@@ -36,6 +36,7 @@ export default {
   detected: 'Discord language: {name} ({locale}).', undetected: 'Discord language: not detected yet.',
   botLanguage: 'Bot language: {name} ({locale}) · {source}.', automatic: 'automatic', override: 'your override',
   gamesHeading: '**Your monitored games**', game: 'Game', connected: 'connected', disconnected: 'disconnected',
+  turnLabel: 'Turn', lastKnownTurn: 'Last known turn', unknownTurn: 'unknown',
   nothingToStop: 'You have no subscription to end.', stopped: 'Your subscription for {name} has ended.',
   unknown: 'Unknown command. Use /help for help.',
   exactCase: 'Nations names are case-sensitive. Use the exact spelling: {names}.',

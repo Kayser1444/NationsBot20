@@ -324,7 +324,7 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       getStatus: (username, userId) => {
         const monitored = matches.filter(m => !m.finished && m.players?.includes(username));
         return { discordEnabled: Boolean(transport), blocked: outbox?.data.jobs.some(job => job.userId === userId && job.blocked),
-          matches: monitored.length, matchList: monitored.map(m => ({ id: m.id, title: m.title, connected: m.status === 'connected' })) };
+          matches: monitored.length, matchList: monitored.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, connected: m.status === 'connected' })) };
       },
     },
   });

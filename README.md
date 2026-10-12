@@ -12,6 +12,10 @@ English commands with Swedish or English replies:
 - `/dm on` chooses private reminders and sends a control DM; `/dm off` chooses
   channel reminders. Preferences persist across restarts.
 - `/status` privately lists your monitored games with links and connection status.
+  Each game shows its current turn player and, for active subscribers, the Discord
+  display name in parentheses as plain text without mentions. Disconnected games
+  label the player as the last known turn; missing snapshots show an unknown turn.
+  Individual display-name lookups are briefly cached, with no server member scan.
   It also shows your Discord interface language, captured from your latest allowed
   command, and your effective bot language and override status.
 - `/help` explains the bot and subscription rules.

@@ -20,6 +20,7 @@ export const commands = [
 ];
 export const helpMessage = text('sv-SE', 'help');
 const quote = name => '`' + name.replace(/[`\r\n]/g, '') + '`';
+const plainName = name => String(name).replace(/[\r\n\t]+/g, ' ').replace(/[\\`*_[\]<>@~|]/g, '').trim().slice(0, 150);
 const folded = name => name.toLocaleLowerCase('sv-SE');
 // A server nickname may append a real name: "Kayser (Jonas Adolphson)".
 // Only automatic Discord-name matching removes that trailing annotation.
@@ -68,7 +69,11 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     if (!own || !state.matchList?.length) return summary;
     const rows = state.matchList.map(match => {
       const title = (match.title || `${t('game')} ${match.id}`).replace(/[\r\n\t]+/g, ' ').replace(/[\\`*_[\]<>@]/g, '').slice(0, 100);
-      return `• [${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>) · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')}`;
+      const player = match.player ? plainName(match.player) || t('unknownTurn') : t('unknownTurn');
+      const name = match.discordName ? plainName(match.discordName) : '';
+      const discordName = match.player && Object.hasOwn(current, match.player) && name ? ` (${name})` : '';
+      const turn = `${t(match.player && !match.connected ? 'lastKnownTurn' : 'turnLabel')}: ${player}${discordName}`;
+      return `• [${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>) · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')} · ${turn}`;
     });
     return summary + '\n\n' + t('gamesHeading') + '\n' + rows.join('\n');
   }

@@ -1,5 +1,6 @@
 import { commands, autocompleteNames, handleSubscriptionCommand } from './discord-commands.mjs';
 import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
+import { createDisplayNameCache, statusServiceWithNames } from './status-turns.mjs';
 
 export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js') }) {
   let client, stopped = false, readyTimer;
@@ -12,6 +13,11 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
       const { Client, GatewayIntentBits, Events, MessageFlags, Routes } = await loadLibrary();
       if (stopped) return;
       client = new Client({ intents: [GatewayIntentBits.Guilds], allowedMentions: { parse: [] }, rest: { timeout: 10000 } });
+      const displayNames = createDisplayNameCache(async userId => {
+        const member = await client.rest.get(Routes.guildMember(guildId, userId), { signal: AbortSignal.timeout(4000) });
+        if (member?.user?.id !== userId) return null;
+        return member.nick || member.user.global_name || member.user.username;
+      });
       client.on(Events.Error, () => fail('Discord-boten fick ett anslutningsfel. Kontrollera bot-token och anslutningen.'));
       client.on(Events.ShardReconnecting, () => state('Återansluter'));
       client.on(Events.ShardDisconnect, () => state('Frånkopplad · återansluter'));
@@ -35,6 +41,10 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           if (stopped) return;
           if (!allowed) { await interaction.editReply({ content: text(language(), 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           service.captureLocale?.(interaction.user.id, interaction.locale);
+          displayNames.remember(interaction.user.id, interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username);
+          const commandService = interaction.commandName === 'status'
+            ? await statusServiceWithNames(service, interaction.user.id, id => displayNames.resolve(id)) : service;
+          if (stopped) return;
           const action = ['notifications', 'dm'].includes(interaction.commandName) ? interaction.options.getSubcommand() : null;
           let content = handleSubscriptionCommand({
             command: interaction.commandName, userId: interaction.user.id,
@@ -42,7 +52,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             displayName: interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username,
             nationsName: interaction.options.getString('nationsname'),
             locale: interaction.commandName === 'language' ? interaction.options.getString('locale') : undefined,
-          }, service);
+          }, commandService);
           if (interaction.commandName === 'dm' && action === 'on') {
             try {
               await service.checkDm(interaction.user.id);

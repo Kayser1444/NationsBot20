@@ -36,6 +36,7 @@ export default {
   detected: 'Discord-språk: {name} ({locale}).', undetected: 'Discord-språk: inte upptäckt ännu.',
   botLanguage: 'Botens språk: {name} ({locale}) · {source}.', automatic: 'automatiskt', override: 'eget val',
   gamesHeading: '**Dina bevakade partier**', game: 'Parti', connected: 'ansluten', disconnected: 'ej ansluten',
+  turnLabel: 'Tur', lastKnownTurn: 'Senast kända tur', unknownTurn: 'okänd',
   nothingToStop: 'Du har ingen prenumeration att avsluta.', stopped: 'Prenumerationen för {name} är avslutad.',
   unknown: 'Okänt kommando. Använd /help för hjälp.',
   exactCase: 'Nations-namn skiljer på stora och små bokstäver. Ange det exakta namnet: {names}.',

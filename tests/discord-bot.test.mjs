@@ -113,7 +113,8 @@ test('adapter requests no chat intents and uses private replies in the configure
   const dmChecks = [];
   class FakeClient extends EventEmitter {
     constructor(options) { super(); this.options = options; this.application = { id: 'application' }; this.rest = {
-      get: async () => [{ name: 'prenumerera', type: 1, id: 'old-on' }, { name: 'avprenumerera', type: 1, id: 'old-off' }, { name: 'hjälp', type: 1, id: 'old-help' }, { name: 'other', type: 1, id: 'keep' }],
+      get: async route => route.includes('/members/') ? { user: { id: second, username: 'friend-account' }, nick: 'Friendly Discord name' }
+        : [{ name: 'prenumerera', type: 1, id: 'old-on' }, { name: 'avprenumerera', type: 1, id: 'old-off' }, { name: 'hjälp', type: 1, id: 'old-help' }, { name: 'other', type: 1, id: 'keep' }],
       delete: async route => deleted.push(route),
       post: async (route, options) => registered.push({ route, ...options }),
     }; instance = this; }
@@ -178,6 +179,15 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.match(statusContent, /https:\/\/games.tabony.net\/nations\/3000\//);
   assert.match(statusContent, /disconnected/);
   assert.match(statusContent, /· connected/);
+  f.service.commit({ ...f.service.getSubscriptions(), Suddoman: second });
+  f.service.getStatus = () => ({ matches: 1, discordEnabled: true, matchList: [{ id: '1', title: 'Live', player: 'Suddoman', connected: true }] });
+  const turnStatus = makeInteraction({ commandName: 'status', locale: 'en-US' });
+  await instance.listeners(Events.InteractionCreate)[0](turnStatus);
+  assert.match(turnStatus.replies[1].content, /Turn: Suddoman \(Friendly Discord name\)/);
+  assert.deepEqual(turnStatus.replies[1].allowedMentions, { parse: [] });
+  assert.equal(turnStatus.replies[0].flags, MessageFlags.Ephemeral);
+  // The extra fixture subscription must not affect the following off-command test.
+  const remaining = { ...f.service.getSubscriptions() }; delete remaining.Suddoman; f.service.commit(remaining);
   const dm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](dm);
   assert.equal(f.service.getDm(first), true);
