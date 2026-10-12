@@ -39,9 +39,9 @@ mode; subscribers use Discord commands. Railway's deployment logs and metrics
 provide operator status. The trial's outbound networking must permit Nations and
 Discord connections.
 
-1. Connect Railway to this repository. Its Dockerfile installs the locked Node.js
+1. Connect Railway to this repository and select the Dockerfile builder. Its Dockerfile installs the locked Node.js
    dependencies and runs `node start-cloud.mjs`.
-2. Attach a persistent volume mounted at `/data`.
+2. Attach a persistent volume mounted at `/data`. In service settings, use one replica, disable Serverless, and set restart policy to On Failure (10 retries). New services cannot opt into Railway's deprecated config-as-code; configure these settings in the dashboard.
 3. Set these service variables:
 
    | Variable | Value |
