@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { normalizeLanguage, resolveLanguage } from './language.mjs';
 
 export function validateSubscriptions(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Ogiltig prenumerationslista.');
@@ -54,6 +55,27 @@ export function saveUserLocale(path, userId, locale) {
   const temp = path + '.tmp';
   writeFileSync(temp, JSON.stringify(config, null, 2) + '\n'); renameSync(temp, path);
   return true;
+}
+
+export function readLanguageOverride(path, userId) {
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  const value = normalizeLanguage(config.languagePreferences?.[userId]);
+  return value && value !== 'auto' ? value : null;
+}
+
+export function readBotLanguage(path, userId) {
+  return resolveLanguage(readUserLocale(path, userId), readLanguageOverride(path, userId));
+}
+
+export function saveLanguagePreference(path, userId, language) {
+  const selected = normalizeLanguage(language);
+  if (!/^\d{17,20}$/.test(userId) || !selected) throw new Error('Invalid language preference.');
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  config.languagePreferences = { ...config.languagePreferences };
+  if (selected === 'auto') delete config.languagePreferences[userId];
+  else config.languagePreferences[userId] = selected;
+  const temp = path + '.tmp';
+  writeFileSync(temp, JSON.stringify(config, null, 2) + '\n'); renameSync(temp, path);
 }
 
 export function saveDmPreference(path, userId, enabled) {

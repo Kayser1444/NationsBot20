@@ -1,4 +1,5 @@
 import { commands, autocompleteNames, handleSubscriptionCommand } from './discord-commands.mjs';
+import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
 
 export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js') }) {
   let client, stopped = false, readyTimer;
@@ -20,15 +21,19 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
         if (stopped || !(interaction.isChatInputCommand() || interaction.isAutocomplete())) return;
         // Only members using the designated reminders channel can self-subscribe.
         const allowed = interaction.guildId === guildId && interaction.channelId === channelId && !interaction.user.bot;
+        const language = () => resolveLanguage(interaction.locale ?? service.getLocale?.(interaction.user.id), service.getLanguageOverride?.(interaction.user.id));
         try {
           if (interaction.isAutocomplete()) {
             const focused = interaction.options.getFocused(true);
-            await interaction.respond(allowed && interaction.commandName === 'notifications' && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : []);
+            const choices = !allowed ? []
+              : interaction.commandName === 'language' && focused.name === 'locale' ? autocompleteLanguages(focused.value)
+              : interaction.commandName === 'notifications' && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : [];
+            await interaction.respond(choices);
             return;
           }
           await interaction.deferReply({ flags: MessageFlags.Ephemeral });
           if (stopped) return;
-          if (!allowed) { await interaction.editReply({ content: 'Använd kommandot i den avsedda påminnelsekanalen på spelservern.', allowedMentions: { parse: [] } }); return; }
+          if (!allowed) { await interaction.editReply({ content: text(language(), 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           service.captureLocale?.(interaction.user.id, interaction.locale);
           const action = ['notifications', 'dm'].includes(interaction.commandName) ? interaction.options.getSubcommand() : null;
           let content = handleSubscriptionCommand({
@@ -36,13 +41,14 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             action,
             displayName: interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username,
             nationsName: interaction.options.getString('nationsname'),
+            locale: interaction.commandName === 'language' ? interaction.options.getString('locale') : undefined,
           }, service);
           if (interaction.commandName === 'dm' && action === 'on') {
             try {
               await service.checkDm(interaction.user.id);
-              content += '\nEtt kontroll-DM har skickats. Godkänn meddelandeförfrågan om Discord visar en sådan.';
+              content += '\n' + text(language(), 'dmConfirmed');
             } catch {
-              content += '\nKontroll-DM kunde inte bekräftas. Kontrollera att du tillåter DM från servermedlemmar och inte har blockerat boten; kör sedan /dm on igen. DM-valet är fortfarande på. Inga turpåminnelser skickas i kanalen.';
+              content += '\n' + text(language(), 'dmFailed');
             }
           }
           // Keep every game visible even when the list exceeds Discord's message limit.
@@ -57,7 +63,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           }
         } catch {
           report('Ett Discord-kommando kunde inte slutföras. Kontrollera prenumerationen i statusfönstret.', 'error');
-          if (interaction.deferred) await interaction.editReply({ content: 'Kommandot kunde inte slutföras. Kontrollera /status eller kontakta Kayser.', allowedMentions: { parse: [] } }).catch(() => {});
+          if (interaction.deferred) await interaction.editReply({ content: text(language(), 'commandFailed'), allowedMentions: { parse: [] } }).catch(() => {});
         }
       });
       client.once(Events.ClientReady, async () => {
@@ -76,7 +82,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
               await client.rest.delete(Routes.applicationGuildCommand(client.application.id, guildId, old.id));
             }
           }
-          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off, /dm on|off, /status och /help är registrerade.'); }
+          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off, /dm on|off, /status, /help och /language är registrerade.'); }
         } catch { fail('Discord-kommandona kunde inte registreras. Kontrollera att boten är tillagd på rätt server.'); }
       });
       readyTimer = setTimeout(() => { fail('Discord-boten kunde inte ansluta inom 30 sekunder. Kontrollera token och starta om.'); client.destroy(); }, 30000);

@@ -9,6 +9,7 @@ import { startDiscordBot } from '../discord-bot.mjs';
 const first = '229311536827465728', second = '821001820309815368';
 test('help covers every registered command, fits one Discord message and needs no subscription access', () => {
   const content = handleSubscriptionCommand({ command: 'help' }, {
+    getLocale: () => 'sv-SE',
     getSubscriptions: () => assert.fail('help must not read or modify subscriptions'),
     commit: () => assert.fail('help must not subscribe the caller'),
   });
@@ -22,6 +23,7 @@ function fixture(names = ['Kayser', 'Suddoman']) {
   const dmPreferences = {};
   const service = {
     getSubscriptions: () => subscriptions, getNames: () => names,
+    getLocale: () => 'sv-SE',
     getPreviousName: userId => previousNames[userId] ?? null,
     getDm: userId => dmPreferences[userId] === true,
     setDm: (userId, enabled) => { dmPreferences[userId] = enabled; },
@@ -123,13 +125,16 @@ test('adapter requests no chat intents and uses private replies in the configure
   const capturedLocales = [];
   f.service.captureLocale = (userId, locale) => capturedLocales.push({ userId, locale });
   f.service.getLocale = userId => capturedLocales.findLast(item => item.userId === userId)?.locale ?? null;
+  const languageOverrides = {};
+  f.service.getLanguageOverride = userId => languageOverrides[userId] ?? null;
+  f.service.setLanguage = (userId, locale) => { if (locale === 'auto') delete languageOverrides[userId]; else languageOverrides[userId] = locale; };
   const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service,
     onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
   });
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['notifications', 'status', 'dm', 'help']);
+  assert.deepEqual(registered.map(item => item.body.name), ['notifications', 'status', 'dm', 'help', 'language']);
   assert.deepEqual(registered[0].body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
@@ -168,11 +173,11 @@ test('adapter requests no chat intents and uses private replies in the configure
   }
   for (const page of statusPages.slice(1)) assert.equal(page.flags, MessageFlags.Ephemeral);
   const statusContent = statusPages.map(page => page.content).join('\n');
-  assert.match(statusContent, /Discord-språk:.*`en-US`/);
+  assert.match(statusContent, /Discord language:.*`en-US`/);
   for (let i = 0; i < 100; i++) assert.ok(statusContent.includes(`ID ${3000 + i} ·`));
   assert.match(statusContent, /https:\/\/games.tabony.net\/nations\/3000\//);
-  assert.match(statusContent, /ej ansluten/);
-  assert.match(statusContent, /· ansluten/);
+  assert.match(statusContent, /disconnected/);
+  assert.match(statusContent, /· connected/);
   const dm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](dm);
   assert.equal(f.service.getDm(first), true);
@@ -199,6 +204,28 @@ test('adapter requests no chat intents and uses private replies in the configure
     options: { getFocused: () => ({ name: 'nationsname', value: 'KAY' }) }, respond: async value => { autocomplete.choices = value; } });
   await instance.listeners(Events.InteractionCreate)[0](autocomplete);
   assert.deepEqual(autocomplete.choices, [{ name: 'Kayser', value: 'Kayser' }]);
+  const languageAutocomplete = makeInteraction({ commandName: 'language', isChatInputCommand: () => false, isAutocomplete: () => true,
+    options: { getFocused: () => ({ name: 'locale', value: 'swe' }) }, respond: async value => { languageAutocomplete.choices = value; } });
+  await instance.listeners(Events.InteractionCreate)[0](languageAutocomplete);
+  assert.deepEqual(languageAutocomplete.choices.map(option => option.value), ['sv-SE']);
+  const language = makeInteraction({ commandName: 'language', locale: 'sv-SE', options: { getString: name => name === 'locale' ? 'en-US' : null } });
+  await instance.listeners(Events.InteractionCreate)[0](language);
+  assert.equal(languageOverrides[first], 'en-US');
+  assert.match(language.replies[1].content, /Your bot language is now English/);
+  assert.equal(language.replies[0].flags, MessageFlags.Ephemeral);
+  f.service.checkDm = async () => {};
+  const englishDm = makeInteraction({ commandName: 'dm' });
+  await instance.listeners(Events.InteractionCreate)[0](englishDm);
+  assert.match(englishDm.replies[1].content, /DM is on/);
+  assert.match(englishDm.replies[1].content, /A test DM has been sent/);
+  f.service.checkDm = async () => { throw new Error('secret must never appear'); };
+  const failedEnglishDm = makeInteraction({ commandName: 'dm' });
+  await instance.listeners(Events.InteractionCreate)[0](failedEnglishDm);
+  assert.match(failedEnglishDm.replies[1].content, /DM remains on/);
+  assert.equal(failedEnglishDm.replies[1].content.includes('secret'), false);
+  const blockedLanguage = makeInteraction({ commandName: 'language', channelId: 'other', options: { getString: () => 'sv-SE' } });
+  await instance.listeners(Events.InteractionCreate)[0](blockedLanguage);
+  assert.equal(languageOverrides[first], 'en-US');
   const off = makeInteraction({ options: { getString: () => null, getSubcommand: () => 'off' } });
   await instance.listeners(Events.InteractionCreate)[0](off);
   assert.equal(Object.keys(f.service.getSubscriptions()).length, 0);

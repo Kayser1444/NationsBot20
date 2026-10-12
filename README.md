@@ -4,7 +4,7 @@ A standalone Discord reminder bot for the online Nations board game at
 https://games.tabony.net/nations/. It observes public game information without
 logging into the game, submitting moves or posting game chat.
 
-English commands with Swedish replies:
+English commands with Swedish or English replies:
 
 - `/notifications on [nationsname]` enables turn reminders; omitted names reuse
   your last subscription or match your Discord display name.
@@ -13,8 +13,18 @@ English commands with Swedish replies:
   channel reminders. Preferences persist across restarts.
 - `/status` privately lists your monitored games with links and connection status.
   It also shows your Discord interface language, captured from your latest allowed
-  command. This observation does not yet change the language of bot messages.
+  command, and your effective bot language and override status.
 - `/help` explains the bot and subscription rules.
+- `/language locale:sv-SE` selects Swedish; `/language locale:en-US` selects
+  English. Typeahead suggests both supported languages and `auto`.
+- `/language locale:auto` removes your override and follows your Discord locale.
+  Swedish locales use Swedish; English variants and unsupported or unknown locales
+  use English. Commands update the remembered Discord locale automatically.
+
+Language preferences apply to command replies, control DMs and your turn reminders
+in either delivery mode. The preference survives unsubscribe/resubscribe and restarts.
+Shared startup/shutdown notices remain Swedish. Translation text lives in
+`messages-sv.mjs` and `messages-en.mjs`, separate from command logic.
 
 Nations names are case-sensitive. Discord display-name matching is case-insensitive
 and strips a trailing parenthesized name. One Nations name can have one subscriber.
@@ -23,7 +33,8 @@ Startup/shutdown notices go to the channel without mentions.
 
 Subscriptions and user preferences are saved in `/data/friends.json` on Railway's
 persistent volume: `subscriptions`, `lastNationsNames`, `dmPreferences` and
-`userLocales` (last observed Discord locale, keyed by Discord user ID). Locale
+`userLocales` (last observed Discord locale) plus `languagePreferences` (explicit
+bot language overrides), keyed by Discord user ID. Locale
 capture happens on commands in the designated channel; it does not sample the
 server member list. Delivery history lives separately in `friends-outbox.json`.
 

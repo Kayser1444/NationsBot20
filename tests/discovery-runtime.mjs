@@ -57,6 +57,8 @@ const configDir = mkdtempSync(join(tmpdir(), 'nations-persistent-config-'));
 const root = fileURLToPath(new URL('../', import.meta.url));
 for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dataDir, name));
 const config = { subscriptions: { Kayser: '229311536827465728' }, matches: [],
+  userLocales: { '229311536827465728': 'en-US' },
+  languagePreferences: dmEnabled ? { '229311536827465728': 'sv-SE' } : {},
   discord: { guildId: '706912380067643473', channelId: '1558878151646388264' } };
 config.dmPreferences = { '229311536827465728': dmEnabled };
 writeFileSync(join(configDir, 'friends.json'), JSON.stringify(config));
@@ -71,6 +73,7 @@ const turnPosts = posts.filter(post => post.content.includes('<@'));
 assert.equal(turnPosts.length, 1);
 assert.match(turnPosts[0].content, /<@229311536827465728>/);
 assert.match(turnPosts[0].content, /900000/);
+assert.ok(turnPosts[0].content.includes(dmEnabled ? 'Din tur i' : 'Your turn in'), 'reminders follow persisted language preferences in either delivery mode');
 const statusPosts = posts.filter(post => !post.content.includes('<@'));
 assert.equal(statusPosts.length, 2);
 assert.equal(statusPosts[0].content, '🟢 Bevakningen har startat.');

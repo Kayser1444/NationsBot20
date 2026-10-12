@@ -1,4 +1,5 @@
 // Incoming-webhook delivery. The webhook URL is never included in errors/logs.
+import { text } from './language.mjs';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 export class DiscordDeliveryError extends Error {
   constructor(message, { retryable = true, retryAfterMs = 0 } = {}) {
@@ -46,13 +47,13 @@ function mention(userId) {
   }
   return { text: `<@${userId}>`, allowed: { parse: [], users: [userId] } };
 }
-export function turnMessage(username, match, userId) {
+export function turnMessage(username, match, userId, language = 'sv-SE') {
   const recipient = userId ? mention(userId) : { text: username, allowed: { parse: [] } };
-  const title = (match.title || `Parti ${match.id}`).replace(/\s+/g, ' ').trim().slice(0, 250)
+  const title = (match.title || `${text(language, 'game')} ${match.id}`).replace(/\s+/g, ' ').trim().slice(0, 250)
     .replace(/[\\\[\]*_~`]/g, '\\$&');
   return {
     username: 'Nations',
-    content: `${recipient.text} — Din tur i [${title}](<https://games.tabony.net/nations/${match.id}/>)`,
+    content: `${recipient.text} — ${text(language, 'turn')} [${title}](<https://games.tabony.net/nations/${match.id}/>)`,
     allowed_mentions: recipient.allowed,
   };
 }

@@ -34,8 +34,8 @@ test('status shows the observed Discord language even without a subscription', (
     const content = handleSubscriptionCommand({ command: 'status', userId: '111111111111111111' }, {
       getSubscriptions: () => ({}), getStatus: () => ({}), getLocale: () => locale,
     });
-    assert.match(content, /Discord-språk:/);
-    assert.ok(locale ? content.includes('`' + locale + '`') : content.includes('inte upptäckt'));
-    assert.match(content, /tills vidare på svenska/);
+    assert.match(content, /Discord-språk:|Discord language:/);
+    assert.ok(locale ? content.includes('`' + locale + '`') : content.includes('not detected'));
+    assert.match(content, /Botens språk:|Bot language:/);
   }
 });

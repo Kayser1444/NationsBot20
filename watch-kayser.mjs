@@ -10,7 +10,8 @@ import { liveSnapshot } from './live-snapshot.mjs';
 import { ServiceStatus } from './service-status.mjs';
 import { startDashboard } from './dashboard.mjs';
 import { EventLog } from './event-log.mjs';
-import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference, readUserLocale, saveUserLocale } from './subscriptions.mjs';
+import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference, readUserLocale, saveUserLocale, readLanguageOverride, readBotLanguage, saveLanguagePreference } from './subscriptions.mjs';
+import { text } from './language.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
@@ -149,7 +150,8 @@ async function flushOutbox() {
       },
       send: job => {
         if (stopped || subscriptions[job.player] !== job.userId || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
-        const payload = turnMessage(job.player, { id: job.matchId, title: job.title }, job.userId);
+        const payload = turnMessage(job.player, { id: job.matchId, title: job.title }, job.userId,
+          profile === 'friends.json' ? readBotLanguage(configPath, job.userId) : 'sv-SE');
         return profile === 'friends.json'
           ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && subscriptions[job.player] === job.userId && outbox.current(job))
           : transport.send(payload, deliveryAbort.signal);
@@ -300,9 +302,11 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       getPreviousName: userId => readPreviousNationsName(configPath, userId),
       getDm: userId => readDmPreference(configPath, userId),
       getLocale: userId => readUserLocale(configPath, userId),
+      getLanguageOverride: userId => readLanguageOverride(configPath, userId),
+      setLanguage: (userId, language) => saveLanguagePreference(configPath, userId, language),
       captureLocale: (userId, locale) => saveUserLocale(configPath, userId, locale),
       checkDm: userId => transport.sendReminder({
-        content: '✅ Kontrollmeddelande från Nations Bot 2.0. Dina aktiverade Nations-påminnelser skickas hit när DM är på. Godkänn meddelandeförfrågan om Discord visar en sådan.',
+        content: text(readBotLanguage(configPath, userId), 'dmControl'),
         allowed_mentions: { parse: [] },
       }, userId, () => true, AbortSignal.any([deliveryAbort.signal, AbortSignal.timeout(10000)]),
       () => !stopped && readDmPreference(configPath, userId)),
