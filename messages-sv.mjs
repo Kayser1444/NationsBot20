@@ -33,7 +33,6 @@ export default {
   subscribedStatus: 'Du prenumererar på påminnelser för {name}. {count} pågående partier bevakas. {delivery}',
   enabled: 'Discord-utskick är aktiverade.', disabled: 'Discord-utskick är inte aktiverade.',
   noSubscription: 'Du har ingen prenumeration. Använd /notifications on för att börja.',
-  detected: 'Discord-språk: {name} ({locale}).', undetected: 'Discord-språk: inte upptäckt ännu.',
   botLanguage: 'Botens språk: {name} ({locale}) · {source}.', automatic: 'automatiskt', override: 'eget val',
   gamesHeading: '**Dina bevakade partier**', game: 'Parti', connected: 'ansluten', disconnected: 'ej ansluten',
   turnLabel: 'Tur', lastKnownTurn: 'Senast kända tur', unknownTurn: 'okänd',

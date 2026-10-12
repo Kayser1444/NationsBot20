@@ -174,7 +174,8 @@ test('adapter requests no chat intents and uses private replies in the configure
   }
   for (const page of statusPages.slice(1)) assert.equal(page.flags, MessageFlags.Ephemeral);
   const statusContent = statusPages.map(page => page.content).join('\n');
-  assert.match(statusContent, /Discord language:.*`en-US`/);
+  assert.match(statusContent, /Bot language:.*`en-US`.*automatic/);
+  assert.equal(statusContent.includes('Discord language:'), false);
   for (let i = 0; i < 100; i++) assert.ok(statusContent.includes(`ID ${3000 + i} ·`));
   assert.match(statusContent, /https:\/\/games.tabony.net\/nations\/3000\//);
   assert.match(statusContent, /disconnected/);
@@ -183,7 +184,7 @@ test('adapter requests no chat intents and uses private replies in the configure
   f.service.getStatus = () => ({ matches: 1, discordEnabled: true, matchList: [{ id: '1', title: 'Live', player: 'Suddoman', connected: true }] });
   const turnStatus = makeInteraction({ commandName: 'status', locale: 'en-US' });
   await instance.listeners(Events.InteractionCreate)[0](turnStatus);
-  assert.match(turnStatus.replies[1].content, /Turn: Suddoman \(Friendly Discord name\)/);
+  assert.match(turnStatus.replies[1].content, /Turn: Suddoman \[Friendly Discord name\]/);
   assert.deepEqual(turnStatus.replies[1].allowedMentions, { parse: [] });
   assert.equal(turnStatus.replies[0].flags, MessageFlags.Ephemeral);
   // The extra fixture subscription must not affect the following off-command test.

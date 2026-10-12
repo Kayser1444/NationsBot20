@@ -43,13 +43,13 @@ test('status shows current, unknown and stale turns in both languages with plain
     const content = handleSubscriptionCommand({ command: 'status', userId: '1' }, {
       getLocale: () => locale, getSubscriptions: () => ({ Kayser: '1', Friend: '2' }),
       getStatus: () => ({ matches: 4, discordEnabled: true, matchList: [
-        { id: '1', title: 'Live', player: 'Friend', discordName: 'Friendly Discord name', connected: true },
+        { id: '1', title: 'Live', player: 'Friend', discordName: 'Friendly Discord name (Real name)', connected: true },
         { id: '2', title: 'Not subscribed', player: 'Stranger', discordName: 'Do not display', connected: true },
         { id: '3', title: 'Stale', player: 'Friend', discordName: '<@2> **name**\n@everyone', connected: false },
         { id: '4', title: 'Waiting', player: null, connected: false },
       ] }),
     });
-    assert.ok(content.includes('Friend (Friendly Discord name)'));
+    assert.ok(content.includes('Friend [Friendly Discord name (Real name)]'));
     assert.equal(content.includes('Do not display'), false);
     assert.equal(content.includes('<@'), false);
     assert.equal(content.includes('@everyone'), false);

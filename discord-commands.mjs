@@ -57,21 +57,14 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     const state = getStatus(own, userId);
     const mode = t(getDm(userId) ? 'modeDm' : 'modeChannel');
     const blocked = state.blocked ? t('blocked') : '';
-    const detectedLocale = getLocale(userId);
-    let detected = t('undetected');
-    if (detectedLocale) {
-      let label = detectedLocale;
-      try { label = new Intl.DisplayNames([language], { type: 'language' }).of(detectedLocale); } catch {}
-      detected = t('detected', { name: label, locale: quote(detectedLocale) });
-    }
     const selectedLanguage = t('botLanguage', { name: t('languageName'), locale: quote(language), source: t(getLanguageOverride(userId) ? 'override' : 'automatic') });
-    const summary = (own ? t('subscribedStatus', { name: quote(own), count: state.matches, delivery: t(state.discordEnabled ? 'enabled' : 'disabled') }) : t('noSubscription')) + ' ' + mode + blocked + '\n' + detected + '\n' + selectedLanguage;
+    const summary = (own ? t('subscribedStatus', { name: quote(own), count: state.matches, delivery: t(state.discordEnabled ? 'enabled' : 'disabled') }) : t('noSubscription')) + ' ' + mode + blocked + '\n' + selectedLanguage;
     if (!own || !state.matchList?.length) return summary;
     const rows = state.matchList.map(match => {
       const title = (match.title || `${t('game')} ${match.id}`).replace(/[\r\n\t]+/g, ' ').replace(/[\\`*_[\]<>@]/g, '').slice(0, 100);
       const player = match.player ? plainName(match.player) || t('unknownTurn') : t('unknownTurn');
       const name = match.discordName ? plainName(match.discordName) : '';
-      const discordName = match.player && Object.hasOwn(current, match.player) && name ? ` (${name})` : '';
+      const discordName = match.player && Object.hasOwn(current, match.player) && name ? ` [${name}]` : '';
       const turn = `${t(match.player && !match.connected ? 'lastKnownTurn' : 'turnLabel')}: ${player}${discordName}`;
       return `• [${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>) · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')} · ${turn}`;
     });

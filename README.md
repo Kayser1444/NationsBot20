@@ -13,11 +13,11 @@ English commands with Swedish or English replies:
   channel reminders. Preferences persist across restarts.
 - `/status` privately lists your monitored games with links and connection status.
   Each game shows its current turn player and, for active subscribers, the Discord
-  display name in parentheses as plain text without mentions. Disconnected games
+  display name in square brackets as plain text without mentions. Disconnected games
   label the player as the last known turn; missing snapshots show an unknown turn.
   Individual display-name lookups are briefly cached, with no server member scan.
-  It also shows your Discord interface language, captured from your latest allowed
-  command, and your effective bot language and override status.
+  It shows your effective bot language and whether it is automatic or overridden;
+  the detected Discord locale is retained for automatic selection but not displayed.
 - `/help` explains the bot and subscription rules.
 - `/language locale:sv-SE` selects Swedish; `/language locale:en-US` selects
   English. Typeahead suggests both supported languages and `auto`.

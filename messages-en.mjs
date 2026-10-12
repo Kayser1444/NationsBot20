@@ -33,7 +33,6 @@ export default {
   subscribedStatus: 'You receive reminders for {name}. {count} ongoing games are monitored. {delivery}',
   enabled: 'Discord delivery is enabled.', disabled: 'Discord delivery is disabled.',
   noSubscription: 'You have no subscription. Use /notifications on to start.',
-  detected: 'Discord language: {name} ({locale}).', undetected: 'Discord language: not detected yet.',
   botLanguage: 'Bot language: {name} ({locale}) · {source}.', automatic: 'automatic', override: 'your override',
   gamesHeading: '**Your monitored games**', game: 'Game', connected: 'connected', disconnected: 'disconnected',
   turnLabel: 'Turn', lastKnownTurn: 'Last known turn', unknownTurn: 'unknown',

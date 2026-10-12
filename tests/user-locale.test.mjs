@@ -29,13 +29,14 @@ test('observed locales survive preference edits and only update the invoking use
   assert.equal(JSON.parse(readFileSync(path)).dmPreferences[first], true);
 });
 
-test('status shows the observed Discord language even without a subscription', () => {
+test('status shows only the effective automatic bot language, even without a subscription', () => {
   for (const locale of ['sv-SE', 'en-US', 'en-GB', null]) {
     const content = handleSubscriptionCommand({ command: 'status', userId: '111111111111111111' }, {
       getSubscriptions: () => ({}), getStatus: () => ({}), getLocale: () => locale,
     });
-    assert.match(content, /Discord-språk:|Discord language:/);
-    assert.ok(locale ? content.includes('`' + locale + '`') : content.includes('not detected'));
+    assert.doesNotMatch(content, /Discord-språk:|Discord language:/);
+    assert.ok(content.includes(locale === 'sv-SE' ? '`sv-SE`' : '`en-US`'));
+    assert.match(content, /automatiskt|automatic/);
     assert.match(content, /Botens språk:|Bot language:/);
   }
 });
