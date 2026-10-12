@@ -1,0 +1,13 @@
+{
+  "name": "nations-local-notifier",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node start-cloud.mjs",
+    "test": "node --test --test-isolation=none tests/*.test.mjs"
+  },
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "dependencies": { "discord.js": "14.27.0" }
+}

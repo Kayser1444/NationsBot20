@@ -1,0 +1,10 @@
+{
+  "subscriptions": {},
+  "matches": [],
+  "discord": {
+    "guildId": "YOUR_DISCORD_SERVER_ID",
+    "channelId": "YOUR_REMINDER_CHANNEL_ID"
+  },
+  "lastNationsNames": {},
+  "dmPreferences": {}
+}

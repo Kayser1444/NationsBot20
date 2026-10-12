@@ -1,0 +1,10 @@
+node_modules/
+.data/
+*.secret
+.env
+.env.*
+friends.json
+kayser.json
+*.log
+*.tmp
+work/

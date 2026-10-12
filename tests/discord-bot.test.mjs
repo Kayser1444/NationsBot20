@@ -1,0 +1,213 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { EventEmitter } from 'node:events';
+import { setImmediate } from 'node:timers/promises';
+import { Client, Events, GatewayIntentBits, MessageFlags, Routes } from 'discord.js';
+import { handleSubscriptionCommand, autocompleteNames, commands, helpMessage } from '../discord-commands.mjs';
+import { startDiscordBot } from '../discord-bot.mjs';
+
+const first = '229311536827465728', second = '821001820309815368';
+test('help covers every registered command, fits one Discord message and needs no subscription access', () => {
+  const content = handleSubscriptionCommand({ command: 'help' }, {
+    getSubscriptions: () => assert.fail('help must not read or modify subscriptions'),
+    commit: () => assert.fail('help must not subscribe the caller'),
+  });
+  assert.equal(content, helpMessage);
+  assert.ok(content.length <= 2000);
+  for (const command of commands) assert.ok(content.includes('/' + command.name));
+});
+function fixture(names = ['Kayser', 'Suddoman']) {
+  let subscriptions = {};
+  const previousNames = {};
+  const dmPreferences = {};
+  const service = {
+    getSubscriptions: () => subscriptions, getNames: () => names,
+    getPreviousName: userId => previousNames[userId] ?? null,
+    getDm: userId => dmPreferences[userId] === true,
+    setDm: (userId, enabled) => { dmPreferences[userId] = enabled; },
+    commit: next => {
+      for (const [name, id] of Object.entries(subscriptions)) previousNames[id] = name;
+      for (const [name, id] of Object.entries(next)) previousNames[id] = name;
+      subscriptions = next;
+    },
+    getStatus: () => ({ matches: 6, discordEnabled: true }),
+  };
+  return { service, execute: args => handleSubscriptionCommand({ command: 'notifications', action: 'on', userId: first, displayName: 'kayser', ...args }, service) };
+}
+test('on without a name restores the previous exact name; explicit choice updates it; takeover stays blocked', () => {
+  const f = fixture();
+  f.execute({ nationsName: 'DifferentCase' });
+  f.execute({ action: 'off' });
+  assert.match(f.execute({ displayName: 'unmatched' }), /nu.*DifferentCase/);
+  f.execute({ action: 'off' });
+  f.execute({ nationsName: 'NewName' });
+  f.execute({ action: 'off' });
+  f.execute({ userId: second, nationsName: 'NewName' });
+  assert.match(f.execute({ displayName: 'unmatched' }), /kan inte tas över/);
+  assert.equal(f.service.getSubscriptions().NewName, second);
+  assert.equal(Object.values(f.service.getSubscriptions()).includes(first), false);
+});
+test('Discord-name matching is case insensitive and stores exact Nations spelling', () => {
+  const f = fixture();
+  assert.match(f.execute({}), /nu.*Kayser/);
+  assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.equal(Object.hasOwn(f.service.getSubscriptions(), 'kayser'), false);
+  assert.match(f.execute({ nationsName: 'kayser' }), /exakta namnet.*Kayser/);
+});
+test('DM defaults off, is independent from subscriptions, and is included in personal status', () => {
+  const f = fixture();
+  assert.equal(f.service.getDm(first), false);
+  assert.match(f.execute({ command: 'dm', action: 'on' }), /bara privat/);
+  assert.deepEqual(f.service.getSubscriptions(), {});
+  assert.match(f.execute({ command: 'status' }), /endast DM/);
+  assert.match(f.execute({}), /endast som DM/);
+  f.execute({ action: 'off' });
+  assert.equal(f.service.getDm(first), true);
+  assert.match(f.execute({}), /endast som DM/);
+  f.execute({ command: 'dm', action: 'off' });
+  assert.equal(f.service.getDm(first), false);
+  assert.equal(f.service.getSubscriptions().Kayser, first);
+});
+test('ambiguous or missing automatic name never silently selects a different player', () => {
+  assert.match(fixture(['Kayser', 'kayser']).execute({}), /Flera Nations-namn/);
+  assert.match(fixture([]).execute({}), /matchar inget/);
+  const f = fixture(['Kayser', 'kayser']);
+  assert.match(f.execute({ nationsName: 'kayser' }), /nu.*kayser/);
+  assert.equal(f.service.getSubscriptions().kayser, first);
+});
+test('automatic matching ignores the appended real name and preserves explicit Nations names', () => {
+  const f = fixture(['Kayser', 'Kayser (Jonas Adolphson)']);
+  assert.match(f.execute({ displayName: 'kayser (Jonas Adolphson)' }), /nu.*`Kayser`/);
+  assert.deepEqual(Object.keys(f.service.getSubscriptions()), ['Kayser']);
+  const explicit = fixture(['Kayser', 'Kayser (Jonas Adolphson)']);
+  explicit.execute({ nationsName: 'Kayser (Jonas Adolphson)' });
+  assert.deepEqual(Object.keys(explicit.service.getSubscriptions()), ['Kayser (Jonas Adolphson)']);
+  assert.match(fixture(['Kayser', 'kayser']).execute({ displayName: 'Kayser (Jonas Adolphson)' }), /Flera Nations-namn/);
+});
+test('occupied names cannot be taken over, and a Discord user has one subscription', () => {
+  const f = fixture(); f.execute({});
+  assert.match(f.execute({ userId: second, nationsName: 'Kayser' }), /kan inte tas över/);
+  assert.match(f.execute({ nationsName: 'Suddoman' }), /Avsluta först/);
+  assert.match(f.execute({}), /redan/);
+  assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.equal(Object.keys(f.service.getSubscriptions()).length, 1);
+});
+test('unsubscribe affects only the caller; status is personal; explicit new names are allowed', () => {
+  const f = fixture(); f.execute({}); f.execute({ userId: second, nationsName: 'Suddoman' });
+  assert.match(f.execute({ command: 'status' }), /Kayser.*6/);
+  assert.match(f.execute({ command: 'notifications', action: 'off' }), /Kayser.*avslutad/);
+  assert.equal(f.service.getSubscriptions().Suddoman, second);
+  assert.match(f.execute({ command: 'status' }), /ingen prenumeration/);
+  assert.match(f.execute({ nationsName: 'NewPlayer' }), /nu.*NewPlayer/);
+});
+test('autocomplete preserves case, prioritizes prefixes, and respects Discord limits', () => {
+  assert.deepEqual(autocompleteNames(['aKayser', 'Kayser', 'kayser', 'Kayser'], 'KAY').map(item => item.value), ['kayser', 'Kayser', 'aKayser']);
+  assert.equal(autocompleteNames(Array.from({ length: 30 }, (_, i) => 'Player' + i), '').length, 25);
+  assert.deepEqual(autocompleteNames(['X'.repeat(101)], ''), []);
+});
+
+test('adapter requests no chat intents and uses private replies in the configured channel only', async t => {
+  let instance; const registered = [], states = [], deleted = [];
+  const dmChecks = [];
+  class FakeClient extends EventEmitter {
+    constructor(options) { super(); this.options = options; this.application = { id: 'application' }; this.rest = {
+      get: async () => [{ name: 'prenumerera', type: 1, id: 'old-on' }, { name: 'avprenumerera', type: 1, id: 'old-off' }, { name: 'hjälp', type: 1, id: 'old-help' }, { name: 'other', type: 1, id: 'keep' }],
+      delete: async route => deleted.push(route),
+      post: async (route, options) => registered.push({ route, ...options }),
+    }; instance = this; }
+    async login() { this.emit(Events.ClientReady); }
+    destroy() { this.destroyed = true; }
+  }
+  const f = fixture();
+  f.service.checkDm = async userId => { dmChecks.push(userId); };
+  const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service,
+    onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
+  });
+  t.after(() => bot.close());
+  await bot.ready; await setImmediate();
+  assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
+  assert.deepEqual(registered.map(item => item.body.name), ['notifications', 'status', 'dm', 'help']);
+  assert.deepEqual(registered[0].body.options.map(option => option.name), ['on', 'off']);
+  assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
+  assert.ok(states.includes('Igång'));
+  const makeInteraction = (overrides = {}) => {
+    const replies = [];
+    return { replies, guildId: 'guild', channelId: 'channel', commandName: 'notifications',
+      user: { id: first, bot: false, username: 'other', globalName: 'unmatched' }, member: { nick: 'kayser (Jonas Adolphson)' },
+      options: { getString: () => null, getSubcommand: () => 'on' }, isChatInputCommand: () => true, isAutocomplete: () => false,
+      deferReply: async function(options) { this.deferred = true; replies.push(options); },
+      editReply: async options => replies.push(options), ...overrides };
+  };
+  const blocked = makeInteraction({ channelId: 'other' });
+  await instance.listeners(Events.InteractionCreate)[0](blocked);
+  assert.deepEqual(f.service.getSubscriptions(), {});
+  assert.equal(blocked.replies[0].flags, MessageFlags.Ephemeral);
+  const interaction = makeInteraction();
+  await instance.listeners(Events.InteractionCreate)[0](interaction);
+  assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.equal(interaction.replies[0].flags, MessageFlags.Ephemeral);
+  assert.deepEqual(interaction.replies[1].allowedMentions, { parse: [] });
+  const help = makeInteraction({ commandName: 'help' });
+  await instance.listeners(Events.InteractionCreate)[0](help);
+  assert.equal(help.replies[0].flags, MessageFlags.Ephemeral);
+  assert.equal(help.replies[1].content, helpMessage);
+  assert.deepEqual(help.replies[1].allowedMentions, { parse: [] });
+  f.service.getStatus = () => ({ matches: 100, discordEnabled: true, matchList: Array.from({ length: 100 }, (_, i) => ({ id: String(3000 + i), title: 'Testparti ' + i, connected: i % 2 === 0 })) });
+  const status = makeInteraction({ commandName: 'status', followUp: async options => status.replies.push(options) });
+  await instance.listeners(Events.InteractionCreate)[0](status);
+  assert.ok(status.replies.length > 2);
+  const statusPages = status.replies.slice(1);
+  for (const page of statusPages) {
+    assert.ok(page.content.length <= 2000);
+    assert.deepEqual(page.allowedMentions, { parse: [] });
+  }
+  for (const page of statusPages.slice(1)) assert.equal(page.flags, MessageFlags.Ephemeral);
+  const statusContent = statusPages.map(page => page.content).join('\n');
+  for (let i = 0; i < 100; i++) assert.ok(statusContent.includes(`ID ${3000 + i} ·`));
+  assert.match(statusContent, /https:\/\/games.tabony.net\/nations\/3000\//);
+  assert.match(statusContent, /ej ansluten/);
+  assert.match(statusContent, /· ansluten/);
+  const dm = makeInteraction({ commandName: 'dm' });
+  await instance.listeners(Events.InteractionCreate)[0](dm);
+  assert.equal(f.service.getDm(first), true);
+  assert.equal(dm.replies[0].flags, MessageFlags.Ephemeral);
+  assert.deepEqual(dmChecks, [first]);
+  assert.match(dm.replies[1].content, /kontroll-DM har skickats/);
+  assert.deepEqual(dm.replies[1].allowedMentions, { parse: [] });
+  const repeatedDm = makeInteraction({ commandName: 'dm' });
+  await instance.listeners(Events.InteractionCreate)[0](repeatedDm);
+  assert.deepEqual(dmChecks, [first, first]);
+  f.service.checkDm = async () => { throw new Error('private token must never appear'); };
+  const deniedDm = makeInteraction({ commandName: 'dm' });
+  await instance.listeners(Events.InteractionCreate)[0](deniedDm);
+  assert.equal(f.service.getDm(first), true);
+  assert.match(deniedDm.replies[1].content, /Kontroll-DM kunde inte bekräftas/);
+  assert.match(deniedDm.replies[1].content, /DM-valet är fortfarande på/);
+  assert.equal(deniedDm.replies[1].content.includes('private token'), false);
+  const dmOff = makeInteraction({ commandName: 'dm', options: { getString: () => null, getSubcommand: () => 'off' } });
+  f.service.checkDm = () => assert.fail('off must not send a control DM');
+  await instance.listeners(Events.InteractionCreate)[0](dmOff);
+  assert.equal(f.service.getDm(first), false);
+  assert.match(dmOff.replies[1].content, /DM är av/);
+  const autocomplete = makeInteraction({ isChatInputCommand: () => false, isAutocomplete: () => true,
+    options: { getFocused: () => ({ name: 'nationsname', value: 'KAY' }) }, respond: async value => { autocomplete.choices = value; } });
+  await instance.listeners(Events.InteractionCreate)[0](autocomplete);
+  assert.deepEqual(autocomplete.choices, [{ name: 'Kayser', value: 'Kayser' }]);
+  const off = makeInteraction({ options: { getString: () => null, getSubcommand: () => 'off' } });
+  await instance.listeners(Events.InteractionCreate)[0](off);
+  assert.equal(Object.keys(f.service.getSubscriptions()).length, 0);
+  bot.close(); assert.equal(instance.destroyed, true);
+});
+test('missing library or bad token stays isolated from game monitoring and logs no secret', async () => {
+  const messages = [], states = [];
+  const bot = startDiscordBot({ token: 'secret', service: fixture().service,
+    report: message => messages.push(message), onState: state => states.push(state),
+    loadLibrary: async () => { throw new Error('secret'); } });
+  await bot.ready; assert.equal(states.at(-1), 'Fel · behöver åtgärdas');
+  assert.equal(messages.some(message => message.includes('secret')), false); bot.close();
+});
+test('installed Discord library can construct and stop a Guilds-only client without connecting', async () => {
+  const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+  assert.equal(client.options.intents.has(GatewayIntentBits.MessageContent), false);
+  await client.destroy();
+});
