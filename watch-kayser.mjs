@@ -16,12 +16,13 @@ import { text } from './language.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
+import { readBannedUsers, isUserBanned, setUserBan } from './subscriptions.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
 const configPath = process.env.NATIONS_CONFIG_DIR ? join(process.env.NATIONS_CONFIG_DIR, profile) : fileURLToPath(new URL(profile, import.meta.url));
 const config = JSON.parse(readFileSync(configPath, 'utf8'));
-let subscriptions = validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
+let subscriptions = readSubscriptions(configPath);
 const seconds = args.includes('--seconds') ? Number(args[args.indexOf('--seconds') + 1]) : 0;
 if (!Number.isFinite(seconds) || seconds < 0) throw new Error('Invalid duration');
 const matches = config.matches.map(match => ({ ...match, state: null, status: 'connecting', backoff: 1000 }));
@@ -94,6 +95,7 @@ function snapshot() {
     pending: outbox?.data.jobs.length ?? 0, blocked: outbox?.data.jobs.filter(job => job.blocked).length ?? 0,
     lastDelivery, lastDiscovery,
     botState,
+    bannedUsers: Object.entries(readBannedUsers(configPath)).map(([userId, ban]) => ({ userId, ...ban })),
     playerNames: playerCache.names, playerNamesUpdatedAt: playerCache.updatedAt,
     subscribers: Object.entries(subscriptions).map(([username, userId]) => ({ username, userId, matches: matches.filter(m => !m.finished && m.players?.includes(username)).length })),
     matches: matches.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, over: Boolean(m.finished), connected: m.status === 'connected' })),
@@ -140,7 +142,7 @@ async function flushOutbox() {
     await outbox.flush({
       signal: deliveryAbort.signal,
       validate: async job => {
-        if (subscriptions[job.player] !== job.userId) return false;
+        if (subscriptions[job.player] !== job.userId || isUserBanned(configPath, job.userId)) return false;
         const m = matches.find(match => match.id === job.matchId);
         // Wait for this run's initial snapshot; persisted state alone is insufficient.
         if (!m?.state) throw new Error('Waiting for a fresh game snapshot.');
@@ -150,11 +152,11 @@ async function flushOutbox() {
         return !state.over && state.player === job.player;
       },
       send: job => {
-        if (stopped || subscriptions[job.player] !== job.userId || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
+        if (stopped || subscriptions[job.player] !== job.userId || isUserBanned(configPath, job.userId) || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
         const payload = turnMessage(job.player, { id: job.matchId, title: job.title }, job.userId,
           profile === 'friends.json' ? readBotLanguage(configPath, job.userId) : 'sv-SE');
         return profile === 'friends.json'
-          ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && subscriptions[job.player] === job.userId && outbox.current(job))
+          ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && subscriptions[job.player] === job.userId && !isUserBanned(configPath, job.userId) && outbox.current(job))
           : transport.send(payload, deliveryAbort.signal);
       },
       report: status => { delivery = status; show(); },
@@ -276,6 +278,11 @@ if (!args.includes('--no-dashboard')) {
         const next = { ...subscriptions }; delete next[username];
         applySubscriptions(saveSubscriptions(configPath, next));
       },
+      setBan: async (userId, enabled) => {
+        if (stopped) throw new Error('Bevakningen är stoppad.');
+        applySubscriptions(setUserBan(configPath, userId, enabled));
+        log.add(`${enabled ? 'Discord-användare spärrad' : 'Spärr hävd'}: ${userId}`);
+      },
     });
     if (stopped) dashboard.close();
     else log.add(`Statusfönster: ${dashboard.url} · Ctrl+C stoppar bevakningen.`);
@@ -300,6 +307,7 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
     guildId: config.discord.guildId, channelId: config.discord.channelId,
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {
+      isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),
       getPreviousName: userId => readPreviousNationsName(configPath, userId),
       getDm: userId => readDmPreference(configPath, userId),
@@ -311,7 +319,7 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
         content: text(readBotLanguage(configPath, userId), 'dmControl'),
         allowed_mentions: { parse: [] },
       }, userId, () => true, AbortSignal.any([deliveryAbort.signal, AbortSignal.timeout(10000)]),
-      () => !stopped && readDmPreference(configPath, userId)),
+      () => !stopped && !isUserBanned(configPath, userId) && readDmPreference(configPath, userId)),
       setDm: (userId, enabled) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         saveDmPreference(configPath, userId, enabled);

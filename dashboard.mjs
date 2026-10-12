@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, auth = null }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, auth = null }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -53,6 +53,13 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
     try {
+      if (url.pathname.startsWith('/api/bans/')) {
+        const userId = url.pathname.slice('/api/bans/'.length);
+        if (!/^\d{17,20}$/.test(userId)) { json(400, { error: 'Discord-ID ska vara ett nummer med 17–20 siffror.' }); return; }
+        if (!setBan) { json(404, { error: 'Spärrhantering är inte tillgänglig.' }); return; }
+        await setBan(userId, req.method === 'POST');
+        json(200, { ok: true }); return;
+      }
       if (req.method === 'POST' && url.pathname === '/api/subscriptions') {
         if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'Ogiltigt format.' }); return; }
         let body = '';

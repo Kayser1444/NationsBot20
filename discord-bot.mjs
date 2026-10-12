@@ -31,7 +31,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
         try {
           if (interaction.isAutocomplete()) {
             const focused = interaction.options.getFocused(true);
-            const choices = !allowed ? []
+            const choices = !allowed || service.isBanned?.(interaction.user.id) ? []
               : interaction.commandName === 'language' && focused.name === 'locale' ? autocompleteLanguages(focused.value)
               : interaction.commandName === 'notifications' && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : [];
             await interaction.respond(choices);
@@ -40,6 +40,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           await interaction.deferReply({ flags: MessageFlags.Ephemeral });
           if (stopped) return;
           if (!allowed) { await interaction.editReply({ content: text(language(), 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
+          if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           service.captureLocale?.(interaction.user.id, interaction.locale);
           displayNames.remember(interaction.user.id, interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username);
           const commandService = interaction.commandName === 'status'
@@ -53,7 +54,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             nationsName: interaction.options.getString('nationsname'),
             locale: interaction.commandName === 'language' ? interaction.options.getString('locale') : undefined,
           }, commandService);
-          if (interaction.commandName === 'dm' && action === 'on') {
+          if (interaction.commandName === 'dm' && action === 'on' && !service.isBanned?.(interaction.user.id)) {
             try {
               await service.checkDm(interaction.user.id);
               content += '\n' + text(language(), 'dmConfirmed');

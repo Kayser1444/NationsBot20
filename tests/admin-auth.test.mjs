@@ -20,7 +20,7 @@ async function fixture(t) {
     return Response.json({ id: identity, username: 'Owner' });
   } });
   const dashboard = await startDashboard({ port: 0, auth, snapshot: () => { snapshots++; return { private: 'owner-only' }; },
-    subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; } });
+    subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
   t.after(() => dashboard.close());
   // Emulate the TLS proxy with an explicit Host header (fetch derives Host from URL).
   const request = (path, options = {}) => new Promise((resolve, reject) => {
@@ -58,6 +58,7 @@ test('public admin pages disclose no state; APIs require authentication and HTTP
   assert.equal(html.includes('owner-only'), false);
   assert.equal((await f.request('/api/status')).status, 401);
   assert.equal((await f.request('/api/subscriptions', { method: 'POST' })).status, 401);
+  for (const method of ['POST', 'DELETE']) assert.equal((await f.request('/api/bans/' + owner, { method })).status, 401);
   assert.equal((await f.request('/api/status', { headers: { host: 'evil.test' } })).status, 403);
   assert.equal((await f.request('/', { headers: { 'x-forwarded-proto': 'http' } })).status, 403);
   assert.deepEqual(f.counts(), { calls: 0, snapshots: 0, edits: 0 });
@@ -97,6 +98,11 @@ test('owner session protects page and edits, rejects forged CSRF, and ends on lo
   assert.equal((await f.request('/api/subscriptions', { method: 'POST', body, headers })).status, 200);
   assert.equal(f.counts().edits, 1);
   assert.equal((await f.request('/api/subscriptions/Kayser', { method: 'DELETE', headers })).status, 200);
+  for (const method of ['POST', 'DELETE']) {
+    assert.equal((await f.request('/api/bans/' + owner, { method, headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
+    assert.equal((await f.request('/api/bans/' + owner, { method, headers })).status, 200);
+  }
+  assert.equal(f.counts().edits, 4);
   assert.equal((await f.request('/auth/logout', { headers })).status, 403);
   assert.equal((await f.request('/auth/logout', { method: 'POST', headers })).status, 303);
   assert.equal((await f.request('/api/status', { headers: { cookie } })).status, 401);

@@ -145,6 +145,23 @@ or exposed in the dashboard. Subscriptions remain in the existing `/data` files.
 To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
 redeploy. Local runs retain the original loopback-only administration page.
 
+### Blocking abusive users
+
+The owner console offers **Avsluta och spärra** beside each subscription, plus a
+Discord-ID field for blocking users who have no active subscription. Blocking
+atomically saves `bannedUsers` in `/data/friends.json`, releases the Nations name,
+clears the user's remembered name, cancels queued reminders and closes game
+connections no longer needed by other subscribers. All bot commands and
+autocomplete reject blocked Discord IDs; admin subscription edits also refuse
+blocked IDs. The block is specific to NationsBot, not a Discord server ban.
+
+The blocked-user list shows the Discord ID, previous active Nations name and
+timestamp. **Häv spärr** restores bot access without recreating the subscription
+or restoring the old name. Preferences such as language and DM mode are retained.
+Block/unblock endpoints use the same owner authentication and CSRF protection as
+subscription management. A Discord message already submitted before a block
+cannot be recalled; subsequent reminders are suppressed.
+
 ## Local development
 
 Install Node.js 24, then:

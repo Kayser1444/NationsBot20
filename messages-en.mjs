@@ -1,4 +1,5 @@
 export default {
+  userBanned: 'You are blocked from NationsBot. Contact Kayser to ask for a review.',
   help: [
     '**Nations Bot 2.0 — help**',
     'I watch public Nations games and remind you when it is your turn, with a link to the game.',

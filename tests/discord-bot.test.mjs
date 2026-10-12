@@ -215,6 +215,16 @@ test('adapter requests no chat intents and uses private replies in the configure
     options: { getFocused: () => ({ name: 'nationsname', value: 'KAY' }) }, respond: async value => { autocomplete.choices = value; } });
   await instance.listeners(Events.InteractionCreate)[0](autocomplete);
   assert.deepEqual(autocomplete.choices, [{ name: 'Kayser', value: 'Kayser' }]);
+  f.service.isBanned = () => true;
+  await instance.listeners(Events.InteractionCreate)[0](autocomplete);
+  assert.deepEqual(autocomplete.choices, []);
+  const bannedDm = makeInteraction({ commandName: 'dm' });
+  f.service.checkDm = () => assert.fail('banned users must receive no control DM');
+  await instance.listeners(Events.InteractionCreate)[0](bannedDm);
+  assert.match(bannedDm.replies[1].content, /spärrad/);
+  assert.equal(bannedDm.replies[0].flags, MessageFlags.Ephemeral);
+  assert.equal(f.service.getDm(first), false);
+  f.service.isBanned = () => false;
   const languageAutocomplete = makeInteraction({ commandName: 'language', isChatInputCommand: () => false, isAutocomplete: () => true,
     options: { getFocused: () => ({ name: 'locale', value: 'swe' }) }, respond: async value => { languageAutocomplete.choices = value; } });
   await instance.listeners(Events.InteractionCreate)[0](languageAutocomplete);

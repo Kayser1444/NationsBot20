@@ -35,9 +35,10 @@ export function autocompleteNames(names, query) {
 
 // Called synchronously after Discord acknowledges the interaction. Check and save
 // have no await between them, so simultaneous claims cannot replace each other.
-export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => false, getLocale = () => null, getLanguageOverride = () => null, setLanguage, setDm }) {
+export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => false, getLocale = () => null, getLanguageOverride = () => null, isBanned = () => false, setLanguage, setDm }) {
   const language = resolveLanguage(getLocale(userId), getLanguageOverride(userId));
   const t = (key, values) => text(language, key, values);
+  if (isBanned(userId)) return t('userBanned');
   if (command === 'help') return t('help');
   if (command === 'language') {
     const selected = normalizeLanguage(locale);

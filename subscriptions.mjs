@@ -15,7 +15,48 @@ export function validateSubscriptions(value) {
 
 export function readSubscriptions(path) {
   const config = JSON.parse(readFileSync(path, 'utf8'));
-  return validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
+  const selected = validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
+  const banned = validateBans(config.bannedUsers);
+  return validateSubscriptions(Object.fromEntries(Object.entries(selected).filter(([, id]) => !Object.hasOwn(banned, id))));
+}
+
+function validateBans(value = {}) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('Ogiltig spärrlista.');
+  const result = Object.create(null);
+  for (const [id, ban] of Object.entries(value)) {
+    if (!/^\d{17,20}$/.test(id) || !ban || typeof ban !== 'object' || Array.isArray(ban) ||
+        typeof ban.bannedAt !== 'string' || !Number.isFinite(Date.parse(ban.bannedAt)) ||
+        (ban.nationsName !== null && (typeof ban.nationsName !== 'string' || ban.nationsName.length > 150))) throw new Error('Ogiltig spärrlista.');
+    result[id] = { bannedAt: ban.bannedAt, nationsName: ban.nationsName };
+  }
+  return result;
+}
+
+export function readBannedUsers(path) {
+  return validateBans(JSON.parse(readFileSync(path, 'utf8')).bannedUsers);
+}
+
+export function isUserBanned(path, userId) {
+  return Object.hasOwn(readBannedUsers(path), userId);
+}
+
+// Persist the ban and release every claim in one atomic configuration write.
+export function setUserBan(path, userId, enabled) {
+  if (!/^\d{17,20}$/.test(userId) || typeof enabled !== 'boolean') throw new Error('Ogiltigt Discord-ID eller spärrval.');
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  const bans = validateBans(config.bannedUsers);
+  const selected = validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
+  if (enabled) {
+    const name = Object.entries(selected).find(([, id]) => id === userId)?.[0] ?? null;
+    if (!Object.hasOwn(bans, userId)) bans[userId] = { bannedAt: new Date().toISOString(), nationsName: name };
+    for (const [name, id] of Object.entries(selected)) if (id === userId) delete selected[name];
+    // Do not silently restore a potentially stolen name after an unban.
+    config.lastNationsNames = rememberedNames(config); delete config.lastNationsNames[userId];
+  } else delete bans[userId];
+  config.bannedUsers = bans; config.subscriptions = selected;
+  const temp = path + '.tmp';
+  writeFileSync(temp, JSON.stringify(config, null, 2) + '\n'); renameSync(temp, path);
+  return readSubscriptions(path);
 }
 
 function rememberedNames(config) {
@@ -89,6 +130,8 @@ export function saveDmPreference(path, userId, enabled) {
 export function saveSubscriptions(path, subscriptions) {
   const selected = validateSubscriptions(subscriptions);
   const config = JSON.parse(readFileSync(path, 'utf8'));
+  const bans = validateBans(config.bannedUsers);
+  if (Object.values(selected).some(id => Object.hasOwn(bans, id))) throw new Error('Discord-användaren är spärrad från botten. Häv spärren först.');
   const previousNames = rememberedNames(config);
   const previous = validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
   // Preserve the removed mapping and let an explicit new mapping become the latest.

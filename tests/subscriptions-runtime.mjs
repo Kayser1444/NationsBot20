@@ -51,6 +51,22 @@ try {
   assert.equal(removed.subscribers.length, 0); assert.equal(removed.matches.length, 0);
   assert.equal(sockets[0].readyState, 3);
   assert.deepEqual(JSON.parse(readFileSync(join(dir, 'friends.json'), 'utf8')).subscriptions, {});
+  const add = userId => fetch(origin + '/api/subscriptions', { method: 'POST', headers, body: JSON.stringify({ username: 'Tester', userId }) });
+  const userId = '229311536827465728';
+  assert.equal((await add(userId)).status, 200);
+  assert.equal((await fetch(origin + '/api/bans/' + userId, { method: 'POST', headers })).status, 200);
+  const banned = await (await fetch(origin + '/api/status')).json();
+  assert.equal(banned.subscribers.length, 0); assert.equal(banned.matches.length, 0);
+  assert.equal(banned.bannedUsers[0].userId, userId);
+  assert.equal(banned.bannedUsers[0].nationsName, 'Tester');
+  assert.equal(sockets.at(-1).readyState, 3);
+  assert.equal((await add(userId)).status, 400, 'admin cannot recreate a banned subscription');
+  assert.equal((await add('821001820309815368')).status, 200, 'released name is available to its rightful owner');
+  assert.equal((await fetch(origin + '/api/bans/' + userId, { method: 'DELETE', headers })).status, 200);
+  const unbanned = await (await fetch(origin + '/api/status')).json();
+  assert.equal(unbanned.bannedUsers.length, 0);
+  assert.equal(unbanned.subscribers.length, 1);
+  assert.equal(unbanned.subscribers[0].userId, '821001820309815368', 'unban never restores an old claim');
 } finally {
   process.emit('SIGTERM'); console.log = originalLog;
   rmSync(dir, { recursive: true, force: true });

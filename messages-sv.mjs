@@ -1,4 +1,5 @@
 export default {
+  userBanned: 'Du är spärrad från NationsBot. Kontakta Kayser om du vill få spärren prövad.',
   help: [
     '**Nations Bot 2.0 — hjälp**',
     'Jag bevakar publika Nations-partier och påminner dig när det är din tur, med en länk till partiet.',
