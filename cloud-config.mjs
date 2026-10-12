@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { isAbsolute, join } from 'node:path';
 import { validateSubscriptions } from './subscriptions.mjs';
+import { importCloudState } from './cloud-migration.mjs';
 
 export function prepareCloudConfiguration(env = process.env) {
   if (!env.NATIONS_DISCORD_BOT_TOKEN) throw new Error('Set NATIONS_DISCORD_BOT_TOKEN in the hosting service secrets.');
@@ -8,6 +9,7 @@ export function prepareCloudConfiguration(env = process.env) {
   if (!directory || !isAbsolute(directory)) throw new Error('NATIONS_DATA_DIR must be an absolute persistent volume path.');
   const configPath = join(directory, 'friends.json');
   mkdirSync(directory, { recursive: true });
+  importCloudState(directory, env.NATIONS_MIGRATION_BUNDLE, env);
   if (!existsSync(configPath)) {
     if (![env.NATIONS_DISCORD_GUILD_ID, env.NATIONS_DISCORD_CHANNEL_ID].every(id => /^\d{17,20}$/.test(id ?? ''))) {
       throw new Error('Set valid NATIONS_DISCORD_GUILD_ID and NATIONS_DISCORD_CHANNEL_ID before first startup.');

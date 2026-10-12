@@ -73,6 +73,13 @@ cloud instance stopped while transferring:
 
 Use the current files after stopping, not an old snapshot. Never transfer
 Windows-encrypted `*.secret` files; supply the bot token privately in Railway.
+Alternatively, set a temporary private `NATIONS_MIGRATION_BUNDLE` variable to the
+base64-encoded JSON `{ "version": 1, "config": <friends.json object>, "outbox":
+<friends-outbox.json object> }`. First startup imports it into a new volume;
+destination mismatches or existing different state are rejected. A persisted
+completion marker prevents later restarts from overwriting subscription edits.
+Remove this variable after verifying migration. The player-name cache rebuilds
+automatically if omitted. Never commit the bundle to GitHub.
 Start only the cloud instance. To roll back, stop the cloud instance and download
 its latest configuration/outbox before restarting locally. Do not run both copies
 against the same reminder channel.
