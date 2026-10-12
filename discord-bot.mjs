@@ -29,6 +29,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           await interaction.deferReply({ flags: MessageFlags.Ephemeral });
           if (stopped) return;
           if (!allowed) { await interaction.editReply({ content: 'Använd kommandot i den avsedda påminnelsekanalen på spelservern.', allowedMentions: { parse: [] } }); return; }
+          service.captureLocale?.(interaction.user.id, interaction.locale);
           const action = ['notifications', 'dm'].includes(interaction.commandName) ? interaction.options.getSubcommand() : null;
           let content = handleSubscriptionCommand({
             command: interaction.commandName, userId: interaction.user.id,

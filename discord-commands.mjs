@@ -47,7 +47,7 @@ export function autocompleteNames(names, query) {
 
 // Called synchronously after Discord acknowledges the interaction. Check and save
 // have no await between them, so simultaneous claims cannot replace each other.
-export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => false, setDm }) {
+export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => false, getLocale = () => null, setDm }) {
   if (command === 'help') return helpMessage;
   if (command === 'dm') {
     if (!['on', 'off'].includes(action)) return 'Använd /dm on eller /dm off.';
@@ -60,7 +60,14 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     const state = getStatus(own, userId);
     const mode = getDm(userId) ? 'Leverans: endast DM.' : 'Leverans: påminnelsekanalen (DM av).';
     const blocked = state.blocked ? ' Ett utskick är blockerat. Kontrollera DM-inställningarna eller kontakta Kayser; /dm on eller /dm off gör ett nytt försök.' : '';
-    const summary = (own ? `Du prenumererar på påminnelser för ${quote(own)}. ${state.matches} pågående partier bevakas. ${state.discordEnabled ? 'Discord-utskick är aktiverade.' : 'Discord-utskick är inte aktiverade.'}` : 'Du har ingen prenumeration. Använd /notifications on för att börja.') + ' ' + mode + blocked;
+    const locale = getLocale(userId);
+    let language = 'Discord-språk: inte upptäckt ännu.';
+    if (locale) {
+      let label = locale;
+      try { label = new Intl.DisplayNames(['sv'], { type: 'language' }).of(locale); } catch {}
+      language = `Discord-språk: ${label} (${quote(locale)}).`;
+    }
+    const summary = (own ? `Du prenumererar på påminnelser för ${quote(own)}. ${state.matches} pågående partier bevakas. ${state.discordEnabled ? 'Discord-utskick är aktiverade.' : 'Discord-utskick är inte aktiverade.'}` : 'Du har ingen prenumeration. Använd /notifications on för att börja.') + ' ' + mode + blocked + '\n' + language + ' Botens texter är tills vidare på svenska.';
     if (!own || !state.matchList?.length) return summary;
     const rows = state.matchList.map(match => {
       const title = (match.title || `Parti ${match.id}`).replace(/[\r\n\t]+/g, ' ').replace(/[\\`*_[\]<>@]/g, '').slice(0, 100);

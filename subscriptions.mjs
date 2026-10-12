@@ -39,6 +39,23 @@ export function readDmPreference(path, userId) {
   return value ?? false;
 }
 
+export function readUserLocale(path, userId) {
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  const locale = config.userLocales?.[userId];
+  return typeof locale === 'string' && /^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(locale) && locale.length <= 35 ? locale : null;
+}
+
+export function saveUserLocale(path, userId, locale) {
+  if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
+  if (typeof locale !== 'string' || locale.length > 35 || !/^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(locale)) return false;
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  if (config.userLocales?.[userId] === locale) return false;
+  config.userLocales = { ...config.userLocales, [userId]: locale };
+  const temp = path + '.tmp';
+  writeFileSync(temp, JSON.stringify(config, null, 2) + '\n'); renameSync(temp, path);
+  return true;
+}
+
 export function saveDmPreference(path, userId, enabled) {
   if (!/^\d{17,20}$/.test(userId) || typeof enabled !== 'boolean') throw new Error('Ogiltig DM-inställning.');
   const config = JSON.parse(readFileSync(path, 'utf8'));

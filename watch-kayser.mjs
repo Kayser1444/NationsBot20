@@ -10,7 +10,7 @@ import { liveSnapshot } from './live-snapshot.mjs';
 import { ServiceStatus } from './service-status.mjs';
 import { startDashboard } from './dashboard.mjs';
 import { EventLog } from './event-log.mjs';
-import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference } from './subscriptions.mjs';
+import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference, readUserLocale, saveUserLocale } from './subscriptions.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
@@ -299,6 +299,8 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       getSubscriptions: () => readSubscriptions(configPath),
       getPreviousName: userId => readPreviousNationsName(configPath, userId),
       getDm: userId => readDmPreference(configPath, userId),
+      getLocale: userId => readUserLocale(configPath, userId),
+      captureLocale: (userId, locale) => saveUserLocale(configPath, userId, locale),
       checkDm: userId => transport.sendReminder({
         content: '✅ Kontrollmeddelande från Nations Bot 2.0. Dina aktiverade Nations-påminnelser skickas hit när DM är på. Godkänn meddelandeförfrågan om Discord visar en sådan.',
         allowed_mentions: { parse: [] },

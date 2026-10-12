@@ -12,12 +12,20 @@ English commands with Swedish replies:
 - `/dm on` chooses private reminders and sends a control DM; `/dm off` chooses
   channel reminders. Preferences persist across restarts.
 - `/status` privately lists your monitored games with links and connection status.
+  It also shows your Discord interface language, captured from your latest allowed
+  command. This observation does not yet change the language of bot messages.
 - `/help` explains the bot and subscription rules.
 
 Nations names are case-sensitive. Discord display-name matching is case-insensitive
 and strips a trailing parenthesized name. One Nations name can have one subscriber.
 Reminders use the bot account, with mentions in the channel unless DM is enabled.
 Startup/shutdown notices go to the channel without mentions.
+
+Subscriptions and user preferences are saved in `/data/friends.json` on Railway's
+persistent volume: `subscriptions`, `lastNationsNames`, `dmPreferences` and
+`userLocales` (last observed Discord locale, keyed by Discord user ID). Locale
+capture happens on commands in the designated channel; it does not sample the
+server member list. Delivery history lives separately in `friends-outbox.json`.
 
 ## Current observation method
 

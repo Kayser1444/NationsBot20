@@ -120,6 +120,9 @@ test('adapter requests no chat intents and uses private replies in the configure
   }
   const f = fixture();
   f.service.checkDm = async userId => { dmChecks.push(userId); };
+  const capturedLocales = [];
+  f.service.captureLocale = (userId, locale) => capturedLocales.push({ userId, locale });
+  f.service.getLocale = userId => capturedLocales.findLast(item => item.userId === userId)?.locale ?? null;
   const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service,
     onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
   });
@@ -132,7 +135,7 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.ok(states.includes('Igång'));
   const makeInteraction = (overrides = {}) => {
     const replies = [];
-    return { replies, guildId: 'guild', channelId: 'channel', commandName: 'notifications',
+    return { replies, guildId: 'guild', channelId: 'channel', commandName: 'notifications', locale: 'sv-SE',
       user: { id: first, bot: false, username: 'other', globalName: 'unmatched' }, member: { nick: 'kayser (Jonas Adolphson)' },
       options: { getString: () => null, getSubcommand: () => 'on' }, isChatInputCommand: () => true, isAutocomplete: () => false,
       deferReply: async function(options) { this.deferred = true; replies.push(options); },
@@ -141,10 +144,12 @@ test('adapter requests no chat intents and uses private replies in the configure
   const blocked = makeInteraction({ channelId: 'other' });
   await instance.listeners(Events.InteractionCreate)[0](blocked);
   assert.deepEqual(f.service.getSubscriptions(), {});
+  assert.deepEqual(capturedLocales, []);
   assert.equal(blocked.replies[0].flags, MessageFlags.Ephemeral);
   const interaction = makeInteraction();
   await instance.listeners(Events.InteractionCreate)[0](interaction);
   assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.deepEqual(capturedLocales, [{ userId: first, locale: 'sv-SE' }]);
   assert.equal(interaction.replies[0].flags, MessageFlags.Ephemeral);
   assert.deepEqual(interaction.replies[1].allowedMentions, { parse: [] });
   const help = makeInteraction({ commandName: 'help' });
@@ -153,7 +158,7 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.equal(help.replies[1].content, helpMessage);
   assert.deepEqual(help.replies[1].allowedMentions, { parse: [] });
   f.service.getStatus = () => ({ matches: 100, discordEnabled: true, matchList: Array.from({ length: 100 }, (_, i) => ({ id: String(3000 + i), title: 'Testparti ' + i, connected: i % 2 === 0 })) });
-  const status = makeInteraction({ commandName: 'status', followUp: async options => status.replies.push(options) });
+  const status = makeInteraction({ commandName: 'status', locale: 'en-US', followUp: async options => status.replies.push(options) });
   await instance.listeners(Events.InteractionCreate)[0](status);
   assert.ok(status.replies.length > 2);
   const statusPages = status.replies.slice(1);
@@ -163,6 +168,7 @@ test('adapter requests no chat intents and uses private replies in the configure
   }
   for (const page of statusPages.slice(1)) assert.equal(page.flags, MessageFlags.Ephemeral);
   const statusContent = statusPages.map(page => page.content).join('\n');
+  assert.match(statusContent, /Discord-språk:.*`en-US`/);
   for (let i = 0; i < 100; i++) assert.ok(statusContent.includes(`ID ${3000 + i} ·`));
   assert.match(statusContent, /https:\/\/games.tabony.net\/nations\/3000\//);
   assert.match(statusContent, /ej ansluten/);
