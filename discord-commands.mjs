@@ -67,7 +67,9 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
       const name = match.discordName ? plainName(match.discordName) : '';
       const discordName = match.player && Object.hasOwn(current, match.player) && name ? ` [${name}]` : '';
       const turn = `${t(match.player && !match.connected ? 'lastKnownTurn' : 'turnLabel')}: ${player}${discordName}`;
-      return `• [${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>) · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')} · ${turn}`;
+      const link = `[${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>)`;
+      const game = match.connected && match.player === own ? `**${link}**` : link;
+      return `• ${game} · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')} · ${turn}`;
     });
     return summary + '\n\n' + t('gamesHeading') + '\n' + rows.join('\n');
   }
