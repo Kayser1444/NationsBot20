@@ -56,9 +56,10 @@ that feed; it can be hosted independently of that PR's deployment.
 
 ## Railway deployment
 
-Use one persistent service, with **Serverless disabled**, **one replica**, and no
-public domain or port. The local administration dashboard is disabled in cloud
-mode; subscribers use Discord commands. Railway's deployment logs and metrics
+Use one persistent service, with **Serverless disabled** and **one replica**. No
+public domain is needed unless enabling the authenticated owner console below.
+The administration dashboard is disabled by default in cloud mode; subscribers
+use Discord commands. Railway's deployment logs and metrics
 provide operator status. The trial's outbound networking must permit Nations and
 Discord connections.
 
@@ -106,6 +107,43 @@ automatically if omitted. Never commit the bundle to GitHub.
 Start only the cloud instance. To roll back, stop the cloud instance and download
 its latest configuration/outbox before restarting locally. Do not run both copies
 against the same reminder channel.
+
+## Owner console with Discord authentication
+
+The cloud console reuses the local subscription-management page, protected by
+Discord OAuth authorization-code sign-in with only the `identify` scope. Access
+is restricted to one configured Discord owner ID, checked by the backend on every
+session. Server membership or administrator permissions do not grant access.
+
+1. Generate a Railway HTTPS domain for this service, targeting port `8080`.
+2. In the Discord application's OAuth2 settings, add the exact redirect URI
+   `https://<your-domain>/auth/callback`. Keep the existing bot installation settings.
+3. Set these private service variables:
+
+   | Variable | Value |
+   |---|---|
+   | `NATIONS_ADMIN_ENABLED` | `1` |
+   | `NATIONS_ADMIN_ORIGIN` | `https://<your-domain>` (no path) |
+   | `NATIONS_ADMIN_OWNER_ID` | `229311536827465728` for Kayser |
+   | `NATIONS_DISCORD_CLIENT_ID` | `1558936899446374570` for NationsBot 2.0 |
+   | `NATIONS_DISCORD_CLIENT_SECRET` | OAuth client secret from Developer Portal, **not the bot token** |
+   | `PORT` | `8080` |
+
+4. Deploy and open the domain, sign in with Discord, and verify `/api/status`
+   requires authentication. Test adding/removing a test subscription and logout.
+
+The console binds to the service port only with complete, valid OAuth settings;
+otherwise it stays disabled while reminders keep running. HTTPS and the exact
+configured Host are required. Railway must supply `X-Forwarded-Proto: https`.
+The UI and APIs require owner sessions, and edits/logout also require same-origin
+requests and per-session CSRF tokens. Cookies are Secure, HttpOnly, host-only and
+SameSite=Lax. Login state is browser-bound, expiring and single-use. Sessions
+expire after one hour, are held only in memory, and end on logout or bot restart.
+OAuth tokens, client secrets and session cookies are never saved to the volume
+or exposed in the dashboard. Subscriptions remain in the existing `/data` files.
+
+To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
+redeploy. Local runs retain the original loopback-only administration page.
 
 ## Local development
 

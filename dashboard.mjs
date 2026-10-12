@@ -3,10 +3,15 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, auth = null }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
+    res.setHeader('x-frame-options', 'DENY');
+    res.setHeader('x-content-type-options', 'nosniff');
+    res.setHeader('referrer-policy', 'no-referrer');
+    res.setHeader('cache-control', 'no-store');
+    if (auth) res.setHeader('strict-transport-security', 'max-age=31536000');
     const json = (status, data) => {
       res.writeHead(status, { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' });
       res.end(JSON.stringify(data));
@@ -14,18 +19,39 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
     // Loopback binding + exact Host/Origin + per-process token prevent remote
     // pages from changing local subscriptions (including DNS rebinding).
     if (req.headers.host !== new URL(origin).host) { json(403, { error: 'Fel lokal adress.' }); return; }
-    const url = new URL(req.url, origin);
+    let url;
+    try { url = new URL(req.url, origin); } catch { json(400, { error: 'Ogiltig adress.' }); return; }
+    let activeSession = null;
+    if (auth) {
+      // Railway terminates TLS and forwards HTTPS requests to this private port.
+      if (req.headers['x-forwarded-proto'] !== 'https') { json(403, { error: 'HTTPS krävs.' }); return; }
+      try {
+        if (await auth.handle(req, res, url)) return;
+        activeSession = auth.session(req);
+      } catch { json(500, { error: 'Inloggningen kunde inte verifieras.' }); return; }
+      if (!activeSession) {
+        if (req.method === 'GET' && url.pathname === '/') {
+          res.writeHead(200, { 'content-type': 'text/html; charset=utf-8',
+            'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'" });
+          res.end('<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NationsBot · Ägarpanel</title><style>body{font:16px system-ui;background:#f3f5f8;color:#203044;margin:0;padding:24px}main{max-width:440px;margin:12vh auto;background:white;border:1px solid #e0e5ec;border-radius:14px;padding:32px}h1{margin:0 0 8px}p{line-height:1.6}a{display:inline-block;background:#234f86;color:white;text-decoration:none;border-radius:8px;padding:12px 18px}.muted{font-size:13px;color:#64748b}</style><main><h1>NationsBot 2.0</h1><p>Hantera prenumerationer och se aktuell bevakning.</p><p><a href="/auth/login">Logga in med Discord</a></p><p class="muted">Endast botägaren har tillgång till ägarpanelen.</p></main></html>'); return;
+        }
+        json(401, { error: 'Logga in med Discord.' }); return;
+      }
+    }
+    const csrf = activeSession?.csrf ?? token;
     if (req.method === 'GET' && url.pathname === '/') {
       res.writeHead(200, {
         'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
         'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff',
-        'content-security-policy': "default-src 'self'; script-src 'self' 'nonce-" + token + "'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'",
+        'content-security-policy': "default-src 'self'; script-src 'self' 'nonce-" + csrf + "'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
       });
-      res.end(page.replaceAll('__TOKEN__', token)); return;
+      res.end(page.replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
+        .replaceAll('__STOP_HINT__', auth ? 'Bevakningen körs på Railway.' : 'Stoppa tjänsten med Ctrl+C i terminalen.')
+        .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : '')); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
-    if (req.headers.origin !== origin || req.headers['x-nations-token'] !== token) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
+    if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
     try {
       if (req.method === 'POST' && url.pathname === '/api/subscriptions') {
         if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'Ogiltigt format.' }); return; }
@@ -50,8 +76,8 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
   });
   await new Promise((resolve, reject) => {
     server.once('error', reject);
-    server.listen(port, '127.0.0.1', resolve);
+    server.listen(port, auth ? '0.0.0.0' : '127.0.0.1', resolve);
   });
-  origin = `http://127.0.0.1:${server.address().port}`;
-  return { url: origin, close: () => { server.close(); server.closeIdleConnections(); } };
+  origin = auth?.origin ?? `http://127.0.0.1:${server.address().port}`;
+  return { url: origin, port: server.address().port, close: () => { auth?.close(); server.close(); server.closeIdleConnections(); } };
 }

@@ -9,7 +9,7 @@
 .name-field{position:relative}.suggestions{position:absolute;z-index:5;top:100%;left:0;right:0;list-style:none;margin:4px 0 0;padding:4px;background:white;border:1px solid #cdd5df;border-radius:8px;box-shadow:0 8px 20px #20304420;max-height:240px;overflow:auto}.suggestions[hidden]{display:none}.suggestions li{padding:9px 10px;border-radius:5px;cursor:pointer}.suggestions li:hover,.suggestions li[aria-selected=true]{background:#eaf0fa;color:#234f86}#name-hint{margin-top:7px;font-size:11px}
 </style>
 <main>
-<header><div><h1>Nations</h1><p class="muted">Bevakning och prenumerationer · på den här datorn</p></div><span id="health" class="badge off">Ansluter…</span></header>
+<header><div><h1>Nations</h1><p class="muted">Bevakning och prenumerationer · __LOCATION__</p></div><span id="health" class="badge off">Ansluter…</span>__ADMIN_CONTROLS__</header>
 <section class="cards">
 <div class="card"><div class="muted">BEVAKADE PARTIER</div><div id="match-count" class="number">–</div><p id="connections" class="muted">Hämtar status</p></div>
 <div class="card"><div class="muted">PRENUMERANTER</div><div id="subscriber-count" class="number">–</div><p class="muted">Ändringar gäller direkt</p></div>
@@ -21,10 +21,11 @@
 <div class="panel"><h2>Senaste händelser</h2><div id="activity" class="activity"></div></div>
 </section>
 <section class="panel"><h2>Partier</h2><p id="discovery" class="muted"></p><div class="scroll"><table><thead><tr><th>Parti</th><th>Tur</th><th>Anslutning</th></tr></thead><tbody id="matches"></tbody></table></div></section>
-<footer>Du kan stänga fönstret utan att stoppa bevakningen. Stoppa tjänsten med Ctrl+C i terminalen. <span id="updated"></span></footer>
+<footer>Du kan stänga fönstret utan att stoppa bevakningen. __STOP_HINT__ <span id="updated"></span></footer>
 </main>
 <script nonce="__TOKEN__">
 const token='__TOKEN__';
+document.getElementById('logout')?.addEventListener('click',async()=>{await fetch('/auth/logout',{method:'POST',headers:{'x-nations-token':token}});location.assign('/')});
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');
@@ -52,10 +53,11 @@ function cell(row,value){const td=document.createElement('td');td.textContent=va
 function feedback(message,error=false){text('feedback',message);el('feedback').className=error?'error':''}
 async function change(method,path,body){
  const response=await fetch(path,{method,headers:{'content-type':'application/json','x-nations-token':token},body:body?JSON.stringify(body):undefined});
+ if(response.status===401){location.assign('/');throw new Error('Logga in med Discord igen.');}
  const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();
 }
 async function refresh(){try{
- const response=await fetch('/api/status',{cache:'no-store'});if(!response.ok)throw new Error();const s=await response.json();
+ const response=await fetch('/api/status',{cache:'no-store'});if(response.status===401){location.assign('/');return;}if(!response.ok)throw new Error();const s=await response.json();
  const incomingNames=JSON.stringify(s.playerNames||[]);if(incomingNames!==namesVersion){namesVersion=incomingNames;playerNames=s.playerNames||[];if(document.activeElement===el('username'))showSuggestions()}
  text('name-hint',s.playerNamesUpdatedAt?playerNames.length+' spelarnamn · uppdaterat '+time(s.playerNamesUpdatedAt):'Hämtar spelarnamn från pågående partier…');
  const active=s.matches.filter(m=>!m.over);const connected=active.filter(m=>m.connected).length;

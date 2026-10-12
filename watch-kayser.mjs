@@ -9,6 +9,7 @@ import { Outbox } from './outbox.mjs';
 import { liveSnapshot } from './live-snapshot.mjs';
 import { ServiceStatus } from './service-status.mjs';
 import { startDashboard } from './dashboard.mjs';
+import { adminSettings, createDiscordAuth } from './admin-auth.mjs';
 import { EventLog } from './event-log.mjs';
 import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference, readUserLocale, saveUserLocale, readLanguageOverride, readBotLanguage, saveLanguagePreference } from './subscriptions.mjs';
 import { text } from './language.mjs';
@@ -264,6 +265,7 @@ if (!args.includes('--no-dashboard')) {
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
     dashboard = await startDashboard({ port, snapshot,
+      auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings()) : null,
       subscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         const next = validateSubscriptions({ ...subscriptions, [username]: userId });
