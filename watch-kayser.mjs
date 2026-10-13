@@ -68,6 +68,7 @@ const serviceStatus = transport ? new ServiceStatus(async (payload, signal) => {
 }, message => log.add(message, 'error')) : null;
 const shown = new Map();
 let shownDiscovery, shownDelivery;
+const gameLabel = match => `${match.title || 'Parti'} (${match.id ?? match.matchId})`;
 function show() {
   if (shownDelivery !== delivery) {
     shownDelivery = delivery;
@@ -81,11 +82,11 @@ function show() {
   for (const m of matches) {
     const before = shown.get(m.id);
     const current = { status: m.status, player: m.state?.player, over: m.state?.over };
-    if (before && before.player !== current.player && current.player) log.add(`${current.player} har turen i ${m.title || 'Parti'} (${m.id})`);
-    if (before && !before.over && current.over) log.add(`Parti avslutat: ${m.title || m.id}`);
+    if (before && before.player !== current.player && current.player) log.add(`${current.player} har turen i ${gameLabel(m)}`);
+    if (before && !before.over && current.over) log.add(`Parti avslutat: ${gameLabel(m)}`);
     if (before?.status !== current.status) {
-      if (current.status === 'connected') log.add(`Ansluten till ${m.title || m.id}`);
-      else if (/disconnected|error/.test(current.status)) log.add(`Anslutningen till ${m.title || m.id} avbröts. Återansluter.`, 'error');
+      if (current.status === 'connected') log.add(`Ansluten till ${gameLabel(m)}`);
+      else if (/disconnected|error/.test(current.status)) log.add(`Anslutningen till ${gameLabel(m)} avbröts. Återansluter.`, 'error');
     }
     shown.set(m.id, current);
   }
@@ -117,7 +118,7 @@ function applySubscriptions(selected) {
       m.removed = true; const socket = m.socket; m.socket = null;
       clearTimeout(m.retry); clearInterval(m.heartbeat); socket?.close();
       matches.splice(matches.indexOf(m), 1); shown.delete(m.id);
-      log.add(`Bevakning avslutad: ${m.title || m.id} (inga prenumeranter)`);
+      log.add(`Bevakning avslutad: ${gameLabel(m)} (inga prenumeranter)`);
     } else if (m.state) {
       try { outbox?.observe(m, m.state, recipients(selected, m.state.player)); }
       catch { stop(); throw new Error('Utkorgen kunde inte sparas. Bevakningen har stoppats.'); }
@@ -162,12 +163,12 @@ async function flushOutbox() {
           : transport.send(payload, deliveryAbort.signal);
       },
       report: async (status, job) => {
-        delivery = status; show();
+        delivery = job ? status.replace(`for ${job.matchId}`, `för ${gameLabel(job)}`) : status; show();
         if (status.startsWith('last alert confirmed') && job) {
           let name = null;
           try { name = await bot?.resolveDisplayName(job.userId); } catch { /* Log the ID if Discord cannot resolve a name. */ }
           const recipient = name ? name.replace(/[\u0000-\u001f\u007f]+/g, ' ').trim() : `Discord-ID ${job.userId}`;
-          log.add(`Discord-påminnelse levererad till ${recipient} för ${job.title || 'Parti'} (${job.matchId})`);
+          log.add(`Discord-påminnelse levererad till ${recipient} för ${gameLabel(job)}`);
         }
       },
     });
@@ -191,7 +192,7 @@ async function refreshMatches() {
     lastDiscovery = new Date().toISOString();
     discoveryStatus = `${new Date().toISOString()} | ${discovered.length} matching games | ${added.length} added`;
     for (const m of added) {
-      log.add(`Nytt parti upptäckt: ${m.title || m.id}`);
+      log.add(`Nytt parti upptäckt: ${gameLabel(m)}`);
       events.push(`${new Date().toISOString()} | NEW MATCH | https://games.tabony.net/nations/${m.id}/`);
       if (events.length > 10) events.shift();
       connect(m);

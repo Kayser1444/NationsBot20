@@ -79,9 +79,9 @@ export class Outbox {
             this.data.turns[job.matchId].sent = true;
             (this.data.turns[job.matchId].sentUsers ??= []).push(job.userId);
             this.data.jobs = this.data.jobs.filter(item => item !== job);
-            this.save(); report(`discarded expired turn for ${job.matchId}`); continue;
+            this.save(); report(`discarded expired turn for ${job.matchId}`, job); continue;
           }
-          report(`sending turn alert for ${job.matchId}`);
+          report(`sending turn alert for ${job.matchId}`, job);
           await send(job);
         } catch (error) {
           if (error.outboxPersistence) throw error;
@@ -92,7 +92,7 @@ export class Outbox {
           const delay = Math.max(Math.min(60000 * 2 ** Math.min(job.attempts - 1, 4), 900000), error.retryAfterMs || 0);
           job.nextAt = this.now() + delay;
           this.save();
-          report(job.blocked ? `BLOCKED for ${job.matchId}: ${error.message}; fix configuration and restart` : `RETRY for ${job.matchId} in ${Math.ceil(delay / 1000)}s: ${error.message}`);
+          report(job.blocked ? `BLOCKED for ${job.matchId}: ${error.message}; fix configuration and restart` : `RETRY for ${job.matchId} in ${Math.ceil(delay / 1000)}s: ${error.message}`, job);
           if (!job.blocked) { this.cooldown = job.nextAt; break; }
           continue;
         }
