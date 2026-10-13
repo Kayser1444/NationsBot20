@@ -102,7 +102,7 @@ export class Outbox {
           (this.data.turns[job.matchId].sentUsers ??= []).push(job.userId);
         }
         this.data.jobs = this.data.jobs.filter(item => item !== job);
-        this.save(); report(`last alert confirmed for ${job.matchId}`);
+        this.save(); await report(`last alert confirmed for ${job.matchId}`, job);
       }
     } finally { this.busy = false; }
   }

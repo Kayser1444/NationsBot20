@@ -3,7 +3,7 @@ import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
 import { createDisplayNameCache, statusServiceWithNames } from './status-turns.mjs';
 
 export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js') }) {
-  let client, stopped = false, readyTimer;
+  let client, displayNames, stopped = false, readyTimer;
   const state = value => { if (!stopped) onState(value); };
   const fail = message => { if (!stopped) { state('Fel · behöver åtgärdas'); report(message, 'error'); } };
   const close = () => { stopped = true; clearTimeout(readyTimer); client?.destroy(); onState('Avstängd'); };
@@ -13,7 +13,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
       const { Client, GatewayIntentBits, Events, MessageFlags, Routes } = await loadLibrary();
       if (stopped) return;
       client = new Client({ intents: [GatewayIntentBits.Guilds], allowedMentions: { parse: [] }, rest: { timeout: 10000 } });
-      const displayNames = createDisplayNameCache(async userId => {
+      displayNames = createDisplayNameCache(async userId => {
         const member = await client.rest.get(Routes.guildMember(guildId, userId), { signal: AbortSignal.timeout(4000) });
         if (member?.user?.id !== userId) return null;
         return member.nick || member.user.global_name || member.user.username;
@@ -104,5 +104,5 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
       fail('Discord-boten kunde inte starta. Kontrollera bot-token och att dess programbibliotek är installerat.');
     }
   })();
-  return { close, ready };
+  return { close, ready, resolveDisplayName: async userId => stopped ? null : displayNames?.resolve(userId) ?? null };
 }

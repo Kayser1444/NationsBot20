@@ -71,7 +71,7 @@ let shownDiscovery, shownDelivery;
 function show() {
   if (shownDelivery !== delivery) {
     shownDelivery = delivery;
-    if (delivery.startsWith('last alert confirmed')) { lastDelivery = new Date().toISOString(); log.add('Discord-påminnelse levererad för parti ' + delivery.split(' ').at(-1)); }
+    if (delivery.startsWith('last alert confirmed')) lastDelivery = new Date().toISOString();
     else if (/RETRY|BLOCKED|STOPPED/.test(delivery)) log.add(delivery, 'error');
   }
   if (shownDiscovery !== discoveryStatus) {
@@ -81,7 +81,7 @@ function show() {
   for (const m of matches) {
     const before = shown.get(m.id);
     const current = { status: m.status, player: m.state?.player, over: m.state?.over };
-    if (before && before.player !== current.player && current.player) log.add(`${current.player} har turen i ${m.title || m.id}`);
+    if (before && before.player !== current.player && current.player) log.add(`${current.player} har turen i ${m.title || 'Parti'} (${m.id})`);
     if (before && !before.over && current.over) log.add(`Parti avslutat: ${m.title || m.id}`);
     if (before?.status !== current.status) {
       if (current.status === 'connected') log.add(`Ansluten till ${m.title || m.id}`);
@@ -161,7 +161,15 @@ async function flushOutbox() {
           ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && recipients(subscriptions, job.player).includes(job.userId) && !isUserBanned(configPath, job.userId) && outbox.current(job))
           : transport.send(payload, deliveryAbort.signal);
       },
-      report: status => { delivery = status; show(); },
+      report: async (status, job) => {
+        delivery = status; show();
+        if (status.startsWith('last alert confirmed') && job) {
+          let name = null;
+          try { name = await bot?.resolveDisplayName(job.userId); } catch { /* Log the ID if Discord cannot resolve a name. */ }
+          const recipient = name ? name.replace(/[\u0000-\u001f\u007f]+/g, ' ').trim() : `Discord-ID ${job.userId}`;
+          log.add(`Discord-påminnelse levererad till ${recipient} för ${job.title || 'Parti'} (${job.matchId})`);
+        }
+      },
     });
   } catch {
     delivery = 'STOPPED: could not save the outbox; check available disk space and file permissions';
