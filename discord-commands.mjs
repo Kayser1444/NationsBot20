@@ -2,6 +2,12 @@ import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscr
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
+  { name: 'smtable', description: 'Visa aktuell SM-tabell', type: 1, options: [
+    { name: 'div', description: 'SM-grupp; utan val används din prenumerations Nations-namn', type: 3, required: false,
+      choices: ['1A', '2A', '2B'].map(value => ({ name: value, value })) },
+    { name: 'dm', description: 'Skicka tabellen som DM; off visar den publikt (standard)', type: 3, required: false,
+      choices: ['on', 'off'].map(value => ({ name: value, value })) },
+  ] },
   { name: 'notifications', description: 'Turn Nations reminders on or off', type: 1, options: [
     { name: 'on', description: 'Enable turn reminders', type: 1, options: [
       { name: 'nationsname', description: 'Exact Nations name; omit to match your Discord display name', type: 3, required: false, autocomplete: true, max_length: 100 },

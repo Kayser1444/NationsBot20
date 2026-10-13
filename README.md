@@ -216,3 +216,16 @@ to run independently until the deliberate cloud cutover.
 ## License
 
 MIT. This repository contains the notifier, not the Nations game engine or assets.
+
+
+### Svenska mästerskapet
+
+`/smtable div:1A`, `div:2A` eller `div:2B` visar en publik tabell i valfri kanal på den konfigurerade servern. Utan `div` används Nations-namnet från avsändarens aktiva prenumeration. `dm:on` skickar tabellen som DM med en privat leveransbekräftelse i kanalen. `dm:off` är standard och visar tabellen publikt. Valet gäller detta anrop och ändrar inte inställningen för turpåminnelser. Nekade DM faller aldrig tillbaka till publikt svar. Övriga kommandon behåller sina privata svar och kanalbegränsningar. Om serverns Integrations-inställningar begränsar kommandon till påminnelsekanalen behöver `/smtable` ges tillgång till övriga kanaler där det ska användas.
+
+`sm-season.json` är den manuellt granskade säsongslåsningen: säsong, deltagare och exakt parti-ID för varje grupp. Säsong 11 har 21 låsta partier. SM-tabeller tar aldrig in nya parti-ID:n från matchsökningen. Vid nästa säsong uppdateras och kontrolleras låsningen manuellt, sedan startas bevakningen om. Ett ändrat säsongslås gör den gamla diskcachen ogiltig.
+
+Vänprofilen bevakar samtliga låsta partier även utan prenumeranter, med samma anslutningar som turbevakningen. Aktuella snapshots räknar om tabellen i minnet. `.data/sm-table-cache.json` sparar senaste ställning och slutresultat över omstarter. Pågående partier visas som inaktuella tills en färsk snapshot kommit; avbrott eller mer än 60 sekunder sedan senaste snapshot markeras i svaret. Saknas något parti helt visas ett väntemeddelande i stället för en ofullständig tabell. Slutresultat behålls när ett parti avslutas.
+
+Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare spelare först). Placeringen ger 5/3/2/1 grupppoäng. Tabellens skiljekriterier följer §7: vinster, andraplatser, grupppoäng/vinster/andraplatser/VP i inbördes möten. Vid fler än två lika spelare beräknas inbördes möten för hela den bundna gruppen. Helt olösta lika ställningar visas som delad plats i livetabellen; boten lottar inte en ny ordning vid varje uppdatering.
+
+Partier i Nations-valet (round 0, Drafting Phase) bevakas men ger inga grupppoäng innan spelstart. Dessa partier anges uttryckligen i tabellsvaret.

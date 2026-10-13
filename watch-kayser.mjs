@@ -16,6 +16,7 @@ import { text } from './language.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
+import { SmTableCache } from './sm-table.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 import { adminUsers } from './admin-users.mjs';
 const args = process.argv.slice(2);
@@ -49,12 +50,22 @@ let delivery = transport ? 'enabled' : 'not configured';
 const deliveryAbort = new AbortController();
 const dataDirectory = process.env.NATIONS_DATA_DIR || fileURLToPath(new URL('./.data/', import.meta.url));
 const log = new EventLog(join(dataDirectory, profile.replace('.json', '.log')));
+const sm = profile === 'friends.json' ? new SmTableCache(JSON.parse(readFileSync(new URL('./sm-season.json', import.meta.url), 'utf8')), {
+  path: join(dataDirectory, 'sm-table-cache.json'), report: (message, level) => log.add(message, level),
+}) : null;
+if (sm) {
+  for (const pinned of sm.matches) {
+    let match = matches.find(m => m.id === pinned.id);
+    if (!match) { match = { ...pinned, state: null, status: 'connecting', backoff: 1000 }; matches.push(match); }
+    Object.assign(match, pinned, { smLocked: true });
+  }
+}
 const playerCache = new PlayerCache(join(dataDirectory, 'player-names.json'), (message, level) => log.add(message, level));
 let outbox = null, outboxTimer;
 try {
   if (transport) {
     outbox = new Outbox(join(dataDirectory, profile.replace('.json', '-outbox.json')), { guildId: config.discord.guildId, channelId: config.discord.channelId });
-    addDiscoveredMatches(matches, outbox.data.jobs.map(job => ({ id: job.matchId, title: job.title, players: [job.player] })));
+    addDiscoveredMatches(matches, outbox.data.jobs.filter(job => !sm?.has(job.matchId)).map(job => ({ id: job.matchId, title: job.title, players: [job.player] })));
   }
 } catch {
   console.error('Could not open the saved outbox. Check its file and destination; no alerts were sent.');
@@ -114,7 +125,7 @@ function applySubscriptions(selected) {
   for (const name of Object.keys(previous)) if (!Object.hasOwn(selected, name)) log.add(`Prenumeration avslutad: ${name}`);
   for (const [name, id] of Object.entries(selected)) if (previous[name] !== id) log.add(`Prenumeration sparad: ${name}`);
   for (const m of [...matches]) {
-    if (m.players && !m.players.some(name => Object.hasOwn(selected, name))) {
+    if (!m.smLocked && m.players && !m.players.some(name => Object.hasOwn(selected, name))) {
       m.removed = true; const socket = m.socket; m.socket = null;
       clearTimeout(m.retry); clearInterval(m.heartbeat); socket?.close();
       matches.splice(matches.indexOf(m), 1); shown.delete(m.id);
@@ -187,7 +198,7 @@ async function refreshMatches() {
     const publicMatches = await discoverPublicMatches({ signal: discoveryAbort.signal });
     if (stopped) return;
     playerCache.update(publicMatches);
-    const discovered = publicMatches.filter(m => m.players.some(name => Object.hasOwn(subscriptions, name)));
+    const discovered = publicMatches.filter(m => !sm?.has(m.id) && m.players.some(name => Object.hasOwn(subscriptions, name)));
     const added = addDiscoveredMatches(matches, discovered);
     lastDiscovery = new Date().toISOString();
     discoveryStatus = `${new Date().toISOString()} | ${discovered.length} matching games | ${added.length} added`;
@@ -210,6 +221,7 @@ async function refreshMatches() {
 function connect(m) {
   if (stopped || m.finished || m.removed) return;
   clearTimeout(m.retry); clearInterval(m.heartbeat); m.socket?.close();
+  if (m.smLocked) sm.connection(m.id, false);
   m.status = 'connecting'; show();
   const socket = new WebSocket(`wss://games.tabony.net/ws/nations/${m.id}/`);
   m.socket = socket; m.lastResponse = Date.now();
@@ -222,6 +234,7 @@ function connect(m) {
     m.lastResponse = Date.now();
     let message;
     try { message = JSON.parse(data); } catch { return; }
+    if (m.smLocked) sm.update(m.id, message);
     const result = observe(m.state, message, config.username);
     if (result.state === m.state) return;
     const previous = m.state;
@@ -256,10 +269,12 @@ function connect(m) {
   });
   socket.addEventListener('error', () => {
     if (stopped || m.socket !== socket) return;
+    if (m.smLocked) sm.connection(m.id, false);
     m.status = 'connection error'; show(); socket.close();
   });
   socket.addEventListener('close', () => {
     if (stopped || m.socket !== socket) return;
+    if (m.smLocked) sm.connection(m.id, false);
     clearInterval(m.heartbeat);
     m.status = `disconnected, retry in ${m.backoff / 1000}s`; show();
     m.retry = setTimeout(() => connect(m), m.backoff);
@@ -322,6 +337,8 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
     guildId: config.discord.guildId, channelId: config.discord.channelId,
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {
+      getSmTable: (div, userId) => sm.reply(div, userId, readSubscriptions(configPath)),
+      sendSmTableDm: (userId, content) => transport.sendReminder({ content, allowed_mentions: { parse: [] } }, userId, () => true, deliveryAbort.signal, () => !stopped && !isUserBanned(configPath, userId)),
       isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),
       getPreviousName: userId => readPreviousNationsName(configPath, userId),

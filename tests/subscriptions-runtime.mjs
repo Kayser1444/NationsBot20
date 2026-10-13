@@ -7,6 +7,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dir = mkdtempSync(join(tmpdir(), 'nations-subscriptions-'));
 for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dir, name));
+writeFileSync(join(dir, 'sm-season.json'), JSON.stringify({ season: 11, divisions: {} }));
 writeFileSync(join(dir, 'friends.json'), JSON.stringify({ subscriptions: {}, matches: [], discord: {} }));
 const nativeFetch = globalThis.fetch, originalLog = console.log;
 let origin, searches = 0;

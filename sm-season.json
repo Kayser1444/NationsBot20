@@ -1,0 +1,255 @@
+{
+  "season": 11,
+  "source": "https://docs.google.com/spreadsheets/d/1VLKDGePQEcSls5K_tSQQh5sIa6j94hDylcROvPgcZXA",
+  "divisions": {
+    "1A": {
+      "players": [
+        "LindenR",
+        "Tankare",
+        "Kayser",
+        "gostubben",
+        "Dread",
+        "Anderberg",
+        "goonzo"
+      ],
+      "matches": [
+        {
+          "id": "3032",
+          "title": "S11-1A-P1",
+          "players": [
+            "LindenR",
+            "Tankare",
+            "Kayser",
+            "gostubben"
+          ]
+        },
+        {
+          "id": "3038",
+          "title": "S11-1A-P2",
+          "players": [
+            "LindenR",
+            "Dread",
+            "Anderberg",
+            "Kayser"
+          ]
+        },
+        {
+          "id": "3044",
+          "title": "S11-1A-P3",
+          "players": [
+            "LindenR",
+            "Dread",
+            "goonzo",
+            "Tankare"
+          ]
+        },
+        {
+          "id": "3039",
+          "title": "S11-1A-P4",
+          "players": [
+            "Kayser",
+            "goonzo",
+            "gostubben",
+            "Dread"
+          ]
+        },
+        {
+          "id": "3031",
+          "title": "S11-1A-P5",
+          "players": [
+            "Anderberg",
+            "gostubben",
+            "Dread",
+            "Tankare"
+          ]
+        },
+        {
+          "id": "3056",
+          "title": "S11-1A-P6",
+          "players": [
+            "Kayser",
+            "Tankare",
+            "goonzo",
+            "Anderberg"
+          ]
+        },
+        {
+          "id": "3026",
+          "title": "S11-1A-P7",
+          "players": [
+            "gostubben",
+            "Anderberg",
+            "goonzo",
+            "LindenR"
+          ]
+        }
+      ]
+    },
+    "2A": {
+      "players": [
+        "Osbo76",
+        "Narcissus",
+        "Gamay",
+        "Paoljo",
+        "Podrik",
+        "Barbarossa",
+        "Belgarion"
+      ],
+      "matches": [
+        {
+          "id": "3074",
+          "title": "S11-2A-P1",
+          "players": [
+            "Osbo76",
+            "Narcissus",
+            "Gamay",
+            "Paoljo"
+          ]
+        },
+        {
+          "id": "3042",
+          "title": "S11-2A-P2",
+          "players": [
+            "Podrik",
+            "Paoljo",
+            "Osbo76",
+            "Barbarossa"
+          ]
+        },
+        {
+          "id": "3036",
+          "title": "S11-2A-P3",
+          "players": [
+            "Podrik",
+            "Narcissus",
+            "Osbo76",
+            "Belgarion"
+          ]
+        },
+        {
+          "id": "3054",
+          "title": "S11-2A-P4",
+          "players": [
+            "Paoljo",
+            "Gamay",
+            "Podrik",
+            "Belgarion"
+          ]
+        },
+        {
+          "id": "3029",
+          "title": "S11-2A-P5",
+          "players": [
+            "Barbarossa",
+            "Podrik",
+            "Narcissus",
+            "Gamay"
+          ]
+        },
+        {
+          "id": "3047",
+          "title": "S11-2A-P6",
+          "players": [
+            "Barbarossa",
+            "Paoljo",
+            "Belgarion",
+            "Narcissus"
+          ]
+        },
+        {
+          "id": "3027",
+          "title": "S11-2A-P7",
+          "players": [
+            "Osbo76",
+            "Gamay",
+            "Barbarossa",
+            "Belgarion"
+          ]
+        }
+      ]
+    },
+    "2B": {
+      "players": [
+        "Suddoman",
+        "Wondermoose",
+        "Whippis",
+        "Jarrjan",
+        "swedviking",
+        "Ergus8",
+        "GardenWig"
+      ],
+      "matches": [
+        {
+          "id": "3037",
+          "title": "S11-2B-P1",
+          "players": [
+            "Suddoman",
+            "Wondermoose",
+            "Whippis",
+            "Jarrjan"
+          ]
+        },
+        {
+          "id": "3034",
+          "title": "S11-2B-P2",
+          "players": [
+            "swedviking",
+            "Wondermoose",
+            "Ergus8",
+            "Jarrjan"
+          ]
+        },
+        {
+          "id": "3040",
+          "title": "S11-2B-P3",
+          "players": [
+            "swedviking",
+            "Suddoman",
+            "GardenWig",
+            "Jarrjan"
+          ]
+        },
+        {
+          "id": "3035",
+          "title": "S11-2B-P4",
+          "players": [
+            "Whippis",
+            "swedviking",
+            "GardenWig",
+            "Wondermoose"
+          ]
+        },
+        {
+          "id": "3062",
+          "title": "S11-2B-P5",
+          "players": [
+            "Suddoman",
+            "Whippis",
+            "Jarrjan",
+            "Wondermoose"
+          ]
+        },
+        {
+          "id": "3046",
+          "title": "S11-2B-P6",
+          "players": [
+            "Ergus8",
+            "GardenWig",
+            "Suddoman",
+            "Wondermoose"
+          ]
+        },
+        {
+          "id": "3055",
+          "title": "S11-2B-P7",
+          "players": [
+            "Jarrjan",
+            "GardenWig",
+            "Ergus8",
+            "Whippis"
+          ]
+        }
+      ]
+    }
+  }
+}

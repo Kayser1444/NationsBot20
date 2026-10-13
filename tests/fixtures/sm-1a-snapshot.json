@@ -1,0 +1,264 @@
+{
+  "fetchedAt": "2026-10-13T15:58:45.520Z",
+  "results": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3026",
+        "title": "S11-1A-P7",
+        "players": [
+          {
+            "name": "gostubben",
+            "score": 4,
+            "remainder": 8
+          },
+          {
+            "name": "Anderberg",
+            "score": 4,
+            "remainder": 6
+          },
+          {
+            "name": "goonzo",
+            "score": 5,
+            "remainder": 6
+          },
+          {
+            "name": "LindenR",
+            "score": 6,
+            "remainder": 1
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "gostubben",
+          "Anderberg",
+          "goonzo",
+          "LindenR"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3031",
+        "title": "S11-1A-P5",
+        "players": [
+          {
+            "name": "Anderberg",
+            "score": 4,
+            "remainder": 5
+          },
+          {
+            "name": "gostubben",
+            "score": 7,
+            "remainder": 1
+          },
+          {
+            "name": "Dread",
+            "score": 7,
+            "remainder": 4
+          },
+          {
+            "name": "Tankare",
+            "score": 8,
+            "remainder": 5
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "Anderberg",
+          "gostubben",
+          "Dread",
+          "Tankare"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3032",
+        "title": "S11-1A-P1",
+        "players": [
+          {
+            "name": "LindenR",
+            "score": 8,
+            "remainder": 0
+          },
+          {
+            "name": "Tankare",
+            "score": 9,
+            "remainder": 7
+          },
+          {
+            "name": "Kayser",
+            "score": 7,
+            "remainder": 9
+          },
+          {
+            "name": "gostubben",
+            "score": 8,
+            "remainder": 9
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "LindenR",
+          "Tankare",
+          "Kayser",
+          "gostubben"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3038",
+        "title": "S11-1A-P2",
+        "players": [
+          {
+            "name": "LindenR",
+            "score": 7,
+            "remainder": 2
+          },
+          {
+            "name": "Dread",
+            "score": 6,
+            "remainder": 6
+          },
+          {
+            "name": "Anderberg",
+            "score": 5,
+            "remainder": 1
+          },
+          {
+            "name": "Kayser",
+            "score": 9,
+            "remainder": 4
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "LindenR",
+          "Dread",
+          "Anderberg",
+          "Kayser"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3039",
+        "title": "S11-1A-P4",
+        "players": [
+          {
+            "name": "Kayser",
+            "score": 9,
+            "remainder": 3
+          },
+          {
+            "name": "goonzo",
+            "score": 6,
+            "remainder": 6
+          },
+          {
+            "name": "gostubben",
+            "score": 6,
+            "remainder": 8
+          },
+          {
+            "name": "Dread",
+            "score": 7,
+            "remainder": 3
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "Kayser",
+          "goonzo",
+          "gostubben",
+          "Dread"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3044",
+        "title": "S11-1A-P3",
+        "players": [
+          {
+            "name": "LindenR",
+            "score": 5,
+            "remainder": 3
+          },
+          {
+            "name": "Dread",
+            "score": 7,
+            "remainder": 7
+          },
+          {
+            "name": "goonzo",
+            "score": 9,
+            "remainder": 5
+          },
+          {
+            "name": "Tankare",
+            "score": 7,
+            "remainder": 3
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "LindenR",
+          "Dread",
+          "goonzo",
+          "Tankare"
+        ]
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "id": "3056",
+        "title": "S11-1A-P6",
+        "players": [
+          {
+            "name": "Kayser",
+            "score": 6,
+            "remainder": 7
+          },
+          {
+            "name": "Tankare",
+            "score": 3,
+            "remainder": 2
+          },
+          {
+            "name": "goonzo",
+            "score": 9,
+            "remainder": 5
+          },
+          {
+            "name": "Anderberg",
+            "score": 6,
+            "remainder": 7
+          }
+        ],
+        "round": 1,
+        "over": 0,
+        "playerOrder": [
+          "Kayser",
+          "Tankare",
+          "goonzo",
+          "Anderberg"
+        ]
+      }
+    }
+  ]
+}
