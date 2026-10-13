@@ -26,11 +26,22 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
       client.on(Events.InteractionCreate, async interaction => {
         if (stopped || !(interaction.isChatInputCommand() || interaction.isAutocomplete())) return;
         // Only members using the designated reminders channel can self-subscribe.
+        const inDm = !interaction.guildId && interaction.context === 1;
         const smTable = interaction.commandName === 'smtable';
-        const smDm = smTable && interaction.isChatInputCommand() && interaction.options.getString('dm') === 'on';
-        const allowed = interaction.guildId === guildId && (smTable || interaction.channelId === channelId) && !interaction.user.bot;
+        const smDm = !inDm && smTable && interaction.isChatInputCommand() && interaction.options.getString('dm') === 'on';
+        let allowed = !interaction.user.bot && (inDm || (interaction.guildId === guildId && (smTable || interaction.channelId === channelId)));
+        let dmMember = null;
         const language = () => resolveLanguage(interaction.locale ?? service.getLocale?.(interaction.user.id), service.getLanguageOverride?.(interaction.user.id));
         try {
+          if (inDm && allowed && !service.isBanned?.(interaction.user.id)) {
+            // Acknowledge before the membership lookup; ordinary chat messages
+            // need no intent and are never consumed by this slash-command bot.
+            if (interaction.isChatInputCommand()) await interaction.deferReply({});
+            try {
+              dmMember = await client.rest.get(Routes.guildMember(guildId, interaction.user.id), { signal: AbortSignal.timeout(1500) });
+              allowed = dmMember?.user?.id === interaction.user.id;
+            } catch { allowed = false; }
+          }
           if (interaction.isAutocomplete()) {
             const focused = interaction.options.getFocused(true);
             const choices = !allowed || service.isBanned?.(interaction.user.id) ? []
@@ -39,9 +50,9 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             await interaction.respond(choices);
             return;
           }
-          await interaction.deferReply(smTable && allowed && !smDm && !service.isBanned?.(interaction.user.id) ? {} : { flags: MessageFlags.Ephemeral });
+          if (!interaction.deferred) await interaction.deferReply(inDm || (smTable && allowed && !smDm && !service.isBanned?.(interaction.user.id)) ? {} : { flags: MessageFlags.Ephemeral });
           if (stopped) return;
-          if (!allowed) { await interaction.editReply({ content: text(language(), 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
+          if (!allowed) { await interaction.editReply({ content: text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           if (smTable) {
             const table = service.getSmTable(interaction.options.getString('div'), interaction.user.id);
@@ -56,7 +67,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             return;
           }
           service.captureLocale?.(interaction.user.id, interaction.locale);
-          displayNames.remember(interaction.user.id, interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username);
+          displayNames.remember(interaction.user.id, interaction.member?.displayName || interaction.member?.nick || dmMember?.nick || interaction.user.globalName || interaction.user.username);
           const commandService = interaction.commandName === 'status'
             ? await statusServiceWithNames(service, interaction.user.id, id => displayNames.resolve(id)) : service;
           if (stopped) return;
@@ -64,7 +75,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           let content = handleSubscriptionCommand({
             command: interaction.commandName, userId: interaction.user.id,
             action,
-            displayName: interaction.member?.displayName || interaction.member?.nick || interaction.user.globalName || interaction.user.username,
+            displayName: interaction.member?.displayName || interaction.member?.nick || dmMember?.nick || interaction.user.globalName || interaction.user.username,
             nationsName: interaction.options.getString('nationsname'),
             locale: interaction.commandName === 'language' ? interaction.options.getString('locale') : undefined,
           }, commandService);
@@ -84,7 +95,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           }
           await interaction.editReply({ content: pages[0], allowedMentions: { parse: [] } });
           for (const page of pages.slice(1)) {
-            await interaction.followUp({ content: page, flags: MessageFlags.Ephemeral, allowedMentions: { parse: [] } });
+            await interaction.followUp({ content: page, ...(inDm ? {} : { flags: MessageFlags.Ephemeral }), allowedMentions: { parse: [] } });
           }
         } catch {
           report('Ett Discord-kommando kunde inte slutföras. Kontrollera prenumerationen i statusfönstret.', 'error');
@@ -98,16 +109,16 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           // Upsert only our own commands; do not bulk-delete other app commands.
           for (const command of commands) {
             if (stopped) return;
-            await client.rest.post(Routes.applicationGuildCommands(client.application.id, guildId), { body: command });
+            await client.rest.post(Routes.applicationCommands(client.application.id), { body: { ...command, integration_types: [0], contexts: [0, 1] } });
           }
           const existing = await client.rest.get(Routes.applicationGuildCommands(client.application.id, guildId));
           for (const old of existing) {
             if (stopped) return;
-            if (old.type === 1 && ['prenumerera', 'avprenumerera', 'hjälp'].includes(old.name)) {
+            if (old.type === 1 && [...commands.map(command => command.name), 'prenumerera', 'avprenumerera', 'hjälp'].includes(old.name)) {
               await client.rest.delete(Routes.applicationGuildCommand(client.application.id, guildId, old.id));
             }
           }
-          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off, /dm on|off, /status, /help, /language och /smtable är registrerade.'); }
+          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off, /dm on|off, /status, /help, /language och /smtable är registrerade för server och DM.'); }
         } catch { fail('Discord-kommandona kunde inte registreras. Kontrollera att boten är tillagd på rätt server.'); }
       });
       readyTimer = setTimeout(() => { fail('Discord-boten kunde inte ansluta inom 30 sekunder. Kontrollera token och starta om.'); client.destroy(); }, 30000);

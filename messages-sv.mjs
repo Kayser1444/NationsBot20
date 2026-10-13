@@ -1,4 +1,5 @@
 export default {
+  dmMembershipRequired: 'Kommandon i DM kräver medlemskap i Nations-servern. Medlemskapet kunde inte verifieras; försök igen eller kör kommandot på servern.',
   userBanned: 'Du är spärrad från NationsBot. Kontakta Kayser om du vill få spärren prövad.',
   help: [
     '**Nations Bot 2.0 — hjälp**',
@@ -15,6 +16,7 @@ export default {
     '', '**Bra att veta**',
     'Ett Discord-konto kan bevaka ett Nations-namn i taget. Flera konton kan bevaka samma spelare, och du får välja någon annans namn. Avprenumerera först om du vill byta namn.',
     'Nya partier upptäcks normalt inom fem minuter. En väntande tur kan ge en påminnelse direkt vid prenumeration.',
+    'Alla kommandon fungerar också direkt i DM med boten för servermedlemmar. I DM svarar /smtable här; dm-valet används bara på servern.',
     'Övriga kommandosvar är privata. Tillåt DM från boten om du valt DM. Nekade DM visas i /status och skickas aldrig i kanalen.',
     'Ditt språk gäller svar och dina turpåminnelser. Andra Discord-språk använder engelska som standard. Gemensamma start- och stoppmeddelanden är på svenska, utan omnämningar.',
   ],

@@ -139,8 +139,14 @@ export class SmTableCache {
     const rows = this.tables.get(div);
     const width = Math.max(7, ...rows.map(r => r.name.length));
     const lines = rows.map(r => `${String(r.place).padStart(5)}  ${r.name.padEnd(width)}  ${String(r.points).padStart(5)}  ${r.tiebreak}`);
+    const header = `Plats  ${"Spelare".padEnd(width)}  Poäng  Skiljekriterium`;
+    const boundary = div === "1A" ? rows.length - 2 : /^2[A-Z]$/.test(div) ? 1 : -1;
+    if (boundary > 0 && boundary < lines.length) {
+      const separator = "─".repeat(Math.max(header.length, ...lines.map(line => line.length)));
+      lines.splice(boundary, 0, separator);
+    }
     const ongoing = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).length;
     const drafting = group.matches.filter(m => this.snapshots.get(m.id).state.phase === 'Drafting Phase' && this.snapshots.get(m.id).state.round === 0);
-    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', `Plats  ${'Spelare'.padEnd(width)}  Poäng  Skiljekriterium`, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
+    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', header, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
   }
 }

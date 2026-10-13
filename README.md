@@ -229,3 +229,5 @@ Vänprofilen bevakar samtliga låsta partier även utan prenumeranter, med samma
 Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare spelare först). Placeringen ger 5/3/2/1 grupppoäng. Tabellens skiljekriterier följer §7: vinster, andraplatser, grupppoäng/vinster/andraplatser/VP i inbördes möten. Vid fler än två lika spelare beräknas inbördes möten för hela den bundna gruppen. Helt olösta lika ställningar visas som delad plats i livetabellen; boten lottar inte en ny ordning vid varje uppdatering.
 
 Partier i Nations-valet (round 0, Drafting Phase) bevakas men ger inga grupppoäng innan spelstart. Dessa partier anges uttryckligen i tabellsvaret.
+
+Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in the configured server before accessing subscriptions, and honor user bans. /smtable replies directly in the DM regardless of its dm option. Other server-channel restrictions remain in force. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.

@@ -1,4 +1,5 @@
 export default {
+  dmMembershipRequired: 'DM commands require membership in the Nations server. Membership could not be verified; retry or use the command on the server.',
   userBanned: 'You are blocked from NationsBot. Contact Kayser to ask for a review.',
   help: [
     '**Nations Bot 2.0 — help**',
@@ -15,6 +16,7 @@ export default {
     '', '**Good to know**',
     'Each Discord account can watch one Nations name at a time. Multiple accounts may watch the same player, and you may choose another player’s name. Unsubscribe before changing names.',
     'New games are normally discovered within five minutes. Subscribing can trigger a reminder for an already pending turn.',
+    'All commands also work directly in the bot’s DMs for server members. In DMs, /smtable replies here; its dm option applies only on the server.',
     'Other command replies are private. Allow DMs from the bot if you choose DM reminders. Blocked DMs appear in /status and are never sent to the channel.',
     'Your language applies to replies and your turn reminders. Unsupported Discord languages default to English. Shared startup/shutdown notices remain Swedish, without mentions.',
   ],
