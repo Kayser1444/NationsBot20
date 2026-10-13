@@ -15,7 +15,7 @@ export function adminUsers(config, subscriptions, matches, jobs = []) {
     return {
       userId, username, previousName: config.lastNationsNames?.[userId] ?? null,
       banned: Object.hasOwn(config.bannedUsers ?? {}, userId), bannedAt: config.bannedUsers?.[userId]?.bannedAt ?? null,
-      dm: config.dmPreferences?.[userId] === true,
+      dm: config.dmPreferences?.[userId] !== false,
       language: resolveLanguage(config.userLocales?.[userId], override),
       languageOverride: override, discordLocale: config.userLocales?.[userId] ?? null,
       matches: watched.map(match => ({ id: match.id, title: match.title, player: match.state?.player ?? null,

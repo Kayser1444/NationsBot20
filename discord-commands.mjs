@@ -5,20 +5,15 @@ export const commands = [
   { name: 'smtable', description: 'Visa aktuell SM-tabell', type: 1, options: [
     { name: 'div', description: 'SM-grupp; utan val används din prenumerations Nations-namn', type: 3, required: false,
       choices: ['1A', '2A', '2B'].map(value => ({ name: value, value })) },
-    { name: 'dm', description: 'Skicka tabellen som DM; off visar den publikt (standard)', type: 3, required: false,
-      choices: ['on', 'off'].map(value => ({ name: value, value })) },
   ] },
   { name: 'notifications', description: 'Turn Nations reminders on or off', type: 1, options: [
     { name: 'on', description: 'Enable turn reminders', type: 1, options: [
+      { name: 'dm', description: 'DM on (standard) eller off för påminnelser i kanalen', type: 3, required: false, choices: ['on', 'off'].map(value => ({ name: value, value })) },
       { name: 'nationsname', description: 'Exact Nations name; omit to match your Discord display name', type: 3, required: false, autocomplete: true, max_length: 100 },
     ] },
     { name: 'off', description: 'Disable your turn reminders', type: 1 },
   ] },
   { name: 'status', description: 'Show your Nations subscription and monitored games', type: 1 },
-  { name: 'dm', description: 'Choose private or channel reminders', type: 1, options: [
-    { name: 'on', description: 'Send your reminders only by DM', type: 1 },
-    { name: 'off', description: 'Send your reminders in the reminders channel (default)', type: 1 },
-  ] },
   { name: 'help', description: 'Show commands and what NationsBot can do', type: 1 },
   { name: 'language', description: 'Choose your bot language or follow Discord automatically', type: 1, options: [
     { name: 'locale', description: 'Swedish (sv-SE), English (en-US), or automatic (auto)', type: 3, required: true, autocomplete: true, max_length: 35 },
@@ -41,7 +36,7 @@ export function autocompleteNames(names, query) {
 
 // Called synchronously after Discord acknowledges the interaction. Check and save
 // have no await between them, so simultaneous claims cannot replace each other.
-export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => false, getLocale = () => null, getLanguageOverride = () => null, isBanned = () => false, setLanguage, setDm }) {
+export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale, dm }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => true, getLocale = () => null, getLanguageOverride = () => null, isBanned = () => false, setLanguage, setDm, onNotificationsEnabled = () => {} }) {
   const language = resolveLanguage(getLocale(userId), getLanguageOverride(userId));
   const t = (key, values) => text(language, key, values);
   if (isBanned(userId)) return t('userBanned');
@@ -101,9 +96,12 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     if (matches.length > 1) return t('ambiguous', { names: matches.map(quote).join(', ') });
     name = matches[0];
   }
-  if (own === name) return t('already', { name: quote(name) });
-  if (own) return t('switchName', { name: quote(own) });
+  if (own && own !== name) return t('switchName', { name: quote(own) });
   try { validateSubscriptions({ [name]: userId }); } catch { return t('invalidName'); }
-  commit(addSubscriber(current, name, userId));
+  if (dm != null && !['on', 'off'].includes(dm)) return t('dmUsage');
+  if (dm != null) setDm(userId, dm === 'on');
+  if (own !== name) commit(addSubscriber(current, name, userId));
+  onNotificationsEnabled();
+  if (own === name) return t('already', { name: quote(name) }) + ' ' + t(getDm(userId) ? 'modeDm' : 'modeChannel');
   return t('subscribed', { name: quote(name), destination: t(getDm(userId) ? 'destinationDm' : 'destinationChannel') });
 }

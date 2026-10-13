@@ -86,7 +86,7 @@ test('DM preferences survive subscription edits and restart without enabling uns
   t.after(() => rmSync(dir, { recursive: true, force: true }));
   const path = join(dir, 'friends.json'), userId = '229311536827465728';
   writeFileSync(path, JSON.stringify({ subscriptions: {}, discord: { channelId: 'channel' } }));
-  assert.equal(readDmPreference(path, userId), false);
+  assert.equal(readDmPreference(path, userId), true);
   saveDmPreference(path, userId, true);
   assert.equal(Object.keys(readSubscriptions(path)).length, 0);
   saveSubscriptions(path, { Kayser: userId }); saveSubscriptions(path, {});

@@ -122,6 +122,7 @@ export class SmTableCache {
     if (group.matches.every(m => this.snapshots.has(m.id))) this.tables.set(div, rankTable(group, this.snapshots));
   }
   reply(div, userId, subscriptions) {
+    const automaticallySelected = !div;
     if (!div) {
       const name = Object.entries(subscriptions).find(([, id]) => Array.isArray(id) ? id.includes(userId) : id === userId)?.[0];
       if (!name) return 'Ange div:1A, div:2A eller div:2B. Automatisk grupp kräver en aktiv prenumeration.';
@@ -147,6 +148,6 @@ export class SmTableCache {
     }
     const ongoing = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).length;
     const drafting = group.matches.filter(m => this.snapshots.get(m.id).state.phase === 'Drafting Phase' && this.snapshots.get(m.id).state.round === 0);
-    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', header, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
+    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}${automaticallySelected ? " (Automatiskt vald utifrån din prenumeration)" : ""}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', header, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
   }
 }

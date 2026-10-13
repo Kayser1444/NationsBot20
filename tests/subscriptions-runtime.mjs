@@ -45,7 +45,7 @@ try {
   assert.equal(state.subscribers[0].username, 'Tester');
   assert.equal(state.users[0].username, 'Tester');
   assert.equal(state.users[0].userId, '229311536827465728');
-  assert.equal(state.users[0].dm, false); assert.equal(state.users[0].language, 'en-US');
+  assert.equal(state.users[0].dm, true); assert.equal(state.users[0].language, 'en-US');
   assert.equal(state.users[0].matches[0].player, 'Tester');
   assert.equal(state.matches.length, 1);
   assert.equal(state.matches[0].connected, true);

@@ -9,7 +9,7 @@ English commands with Swedish or English replies:
 - `/notifications on [nationsname]` enables turn reminders; omitted names reuse
   your last subscription or match your Discord display name.
 - `/notifications off` ends your subscription.
-- `/dm on` chooses private reminders and sends a control DM; `/dm off` chooses
+- `/notifications on dm:on` chooses private reminders and sends a control DM; `/notifications on dm:off` chooses
   channel reminders. Preferences persist across restarts.
 - `/status` privately lists your monitored games with links and connection status.
   Each game shows its current turn player and, for active subscribers, the Discord
@@ -88,7 +88,7 @@ Discord connections.
 
 4. Complete the migration below **before starting the real cloud service**.
 5. Confirm startup logs show game connections and the bot's registered commands.
-   Test `/status` and `/dm on` in the designated Discord channel.
+   Test `/status` and `/notifications on dm:on` in the designated Discord channel.
 
 If `/data/friends.json` is absent, first startup creates an empty subscription
 configuration from the destination variables. It never saves the token. If the
@@ -220,7 +220,7 @@ MIT. This repository contains the notifier, not the Nations game engine or asset
 
 ### Svenska mästerskapet
 
-`/smtable div:1A`, `div:2A` eller `div:2B` visar en publik tabell i valfri kanal på den konfigurerade servern. Utan `div` används Nations-namnet från avsändarens aktiva prenumeration. `dm:on` skickar tabellen som DM med en privat leveransbekräftelse i kanalen. `dm:off` är standard och visar tabellen publikt. Valet gäller detta anrop och ändrar inte inställningen för turpåminnelser. Nekade DM faller aldrig tillbaka till publikt svar. Övriga kommandon behåller sina privata svar och kanalbegränsningar. Om serverns Integrations-inställningar begränsar kommandon till påminnelsekanalen behöver `/smtable` ges tillgång till övriga kanaler där det ska användas.
+`/smtable div:1A`, `div:2A` eller `div:2B` visar en publik tabell i valfri kanal på den konfigurerade servern. Utan `div` används Nations-namnet från avsändarens aktiva prenumeration. Tabellen visas direkt i DM när kommandot körs där, annars publikt i serverkanalen. Automatiskt vald grupp markeras i rubriken. Övriga kommandon behåller sina privata svar och kanalbegränsningar. Om serverns Integrations-inställningar begränsar kommandon till påminnelsekanalen behöver `/smtable` ges tillgång till övriga kanaler där det ska användas.
 
 `sm-season.json` är den manuellt granskade säsongslåsningen: säsong, deltagare och exakt parti-ID för varje grupp. Säsong 11 har 21 låsta partier. SM-tabeller tar aldrig in nya parti-ID:n från matchsökningen. Vid nästa säsong uppdateras och kontrolleras låsningen manuellt, sedan startas bevakningen om. Ett ändrat säsongslås gör den gamla diskcachen ogiltig.
 
@@ -230,4 +230,4 @@ Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare 
 
 Partier i Nations-valet (round 0, Drafting Phase) bevakas men ger inga grupppoäng innan spelstart. Dessa partier anges uttryckligen i tabellsvaret.
 
-Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in the configured server before accessing subscriptions, and honor user bans. /smtable replies directly in the DM regardless of its dm option. Other server-channel restrictions remain in force. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.
+Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in the configured server before accessing subscriptions, and honor user bans. /smtable replies directly in the DM without a separate dm option. Other server-channel restrictions remain in force. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.

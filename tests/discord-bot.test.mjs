@@ -137,7 +137,7 @@ test('adapter requests no chat intents and uses private replies in the configure
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['smtable', 'notifications', 'status', 'dm', 'help', 'language']);
+  assert.deepEqual(registered.map(item => item.body.name), ['smtable', 'notifications', 'status', 'help', 'language']);
   assert.deepEqual(registered[1].body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
@@ -175,14 +175,14 @@ test('adapter requests no chat intents and uses private replies in the configure
   f.service.sendSmTableDm = async (userId, content) => dmTables.push({ userId, content });
   const smDm = makeInteraction({ commandName: 'smtable', channelId: 'other', options: { getString: name => name === 'dm' ? 'on' : null } });
   await instance.listeners(Events.InteractionCreate)[0](smDm);
-  assert.equal(smDm.replies[0].flags, MessageFlags.Ephemeral);
-  assert.deepEqual(dmTables, [{ userId: first, content: `SM auto ${first}` }]);
-  assert.match(smDm.replies[1].content, /skickats som DM/);
+  assert.deepEqual(smDm.replies[0], {});
+  assert.deepEqual(dmTables, []);
+  assert.equal(smDm.replies[1].content, `SM auto ${first}`);
   f.service.sendSmTableDm = async () => { throw new Error('blocked'); };
   const blockedSmDm = makeInteraction({ commandName: 'smtable', options: smDm.options });
   await instance.listeners(Events.InteractionCreate)[0](blockedSmDm);
-  assert.equal(blockedSmDm.replies[0].flags, MessageFlags.Ephemeral);
-  assert.match(blockedSmDm.replies[1].content, /inte publikt/);
+  assert.deepEqual(blockedSmDm.replies[0], {});
+  assert.equal(blockedSmDm.replies[1].content, `SM auto ${first}`);
   const foreignSm = makeInteraction({ commandName: 'smtable', guildId: 'another-server' });
   await instance.listeners(Events.InteractionCreate)[0](foreignSm);
   assert.equal(foreignSm.replies[0].flags, MessageFlags.Ephemeral);

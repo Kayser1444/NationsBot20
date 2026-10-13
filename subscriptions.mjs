@@ -102,7 +102,7 @@ export function readDmPreference(path, userId) {
   const config = JSON.parse(readFileSync(path, 'utf8'));
   const value = config.dmPreferences?.[userId];
   if (value !== undefined && typeof value !== 'boolean') throw new Error('Ogiltig sparad DM-inställning. Ingen leverans görs innan den rättats.');
-  return value ?? false;
+  return value ?? true;
 }
 
 export function readUserLocale(path, userId) {

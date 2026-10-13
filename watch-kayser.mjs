@@ -338,7 +338,6 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {
       getSmTable: (div, userId) => sm.reply(div, userId, readSubscriptions(configPath)),
-      sendSmTableDm: (userId, content) => transport.sendReminder({ content, allowed_mentions: { parse: [] } }, userId, () => true, deliveryAbort.signal, () => !stopped && !isUserBanned(configPath, userId)),
       isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),
       getPreviousName: userId => readPreviousNationsName(configPath, userId),

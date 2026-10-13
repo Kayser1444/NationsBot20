@@ -10,7 +10,7 @@ test('admin user status isolates shared subscribers, preferences, current games 
     { id: '2', players: ['Player'], finished: true }, { id: '3', players: ['Other'] }];
   const users = adminUsers(config, { Player: ['a', 'b'] }, matches, [{ userId: 'a', matchId: '1', attempts: 3, blocked: true, nextAt: 123 }]);
   const [a, b, c] = users;
-  assert.equal(a.dm, true); assert.equal(b.dm, false);
+  assert.equal(a.dm, true); assert.equal(b.dm, true);
   assert.equal(a.language, 'sv-SE'); assert.equal(a.languageOverride, null);
   assert.equal(b.language, 'sv-SE'); assert.equal(b.languageOverride, 'sv-SE'); assert.equal(b.discordLocale, 'en-GB');
   assert.equal(a.matches.length, 1); assert.equal(a.matches[0].player, 'Opponent');
@@ -26,7 +26,7 @@ test('admin status follows preference changes and supplies defaults without alte
   const original = JSON.stringify(config);
   const first = adminUsers(config, config.subscriptions, []);
   assert.equal(first[0].discordLocale, null); assert.equal(first[0].language, 'en-US');
-  assert.equal(first[0].dm, false); assert.deepEqual(first[0].pending, []);
+  assert.equal(first[0].dm, true); assert.deepEqual(first[0].pending, []);
   assert.equal(JSON.stringify(config), original);
   config.dmPreferences = { a: true }; config.languagePreferences = { a: 'sv-SE' };
   const next = adminUsers(config, config.subscriptions, []);

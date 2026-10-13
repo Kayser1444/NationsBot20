@@ -87,3 +87,9 @@ test('heartbeat-only replies keep a quiet game current without changing its last
   cache.update('1', { chat_log: [] });
   assert.match(cache.reply('1A'), /saknar aktuell/);
 });
+
+test('automatic division includes subscription explanation while explicit selection does not', () => {
+  const cache = new SmTableCache(fixture); cache.update('1', message());
+  assert.match(cache.reply(null, 'user', { A: 'user' }), /Division 1A \(Automatiskt vald utifrån din prenumeration\)/);
+  assert.doesNotMatch(cache.reply('1A', 'user', { A: 'user' }), /Automatiskt vald/);
+});
