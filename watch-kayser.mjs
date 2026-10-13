@@ -337,7 +337,7 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
     guildId: config.discord.guildId, channelId: config.discord.channelId,
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {
-      getSmTable: (div, userId) => sm.reply(div, userId, readSubscriptions(configPath)),
+      getSmTable: (div, userId, language) => sm.reply(div, userId, readSubscriptions(configPath), language ?? readBotLanguage(configPath, userId)),
       isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),
       getPreviousName: userId => readPreviousNationsName(configPath, userId),

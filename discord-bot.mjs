@@ -54,7 +54,8 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           if (!allowed) { await interaction.editReply({ content: text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           if (smTable) {
-            const table = service.getSmTable(interaction.options.getString('div'), interaction.user.id);
+            service.captureLocale?.(interaction.user.id, interaction.locale);
+            const table = service.getSmTable(interaction.options.getString('div'), interaction.user.id, language());
             await interaction.editReply({ content: table, allowedMentions: { parse: [] } });
             return;
           }

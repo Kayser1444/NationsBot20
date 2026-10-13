@@ -1,5 +1,6 @@
 import { existsSync, readFileSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { text } from './language.mjs';
 
 const awards = [5, 3, 2, 1];
 const sameNames = (a, b) => a.length === b.length && new Set(a).size === a.length && a.every(name => b.includes(name));
@@ -51,10 +52,11 @@ export function rankTable(group, snapshots) {
   }
   // Resolve each tied cohort together, rather than a pairwise comparator that
   // can produce circular ordering when three or more players are tied.
+  const labelKeys = ['smPoints', 'smWins', 'smSeconds', 'smH2hPoints', 'smH2hWins', 'smH2hSeconds', 'smH2hVp'];
   const labels = ['Poäng', 'Vinster', 'Andraplatser', 'Inbördes p', 'Inbördes vinster', 'Inbördes tvåor', 'Inbördes VP'];
   function resolve(cohort, stage = 0, headIds = null) {
     if (cohort.length < 2) return cohort;
-    if (stage === 7) { const tie = Symbol(); cohort.forEach(r => { r.tie = tie; r.tiebreak = 'Lika'; }); return cohort; }
+    if (stage === 7) { const tie = Symbol(); cohort.forEach(r => { r.tie = tie; r.tiebreak = 'Lika'; r.tiebreakKey = 'smTied'; }); return cohort; }
     if (stage === 3) {
       const names = new Set(cohort.map(r => r.name));
       headIds = new Set(group.matches.filter(m => m.players.filter(n => names.has(n)).length >= 2).map(m => m.id));
@@ -62,7 +64,7 @@ export function rankTable(group, snapshots) {
     const value = row => stage < 3 ? row[['points', 'wins', 'seconds'][stage]] : row.games.filter(g => headIds.has(g.id)).reduce((n, g) => n + g[['points', 'wins', 'seconds', 'vp'][stage - 3]], 0);
     const buckets = new Map();
     for (const row of cohort) { const n = value(row); if (!buckets.has(n)) buckets.set(n, []); buckets.get(n).push(row); }
-    if (buckets.size > 1 && stage > 0) cohort.forEach(row => { row.tiebreak = `${labels[stage]}: ${value(row)}`; });
+    if (buckets.size > 1 && stage > 0) cohort.forEach(row => { row.tiebreak = `${labels[stage]}: ${value(row)}`; row.tiebreakKey = labelKeys[stage]; row.tiebreakValue = value(row); });
     return [...buckets.entries()].sort((a, b) => b[0] - a[0]).flatMap(([, bucket]) => resolve(bucket, stage + 1, headIds));
   }
   const sorted = resolve(rows);
@@ -121,26 +123,29 @@ export class SmTableCache {
     const group = this.config.divisions[div];
     if (group.matches.every(m => this.snapshots.has(m.id))) this.tables.set(div, rankTable(group, this.snapshots));
   }
-  reply(div, userId, subscriptions) {
+  reply(div, userId, subscriptions, language = 'sv-SE') {
+    const t = (key, values) => text(language, key, values);
     const automaticallySelected = !div;
     if (!div) {
       const name = Object.entries(subscriptions).find(([, id]) => Array.isArray(id) ? id.includes(userId) : id === userId)?.[0];
-      if (!name) return 'Ange div:1A, div:2A eller div:2B. Automatisk grupp kräver en aktiv prenumeration.';
+      if (!name) return t('smNoSubscription');
       div = this.divisionFor(name);
-      if (!div) return 'Ditt Nations-namn finns inte i SM denna säsong. Ange div:1A, div:2A eller div:2B.';
+      if (!div) return t('smNoDivision');
     }
     const group = this.config.divisions[div];
-    if (!group) return 'Okänd SM-grupp. Välj div:1A, div:2A eller div:2B.';
+    if (!group) return t('smUnknown');
     const missing = group.matches.filter(m => !this.snapshots.has(m.id));
-    if (missing.length) return `SM S${this.config.season} · ${div}: väntar på ${missing.length} av ${group.matches.length} partier. Försök igen strax.`;
+    if (missing.length) return t('smWaiting', { season: this.config.season, div, missing: missing.length, total: group.matches.length });
     const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && (!this.connected.has(m.id) || this.now() - (this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt) > 60000));
     const oldest = Math.min(...group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).map(m => this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt));
     const stamp = Number.isFinite(oldest) ? oldest : Math.max(...group.matches.map(m => this.snapshots.get(m.id).updatedAt));
-    const time = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'medium' }).format(stamp);
+    const time = new Intl.DateTimeFormat(language, { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'medium' }).format(stamp);
     const rows = this.tables.get(div);
-    const width = Math.max(7, ...rows.map(r => r.name.length));
-    const lines = rows.map(r => `${String(r.place).padStart(5)}  ${r.name.padEnd(width)}  ${String(r.points).padStart(5)}  ${r.tiebreak}`);
-    const header = `Plats  ${"Spelare".padEnd(width)}  Poäng  Skiljekriterium`;
+    const width = Math.max(t('smPlayer').length, ...rows.map(r => r.name.length));
+    const rendered = rows.map(r => ({ ...r, tiebreak: r.tiebreakKey ? t(r.tiebreakKey) + (r.tiebreakValue == null ? '' : ': ' + r.tiebreakValue) : '–' }));
+    const placeWidth = Math.max(5, t('smPlace').length), pointsWidth = Math.max(5, t('smPoints').length);
+    const lines = rendered.map(r => `${String(r.place).padStart(placeWidth)}  ${r.name.padEnd(width)}  ${String(r.points).padStart(pointsWidth)}  ${r.tiebreak}`);
+    const header = `${t('smPlace').padEnd(placeWidth)}  ${t('smPlayer').padEnd(width)}  ${t('smPoints').padEnd(pointsWidth)}  ${t('smTiebreak')}`;
     const boundary = div === "1A" ? rows.length - 2 : /^2[A-Z]$/.test(div) ? 1 : -1;
     if (boundary > 0 && boundary < lines.length) {
       const separator = "─".repeat(Math.max(header.length, ...lines.map(line => line.length)));
@@ -148,6 +153,8 @@ export class SmTableCache {
     }
     const ongoing = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).length;
     const drafting = group.matches.filter(m => this.snapshots.get(m.id).state.phase === 'Drafting Phase' && this.snapshots.get(m.id).state.round === 0);
-    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}${automaticallySelected ? " (Automatiskt vald utifrån din prenumeration)" : ""}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', header, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
+    return [t('smTitle', { season: this.config.season, div, auto: automaticallySelected ? t('smAuto') : '' }),
+      t('smChecked', { time }), stale.length ? t('smStale', { count: stale.length }) : '', '```text', header, ...lines, '```',
+      t('smOngoing', { ongoing, total: group.matches.length }), drafting.length ? t('smDrafting', { matches: drafting.map(m => m.title).join(', ') }) : '', t('smLegend')].filter(Boolean).join('\n');
   }
 }

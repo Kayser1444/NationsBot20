@@ -231,3 +231,5 @@ Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare 
 Partier i Nations-valet (round 0, Drafting Phase) bevakas men ger inga grupppoäng innan spelstart. Dessa partier anges uttryckligen i tabellsvaret.
 
 Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in the configured server before accessing subscriptions, and honor user bans. /smtable replies directly in the DM without a separate dm option. Other server-channel restrictions remain in force. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.
+
+SM standings, tiebreaker labels, warnings and automatic division labels use the caller’s effective Swedish/English language preference, matching other commands. Language is applied when rendering; every user shares the same cached standings.

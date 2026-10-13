@@ -93,3 +93,27 @@ test('automatic division includes subscription explanation while explicit select
   assert.match(cache.reply(null, 'user', { A: 'user' }), /Division 1A \(Automatiskt vald utifrån din prenumeration\)/);
   assert.doesNotMatch(cache.reply('1A', 'user', { A: 'user' }), /Automatiskt vald/);
 });
+
+test('English SM rendering covers titles, auto selection, tiebreakers, unavailable games and stale connections without changing rankings', () => {
+  const cache = new SmTableCache(config);
+  assert.match(cache.reply(null, 'u', {}, 'en-US'), /active subscription/);
+  assert.match(cache.reply(null, 'u', { Outside: 'u' }, 'en-US'), /not in SM/);
+  assert.match(cache.reply('9Z', 'u', {}, 'en-US'), /Unknown SM group/);
+  assert.match(cache.reply('1A', 'u', {}, 'en-US'), /waiting for 7 of 7 games/);
+  const data = JSON.parse(readFileSync(new URL('./fixtures/sm-1a-snapshot.json', import.meta.url), 'utf8'));
+  for (const { value: m } of data.results) cache.update(m.id, { replaying: false, state: { game_over: m.over, player_order: m.playerOrder,
+    players: Object.fromEntries(m.players.map(p => [p.name, { score: p.score, resource_remainder: p.remainder }])) } });
+  const ranking = cache.tables.get('1A').map(r => [r.name, r.points]);
+  const english = cache.reply(null, 'u', { Kayser: 'u' }, 'en-US');
+  assert.match(english, /Swedish Championship/); assert.match(english, /Automatically selected from your subscription/);
+  assert.match(english, /H2H points: 8/); assert.match(english, /Wins: 1/); assert.match(english, /Tiebreaker/);
+  assert.doesNotMatch(english, /Svenska|Inbördes|Vinster|Skiljekriterium|Bevakning kontrollerad/);
+  assert.ok(english.length < 2000); assert.match(english, /─/);
+  assert.match(cache.reply('1A', 'u', {}, 'sv-SE'), /Svenska mästerskapet/);
+  assert.deepEqual(cache.tables.get('1A').map(r => [r.name, r.points]), ranking);
+  cache.connection('3032', false); assert.match(cache.reply('1A', 'u', {}, 'en-US'), /Last known standings/);
+  const draftCache = new SmTableCache(fixture);
+  const draft = message(); draft.state.round = 0; draft.state.phase = 'Drafting Phase'; draftCache.update('1', draft);
+  assert.match(draftCache.reply('1A', 'u', {}, 'en-US'), /Waiting for play to start/);
+  assert.match(draftCache.reply('1A', 'u', {}, 'en-US'), /Tied/);
+});

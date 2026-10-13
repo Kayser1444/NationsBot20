@@ -75,3 +75,12 @@ test('DM autocomplete requires current membership and provides exact Nations spe
   assert.deepEqual(await f.run('notifications', { autocomplete: true }), [[{ name: 'Kayser', value: 'Kayser' }]]);
   f.deny(); assert.deepEqual(await f.run('notifications', { autocomplete: true }), [[]]);
 });
+
+test('SM commands pass the effective language override, falling back to the interaction locale', async t => {
+  const f = await fixture(t);
+  f.service.getSmTable = (div, id, language) => language;
+  f.service.getLanguageOverride = () => 'en-US';
+  assert.equal((await f.run('smtable'))[1].content, 'en-US');
+  f.service.getLanguageOverride = () => null;
+  assert.equal((await f.run('smtable'))[1].content, 'sv-SE');
+});
