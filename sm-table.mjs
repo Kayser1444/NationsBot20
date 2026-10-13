@@ -73,7 +73,7 @@ export function rankTable(group, snapshots) {
 export class SmTableCache {
   constructor(config, { path, now = () => Date.now(), report = () => {} } = {}) {
     this.config = validateSeason(config); this.path = path; this.now = now; this.report = report;
-    this.snapshots = new Map(); this.connected = new Set(); this.tables = new Map();
+    this.snapshots = new Map(); this.connected = new Set(); this.tables = new Map(); this.lastContact = new Map();
     this.matches = Object.values(config.divisions).flatMap(group => group.matches);
     if (path && existsSync(path)) {
       try {
@@ -89,15 +89,24 @@ export class SmTableCache {
   }
   has(id) { return this.matches.some(m => m.id === id); }
   divisionFor(name) { return Object.entries(this.config.divisions).find(([, g]) => g.players.includes(name))?.[0]; }
-  connection(id, connected) { connected ? this.connected.add(id) : this.connected.delete(id); }
+  connection(id, connected) {
+    if (connected) this.connected.add(id);
+    else { this.connected.delete(id); this.lastContact.delete(id); }
+  }
   update(id, message) {
     const match = this.matches.find(m => m.id === id);
     if (!match) return false;
+    // Anonymous info requests return only {turns: 0} after the initial snapshot.
+    // This confirms socket liveness; full state arrives on each game change.
+    if (message && Object.keys(message).length === 1 && Number.isInteger(message.turns) && message.turns >= 0) {
+      if (this.connected.has(id) && this.snapshots.has(id)) this.lastContact.set(id, this.now());
+      return false;
+    }
     let snapshot;
     try { snapshot = extract(match, message, this.now()); }
     catch (error) { this.connected.delete(id); this.report(error.message, 'error'); return false; }
     if (!snapshot) return false;
-    this.snapshots.set(id, snapshot); this.connected.add(id);
+    this.snapshots.set(id, snapshot); this.connected.add(id); this.lastContact.set(id, this.now());
     this.rebuild(this.divisionFor(match.players[0]));
     if (this.path) {
       try {
@@ -123,8 +132,8 @@ export class SmTableCache {
     if (!group) return 'Okänd SM-grupp. Välj div:1A, div:2A eller div:2B.';
     const missing = group.matches.filter(m => !this.snapshots.has(m.id));
     if (missing.length) return `SM S${this.config.season} · ${div}: väntar på ${missing.length} av ${group.matches.length} partier. Försök igen strax.`;
-    const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && (!this.connected.has(m.id) || this.now() - this.snapshots.get(m.id).updatedAt > 60000));
-    const oldest = Math.min(...group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).map(m => this.snapshots.get(m.id).updatedAt));
+    const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && (!this.connected.has(m.id) || this.now() - (this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt) > 60000));
+    const oldest = Math.min(...group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).map(m => this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt));
     const stamp = Number.isFinite(oldest) ? oldest : Math.max(...group.matches.map(m => this.snapshots.get(m.id).updatedAt));
     const time = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'medium' }).format(stamp);
     const rows = this.tables.get(div);
@@ -132,6 +141,6 @@ export class SmTableCache {
     const lines = rows.map(r => `${String(r.place).padStart(5)}  ${r.name.padEnd(width)}  ${String(r.points).padStart(5)}  ${r.tiebreak}`);
     const ongoing = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).length;
     const drafting = group.matches.filter(m => this.snapshots.get(m.id).state.phase === 'Drafting Phase' && this.snapshots.get(m.id).state.round === 0);
-    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}**`, `Avläst: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', `Plats  ${'Spelare'.padEnd(width)}  Poäng  Skiljekriterium`, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
+    return [`**Svenska mästerskapet · S${this.config.season} · Division ${div}**`, `Bevakning kontrollerad: ${time}`, stale.length ? `⚠️ ${stale.length} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.` : '', '```text', `Plats  ${'Spelare'.padEnd(width)}  Poäng  Skiljekriterium`, ...lines, '```', `${ongoing}/${group.matches.length} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.`, drafting.length ? `Väntar på spelstart: ${drafting.map(m => m.title).join(', ')}. Dessa partier ger ännu inga grupppoäng.` : '', 'Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.'].filter(Boolean).join('\n');
   }
 }

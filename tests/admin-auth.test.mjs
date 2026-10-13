@@ -201,3 +201,14 @@ test('corrupt persistent session storage fails closed', t => {
   const f = persistentFixture(t); writeFileSync(f.path, '{broken');
   assert.throws(() => f.open());
 });
+
+test('login form CSP permits its Discord OAuth redirect and does not allow arbitrary origins', async t => {
+  const f = await fixture(t);
+  const landing = await f.request('/');
+  const login = await f.request('/auth/login?remember=1');
+  const destination = new URL(login.headers.get('location'));
+  const csp = landing.headers.get('content-security-policy');
+  const formAction = csp.split(';').map(s => s.trim()).find(s => s.startsWith('form-action ')).split(/\s+/).slice(1);
+  assert.ok(formAction.includes(destination.origin), 'browser blocks form redirect unless Discord is an allowed form destination');
+  assert.deepEqual(formAction, ["'self'", 'https://discord.com']);
+});

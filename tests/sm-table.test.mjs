@@ -70,3 +70,20 @@ test('verified 1A snapshot sorts Kayser above goonzo by head-to-head, LindenR ab
   assert.equal(rows[3].tiebreak, 'Vinster: 1');
   assert.ok(cache.reply('1A').length < 2000);
 });
+
+test('heartbeat-only replies keep a quiet game current without changing its last score update', () => {
+  let now = 100000;
+  const cache = new SmTableCache(fixture, { now: () => now });
+  cache.update('1', message());
+  const snapshotTime = cache.snapshots.get('1').updatedAt;
+  for (let i = 0; i < 5; i++) { now += 20000; cache.update('1', { turns: 0 }); }
+  assert.doesNotMatch(cache.reply('1A'), /saknar aktuell/);
+  assert.equal(cache.snapshots.get('1').updatedAt, snapshotTime);
+  cache.connection('1', false);
+  cache.update('1', { turns: 0 });
+  assert.match(cache.reply('1A'), /saknar aktuell/);
+  cache.update('1', message());
+  now += 60001;
+  cache.update('1', { chat_log: [] });
+  assert.match(cache.reply('1A'), /saknar aktuell/);
+});
