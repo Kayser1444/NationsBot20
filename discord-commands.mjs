@@ -1,4 +1,4 @@
-import { validateSubscriptions } from './subscriptions.mjs';
+import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
@@ -53,7 +53,7 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     return t(action === 'on' ? 'dmOn' : 'dmOff');
   }
   const current = getSubscriptions();
-  const own = Object.entries(current).find(([, id]) => id === userId)?.[0];
+  const own = subscriptionEntries(current).find(([, id]) => id === userId)?.[0];
   if (command === 'status') {
     const state = getStatus(own, userId);
     const mode = t(getDm(userId) ? 'modeDm' : 'modeChannel');
@@ -75,7 +75,7 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
   }
   if (command === 'notifications' && action === 'off') {
     if (!own) return t('nothingToStop');
-    const next = { ...current }; delete next[own]; commit(next);
+    commit(removeSubscriber(current, userId));
     return t('stopped', { name: quote(own) });
   }
   if (command !== 'notifications' || action !== 'on') return t('unknown');
@@ -95,10 +95,9 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
     if (matches.length > 1) return t('ambiguous', { names: matches.map(quote).join(', ') });
     name = matches[0];
   }
-  if (Object.hasOwn(current, name) && current[name] !== userId) return t('occupied', { name: quote(name) });
   if (own === name) return t('already', { name: quote(name) });
   if (own) return t('switchName', { name: quote(own) });
   try { validateSubscriptions({ [name]: userId }); } catch { return t('invalidName'); }
-  commit(validateSubscriptions({ ...current, [name]: userId }));
+  commit(addSubscriber(current, name, userId));
   return t('subscribed', { name: quote(name), destination: t(getDm(userId) ? 'destinationDm' : 'destinationChannel') });
 }

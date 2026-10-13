@@ -62,7 +62,7 @@ test('language command immediately replies in the selected language, without req
   let locale = 'en-GB', override = null;
   const service = { getLocale: () => locale, getLanguageOverride: () => override,
     setLanguage: (_, value) => { override = value === 'auto' ? null : value; },
-    getSubscriptions: () => ({ Player: '222222222222222222' }), getNames: () => ['Player'] };
+    getSubscriptions: () => ({ Player: '222222222222222222' }), getNames: () => ['Player'], commit: () => {} };
   const execute = args => handleSubscriptionCommand({ command: 'language', userId: '111111111111111111', ...args }, service);
   assert.match(execute({ locale: 'sv-SE' }), /Botens språk är nu svenska/);
   assert.match(execute({ command: 'help' }), /— hjälp/);
@@ -70,7 +70,7 @@ test('language command immediately replies in the selected language, without req
   assert.equal(override, 'sv-SE');
   assert.match(execute({ locale: 'en-US' }), /Your bot language is now English/);
   assert.match(execute({ command: 'help' }), /— help/);
-  assert.match(execute({ command: 'notifications', action: 'on', nationsName: 'Player' }), /cannot be taken over/);
+  assert.match(execute({ command: 'notifications', action: 'on', nationsName: 'Player' }), /Player/);
   locale = 'sv-SE';
   assert.match(execute({ command: 'help' }), /— help/);
   assert.match(execute({ locale: 'auto' }), /Automatiskt språk är på/);

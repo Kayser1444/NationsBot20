@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readSubscriptions, saveSubscriptions, setUserBan, isUserBanned, readBannedUsers, readPreviousNationsName } from '../subscriptions.mjs';
+import { readSubscriptions, saveSubscriptions, setUserBan, isUserBanned, readBannedUsers, readPreviousNationsName, addSubscriber } from '../subscriptions.mjs';
 import { handleSubscriptionCommand } from '../discord-commands.mjs';
 import { startDashboard } from '../dashboard.mjs';
 
@@ -42,6 +42,16 @@ test('unsubscribed users can be banned, repeated bans preserve timestamp, malfor
   writeFileSync(path, JSON.stringify(config));
   assert.throws(() => readSubscriptions(path), /spärrlista/);
   assert.throws(() => saveSubscriptions(path, {}), /spärrlista/);
+});
+test('blocking one shared subscriber preserves every other follower and remembered name', t => {
+  const path = fixture(t);
+  saveSubscriptions(path, addSubscriber(readSubscriptions(path), 'Kayser', rightful));
+  assert.deepEqual(readSubscriptions(path).Kayser, [offender, rightful]);
+  setUserBan(path, offender, true);
+  assert.equal(readSubscriptions(path).Kayser, rightful);
+  assert.equal(readPreviousNationsName(path, rightful), 'Kayser');
+  setUserBan(path, offender, false);
+  assert.equal(readSubscriptions(path).Kayser, rightful);
 });
 test('all commands deny banned users without reading subscriptions or changing preferences', () => {
   for (const locale of ['sv-SE', 'en-US']) for (const command of ['notifications', 'dm', 'language', 'status', 'help']) {

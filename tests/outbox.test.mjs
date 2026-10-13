@@ -10,6 +10,42 @@ const destination = { guildId: 'guild', channelId: 'channel' };
 const match = { id: '1', title: 'Game' };
 const turn = player => ({ player, over: false });
 
+test('shared turns deliver once per recipient, new followers do not replay receipts, and unsubscribe is isolated', async t => {
+  const f = fixture(t); let box = f.open(); const delivered = [];
+  box.observe(match, turn('Player'), ['a', 'b']);
+  await box.flush({ validate: async () => true, send: async job => {
+    if (job.userId === 'b') throw Object.assign(new Error('DM denied'), { retryable: false });
+    delivered.push(job.userId);
+  } });
+  assert.deepEqual(delivered, ['a']);
+  assert.equal(box.data.jobs[0].userId, 'b');
+  box = f.open();
+  box.updateSubscriptions({ Player: ['a', 'b'] }, { Player: ['a', 'b', 'c'] });
+  box.observe(match, turn('Player'), ['a', 'b', 'c']);
+  assert.deepEqual(box.data.jobs.map(job => job.userId), ['b', 'c']);
+  box.updateSubscriptions({ Player: ['a', 'b', 'c'] }, { Player: ['a', 'c'] });
+  await box.flush({ validate: async () => true, send: async job => delivered.push(job.userId) });
+  assert.deepEqual(delivered, ['a', 'c']);
+  box = f.open(); assert.equal(box.observe(match, turn('Player'), ['a', 'c']), false);
+  box.observe(match, turn('Other'), []);
+  box.observe(match, turn('Player'), ['a', 'c']);
+  assert.equal(box.data.jobs.length, 2);
+});
+
+test('legacy confirmed turns and queued jobs upgrade without losing delivery history', async t => {
+  const f = fixture(t); let box = f.open();
+  box.data.turns['1'] = { player: 'Player', over: false, generation: 2, sent: true };
+  box.save(); box = f.open();
+  assert.equal(box.observe(match, turn('Player'), 'a'), false);
+  box.updateSubscriptions({ Player: 'a' }, { Player: ['a', 'b'] });
+  assert.equal(box.observe(match, turn('Player'), ['a', 'b']), true);
+  assert.deepEqual(box.data.jobs.map(job => job.userId), ['b']);
+  delete box.data.turns['1'].sentUsers; box.data.turns['1'].sent = false; box.save();
+  box = f.open();
+  await box.flush({ validate: async () => true, send: async () => {} });
+  assert.ok(box.data.turns['1'].sentUsers.includes('b'));
+});
+
 test('unsubscribe cancels saved jobs; a changed recipient can receive the current turn', async t => {
   const f = fixture(t), box = f.open();
   box.observe(match, turn('Kayser'), 'old');

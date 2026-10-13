@@ -4,6 +4,8 @@ import { mkdtempSync, rmSync, readdirSync, copyFileSync, readFileSync, writeFile
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+const shared = process.env.NATIONS_TEST_SHARED === '1';
+const secondUser = '821001820309815368';
 const dmEnabled = process.env.NATIONS_TEST_DM === '1';
 const dmChannel = '1559000000000000001';
 const connections = [], posts = [], closedConnections = [];
@@ -33,12 +35,14 @@ globalThis.fetch = async (url, options = {}) => {
     assert.equal(options.headers.authorization, 'Bot offline_test');
     if (options.method === 'POST') {
       if (address.endsWith('/users/@me/channels')) {
-        assert.equal(dmEnabled, true);
-        return Response.json({ id: dmChannel, type: 1, recipients: [{ id: '229311536827465728' }] });
+        const recipient = JSON.parse(options.body).recipient_id;
+        assert.equal(recipient, shared ? secondUser : '229311536827465728');
+        assert.ok(shared || dmEnabled);
+        return Response.json({ id: dmChannel, type: 1, recipients: [{ id: recipient }] });
       }
       posts.push(JSON.parse(options.body));
       const isTurn = JSON.parse(options.body).content.includes('<@');
-      const channelId = dmEnabled && isTurn ? dmChannel : '1558878151646388264';
+      const channelId = isTurn && (dmEnabled || (shared && JSON.parse(options.body).content.includes('<@'+secondUser+'>'))) ? dmChannel : '1558878151646388264';
       assert.ok(address.endsWith(`/channels/${channelId}/messages`));
       return Response.json({ id: 'test-message', channel_id: channelId, mentions: [{ id: '229311536827465728' }] });
     }
@@ -61,6 +65,7 @@ const config = { subscriptions: { Kayser: '229311536827465728' }, matches: [],
   languagePreferences: dmEnabled ? { '229311536827465728': 'sv-SE' } : {},
   discord: { guildId: '706912380067643473', channelId: '1558878151646388264' } };
 config.dmPreferences = { '229311536827465728': dmEnabled };
+if(shared){config.subscriptions.Kayser=['229311536827465728',secondUser];config.dmPreferences[secondUser]=true;config.userLocales[secondUser]='sv-SE';}
 writeFileSync(join(configDir, 'friends.json'), JSON.stringify(config));
 process.env.NATIONS_CONFIG_DIR = configDir;
 process.env.NATIONS_DATA_DIR = configDir;
@@ -68,9 +73,10 @@ process.argv = [process.execPath, 'watch-kayser.mjs', '--config', 'friends.json'
 await import(pathToFileURL(join(dataDir, 'watch-kayser.mjs')));
 await new Promise(resolve => realTimeout(resolve, 2300));
 assert.ok(listingChecks >= 4, 'discovery must run repeatedly');
-assert.equal(connections.filter(url => url.endsWith('/900000/')).length, 2, 'one observer plus one fresh delivery check');
+assert.equal(connections.filter(url => url.endsWith('/900000/')).length, shared ? 3 : 2, 'one observer plus one fresh check per recipient');
 const turnPosts = posts.filter(post => post.content.includes('<@'));
-assert.equal(turnPosts.length, 1);
+assert.equal(turnPosts.length, shared ? 2 : 1);
+if(shared){assert.match(turnPosts[1].content, /<@821001820309815368>/);assert.ok(turnPosts[1].content.includes('Din tur i'));}
 assert.match(turnPosts[0].content, /<@229311536827465728>/);
 assert.match(turnPosts[0].content, /900000/);
 assert.ok(turnPosts[0].content.includes(dmEnabled ? 'Din tur i' : 'Your turn in'), 'reminders follow persisted language preferences in either delivery mode');
@@ -79,7 +85,7 @@ assert.equal(statusPosts.length, 2);
 assert.equal(statusPosts[0].content, '🟢 Bevakningen har startat.');
 assert.equal(statusPosts[1].content, '⚪ Bevakningen har stängts av.');
 assert.deepEqual(statusPosts[0].allowed_mentions, { parse: [], users: [], roles: [] });
-assert.equal(closedConnections.filter(url => url.endsWith('/900000/')).length, 2, 'both sockets close and discovery does not reopen completed games');
+assert.equal(closedConnections.filter(url => url.endsWith('/900000/')).length, shared ? 3 : 2, 'all sockets close and discovery does not reopen completed games');
 rmSync(dataDir, { recursive: true, force: true });
 rmSync(configDir, { recursive: true, force: true });
 console.log(`PASS: one ${dmEnabled ? 'DM-only' : 'channel'} turn mention; completion disconnects; startup/shutdown each post once without mentions.`);

@@ -12,7 +12,7 @@ export default {
     '`/status` — visa din prenumeration, dina bevakade partier och ditt språk.',
     '`/help` — visa den här hjälpen.',
     '', '**Bra att veta**',
-    'Ett Discord-konto kan ha en prenumeration. Ett upptaget Nations-namn kan inte tas över. Avprenumerera först om du vill byta namn; kontakta Kayser om en koppling är fel.',
+    'Ett Discord-konto kan bevaka ett Nations-namn i taget. Flera konton kan bevaka samma spelare, och du får välja någon annans namn. Avprenumerera först om du vill byta namn.',
     'Nya partier upptäcks normalt inom fem minuter. En väntande tur kan ge en påminnelse direkt vid prenumeration.',
     'Kommandosvaren är privata. Tillåt DM från boten om du valt DM. Nekade DM visas i /status och skickas aldrig i kanalen.',
     'Ditt språk gäller svar och dina turpåminnelser. Andra Discord-språk använder engelska som standard. Gemensamma start- och stoppmeddelanden är på svenska, utan omnämningar.',

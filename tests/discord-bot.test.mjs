@@ -4,6 +4,7 @@ import { EventEmitter } from 'node:events';
 import { setImmediate } from 'node:timers/promises';
 import { Client, Events, GatewayIntentBits, MessageFlags, Routes } from 'discord.js';
 import { handleSubscriptionCommand, autocompleteNames, commands, helpMessage } from '../discord-commands.mjs';
+import { subscriptionEntries } from '../subscriptions.mjs';
 import { startDiscordBot } from '../discord-bot.mjs';
 
 const first = '229311536827465728', second = '821001820309815368';
@@ -28,15 +29,15 @@ function fixture(names = ['Kayser', 'Suddoman']) {
     getDm: userId => dmPreferences[userId] === true,
     setDm: (userId, enabled) => { dmPreferences[userId] = enabled; },
     commit: next => {
-      for (const [name, id] of Object.entries(subscriptions)) previousNames[id] = name;
-      for (const [name, id] of Object.entries(next)) previousNames[id] = name;
+      for (const [name, id] of subscriptionEntries(subscriptions)) previousNames[id] = name;
+      for (const [name, id] of subscriptionEntries(next)) previousNames[id] = name;
       subscriptions = next;
     },
     getStatus: () => ({ matches: 6, discordEnabled: true }),
   };
   return { service, execute: args => handleSubscriptionCommand({ command: 'notifications', action: 'on', userId: first, displayName: 'kayser', ...args }, service) };
 }
-test('on without a name restores the previous exact name; explicit choice updates it; takeover stays blocked', () => {
+test('on without a name restores the previous exact name; explicit choice updates it; other watchers do not reserve the name', () => {
   const f = fixture();
   f.execute({ nationsName: 'DifferentCase' });
   f.execute({ action: 'off' });
@@ -45,9 +46,8 @@ test('on without a name restores the previous exact name; explicit choice update
   f.execute({ nationsName: 'NewName' });
   f.execute({ action: 'off' });
   f.execute({ userId: second, nationsName: 'NewName' });
-  assert.match(f.execute({ displayName: 'unmatched' }), /kan inte tas över/);
-  assert.equal(f.service.getSubscriptions().NewName, second);
-  assert.equal(Object.values(f.service.getSubscriptions()).includes(first), false);
+  assert.match(f.execute({ displayName: 'unmatched' }), /nu.*NewName/);
+  assert.deepEqual(f.service.getSubscriptions().NewName, [second, first]);
 });
 test('Discord-name matching is case insensitive and stores exact Nations spelling', () => {
   const f = fixture();
@@ -86,13 +86,15 @@ test('automatic matching ignores the appended real name and preserves explicit N
   assert.deepEqual(Object.keys(explicit.service.getSubscriptions()), ['Kayser (Jonas Adolphson)']);
   assert.match(fixture(['Kayser', 'kayser']).execute({ displayName: 'Kayser (Jonas Adolphson)' }), /Flera Nations-namn/);
 });
-test('occupied names cannot be taken over, and a Discord user has one subscription', () => {
+test('multiple users may watch one player while each user has one subscription', () => {
   const f = fixture(); f.execute({});
-  assert.match(f.execute({ userId: second, nationsName: 'Kayser' }), /kan inte tas över/);
+  assert.match(f.execute({ userId: second, nationsName: 'Kayser' }), /nu.*Kayser/);
   assert.match(f.execute({ nationsName: 'Suddoman' }), /Avsluta först/);
   assert.match(f.execute({}), /redan/);
-  assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.deepEqual(f.service.getSubscriptions().Kayser, [first, second]);
   assert.equal(Object.keys(f.service.getSubscriptions()).length, 1);
+  f.execute({ action: 'off' });
+  assert.equal(f.service.getSubscriptions().Kayser, second);
 });
 test('unsubscribe affects only the caller; status is personal; explicit new names are allowed', () => {
   const f = fixture(); f.execute({}); f.execute({ userId: second, nationsName: 'Suddoman' });

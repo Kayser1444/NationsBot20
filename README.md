@@ -19,6 +19,17 @@ English commands with Swedish or English replies:
   It shows your effective bot language and whether it is automatic or overridden;
   the detected Discord locale is retained for automatic selection but not displayed.
 - `/help` explains the bot and subscription rules.
+
+Each Discord account can watch one Nations name at a time. Watching another
+player is allowed, and any number of accounts can watch the same player. Each
+recipient receives an individual reminder using their own language and delivery
+preferences. Shared games still use one observer connection. To change the watched
+name, use `/notifications off` followed by `/notifications on nationsname:...`.
+
+Existing single-recipient subscription files remain readable; shared names store
+an array of Discord IDs instead of a single ID. The outbox retains per-recipient
+turn receipts, upgrading old confirmed turns without resending them on startup.
+Admin removal and blocking affect only the selected Discord account.
 - `/language locale:sv-SE` selects Swedish; `/language locale:en-US` selects
   English. Typeahead suggests both supported languages and `auto`.
 - `/language locale:auto` removes your override and follows your Discord locale.

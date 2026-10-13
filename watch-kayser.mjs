@@ -16,7 +16,7 @@ import { text } from './language.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
-import { readBannedUsers, isUserBanned, setUserBan } from './subscriptions.mjs';
+import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
@@ -97,7 +97,7 @@ function snapshot() {
     botState,
     bannedUsers: Object.entries(readBannedUsers(configPath)).map(([userId, ban]) => ({ userId, ...ban })),
     playerNames: playerCache.names, playerNamesUpdatedAt: playerCache.updatedAt,
-    subscribers: Object.entries(subscriptions).map(([username, userId]) => ({ username, userId, matches: matches.filter(m => !m.finished && m.players?.includes(username)).length })),
+    subscribers: subscriptionEntries(subscriptions).map(([username, userId]) => ({ username, userId, matches: matches.filter(m => !m.finished && m.players?.includes(username)).length })),
     matches: matches.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, over: Boolean(m.finished), connected: m.status === 'connected' })),
     events: log.error ? [...log.entries, { time: new Date().toISOString(), level: 'error', message: log.error }] : log.entries,
   };
@@ -117,7 +117,7 @@ function applySubscriptions(selected) {
       matches.splice(matches.indexOf(m), 1); shown.delete(m.id);
       log.add(`Bevakning avslutad: ${m.title || m.id} (inga prenumeranter)`);
     } else if (m.state) {
-      try { outbox?.observe(m, m.state, selected[m.state.player]); }
+      try { outbox?.observe(m, m.state, recipients(selected, m.state.player)); }
       catch { stop(); throw new Error('Utkorgen kunde inte sparas. Bevakningen har stoppats.'); }
     }
   }
@@ -142,7 +142,7 @@ async function flushOutbox() {
     await outbox.flush({
       signal: deliveryAbort.signal,
       validate: async job => {
-        if (subscriptions[job.player] !== job.userId || isUserBanned(configPath, job.userId)) return false;
+        if (!recipients(subscriptions, job.player).includes(job.userId) || isUserBanned(configPath, job.userId)) return false;
         const m = matches.find(match => match.id === job.matchId);
         // Wait for this run's initial snapshot; persisted state alone is insufficient.
         if (!m?.state) throw new Error('Waiting for a fresh game snapshot.');
@@ -152,11 +152,11 @@ async function flushOutbox() {
         return !state.over && state.player === job.player;
       },
       send: job => {
-        if (stopped || subscriptions[job.player] !== job.userId || isUserBanned(configPath, job.userId) || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
+        if (stopped || !recipients(subscriptions, job.player).includes(job.userId) || isUserBanned(configPath, job.userId) || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
         const payload = turnMessage(job.player, { id: job.matchId, title: job.title }, job.userId,
           profile === 'friends.json' ? readBotLanguage(configPath, job.userId) : 'sv-SE');
         return profile === 'friends.json'
-          ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && subscriptions[job.player] === job.userId && !isUserBanned(configPath, job.userId) && outbox.current(job))
+          ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && recipients(subscriptions, job.player).includes(job.userId) && !isUserBanned(configPath, job.userId) && outbox.current(job))
           : transport.send(payload, deliveryAbort.signal);
       },
       report: status => { delivery = status; show(); },
@@ -226,7 +226,7 @@ function connect(m) {
     const player = m.state.player;
     const subscribed = Object.hasOwn(subscriptions, player);
     if (outbox) {
-      try { outbox.observe(m, m.state, subscriptions[player]); }
+      try { outbox.observe(m, m.state, recipients(subscriptions, player)); }
       catch {
         delivery = 'STOPPED: could not save the outbox; no new alert sent';
         show(); stop(); process.exitCode = 1; return;
@@ -270,12 +270,13 @@ if (!args.includes('--no-dashboard')) {
       auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings()) : null,
       subscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
-        const next = validateSubscriptions({ ...subscriptions, [username]: userId });
+        const next = addSubscriber(subscriptions, username, userId);
         applySubscriptions(saveSubscriptions(configPath, next));
       },
-      unsubscribe: async username => {
+      unsubscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
-        const next = { ...subscriptions }; delete next[username];
+        if (!userId && recipients(subscriptions, username).length > 1) throw new Error('Ange Discord-ID för prenumerationen som ska avslutas.');
+        const next = removeSubscriber(subscriptions, userId || recipients(subscriptions, username)[0]);
         applySubscriptions(saveSubscriptions(configPath, next));
       },
       setBan: async (userId, enabled) => {

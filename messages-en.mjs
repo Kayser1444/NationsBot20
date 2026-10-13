@@ -12,7 +12,7 @@ export default {
     '`/status` — show your subscription, watched games and language.',
     '`/help` — show this help.',
     '', '**Good to know**',
-    'Each Discord account can have one subscription. An occupied Nations name cannot be taken over. Unsubscribe before changing names; contact Kayser if a mapping is wrong.',
+    'Each Discord account can watch one Nations name at a time. Multiple accounts may watch the same player, and you may choose another player’s name. Unsubscribe before changing names.',
     'New games are normally discovered within five minutes. Subscribing can trigger a reminder for an already pending turn.',
     'Command replies are private. Allow DMs from the bot if you choose DM reminders. Blocked DMs appear in /status and are never sent to the channel.',
     'Your language applies to replies and your turn reminders. Unsupported Discord languages default to English. Shared startup/shutdown notices remain Swedish, without mentions.',

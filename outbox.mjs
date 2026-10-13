@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, renameSync, openSync, fsyncSync, closeSync } from 'node:fs';
 import { dirname } from 'node:path';
+import { recipients } from './subscriptions.mjs';
 
 // One persisted turn record per match; jobs never contain webhook credentials.
 export class Outbox {
@@ -27,19 +28,23 @@ export class Outbox {
     }
   }
   observe(match, state, userId) {
+    const ids = userId == null ? [] : Array.isArray(userId) ? userId : [userId];
     const prior = this.data.turns[match.id];
     const changed = !prior || prior.player !== state.player || prior.over !== state.over;
-    const turn = changed ? { player: state.player, over: state.over, generation: (prior?.generation ?? 0) + 1, sent: false } : prior;
+    const turn = changed ? { player: state.player, over: state.over, generation: (prior?.generation ?? 0) + 1, sent: false, sentUsers: [] } : prior;
+    // Old single-recipient receipts are upgraded on the initial observation.
+    const migrated = !Array.isArray(turn.sentUsers);
+    if (migrated) turn.sentUsers = turn.sent ? [...ids] : [];
     this.data.turns[match.id] = turn;
     const key = `${match.id}:${turn.generation}`;
     const oldLength = this.data.jobs.length;
-    this.data.jobs = this.data.jobs.filter(job => job.matchId !== match.id || job.key === key);
+    this.data.jobs = this.data.jobs.filter(job => job.matchId !== match.id || (job.key === key && ids.includes(job.userId)));
     let added = false;
-    if (!state.over && userId && !turn.sent && !this.data.jobs.some(job => job.key === key)) {
+    for (const userId of new Set(ids)) if (!state.over && !turn.sentUsers.includes(userId) && !this.data.jobs.some(job => job.key === key && job.userId === userId)) {
       this.data.jobs.push({ key, matchId: match.id, title: match.title, player: state.player, userId, attempts: 0, nextAt: this.now(), blocked: false });
       added = true;
     }
-    if (changed || added || oldLength !== this.data.jobs.length) this.save();
+    if (changed || migrated || added || oldLength !== this.data.jobs.length) this.save();
     return added;
   }
   current(job) {
@@ -47,9 +52,11 @@ export class Outbox {
     return this.data.jobs.includes(job) && !turn.over && turn.player === job.player && job.key === `${job.matchId}:${turn.generation}`;
   }
   updateSubscriptions(previous, selected) {
-    this.data.jobs = this.data.jobs.filter(job => selected[job.player] === job.userId);
+    this.data.jobs = this.data.jobs.filter(job => recipients(selected, job.player).includes(job.userId));
     for (const turn of Object.values(this.data.turns)) {
-      if (selected[turn.player] && previous[turn.player] !== selected[turn.player]) turn.sent = false;
+      if (!Array.isArray(turn.sentUsers)) turn.sentUsers = turn.sent ? [...recipients(previous, turn.player)] : [];
+      turn.sentUsers = turn.sentUsers.filter(id => recipients(selected, turn.player).includes(id));
+      if (recipients(selected, turn.player).some(id => !recipients(previous, turn.player).includes(id))) turn.sent = false;
     }
     this.save();
   }
@@ -70,6 +77,7 @@ export class Outbox {
           if (!this.current(job)) continue;
           if (!valid) {
             this.data.turns[job.matchId].sent = true;
+            (this.data.turns[job.matchId].sentUsers ??= []).push(job.userId);
             this.data.jobs = this.data.jobs.filter(item => item !== job);
             this.save(); report(`discarded expired turn for ${job.matchId}`); continue;
           }
@@ -89,7 +97,10 @@ export class Outbox {
           continue;
         }
         // Save errors are fatal: do not mistake a failed receipt write for a send error.
-        if (this.current(job)) this.data.turns[job.matchId].sent = true;
+        if (this.current(job)) {
+          this.data.turns[job.matchId].sent = true;
+          (this.data.turns[job.matchId].sentUsers ??= []).push(job.userId);
+        }
         this.data.jobs = this.data.jobs.filter(item => item !== job);
         this.save(); report(`last alert confirmed for ${job.matchId}`);
       }

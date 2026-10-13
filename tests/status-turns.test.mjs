@@ -30,6 +30,15 @@ test('display-name cache deduplicates requests, expires, and retains a newer int
   assert.equal(await refreshed, 'Latest nickname');
   assert.equal(calls, 2);
 });
+test('status resolves every shared follower and finds the caller within a recipient list', async () => {
+  const service = { getSubscriptions: () => ({ Player: ['1', '2'] }), getStatus: name => {
+    assert.equal(name, 'Player'); return { matchList: [{ player: 'Player' }] };
+  } };
+  const calls = [];
+  const enriched = await statusServiceWithNames(service, '2', async id => { calls.push(id); return 'User ' + id; });
+  assert.deepEqual(calls, ['1', '2']);
+  assert.equal(enriched.getStatus('Player', '2').matchList[0].discordName, 'User 1, User 2');
+});
 
 test('failed name lookups fall back and back off without preventing status replies', async () => {
   let calls = 0;

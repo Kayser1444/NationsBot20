@@ -17,4 +17,7 @@ jobs:
       - run: node tests/discovery-runtime.mjs
         env:
           NATIONS_TEST_DM: '1'
+      - run: node tests/discovery-runtime.mjs
+        env:
+          NATIONS_TEST_SHARED: '1'
       - run: node tests/subscriptions-runtime.mjs

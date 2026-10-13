@@ -73,7 +73,7 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
         json(200, { ok: true }); return;
       }
       if (req.method === 'DELETE' && url.pathname.startsWith('/api/subscriptions/')) {
-        await unsubscribe(decodeURIComponent(url.pathname.slice('/api/subscriptions/'.length)));
+        await unsubscribe(decodeURIComponent(url.pathname.slice('/api/subscriptions/'.length)), url.searchParams.get('userId'));
         json(200, { ok: true }); return;
       }
       json(404, { error: 'Sidan finns inte.' });

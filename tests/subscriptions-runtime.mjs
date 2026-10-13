@@ -67,6 +67,16 @@ try {
   assert.equal(unbanned.bannedUsers.length, 0);
   assert.equal(unbanned.subscribers.length, 1);
   assert.equal(unbanned.subscribers[0].userId, '821001820309815368', 'unban never restores an old claim');
+  const beforeShared = sockets.length;
+  assert.equal((await add(userId)).status, 200, 'two accounts may watch the same player');
+  const shared = await (await fetch(origin + '/api/status')).json();
+  assert.equal(shared.subscribers.length, 2); assert.equal(shared.matches.length, 1);
+  assert.equal(sockets.length, beforeShared, 'sharing a player opens no extra game connections');
+  assert.equal((await fetch(origin + '/api/subscriptions/Tester', { method: 'DELETE', headers })).status, 400, 'ambiguous old admin deletion must not remove both subscribers');
+  assert.equal((await fetch(origin + '/api/subscriptions/Tester?userId=' + userId, { method: 'DELETE', headers })).status, 200);
+  const remaining = await (await fetch(origin + '/api/status')).json();
+  assert.equal(remaining.subscribers.length, 1); assert.equal(remaining.matches.length, 1);
+  assert.equal(remaining.subscribers[0].userId, '821001820309815368');
 } finally {
   process.emit('SIGTERM'); console.log = originalLog;
   rmSync(dir, { recursive: true, force: true });

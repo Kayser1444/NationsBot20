@@ -1,3 +1,4 @@
+import { subscriptionEntries, recipients } from './subscriptions.mjs';
 // Cache only names needed by status replies; never scan the server's member list.
 export function createDisplayNameCache(fetchName, { now = Date.now, ttlMs = 5 * 60 * 1000, maxEntries = 250 } = {}) {
   const cache = new Map();
@@ -29,9 +30,9 @@ export function createDisplayNameCache(fetchName, { now = Date.now, ttlMs = 5 * 
 
 export async function statusServiceWithNames(service, userId, resolveName) {
   const subscriptions = service.getSubscriptions();
-  const own = Object.entries(subscriptions).find(([, id]) => id === userId)?.[0];
+  const own = subscriptionEntries(subscriptions).find(([, id]) => id === userId)?.[0];
   const initial = service.getStatus(own, userId);
-  const ids = own ? [...new Set((initial.matchList ?? []).filter(match => Object.hasOwn(subscriptions, match.player)).map(match => subscriptions[match.player]))] : [];
+  const ids = own ? [...new Set((initial.matchList ?? []).filter(match => Object.hasOwn(subscriptions, match.player)).flatMap(match => recipients(subscriptions, match.player)))] : [];
   const names = new Map(await Promise.all(ids.map(async id => {
     try { return [id, await resolveName(id)]; } catch { return [id, null]; }
   })));
@@ -39,7 +40,7 @@ export async function statusServiceWithNames(service, userId, resolveName) {
     // Turns and subscriptions may have changed while Discord names were fetched.
     const current = service.getSubscriptions(), state = service.getStatus(username, id);
     return { ...state, matchList: state.matchList?.map(match => ({ ...match,
-      discordName: Object.hasOwn(current, match.player) ? names.get(current[match.player]) ?? null : null,
+      discordName: Object.hasOwn(current, match.player) ? recipients(current, match.player).map(id => names.get(id)).filter(Boolean).join(', ') || null : null,
     })) };
   } };
 }
