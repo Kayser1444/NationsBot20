@@ -4,3 +4,4 @@
 !package-lock.json
 !*.mjs
 !dashboard.html
+!sm-season.json
