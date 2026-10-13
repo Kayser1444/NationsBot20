@@ -28,7 +28,7 @@
 <style>dialog{width:min(700px,calc(100% - 32px));max-height:85vh;overflow:auto;border:1px solid #e0e5ec;border-radius:14px;padding:24px;color:#203044}dialog::backdrop{background:#20304466}.detail-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.detail-header h2{margin:0}.user-link{background:transparent;color:#2256a5;padding:0;text-align:left;text-decoration:underline;font-size:14px}.detail-list{display:grid;grid-template-columns:minmax(130px,1fr) 2fr;gap:10px;margin:0 0 22px}.detail-list dt{color:#64748b}.detail-list dd{margin:0;overflow-wrap:anywhere}dialog h3{font-size:15px;margin-top:20px}dialog li{margin:8px 0}</style>
 <script nonce="__TOKEN__">
 const token='__TOKEN__';
-document.getElementById('logout')?.addEventListener('click',async()=>{await fetch('/auth/logout',{method:'POST',headers:{'x-nations-token':token}});location.assign('/')});
+document.getElementById('logout')?.addEventListener('click',async()=>{const response=await fetch('/auth/logout',{method:'POST',headers:{'x-nations-token':token}});if(response.ok)location.assign('/');else feedback('Utloggningen kunde inte sparas. Försök igen.',true)});
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');

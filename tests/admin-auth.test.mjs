@@ -3,6 +3,9 @@ import assert from 'node:assert/strict';
 import { createDiscordAuth, adminSettings } from '../admin-auth.mjs';
 import { startDashboard } from '../dashboard.mjs';
 import { request as httpRequest } from 'node:http';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 const owner = '229311536827465728';
 const settings = { origin: 'https://admin.example.test', clientId: '1558936899446374570', clientSecret: 'synthetic-client-secret', ownerId: owner };
@@ -42,6 +45,7 @@ async function fixture(t) {
     const authorize = new URL(response.headers.get('location'));
     assert.equal(authorize.origin, 'https://discord.com');
     assert.equal(authorize.searchParams.get('scope'), 'identify');
+    assert.equal(authorize.searchParams.get('prompt'), 'none');
     const cookie = response.headers.getSetCookie()[0].split(';')[0];
     const callback = '/auth/callback?code=synthetic-code&state=' + authorize.searchParams.get('state');
     return { cookie, callback };
@@ -129,4 +133,71 @@ test('cloud admin settings are opt-in and reject incomplete or unsafe setup', ()
   assert.throws(() => createDiscordAuth({ ...settings, origin: 'http://admin.example.test' }));
   assert.throws(() => createDiscordAuth({ ...settings, origin: 'https://admin.example.test/path' }));
   assert.throws(() => createDiscordAuth({ ...settings, ownerId: 'not-an-id' }));
+});
+
+function persistentFixture(t) {
+  const dir = mkdtempSync(join(tmpdir(), 'nations-session-'));
+  t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const path = join(dir, 'admin-sessions.json'); let clock = 1000;
+  const open = (custom = settings) => createDiscordAuth(custom, { sessionPath: path, now: () => clock, fetcher: async url =>
+    url.endsWith('/oauth2/token') ? Response.json({ access_token: 'private-oauth-token', token_type: 'Bearer', scope: 'identify' }) : Response.json({ id: owner }) });
+  const call = async (auth, path, headers = {}, method = 'GET') => {
+    const res = { status: 0, headers: {}, body: '', setHeader(key, value) { this.headers[key] = value; },
+      writeHead(status, values) { this.status = status; Object.assign(this.headers, values); }, end(value = '') { this.body = value; } };
+    await auth.handle({ method, headers }, res, new URL(path, settings.origin)); return res;
+  };
+  const login = async (auth, remember) => {
+    const start = await call(auth, '/auth/login' + (remember ? '?remember=1' : ''));
+    const state = new URL(start.headers.location).searchParams.get('state');
+    const done = await call(auth, '/auth/callback?code=test&state=' + state, { cookie: start.headers['set-cookie'].split(';')[0] });
+    assert.equal(done.status, 303);
+    const cookie = done.headers['set-cookie'].find(value => value.startsWith('__Host-nations-admin='));
+    return { cookie: cookie.split(';')[0], rawCookie: cookie };
+  };
+  return { path, open, call, login, setClock: value => { clock = value; } };
+}
+
+test('remembered owner sessions survive restart, store only token hashes, and expire after 30 days', async t => {
+  const f = persistentFixture(t); let auth = f.open();
+  const { cookie, rawCookie } = await f.login(auth, true);
+  assert.ok(rawCookie.includes('Max-Age=2592000'));
+  const saved = readFileSync(f.path, 'utf8');
+  assert.equal(saved.includes(cookie.split('=')[1]), false);
+  for (const secret of ['private-oauth-token', settings.clientSecret]) assert.equal(saved.includes(secret), false);
+  const csrf = auth.session({ headers: { cookie } }).csrf;
+  auth.close(); auth = f.open();
+  f.setClock(86400000); assert.equal(auth.session({ headers: { cookie } }).csrf, csrf);
+  assert.equal((await f.call(auth, '/auth/login', { cookie })).headers.location, '/');
+  assert.equal(f.open({ ...settings, ownerId: '111111111111111111' }).session({ headers: { cookie } }), null);
+  assert.equal(f.open({ ...settings, origin: 'https://other.example.test' }).session({ headers: { cookie } }), null);
+  f.setClock(1000 + 30 * 86400000); assert.equal(auth.session({ headers: { cookie } }), null);
+  assert.deepEqual(JSON.parse(readFileSync(f.path)).sessions, []);
+});
+
+test('logout revokes remembered sessions on disk; unchecked sessions last one hour and do not survive restart', async t => {
+  const f = persistentFixture(t); let auth = f.open();
+  const { cookie } = await f.login(auth, true), csrf = auth.session({ headers: { cookie } }).csrf;
+  assert.equal((await f.call(auth, '/auth/logout', { cookie, origin: settings.origin, 'x-nations-token': csrf }, 'POST')).status, 303);
+  auth.close(); auth = f.open(); assert.equal(auth.session({ headers: { cookie } }), null);
+  const short = await f.login(auth, false); assert.ok(short.rawCookie.includes('Max-Age=3600'));
+  assert.deepEqual(JSON.parse(readFileSync(f.path)).sessions, []);
+  auth.close(); assert.equal(f.open().session({ headers: { cookie: short.cookie } }), null);
+});
+
+test('silent OAuth falls back once to consent and keeps remember choice without accepting a forged callback', async t => {
+  const f = persistentFixture(t), auth = f.open();
+  const start = await f.call(auth, '/auth/login?remember=1');
+  const state = new URL(start.headers.location).searchParams.get('state');
+  assert.equal((await f.call(auth, '/auth/callback?error=consent_required&state=' + state)).status, 400);
+  const fallback = await f.call(auth, '/auth/callback?error=consent_required&state=' + state, { cookie: start.headers['set-cookie'].split(';')[0] });
+  assert.equal(fallback.headers.location, '/auth/login?consent=1&remember=1');
+  const next = await f.call(auth, fallback.headers.location);
+  const url = new URL(next.headers.location); assert.equal(url.searchParams.get('prompt'), 'consent');
+  const denied = await f.call(auth, '/auth/callback?error=consent_required&state=' + url.searchParams.get('state'), { cookie: next.headers['set-cookie'].split(';')[0] });
+  assert.equal(denied.status, 400);
+});
+
+test('corrupt persistent session storage fails closed', t => {
+  const f = persistentFixture(t); writeFileSync(f.path, '{broken');
+  assert.throws(() => f.open());
 });

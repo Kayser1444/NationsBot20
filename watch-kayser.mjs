@@ -269,7 +269,7 @@ if (!args.includes('--no-dashboard')) {
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
     dashboard = await startDashboard({ port, snapshot,
-      auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings()) : null,
+      auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings(), { sessionPath: join(dataDirectory, 'admin-sessions.json') }) : null,
       subscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         const next = addSubscriber(subscriptions, username, userId);
@@ -290,8 +290,11 @@ if (!args.includes('--no-dashboard')) {
     if (stopped) dashboard.close();
     else log.add(`Statusfönster: ${dashboard.url} · Ctrl+C stoppar bevakningen.`);
   } catch {
-    console.error('Could not open the local status window. Another instance may already be running.');
-    process.exit(1);
+    if (args.includes('--cloud-admin')) console.error('Admin console disabled: could not safely load sessions or open its port. Reminders continue.');
+    else {
+      console.error('Could not open the local status window. Another instance may already be running.');
+      process.exit(1);
+    }
   }
 }
 if (!stopped) {

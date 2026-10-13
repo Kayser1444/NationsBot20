@@ -1,8 +1,10 @@
-import { randomBytes } from 'node:crypto';
+import { randomBytes, createHash } from 'node:crypto';
+import { sessionStore } from './admin-session-store.mjs';
 
 const SESSION_COOKIE = '__Host-nations-admin';
 const LOGIN_COOKIE = '__Host-nations-login';
 const random = () => randomBytes(32).toString('hex');
+const sessionKey = value => createHash('sha256').update(value ?? '').digest('hex');
 const cookie = (name, value, seconds) => `${name}=${value}; Path=/; Secure; HttpOnly; SameSite=Lax; Max-Age=${seconds}`;
 function cookies(req) {
   const result = Object.create(null);
@@ -28,16 +30,20 @@ function validate(settings) {
   return url.origin;
 }
 
-export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, sessionSeconds = 3600 } = {}) {
+export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, sessionSeconds = 3600, rememberSeconds = 30 * 86400, sessionPath = null } = {}) {
   const origin = validate(settings), redirectUri = origin + '/auth/callback';
-  const logins = new Map(), sessions = new Map();
+  const logins = new Map();
+  const store = sessionStore(sessionPath, { origin, clientId: settings.clientId, ownerId: settings.ownerId }, now);
+  const sessions = store.records;
   function purge() {
     for (const [id, value] of logins) if (value.expires <= now()) logins.delete(id);
-    for (const [id, value] of sessions) if (value.expires <= now()) sessions.delete(id);
+    let removed = false;
+    for (const [id, value] of sessions) if (value.expires <= now()) { sessions.delete(id); removed = true; }
+    if (removed) store.save();
   }
   function session(req) {
     purge();
-    const value = sessions.get(cookies(req)[SESSION_COOKIE]);
+    const value = sessions.get(sessionKey(cookies(req)[SESSION_COOKIE]));
     return value?.userId === settings.ownerId ? value : null;
   }
   function fail(res, status, message) {
@@ -54,14 +60,17 @@ export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, s
     async handle(req, res, url) {
       purge();
       if (req.method === 'GET' && url.pathname === '/auth/login') {
+        if (session(req)) { res.writeHead(303, { location: '/' }); res.end(); return true; }
         if (logins.size >= 50) { fail(res, 429, 'Too many sign-in attempts. Please try again later.'); return true; }
         const state = random();
         // Replace this browser's pending attempt rather than accumulating it.
         logins.delete(cookies(req)[LOGIN_COOKIE]);
-        logins.set(state, { expires: now() + 300000 });
+        const remember = url.searchParams.get('remember') === '1';
+        const prompt = url.searchParams.get('consent') === '1' ? 'consent' : 'none';
+        logins.set(state, { expires: now() + 300000, remember, prompt });
         const authorize = new URL('https://discord.com/oauth2/authorize');
         authorize.search = new URLSearchParams({ client_id: settings.clientId, response_type: 'code',
-          scope: 'identify', redirect_uri: redirectUri, state }).toString();
+          scope: 'identify', redirect_uri: redirectUri, state, prompt }).toString();
         redirect(res, authorize.href, cookie(LOGIN_COOKIE, state, 300)); return true;
       }
       if (req.method === 'GET' && url.pathname === '/auth/callback') {
@@ -73,6 +82,9 @@ export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, s
         logins.delete(state); // One-use and bound to the initiating browser.
         res.setHeader('set-cookie', cookie(LOGIN_COOKIE, '', 0));
         const code = url.searchParams.get('code');
+        if (pending.prompt === 'none' && ['consent_required', 'login_required', 'interaction_required'].includes(url.searchParams.get('error'))) {
+          redirect(res, '/auth/login?consent=1' + (pending.remember ? '&remember=1' : ''), cookie(LOGIN_COOKIE, '', 0)); return true;
+        }
         if (url.searchParams.has('error') || !code || code.length > 2048) {
           fail(res, 400, 'Discord sign-in was not completed.'); return true;
         }
@@ -96,11 +108,13 @@ export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, s
             fail(res, 403, 'This console is restricted to the NationsBot owner.'); return true;
           }
           // Tokens and user profiles are never persisted or sent to the browser.
-          sessions.delete(cookies(req)[SESSION_COOKIE]);
+          sessions.delete(sessionKey(cookies(req)[SESSION_COOKIE]));
           while (sessions.size >= 10) sessions.delete(sessions.keys().next().value);
           const id = random();
-          sessions.set(id, { userId: user.id, csrf: random(), expires: now() + sessionSeconds * 1000 });
-          redirect(res, '/', [cookie(LOGIN_COOKIE, '', 0), cookie(SESSION_COOKIE, id, sessionSeconds)]);
+          const lifetime = pending.remember ? rememberSeconds : sessionSeconds;
+          sessions.set(sessionKey(id), { userId: user.id, csrf: random(), expires: now() + lifetime * 1000, remember: pending.remember });
+          try { store.save(); } catch { sessions.delete(sessionKey(id)); throw new Error('Session could not be saved.'); }
+          redirect(res, '/', [cookie(LOGIN_COOKIE, '', 0), cookie(SESSION_COOKIE, id, lifetime)]);
         } catch { fail(res, 502, 'Discord sign-in could not be verified. Please try again.'); }
         return true;
       }
@@ -109,7 +123,9 @@ export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, s
         if (req.method !== 'POST' || !active || req.headers.origin !== origin || req.headers['x-nations-token'] !== active.csrf) {
           fail(res, 403, 'Reload the console before signing out.'); return true;
         }
-        sessions.delete(cookies(req)[SESSION_COOKIE]);
+        const key = sessionKey(cookies(req)[SESSION_COOKIE]);
+        sessions.delete(key);
+        try { store.save(); } catch { sessions.set(key, active); fail(res, 503, 'Sign-out could not be saved. Please try again.'); return true; }
         redirect(res, '/', cookie(SESSION_COOKIE, '', 0)); return true;
       }
       return false;

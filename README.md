@@ -149,9 +149,18 @@ configured Host are required. Railway must supply `X-Forwarded-Proto: https`.
 The UI and APIs require owner sessions, and edits/logout also require same-origin
 requests and per-session CSRF tokens. Cookies are Secure, HttpOnly, host-only and
 SameSite=Lax. Login state is browser-bound, expiring and single-use. Sessions
-expire after one hour, are held only in memory, and end on logout or bot restart.
-OAuth tokens, client secrets and session cookies are never saved to the volume
+expire after one hour when “Kom ihåg mig” is unchecked. Remembered sessions
+last 30 days (absolute expiry) and survive bot restarts via `/data/admin-sessions.json`.
+Only hashes of session tokens, the owner ID, expiry and CSRF data are stored,
+with private file permissions. Logout revokes the session on disk immediately.
+Changing the configured owner, OAuth client or HTTPS origin invalidates saved sessions.
+OAuth tokens, client secrets and raw session cookies are never saved to the volume
 or exposed in the dashboard. Subscriptions remain in the existing `/data` files.
+Login uses `prompt=none` to reuse prior Discord authorization; when Discord
+requests interaction or consent, a fresh browser-bound flow retries with consent
+while preserving the remember choice. A damaged session file disables only the
+admin console; reminder monitoring continues. Deleting `admin-sessions.json`
+and restarting revokes all remembered sessions.
 
 To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
 redeploy. Local runs retain the original loopback-only administration page.
