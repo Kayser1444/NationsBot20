@@ -158,6 +158,12 @@ redeploy. Local runs retain the original loopback-only administration page.
 
 ### Blocking abusive users
 
+Click a subscriber's Nations name (or a blocked user's Discord ID) to open their
+live debug details: Discord ID, active/previous watched name, DM mode, effective
+bot language and override source, last observed Discord locale, block state,
+watched games and current turns, plus queued deliveries with failed attempts and
+retry times. Details refresh with the owner panel and never expose credentials.
+
 The owner console offers **Avsluta och spärra** beside each subscription, plus a
 Discord-ID field for blocking users who have no active subscription. Blocking
 atomically saves `bannedUsers` in `/data/friends.json`, releases the Nations name,

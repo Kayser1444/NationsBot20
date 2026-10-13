@@ -24,12 +24,15 @@
 <section class="panel"><h2>Partier</h2><p id="discovery" class="muted"></p><div class="scroll"><table><thead><tr><th>Parti</th><th>Tur</th><th>Anslutning</th></tr></thead><tbody id="matches"></tbody></table></div></section>
 <footer>Du kan stänga fönstret utan att stoppa bevakningen. __STOP_HINT__ <span id="updated"></span></footer>
 </main>
+<dialog id="user-details" aria-labelledby="user-details-title"><div class="detail-header"><h2 id="user-details-title">Användarstatus</h2><button id="close-details" type="button">Stäng</button></div><div id="user-details-body"></div><p id="user-details-updated" class="muted"></p></dialog>
+<style>dialog{width:min(700px,calc(100% - 32px));max-height:85vh;overflow:auto;border:1px solid #e0e5ec;border-radius:14px;padding:24px;color:#203044}dialog::backdrop{background:#20304466}.detail-header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.detail-header h2{margin:0}.user-link{background:transparent;color:#2256a5;padding:0;text-align:left;text-decoration:underline;font-size:14px}.detail-list{display:grid;grid-template-columns:minmax(130px,1fr) 2fr;gap:10px;margin:0 0 22px}.detail-list dt{color:#64748b}.detail-list dd{margin:0;overflow-wrap:anywhere}dialog h3{font-size:15px;margin-top:20px}dialog li{margin:8px 0}</style>
 <script nonce="__TOKEN__">
 const token='__TOKEN__';
 document.getElementById('logout')?.addEventListener('click',async()=>{await fetch('/auth/logout',{method:'POST',headers:{'x-nations-token':token}});location.assign('/')});
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');
+let currentStatus=null, selectedUserId=null;
 let playerNames=[], namesVersion='', suggestions=[], activeSuggestion=-1;
 function closeSuggestions(){el('name-suggestions').hidden=true;el('username').setAttribute('aria-expanded','false');el('username').removeAttribute('aria-activedescendant');activeSuggestion=-1}
 function selectName(name){el('username').value=name;closeSuggestions()}
@@ -58,7 +61,7 @@ async function change(method,path,body){
  const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();
 }
 async function refresh(){try{
- const response=await fetch('/api/status',{cache:'no-store'});if(response.status===401){location.assign('/');return;}if(!response.ok)throw new Error();const s=await response.json();
+ const response=await fetch('/api/status',{cache:'no-store'});if(response.status===401){location.assign('/');return;}if(!response.ok)throw new Error();const s=await response.json();currentStatus=s;if(selectedUserId)renderUserDetails();
  const incomingNames=JSON.stringify(s.playerNames||[]);if(incomingNames!==namesVersion){namesVersion=incomingNames;playerNames=s.playerNames||[];if(document.activeElement===el('username'))showSuggestions()}
  text('name-hint',s.playerNamesUpdatedAt?playerNames.length+' spelarnamn · uppdaterat '+time(s.playerNamesUpdatedAt):'Hämtar spelarnamn från pågående partier…');
  const active=s.matches.filter(m=>!m.over);const connected=active.filter(m=>m.connected).length;
@@ -67,14 +70,37 @@ async function refresh(){try{
  text('discord',!s.discordEnabled?'Discord är inte aktiverat':s.blocked?s.blocked+' utskick behöver åtgärdas':s.pending?'Påminnelser väntar på leverans':'Inga påminnelser i kö');
  text('bot-state','Discord-bot: '+(s.botState||'Inte konfigurerad'));
  text('last-delivery',s.lastDelivery?'Senast levererat '+time(s.lastDelivery):'');text('discovery',s.lastDiscovery?'Senaste matchsökning: '+time(s.lastDiscovery):'Söker efter partier…');
- el('subscribers').replaceChildren();for(const sub of s.subscribers){const tr=document.createElement('tr');const nameCell=cell(tr,sub.username);nameCell.title=sub.userId;const idLine=document.createElement('div');idLine.className='muted';idLine.textContent=sub.userId;nameCell.append(idLine);cell(tr,sub.matches);const actions=cell(tr,'');const button=document.createElement('button');button.textContent='Avsluta';button.className='remove';button.onclick=async()=>{button.disabled=true;try{await change('DELETE','/api/subscriptions/'+encodeURIComponent(sub.username)+'?userId='+encodeURIComponent(sub.userId));feedback('Prenumerationen för '+sub.username+' är avslutad.')}catch(e){feedback(e.message,true);button.disabled=false}};actions.append(button);const banButton=document.createElement('button');banButton.textContent='Avsluta och spärra';banButton.className='remove';banButton.style.marginLeft='6px';banButton.onclick=()=>banUser(sub.userId,sub.username,banButton);actions.append(banButton);el('subscribers').append(tr)}
- el('bans').replaceChildren();for(const ban of s.bannedUsers||[]){const tr=document.createElement('tr');cell(tr,ban.userId);cell(tr,ban.nationsName||'–');cell(tr,new Date(ban.bannedAt).toLocaleString('sv-SE'));const actions=cell(tr,'');const button=document.createElement('button');button.textContent='Häv spärr';button.className='remove';button.onclick=async()=>{button.disabled=true;try{await change('DELETE','/api/bans/'+encodeURIComponent(ban.userId));feedback('Spärren för '+ban.userId+' är hävd. Användaren kan prenumerera igen.')}catch(e){feedback(e.message,true);button.disabled=false}};actions.append(button);el('bans').append(tr)}
+ el('subscribers').replaceChildren();for(const sub of s.subscribers){const tr=document.createElement('tr');const nameCell=cell(tr,'');const nameButton=document.createElement('button');nameButton.type='button';nameButton.className='user-link';nameButton.textContent=sub.username;nameButton.onclick=()=>openUserDetails(sub.userId);nameCell.append(nameButton);nameCell.title=sub.userId;const idLine=document.createElement('div');idLine.className='muted';idLine.textContent=sub.userId;nameCell.append(idLine);cell(tr,sub.matches);const actions=cell(tr,'');const button=document.createElement('button');button.textContent='Avsluta';button.className='remove';button.onclick=async()=>{button.disabled=true;try{await change('DELETE','/api/subscriptions/'+encodeURIComponent(sub.username)+'?userId='+encodeURIComponent(sub.userId));feedback('Prenumerationen för '+sub.username+' är avslutad.')}catch(e){feedback(e.message,true);button.disabled=false}};actions.append(button);const banButton=document.createElement('button');banButton.textContent='Avsluta och spärra';banButton.className='remove';banButton.style.marginLeft='6px';banButton.onclick=()=>banUser(sub.userId,sub.username,banButton);actions.append(banButton);el('subscribers').append(tr)}
+ el('bans').replaceChildren();for(const ban of s.bannedUsers||[]){const tr=document.createElement('tr');const idCell=cell(tr,'');const idButton=document.createElement('button');idButton.type='button';idButton.className='user-link';idButton.textContent=ban.userId;idButton.onclick=()=>openUserDetails(ban.userId);idCell.append(idButton);cell(tr,ban.nationsName||'–');cell(tr,new Date(ban.bannedAt).toLocaleString('sv-SE'));const actions=cell(tr,'');const button=document.createElement('button');button.textContent='Häv spärr';button.className='remove';button.onclick=async()=>{button.disabled=true;try{await change('DELETE','/api/bans/'+encodeURIComponent(ban.userId));feedback('Spärren för '+ban.userId+' är hävd. Användaren kan prenumerera igen.')}catch(e){feedback(e.message,true);button.disabled=false}};actions.append(button);el('bans').append(tr)}
  if(!s.bannedUsers?.length){const tr=document.createElement('tr');const td=cell(tr,'Inga spärrade användare.');td.colSpan=4;el('bans').append(tr)}
  el('matches').replaceChildren();for(const m of s.matches){const tr=document.createElement('tr');const title=cell(tr,'');const link=document.createElement('a');link.textContent=m.title||'Parti '+m.id;link.href='https://games.tabony.net/nations/'+m.id+'/';link.target='_blank';link.rel='noopener';title.append(link);cell(tr,m.over?'Avslutat':m.player||'Hämtar tur…');cell(tr,m.over?'Bevakning avslutad':m.connected?'Ansluten':'Återansluter / hämtar status');el('matches').append(tr)}
  el('activity').replaceChildren();for(const entry of [...s.events].reverse()){const row=document.createElement('div');row.className='event'+(entry.level==='error'?' error':'');const timestamp=document.createElement('time');timestamp.textContent=time(entry.time);const message=document.createElement('span');message.textContent=entry.message;row.append(timestamp,message);el('activity').append(row)}
  if(!s.events.length)text('activity','Inga händelser ännu.');text('updated','Uppdaterat '+time(s.now)+'.');
 }catch{text('health','Ingen kontakt med tjänsten');el('health').className='badge warn';text('updated','Visar senast hämtade status.')}}
 el('subscribe').onsubmit=async event=>{event.preventDefault();el('save').disabled=true;try{await change('POST','/api/subscriptions',{username:el('username').value,userId:el('user-id').value});feedback('Prenumerationen är sparad.');el('subscribe').reset()}catch(e){feedback(e.message,true)}finally{el('save').disabled=false}};
+function openUserDetails(userId){selectedUserId=userId;renderUserDetails();if(!el('user-details').open)el('user-details').showModal()}
+el('close-details').onclick=()=>el('user-details').close();
+el('user-details').addEventListener('close',()=>{selectedUserId=null});
+function renderUserDetails(){
+ const user=currentStatus?.users?.find(user=>user.userId===selectedUserId);
+ const body=el('user-details-body');body.replaceChildren();text('user-details-title',user?.username?'Status för '+user.username:'Användarstatus');
+ if(!user){body.textContent='Användaren finns inte längre i den aktuella statusen.';return}
+ const dl=document.createElement('dl');dl.className='detail-list';body.append(dl);
+ const item=(label,value)=>{const dt=document.createElement('dt');dt.textContent=label;const dd=document.createElement('dd');dd.textContent=value;dl.append(dt,dd)};
+ item('Discord-ID',user.userId);item('Prenumeration',user.username?'Aktiv · '+user.username:'Avslutad');item('Senaste Nations-namn',user.previousName||'Inte sparat');
+ item('Åtkomst',user.banned?'Spärrad'+(user.bannedAt?' sedan '+new Date(user.bannedAt).toLocaleString('sv-SE'):''):'Tillåten');
+ item('Leveranssätt',user.dm?'Endast DM':'Påminnelsekanalen');item('Bottens språk',(user.language==='sv-SE'?'Svenska':'Engelska')+' ('+user.language+') · '+(user.languageOverride?'Inställt':'Automatiskt'));
+ item('Discord-språk',user.discordLocale||'Inte observerat ännu');item('Tjänst',currentStatus.stopped?'Stoppad':currentStatus.discordEnabled?'Discord-utskick aktiverade':'Discord-utskick avstängda');item('Discord-bot',currentStatus.botState||'Okänt');
+ const heading=value=>{const h=document.createElement('h3');h.textContent=value;body.append(h)};
+ const gameLink=(li,id,title)=>{const a=document.createElement('a');a.textContent=title||'Parti '+id;a.href='https://games.tabony.net/nations/'+encodeURIComponent(id)+'/';a.target='_blank';a.rel='noopener';li.append(a)};
+ heading('Bevakade partier ('+user.matches.length+')');const games=document.createElement('ul');body.append(games);
+ for(const match of user.matches){const li=document.createElement('li');gameLink(li,match.id,match.title);li.append(document.createTextNode(' · ID '+match.id+' · '+(match.connected?'Ansluten':'Frånkopplad / återansluter')+' · '+(match.connected?'Tur: ':'Senast kända tur: ')+(match.player||'okänd')));games.append(li)}
+ if(!user.matches.length)games.textContent='Inga pågående partier bevakas för användaren.';
+ heading('Väntande utskick ('+user.pending.length+')');const queue=document.createElement('ul');body.append(queue);
+ for(const job of user.pending){const li=document.createElement('li');gameLink(li,job.matchId,job.title);li.append(document.createTextNode(' · '+(job.blocked?'Leverans blockerad':'Väntar på leverans')+' · Misslyckade försök: '+job.attempts+(job.blocked?'': ' · Nästa försök tidigast '+new Date(job.nextAt).toLocaleString('sv-SE'))));queue.append(li)}
+ if(!user.pending.length)queue.textContent='Inga påminnelser i kö för användaren.';
+ text('user-details-updated','Uppdaterat '+time(currentStatus.now)+'. Inställningarna visas utan att ändras.');
+}
 async function banUser(userId,name,button){
  if(!confirm('Avsluta prenumerationen och spärra '+(name?name+' ('+userId+')':userId)+' från NationsBot?'))return;
  button.disabled=true;try{await change('POST','/api/bans/'+encodeURIComponent(userId));feedback('Prenumerationen avslutad och Discord-ID '+userId+' spärrat.')}catch(e){feedback(e.message,true)}finally{button.disabled=false}

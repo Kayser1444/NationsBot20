@@ -17,6 +17,7 @@ import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
+import { adminUsers } from './admin-users.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
@@ -95,6 +96,7 @@ function snapshot() {
     pending: outbox?.data.jobs.length ?? 0, blocked: outbox?.data.jobs.filter(job => job.blocked).length ?? 0,
     lastDelivery, lastDiscovery,
     botState,
+    users: adminUsers(JSON.parse(readFileSync(configPath, 'utf8')), subscriptions, matches, outbox?.data.jobs),
     bannedUsers: Object.entries(readBannedUsers(configPath)).map(([userId, ban]) => ({ userId, ...ban })),
     playerNames: playerCache.names, playerNamesUpdatedAt: playerCache.updatedAt,
     subscribers: subscriptionEntries(subscriptions).map(([username, userId]) => ({ username, userId, matches: matches.filter(m => !m.finished && m.players?.includes(username)).length })),

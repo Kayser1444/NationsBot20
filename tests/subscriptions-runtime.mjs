@@ -42,6 +42,10 @@ try {
   assert.equal(added.status, 200);
   const state = await (await fetch(origin + '/api/status')).json();
   assert.equal(state.subscribers[0].username, 'Tester');
+  assert.equal(state.users[0].username, 'Tester');
+  assert.equal(state.users[0].userId, '229311536827465728');
+  assert.equal(state.users[0].dm, false); assert.equal(state.users[0].language, 'en-US');
+  assert.equal(state.users[0].matches[0].player, 'Tester');
   assert.equal(state.matches.length, 1);
   assert.equal(state.matches[0].connected, true);
   assert.deepEqual(state.playerNames, ['Tester']);
@@ -59,6 +63,7 @@ try {
   assert.equal(banned.subscribers.length, 0); assert.equal(banned.matches.length, 0);
   assert.equal(banned.bannedUsers[0].userId, userId);
   assert.equal(banned.bannedUsers[0].nationsName, 'Tester');
+  assert.equal(banned.users[0].banned, true); assert.equal(banned.users[0].username, null);
   assert.equal(sockets.at(-1).readyState, 3);
   assert.equal((await add(userId)).status, 400, 'admin cannot recreate a banned subscription');
   assert.equal((await add('821001820309815368')).status, 200, 'released name is available to its rightful owner');
