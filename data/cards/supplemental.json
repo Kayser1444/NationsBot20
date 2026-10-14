@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceId": "nations-faq-official",
-  "note": "Cards named in FAQ++ 1.11 but absent from the local Tabony game implementation. Image URLs remain null until a real public asset is verified. These metadata additions do not approve FAQ rules.",
+  "note": "Cards named in FAQ++ 1.11 but absent from the local Tabony game implementation. Local promo scans and metadata are maintained in promos.json and asset-manifest.json. These metadata additions do not approve FAQ rules.",
   "cards": [
     { "id": "faq-nikola-tesla", "name": "Nikola Tesla", "aliases": ["Tesla"], "type": "advisor", "age": 4, "faqHeadingId": "advisor-nikola-tesla" },
     { "id": "faq-hagia-sophia", "name": "Hagia Sophia", "aliases": [], "type": "wonder", "age": 2, "faqHeadingId": "wonder-hagia-sophia" },

@@ -384,7 +384,11 @@
       "sourcePages": [
         5
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-antikythera-mechanism.ca74f64ad62d.png"
     },
     {
       "id": "Aqd",
@@ -2802,6 +2806,21 @@
       "imageAsset": "J_Epr.bb502505264d.png"
     },
     {
+      "id": "promo-engineering-genius",
+      "name": "Engineering Genius",
+      "aliases": [],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "golden_age",
+      "age": 1,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-engineering-genius.f1cb8139175d.png"
+    },
+    {
       "id": "EgSl",
       "name": "Engineering School",
       "aliases": [],
@@ -3640,7 +3659,11 @@
       "sourcePages": [
         4
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-grand-duchy-of-finland.2b169177c1fe.png"
     },
     {
       "id": "GBR",
@@ -3859,7 +3882,11 @@
       "sourcePages": [
         6
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-hagia-sophia.043ec6bc96b7.png"
     },
     {
       "id": "Hkp",
@@ -4317,7 +4344,9 @@
       "sourcePages": [
         5
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false
     },
     {
       "id": "HdPl",
@@ -4423,6 +4452,21 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "promo-imperium-rex",
+      "name": "Imperium Rex",
+      "aliases": [],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "event",
+      "age": 3,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-imperium-rex.9b2b58d8cfcf.png"
     },
     {
       "id": "IcEp",
@@ -4620,6 +4664,21 @@
       "nation": "Korea"
     },
     {
+      "id": "promo-julius-agricola",
+      "name": "Julius Agricola",
+      "aliases": [],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "advisor",
+      "age": 1,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-julius-agricola.6ee21d5f2d77.png"
+    },
+    {
       "id": "Ar_Kba",
       "aliases": [
         "Arabs Kaba"
@@ -4781,7 +4840,11 @@
       "sourcePages": [
         6
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-kremlin.8f7e5f44ec2f.png"
     },
     {
       "id": "LNT",
@@ -5064,23 +5127,6 @@
       "metadataSource": "progress_cards.py",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Lyc.jpg",
-        "checkedAt": "2026-10-14T18:35:13.274Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      },
-      "enabled": true
-    },
-    {
-      "id": "MIT",
-      "name": "MIT",
-      "aliases": [],
-      "type": "wonder",
-      "age": 4,
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
-      "faqReviewStatus": "pending",
-      "metadataSource": "progress_cards.py",
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
         "checkedAt": "2026-10-14T18:35:13.274Z",
         "status": 200,
         "contentType": "image/jpeg"
@@ -5438,7 +5484,11 @@
       "sourcePages": [
         6
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-mechanical-turk.db8e55c3fcbe.png"
     },
     {
       "id": "Mcn",
@@ -5539,6 +5589,23 @@
       "metadataSource": "progress_cards.py",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mnt.jpg",
+        "checkedAt": "2026-10-14T18:35:13.274Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      },
+      "enabled": true
+    },
+    {
+      "id": "MIT",
+      "name": "MIT",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py",
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
         "checkedAt": "2026-10-14T18:35:13.274Z",
         "status": 200,
         "contentType": "image/jpeg"
@@ -5821,7 +5888,11 @@
       "sourcePages": [
         4
       ],
-      "enabled": true
+      "enabled": true,
+      "promo": true,
+      "tabonyImplemented": false,
+      "imageCheck": null,
+      "imageAsset": "faq-nikola-tesla.cec3afeb20e8.png"
     },
     {
       "id": "Vk_Nm",
@@ -6465,6 +6536,23 @@
       "enabled": true
     },
     {
+      "id": "promo-potemkin-village",
+      "name": "Potemkin Village",
+      "aliases": [
+        "Potëmkin Village"
+      ],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "building",
+      "age": 3,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-potemkin-village.fbff1bf44e67.png"
+    },
+    {
       "id": "Pts",
       "name": "Potosi",
       "aliases": [],
@@ -6480,6 +6568,21 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "promo-power-grid",
+      "name": "Power Grid",
+      "aliases": [],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "golden_age",
+      "age": 4,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-power-grid.3ebafaa46540.png"
     },
     {
       "id": "PtGd",
@@ -8035,6 +8138,24 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "promo-solar-eclipse-spring-and-autumn-period",
+      "name": "Solar Eclipse; Spring and Autumn Period",
+      "aliases": [
+        "Solar Eclipse",
+        "Spring and Autumn Period"
+      ],
+      "imageUrl": null,
+      "faqReviewStatus": "pending",
+      "metadataSource": "User-supplied promo card scan",
+      "type": "event",
+      "age": 1,
+      "promo": true,
+      "tabonyImplemented": false,
+      "enabled": true,
+      "imageCheck": null,
+      "imageAsset": "promo-solar-eclipse-spring-and-autumn-period.671500a9fe6c.png"
     },
     {
       "id": "SmTp",

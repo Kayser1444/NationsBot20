@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "note": "Promo cards outside the local Tabony implementation. Metadata for supplied scans follows printed colors and era stripes. Existing FAQ card IDs and review decisions are preserved.",
+  "cards": [
+    {
+      "id": "promo-imperium-rex",
+      "name": "Imperium Rex",
+      "aliases": [],
+      "type": "event",
+      "age": 3,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/imperium-rex.png",
+      "crop": [
+        3,
+        3,
+        147,
+        229
+      ],
+      "cleanupRegions": [
+        [
+          5,
+          171,
+          140,
+          20
+        ],
+        [
+          5,
+          164,
+          30,
+          8
+        ]
+      ]
+    },
+    {
+      "id": "promo-potemkin-village",
+      "name": "Potemkin Village",
+      "aliases": [
+        "Potëmkin Village"
+      ],
+      "type": "building",
+      "age": 3,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/potemkin-village.png",
+      "crop": [
+        151,
+        3,
+        149,
+        229
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          81,
+          149,
+          97
+        ],
+        [
+          0,
+          171,
+          40,
+          20
+        ]
+      ]
+    },
+    {
+      "id": "promo-power-grid",
+      "name": "Power Grid",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/power-grid.png",
+      "crop": [
+        300,
+        3,
+        148,
+        229
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          43,
+          148,
+          118
+        ]
+      ]
+    },
+    {
+      "id": "promo-julius-agricola",
+      "name": "Julius Agricola",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/julius-agricola.png",
+      "crop": [
+        4,
+        234,
+        148,
+        230
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          46,
+          148,
+          118
+        ]
+      ]
+    },
+    {
+      "id": "promo-engineering-genius",
+      "name": "Engineering Genius",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/engineering-genius.png",
+      "crop": [
+        153,
+        234,
+        147,
+        230
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          45,
+          147,
+          113
+        ]
+      ]
+    },
+    {
+      "id": "promo-solar-eclipse-spring-and-autumn-period",
+      "name": "Solar Eclipse; Spring and Autumn Period",
+      "aliases": [
+        "Solar Eclipse",
+        "Spring and Autumn Period"
+      ],
+      "type": "event",
+      "age": 1,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/solar-eclipse-spring-and-autumn-period.png",
+      "crop": [
+        301,
+        234,
+        147,
+        230
+      ],
+      "cleanupRegions": []
+    },
+    {
+      "id": "faq-nikola-tesla",
+      "name": "Nikola Tesla",
+      "aliases": [
+        "Tesla"
+      ],
+      "type": "advisor",
+      "age": 4,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/nikola-tesla.png",
+      "crop": [
+        87,
+        466,
+        137,
+        213
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          1,
+          137,
+          15
+        ],
+        [
+          0,
+          42,
+          137,
+          106
+        ]
+      ]
+    },
+    {
+      "id": "faq-hagia-sophia",
+      "name": "Hagia Sophia",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "preparedFile": "Reference/promo-scans/prepared/hagia-sophia.png",
+      "crop": [
+        224,
+        466,
+        138,
+        213
+      ],
+      "cleanupRegions": [
+        [
+          0,
+          42,
+          138,
+          79
+        ]
+      ]
+    },
+    {
+      "id": "faq-grand-duchy-of-finland",
+      "name": "Grand Duchy of Finland",
+      "aliases": [
+        "Finland"
+      ],
+      "type": "colony",
+      "age": 4,
+      "sourceFile": "Reference/promo-scans/finland.jpg",
+      "crop": [
+        31,
+        0,
+        113,
+        175
+      ],
+      "cleanupRegions": []
+    },
+    {
+      "id": "faq-kremlin",
+      "name": "Kremlin",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "sourceFile": "Reference/promo-scans/wonders.jpg",
+      "crop": [
+        0,
+        0,
+        128,
+        201
+      ],
+      "cleanupRegions": []
+    },
+    {
+      "id": "faq-mechanical-turk",
+      "name": "Mechanical Turk",
+      "aliases": [
+        "The Turk"
+      ],
+      "type": "wonder",
+      "age": 3,
+      "sourceFile": "Reference/promo-scans/wonders.jpg",
+      "crop": [
+        129,
+        0,
+        129,
+        201
+      ],
+      "cleanupRegions": []
+    },
+    {
+      "id": "faq-antikythera-mechanism",
+      "name": "Antikythera Mechanism",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "sourceFile": "Reference/Nations_assets/Progress_Cards/Antikythera_Mechanism.jpg",
+      "crop": [
+        0,
+        0,
+        210,
+        324
+      ],
+      "cleanupRegions": []
+    },
+    {
+      "id": "faq-hussar",
+      "name": "Hussar",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "sourceFile": null
+    }
+  ]
+}

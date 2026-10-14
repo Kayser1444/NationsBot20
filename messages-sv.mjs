@@ -2,6 +2,7 @@ export default {
   cardUnavailable: 'Kortnamnet saknas eller är tvetydigt. Välj ett kort från namnförslagen.',
   cardHeading: 'Nations · kort',
   cardStarting: 'Startkort',
+  cardPromoNote: 'Promo-kort · ingår inte i Tabonys spelimplementation.',
   cardImagePending: 'Kortbilden är inte tillgänglig just nu. Kortet finns i inventeringen.',
   cardType_nation: 'Nation', cardBoardSide: '{side}-sida · Dynasties',
   cardAge: 'Era', cardPage: 's.', cardSource: 'Källa',

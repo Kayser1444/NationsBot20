@@ -2,6 +2,7 @@ export default {
   cardUnavailable: 'The card name is unknown or ambiguous. Choose a card from the suggestions.',
   cardHeading: 'Nations · card',
   cardStarting: 'Starting card',
+  cardPromoNote: 'Promo card · not included in the Tabony game implementation.',
   cardImagePending: 'The card image is not available yet. This card is included in the inventory.',
   cardType_nation: 'Nation', cardBoardSide: 'Side {side} · Dynasties',
   cardAge: 'Age', cardPage: 'p.', cardSource: 'Source',

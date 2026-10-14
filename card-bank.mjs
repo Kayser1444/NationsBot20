@@ -74,7 +74,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     const imageUrl = cardImageUrl(card, assetOrigin);
     const message = { content: text(language, 'cardHeading'), allowed_mentions: silent, embeds: [
       { title: card.name, color: 12092983, ...(imageUrl ? { url: imageUrl, image: { url: imageUrl } } : {}) },
-      { description: metadata + (description ? '\n' + description : ''), color: 12092983 },
+      { description: metadata + (description ? '\n' + description : '') + (card.promo ? '\n' + text(language, 'cardPromoNote') : ''), color: 12092983 },
     ] };
     if (!imageUrl && !card.imageAsset) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });

@@ -1,22 +1,22 @@
 # Kortinventering
 
-Status 2026-10-14: 520 poster, inklusive 74 varianter på startbrädena och 17 nationer. Alla 479 kortnamnsrubriker i den importerade FAQ++ 1.11 är kopplade till inventeringen. Händelsekort har två namn på samma bild och kan sökas på båda. `Tom's Cabin` är ett alias till `Uncle Tom's Cabin` (`UTC`). Nationerna kan sökas på svenska eller engelska, exempelvis `Kina` eller `China`.
+Status 2026-10-14: 526 poster, inklusive 74 varianter på startbrädena, 17 nationer och 13 promo-poster. Alla 479 kortnamnsrubriker i den importerade FAQ++ 1.11 är kopplade till inventeringen. Händelsekort med två namn på samma bild kan sökas på båda. `Tom's Cabin` är ett alias till `Uncle Tom's Cabin` (`UTC`). Nationerna kan sökas på svenska eller engelska, exempelvis `Kina` eller `China`.
 
-422 separata JPEG-kortbilder har verifierats på Tabonys publika assetserver. Nationsposterna använder 17 lokala `PlayerBoard_start_*`-bilder med tryckta startresurser: B-sidor för grundspelets fem nationer och D-sidor för övriga tolv. De kopieras utan ändringar till `public/card-assets`. De 74 startkortsbilderna är extraherade från Tabonys bräden med spelets egna positionskoordinater, utan omritning, och har granskats i bildöversikter. Manifestet bevarar källa och checksummor samt beskärningsrektangel för startkorten. Totalt har 513 poster en bild. Sju FAQ-kort saknar fortfarande verifierad bild: Nikola Tesla, Hagia Sophia, Kremlin, Mechanical Turk, Antikythera Mechanism, Grand Duchy of Finland och Hussar. Dessa poster kan väljas med `/card`, men svaret anger att bilden saknas.
+422 separata JPEG-kortbilder har verifierats på Tabonys publika assetserver. Nationsposterna använder 17 lokala `PlayerBoard_start_*`-bilder med tryckta startresurser: B-sidor för grundspelets fem nationer och D-sidor för övriga tolv. De kopieras utan ändringar till `public/card-assets`. De 74 startkortsbilderna är extraherade från Tabonys bräden med spelets egna positionskoordinater, utan omritning, och har granskats i bildöversikter. Tolv promo-framsidor har lagts till från användarens tre bildbilagor och en komplett lokal bild av Antikythera Mechanism. Manifestet bevarar källor, checksummor, beskärningsrektanglar och rensningsområden. Totalt har 525 poster en bild. Hussar kan väljas med `/card` men saknar ännu en komplett kortframsida.
 
 | Typ | Poster |
 | --- | ---: |
 | Underverk | 50 |
-| Rådgivare/ledare | 46 |
-| Byggnader | 119 |
+| Rådgivare/ledare | 47 |
+| Byggnader | 120 |
 | Militär | 51 |
-| Guldåldrar | 36 |
+| Guldåldrar | 38 |
 | Kolonier | 34 |
 | Krig | 32 |
 | Slag | 32 |
 | Naturliga underverk | 19 |
 | Dynastier | 34 |
-| Händelsekort (två händelser per kort) | 48 |
+| Händelsekort | 50 |
 | Tilläggskort (Siberia 2) | 1 |
 | Turmoil | 1 |
 | Nationer med spelarbräde | 17 |
@@ -33,6 +33,7 @@ Nationsposterna visar spelarbrädet med startresurser, nationens egna FAQ-poster
 python scripts/import-card-catalog.py --game-source <sökväg-till-nations-pythonkällan>
 node scripts/extract-starting-cards.mjs --game-source=<sökväg-till-TabonyGames> --sharp=<sökväg-till-sharp>
 node scripts/import-player-boards.mjs
+node scripts/import-promo-cards.mjs --sharp=<sökväg-till-sharp>
 node scripts/update-card-faq-coverage.mjs
 node scripts/verify-card-images.mjs
 node scripts/review-faq-pilot.mjs

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "provenance": "Printed starting cards from Tabony boards and supplied resource player boards; original pixels preserved.",
+  "provenance": "Printed card crops, resource player boards and reviewed promo scans; source checksums and transformations recorded per file.",
   "templateSha256": "1e0f7dd66dc495c6162aa2e2080277914f33d8b6d09b97a4378c07a9dcd65e2c",
   "files": [
     {
@@ -1339,6 +1339,301 @@
       "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Vikings.jpg",
       "sourceSha256": "1c9c2368b80f62c11e150e83bc3589bc2edc6f3c4d603672e393c64cec34f92c",
       "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "promo-imperium-rex",
+      "filename": "promo-imperium-rex.9b2b58d8cfcf.png",
+      "sha256": "9b2b58d8cfcf45a1a1dc00344ab3ee07048e772bb47151dd78b120145477f09f",
+      "bytes": 105627,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 3,
+        "top": 3,
+        "width": 147,
+        "height": 229
+      },
+      "cleanupRegions": [
+        [
+          5,
+          171,
+          140,
+          20
+        ],
+        [
+          5,
+          164,
+          30,
+          8
+        ]
+      ],
+      "preparedSha256": "ce6d107918426681a404111c6fbb3d756b8aec6c2923d3d84eaf203d290185ca",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "promo-potemkin-village",
+      "filename": "promo-potemkin-village.fbff1bf44e67.png",
+      "sha256": "fbff1bf44e67a544fe922e72a095eb4032a1f1307cbb2d8c1d1084039695596d",
+      "bytes": 117294,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 151,
+        "top": 3,
+        "width": 149,
+        "height": 229
+      },
+      "cleanupRegions": [
+        [
+          0,
+          81,
+          149,
+          97
+        ],
+        [
+          0,
+          171,
+          40,
+          20
+        ]
+      ],
+      "preparedSha256": "98d0a120655eb245d0cbd148e50fe836282ecd69d9af0042abc069f46018cbe1",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "promo-power-grid",
+      "filename": "promo-power-grid.3ebafaa46540.png",
+      "sha256": "3ebafaa46540aed158120bc4b5c4ce87520044f8e73cbf92ec7c72d45b3b06a1",
+      "bytes": 105458,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 300,
+        "top": 3,
+        "width": 148,
+        "height": 229
+      },
+      "cleanupRegions": [
+        [
+          0,
+          43,
+          148,
+          118
+        ]
+      ],
+      "preparedSha256": "6fcf66287c524ed9b6effc69502c278a9bfd17eef39a7c0052f25d6bcbb5180c",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "promo-julius-agricola",
+      "filename": "promo-julius-agricola.6ee21d5f2d77.png",
+      "sha256": "6ee21d5f2d7717ee2d7d1fef8e784da95fa046d3108a29d48b6aebfd48bc372c",
+      "bytes": 111631,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 4,
+        "top": 234,
+        "width": 148,
+        "height": 230
+      },
+      "cleanupRegions": [
+        [
+          0,
+          46,
+          148,
+          118
+        ]
+      ],
+      "preparedSha256": "914f7e62676d078685bbd6dc33950bdd3ab94b621a0cf97c5f7557c00e25f0af",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "promo-engineering-genius",
+      "filename": "promo-engineering-genius.f1cb8139175d.png",
+      "sha256": "f1cb8139175d3bc4a7922f29419694ca26db6e38103b5cec63f46fa64ae20288",
+      "bytes": 105746,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 153,
+        "top": 234,
+        "width": 147,
+        "height": 230
+      },
+      "cleanupRegions": [
+        [
+          0,
+          45,
+          147,
+          113
+        ]
+      ],
+      "preparedSha256": "6a17f58dce4487dbbad1956ceee1ae464e765ed1644b83429e894ebdbdb43c9e",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "promo-solar-eclipse-spring-and-autumn-period",
+      "filename": "promo-solar-eclipse-spring-and-autumn-period.671500a9fe6c.png",
+      "sha256": "671500a9fe6cf3eff8fbafdb18b770cbae2fefb9badbdd44c9cdfe1f490c5ca6",
+      "bytes": 111256,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 301,
+        "top": 234,
+        "width": 147,
+        "height": 230
+      },
+      "cleanupRegions": [],
+      "preparedSha256": "08e4a40c9817f104c3fb81e07c74b5e5ded25149e52589e2f3ee8480e2d6925e",
+      "provenance": "Original supplied or local card scan; cropped and resized, without generated content."
+    },
+    {
+      "cardId": "faq-nikola-tesla",
+      "filename": "faq-nikola-tesla.cec3afeb20e8.png",
+      "sha256": "cec3afeb20e867175ed4a2e89455759f002a3676ffa62438200d2caf99efe7d3",
+      "bytes": 110415,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 87,
+        "top": 466,
+        "width": 137,
+        "height": 213
+      },
+      "cleanupRegions": [
+        [
+          0,
+          1,
+          137,
+          15
+        ],
+        [
+          0,
+          42,
+          137,
+          106
+        ]
+      ],
+      "preparedSha256": "006a54c89c59af92dc5cc3631e5420cf2e5b707ff3a618fc5cf273af8ea4b307",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "faq-hagia-sophia",
+      "filename": "faq-hagia-sophia.043ec6bc96b7.png",
+      "sha256": "043ec6bc96b7d271e1eef40cbdf21aab7231c4c00ef38a2cdf4eb83585239b97",
+      "bytes": 117258,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/sheet.jpg",
+      "sourceSha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+      "crop": {
+        "left": 224,
+        "top": 466,
+        "width": 138,
+        "height": 213
+      },
+      "cleanupRegions": [
+        [
+          0,
+          42,
+          138,
+          79
+        ]
+      ],
+      "preparedSha256": "559b087eaf4eedca7ee60e1eb74cb4dac5d43ece012bb8eca84b62739b764bad",
+      "provenance": "User-supplied scan; local watermark cleanup patches from imagegen, original pixels outside those patches retained; resized to library dimensions."
+    },
+    {
+      "cardId": "faq-grand-duchy-of-finland",
+      "filename": "faq-grand-duchy-of-finland.2b169177c1fe.png",
+      "sha256": "2b169177c1fef9510a43c73008432cc273d92871cfc105e875e6bdeffad3dabb",
+      "bytes": 103803,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/finland.jpg",
+      "sourceSha256": "37e27f9c4c2e22e7ff3670d2abdb47e2bcaf5bb09634c09d28cf8629b8dcf32b",
+      "crop": {
+        "left": 31,
+        "top": 0,
+        "width": 113,
+        "height": 175
+      },
+      "cleanupRegions": [],
+      "preparedSha256": "704d5ca39486f1cb1a94f364e335cddef210b10def2397f29ba1356751e65a1b",
+      "provenance": "Original supplied or local card scan; cropped and resized, without generated content."
+    },
+    {
+      "cardId": "faq-kremlin",
+      "filename": "faq-kremlin.8f7e5f44ec2f.png",
+      "sha256": "8f7e5f44ec2fd197abe9aef79c6d6f45c45af5cc8a1861936eb232851f53d6b4",
+      "bytes": 116425,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/wonders.jpg",
+      "sourceSha256": "72763394b0abd9ac17defaa472386b1d19106ece0a7bffd1693ea1abc5532bea",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 128,
+        "height": 201
+      },
+      "cleanupRegions": [],
+      "preparedSha256": "62b2f620f7a192f0bdc747c25286dd7b0353aba1d7d55414b104076096d64d2f",
+      "provenance": "Original supplied or local card scan; cropped and resized, without generated content."
+    },
+    {
+      "cardId": "faq-mechanical-turk",
+      "filename": "faq-mechanical-turk.db8e55c3fcbe.png",
+      "sha256": "db8e55c3fcbe3fd5701a1a1ef826a43ac919f4af27ebfc034383ca854c3e10e6",
+      "bytes": 118488,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/promo-scans/wonders.jpg",
+      "sourceSha256": "72763394b0abd9ac17defaa472386b1d19106ece0a7bffd1693ea1abc5532bea",
+      "crop": {
+        "left": 129,
+        "top": 0,
+        "width": 129,
+        "height": 201
+      },
+      "cleanupRegions": [],
+      "preparedSha256": "5ab05958beca6e74f718a3ad5614bb3e6ea8d1f04c376fe8b53cf645d62fc3ce",
+      "provenance": "Original supplied or local card scan; cropped and resized, without generated content."
+    },
+    {
+      "cardId": "faq-antikythera-mechanism",
+      "filename": "faq-antikythera-mechanism.ca74f64ad62d.png",
+      "sha256": "ca74f64ad62dd05bd78d445d380de747a54e6abc15f2b371d15fd771ee21a775",
+      "bytes": 99202,
+      "width": 164,
+      "height": 254,
+      "sourceFile": "Reference/Nations_assets/Progress_Cards/Antikythera_Mechanism.jpg",
+      "sourceSha256": "0da46cbf3bbd1dd1922896c6664e4924aa072c24846cb9c1ecaae025360b0e12",
+      "crop": {
+        "left": 0,
+        "top": 0,
+        "width": 210,
+        "height": 324
+      },
+      "cleanupRegions": [],
+      "preparedSha256": "f437261dc24d988dca772b11a1277ef0c91b61f0a03a0de5f7f1a7c1a203fef9",
+      "provenance": "Original supplied or local card scan; cropped and resized, without generated content."
     }
   ]
 }

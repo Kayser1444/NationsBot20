@@ -362,13 +362,14 @@ The buttons continue working after a local bot restart while the same card remai
 available. Run `npm run dev` and use `/card name:Porcelain Tower` from **NationsBot Dev**
 to try it locally; the production bot is separate.
 
-The inventory enables 520 entries across all card types, including 17 nations,
+The inventory enables 526 entries across all card types, including 17 nations,
 starting-board variants and the special cards named in FAQ++ 1.11. All 479 FAQ card
 headings map to the inventory. 422 public Tabony card images have been checked.
 The 74 starting cards are extracted from Tabony boards. Nation entries use 17 supplied
 player boards with printed starting resource amounts (base B sides and expansion D sides).
-These 91 local files are served by a separate Railway image listener. Seven additional
-FAQ cards still report a missing image. Nation entries show their board and applicable nation/dynasty FAQ.
+These and 12 supplied/local promo-card scans make 103 local files served by a separate
+Railway image listener. Hussar still lacks a complete card image. Promo entries explicitly
+state that they are outside the Tabony game implementation. Nation entries show their board and applicable nation/dynasty FAQ.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation. All 34 dynasty entries identify their nation.
 The first reply uploads the image as a Discord attachment; FAQ edits retain it,
