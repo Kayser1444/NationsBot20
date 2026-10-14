@@ -14,11 +14,12 @@ const bank = () => createCardBank({ catalog, sources: read('faq/sources.json'), 
 test('all starting variants map to real extracted PNGs and keep the correct nation and board slot', () => {
   const cards = catalog.cards.filter(card => card.variant);
   assert.equal(cards.length, 74);
-  assert.equal(manifest.files.length, cards.length);
-  assert.equal(new Set(manifest.files.map(file => file.cardId)).size, cards.length);
+  const startingFiles = manifest.files.filter(file => cards.some(card => card.id === file.cardId));
+  assert.equal(startingFiles.length, cards.length);
+  assert.equal(new Set(startingFiles.map(file => file.cardId)).size, cards.length);
   const cardsById = new Map(cards.map(card => [card.id, card]));
   const renderer = bank();
-  for (const file of manifest.files) {
+  for (const file of startingFiles) {
     const card = cardsById.get(file.cardId);
     assert.equal(file.filename, card.imageAsset);
     assert.equal(file.sourceUrl, card.boardSource.url);
@@ -44,8 +45,15 @@ test('every nation has a public player board, localized aliases and applicable n
   const entries = read('faq/entries.json').entries;
   for (const nation of nations) {
     const reply = renderer.render(nation.id, 'sv-SE');
-    assert.equal(reply.messages[0].embeds[0].image.url, 'https://games.tabony.net/static/public/Nations/nations/' + nation.name + '.jpg');
-    assert.match(reply.messages[0].embeds[1].description, /Nation.*B-sida/);
+    assert.equal(reply.messages[0].embeds[0].image.url, origin + '/card-assets/' + nation.imageAsset);
+    assert.equal(nation.boardStartingResources, true);
+    const file = manifest.files.find(file => file.cardId === nation.id);
+    assert.equal(file.sourceFile, 'Reference/Nations_assets/PlayerBoard_start_' + nation.name + '.jpg');
+    const body = readFileSync(new URL('../public/card-assets/' + file.filename, import.meta.url));
+    assert.deepEqual([...body.subarray(0, 3)], [255,216,255]);
+    assert.equal(createHash('sha256').update(body).digest('hex'), file.sourceSha256);
+    assert.ok(reply.messages[0].embeds[1].description.includes(nation.boardSide + '-sida'));
+    assert.equal(nation.boardSide, ['China','Egypt','Greece','Persia','Rome'].includes(nation.name) ? 'B' : 'D');
     const applicable = entries.filter(entry => entry.category === 'nation' && entry.heading.replace(/ B-side$/, '') === nation.name ||
       entry.category === 'dynasty' && entry.heading.startsWith(nation.name + ':'));
     for (const entry of applicable) assert.ok(reply.entryIds.includes(entry.id), nation.id + ': ' + entry.id);
@@ -78,6 +86,10 @@ test('public image server serves only manifest assets and never exposes admin, c
   assert.equal(cached.status, 304);
   assert.equal((await cached.arrayBuffer()).byteLength, 0);
   assert.equal((await fetch(base + path, { method: 'POST', body: 'not-an-upload' })).status, 405);
+  const board = manifest.files.find(file => file.cardId === 'nation-China');
+  const boardReply = await fetch(base + '/card-assets/' + board.filename);
+  assert.equal(boardReply.headers.get('content-type'), 'image/jpeg');
+  assert.equal(createHash('sha256').update(Buffer.from(await boardReply.arrayBuffer())).digest('hex'), board.sha256);
   for (const other of ['/', '/api/status', '/auth/login', '/data/friends.json', '/.env.dev', '/card-assets/../.env.dev',
     '/card-assets/%2e%2e%2f.env.dev', '/card-assets/unknown.png', path + '?file=.env']) {
     const denied = await fetch(base + other);

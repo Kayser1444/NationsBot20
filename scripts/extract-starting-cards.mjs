@@ -22,7 +22,9 @@ await mkdir(new URL('Reference/tabony-boards/', root), { recursive: true });
 await mkdir(new URL('public/card-assets/', root), { recursive: true });
 const boards = new Map();
 const checkedAt = new Date().toISOString();
-const files = [];
+// Keep the separately imported player boards when refreshing starting-card crops.
+const files = JSON.parse(await readFile(new URL('data/cards/asset-manifest.json', root), 'utf8')).files
+  .filter(file => !catalog.cards.some(card => card.id === file.cardId && card.variant));
 for (const card of catalog.cards.filter(card => card.variant)) {
   const { nation, slot, url } = card.boardSource;
   if (!/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/nations\/[A-Za-z]+\.jpg$/.test(url)) throw new Error('Invalid board source.');
@@ -34,7 +36,7 @@ for (const card of catalog.cards.filter(card => card.variant)) {
     boards.set(nation, bytes);
     const record = catalog.cards.find(item => item.id === 'nation-' + nation);
     record.enabled = true;
-    record.imageCheck = { url, checkedAt, status: 200, contentType: 'image/jpeg' };
+    if (!record.imageAsset) record.imageCheck = { url, checkedAt, status: 200, contentType: 'image/jpeg' };
   }
   const source = boards.get(nation);
   const [left, top, cropWidth, cropHeight] = slots[nation]?.[slot] ?? [];
@@ -51,7 +53,8 @@ for (const card of catalog.cards.filter(card => card.variant)) {
   card.enabled = true;
 }
 await writeFile(new URL('data/cards/asset-manifest.json', root), JSON.stringify({ schemaVersion: 1,
-  provenance: 'Printed starting cards extracted without redrawing from public Tabony player boards; rectangles from the game template.',
+  provenance: 'Printed starting cards from Tabony boards and supplied resource player boards; original pixels preserved.',
   templateSha256: hash(template), files }, null, 2) + '\n');
 await writeFile(catalogPath, JSON.stringify(catalog, null, 2) + '\n');
-console.log(JSON.stringify({ boards: boards.size, extractedCards: files.length, totalBytes: files.reduce((sum, file) => sum + file.bytes, 0) }));
+console.log(JSON.stringify({ boards: boards.size, extractedCards: catalog.cards.filter(card => card.variant).length,
+  totalAssets:files.length, totalBytes: files.reduce((sum, file) => sum + file.bytes, 0) }));

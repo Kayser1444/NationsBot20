@@ -49,19 +49,24 @@ def main():
              'NaturalWonder': 'natural_wonder', 'DynastyCard': 'dynasty', 'EventCard': 'event', 'ExtensionCard': 'extension'}
     nations = {attrs['abbr']: attrs['name'] for name, (attrs, _, _) in classes.items()
                if 'Nation' in ancestors(name) and isinstance(attrs.get('abbr'), str) and isinstance(attrs.get('name'), str)}
+    dynasty_nations = {dynasty: attrs['name'] for name, (attrs, _, _) in classes.items()
+                       if 'Nation' in ancestors(name) and isinstance(attrs.get('name'), str)
+                       for dynasty in attrs.get('dynasties', [])}
     for name, (attrs, _, filename) in classes.items():
         if 'Nation' not in ancestors(name) or not isinstance(attrs.get('abbr'), str) or not isinstance(attrs.get('name'), str):
             continue
         ident = 'nation-' + attrs['name']
         nation = existing.setdefault(ident, dict(id=ident, aliases=[], faqReviewStatus='pending'))
-        nation.update(name=attrs['name'], type='nation', age=None, boardSide='B',
-                      imageUrl=f"https://games.tabony.net/static/public/Nations/nations/{attrs['name']}.jpg", metadataSource=filename)
+        board_url = f"https://games.tabony.net/static/public/Nations/nations/{attrs['name']}.jpg"
+        nation.update(name=attrs['name'], type='nation', age=None, boardSide=nation.get('boardSide', 'B'), metadataSource=filename)
+        if not nation.get('imageAsset'):
+            nation['imageUrl'] = board_url
         for key, prefix in [('advisors', 'A'), ('buildings_military', 'BM'), ('colonies', 'C'), ('wonders', 'W')]:
             for index, cls in enumerate(attrs.get(key, []), 1):
                 if cls in classes and 'StartingCard' in ancestors(cls):
                     abbr = classes[cls][0].get('abbr', '').strip()
                     card = existing.setdefault(abbr, dict(id=abbr, aliases=[], faqReviewStatus='pending'))
-                    card['boardSource'] = dict(nation=attrs['name'], slot=f'{prefix}{index}', url=nation['imageUrl'])
+                    card['boardSource'] = dict(nation=attrs['name'], slot=f'{prefix}{index}', url=board_url)
     for name, (attrs, _, filename) in classes.items():
         bases = ancestors(name)
         kind = next((value for base, value in types.items() if base in bases), None)
@@ -81,6 +86,9 @@ def main():
         if 'StartingCard' in bases:
             card['variant'] = nations.get(ident.split('_')[0], ident.split('_')[0])
             aliases.append(f"{card['variant']} {title}")
+        if kind == 'dynasty':
+            card['nation'] = dynasty_nations[name]
+            aliases.append(f"{card['nation']} {title}")
         card['aliases'] = list(dict.fromkeys(card['aliases'] + aliases))
     catalog['metadataSources'] = [dict(file=filename, sha256=hashlib.sha256((args.game_source / filename).read_bytes()).hexdigest()) for filename in files]
     catalog['cards'] = sorted(existing.values(), key=lambda card: (card['name'], card['id']))

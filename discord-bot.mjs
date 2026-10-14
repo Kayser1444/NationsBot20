@@ -3,13 +3,14 @@ import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
 import { createDisplayNameCache, statusServiceWithNames } from './status-turns.mjs';
 import { rateLimit } from './rate-limit.mjs';
 import { cardBank } from './card-bank.mjs';
+import { prepareCardImage } from './card-image-delivery.mjs';
 
 const interactionPayload = message => {
   const { allowed_mentions, ...body } = message;
   return { ...body, allowedMentions: allowed_mentions };
 };
 
-export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now }) {
+export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now, prepareImage = prepareCardImage }) {
   const edits = rateLimit({ limit: 5, windowMs: 10000, now });
   const dmControls = rateLimit({ limit: 1, windowMs: 60000, now });
   let client, displayNames, stopped = false, readyTimer;
@@ -59,7 +60,9 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             if (service.isBanned?.(interaction.user.id)) { await privateReply('userBanned'); return; }
             const reply = cardBank.renderButton(interaction.customId);
             if (!reply?.ok) { await privateReply('cardFaqExpired'); return; }
-            await interaction.editReply(interactionPayload(reply.messages[0]));
+            const message = await prepareImage(reply, {attachments:[...(interaction.message?.attachments?.values?.() ?? [])]});
+            if (stopped) return;
+            await interaction.editReply(interactionPayload(message));
           } catch {
             report('Kortets FAQ-vy kunde inte uppdateras.', 'error');
             if (interaction.deferred) await privateReply('commandFailed').catch(() => {});
@@ -106,7 +109,9 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           if (cardCommand) {
             service.captureLocale?.(interaction.user.id, interaction.locale);
-            await interaction.editReply(interactionPayload(cardReply.messages[0]));
+            const message = await prepareImage(cardReply);
+            if (stopped) return;
+            await interaction.editReply(interactionPayload(message));
             for (const message of cardReply.messages.slice(1)) {
               if (stopped) return;
               await interaction.followUp(interactionPayload(message));

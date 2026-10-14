@@ -133,6 +133,7 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   f.service.getLanguageOverride = userId => languageOverrides[userId] ?? null;
   f.service.setLanguage = (userId, locale) => { if (locale === 'auto') delete languageOverrides[userId]; else languageOverrides[userId] = locale; };
   const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service, now: () => clock,
+    prepareImage: async reply => reply.messages[0],
     onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
   });
   t.after(() => bot.close());

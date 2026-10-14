@@ -364,12 +364,16 @@ to try it locally; the production bot is separate.
 
 The inventory enables 520 entries across all card types, including 17 nations,
 starting-board variants and the special cards named in FAQ++ 1.11. All 479 FAQ card
-headings map to the inventory. 422 public Tabony card images and 17 player boards
-have been checked. The 74 starting cards are extracted from the boards and served
-by a separate Railway image listener. Seven additional FAQ cards still report a
-missing image. Nation entries show their board and applicable nation/dynasty FAQ.
+headings map to the inventory. 422 public Tabony card images have been checked.
+The 74 starting cards are extracted from Tabony boards. Nation entries use 17 supplied
+player boards with printed starting resource amounts (base B sides and expansion D sides).
+These 91 local files are served by a separate Railway image listener. Seven additional
+FAQ cards still report a missing image. Nation entries show their board and applicable nation/dynasty FAQ.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
-cards sharing a name by type, age and starting nation.
+cards sharing a name by type, age and starting nation. All 34 dynasty entries identify their nation.
+The first reply uploads the image as a Discord attachment; FAQ edits retain it,
+including after bot restart. Remote image downloads have bounded caching, size and timeout
+limits and fall back to the source URL on failure. Local images need no HTTP fetch.
 The FAQ bank contains 216 text entries; 206 remain pending review. Pending points
 and links are visible without a review disclaimer, while rejected content stays hidden.
 Swedish replies use Swedish text consistently; English replies use the English
@@ -379,7 +383,7 @@ once each. Empty card headings do not create FAQ points. Displaying content does
 not change its review status. See [card coverage and image checks](data/cards/README.md),
 [FAQ data and reproduction](data/faq/README.md) and
 [content review](data/faq/review.md). The Docker build includes the runtime JSON
-files and the extracted starting-card PNGs; source PDFs and full source boards stay local. The expanded catalog is deployed to
+files, extracted starting-card PNGs and the 17 resource board JPEGs; source PDFs stay local. The expanded catalog is deployed to
 the separate Railway staging service; production remains separate.
 
 Message splitting and embed limits follow the

@@ -2,7 +2,7 @@
 
 Status 2026-10-14: 520 poster, inklusive 74 varianter på startbrädena och 17 nationer. Alla 479 kortnamnsrubriker i den importerade FAQ++ 1.11 är kopplade till inventeringen. Händelsekort har två namn på samma bild och kan sökas på båda. `Tom's Cabin` är ett alias till `Uncle Tom's Cabin` (`UTC`). Nationerna kan sökas på svenska eller engelska, exempelvis `Kina` eller `China`.
 
-422 separata JPEG-kortbilder har verifierats på Tabonys publika assetserver. Nationsposterna länkar till ytterligare 17 verifierade spelarbräden, B-sidorna för Dynasties. De 74 startkortsbilderna är extraherade från dessa bräden med spelets egna positionskoordinater, utan omritning, och har granskats i bildöversikter. De lagras i `public/card-assets` och levereras från Railway. Manifestet bevarar källadress, källbildens checksumma, beskärningsrektangel och resultatets checksumma. Totalt har 513 poster en bild. Sju FAQ-kort saknar fortfarande verifierad bild: Nikola Tesla, Hagia Sophia, Kremlin, Mechanical Turk, Antikythera Mechanism, Grand Duchy of Finland och Hussar. Dessa poster kan väljas med `/card`, men svaret anger att bilden saknas.
+422 separata JPEG-kortbilder har verifierats på Tabonys publika assetserver. Nationsposterna använder 17 lokala `PlayerBoard_start_*`-bilder med tryckta startresurser: B-sidor för grundspelets fem nationer och D-sidor för övriga tolv. De kopieras utan ändringar till `public/card-assets`. De 74 startkortsbilderna är extraherade från Tabonys bräden med spelets egna positionskoordinater, utan omritning, och har granskats i bildöversikter. Manifestet bevarar källa och checksummor samt beskärningsrektangel för startkorten. Totalt har 513 poster en bild. Sju FAQ-kort saknar fortfarande verifierad bild: Nikola Tesla, Hagia Sophia, Kremlin, Mechanical Turk, Antikythera Mechanism, Grand Duchy of Finland och Hussar. Dessa poster kan väljas med `/card`, men svaret anger att bilden saknas.
 
 | Typ | Poster |
 | --- | ---: |
@@ -21,28 +21,33 @@ Status 2026-10-14: 520 poster, inklusive 74 varianter på startbrädena och 17 n
 | Turmoil | 1 |
 | Nationer med spelarbräde | 17 |
 
-`catalog.json` innehåller sökbara namn, alias, typ, era, eventuell startnation och bildkontroll. Namn som Three Kingdoms kan avse olika kort; använd namnförslagens typ/era för att välja. Startvarianter visar nationen. Ett entydigt progresskort prioriteras när det har samma namn som en startvariant.
+`catalog.json` innehåller sökbara namn, alias, typ, era, eventuell startnation och bildkontroll. Namn som Three Kingdoms kan avse olika kort; använd namnförslagens typ/era för att välja. Startvarianter och alla 34 dynastier visar nationen. Dynastiernas kopplingar importeras från respektive nations klasslista. Ett entydigt progresskort prioriteras när det har samma namn som en startvariant.
 
 `supplemental.json` dokumenterar extra kort och stavningsvarianter från FAQ:n. `faq-coverage.json` kopplar varje kortnamnsrubrik till en eller flera poster. `data/faq/index.json` bevarar originalrubriker, inklusive PDF-textlagrets stavfel. Det är metadata, inte ett godkännande av FAQ-innehåll. Nya egna poster och omnämnanden registreras med `pending`; godkända beslut bevaras.
 
-Nationsposterna visar spelarbrädet från Tabony, nationens egna FAQ-poster, dynastiposter och namngivna korshänvisningar. Startkortens filnamn skiljer nationsvarianterna åt. Spelimplementationens klasslista anger vilket startkort som ligger på vilken plats; ingen kortbild återanvänds enbart för att kortnamnet är detsamma.
+Nationsposterna visar spelarbrädet med startresurser, nationens egna FAQ-poster, dynastiposter och namngivna korshänvisningar. Startkortens filnamn skiljer nationsvarianterna åt. Spelimplementationens klasslista anger vilket startkort som ligger på vilken plats; ingen kortbild återanvänds enbart för att kortnamnet är detsamma.
 
 ## Uppdatera
 
 ```text
 python scripts/import-card-catalog.py --game-source <sökväg-till-nations-pythonkällan>
 node scripts/extract-starting-cards.mjs --game-source=<sökväg-till-TabonyGames> --sharp=<sökväg-till-sharp>
+node scripts/import-player-boards.mjs
 node scripts/update-card-faq-coverage.mjs
 node scripts/verify-card-images.mjs
 node scripts/review-faq-pilot.mjs
 node scripts/apply-faq-translations.mjs
 ```
 
-Importen läser Python med AST utan att köra spelkod och bevarar befintliga granskningsbeslut. Bildkontrollen gör högst fyra samtidiga HEAD-anrop, kontrollerar bara nya/ändrade adresser och avbryter vid nätverksfel eller andra oväntade svar. Använd `--all` för en ny kontroll av alla adresser. Bildkontroller körs manuellt, aldrig vid Discord-kommandon. FAQ-PDF:en behöver inte importeras om för att uppdatera kortkatalogen.
+Importen läser Python med AST utan att köra spelkod och bevarar befintliga granskningsbeslut. Bildkontrollen gör högst fyra samtidiga HEAD-anrop, kontrollerar bara nya/ändrade adresser och avbryter vid nätverksfel eller andra oväntade svar. Använd `--all` för en ny kontroll av alla adresser. Inventeringens bildkontroller körs manuellt; ett Discord-kommando skannar aldrig bildservern. FAQ-PDF:en behöver inte importeras om för att uppdatera kortkatalogen.
+
+## Bilder i Discord-svar
+
+Det första kortsvaret skickar bildens bytes som en Discord-bilaga med `attachment://` i bildfältet. Lokala kort och nationsbräden läses ur manifestet utan HTTP. Övriga bilder hämtas från den verifierade Tabony-adressen och cachas i högst 32 MiB; parallella hämtningar av samma bild samordnas. Hämtningar har fem sekunders tidsgräns, fyra MiB storleksgräns och tillåter inte redirects. Om hämtningen misslyckas behålls den ursprungliga bildlänken. FAQ-knapparna behåller bilagans ID och hämtar inte bilden igen, även efter omstart. Direktlänken till bildkällan bevaras på kortets rubrik.
 
 ## Bildtjänst på Railway
 
-Sätt `NATIONS_CARD_ASSETS_ENABLED=1` och `NATIONS_CARD_ASSET_ORIGIN=https://<publik-staging-domän>`. Rikta den publika domänen till port **8081**, eller en uttryckligen vald `NATIONS_CARD_ASSET_PORT`. Denna port har en separat HTTP-server som endast levererar manifestets PNG-filer under `/card-assets/`. Adminpanelen, API:er, prenumerationer och andra filer finns inte på denna server. Adminpanelens befintliga inställningar och port är separata.
+Sätt `NATIONS_CARD_ASSETS_ENABLED=1` och `NATIONS_CARD_ASSET_ORIGIN=https://<publik-staging-domän>`. Rikta den publika domänen till port **8081**, eller en uttryckligen vald `NATIONS_CARD_ASSET_PORT`. Denna port har en separat HTTP-server som endast levererar manifestets PNG- och JPEG-filer under `/card-assets/`. Adminpanelen, API:er, prenumerationer och andra filer finns inte på denna server. Adminpanelens befintliga inställningar och port är separata. Discord-bilagor för lokala bilder fungerar även utan en publik HTTP-origin.
 
 Bildfiler och manifest byggs in i Dockerbilden och använder ingen plats på prenumerationsvolymen. Filnamnets checksumma gör URL:en versionsunik; bilderna kan därför cachas permanent. `GET`, `HEAD` och ETag stöds. `sharp` behövs bara vid extrahering, inte i driften. De fullständiga källbrädena sparas i det ignorerade `Reference/tabony-boards`.
 

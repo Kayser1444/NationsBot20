@@ -5,8 +5,10 @@ import { setImmediate } from 'node:timers/promises';
 import { Events, GatewayIntentBits, MessageFlags, Routes } from 'discord.js';
 import { startDiscordBot } from '../discord-bot.mjs';
 import { cardBank } from '../card-bank.mjs';
+import { createCardImageDelivery } from '../card-image-delivery.mjs';
+import { readFileSync } from 'node:fs';
 
-async function fixture(t) {
+async function fixture(t, prepareImage = async reply => reply.messages[0]) {
   let client, banned = false, member = true;
   const requests = [], errors = [];
   class FakeClient extends EventEmitter {
@@ -34,7 +36,7 @@ async function fixture(t) {
     getSubscriptions: () => assert.fail('FAQ buttons must not access subscriptions') };
   const bot = startDiscordBot({ token: 'fake', guildId: 'guild', channelId: 'channel', service,
     report: (message, level) => { if (level === 'error') errors.push(message); },
-    loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }) });
+    loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }), prepareImage });
   t.after(() => bot.close());
   await bot.ready;
   await setImmediate();
@@ -52,9 +54,34 @@ async function fixture(t) {
     await client.listeners(Events.InteractionCreate)[0](interaction);
     return calls;
   }
-  return { click, requests, errors, ban: () => { banned = true; }, deny: () => { member = false; } };
+  async function slashCard() {
+    const calls = [];
+    const interaction = {commandName:'card',guildId:'guild',channelId:'channel',context:0,locale:'sv-SE',user:{id:'user'},
+      options:{getString:()=> 'PcTw'}, isButton:()=>false,isChatInputCommand:()=>true,isAutocomplete:()=>false,
+      deferReply:async()=>{interaction.deferred=true;calls.push({type:'ack'});},
+      editReply:async payload=>calls.push({type:'update',payload}),followUp:async()=>assert.fail('No extra message')};
+    await client.listeners(Events.InteractionCreate)[0](interaction);
+    return calls;
+  }
+  return { click, slashCard, requests, errors, ban: () => { banned = true; }, deny: () => { member = false; } };
 }
 const openId = () => cardBank.render('PcTw', 'en-US').messages[0].components[0].components[0].custom_id;
+
+test('slash card uploads the image on the first edit and FAQ clicks keep its existing attachment',async t=>{
+  const cards=JSON.parse(readFileSync(new URL('../data/cards/catalog.json',import.meta.url),'utf8')).cards;
+  let downloads=0;
+  const prepare=createCardImageDelivery({cards,fetchImage:async()=>{downloads++;return new Response(Buffer.from([255,216,255,217]),{headers:{'content-type':'image/jpeg'}});}});
+  const f=await fixture(t,prepare);
+  const initial=await f.slashCard();
+  assert.deepEqual(initial.map(call=>call.type),['ack','update']);
+  assert.equal(initial[1].payload.embeds[0].image.url,'attachment://card-PcTw.jpg');
+  assert.ok(initial[1].payload.files[0].attachment.length);
+  const opened=await f.click(openId(),{message:{author:{id:'app'},attachments:new Map([['image',{id:'image',name:'card-PcTw.jpg'}]])}});
+  assert.deepEqual(opened[1].payload.attachments,[{id:'image',filename:'card-PcTw.jpg'}]);
+  assert.equal(opened[1].payload.files,undefined);
+  assert.equal(downloads,1);
+  assert.deepEqual(f.errors,[]);
+});
 
 test('FAQ buttons update the original card, preserve its language, and collapse without follow-ups', async t => {
   const f = await fixture(t);

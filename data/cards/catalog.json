@@ -23,7 +23,9 @@
     {
       "id": "Ar_AC",
       "name": "Abbasid Caliphate",
-      "aliases": [],
+      "aliases": [
+        "Arabs Abbasid Caliphate"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_AC.jpg",
@@ -35,7 +37,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Arabs"
     },
     {
       "id": "AhLc",
@@ -94,7 +97,9 @@
     {
       "id": "Ps_AE",
       "name": "Achaemenid Empire",
-      "aliases": [],
+      "aliases": [
+        "Persia Achaemenid Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_AE.jpg",
@@ -106,7 +111,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Persia"
     },
     {
       "id": "Am_Adb",
@@ -249,16 +255,13 @@
       "name": "America",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-America.906a46e29c17.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "ACW",
@@ -453,16 +456,13 @@
       "name": "Arabs",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Arabs.3ed078f64163.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Arc",
@@ -601,7 +601,9 @@
     {
       "id": "G_At",
       "name": "Athens",
-      "aliases": [],
+      "aliases": [
+        "Greece Athens"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_At.jpg",
@@ -613,7 +615,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Greece"
     },
     {
       "id": "At_ZR",
@@ -846,7 +849,9 @@
     {
       "id": "Et_AK",
       "name": "Axumite Kingdom",
-      "aliases": [],
+      "aliases": [
+        "Ethiopia Axumite Kingdom"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_AK.jpg",
@@ -858,7 +863,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Ethiopia"
     },
     {
       "id": "AzEp",
@@ -1989,15 +1995,12 @@
       "type": "nation",
       "age": null,
       "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-China.2ffd4f0df283.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "CKN",
@@ -2489,7 +2492,9 @@
     {
       "id": "Am_DR",
       "name": "Democratic Republicans",
-      "aliases": [],
+      "aliases": [
+        "America Democratic Republicans"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_DR.jpg",
@@ -2501,7 +2506,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "America"
     },
     {
       "id": "DpSr",
@@ -2559,7 +2565,9 @@
     {
       "id": "Vn_DS",
       "name": "Domains of the Sea",
-      "aliases": [],
+      "aliases": [
+        "Venice Domains of the Sea"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_DS.jpg",
@@ -2571,7 +2579,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Venice"
     },
     {
       "id": "DnQx",
@@ -2664,7 +2673,9 @@
     {
       "id": "J_EP",
       "name": "Edo Period",
-      "aliases": [],
+      "aliases": [
+        "Japan Edo Period"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_EP.jpg",
@@ -2676,7 +2687,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Japan"
     },
     {
       "id": "nation-Egypt",
@@ -2688,15 +2700,12 @@
       "type": "nation",
       "age": null,
       "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Egypt.57882186e9a9.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "EnAq",
@@ -2876,16 +2885,13 @@
       "name": "Ethiopia",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Ethiopia.0f713333335f.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Fct",
@@ -3192,7 +3198,9 @@
     {
       "id": "Am_FP",
       "name": "Federalist Party",
-      "aliases": [],
+      "aliases": [
+        "America Federalist Party"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_FP.jpg",
@@ -3204,7 +3212,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "America"
     },
     {
       "id": "FD_HM",
@@ -3548,7 +3557,9 @@
     {
       "id": "Mg_GH",
       "name": "Golden Horde",
-      "aliases": [],
+      "aliases": [
+        "Mongolia Golden Horde"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_GH.jpg",
@@ -3560,7 +3571,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Mongolia"
     },
     {
       "id": "Grn",
@@ -3742,15 +3754,12 @@
       "type": "nation",
       "age": null,
       "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Greece.42720193ba02.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "GFG",
@@ -4008,7 +4017,9 @@
     {
       "id": "J_HP",
       "name": "Heian Period",
-      "aliases": [],
+      "aliases": [
+        "Japan Heian Period"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_HP.jpg",
@@ -4020,7 +4031,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Japan"
     },
     {
       "id": "He_AC",
@@ -4455,16 +4467,13 @@
       "name": "India",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-India.a1e4b342c27e.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "IrWk",
@@ -4521,7 +4530,8 @@
       "id": "Pl_JD",
       "name": "Jagellonian Dynasty",
       "aliases": [
-        "Jagiellonian Dynasty"
+        "Jagiellonian Dynasty",
+        "Poland Jagellonian Dynasty"
       ],
       "type": "dynasty",
       "age": null,
@@ -4534,7 +4544,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Poland"
     },
     {
       "id": "JgWr",
@@ -4580,21 +4591,20 @@
       "name": "Japan",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Japan.ad088add7f5d.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "K_JK",
       "name": "Joseon Kingdom",
-      "aliases": [],
+      "aliases": [
+        "Korea Joseon Kingdom"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_JK.jpg",
@@ -4606,7 +4616,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Korea"
     },
     {
       "id": "Ar_Kba",
@@ -4654,7 +4665,9 @@
     {
       "id": "Pg_KL",
       "name": "Kingdom of Leon",
-      "aliases": [],
+      "aliases": [
+        "Portugal Kingdom of Leon"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_KL.jpg",
@@ -4666,7 +4679,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Portugal"
     },
     {
       "id": "Knt",
@@ -4709,21 +4723,20 @@
       "name": "Korea",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Korea.c4dec8b223ba.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "K_KK",
       "name": "Koryo Kingdom",
-      "aliases": [],
+      "aliases": [
+        "Korea Koryo Kingdom"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_KK.jpg",
@@ -4735,7 +4748,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Korea"
     },
     {
       "id": "KrCv",
@@ -5057,6 +5071,23 @@
       "enabled": true
     },
     {
+      "id": "MIT",
+      "name": "MIT",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py",
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
+        "checkedAt": "2026-10-14T18:35:13.274Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      },
+      "enabled": true
+    },
+    {
       "id": "Mcd",
       "name": "Macedonia",
       "aliases": [],
@@ -5185,21 +5216,20 @@
       "name": "Mali",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Mali.d449174ee5e4.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Ml_ME",
       "name": "Mali Empire",
-      "aliases": [],
+      "aliases": [
+        "Mali Mali Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_ME.jpg",
@@ -5211,7 +5241,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Mali"
     },
     {
       "id": "MsMs",
@@ -5375,7 +5406,9 @@
     {
       "id": "I_My",
       "name": "Mauryan Empire",
-      "aliases": [],
+      "aliases": [
+        "India Mauryan Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_My.jpg",
@@ -5387,7 +5420,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "India"
     },
     {
       "id": "faq-mechanical-turk",
@@ -5477,7 +5511,9 @@
     {
       "id": "C_MD",
       "name": "Ming Dynasty",
-      "aliases": [],
+      "aliases": [
+        "China Ming Dynasty"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_MD.jpg",
@@ -5489,7 +5525,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "China"
     },
     {
       "id": "Mnt",
@@ -5502,23 +5539,6 @@
       "metadataSource": "progress_cards.py",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mnt.jpg",
-        "checkedAt": "2026-10-14T18:35:13.274Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      },
-      "enabled": true
-    },
-    {
-      "id": "MIT",
-      "name": "MIT",
-      "aliases": [],
-      "type": "wonder",
-      "age": 4,
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
-      "faqReviewStatus": "pending",
-      "metadataSource": "progress_cards.py",
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
         "checkedAt": "2026-10-14T18:35:13.274Z",
         "status": 200,
         "contentType": "image/jpeg"
@@ -5585,16 +5605,13 @@
       "name": "Mongolia",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Mongolia.9053ca59b042.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Mtz",
@@ -5667,7 +5684,9 @@
     {
       "id": "I_Mg",
       "name": "Mughal Empire",
-      "aliases": [],
+      "aliases": [
+        "India Mughal Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Mg.jpg",
@@ -5679,7 +5698,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "India"
     },
     {
       "id": "MghI",
@@ -5735,7 +5755,9 @@
     {
       "id": "Eg_NK",
       "name": "New Kingdom",
-      "aliases": [],
+      "aliases": [
+        "Egypt New Kingdom"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_NK.jpg",
@@ -5747,7 +5769,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Egypt"
     },
     {
       "id": "NcMc",
@@ -5803,7 +5826,9 @@
     {
       "id": "Vk_Nm",
       "name": "Normans",
-      "aliases": [],
+      "aliases": [
+        "Vikings Normans"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Nm.jpg",
@@ -5815,7 +5840,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Vikings"
     },
     {
       "id": "NwPs",
@@ -5905,7 +5931,9 @@
     {
       "id": "Eg_OK",
       "name": "Old Kingdom",
-      "aliases": [],
+      "aliases": [
+        "Egypt Old Kingdom"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_OK.jpg",
@@ -5917,7 +5945,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Egypt"
     },
     {
       "id": "Vk_OlUp",
@@ -6016,7 +6045,9 @@
     {
       "id": "Vn_PW",
       "name": "Pactum Warmundi",
-      "aliases": [],
+      "aliases": [
+        "Venice Pactum Warmundi"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_PW.jpg",
@@ -6028,7 +6059,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Venice"
     },
     {
       "id": "C_Pgd",
@@ -6191,15 +6223,12 @@
       "type": "nation",
       "age": null,
       "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Persia.ff525f1e34ff.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "PtGr",
@@ -6334,21 +6363,20 @@
       "name": "Poland",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Poland.3b25404bfb81.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Pl_PLC",
       "name": "Polish-Lithuanian Commonwealth",
-      "aliases": [],
+      "aliases": [
+        "Poland Polish-Lithuanian Commonwealth"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_PLC.jpg",
@@ -6360,7 +6388,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Poland"
     },
     {
       "id": "PcTw",
@@ -6389,22 +6418,20 @@
       "name": "Portugal",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Portugal.a3baa85439c7.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Pg_PE",
       "name": "Portugese Empire",
       "aliases": [
-        "Portuguese Empire"
+        "Portuguese Empire",
+        "Portugal Portugese Empire"
       ],
       "type": "dynasty",
       "age": null,
@@ -6417,7 +6444,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Portugal"
     },
     {
       "id": "PtPl",
@@ -6601,7 +6629,9 @@
     {
       "id": "C_QD",
       "name": "Qin Dynasty",
-      "aliases": [],
+      "aliases": [
+        "China Qin Dynasty"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_QD.jpg",
@@ -6613,7 +6643,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "China"
     },
     {
       "id": "QSH",
@@ -7226,7 +7257,9 @@
     {
       "id": "R_RE",
       "name": "Roman Empire",
-      "aliases": [],
+      "aliases": [
+        "Rome Roman Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_RE.jpg",
@@ -7238,12 +7271,15 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Rome"
     },
     {
       "id": "R_RR",
       "name": "Roman Republic",
-      "aliases": [],
+      "aliases": [
+        "Rome Roman Republic"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_RR.jpg",
@@ -7255,7 +7291,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Rome"
     },
     {
       "id": "Ro_IR",
@@ -7287,15 +7324,12 @@
       "type": "nation",
       "age": null,
       "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Rome.b83b61ad6c41.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "RmJl",
@@ -7486,7 +7520,9 @@
     {
       "id": "Ps_SE",
       "name": "Sassanid Empire",
-      "aliases": [],
+      "aliases": [
+        "Persia Sassanid Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_SE.jpg",
@@ -7498,7 +7534,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Persia"
     },
     {
       "id": "Swm",
@@ -7666,7 +7703,9 @@
     {
       "id": "Et_Sb",
       "name": "Sheba",
-      "aliases": [],
+      "aliases": [
+        "Ethiopia Sheba"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_Sb.jpg",
@@ -7678,7 +7717,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Ethiopia"
     },
     {
       "id": "Shp",
@@ -8016,7 +8056,9 @@
     {
       "id": "Ml_SE",
       "name": "Songhai Empire",
-      "aliases": [],
+      "aliases": [
+        "Mali Songhai Empire"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_SE.jpg",
@@ -8028,7 +8070,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Mali"
     },
     {
       "id": "StAf",
@@ -8067,7 +8110,9 @@
     {
       "id": "G_St",
       "name": "Sparta",
-      "aliases": [],
+      "aliases": [
+        "Greece Sparta"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_St.jpg",
@@ -8079,7 +8124,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Greece"
     },
     {
       "id": "Stc",
@@ -9132,7 +9178,9 @@
     {
       "id": "Ar_UC",
       "name": "Umayyad Caliphate",
-      "aliases": [],
+      "aliases": [
+        "Arabs Umayyad Caliphate"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_UC.jpg",
@@ -9144,7 +9192,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Arabs"
     },
     {
       "id": "UTC",
@@ -9281,7 +9330,9 @@
     {
       "id": "Vk_Vr",
       "name": "Varangians",
-      "aliases": [],
+      "aliases": [
+        "Vikings Varangians"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Vr.jpg",
@@ -9293,7 +9344,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Vikings"
     },
     {
       "id": "Vtc",
@@ -9321,16 +9373,13 @@
       "name": "Venice",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Venice.fb0b272f847b.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Vrs",
@@ -9410,16 +9459,13 @@
       "name": "Vikings",
       "type": "nation",
       "age": null,
-      "boardSide": "B",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "boardSide": "D",
+      "imageUrl": null,
       "metadataSource": "nations.py",
       "enabled": true,
-      "imageCheck": {
-        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
-        "checkedAt": "2026-10-14T20:00:33.393Z",
-        "status": 200,
-        "contentType": "image/jpeg"
-      }
+      "imageCheck": null,
+      "imageAsset": "nation-Vikings.1c9c2368b80f.jpg",
+      "boardStartingResources": true
     },
     {
       "id": "Vgn",
@@ -9636,7 +9682,9 @@
     {
       "id": "Mg_YD",
       "name": "Yuan Dynasty",
-      "aliases": [],
+      "aliases": [
+        "Mongolia Yuan Dynasty"
+      ],
       "type": "dynasty",
       "age": null,
       "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_YD.jpg",
@@ -9648,7 +9696,8 @@
         "status": 200,
         "contentType": "image/jpeg"
       },
-      "enabled": true
+      "enabled": true,
+      "nation": "Mongolia"
     },
     {
       "id": "Mg_Yrt",

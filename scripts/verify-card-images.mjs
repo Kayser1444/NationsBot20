@@ -1,4 +1,4 @@
-// Explicit maintenance command; Discord requests never fetch or scan the asset server.
+// Explicit metadata maintenance command; Discord requests do not scan the asset server.
 import { readFile, writeFile } from 'node:fs/promises';
 const path = new URL('../data/cards/catalog.json', import.meta.url);
 const catalog = JSON.parse(await readFile(path, 'utf8'));

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "provenance": "Printed starting cards extracted without redrawing from public Tabony player boards; rectangles from the game template.",
+  "provenance": "Printed starting cards from Tabony boards and supplied resource player boards; original pixels preserved.",
   "templateSha256": "1e0f7dd66dc495c6162aa2e2080277914f33d8b6d09b97a4378c07a9dcd65e2c",
   "files": [
     {
@@ -1186,6 +1186,159 @@
         "width": 164,
         "height": 254
       }
+    },
+    {
+      "cardId": "nation-America",
+      "filename": "nation-America.906a46e29c17.jpg",
+      "sha256": "906a46e29c1756f4945c71a21fc539da5156fab8e206e09d9e025262decf124d",
+      "bytes": 401658,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_America.jpg",
+      "sourceSha256": "906a46e29c1756f4945c71a21fc539da5156fab8e206e09d9e025262decf124d",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Arabs",
+      "filename": "nation-Arabs.3ed078f64163.jpg",
+      "sha256": "3ed078f6416321ff977fe7f831f6285516545bd80cef980f8155be3e78e366d7",
+      "bytes": 466967,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Arabs.jpg",
+      "sourceSha256": "3ed078f6416321ff977fe7f831f6285516545bd80cef980f8155be3e78e366d7",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-China",
+      "filename": "nation-China.2ffd4f0df283.jpg",
+      "sha256": "2ffd4f0df283f0269bf6098151acd7d5e5455af1dae08633d65dc51115b305a3",
+      "bytes": 412677,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_China.jpg",
+      "sourceSha256": "2ffd4f0df283f0269bf6098151acd7d5e5455af1dae08633d65dc51115b305a3",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Egypt",
+      "filename": "nation-Egypt.57882186e9a9.jpg",
+      "sha256": "57882186e9a9b7dc8951b3f417bff47c039fc27d459643fb893c085555fc2f19",
+      "bytes": 446097,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Egypt.jpg",
+      "sourceSha256": "57882186e9a9b7dc8951b3f417bff47c039fc27d459643fb893c085555fc2f19",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Ethiopia",
+      "filename": "nation-Ethiopia.0f713333335f.jpg",
+      "sha256": "0f713333335fb6e119fd72bb3f40605dfd05c507d0cf7e23c1ebf2d1e0340072",
+      "bytes": 573675,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Ethiopia.jpg",
+      "sourceSha256": "0f713333335fb6e119fd72bb3f40605dfd05c507d0cf7e23c1ebf2d1e0340072",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Greece",
+      "filename": "nation-Greece.42720193ba02.jpg",
+      "sha256": "42720193ba02ed759332cd032e1e2fdfb8994c7cf9e2392615c2dd6db18de878",
+      "bytes": 416500,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Greece.jpg",
+      "sourceSha256": "42720193ba02ed759332cd032e1e2fdfb8994c7cf9e2392615c2dd6db18de878",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-India",
+      "filename": "nation-India.a1e4b342c27e.jpg",
+      "sha256": "a1e4b342c27ed6feff1a989f4127b6bf405413bc17f86ce0d06d46a04231fc45",
+      "bytes": 492050,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_India.jpg",
+      "sourceSha256": "a1e4b342c27ed6feff1a989f4127b6bf405413bc17f86ce0d06d46a04231fc45",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Japan",
+      "filename": "nation-Japan.ad088add7f5d.jpg",
+      "sha256": "ad088add7f5df1c4a435f1dbd590a579569597de48919628c5face3a4be7042d",
+      "bytes": 485826,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Japan.jpg",
+      "sourceSha256": "ad088add7f5df1c4a435f1dbd590a579569597de48919628c5face3a4be7042d",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Korea",
+      "filename": "nation-Korea.c4dec8b223ba.jpg",
+      "sha256": "c4dec8b223ba8de9261af0b5b76aa0534993ad92be8094aa57743e08c839bcfa",
+      "bytes": 431860,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Korea.jpg",
+      "sourceSha256": "c4dec8b223ba8de9261af0b5b76aa0534993ad92be8094aa57743e08c839bcfa",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Mali",
+      "filename": "nation-Mali.d449174ee5e4.jpg",
+      "sha256": "d449174ee5e471287ed4727fc29efb7f6097e0274edaa9fb6fe0d0c950db5e23",
+      "bytes": 490759,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Mali.jpg",
+      "sourceSha256": "d449174ee5e471287ed4727fc29efb7f6097e0274edaa9fb6fe0d0c950db5e23",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Mongolia",
+      "filename": "nation-Mongolia.9053ca59b042.jpg",
+      "sha256": "9053ca59b0421ba65046dce992f74396d5cd96527ac8e286c6d13e40bf30416e",
+      "bytes": 419339,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Mongolia.jpg",
+      "sourceSha256": "9053ca59b0421ba65046dce992f74396d5cd96527ac8e286c6d13e40bf30416e",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Persia",
+      "filename": "nation-Persia.ff525f1e34ff.jpg",
+      "sha256": "ff525f1e34ff412e8fd87f5bcca01f35658c151bcdb710d7b66be84c58129652",
+      "bytes": 432902,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Persia.jpg",
+      "sourceSha256": "ff525f1e34ff412e8fd87f5bcca01f35658c151bcdb710d7b66be84c58129652",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Poland",
+      "filename": "nation-Poland.3b25404bfb81.jpg",
+      "sha256": "3b25404bfb81856eb062f7be13fde543171d0374721f1e8913322186fffb5557",
+      "bytes": 512567,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Poland.jpg",
+      "sourceSha256": "3b25404bfb81856eb062f7be13fde543171d0374721f1e8913322186fffb5557",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Portugal",
+      "filename": "nation-Portugal.a3baa85439c7.jpg",
+      "sha256": "a3baa85439c753e02f19fc098ac6369aaef5abbe43766086df24aa1cce1dfad0",
+      "bytes": 471787,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Portugal.jpg",
+      "sourceSha256": "a3baa85439c753e02f19fc098ac6369aaef5abbe43766086df24aa1cce1dfad0",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Rome",
+      "filename": "nation-Rome.b83b61ad6c41.jpg",
+      "sha256": "b83b61ad6c41dd70b1847e1b30e4cf0b7e9f789d8060906d7b40bb7775b95243",
+      "bytes": 375471,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Rome.jpg",
+      "sourceSha256": "b83b61ad6c41dd70b1847e1b30e4cf0b7e9f789d8060906d7b40bb7775b95243",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Venice",
+      "filename": "nation-Venice.fb0b272f847b.jpg",
+      "sha256": "fb0b272f847b1a51984b34749ed312ca6dc83c831f28ba7345cea81d3e942198",
+      "bytes": 601497,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Venice.jpg",
+      "sourceSha256": "fb0b272f847b1a51984b34749ed312ca6dc83c831f28ba7345cea81d3e942198",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
+    },
+    {
+      "cardId": "nation-Vikings",
+      "filename": "nation-Vikings.1c9c2368b80f.jpg",
+      "sha256": "1c9c2368b80f62c11e150e83bc3589bc2edc6f3c4d603672e393c64cec34f92c",
+      "bytes": 471802,
+      "sourceFile": "Reference/Nations_assets/PlayerBoard_start_Vikings.jpg",
+      "sourceSha256": "1c9c2368b80f62c11e150e83bc3589bc2edc6f3c4d603672e393c64cec34f92c",
+      "provenance": "Supplied local player board with printed starting resource amounts; copied byte-for-byte."
     }
   ]
 }

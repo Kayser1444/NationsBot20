@@ -12,6 +12,7 @@
 !public/
 !public/card-assets/
 !public/card-assets/*.png
+!public/card-assets/*.jpg
 !data/faq/
 !data/faq/entries.json
 !data/faq/sources.json
