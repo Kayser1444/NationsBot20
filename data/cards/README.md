@@ -43,7 +43,7 @@ Importen läser Python med AST utan att köra spelkod och bevarar befintliga gra
 
 ## Bilder i Discord-svar
 
-Det första kortsvaret skickar bildens bytes som en Discord-bilaga med `attachment://` i bildfältet. Lokala kort och nationsbräden läses ur manifestet utan HTTP. Övriga bilder hämtas från den verifierade Tabony-adressen och cachas i högst 32 MiB; parallella hämtningar av samma bild samordnas. Hämtningar har fem sekunders tidsgräns, fyra MiB storleksgräns och tillåter inte redirects. Om hämtningen misslyckas behålls den ursprungliga bildlänken. FAQ-knapparna behåller bilagans ID och hämtar inte bilden igen, även efter omstart. Direktlänken till bildkällan bevaras på kortets rubrik.
+Det första kortsvaret skickar bildens bytes som en Discord-bilaga med `attachment://` i bildfältet. Lokala kort och nationsbräden läses ur manifestet utan HTTP. Övriga bilder hämtas från den verifierade Tabony-adressen och cachas i högst 32 MiB; parallella hämtningar av samma bild samordnas. Hämtningar har fem sekunders tidsgräns, fyra MiB storleksgräns och tillåter inte redirects. Om hämtningen misslyckas behålls den ursprungliga bildlänken. FAQ-knapparna behåller bilagans ID eller den befintliga Discord CDN-bilden när Discord har dolt bilagan från bilagelistan. Då utelämnas bilagelistan helt vid redigeringen. Bilden hämtas inte igen, även efter omstart. Direktlänken till bildkällan bevaras på kortets rubrik.
 
 ## Bildtjänst på Railway
 

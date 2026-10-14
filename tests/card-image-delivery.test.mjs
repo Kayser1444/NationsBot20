@@ -40,6 +40,18 @@ test('local starting cards and resource boards upload directly without HTTP',asy
   }
 });
 
+test('Discord hides embedded uploads from attachments; FAQ must reuse the CDN image without another upload',async()=>{
+  const prepare=createCardImageDelivery({cards,fetchImage:async()=>response()});
+  const imageUrl='https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg?ex=temporary&hm=signature';
+  const message=await prepare(cardBank.render('PcTw','sv-SE',{faqPage:0}),{attachments:[],imageUrl});
+  assert.equal(message.files,undefined,'hidden embedded uploads must not be downloaded and uploaded again');
+  assert.equal(message.attachments,undefined,'omit attachments to preserve the hidden embedded file');
+  assert.equal(message.embeds[0].image.url,'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg');
+  for(const unrelated of ['https://example.test/attachments/123/456/card-PcTw.jpg','https://cdn.discordapp.com/attachments/123/456/other.jpg']){
+    assert.ok((await prepare(cardBank.render('PcTw'),{imageUrl:unrelated})).files);
+  }
+});
+
 test('concurrent requests coalesce, cache is bounded, and failed or invalid downloads keep the source image',async()=>{
   let downloads=0, release;
   const waiting=new Promise(resolve=>{release=resolve;});

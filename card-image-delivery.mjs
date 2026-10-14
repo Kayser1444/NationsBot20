@@ -46,16 +46,28 @@ export function createCardImageDelivery({ cards, fetchImage = fetch, localAssets
     pending.set(url, loading);
     return loading;
   }
-  return async function prepare(reply, {attachments = []} = {}) {
+  return async function prepare(reply, {attachments = [], imageUrl = null} = {}) {
     const card = byId.get(reply?.cardId);
     if (!reply?.ok || !card) return reply?.messages?.[0];
     const original = reply.messages[0];
     const filename = card.imageAsset ?? 'card-' + card.id + '.jpg';
     const retained = attachments.find(file => (file.name ?? file.filename) === filename && file.id);
+    // Discord can move an embedded upload out of `attachments` into embed.image.
+    // Reuse only the expected file on Discord's CDN; omit attachments when editing
+    // that hidden upload. Unsigned CDN URLs are refreshed by Discord itself.
+    let embedded;
+    try {
+      const url = new URL(imageUrl);
+      if (['https://cdn.discordapp.com','https://media.discordapp.net'].includes(url.origin) && !url.username && !url.password &&
+          /^\/attachments\/\d+\/\d+\//.test(url.pathname) && url.pathname.split('/').length === 5 && url.pathname.split('/').at(-1) === filename) {
+        embedded = url.origin + url.pathname;
+      }
+    } catch { /* An absent or unrelated image requires a fresh verified upload. */ }
+    const withImage = url => ({...original, embeds:original.embeds.map((embed,index) => index === 0 ? {...embed,image:{url}} : {...embed})});
+    if (!retained && embedded) return withImage(embedded);
     const body = retained ? null : await bytes(card);
     if (!retained && !body) return original; // A source outage leaves the existing source link usable.
-    const message = {...original, embeds:original.embeds.map(embed => ({...embed}))};
-    message.embeds[0].image = {url:'attachment://' + filename};
+    const message = withImage('attachment://' + filename);
     if (retained) message.attachments = [{id:retained.id, filename}];
     else { message.attachments = []; message.files = [{attachment:body, name:filename}]; }
     return message;

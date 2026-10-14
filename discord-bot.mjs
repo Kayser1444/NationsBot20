@@ -60,7 +60,8 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             if (service.isBanned?.(interaction.user.id)) { await privateReply('userBanned'); return; }
             const reply = cardBank.renderButton(interaction.customId);
             if (!reply?.ok) { await privateReply('cardFaqExpired'); return; }
-            const message = await prepareImage(reply, {attachments:[...(interaction.message?.attachments?.values?.() ?? [])]});
+            const message = await prepareImage(reply, {attachments:[...(interaction.message?.attachments?.values?.() ?? [])],
+              imageUrl:interaction.message?.embeds?.[0]?.image?.url});
             if (stopped) return;
             await interaction.editReply(interactionPayload(message));
           } catch {

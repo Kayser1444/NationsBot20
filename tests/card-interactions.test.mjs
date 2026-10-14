@@ -80,6 +80,11 @@ test('slash card uploads the image on the first edit and FAQ clicks keep its exi
   assert.deepEqual(opened[1].payload.attachments,[{id:'image',filename:'card-PcTw.jpg'}]);
   assert.equal(opened[1].payload.files,undefined);
   assert.equal(downloads,1);
+  const hidden=await f.click(openId(),{message:{author:{id:'app'},attachments:new Map(),embeds:[{image:{url:'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg?ex=temporary'}}]}});
+  assert.equal(hidden[1].payload.files,undefined);
+  assert.equal(hidden[1].payload.attachments,undefined);
+  assert.equal(hidden[1].payload.embeds[0].image.url,'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg');
+  assert.equal(downloads,1);
   assert.deepEqual(f.errors,[]);
 });
 
