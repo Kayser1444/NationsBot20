@@ -110,11 +110,12 @@ test('autocomplete preserves case, prioritizes prefixes, and respects Discord li
   assert.deepEqual(autocompleteNames(['X'.repeat(101)], ''), []);
 });
 
-test('adapter requests no chat intents and uses private replies in the configured channel only', async t => {
+test('adapter supports all servers and restricts channel delivery to the SM reminder channel', async t => {
+  let clock = 0;
   let instance; const registered = [], states = [], deleted = [];
   const dmChecks = [];
   class FakeClient extends EventEmitter {
-    constructor(options) { super(); this.options = options; this.application = { id: 'application' }; this.rest = {
+    constructor(options) { super(); this.options = options; this.guilds = { cache: new Map([['guild', {}], ['another-server', {}]]) }; this.application = { id: 'application' }; this.rest = {
       get: async route => route.includes('/members/') ? { user: { id: second, username: 'friend-account' }, nick: 'Friendly Discord name' }
         : [{ name: 'prenumerera', type: 1, id: 'old-on' }, { name: 'avprenumerera', type: 1, id: 'old-off' }, { name: 'hjälp', type: 1, id: 'old-help' }, { name: 'other', type: 1, id: 'keep' }],
       delete: async route => deleted.push(route),
@@ -131,13 +132,13 @@ test('adapter requests no chat intents and uses private replies in the configure
   const languageOverrides = {};
   f.service.getLanguageOverride = userId => languageOverrides[userId] ?? null;
   f.service.setLanguage = (userId, locale) => { if (locale === 'auto') delete languageOverrides[userId]; else languageOverrides[userId] = locale; };
-  const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service,
+  const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service, now: () => clock,
     onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
   });
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['smtable', 'notifications', 'status', 'help', 'language']);
+  assert.deepEqual(registered.map(item => item.body.name), ['smtable', 'notifications', 'status', 'help', 'language', 'card']);
   assert.deepEqual(registered[1].body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
@@ -149,10 +150,10 @@ test('adapter requests no chat intents and uses private replies in the configure
       deferReply: async function(options) { this.deferred = true; replies.push(options); },
       editReply: async options => replies.push(options), ...overrides };
   };
-  const blocked = makeInteraction({ channelId: 'other' });
+  const blocked = makeInteraction({ channelId: 'other', options: { getString: name => name === 'dm' ? 'off' : null, getSubcommand: () => 'on' } });
   await instance.listeners(Events.InteractionCreate)[0](blocked);
   assert.deepEqual(f.service.getSubscriptions(), {});
-  assert.deepEqual(capturedLocales, []);
+  assert.match(blocked.replies[1].content, /Kanalpåminnelser/); capturedLocales.length = 0;
   assert.equal(blocked.replies[0].flags, MessageFlags.Ephemeral);
   const interaction = makeInteraction();
   await instance.listeners(Events.InteractionCreate)[0](interaction);
@@ -185,8 +186,20 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.equal(blockedSmDm.replies[1].content, `SM auto ${first}`);
   const foreignSm = makeInteraction({ commandName: 'smtable', guildId: 'another-server' });
   await instance.listeners(Events.InteractionCreate)[0](foreignSm);
-  assert.equal(foreignSm.replies[0].flags, MessageFlags.Ephemeral);
-  assert.match(foreignSm.replies[1].content, /Använd kommandot/);
+  assert.deepEqual(foreignSm.replies[0], {});
+  assert.equal(foreignSm.replies[1].content, `SM auto ${first}`);
+  const card = makeInteraction({ commandName: 'card', guildId: 'another-server', channelId: 'another-channel',
+    options: { getString: () => 'PcTw' }, followUp: async payload => card.replies.push(payload) });
+  await instance.listeners(Events.InteractionCreate)[0](card);
+  assert.deepEqual(card.replies[0], {});
+  assert.equal(card.replies[1].embeds[0].title, 'Porcelain Tower');
+  assert.equal(card.replies.length, 2, 'collapsed card needs no follow-up messages');
+  assert.match(card.replies[1].components[0].components[0].label, /Visa FAQ \(13\)/);
+  assert.ok(card.replies.slice(1).every(reply => !reply.flags && reply.allowedMentions.parse.length === 0));
+  const unknownCard = makeInteraction({ commandName: 'card', options: { getString: () => 'unknown' } });
+  await instance.listeners(Events.InteractionCreate)[0](unknownCard);
+  assert.equal(unknownCard.replies[0].flags, MessageFlags.Ephemeral);
+  assert.match(unknownCard.replies[1].content, /piloturvalet/);
   f.service.getStatus = () => ({ matches: 100, discordEnabled: true, matchList: Array.from({ length: 100 }, (_, i) => ({ id: String(3000 + i), title: 'Testparti ' + i, connected: i % 2 === 0 })) });
   const status = makeInteraction({ commandName: 'status', locale: 'en-US', followUp: async options => status.replies.push(options) });
   await instance.listeners(Events.InteractionCreate)[0](status);
@@ -222,7 +235,8 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.deepEqual(dm.replies[1].allowedMentions, { parse: [] });
   const repeatedDm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](repeatedDm);
-  assert.deepEqual(dmChecks, [first, first]);
+  assert.deepEqual(dmChecks, [first], 'a repeated DM control is suppressed during cooldown');
+  clock += 60001;
   f.service.checkDm = async () => { throw new Error('private token must never appear'); };
   const deniedDm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](deniedDm);
@@ -259,21 +273,36 @@ test('adapter requests no chat intents and uses private replies in the configure
   assert.match(language.replies[1].content, /Your bot language is now English/);
   assert.equal(language.replies[0].flags, MessageFlags.Ephemeral);
   f.service.checkDm = async () => {};
+  clock += 60001;
   const englishDm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](englishDm);
   assert.match(englishDm.replies[1].content, /DM is on/);
   assert.match(englishDm.replies[1].content, /A test DM has been sent/);
   f.service.checkDm = async () => { throw new Error('secret must never appear'); };
+  clock += 60001;
   const failedEnglishDm = makeInteraction({ commandName: 'dm' });
   await instance.listeners(Events.InteractionCreate)[0](failedEnglishDm);
   assert.match(failedEnglishDm.replies[1].content, /DM remains on/);
   assert.equal(failedEnglishDm.replies[1].content.includes('secret'), false);
-  const blockedLanguage = makeInteraction({ commandName: 'language', channelId: 'other', options: { getString: () => 'sv-SE' } });
+  const blockedLanguage = makeInteraction({ commandName: 'language', channelId: 'other', options: { getString: () => 'en-US' } });
   await instance.listeners(Events.InteractionCreate)[0](blockedLanguage);
   assert.equal(languageOverrides[first], 'en-US');
   const off = makeInteraction({ options: { getString: () => null, getSubcommand: () => 'off' } });
   await instance.listeners(Events.InteractionCreate)[0](off);
   assert.equal(Object.keys(f.service.getSubscriptions()).length, 0);
+  clock += 10001;
+  f.service.checkDm = async () => {};
+  const foreign = makeInteraction({ guildId: 'another-server', channelId: 'general' });
+  await instance.listeners(Events.InteractionCreate)[0](foreign);
+  assert.equal(f.service.getSubscriptions().Kayser, first);
+  assert.equal(f.service.getDm(first), true, 'foreign subscription switches a saved channel choice to DM');
+  const foreignOff = makeInteraction({ guildId: 'another-server', options: { getString: name => name === 'dm' ? 'off' : null, getSubcommand: () => 'on' } });
+  await instance.listeners(Events.InteractionCreate)[0](foreignOff);
+  assert.match(foreignOff.replies[1].content, /Channel reminders/);
+  assert.equal(f.service.getDm(first), true);
+  const duplicate = makeInteraction({ guildId: 'third-server' });
+  await instance.listeners(Events.InteractionCreate)[0](duplicate);
+  assert.deepEqual({ ...f.service.getSubscriptions() }, { Kayser: first });
   bot.close(); assert.equal(instance.destroyed, true);
 });
 test('missing library or bad token stays isolated from game monitoring and logs no secret', async () => {

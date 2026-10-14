@@ -1,0 +1,179 @@
+{
+  "sourceSha256": "d9639ea5b25291309210907e7fc5a358156777e45b8f842f661a6b0ab56c97f6",
+  "reviewedAt": "2026-10-14",
+  "reviewer": "Codex",
+  "notes": "Source text, summaries and listed links visually checked against the supplied PDF. No user editorial sign-off is implied. Other corpus entries remain pending.",
+  "cards": {
+    "PcTw": {
+      "enabled": true,
+      "faqReviewStatus": "pilot_reviewed",
+      "descriptionSv": "Det färdigbyggda underverkets plats kan användas för en rådgivare.",
+      "descriptionEn": "The completed Wonder space may hold an Advisor.",
+      "notes": "Name, type, age, image and effect checked against the supplied card image and local game metadata. Covers all nine passages naming Porcelain Tower in FAQ++ 1.11, plus the Wonder replacement rule. General game rules are not exhaustively mapped."
+    }
+  },
+  "entries": {
+    "wonder-porcelain-tower": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "own_entry"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Om en effekt får dig att förlora din rådgivare och du har två rådgivare, förlorar du båda.",
+          "en": "If an effect removes your Advisor and you have two Advisors, both are removed."
+        },
+        {
+          "sv": "Om rådgivaren på Porcelain Tower försvinner får du placera en ny där. Rådgivaren kan också ersättas av en annan rådgivare.",
+          "en": "After losing the Advisor on Porcelain Tower, you may place another there. An Advisor on the tower may also be replaced by another Advisor."
+        },
+        {
+          "sv": "Ett färdigbyggt underverk kan ersätta både Porcelain Tower och rådgivaren på det.",
+          "en": "A ready Wonder may replace both Porcelain Tower and its Advisor."
+        }
+      ],
+      "sourceTextSha256": "32f811f617f049a07025d242f665057a1eba4e3813daf73a08295f8cea84297a"
+    },
+    "nations-japan": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Japans Emperor-regel gör att köpta rådgivare kastas innan de skulle placeras. De kan därför inte placeras på Porcelain Tower.",
+          "en": "Japan's Emperor rule discards bought Advisors before placement, so they cannot be placed on Porcelain Tower."
+        }
+      ],
+      "sourceTextSha256": "856badc598305972a5ed998e8f49d5372cf946c5f2db0f5a0201e79ea171af40"
+    },
+    "advisor-zhu-xi": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Zhu Xi gäller bara sin egen rådgivarplats. Rådgivare som placeras eller ersätts på Porcelain Tower påverkar honom inte.",
+          "en": "Zhu Xi only tracks his own Advisor space; placing or replacing Advisors on Porcelain Tower does not affect him."
+        },
+        {
+          "sv": "Första gången Zhu Xi ersätts behålls han tillsammans med den nya rådgivaren på samma plats. Nästa ersättning tar bort båda. Om den nya rådgivaren tas bort av en effekt tas även Zhu Xi bort; händelser och andra effekter kan ta bort Zhu Xi normalt.",
+          "en": "The first replacement keeps Zhu Xi and the new Advisor together in the same space. The next replacement removes both. If an effect removes the new Advisor, Zhu Xi is removed too; events and other effects can remove him normally."
+        }
+      ],
+      "sourceTextSha256": "d025e2582ed55cc71565d9d9d47d55630e30af72bc4d7a4d4fde828ec9d8c925"
+    },
+    "wonder-potala-palace": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Potala Palace gäller endast slutpoängräkningen. Med Porcelain Tower och två rådgivare får du 2 VP.",
+          "en": "Potala Palace applies only to final scoring. Porcelain Tower with two Advisors scores 2 VP."
+        }
+      ],
+      "sourceTextSha256": "c3618eb451b11bde392e6d58438e8738b97211c7b21a4d3df015ca2ae61fb7c9"
+    },
+    "wonder-titanic": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Titanic: I omvänd spelarordning väljer varje nation att betala 4 guld eller ta bort sin rådgivare. Utan rådgivare måste nationen betala, med normala bristpåföljder. Har du Porcelain Tower och väljer att inte betala, tas båda rådgivarna bort.",
+          "en": "Titanic: In reverse player order, each Nation pays 4 Gold or removes its Advisor. Without an Advisor it must pay, with normal shortage penalties. With Porcelain Tower, not paying removes both Advisors."
+        }
+      ],
+      "sourceTextSha256": "fd93e4ea178ce96550a86c3f4a98f4df5180181423d70d3278974807ef78935b"
+    },
+    "event-salem-witch-trials": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Salem Witch Trials tar bort båda rådgivarna om du har Porcelain Tower.",
+          "en": "Salem Witch Trials removes both Advisors if you have Porcelain Tower."
+        }
+      ],
+      "sourceTextSha256": "daec20eee38852634eaf4f1dcdbf7b1f7ef93515679271c13521f455de8d6847"
+    },
+    "event-anarchism": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Anarchism tar bort båda rådgivarna om du har Porcelain Tower.",
+          "en": "Anarchism removes both Advisors if you have Porcelain Tower."
+        }
+      ],
+      "sourceTextSha256": "cc6905808fa4ef593756a7e3ffb53c19c3a3380addcebb1ea63969486de24587"
+    },
+    "event-french-revolution": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "French Revolution ger inget val: har du en rådgivare måste den tas bort. Med Porcelain Tower och två rådgivare tas båda bort.",
+          "en": "French Revolution is mandatory if you have an Advisor. With Porcelain Tower and two Advisors, both are removed."
+        }
+      ],
+      "sourceTextSha256": "eff4b606bf6248936cebaebe37874ca60ab42a7d35bea82355ce6b707c71e69a"
+    },
+    "dynasties-poland-polish-lithuanian-commonwealth": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "cross_reference"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "När Polen spelar en ny dynasti kastas rådgivare på dess underverksplatser, men rådgivaren på Porcelain Tower påverkas inte av detta. Om någon effekt får dig att förlora din rådgivare när du har två eller fler rådgivare, förlorar du alla.",
+          "en": "When Poland plays a new Dynasty, Advisors on its Wonder spaces are discarded; the Advisor on Porcelain Tower is unaffected. If an effect removes your Advisor while you have two or more, all are removed."
+        }
+      ],
+      "sourceTextSha256": "8820f9c6b0583e50d482a6a7d91387763b867a32c6de56e25097bd696b368d76"
+    },
+    "wonder-wonder": {
+      "cardLinks": [
+        {
+          "cardId": "PcTw",
+          "relation": "general_rule"
+        }
+      ],
+      "bullets": [
+        {
+          "sv": "Ett färdigbyggt underverk får ersätta ett befintligt underverk även om en annan underverksplats är ledig; Mechanical Turk är undantaget. Ett underverks effekt som utlöses när ett underverk färdigställs utförs även om det nya underverket ersätter det som ger effekten.",
+          "en": "A ready Wonder may replace an existing Wonder even with free Wonder spaces, except Mechanical Turk. A Wonder's effect triggered by completing a Wonder still applies when the new Wonder replaces the one providing that effect."
+        }
+      ],
+      "sourceTextSha256": "d7f336eab6687141c2951d9b3d35655b8aba52f4c9b3eeac768175352484ce03"
+    }
+  }
+}

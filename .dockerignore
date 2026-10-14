@@ -5,3 +5,9 @@
 !*.mjs
 !dashboard.html
 !sm-season.json
+!data/
+!data/cards/
+!data/cards/catalog.json
+!data/faq/
+!data/faq/entries.json
+!data/faq/sources.json

@@ -1,5 +1,6 @@
 import { randomBytes, createHash } from 'node:crypto';
 import { sessionStore } from './admin-session-store.mjs';
+import { rateLimit } from './rate-limit.mjs';
 
 const SESSION_COOKIE = '__Host-nations-admin';
 const LOGIN_COOKIE = '__Host-nations-login';
@@ -30,9 +31,11 @@ function validate(settings) {
   return url.origin;
 }
 
-export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, sessionSeconds = 3600, rememberSeconds = 30 * 86400, sessionPath = null } = {}) {
+export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, sessionSeconds = 3600, rememberSeconds = 30 * 86400, sessionPath = null,
+  clientAddress = req => req.socket?.remoteAddress ?? 'unknown' } = {}) {
   const origin = validate(settings), redirectUri = origin + '/auth/callback';
   const logins = new Map();
+  const loginStarts = rateLimit({ limit: 20, windowMs: 300000, now });
   const store = sessionStore(sessionPath, { origin, clientId: settings.clientId, ownerId: settings.ownerId }, now);
   const sessions = store.records;
   function purge() {
@@ -56,18 +59,24 @@ export function createDiscordAuth(settings, { fetcher = fetch, now = Date.now, s
   return {
     origin,
     session,
-    close() { logins.clear(); sessions.clear(); },
+    close() { logins.clear(); loginStarts.clear(); sessions.clear(); },
     async handle(req, res, url) {
       purge();
       if (req.method === 'GET' && url.pathname === '/auth/login') {
         if (session(req)) { res.writeHead(303, { location: '/' }); res.end(); return true; }
-        if (logins.size >= 50) { fail(res, 429, 'Too many sign-in attempts. Please try again later.'); return true; }
+        const client = clientAddress(req);
+        if (!loginStarts.allow(client)) { fail(res, 429, 'Too many sign-in attempts. Please try again later.'); return true; }
         const state = random();
         // Replace this browser's pending attempt rather than accumulating it.
         logins.delete(cookies(req)[LOGIN_COOKIE]);
+        // A client may retain at most five flows. Expired/replaced states still
+        // fail closed; pressure never globally blocks fresh sign-in starts.
+        const own = [...logins].filter(([, pending]) => pending.client === client);
+        if (own.length >= 5) logins.delete(own[0][0]);
+        if (logins.size >= 1000) logins.delete(logins.keys().next().value);
         const remember = url.searchParams.get('remember') === '1';
         const prompt = url.searchParams.get('consent') === '1' ? 'consent' : 'none';
-        logins.set(state, { expires: now() + 300000, remember, prompt });
+        logins.set(state, { expires: now() + 300000, remember, prompt, client });
         const authorize = new URL('https://discord.com/oauth2/authorize');
         authorize.search = new URLSearchParams({ client_id: settings.clientId, response_type: 'code',
           scope: 'identify', redirect_uri: redirectUri, state, prompt }).toString();

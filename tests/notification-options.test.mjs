@@ -15,7 +15,8 @@ test('notification delivery is on by default, explicit off persists, omitted cho
   assert.match(run({}), /endast som DM/); assert.equal(enabled, 1);
   assert.match(run({ dm: 'off' }), /DM av/); assert.equal(dm, false);
   assert.match(run({}), /DM av/); assert.equal(dm, false);
-  assert.match(run({ dm: 'on', nationsName: 'Different' }), /Avsluta först/); assert.equal(dm, false); assert.equal(enabled, 3);
+  assert.match(run({ dm: 'on', nationsName: 'Different' }), /Avsluta först/); assert.equal(dm, false); assert.equal(enabled, 1);
   assert.match(run({ dm: 'on' }), /endast DM/); assert.equal(dm, true);
+  assert.equal(enabled, 2, 'control is requested for a new subscription or an actual DM enable only');
   run({ action: 'off' }); assert.deepEqual(subscriptions, {}); assert.equal(dm, true);
 });

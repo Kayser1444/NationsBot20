@@ -55,7 +55,8 @@ export class Outbox {
     this.data.jobs = this.data.jobs.filter(job => recipients(selected, job.player).includes(job.userId));
     for (const turn of Object.values(this.data.turns)) {
       if (!Array.isArray(turn.sentUsers)) turn.sentUsers = turn.sent ? [...recipients(previous, turn.player)] : [];
-      turn.sentUsers = turn.sentUsers.filter(id => recipients(selected, turn.player).includes(id));
+      // Keep receipts for this turn even while a user is unsubscribed. A new
+      // follower has no receipt; a real turn change creates a fresh receipt list.
       if (recipients(selected, turn.player).some(id => !recipients(previous, turn.player).includes(id))) turn.sent = false;
     }
     this.save();

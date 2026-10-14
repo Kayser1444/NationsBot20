@@ -1,0 +1,8763 @@
+{
+  "schemaVersion": 1,
+  "items": [
+    {
+      "id": "nations-faq-nations-faq",
+      "heading": "Nations FAQ++",
+      "section": "Nations FAQ++",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        1,
+        240.99
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-general",
+      "heading": "General",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        1,
+        534.49
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "general-campaign-rules",
+      "heading": "Campaign rules",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        1,
+        563.15
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-first-game",
+      "heading": "First game",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        1,
+        703.65
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-components",
+      "heading": "Components",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        2,
+        146.55
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-production",
+      "heading": "Production",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        2,
+        208.25
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-architects",
+      "heading": "Architects",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        2,
+        448.35
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-cards",
+      "heading": "Cards",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        2,
+        541.35
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-most-and-least",
+      "heading": "Most and least",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1
+      ],
+      "position": [
+        1,
+        3,
+        329.85
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-resource-loss",
+      "heading": "Resource loss",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        1,
+        2
+      ],
+      "position": [
+        1,
+        3,
+        491.25
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-workers",
+      "heading": "Workers",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        1,
+        307.55
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "general-5-players",
+      "heading": "5 players",
+      "section": "General",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        1,
+        505.85
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-nations",
+      "heading": "Nations",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        45.69
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-america",
+      "heading": "America",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        115.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "nations-arabs",
+      "heading": "Arabs",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        126.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "nations-china-b-side",
+      "heading": "China B-side",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        136.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-ethiopia",
+      "heading": "Ethiopia",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        241.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-egypt-b-side",
+      "heading": "Egypt B-side",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        325.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "nations-greece-b-side",
+      "heading": "Greece B-side",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        335.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-india",
+      "heading": "India",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        356.78
+      ],
+      "hasRule": false,
+      "cardId": "Ind"
+    },
+    {
+      "id": "nations-japan",
+      "heading": "Japan",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        367.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-korea",
+      "heading": "Korea",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        576.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-mali",
+      "heading": "Mali",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        629.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "nations-mongolia",
+      "heading": "Mongolia",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        2,
+        639.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-persia-b-side",
+      "heading": "Persia B-side",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        117.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-poland",
+      "heading": "Poland",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        159.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-portugal",
+      "heading": "Portugal",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        190.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "nations-rome-b-side",
+      "heading": "Rome B-side",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        201.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-venice",
+      "heading": "Venice",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        243.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "nations-vikings",
+      "heading": "Vikings",
+      "section": "Nations",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        264.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "advisor-advisor",
+      "heading": "Advisor",
+      "section": "Advisor",
+      "age": null,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        390.19
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "advisor-augustus",
+      "heading": "Augustus",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        516.28
+      ],
+      "hasRule": true,
+      "cardId": "Agt"
+    },
+    {
+      "id": "advisor-hatshepsut",
+      "heading": "Hatshepsut",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        526.88
+      ],
+      "hasRule": true,
+      "cardId": "Hss"
+    },
+    {
+      "id": "advisor-qin-shi-huang",
+      "heading": "Qin Shi Huang",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        610.58
+      ],
+      "hasRule": true,
+      "cardId": "QSH"
+    },
+    {
+      "id": "advisor-saint-augustine",
+      "heading": "Saint Augustine",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        631.58
+      ],
+      "hasRule": true,
+      "cardId": "StAg"
+    },
+    {
+      "id": "advisor-archimedes",
+      "heading": "Archimedes",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        652.58
+      ],
+      "hasRule": true,
+      "cardId": "Acm"
+    },
+    {
+      "id": "advisor-boudica",
+      "heading": "Boudica",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2
+      ],
+      "position": [
+        2,
+        3,
+        704.88
+      ],
+      "hasRule": true,
+      "cardId": "Bdc"
+    },
+    {
+      "id": "advisor-cyrus-the-great",
+      "heading": "Cyrus the Great",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        2,
+        3
+      ],
+      "position": [
+        2,
+        3,
+        757.28
+      ],
+      "hasRule": true,
+      "cardId": "CrGr"
+    },
+    {
+      "id": "advisor-buddha",
+      "heading": "Buddha",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        127.78
+      ],
+      "hasRule": true,
+      "cardId": "Bdh"
+    },
+    {
+      "id": "advisor-hannibal",
+      "heading": "Hannibal",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        200.98
+      ],
+      "hasRule": true,
+      "cardId": "Hnb"
+    },
+    {
+      "id": "advisor-sun-tzu",
+      "heading": "Sun Tzu",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        274.28
+      ],
+      "hasRule": true,
+      "cardId": "SnTz"
+    },
+    {
+      "id": "advisor-hypatia",
+      "heading": "Hypatia",
+      "section": "Advisor",
+      "age": 1,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        451.98
+      ],
+      "hasRule": false,
+      "cardId": "Hpt"
+    },
+    {
+      "id": "advisor-anna-komnene",
+      "heading": "Anna Komnene",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        487.18
+      ],
+      "hasRule": true,
+      "cardId": "AnKn"
+    },
+    {
+      "id": "advisor-harald-hardrada",
+      "heading": "Harald Hardrada",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        529.18
+      ],
+      "hasRule": true,
+      "cardId": "HrHd"
+    },
+    {
+      "id": "advisor-sejong-the-great",
+      "heading": "Sejong the Great",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        550.18
+      ],
+      "hasRule": true,
+      "cardId": "SjGr"
+    },
+    {
+      "id": "advisor-thomas-aquino",
+      "heading": "Thomas Aquino",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        592.08
+      ],
+      "hasRule": true,
+      "cardId": "TmAq"
+    },
+    {
+      "id": "advisor-abu-bakr",
+      "heading": "Abu Bakr",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        613.08
+      ],
+      "hasRule": true,
+      "cardId": "AbBk"
+    },
+    {
+      "id": "advisor-eleanor-of-aquitaine",
+      "heading": "Eleanor of Aquitaine",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        644.58
+      ],
+      "hasRule": true,
+      "cardId": "EnAq"
+    },
+    {
+      "id": "advisor-mansa-musa",
+      "heading": "Mansa Musa",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        1,
+        686.48
+      ],
+      "hasRule": true,
+      "cardId": "MsMs"
+    },
+    {
+      "id": "advisor-alhazen",
+      "heading": "Alhazen",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        85.98
+      ],
+      "hasRule": true,
+      "cardId": "Ahz"
+    },
+    {
+      "id": "advisor-genghis-khan",
+      "heading": "Genghis Khan",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        180.08
+      ],
+      "hasRule": true,
+      "cardId": "GgKn"
+    },
+    {
+      "id": "advisor-marco-polo",
+      "heading": "Marco Polo",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        211.58
+      ],
+      "hasRule": true,
+      "cardId": "McPl"
+    },
+    {
+      "id": "advisor-zhu-xi",
+      "heading": "Zhu Xi",
+      "section": "Advisor",
+      "age": 2,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        242.98
+      ],
+      "hasRule": true,
+      "cardId": "ZhXi"
+    },
+    {
+      "id": "advisor-elizabeth",
+      "heading": "Elizabeth",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        487.18
+      ],
+      "hasRule": true,
+      "cardId": "Elz"
+    },
+    {
+      "id": "advisor-galileo-galilei",
+      "heading": "Galileo Galilei",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        529.08
+      ],
+      "hasRule": true,
+      "cardId": "GlGl"
+    },
+    {
+      "id": "advisor-isabella",
+      "heading": "Isabella",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        612.78
+      ],
+      "hasRule": true,
+      "cardId": "Isb"
+    },
+    {
+      "id": "advisor-montezuma",
+      "heading": "Montezuma",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        654.68
+      ],
+      "hasRule": true,
+      "cardId": "Mtz"
+    },
+    {
+      "id": "advisor-martin-luther",
+      "heading": "Martin Luther",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        2,
+        707.18
+      ],
+      "hasRule": true,
+      "cardId": "MtLt"
+    },
+    {
+      "id": "advisor-pocahontas",
+      "heading": "Pocahontas",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        85.98
+      ],
+      "hasRule": true,
+      "cardId": "Pch"
+    },
+    {
+      "id": "advisor-tokugawa",
+      "heading": "Tokugawa",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        117.48
+      ],
+      "hasRule": true,
+      "cardId": "Tkg"
+    },
+    {
+      "id": "advisor-niccolo-machiavelli",
+      "heading": "Niccolo Machiavelli",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        169.98
+      ],
+      "hasRule": true,
+      "cardId": "NcMc"
+    },
+    {
+      "id": "advisor-peter-the-great",
+      "heading": "Peter the Great",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        232.78
+      ],
+      "hasRule": true,
+      "cardId": "PtGr"
+    },
+    {
+      "id": "advisor-suleiman-i",
+      "heading": "Suleiman I",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        274.68
+      ],
+      "hasRule": true,
+      "cardId": "Slm"
+    },
+    {
+      "id": "advisor-carolus-linneaus",
+      "heading": "Carolus Linneaus",
+      "section": "Advisor",
+      "age": 3,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        316.58
+      ],
+      "hasRule": false,
+      "cardId": "CrLn"
+    },
+    {
+      "id": "advisor-florence-nightingale",
+      "heading": "Florence Nightingale",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        351.78
+      ],
+      "hasRule": true,
+      "cardId": "FrNg"
+    },
+    {
+      "id": "advisor-frederick-the-great",
+      "heading": "Frederick the Great",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        414.58
+      ],
+      "hasRule": true,
+      "cardId": "FdGr"
+    },
+    {
+      "id": "advisor-lin-zexu",
+      "heading": "Lin Zexu",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        435.58
+      ],
+      "hasRule": false,
+      "cardId": "LnZx"
+    },
+    {
+      "id": "advisor-marie-antoinette",
+      "heading": "Marie Antoinette",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        446.08
+      ],
+      "hasRule": false,
+      "cardId": "MrAn"
+    },
+    {
+      "id": "advisor-abraham-lincoln",
+      "heading": "Abraham Lincoln",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        456.68
+      ],
+      "hasRule": true,
+      "cardId": "AhLc"
+    },
+    {
+      "id": "advisor-benjamin-disraeli",
+      "heading": "Benjamin Disraeli",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        498.58
+      ],
+      "hasRule": true,
+      "cardId": "BjDr"
+    },
+    {
+      "id": "advisor-marie-curie",
+      "heading": "Marie Curie",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        540.48
+      ],
+      "hasRule": true,
+      "cardId": "MrCr"
+    },
+    {
+      "id": "advisor-alfred-nobel",
+      "heading": "Alfred Nobel",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        592.78
+      ],
+      "hasRule": true,
+      "cardId": "AfNb"
+    },
+    {
+      "id": "advisor-shaka-zulu",
+      "heading": "Shaka Zulu",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        655.58
+      ],
+      "hasRule": true,
+      "cardId": "SkZl"
+    },
+    {
+      "id": "advisor-simon-bolivar",
+      "heading": "Simon Bolivar",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        3
+      ],
+      "position": [
+        3,
+        3,
+        687.08
+      ],
+      "hasRule": true,
+      "cardId": "SmBl"
+    },
+    {
+      "id": "advisor-nikola-tesla",
+      "heading": "Nikola Tesla",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        44.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "advisor-frederic-chopin",
+      "heading": "Frédéric Chopin",
+      "section": "Advisor",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        96.48
+      ],
+      "hasRule": true,
+      "cardId": "FdCp"
+    },
+    {
+      "id": "battle-battle",
+      "heading": "Battle",
+      "section": "Battle",
+      "age": null,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        190.79
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "battle-battle-of-cannae",
+      "heading": "Battle of Cannae",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        316.98
+      ],
+      "hasRule": false,
+      "cardId": "BCnn"
+    },
+    {
+      "id": "battle-battle-of-kadesh",
+      "heading": "Battle of Kadesh",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        327.48
+      ],
+      "hasRule": false,
+      "cardId": "BKds"
+    },
+    {
+      "id": "battle-siege-of-alesia",
+      "heading": "Siege of Alesia",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        338.08
+      ],
+      "hasRule": false,
+      "cardId": "SAls"
+    },
+    {
+      "id": "battle-siege-of-troy",
+      "heading": "Siege of Troy",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        348.58
+      ],
+      "hasRule": false,
+      "cardId": "STry"
+    },
+    {
+      "id": "battle-battle-of-thermopylae",
+      "heading": "Battle of Thermopylae",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        359.18
+      ],
+      "hasRule": false,
+      "cardId": "BTmp"
+    },
+    {
+      "id": "battle-milvian-bridge",
+      "heading": "Milvian Bridge",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        369.68
+      ],
+      "hasRule": false,
+      "cardId": "MvBr"
+    },
+    {
+      "id": "battle-battle-of-issus",
+      "heading": "Battle of Issus",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        380.28
+      ],
+      "hasRule": false,
+      "cardId": "BIss"
+    },
+    {
+      "id": "battle-crossing-the-alps",
+      "heading": "Crossing the Alps",
+      "section": "Battle",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        390.78
+      ],
+      "hasRule": false,
+      "cardId": "CsAp"
+    },
+    {
+      "id": "battle-battle-of-agincourt",
+      "heading": "Battle of Agincourt",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        425.98
+      ],
+      "hasRule": false,
+      "cardId": "BAgc"
+    },
+    {
+      "id": "battle-battle-of-hastings",
+      "heading": "Battle of Hastings",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        436.58
+      ],
+      "hasRule": false,
+      "cardId": "BHst"
+    },
+    {
+      "id": "battle-battle-of-poitiers",
+      "heading": "Battle of Poitiers",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        447.08
+      ],
+      "hasRule": false,
+      "cardId": "BPtr"
+    },
+    {
+      "id": "battle-battle-of-tannenberg",
+      "heading": "Battle of Tannenberg",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        457.68
+      ],
+      "hasRule": false,
+      "cardId": "BTnb"
+    },
+    {
+      "id": "battle-battle-of-manzikert",
+      "heading": "Battle of Manzikert",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        468.18
+      ],
+      "hasRule": false,
+      "cardId": "BMzk"
+    },
+    {
+      "id": "battle-the-horns-of-hattin",
+      "heading": "The Horns of Hattin",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        478.78
+      ],
+      "hasRule": false,
+      "cardId": "THH"
+    },
+    {
+      "id": "battle-battle-of-ain-jalut",
+      "heading": "Battle of Ain Jalut",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        489.28
+      ],
+      "hasRule": false,
+      "cardId": "BAJ"
+    },
+    {
+      "id": "battle-siege-of-constantinople",
+      "heading": "Siege of Constantinople",
+      "section": "Battle",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        499.88
+      ],
+      "hasRule": false,
+      "cardId": "SCtn"
+    },
+    {
+      "id": "battle-battle-of-poltava",
+      "heading": "Battle of Poltava",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        535.08
+      ],
+      "hasRule": false,
+      "cardId": "BPtv"
+    },
+    {
+      "id": "battle-fall-of-constantinople",
+      "heading": "Fall of Constantinople",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        545.58
+      ],
+      "hasRule": false,
+      "cardId": "FCtn"
+    },
+    {
+      "id": "battle-la-noche-triste",
+      "heading": "La Noche Triste",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        556.18
+      ],
+      "hasRule": false,
+      "cardId": "LNT"
+    },
+    {
+      "id": "battle-siege-of-rhodes",
+      "heading": "Siege of Rhodes",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        566.68
+      ],
+      "hasRule": false,
+      "cardId": "SRhd"
+    },
+    {
+      "id": "battle-battle-of-cajamarca",
+      "heading": "Battle of Cajamarca",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        577.28
+      ],
+      "hasRule": false,
+      "cardId": "BCjm"
+    },
+    {
+      "id": "battle-battle-of-noryang",
+      "heading": "Battle of Noryang",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        587.78
+      ],
+      "hasRule": false,
+      "cardId": "BNry"
+    },
+    {
+      "id": "battle-fall-of-louisburg",
+      "heading": "Fall of Louisburg",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        598.38
+      ],
+      "hasRule": false,
+      "cardId": "FLsb"
+    },
+    {
+      "id": "battle-siege-of-vienna",
+      "heading": "Siege of Vienna",
+      "section": "Battle",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        608.88
+      ],
+      "hasRule": false,
+      "cardId": "SVnn"
+    },
+    {
+      "id": "battle-battle-of-tsushima",
+      "heading": "Battle of Tsushima",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        644.08
+      ],
+      "hasRule": false,
+      "cardId": "BTsm"
+    },
+    {
+      "id": "battle-battle-of-waterloo",
+      "heading": "Battle of Waterloo",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        654.68
+      ],
+      "hasRule": false,
+      "cardId": "BWtl"
+    },
+    {
+      "id": "battle-fashoda-incident",
+      "heading": "Fashoda Incident",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        665.18
+      ],
+      "hasRule": false,
+      "cardId": "FsIn"
+    },
+    {
+      "id": "battle-surrender-at-yorktown",
+      "heading": "Surrender at Yorktown",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        675.78
+      ],
+      "hasRule": false,
+      "cardId": "SYkt"
+    },
+    {
+      "id": "battle-battle-of-austerlitz",
+      "heading": "Battle of Austerlitz",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        686.28
+      ],
+      "hasRule": false,
+      "cardId": "BAtl"
+    },
+    {
+      "id": "battle-battle-of-borodino",
+      "heading": "Battle of Borodino",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        696.88
+      ],
+      "hasRule": false,
+      "cardId": "BBrd"
+    },
+    {
+      "id": "battle-battle-of-trafalgar",
+      "heading": "Battle of Trafalgar",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        707.38
+      ],
+      "hasRule": false,
+      "cardId": "BTfg"
+    },
+    {
+      "id": "battle-battle-of-balaclava",
+      "heading": "Battle of Balaclava",
+      "section": "Battle",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        1,
+        717.98
+      ],
+      "hasRule": false,
+      "cardId": "BBlc"
+    },
+    {
+      "id": "building-building",
+      "heading": "Building",
+      "section": "Building",
+      "age": null,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        45.69
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-farm",
+      "heading": "Farm",
+      "section": "Building",
+      "age": 0,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        93.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-quarry",
+      "heading": "Quarry",
+      "section": "Building",
+      "age": 0,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        103.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-caravan",
+      "heading": "Caravan",
+      "section": "Building",
+      "age": 0,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        114.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-temple",
+      "heading": "Temple",
+      "section": "Building",
+      "age": 0,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        124.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-aqueduct",
+      "heading": "Aqueduct",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        159.88
+      ],
+      "hasRule": false,
+      "cardId": "Aqd"
+    },
+    {
+      "id": "building-brewery",
+      "heading": "Brewery",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        170.48
+      ],
+      "hasRule": false,
+      "cardId": "Brw"
+    },
+    {
+      "id": "building-city-wall",
+      "heading": "City Wall",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        180.98
+      ],
+      "hasRule": false,
+      "cardId": "CtWl"
+    },
+    {
+      "id": "building-forum",
+      "heading": "Forum",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        191.58
+      ],
+      "hasRule": false,
+      "cardId": "Frm"
+    },
+    {
+      "id": "building-lighthouse",
+      "heading": "Lighthouse",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        202.08
+      ],
+      "hasRule": false,
+      "cardId": "Lth"
+    },
+    {
+      "id": "building-lyceum",
+      "heading": "Lyceum",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        212.68
+      ],
+      "hasRule": false,
+      "cardId": "Lyc"
+    },
+    {
+      "id": "building-synagogue",
+      "heading": "Synagogue",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        223.18
+      ],
+      "hasRule": false,
+      "cardId": "Sng"
+    },
+    {
+      "id": "building-ziggurat",
+      "heading": "Ziggurat",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        233.78
+      ],
+      "hasRule": false,
+      "cardId": "Zgr"
+    },
+    {
+      "id": "building-granary",
+      "heading": "Granary",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        244.28
+      ],
+      "hasRule": false,
+      "cardId": "Grn"
+    },
+    {
+      "id": "building-mine",
+      "heading": "Mine",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        254.88
+      ],
+      "hasRule": false,
+      "cardId": "Min"
+    },
+    {
+      "id": "building-pagoda",
+      "heading": "Pagoda",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        265.38
+      ],
+      "hasRule": false,
+      "cardId": "Pgd"
+    },
+    {
+      "id": "building-confucian-academy",
+      "heading": "Confucian Academy",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        275.98
+      ],
+      "hasRule": false,
+      "cardId": "CfAc"
+    },
+    {
+      "id": "building-forge",
+      "heading": "Forge",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        286.48
+      ],
+      "hasRule": false,
+      "cardId": "Frg"
+    },
+    {
+      "id": "building-library",
+      "heading": "Library",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        297.08
+      ],
+      "hasRule": false,
+      "cardId": "Lib"
+    },
+    {
+      "id": "building-vatican",
+      "heading": "Vatican",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        307.58
+      ],
+      "hasRule": false,
+      "cardId": "Vtc"
+    },
+    {
+      "id": "building-silk-road",
+      "heading": "Silk Road",
+      "section": "Building",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        318.18
+      ],
+      "hasRule": false,
+      "cardId": "SkRd"
+    },
+    {
+      "id": "building-cathedral",
+      "heading": "Cathedral",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        353.38
+      ],
+      "hasRule": false,
+      "cardId": "Cat"
+    },
+    {
+      "id": "building-madrasa",
+      "heading": "Madrasa",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        363.88
+      ],
+      "hasRule": false,
+      "cardId": "Mdr"
+    },
+    {
+      "id": "building-market",
+      "heading": "Market",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        374.48
+      ],
+      "hasRule": false,
+      "cardId": "Mkt"
+    },
+    {
+      "id": "building-monastery",
+      "heading": "Monastery",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        384.98
+      ],
+      "hasRule": false,
+      "cardId": "Mon"
+    },
+    {
+      "id": "building-mosque",
+      "heading": "Mosque",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        395.58
+      ],
+      "hasRule": false,
+      "cardId": "Msq"
+    },
+    {
+      "id": "building-university",
+      "heading": "University",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        406.08
+      ],
+      "hasRule": false,
+      "cardId": "Uni"
+    },
+    {
+      "id": "building-watermill",
+      "heading": "Watermill",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        416.68
+      ],
+      "hasRule": false,
+      "cardId": "Wtm"
+    },
+    {
+      "id": "building-windmill",
+      "heading": "Windmill",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        427.18
+      ],
+      "hasRule": false,
+      "cardId": "Wdm"
+    },
+    {
+      "id": "building-ball-court",
+      "heading": "Ball Court",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        437.78
+      ],
+      "hasRule": false,
+      "cardId": "BlCt"
+    },
+    {
+      "id": "building-castle",
+      "heading": "Castle",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        448.28
+      ],
+      "hasRule": false,
+      "cardId": "Cas"
+    },
+    {
+      "id": "building-guild-hall",
+      "heading": "Guild Hall",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        458.88
+      ],
+      "hasRule": false,
+      "cardId": "GdHl"
+    },
+    {
+      "id": "building-hippodrome",
+      "heading": "Hippodrome",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        469.38
+      ],
+      "hasRule": false,
+      "cardId": "Hip"
+    },
+    {
+      "id": "building-mint",
+      "heading": "Mint",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        479.98
+      ],
+      "hasRule": false,
+      "cardId": "Mnt"
+    },
+    {
+      "id": "building-ocean-fishing",
+      "heading": "Ocean Fishing",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        490.48
+      ],
+      "hasRule": false,
+      "cardId": "OcFs"
+    },
+    {
+      "id": "building-hansa",
+      "heading": "Hansa",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        501.08
+      ],
+      "hasRule": false,
+      "cardId": "Han"
+    },
+    {
+      "id": "building-knights-templar",
+      "heading": "Knights Templar",
+      "section": "Building",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        511.58
+      ],
+      "hasRule": false,
+      "cardId": "KnTp"
+    },
+    {
+      "id": "building-colonial-trading",
+      "heading": "Colonial Trading",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        546.78
+      ],
+      "hasRule": false,
+      "cardId": "ClTr"
+    },
+    {
+      "id": "building-courthouse",
+      "heading": "Courthouse",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        557.38
+      ],
+      "hasRule": false,
+      "cardId": "Cth"
+    },
+    {
+      "id": "building-dike",
+      "heading": "Dike",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        567.88
+      ],
+      "hasRule": false,
+      "cardId": "Dik"
+    },
+    {
+      "id": "building-observatory",
+      "heading": "Observatory",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        578.48
+      ],
+      "hasRule": false,
+      "cardId": "Obs"
+    },
+    {
+      "id": "building-parliament",
+      "heading": "Parliament",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        588.98
+      ],
+      "hasRule": false,
+      "cardId": "Plm"
+    },
+    {
+      "id": "building-sawmill",
+      "heading": "Sawmill",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        599.58
+      ],
+      "hasRule": false,
+      "cardId": "Swm"
+    },
+    {
+      "id": "building-terrace-farming",
+      "heading": "Terrace Farming",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        610.08
+      ],
+      "hasRule": false,
+      "cardId": "TrFm"
+    },
+    {
+      "id": "building-theatre",
+      "heading": "Theatre",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        620.68
+      ],
+      "hasRule": false,
+      "cardId": "Thr"
+    },
+    {
+      "id": "building-bank",
+      "heading": "Bank",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        631.18
+      ],
+      "hasRule": false,
+      "cardId": "Bnk"
+    },
+    {
+      "id": "building-sacrifcial-altar",
+      "heading": "Sacrifcial Altar",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        641.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "building-shipyard",
+      "heading": "Shipyard",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        652.28
+      ],
+      "hasRule": false,
+      "cardId": "Shp"
+    },
+    {
+      "id": "building-chateau",
+      "heading": "Chateau",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        662.88
+      ],
+      "hasRule": false,
+      "cardId": "Cht"
+    },
+    {
+      "id": "building-hammam",
+      "heading": "Hammam",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        673.38
+      ],
+      "hasRule": false,
+      "cardId": "Hmm"
+    },
+    {
+      "id": "building-printing-press",
+      "heading": "Printing Press",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        683.98
+      ],
+      "hasRule": false,
+      "cardId": "PrPr"
+    },
+    {
+      "id": "building-potosi",
+      "heading": "Potosi",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        694.48
+      ],
+      "hasRule": false,
+      "cardId": "Pts"
+    },
+    {
+      "id": "building-coffffee-house",
+      "heading": "Coffffee House",
+      "section": "Building",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        705.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "building-factory",
+      "heading": "Factory",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        750.68
+      ],
+      "hasRule": false,
+      "cardId": "Fct"
+    },
+    {
+      "id": "building-hospital",
+      "heading": "Hospital",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        2,
+        761.28
+      ],
+      "hasRule": false,
+      "cardId": "Hsp"
+    },
+    {
+      "id": "building-hydro-plant",
+      "heading": "Hydro Plant",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        44.18
+      ],
+      "hasRule": false,
+      "cardId": "HdPl"
+    },
+    {
+      "id": "building-penal-colony",
+      "heading": "Penal Colony",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        54.68
+      ],
+      "hasRule": false,
+      "cardId": "PnCl"
+    },
+    {
+      "id": "building-railroad",
+      "heading": "Railroad",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        65.28
+      ],
+      "hasRule": false,
+      "cardId": "Rlr"
+    },
+    {
+      "id": "building-urban-center",
+      "heading": "Urban Center",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        75.78
+      ],
+      "hasRule": false,
+      "cardId": "UbCt"
+    },
+    {
+      "id": "building-voortrekker",
+      "heading": "Voortrekker",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        86.38
+      ],
+      "hasRule": false,
+      "cardId": "Vtk"
+    },
+    {
+      "id": "building-zeppelin",
+      "heading": "Zeppelin",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        96.88
+      ],
+      "hasRule": false,
+      "cardId": "Zpl"
+    },
+    {
+      "id": "building-engineering-school",
+      "heading": "Engineering School",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        107.48
+      ],
+      "hasRule": false,
+      "cardId": "EgSl"
+    },
+    {
+      "id": "building-sewer-system",
+      "heading": "Sewer System",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        117.98
+      ],
+      "hasRule": false,
+      "cardId": "SwSt"
+    },
+    {
+      "id": "building-stock-exchange",
+      "heading": "Stock Exchange",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        128.58
+      ],
+      "hasRule": false,
+      "cardId": "SkEx"
+    },
+    {
+      "id": "building-coal-mine",
+      "heading": "Coal Mine",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        139.08
+      ],
+      "hasRule": false,
+      "cardId": "ClMn"
+    },
+    {
+      "id": "building-national-park",
+      "heading": "National Park",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        149.68
+      ],
+      "hasRule": false,
+      "cardId": "NtPk"
+    },
+    {
+      "id": "building-radio",
+      "heading": "Radio",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        160.18
+      ],
+      "hasRule": false,
+      "cardId": "Rad"
+    },
+    {
+      "id": "building-shantytown",
+      "heading": "Shantytown",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        170.78
+      ],
+      "hasRule": false,
+      "cardId": "Stt"
+    },
+    {
+      "id": "building-department-store",
+      "heading": "Department Store",
+      "section": "Building",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        181.28
+      ],
+      "hasRule": false,
+      "cardId": "DpSr"
+    },
+    {
+      "id": "colony-colony",
+      "heading": "Colony",
+      "section": "Colony",
+      "age": null,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        202.49
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "colony-hispania",
+      "heading": "Hispania",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        249.78
+      ],
+      "hasRule": false,
+      "cardId": "Hsn"
+    },
+    {
+      "id": "colony-israel",
+      "heading": "Israel",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        260.38
+      ],
+      "hasRule": false,
+      "cardId": "Isr"
+    },
+    {
+      "id": "colony-macedonia",
+      "heading": "Macedonia",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        270.88
+      ],
+      "hasRule": false,
+      "cardId": "Mcd"
+    },
+    {
+      "id": "colony-nubia",
+      "heading": "Nubia",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        281.48
+      ],
+      "hasRule": false,
+      "cardId": "Nub"
+    },
+    {
+      "id": "colony-babylonia",
+      "heading": "Babylonia",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        291.98
+      ],
+      "hasRule": false,
+      "cardId": "Bbl"
+    },
+    {
+      "id": "colony-gaul",
+      "heading": "Gaul",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        302.58
+      ],
+      "hasRule": false,
+      "cardId": "Gal"
+    },
+    {
+      "id": "colony-armenia",
+      "heading": "Armenia",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        313.08
+      ],
+      "hasRule": false,
+      "cardId": "Arm"
+    },
+    {
+      "id": "colony-hindu-kush",
+      "heading": "Hindu Kush",
+      "section": "Colony",
+      "age": 1,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        323.68
+      ],
+      "hasRule": false,
+      "cardId": "HdKs"
+    },
+    {
+      "id": "colony-greenland",
+      "heading": "Greenland",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        358.88
+      ],
+      "hasRule": false,
+      "cardId": "Grl"
+    },
+    {
+      "id": "colony-lombardy",
+      "heading": "Lombardy",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        369.38
+      ],
+      "hasRule": false,
+      "cardId": "Lbd"
+    },
+    {
+      "id": "colony-sicily",
+      "heading": "Sicily",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        379.98
+      ],
+      "hasRule": false,
+      "cardId": "Scl"
+    },
+    {
+      "id": "colony-tibet",
+      "heading": "Tibet",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        390.48
+      ],
+      "hasRule": false,
+      "cardId": "Tbt"
+    },
+    {
+      "id": "colony-england",
+      "heading": "England",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        401.08
+      ],
+      "hasRule": false,
+      "cardId": "Eng"
+    },
+    {
+      "id": "colony-prussia",
+      "heading": "Prussia",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        411.58
+      ],
+      "hasRule": false,
+      "cardId": "Prs"
+    },
+    {
+      "id": "colony-crusader-states",
+      "heading": "Crusader States",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        422.18
+      ],
+      "hasRule": false,
+      "cardId": "CsSt"
+    },
+    {
+      "id": "colony-saharan-trade",
+      "heading": "Saharan Trade",
+      "section": "Colony",
+      "age": 2,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        432.68
+      ],
+      "hasRule": false,
+      "cardId": "ShTd"
+    },
+    {
+      "id": "colony-aztec-empire",
+      "heading": "Aztec Empire",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        467.88
+      ],
+      "hasRule": false,
+      "cardId": "AzEp"
+    },
+    {
+      "id": "colony-incan-empire",
+      "heading": "Incan Empire",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        478.48
+      ],
+      "hasRule": false,
+      "cardId": "IcEp"
+    },
+    {
+      "id": "colony-quebec",
+      "heading": "Quebec",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        488.98
+      ],
+      "hasRule": false,
+      "cardId": "Qbc"
+    },
+    {
+      "id": "colony-south-africa",
+      "heading": "South Africa",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        499.58
+      ],
+      "hasRule": false,
+      "cardId": "StAf"
+    },
+    {
+      "id": "colony-brazil",
+      "heading": "Brazil",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        510.08
+      ],
+      "hasRule": false,
+      "cardId": "Brz"
+    },
+    {
+      "id": "colony-phillipines",
+      "heading": "Phillipines",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        520.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "colony-the-caribbean",
+      "heading": "The Caribbean",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        531.18
+      ],
+      "hasRule": false,
+      "cardId": "TCrb"
+    },
+    {
+      "id": "colony-virginia",
+      "heading": "Virginia",
+      "section": "Colony",
+      "age": 3,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        541.78
+      ],
+      "hasRule": false,
+      "cardId": "Vgn"
+    },
+    {
+      "id": "colony-congo",
+      "heading": "Congo",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        576.98
+      ],
+      "hasRule": false,
+      "cardId": "Con"
+    },
+    {
+      "id": "colony-india",
+      "heading": "India",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        587.48
+      ],
+      "hasRule": false,
+      "cardId": "Ind"
+    },
+    {
+      "id": "colony-nigeria",
+      "heading": "Nigeria",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        598.08
+      ],
+      "hasRule": false,
+      "cardId": "Ngr"
+    },
+    {
+      "id": "colony-ostafrika-tanganyika-africa",
+      "heading": "Ostafrika (Tanganyika/Africa",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        608.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "colony-orientale-in-translations-1-4",
+      "heading": "Orientale in translations) [1.4]",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        619.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "colony-algeria",
+      "heading": "Algeria",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        629.68
+      ],
+      "hasRule": false,
+      "cardId": "Agr"
+    },
+    {
+      "id": "colony-hong-kong",
+      "heading": "Hong Kong",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        640.28
+      ],
+      "hasRule": false,
+      "cardId": "HgKg"
+    },
+    {
+      "id": "colony-australia",
+      "heading": "Australia",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        650.78
+      ],
+      "hasRule": false,
+      "cardId": "Arl"
+    },
+    {
+      "id": "colony-libya",
+      "heading": "Libya",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        661.38
+      ],
+      "hasRule": false,
+      "cardId": "Lby"
+    },
+    {
+      "id": "colony-grand-duchy-of-finland",
+      "heading": "Grand Duchy of Finland",
+      "section": "Colony",
+      "age": 4,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        671.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-golden-age",
+      "heading": "Golden Age",
+      "section": "Golden Age",
+      "age": null,
+      "sourcePages": [
+        4
+      ],
+      "position": [
+        4,
+        3,
+        713.99
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-bonus",
+      "heading": "Bonus",
+      "section": "Golden Age",
+      "age": null,
+      "sourcePages": [
+        4,
+        5
+      ],
+      "position": [
+        4,
+        3,
+        742.65
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-aeneid",
+      "heading": "Aeneid",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        168.48
+      ],
+      "hasRule": false,
+      "cardId": "And"
+    },
+    {
+      "id": "golden-age-iron-working",
+      "heading": "Iron Working",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        179.08
+      ],
+      "hasRule": false,
+      "cardId": "IrWk"
+    },
+    {
+      "id": "golden-age-map-making",
+      "heading": "Map Making",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        189.58
+      ],
+      "hasRule": false,
+      "cardId": "MpMk"
+    },
+    {
+      "id": "golden-age-the-bible",
+      "heading": "The Bible",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        200.18
+      ],
+      "hasRule": false,
+      "cardId": "Bib"
+    },
+    {
+      "id": "golden-age-silk",
+      "heading": "Silk",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        210.68
+      ],
+      "hasRule": false,
+      "cardId": "Slk"
+    },
+    {
+      "id": "golden-age-the-odyssey",
+      "heading": "The Odyssey",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        221.28
+      ],
+      "hasRule": false,
+      "cardId": "Ods"
+    },
+    {
+      "id": "golden-age-coinage",
+      "heading": "Coinage",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        231.78
+      ],
+      "hasRule": false,
+      "cardId": "Cng"
+    },
+    {
+      "id": "golden-age-mahabharata",
+      "heading": "Mahabharata",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        242.38
+      ],
+      "hasRule": false,
+      "cardId": "Mhb"
+    },
+    {
+      "id": "golden-age-antikythera-mechanism",
+      "heading": "Antikythera Mechanism",
+      "section": "Golden Age",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        252.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-compass",
+      "heading": "Compass",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        361.28
+      ],
+      "hasRule": false,
+      "cardId": "Cmp"
+    },
+    {
+      "id": "golden-age-divina-comedia",
+      "heading": "Divina Comedia",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        371.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-heavy-plough",
+      "heading": "Heavy Plough",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        382.38
+      ],
+      "hasRule": false,
+      "cardId": "HvPl"
+    },
+    {
+      "id": "golden-age-magna-carta",
+      "heading": "Magna Carta",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        392.88
+      ],
+      "hasRule": false,
+      "cardId": "MnCt"
+    },
+    {
+      "id": "golden-age-spectacles",
+      "heading": "Spectacles",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        403.48
+      ],
+      "hasRule": false,
+      "cardId": "Stc"
+    },
+    {
+      "id": "golden-age-three-kingdoms",
+      "heading": "Three Kingdoms",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        413.98
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "golden-age-gunpowder",
+      "heading": "Gunpowder",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        424.58
+      ],
+      "hasRule": false,
+      "cardId": "Gpd"
+    },
+    {
+      "id": "golden-age-the-quoran",
+      "heading": "The Quoran",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        435.08
+      ],
+      "hasRule": false,
+      "cardId": "Qrn"
+    },
+    {
+      "id": "golden-age-arabian-nights",
+      "heading": "Arabian Nights",
+      "section": "Golden Age",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        445.68
+      ],
+      "hasRule": true,
+      "cardId": "ArNt"
+    },
+    {
+      "id": "golden-age-clocks",
+      "heading": "Clocks",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        564.48
+      ],
+      "hasRule": false,
+      "cardId": "Clk"
+    },
+    {
+      "id": "golden-age-gutenberg-bible",
+      "heading": "Gutenberg Bible",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        574.98
+      ],
+      "hasRule": false,
+      "cardId": "GbBb"
+    },
+    {
+      "id": "golden-age-microscope",
+      "heading": "Microscope",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        585.58
+      ],
+      "hasRule": false,
+      "cardId": "Mcs"
+    },
+    {
+      "id": "golden-age-romeo-and-juliet",
+      "heading": "Romeo and Juliet",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        596.08
+      ],
+      "hasRule": false,
+      "cardId": "RmJl"
+    },
+    {
+      "id": "golden-age-don-quixote",
+      "heading": "Don Quixote",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        606.68
+      ],
+      "hasRule": false,
+      "cardId": "DnQx"
+    },
+    {
+      "id": "golden-age-telescope",
+      "heading": "Telescope",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        617.18
+      ],
+      "hasRule": false,
+      "cardId": "Tls"
+    },
+    {
+      "id": "golden-age-principia",
+      "heading": "Principia",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        627.78
+      ],
+      "hasRule": false,
+      "cardId": "Pcp"
+    },
+    {
+      "id": "golden-age-thermometer",
+      "heading": "Thermometer",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        638.28
+      ],
+      "hasRule": false,
+      "cardId": "Tmm"
+    },
+    {
+      "id": "golden-age-le-vite",
+      "heading": "Le Vite",
+      "section": "Golden Age",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        648.88
+      ],
+      "hasRule": true,
+      "cardId": "LeVt"
+    },
+    {
+      "id": "golden-age-das-kapital",
+      "heading": "Das Kapital",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        725.88
+      ],
+      "hasRule": false,
+      "cardId": "DsKp"
+    },
+    {
+      "id": "golden-age-dynamite",
+      "heading": "Dynamite",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        736.38
+      ],
+      "hasRule": false,
+      "cardId": "Dnm"
+    },
+    {
+      "id": "golden-age-origin-of-species",
+      "heading": "Origin of Species",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        746.98
+      ],
+      "hasRule": false,
+      "cardId": "OgSc"
+    },
+    {
+      "id": "golden-age-vaccine",
+      "heading": "Vaccine",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        757.48
+      ],
+      "hasRule": false,
+      "cardId": "Vcn"
+    },
+    {
+      "id": "golden-age-candide",
+      "heading": "Candide",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        1,
+        768.08
+      ],
+      "hasRule": false,
+      "cardId": "Cdd"
+    },
+    {
+      "id": "golden-age-electricity",
+      "heading": "Electricity",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        44.18
+      ],
+      "hasRule": false,
+      "cardId": "Etc"
+    },
+    {
+      "id": "golden-age-kalevala",
+      "heading": "Kalevala",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        54.68
+      ],
+      "hasRule": false,
+      "cardId": "Klv"
+    },
+    {
+      "id": "golden-age-spinning-jenny",
+      "heading": "Spinning Jenny",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        65.28
+      ],
+      "hasRule": false,
+      "cardId": "SnJn"
+    },
+    {
+      "id": "golden-age-uncle-tom-s-cabin",
+      "heading": "Uncle Tom's Cabin",
+      "section": "Golden Age",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        75.78
+      ],
+      "hasRule": true,
+      "cardId": "UTC"
+    },
+    {
+      "id": "military-military",
+      "heading": "Military",
+      "section": "Military",
+      "age": null,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        190.99
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "military-axeman",
+      "heading": "Axeman",
+      "section": "Military",
+      "age": 0,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        238.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "military-chariot",
+      "heading": "Chariot",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        273.58
+      ],
+      "hasRule": false,
+      "cardId": "Crt"
+    },
+    {
+      "id": "military-hoplite",
+      "heading": "Hoplite",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        284.08
+      ],
+      "hasRule": false,
+      "cardId": "Hpl"
+    },
+    {
+      "id": "military-immortal",
+      "heading": "Immortal",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        294.68
+      ],
+      "hasRule": false,
+      "cardId": "Imt"
+    },
+    {
+      "id": "military-legionary",
+      "heading": "Legionary",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        305.18
+      ],
+      "hasRule": false,
+      "cardId": "Lgn"
+    },
+    {
+      "id": "military-archer",
+      "heading": "Archer",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        315.78
+      ],
+      "hasRule": false,
+      "cardId": "Arc"
+    },
+    {
+      "id": "military-trireme",
+      "heading": "Trireme",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        326.28
+      ],
+      "hasRule": false,
+      "cardId": "Trm"
+    },
+    {
+      "id": "military-elephant",
+      "heading": "Elephant",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        336.88
+      ],
+      "hasRule": false,
+      "cardId": "Elp"
+    },
+    {
+      "id": "military-phalanx",
+      "heading": "Phalanx",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        347.38
+      ],
+      "hasRule": false,
+      "cardId": "Plx"
+    },
+    {
+      "id": "military-praetorian-guard",
+      "heading": "Praetorian Guard",
+      "section": "Military",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        357.98
+      ],
+      "hasRule": false,
+      "cardId": "PtGd"
+    },
+    {
+      "id": "military-camel-archer",
+      "heading": "Camel Archer",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        393.18
+      ],
+      "hasRule": false,
+      "cardId": "CmAr"
+    },
+    {
+      "id": "military-cho-ko-nu",
+      "heading": "Cho-Ko-Nu",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        403.68
+      ],
+      "hasRule": false,
+      "cardId": "CKN"
+    },
+    {
+      "id": "military-horse-archer",
+      "heading": "Horse Archer",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        414.28
+      ],
+      "hasRule": false,
+      "cardId": "HsAr"
+    },
+    {
+      "id": "military-longboats",
+      "heading": "Longboats",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        424.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "military-knight",
+      "heading": "Knight",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        435.38
+      ],
+      "hasRule": false,
+      "cardId": "Knt"
+    },
+    {
+      "id": "military-longbowman",
+      "heading": "Longbowman",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        445.88
+      ],
+      "hasRule": false,
+      "cardId": "Lbm"
+    },
+    {
+      "id": "military-cataphract",
+      "heading": "Cataphract",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        456.48
+      ],
+      "hasRule": false,
+      "cardId": "Ctp"
+    },
+    {
+      "id": "military-greek-fire-galley",
+      "heading": "Greek Fire Galley",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        466.98
+      ],
+      "hasRule": false,
+      "cardId": "GFG"
+    },
+    {
+      "id": "military-assassin",
+      "heading": "Assassin",
+      "section": "Military",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        477.58
+      ],
+      "hasRule": true,
+      "cardId": "Ass"
+    },
+    {
+      "id": "military-conquistador",
+      "heading": "Conquistador",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        596.38
+      ],
+      "hasRule": false,
+      "cardId": "Cqd"
+    },
+    {
+      "id": "military-jaguar-warrior",
+      "heading": "Jaguar Warrior",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        606.88
+      ],
+      "hasRule": false,
+      "cardId": "JgWr"
+    },
+    {
+      "id": "military-redcoat",
+      "heading": "Redcoat",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        617.48
+      ],
+      "hasRule": false,
+      "cardId": "Rdc"
+    },
+    {
+      "id": "military-samurai",
+      "heading": "Samurai",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        627.98
+      ],
+      "hasRule": false,
+      "cardId": "Smr"
+    },
+    {
+      "id": "military-frigate",
+      "heading": "Frigate",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        638.58
+      ],
+      "hasRule": false,
+      "cardId": "Fgt"
+    },
+    {
+      "id": "military-ranger",
+      "heading": "Ranger",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        649.08
+      ],
+      "hasRule": false,
+      "cardId": "Rng"
+    },
+    {
+      "id": "military-hakkapeliitta",
+      "heading": "Hakkapeliitta",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        659.68
+      ],
+      "hasRule": false,
+      "cardId": "Hkp"
+    },
+    {
+      "id": "military-mercenary",
+      "heading": "Mercenary",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        670.18
+      ],
+      "hasRule": false,
+      "cardId": "Mcn"
+    },
+    {
+      "id": "military-privateer",
+      "heading": "Privateer",
+      "section": "Military",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        680.78
+      ],
+      "hasRule": false,
+      "cardId": "Pvt"
+    },
+    {
+      "id": "military-cavalry",
+      "heading": "Cavalry",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        715.98
+      ],
+      "hasRule": false,
+      "cardId": "Cvr"
+    },
+    {
+      "id": "military-cossack",
+      "heading": "Cossack",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        726.48
+      ],
+      "hasRule": false,
+      "cardId": "Csk"
+    },
+    {
+      "id": "military-hussar",
+      "heading": "Hussar",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        737.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "military-riflfleman",
+      "heading": "Riflfleman",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        747.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "military-conscript",
+      "heading": "Conscript",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        758.18
+      ],
+      "hasRule": false,
+      "cardId": "Cns"
+    },
+    {
+      "id": "military-submarine",
+      "heading": "Submarine",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        2,
+        768.68
+      ],
+      "hasRule": false,
+      "cardId": "Sub"
+    },
+    {
+      "id": "military-dreadnought",
+      "heading": "Dreadnought",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        44.18
+      ],
+      "hasRule": false,
+      "cardId": "Drn"
+    },
+    {
+      "id": "military-machine-gunner",
+      "heading": "Machine Gunner",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        54.68
+      ],
+      "hasRule": false,
+      "cardId": "McGn"
+    },
+    {
+      "id": "military-boxers",
+      "heading": "Boxers",
+      "section": "Military",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        65.28
+      ],
+      "hasRule": false,
+      "cardId": "Bxr"
+    },
+    {
+      "id": "war-war",
+      "heading": "War",
+      "section": "War",
+      "age": null,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        86.39
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "war-hunnic-invasions",
+      "heading": "Hunnic Invasions",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        133.78
+      ],
+      "hasRule": false,
+      "cardId": "HncI"
+    },
+    {
+      "id": "war-pelopponesian-war",
+      "heading": "Pelopponesian War",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        144.28
+      ],
+      "hasRule": false,
+      "cardId": "PlpW"
+    },
+    {
+      "id": "war-warring-states",
+      "heading": "Warring States",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        154.88
+      ],
+      "hasRule": false,
+      "cardId": "WSts"
+    },
+    {
+      "id": "war-wars-of-alexander",
+      "heading": "Wars of Alexander",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        165.38
+      ],
+      "hasRule": false,
+      "cardId": "WAlx"
+    },
+    {
+      "id": "war-parthian-wars",
+      "heading": "Parthian Wars",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        175.98
+      ],
+      "hasRule": false,
+      "cardId": "PrtW"
+    },
+    {
+      "id": "war-three-kingdoms",
+      "heading": "Three Kingdoms",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        186.48
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "war-hyksos-invasion",
+      "heading": "Hyksos Invasion",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        197.08
+      ],
+      "hasRule": false,
+      "cardId": "HksI"
+    },
+    {
+      "id": "war-punic-wars",
+      "heading": "Punic Wars",
+      "section": "War",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        207.58
+      ],
+      "hasRule": false,
+      "cardId": "PncW"
+    },
+    {
+      "id": "war-byzantine-arab-war",
+      "heading": "Byzantine-Arab War",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        242.78
+      ],
+      "hasRule": false,
+      "cardId": "BAW"
+    },
+    {
+      "id": "war-first-crusade",
+      "heading": "First Crusade",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        253.38
+      ],
+      "hasRule": false,
+      "cardId": "FstC"
+    },
+    {
+      "id": "war-hundred-years-war",
+      "heading": "Hundred Years War",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        263.88
+      ],
+      "hasRule": false,
+      "cardId": "HYW"
+    },
+    {
+      "id": "war-reconquista",
+      "heading": "Reconquista",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        274.48
+      ],
+      "hasRule": false,
+      "cardId": "Rcq"
+    },
+    {
+      "id": "war-viking-raids",
+      "heading": "Viking Raids",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        284.98
+      ],
+      "hasRule": false,
+      "cardId": "VkgR"
+    },
+    {
+      "id": "war-war-of-the-roses",
+      "heading": "War of the Roses",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        295.58
+      ],
+      "hasRule": false,
+      "cardId": "WRss"
+    },
+    {
+      "id": "war-mongol-invasions",
+      "heading": "Mongol Invasions",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        306.08
+      ],
+      "hasRule": false,
+      "cardId": "MngI"
+    },
+    {
+      "id": "war-vandalic-war",
+      "heading": "Vandalic War",
+      "section": "War",
+      "age": 2,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        316.68
+      ],
+      "hasRule": false,
+      "cardId": "VdlW"
+    },
+    {
+      "id": "war-great-northern-war",
+      "heading": "Great Northern War",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        351.88
+      ],
+      "hasRule": false,
+      "cardId": "GNW"
+    },
+    {
+      "id": "war-imjin-war",
+      "heading": "Imjin War",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        362.38
+      ],
+      "hasRule": false,
+      "cardId": "ImjW"
+    },
+    {
+      "id": "war-mughal-invasion",
+      "heading": "Mughal Invasion",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        372.98
+      ],
+      "hasRule": false,
+      "cardId": "MghI"
+    },
+    {
+      "id": "war-war-of-jenkins-ear",
+      "heading": "War of Jenkins' Ear",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        383.48
+      ],
+      "hasRule": false,
+      "cardId": "WJE"
+    },
+    {
+      "id": "war-cortes-expedition",
+      "heading": "Cortes Expedition",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        394.08
+      ],
+      "hasRule": false,
+      "cardId": "CtEx"
+    },
+    {
+      "id": "war-dutch-liberation-war",
+      "heading": "Dutch Liberation War",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        404.58
+      ],
+      "hasRule": false,
+      "cardId": "DLW"
+    },
+    {
+      "id": "war-thirty-years-war",
+      "heading": "Thirty Years War",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        415.18
+      ],
+      "hasRule": false,
+      "cardId": "TYW"
+    },
+    {
+      "id": "war-war-of-cyprus",
+      "heading": "War of Cyprus",
+      "section": "War",
+      "age": 3,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        425.68
+      ],
+      "hasRule": false,
+      "cardId": "WCpr"
+    },
+    {
+      "id": "war-balkan-wars",
+      "heading": "Balkan Wars",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        460.88
+      ],
+      "hasRule": false,
+      "cardId": "BknW"
+    },
+    {
+      "id": "war-franco-prussian-war",
+      "heading": "Franco-Prussian War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        471.48
+      ],
+      "hasRule": false,
+      "cardId": "FPW"
+    },
+    {
+      "id": "war-opium-war",
+      "heading": "Opium War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        481.98
+      ],
+      "hasRule": false,
+      "cardId": "OpmW"
+    },
+    {
+      "id": "war-second-boer-war",
+      "heading": "Second Boer War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        492.58
+      ],
+      "hasRule": false,
+      "cardId": "SBW"
+    },
+    {
+      "id": "war-anglo-afghan-war",
+      "heading": "Anglo-Afghan War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        503.08
+      ],
+      "hasRule": false,
+      "cardId": "AAW"
+    },
+    {
+      "id": "war-napoleonic-war",
+      "heading": "Napoleonic War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        513.68
+      ],
+      "hasRule": false,
+      "cardId": "NplW"
+    },
+    {
+      "id": "war-american-civil-war",
+      "heading": "American Civil War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        524.18
+      ],
+      "hasRule": false,
+      "cardId": "ACW"
+    },
+    {
+      "id": "war-crimean-war",
+      "heading": "Crimean War",
+      "section": "War",
+      "age": 4,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        534.78
+      ],
+      "hasRule": false,
+      "cardId": "CmnW"
+    },
+    {
+      "id": "wonder-wonder",
+      "heading": "Wonder",
+      "section": "Wonder",
+      "age": null,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        555.89
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "wonder-colosseum",
+      "heading": "Colosseum",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        692.48
+      ],
+      "hasRule": true,
+      "cardId": "Cls"
+    },
+    {
+      "id": "wonder-hanging-gardens",
+      "heading": "Hanging Gardens",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        744.88
+      ],
+      "hasRule": false,
+      "cardId": "HgGd"
+    },
+    {
+      "id": "wonder-pyramids",
+      "heading": "Pyramids",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        755.38
+      ],
+      "hasRule": false,
+      "cardId": "Prm"
+    },
+    {
+      "id": "wonder-stonehenge",
+      "heading": "Stonehenge",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        5
+      ],
+      "position": [
+        5,
+        3,
+        765.98
+      ],
+      "hasRule": false,
+      "cardId": "Sth"
+    },
+    {
+      "id": "wonder-great-lighthouse",
+      "heading": "Great Lighthouse",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        44.18
+      ],
+      "hasRule": true,
+      "cardId": "GrLh"
+    },
+    {
+      "id": "wonder-sphinx",
+      "heading": "Sphinx",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        96.58
+      ],
+      "hasRule": true,
+      "cardId": "Spx"
+    },
+    {
+      "id": "wonder-the-oracle",
+      "heading": "The Oracle",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        128.08
+      ],
+      "hasRule": false,
+      "cardId": "Orc"
+    },
+    {
+      "id": "wonder-solomon-s-temple",
+      "heading": "Solomon's Temple",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        138.58
+      ],
+      "hasRule": true,
+      "cardId": "SmTp"
+    },
+    {
+      "id": "wonder-terracotta-army",
+      "heading": "Terracotta Army",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        211.88
+      ],
+      "hasRule": true,
+      "cardId": "TcAm"
+    },
+    {
+      "id": "wonder-petra",
+      "heading": "Petra",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        253.78
+      ],
+      "hasRule": true,
+      "cardId": "Ptr"
+    },
+    {
+      "id": "wonder-great-library",
+      "heading": "Great Library",
+      "section": "Wonder",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        285.18
+      ],
+      "hasRule": true,
+      "cardId": "GrLr"
+    },
+    {
+      "id": "wonder-alhambra",
+      "heading": "Alhambra",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        362.18
+      ],
+      "hasRule": true,
+      "cardId": "Ahb"
+    },
+    {
+      "id": "wonder-notre-dame",
+      "heading": "Notre Dame",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        404.08
+      ],
+      "hasRule": true,
+      "cardId": "NtDm"
+    },
+    {
+      "id": "wonder-porcelain-tower",
+      "heading": "Porcelain Tower",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        414.68
+      ],
+      "hasRule": true,
+      "cardId": "PcTw"
+    },
+    {
+      "id": "wonder-sankore-university",
+      "heading": "Sankore University",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        519.28
+      ],
+      "hasRule": false,
+      "cardId": "SkUn"
+    },
+    {
+      "id": "wonder-angkor-wat",
+      "heading": "Angkor Wat",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        529.78
+      ],
+      "hasRule": true,
+      "cardId": "AkWt"
+    },
+    {
+      "id": "wonder-chichen-itza",
+      "heading": "Chichen Itza",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        540.38
+      ],
+      "hasRule": true,
+      "cardId": "CcIz"
+    },
+    {
+      "id": "wonder-moai-statues",
+      "heading": "Moai Statues",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        582.28
+      ],
+      "hasRule": false,
+      "cardId": "MoSt"
+    },
+    {
+      "id": "wonder-krak-des-chevaliers",
+      "heading": "Krak des Chevaliers",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        592.78
+      ],
+      "hasRule": false,
+      "cardId": "KrCv"
+    },
+    {
+      "id": "wonder-great-wall",
+      "heading": "Great Wall",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        603.38
+      ],
+      "hasRule": true,
+      "cardId": "GrWl"
+    },
+    {
+      "id": "wonder-piazza-san-marco",
+      "heading": "Piazza San Marco",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        655.68
+      ],
+      "hasRule": true,
+      "cardId": "PSM"
+    },
+    {
+      "id": "wonder-hagia-sophia",
+      "heading": "Hagia Sophia",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        687.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "wonder-shwedagon-pagoda",
+      "heading": "Shwedagon Pagoda",
+      "section": "Wonder",
+      "age": 2,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        1,
+        708.18
+      ],
+      "hasRule": true,
+      "cardId": "SwPg"
+    },
+    {
+      "id": "wonder-machu-picchu",
+      "heading": "Machu Picchu",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        110.58
+      ],
+      "hasRule": false,
+      "cardId": "McPc"
+    },
+    {
+      "id": "wonder-sistine-chapel",
+      "heading": "Sistine Chapel",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        121.18
+      ],
+      "hasRule": true,
+      "cardId": "StCp"
+    },
+    {
+      "id": "wonder-taj-mahal",
+      "heading": "Taj Mahal",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        173.48
+      ],
+      "hasRule": false,
+      "cardId": "TjMh"
+    },
+    {
+      "id": "wonder-versailles",
+      "heading": "Versailles",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        184.08
+      ],
+      "hasRule": true,
+      "cardId": "Vrs"
+    },
+    {
+      "id": "wonder-potala-palace",
+      "heading": "Potala Palace",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        319.98
+      ],
+      "hasRule": true,
+      "cardId": "PtPl"
+    },
+    {
+      "id": "wonder-royal-society",
+      "heading": "Royal Society",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        361.88
+      ],
+      "hasRule": true,
+      "cardId": "RySc"
+    },
+    {
+      "id": "wonder-uraniborg",
+      "heading": "Uraniborg",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        414.28
+      ],
+      "hasRule": true,
+      "cardId": "Unb"
+    },
+    {
+      "id": "wonder-forbidden-palace",
+      "heading": "Forbidden Palace",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        435.28
+      ],
+      "hasRule": false,
+      "cardId": "FbPl"
+    },
+    {
+      "id": "wonder-himeji-castle",
+      "heading": "Himeji Castle",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        445.78
+      ],
+      "hasRule": true,
+      "cardId": "HmCs"
+    },
+    {
+      "id": "wonder-red-fort",
+      "heading": "Red Fort",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        508.58
+      ],
+      "hasRule": true,
+      "cardId": "RdFt"
+    },
+    {
+      "id": "wonder-kremlin",
+      "heading": "Kremlin",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        540.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "wonder-mechanical-turk",
+      "heading": "Mechanical Turk",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        2,
+        592.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "wonder-oresund-dues",
+      "heading": "Öresund Dues",
+      "section": "Wonder",
+      "age": 3,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        65.08
+      ],
+      "hasRule": true,
+      "cardId": "OsDs"
+    },
+    {
+      "id": "wonder-darwin-s-voyage",
+      "heading": "Darwin's Voyage",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        142.08
+      ],
+      "hasRule": false,
+      "cardId": "DwVy"
+    },
+    {
+      "id": "wonder-ford-motor-company",
+      "heading": "Ford Motor Company",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        152.58
+      ],
+      "hasRule": false,
+      "cardId": "FMC"
+    },
+    {
+      "id": "wonder-south-pole-expedition",
+      "heading": "South Pole Expedition",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        163.18
+      ],
+      "hasRule": true,
+      "cardId": "SPE"
+    },
+    {
+      "id": "wonder-suez-canal",
+      "heading": "Suez Canal",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        215.48
+      ],
+      "hasRule": false,
+      "cardId": "SzCn"
+    },
+    {
+      "id": "wonder-big-ben",
+      "heading": "Big Ben",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        226.08
+      ],
+      "hasRule": true,
+      "cardId": "BgBn"
+    },
+    {
+      "id": "wonder-brandenburg-gate",
+      "heading": "Brandenburg Gate",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        257.48
+      ],
+      "hasRule": true,
+      "cardId": "BbGt"
+    },
+    {
+      "id": "wonder-british-museum",
+      "heading": "British Museum",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        299.38
+      ],
+      "hasRule": true,
+      "cardId": "BtMs"
+    },
+    {
+      "id": "wonder-mit",
+      "heading": "MIT",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        341.28
+      ],
+      "hasRule": true,
+      "cardId": "MIT"
+    },
+    {
+      "id": "wonder-statue-of-liberty",
+      "heading": "Statue of Liberty",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        404.08
+      ],
+      "hasRule": true,
+      "cardId": "StLb"
+    },
+    {
+      "id": "wonder-titanic",
+      "heading": "Titanic",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        445.98
+      ],
+      "hasRule": true,
+      "cardId": "Ttn"
+    },
+    {
+      "id": "wonder-wardenclyffffe-tower",
+      "heading": "Wardenclyffffe Tower",
+      "section": "Wonder",
+      "age": 4,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        540.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "natural-wonders-natural-wonders",
+      "heading": "Natural Wonders",
+      "section": "Natural Wonders",
+      "age": null,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        561.16
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "natural-wonders-the-pillar-of-hercules",
+      "heading": "The Pillar of Hercules",
+      "section": "Natural Wonders",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        684.08
+      ],
+      "hasRule": false,
+      "cardId": "PlHc"
+    },
+    {
+      "id": "natural-wonders-mount-ararat",
+      "heading": "Mount Ararat",
+      "section": "Natural Wonders",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        694.68
+      ],
+      "hasRule": false,
+      "cardId": "MtAr"
+    },
+    {
+      "id": "natural-wonders-vesuvius",
+      "heading": "Vesuvius",
+      "section": "Natural Wonders",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        705.18
+      ],
+      "hasRule": true,
+      "cardId": "Vsv"
+    },
+    {
+      "id": "natural-wonders-mount-kailash",
+      "heading": "Mount Kailash",
+      "section": "Natural Wonders",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        747.08
+      ],
+      "hasRule": false,
+      "cardId": "MtKl"
+    },
+    {
+      "id": "natural-wonders-siwa-oasis",
+      "heading": "Siwa Oasis",
+      "section": "Natural Wonders",
+      "age": 1,
+      "sourcePages": [
+        6
+      ],
+      "position": [
+        6,
+        3,
+        757.68
+      ],
+      "hasRule": false,
+      "cardId": "SwOs"
+    },
+    {
+      "id": "natural-wonders-siberia",
+      "heading": "Siberia",
+      "section": "Natural Wonders",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        63.68
+      ],
+      "hasRule": true,
+      "cardId": "Sbr"
+    },
+    {
+      "id": "natural-wonders-sahara",
+      "heading": "Sahara",
+      "section": "Natural Wonders",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        178.78
+      ],
+      "hasRule": true,
+      "cardId": "Shr"
+    },
+    {
+      "id": "natural-wonders-aurora-borealis",
+      "heading": "Aurora Borealis",
+      "section": "Natural Wonders",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        220.68
+      ],
+      "hasRule": false,
+      "cardId": "ArBr"
+    },
+    {
+      "id": "natural-wonders-grand-banks",
+      "heading": "Grand Banks",
+      "section": "Natural Wonders",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        231.18
+      ],
+      "hasRule": false,
+      "cardId": "GrBk"
+    },
+    {
+      "id": "natural-wonders-hawaii",
+      "heading": "Hawaii",
+      "section": "Natural Wonders",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        241.78
+      ],
+      "hasRule": true,
+      "cardId": "Hwi"
+    },
+    {
+      "id": "natural-wonders-great-barrier-reef",
+      "heading": "Great Barrier Reef",
+      "section": "Natural Wonders",
+      "age": 3,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        318.78
+      ],
+      "hasRule": false,
+      "cardId": "GBR"
+    },
+    {
+      "id": "natural-wonders-grand-canyon",
+      "heading": "Grand Canyon",
+      "section": "Natural Wonders",
+      "age": 3,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        329.28
+      ],
+      "hasRule": false,
+      "cardId": "GrCy"
+    },
+    {
+      "id": "natural-wonders-great-plains",
+      "heading": "Great Plains",
+      "section": "Natural Wonders",
+      "age": 3,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        339.88
+      ],
+      "hasRule": false,
+      "cardId": "GrPl"
+    },
+    {
+      "id": "natural-wonders-spice-islands",
+      "heading": "Spice Islands",
+      "section": "Natural Wonders",
+      "age": 3,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        350.38
+      ],
+      "hasRule": true,
+      "cardId": "SpIl"
+    },
+    {
+      "id": "natural-wonders-cape-of-good-hope",
+      "heading": "Cape of Good Hope",
+      "section": "Natural Wonders",
+      "age": 3,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        381.88
+      ],
+      "hasRule": false,
+      "cardId": "CGH"
+    },
+    {
+      "id": "natural-wonders-titusville",
+      "heading": "Titusville",
+      "section": "Natural Wonders",
+      "age": 4,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        417.08
+      ],
+      "hasRule": true,
+      "cardId": "Ttv"
+    },
+    {
+      "id": "natural-wonders-northwest-passage",
+      "heading": "Northwest Passage",
+      "section": "Natural Wonders",
+      "age": 4,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        448.48
+      ],
+      "hasRule": false,
+      "cardId": "NwPs"
+    },
+    {
+      "id": "natural-wonders-victoria-falls",
+      "heading": "Victoria Falls",
+      "section": "Natural Wonders",
+      "age": 4,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        459.08
+      ],
+      "hasRule": true,
+      "cardId": "VtFl"
+    },
+    {
+      "id": "natural-wonders-uluru",
+      "heading": "Uluru",
+      "section": "Natural Wonders",
+      "age": 4,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        490.48
+      ],
+      "hasRule": true,
+      "cardId": "Ulr"
+    },
+    {
+      "id": "event-event",
+      "heading": "Event",
+      "section": "Event",
+      "age": null,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        1,
+        522.09
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-aryan-migration",
+      "heading": "Aryan Migration",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        63.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-ashokas-conversion",
+      "heading": "Ashokas conversion",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        74.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-assyrian-deportations",
+      "heading": "Assyrian deportations",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        126.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-atilla",
+      "heading": "Atilla",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        137.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-bread-and-games",
+      "heading": "Bread and Games",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        147.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-bronze-age-collapse",
+      "heading": "Bronze Age Collapse",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        158.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-christianity",
+      "heading": "Christianity",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        221.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-code-of-hammurabi",
+      "heading": "Code of Hammurabi",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        242.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-exodus",
+      "heading": "Exodus",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        252.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-han-dynasty",
+      "heading": "Han dynasty",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        263.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-hellenism",
+      "heading": "Hellenism",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        294.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-ionian-colonisation",
+      "heading": "Ionian Colonisation",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        315.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-jain-ascetism",
+      "heading": "Jain Ascetism",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        326.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-olympic-games",
+      "heading": "Olympic games",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        420.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-pax-romana",
+      "heading": "Pax Romana",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        483.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-philosophy",
+      "heading": "Philosophy",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        493.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-qin-unifcation",
+      "heading": "Qin Unifcation",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        504.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-spartacus-revolt",
+      "heading": "Spartacus revolt",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        556.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-rigveda",
+      "heading": "Rigveda",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        587.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-sea-peoples",
+      "heading": "Sea Peoples",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        629.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-shang-oracle-bones",
+      "heading": "Shang Oracle Bones",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        682.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-taoism",
+      "heading": "Taoism",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        692.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-yellow-turban-rebellion",
+      "heading": "Yellow Turban Rebellion",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        703.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-zoroastrian-revival",
+      "heading": "Zoroastrian revival",
+      "section": "Event",
+      "age": 1,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        2,
+        713.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-benedictine-rule",
+      "heading": "Benedictine Rule",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        89.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-black-death",
+      "heading": "Black Death",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        100.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-caste-system",
+      "heading": "Caste system",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        173.48
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-chanson-de-roland",
+      "heading": "Chanson de Roland",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        184.08
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-council-of-clermont",
+      "heading": "Council of Clermont",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        194.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-ecological-collapse",
+      "heading": "Ecological Collapse",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        205.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-feudal-dues",
+      "heading": "Feudal dues",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        320.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-fourth-crusade",
+      "heading": "Fourth Crusade",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        351.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-hajj-from-mali",
+      "heading": "Hajj from Mali",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        518.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-hanseatic-salt-trade",
+      "heading": "Hanseatic Salt Trade",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        539.98
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-hunt-for-prester-john",
+      "heading": "Hunt for Prester John",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        550.48
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-iconoclasm",
+      "heading": "Iconoclasm",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        561.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-imperial-examination",
+      "heading": "Imperial Examination",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        582.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-justinian-code",
+      "heading": "Justinian Code",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        592.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-martyrdom-of-ali",
+      "heading": "Martyrdom of Ali",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        603.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-paper-money",
+      "heading": "Paper Money",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        613.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-peace-of-god",
+      "heading": "Peace of God",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        624.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-raid-on-lindisfarne",
+      "heading": "Raid on Lindisfarne",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        645.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-religious-schism",
+      "heading": "Religious Schism",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        655.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-sack-of-baghdad",
+      "heading": "Sack of Baghdad",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        666.48
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-scholasticism",
+      "heading": "Scholasticism",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        676.98
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-song-resistance",
+      "heading": "Song Resistance",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7
+      ],
+      "position": [
+        7,
+        3,
+        687.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-stupor-mundi",
+      "heading": "Stupor Mundi",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        7,
+        8
+      ],
+      "position": [
+        7,
+        3,
+        739.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-zanj-revolt",
+      "heading": "Zanj Revolt",
+      "section": "Event",
+      "age": 2,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        54.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-absolute-monarchy",
+      "heading": "Absolute Monarchy",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        110.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-african-slave-trade",
+      "heading": "African Slave Trade",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        142.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-blackbeard",
+      "heading": "Blackbeard",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        152.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-city-upon-a-hill",
+      "heading": "City Upon a Hill",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        163.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-columbian-exchange",
+      "heading": "Columbian Exchange",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        173.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-council-of-trent",
+      "heading": "Council of Trent",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        184.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-crop-rotation",
+      "heading": "Crop Rotation",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        194.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-dutch-revolt",
+      "heading": "Dutch Revolt",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        205.48
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-expulsion-of-jews",
+      "heading": "Expulsion of Jews",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        236.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-glorious-revolution",
+      "heading": "Glorious revolution",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        247.48
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-habeas-corpus-act",
+      "heading": "Habeas Corpus Act",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        331.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-janissaries",
+      "heading": "Janissaries",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        341.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-kangxi-era",
+      "heading": "Kangxi Era",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        362.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-little-ice-age",
+      "heading": "Little Ice Age",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        394.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-magellan-s-expedition",
+      "heading": "Magellan's expedition",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        415.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-mercantilism",
+      "heading": "Mercantilism",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        467.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-muntzer-revolt",
+      "heading": "Muntzer Revolt",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        519.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-papal-indulgence",
+      "heading": "Papal Indulgence",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        551.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-peace-of-westphalia",
+      "heading": "Peace of Westphalia",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        614.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-pilgrims",
+      "heading": "Pilgrims",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        645.68
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-salem-witch-trials",
+      "heading": "Salem Witch Trials",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        677.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-sinking-of-the-vasa",
+      "heading": "Sinking of the Vasa",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        1,
+        698.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-spice-trade",
+      "heading": "Spice Trade",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        54.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-tulip-mania",
+      "heading": "Tulip Mania",
+      "section": "Event",
+      "age": 3,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        65.18
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-american-revolution",
+      "heading": "American Revolution",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        100.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-anarchism",
+      "heading": "Anarchism",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        131.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-californian-gold-rush",
+      "heading": "Californian Gold Rush",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        152.78
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-dreyfus-affffair",
+      "heading": "Dreyfus Affffair",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        163.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-emigration",
+      "heading": "Emigration",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        173.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-entente-cordiale",
+      "heading": "Entente Cordiale",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        247.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-first-vatican-council",
+      "heading": "First Vatican Council",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        320.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-french-revolution",
+      "heading": "French Revolution",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        330.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-general-strike",
+      "heading": "General strike",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        383.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-great-exhibition",
+      "heading": "Great Exhibition",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        393.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-industrial-revolution",
+      "heading": "Industrial Revolution",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        487.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-irish-potato-blight",
+      "heading": "Irish Potato Blight",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        540.38
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-krakatoa",
+      "heading": "Krakatoa",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        550.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-march-to-moscow",
+      "heading": "March to Moscow",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        561.48
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-romanticism",
+      "heading": "Romanticism",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        592.88
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-scramble-for-africa",
+      "heading": "Scramble for Africa",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        603.48
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-sepoy-mutiny",
+      "heading": "Sepoy Mutiny",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        655.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-sick-man-of-europe",
+      "heading": "Sick Man of Europe",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        687.28
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-sokoto-caliphate",
+      "heading": "Sokoto Caliphate",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        697.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-taiping-rebellion",
+      "heading": "Taiping Rebellion",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        729.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-tennis-court-oath",
+      "heading": "Tennis Court Oath",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        2,
+        760.68
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "event-tonghak-movement",
+      "heading": "Tonghak movement",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        44.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-weltpolitik",
+      "heading": "Weltpolitik",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        65.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "event-women-s-suffffrage",
+      "heading": "Women's Suffffrage",
+      "section": "Event",
+      "age": 4,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        96.58
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "dynasties-dynasties",
+      "heading": "Dynasties",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        117.79
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "dynasties-america-federalist-party",
+      "heading": "America: Federalist Party",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        177.48
+      ],
+      "hasRule": false,
+      "cardId": "Am_FP"
+    },
+    {
+      "id": "dynasties-america-democratic-republicans",
+      "heading": "America: Democratic Republicans",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        187.98
+      ],
+      "hasRule": true,
+      "cardId": "Am_DR"
+    },
+    {
+      "id": "dynasties-arabs-umayyad-caliphate",
+      "heading": "Arabs: Umayyad Caliphate",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        449.48
+      ],
+      "hasRule": false,
+      "cardId": "Ar_UC"
+    },
+    {
+      "id": "dynasties-arabs-abbasid-caliphate",
+      "heading": "Arabs: Abbasid Caliphate",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        459.98
+      ],
+      "hasRule": true,
+      "cardId": "Ar_AC"
+    },
+    {
+      "id": "dynasties-china-qin-dynasty",
+      "heading": "China: Qin Dynasty",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        585.48
+      ],
+      "hasRule": true,
+      "cardId": "C_QD"
+    },
+    {
+      "id": "dynasties-china-ming-dynasty",
+      "heading": "China: Ming Dynasty",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        637.88
+      ],
+      "hasRule": false,
+      "cardId": "C_MD"
+    },
+    {
+      "id": "dynasties-egypt-new-kingdom",
+      "heading": "Egypt: New Kingdom",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        648.38
+      ],
+      "hasRule": false,
+      "cardId": "Eg_NK"
+    },
+    {
+      "id": "dynasties-egypt-old-kingdom",
+      "heading": "Egypt: Old Kingdom",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8
+      ],
+      "position": [
+        8,
+        3,
+        658.98
+      ],
+      "hasRule": true,
+      "cardId": "Eg_OK"
+    },
+    {
+      "id": "dynasties-ethiopia-axumite-kingdom",
+      "heading": "Ethiopia: Axumite Kingdom",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        8,
+        9
+      ],
+      "position": [
+        8,
+        3,
+        721.78
+      ],
+      "hasRule": true,
+      "cardId": "Et_AK"
+    },
+    {
+      "id": "dynasties-ethiopia-sheba",
+      "heading": "Ethiopia: Sheba",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        85.98
+      ],
+      "hasRule": false,
+      "cardId": "Et_Sb"
+    },
+    {
+      "id": "dynasties-greece-athens",
+      "heading": "Greece: Athens",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        96.48
+      ],
+      "hasRule": false,
+      "cardId": "G_At"
+    },
+    {
+      "id": "dynasties-greece-sparta",
+      "heading": "Greece: Sparta",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        107.08
+      ],
+      "hasRule": false,
+      "cardId": "G_St"
+    },
+    {
+      "id": "dynasties-india-mauryan-empire",
+      "heading": "India: Mauryan Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        117.58
+      ],
+      "hasRule": true,
+      "cardId": "I_My"
+    },
+    {
+      "id": "dynasties-india-mughal-empire",
+      "heading": "India: Mughal Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        201.28
+      ],
+      "hasRule": true,
+      "cardId": "I_Mg"
+    },
+    {
+      "id": "dynasties-japan-heian-period",
+      "heading": "Japan: Heian Period",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        274.68
+      ],
+      "hasRule": true,
+      "cardId": "J_HP"
+    },
+    {
+      "id": "dynasties-japan-edo-period",
+      "heading": "Japan: Edo Period",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        337.48
+      ],
+      "hasRule": true,
+      "cardId": "J_EP"
+    },
+    {
+      "id": "dynasties-korea-koryo-kingdom",
+      "heading": "Korea: Koryo Kingdom",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        389.78
+      ],
+      "hasRule": false,
+      "cardId": "K_KK"
+    },
+    {
+      "id": "dynasties-korea-joseon-kingdom",
+      "heading": "Korea: Joseon Kingdom",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        400.38
+      ],
+      "hasRule": true,
+      "cardId": "K_JK"
+    },
+    {
+      "id": "dynasties-mali-mali-empire",
+      "heading": "Mali: Mali Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        536.28
+      ],
+      "hasRule": true,
+      "cardId": "Ml_ME"
+    },
+    {
+      "id": "dynasties-mali-songhai-empire",
+      "heading": "Mali: Songhai Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        588.68
+      ],
+      "hasRule": false,
+      "cardId": "Ml_SE"
+    },
+    {
+      "id": "dynasties-mongolia-golden-horde",
+      "heading": "Mongolia: Golden Horde",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        599.18
+      ],
+      "hasRule": true,
+      "cardId": "Mg_GH"
+    },
+    {
+      "id": "dynasties-mongolia-yuan-dynasty",
+      "heading": "Mongolia: Yuan Dynasty",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        641.08
+      ],
+      "hasRule": true,
+      "cardId": "Mg_YD"
+    },
+    {
+      "id": "dynasties-persia-achaemenid-empire",
+      "heading": "Persia: Achaemenid Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        682.98
+      ],
+      "hasRule": true,
+      "cardId": "Ps_AE"
+    },
+    {
+      "id": "dynasties-persia-sassanid-empire",
+      "heading": "Persia: Sassanid Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        1,
+        724.88
+      ],
+      "hasRule": true,
+      "cardId": "Ps_SE"
+    },
+    {
+      "id": "dynasties-poland-jagellonian-dynasty",
+      "heading": "Poland: Jagellonian Dynasty",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        96.38
+      ],
+      "hasRule": true,
+      "cardId": "Pl_JD"
+    },
+    {
+      "id": "dynasties-poland-polish-lithuanian-commonwealth",
+      "heading": "Poland: Polish-Lithuanian Commonwealth",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        138.28
+      ],
+      "hasRule": true,
+      "cardId": "Pl_PLC"
+    },
+    {
+      "id": "dynasties-portugal-portugese-empire",
+      "heading": "Portugal: Portugese Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        222.08
+      ],
+      "hasRule": true,
+      "cardId": "Pg_PE"
+    },
+    {
+      "id": "dynasties-portugal-kingdom-of-leon",
+      "heading": "Portugal: Kingdom of Leon",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        326.68
+      ],
+      "hasRule": true,
+      "cardId": "Pg_KL"
+    },
+    {
+      "id": "dynasties-rome-roman-republic",
+      "heading": "Rome: Roman Republic",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        431.28
+      ],
+      "hasRule": true,
+      "cardId": "R_RR"
+    },
+    {
+      "id": "dynasties-rome-roman-empire",
+      "heading": "Rome: Roman Empire",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        473.18
+      ],
+      "hasRule": false,
+      "cardId": "R_RE"
+    },
+    {
+      "id": "dynasties-venice-domains-of-the-sea",
+      "heading": "Venice: Domains of the Sea",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        483.78
+      ],
+      "hasRule": true,
+      "cardId": "Vn_DS"
+    },
+    {
+      "id": "dynasties-venice-pactum-warmundi",
+      "heading": "Venice: Pactum Warmundi",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        515.18
+      ],
+      "hasRule": true,
+      "cardId": "Vn_PW"
+    },
+    {
+      "id": "dynasties-vikings-normans",
+      "heading": "Vikings: Normans",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        588.58
+      ],
+      "hasRule": true,
+      "cardId": "Vk_Nm"
+    },
+    {
+      "id": "dynasties-vikings-varangians",
+      "heading": "Vikings: Varangians",
+      "section": "Dynasties",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        609.58
+      ],
+      "hasRule": false,
+      "cardId": "Vk_Vr"
+    },
+    {
+      "id": "faq-faq",
+      "heading": "FAQ",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        641.29
+      ],
+      "hasRule": false,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-can-you-build-the-same-building-military-card-several-times",
+      "heading": "Q: Can you build the same building/military card several times?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        2,
+        687.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-can-you-place-many-workers-on-a-building-military",
+      "heading": "Q: Can you place many workers on a building/military?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        44.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military",
+      "heading": "Q: Do you get VP for placing a worker on a building/military?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        86.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "heading": "Q: In a 5-player game with 2 Nations having the most Strength, who gets the bonus from a strongest Nation event?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        163.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "heading": "Q: In a 5-player game with 3 Nations having the most Strength, who gets the bonus from a strongest Nation event?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        226.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-what-does-the-books-on-the-solo-tiles-mean",
+      "heading": "Q: What does the Books on the solo tiles mean?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        303.28
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-is-the-shadow-opponent-afected-by-war",
+      "heading": "Q: Is the shadow opponent afected by war?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        407.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-can-the-shadow-take-turmoil-cards",
+      "heading": "Q: Can the shadow take Turmoil cards?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        460.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-should-i-roll-the-die-after-every-action",
+      "heading": "Q: Should I roll the die after every action?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        512.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all",
+      "heading": "Q: If I am second in player order and pass as my frst action, will the shadow player roll at all?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        586.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated",
+      "heading": "Q: Are the strength and stability values for the shadow accumulated?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9
+      ],
+      "position": [
+        9,
+        3,
+        701.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again",
+      "heading": "Q: If a war has been bought or rolled, what happens if I roll a column with a war again?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        9,
+        10
+      ],
+      "position": [
+        9,
+        3,
+        753.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst",
+      "heading": "Q: Is the efect applied each time you roll a 5 or 6, or only the frst?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        1,
+        106.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well",
+      "heading": "Q: When an architect is removed by a die roll in the solo game, is a Turmoil card removed as well?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        1,
+        148.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-what-happens-when-i-take-a-worker",
+      "heading": "Q: What happens when I take a worker?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        1,
+        215.58
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers",
+      "heading": "Q: When does \"Scoring\" happen, like on Statue of Liberty? (Scoring: +2 VP if most workers)",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        1,
+        309.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-how-are-used-markers-placed",
+      "heading": "Q: How are \"Used\" markers placed?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        2,
+        44.18
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-how-many-rounds-is-the-game",
+      "heading": "Q: How many rounds is the game?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        2,
+        138.38
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2",
+      "heading": "Q: If I move a worker from a Temple (Stability 1) to a Ziggurat (Stability 2), is my Stability reduced by 1 before being increased by 2?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        2,
+        211.78
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-how-is-player-order-determined-for-nations-in-revolt",
+      "heading": "Q: How is player order determined for Nations in revolt?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        2,
+        326.88
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game",
+      "heading": "Q: How is negative Stability counted at the end of the game?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        3,
+        65.08
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3",
+      "heading": "Q: Is row 1 on the progress board diferent from row 2 and 3?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        3,
+        127.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war",
+      "heading": "Q: Page 15, what is the o in \"It is impossible for any nation to sufer any losses due to strength o war.\"?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        3,
+        215.48
+      ],
+      "hasRule": true,
+      "cardId": null
+    },
+    {
+      "id": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom",
+      "heading": "Q: Why is the 4:th age indicated by \"II II\" instead of \"IV\" at the bottom?",
+      "section": "FAQ",
+      "age": null,
+      "sourcePages": [
+        10
+      ],
+      "position": [
+        10,
+        3,
+        267.98
+      ],
+      "hasRule": true,
+      "cardId": null
+    }
+  ]
+}

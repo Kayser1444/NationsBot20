@@ -1,0 +1,3754 @@
+{
+  "schemaVersion": 1,
+  "metadataProvenance": "Local Tabony game implementation, read with AST; not publisher rule text.",
+  "metadataSources": [
+    {
+      "file": "progress_cards.py",
+      "sha256": "d89303bf696f885543c1d4bcc52767ed6e317c56b538d2f61d8f7449dfd2d9c2"
+    },
+    {
+      "file": "dynasty_cards.py",
+      "sha256": "d1e537f825008d18503660b0f3680c98f14bc607b01bdb9629387018739fd8cf"
+    }
+  ],
+  "cards": [
+    {
+      "id": "Ar_AC",
+      "name": "Abbasid Caliphate",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_AC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "AhLc",
+      "name": "Abraham Lincoln",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AhLc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "AbBk",
+      "name": "Abu Bakr",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AbBk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ps_AE",
+      "name": "Achaemenid Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_AE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "And",
+      "name": "Aeneid",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/And.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "AfNb",
+      "name": "Alfred Nobel",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AfNb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Agr",
+      "name": "Algeria",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Agr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ahb",
+      "name": "Alhambra",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ahb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ahz",
+      "name": "Alhazen",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ahz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ACW",
+      "name": "American Civil War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ACW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "AkWt",
+      "name": "Angkor Wat",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AkWt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "AAW",
+      "name": "Anglo-Afghan War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AAW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "AnKn",
+      "name": "Anna Komnene",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AnKn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Aqd",
+      "name": "Aqueduct",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Aqd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ArNt",
+      "name": "Arabian Nights",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ArNt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Arc",
+      "name": "Archer",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Arc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Acm",
+      "name": "Archimedes",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Acm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Arm",
+      "name": "Armenia",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Arm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ass",
+      "name": "Assassin",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ass.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "G_At",
+      "name": "Athens",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_At.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Agt",
+      "name": "Augustus",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Agt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ArBr",
+      "name": "Aurora Borealis",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ArBr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Arl",
+      "name": "Australia",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Arl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Et_AK",
+      "name": "Axumite Kingdom",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_AK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "AzEp",
+      "name": "Aztec Empire",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/AzEp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bbl",
+      "name": "Babylonia",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bbl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BknW",
+      "name": "Balkan Wars",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BknW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BlCt",
+      "name": "Ball Court",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BlCt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bnk",
+      "name": "Bank",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bnk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BAgc",
+      "name": "Battle of Agincourt",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BAgc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BAJ",
+      "name": "Battle of Ain Jalut",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BAJ.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BAtl",
+      "name": "Battle of Austerlitz",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BAtl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BBlc",
+      "name": "Battle of Balaclava",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BBlc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BBrd",
+      "name": "Battle of Borodino",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BBrd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BCjm",
+      "name": "Battle of Cajamarca",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BCjm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BCnn",
+      "name": "Battle of Cannae",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BCnn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BHst",
+      "name": "Battle of Hastings",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BHst.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BIss",
+      "name": "Battle of Issus",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BIss.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BKds",
+      "name": "Battle of Kadesh",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BKds.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BMzk",
+      "name": "Battle of Manzikert",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BMzk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BNry",
+      "name": "Battle of Noryang",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BNry.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BPtr",
+      "name": "Battle of Poitiers",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BPtr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BPtv",
+      "name": "Battle of Poltava",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BPtv.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BTnb",
+      "name": "Battle of Tannenberg",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BTnb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BTmp",
+      "name": "Battle of Thermopylae",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BTmp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BTfg",
+      "name": "Battle of Trafalgar",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BTfg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BTsm",
+      "name": "Battle of Tsushima",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BTsm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BWtl",
+      "name": "Battle of Waterloo",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BWtl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BjDr",
+      "name": "Benjamin Disraeli",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BjDr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BgBn",
+      "name": "Big Ben",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BgBn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bdc",
+      "name": "Boudica",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bdc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bxr",
+      "name": "Boxers",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bxr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BbGt",
+      "name": "Brandenburg Gate",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BbGt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Brz",
+      "name": "Brazil",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Brz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Brw",
+      "name": "Brewery",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Brw.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BtMs",
+      "name": "British Museum",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BtMs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bdh",
+      "name": "Buddha",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bdh.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "BAW",
+      "name": "Byzantine-Arab War",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/BAW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CmAr",
+      "name": "Camel Archer",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CmAr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cdd",
+      "name": "Candide",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cdd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CGH",
+      "name": "Cape of Good Hope",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CGH.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CrLn",
+      "name": "Carolus Linneaus",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CrLn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cas",
+      "name": "Castle",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cas.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ctp",
+      "name": "Cataphract",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ctp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cat",
+      "name": "Cathedral",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cat.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cvr",
+      "name": "Cavalry",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cvr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Crt",
+      "name": "Chariot",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Crt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cht",
+      "name": "Chateau",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cht.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CcIz",
+      "name": "Chichen Itza",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CcIz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CKN",
+      "name": "Cho-Ko-Nu",
+      "aliases": [
+        "Cho Ko Nu"
+      ],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CKN.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CtWl",
+      "name": "City Wall",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CtWl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Clk",
+      "name": "Clocks",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Clk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ClMn",
+      "name": "Coal Mine",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ClMn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CfHs",
+      "name": "Coffee House",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CfHs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cng",
+      "name": "Coinage",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cng.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ClTr",
+      "name": "Colonial Trading",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ClTr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cls",
+      "name": "Colosseum",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cls.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cmp",
+      "name": "Compass",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cmp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CfAc",
+      "name": "Confucian Academy",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CfAc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Con",
+      "name": "Congo",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Con.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cqd",
+      "name": "Conquistador",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cqd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cns",
+      "name": "Conscript",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cns.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CtEx",
+      "name": "Cortes Expedition",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CtEx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Csk",
+      "name": "Cossack",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Csk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Cth",
+      "name": "Courthouse",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Cth.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CmnW",
+      "name": "Crimean War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CmnW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CsAp",
+      "name": "Crossing the Alps",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CsAp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CsSt",
+      "name": "Crusader States",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CsSt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Crs",
+      "name": "Curassiers",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Crs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "CrGr",
+      "name": "Cyrus the Great",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/CrGr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "DwVy",
+      "name": "Darwin's Voyage",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DwVy.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "DsKp",
+      "name": "Das Kapital",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DsKp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Am_DR",
+      "name": "Democratic Republicans",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_DR.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "DpSr",
+      "name": "Department Store",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DpSr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Dik",
+      "name": "Dike",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Dik.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "DvCm",
+      "name": "Divina Commedia",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DvCm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vn_DS",
+      "name": "Domains of the Sea",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_DS.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "DnQx",
+      "name": "Don Quixote",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DnQx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Drn",
+      "name": "Dreadnought",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Drn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "DLW",
+      "name": "Dutch Liberation War",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/DLW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Dnm",
+      "name": "Dynamite",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Dnm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "J_EP",
+      "name": "Edo Period",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_EP.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "EnAq",
+      "name": "Eleanor of Aquitaine",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/EnAq.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Etc",
+      "name": "Electricity",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Etc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Elp",
+      "name": "Elephant",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Elp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Elz",
+      "name": "Elizabeth",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Elz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "EgSl",
+      "name": "Engineering School",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/EgSl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Eng",
+      "name": "England",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eng.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Fct",
+      "name": "Factory",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Fct.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FCtn",
+      "name": "Fall of Constantinople",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FCtn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FLsb",
+      "name": "Fall of Louisburg",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FLsb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FsIn",
+      "name": "Fashoda Incident",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FsIn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Am_FP",
+      "name": "Federalist Party",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_FP.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "FstC",
+      "name": "First Crusade",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FstC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FrNg",
+      "name": "Florence Nightingale",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FrNg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FbPl",
+      "name": "Forbidden Palace",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FbPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FMC",
+      "name": "Ford Motor Company",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FMC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Frg",
+      "name": "Forge",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Frg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Frm",
+      "name": "Forum",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Frm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FPW",
+      "name": "Franco-Prussian War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FPW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FdCp",
+      "name": "Frederic Chopin",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FdCp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "FdGr",
+      "name": "Frederick the Great",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/FdGr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Fgt",
+      "name": "Frigate",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Fgt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GlGl",
+      "name": "Galileo Galilei",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GlGl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Gal",
+      "name": "Gaul",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Gal.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GgKn",
+      "name": "Genghis Khan",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GgKn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mg_GH",
+      "name": "Golden Horde",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_GH.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Grn",
+      "name": "Granary",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Grn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrBk",
+      "name": "Grand Banks",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrBk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrCy",
+      "name": "Grand Canyon",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrCy.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GBR",
+      "name": "Great Barrier Reef",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GBR.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrLr",
+      "name": "Great Library",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrLr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrLh",
+      "name": "Great Lighthouse",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrLh.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GNW",
+      "name": "Great Northern War",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GNW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrPl",
+      "name": "Great Plains",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GrWl",
+      "name": "Great Wall",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GrWl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GFG",
+      "name": "Greek Fire Galley",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GFG.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Grl",
+      "name": "Greenland",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Grl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GdHl",
+      "name": "Guild Hall",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GdHl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Gpd",
+      "name": "Gunpowder",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Gpd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "GbBb",
+      "name": "Gutenberg Bible",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/GbBb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hkp",
+      "name": "Hakkapeliitta",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hkp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hmm",
+      "name": "Hammam",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hmm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HgGd",
+      "name": "Hanging Gardens",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HgGd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hnb",
+      "name": "Hannibal",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hnb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Han",
+      "name": "Hansa",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Han.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HrHd",
+      "name": "Harald Hardrada",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HrHd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hss",
+      "name": "Hatshepsut",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hss.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hwi",
+      "name": "Hawaii",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hwi.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HvPl",
+      "name": "Heavy Plough",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HvPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "J_HP",
+      "name": "Heian Period",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_HP.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "HmCs",
+      "name": "Himeji Castle",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HmCs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HdKs",
+      "name": "Hindu Kush",
+      "aliases": [
+        "Hindukush"
+      ],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HdKs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hip",
+      "name": "Hippodrome",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hip.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hsn",
+      "name": "Hispania",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hsn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HgKg",
+      "name": "Hong Kong",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HgKg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hpl",
+      "name": "Hoplite",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hpl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HsAr",
+      "name": "Horse Archer",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HsAr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hsp",
+      "name": "Hospital",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hsp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HYW",
+      "name": "Hundred Years War",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HYW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HncI",
+      "name": "Hunnic Invasions",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HncI.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HdPl",
+      "name": "Hydro Plant",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HdPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "HksI",
+      "name": "Hyksos Invasion",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/HksI.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Hpt",
+      "name": "Hypatia",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Hpt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ImjW",
+      "name": "Imjin War",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ImjW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Imt",
+      "name": "Immortal",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Imt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "IcEp",
+      "name": "Incan Empire",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/IcEp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ind",
+      "name": "India",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ind.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "IrWk",
+      "name": "Iron Working",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/IrWk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Isb",
+      "name": "Isabella",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Isb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Isr",
+      "name": "Israel",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Isr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pl_JD",
+      "name": "Jagellonian Dynasty",
+      "aliases": [
+        "Jagiellonian Dynasty"
+      ],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_JD.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "JgWr",
+      "name": "Jaguar Warrior",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/JgWr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "K_JK",
+      "name": "Joseon Kingdom",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_JK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Klv",
+      "name": "Kalevala",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Klv.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pg_KL",
+      "name": "Kingdom of Leon",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_KL.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Knt",
+      "name": "Knight",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Knt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "KnTp",
+      "name": "Knights Templar",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/KnTp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "K_KK",
+      "name": "Koryo Kingdom",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_KK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "KrCv",
+      "name": "Krak des Chevaliers",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/KrCv.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "LNT",
+      "name": "La Noche Triste",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/LNT.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "LeVt",
+      "name": "Le Vite",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/LeVt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lgn",
+      "name": "Legionary",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lgn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lib",
+      "name": "Library",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lib.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lby",
+      "name": "Libya",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lby.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lth",
+      "name": "Lighthouse",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lth.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "LnZx",
+      "name": "Lin Zexu",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/LnZx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lbd",
+      "name": "Lombardy",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lbd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lbm",
+      "name": "Longbowman",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lbm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lsp",
+      "name": "Longships",
+      "aliases": [],
+      "type": "military",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lsp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Lyc",
+      "name": "Lyceum",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Lyc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MIT",
+      "name": "MIT",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MIT.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mcd",
+      "name": "Macedonia",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mcd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "McGn",
+      "name": "Machine Gunner",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/McGn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "McPc",
+      "name": "Machu Picchu",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/McPc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mdr",
+      "name": "Madrasa",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mdr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MnCt",
+      "name": "Magna Carta",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MnCt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mhb",
+      "name": "Mahabharata",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mhb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ml_ME",
+      "name": "Mali Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_ME.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "MsMs",
+      "name": "Mansa Musa",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MsMs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MpMk",
+      "name": "Map Making",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MpMk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "McPl",
+      "name": "Marco Polo",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/McPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MrAn",
+      "name": "Marie Antoinette",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MrAn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MrCr",
+      "name": "Marie Curie",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MrCr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mkt",
+      "name": "Market",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mkt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MtLt",
+      "name": "Martin Luther",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MtLt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "I_My",
+      "name": "Mauryan Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_My.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Mcn",
+      "name": "Mercenary",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mcn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mcs",
+      "name": "Microscope",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mcs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MvBr",
+      "name": "Milvian Bridge",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MvBr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Min",
+      "name": "Mine",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Min.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "C_MD",
+      "name": "Ming Dynasty",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_MD.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Mnt",
+      "name": "Mint",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mnt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MoSt",
+      "name": "Moai Statues",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MoSt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mon",
+      "name": "Monastery",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mon.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MngI",
+      "name": "Mongol Invasions",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MngI.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mtz",
+      "name": "Montezuma",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mtz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Msq",
+      "name": "Mosque",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Msq.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MtAr",
+      "name": "Mount Ararat",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MtAr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "MtKl",
+      "name": "Mount Kailash",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MtKl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "I_Mg",
+      "name": "Mughal Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Mg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "MghI",
+      "name": "Mughal Invasion",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/MghI.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "NplW",
+      "name": "Napoleonic War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/NplW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "NtPk",
+      "name": "National Park",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/NtPk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Eg_NK",
+      "name": "New Kingdom",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_NK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "NcMc",
+      "name": "Niccolo Machiavelli",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/NcMc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ngr",
+      "name": "Nigeria",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ngr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vk_Nm",
+      "name": "Normans",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Nm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "NwPs",
+      "name": "Northwest Passage",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/NwPs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "NtDm",
+      "name": "Notre Dame",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/NtDm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Nub",
+      "name": "Nubia",
+      "aliases": [],
+      "type": "colony",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Nub.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Obs",
+      "name": "Observatory",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Obs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "OcFs",
+      "name": "Ocean Fishing",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/OcFs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Eg_OK",
+      "name": "Old Kingdom",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_OK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "OpmW",
+      "name": "Opium War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/OpmW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "OsDs",
+      "name": "Oresund Dues",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/OsDs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "OgSc",
+      "name": "Origin of Species",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/OgSc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Oak",
+      "name": "Ostafrika",
+      "aliases": [],
+      "type": "colony",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Oak.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vn_PW",
+      "name": "Pactum Warmundi",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_PW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Pgd",
+      "name": "Pagoda",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pgd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Plm",
+      "name": "Parliament",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Plm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PrtW",
+      "name": "Parthian Wars",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PrtW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PlpW",
+      "name": "Pelopponesian War",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PlpW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PnCl",
+      "name": "Penal Colony",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PnCl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PtGr",
+      "name": "Peter the Great",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PtGr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ptr",
+      "name": "Petra",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ptr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Plx",
+      "name": "Phalanx",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Plx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Plp",
+      "name": "Philippines",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Plp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PSM",
+      "name": "Piazza San Marco",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PSM.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pch",
+      "name": "Pocahontas",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pch.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pl_PLC",
+      "name": "Polish-Lithuanian Commonwealth",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_PLC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "PcTw",
+      "name": "Porcelain Tower",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PcTw.jpg",
+      "faqReviewStatus": "pilot_reviewed",
+      "metadataSource": "progress_cards.py",
+      "enabled": true,
+      "descriptionSv": "Det färdigbyggda underverkets plats kan användas för en rådgivare.",
+      "descriptionEn": "The completed Wonder space may hold an Advisor.",
+      "notes": "Name, type, age, image and effect checked against the supplied card image and local game metadata. Covers all nine passages naming Porcelain Tower in FAQ++ 1.11, plus the Wonder replacement rule. General game rules are not exhaustively mapped."
+    },
+    {
+      "id": "Pg_PE",
+      "name": "Portugese Empire",
+      "aliases": [
+        "Portuguese Empire"
+      ],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_PE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "PtPl",
+      "name": "Potala Palace",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PtPl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pts",
+      "name": "Potosi",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pts.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PtGd",
+      "name": "Praetorian Guard",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PtGd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pcp",
+      "name": "Principia",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pcp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PrPr",
+      "name": "Printing Press",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PrPr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Pvt",
+      "name": "Privateer",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pvt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Prs",
+      "name": "Prussia",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Prs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PncW",
+      "name": "Punic Wars",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PncW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Prm",
+      "name": "Pyramids",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Prm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "C_QD",
+      "name": "Qin Dynasty",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_QD.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "QSH",
+      "name": "Qin Shi Huang",
+      "aliases": [
+        "Qin Shi Huangdi"
+      ],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/QSH.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Qbc",
+      "name": "Quebec",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Qbc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rad",
+      "name": "Radio",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rad.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rlr",
+      "name": "Railroad",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rlr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rng",
+      "name": "Ranger",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rng.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rcq",
+      "name": "Reconquista",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rcq.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "RdFt",
+      "name": "Red Fort",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/RdFt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rdc",
+      "name": "Redcoat",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rdc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Rfm",
+      "name": "Rifleman",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Rfm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "R_RE",
+      "name": "Roman Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_RE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "R_RR",
+      "name": "Roman Republic",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_RR.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "RmJl",
+      "name": "Romeo and Juliet",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/RmJl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "RySc",
+      "name": "Royal Society",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/RySc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ScAl",
+      "name": "Sacrificial Altar",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ScAl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Shr",
+      "name": "Sahara",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Shr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ShTd",
+      "name": "Saharan Trade",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ShTd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "StAg",
+      "name": "Saint Augustine",
+      "aliases": [
+        "St Augustine"
+      ],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/StAg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Smr",
+      "name": "Samurai",
+      "aliases": [],
+      "type": "military",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Smr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SkUn",
+      "name": "Sankore University",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SkUn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ps_SE",
+      "name": "Sassanid Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_SE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Swm",
+      "name": "Sawmill",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Swm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SBW",
+      "name": "Second Boer War",
+      "aliases": [],
+      "type": "war",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SBW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SjGr",
+      "name": "Sejong the Great",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SjGr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SwSt",
+      "name": "Sewer System",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SwSt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SkZl",
+      "name": "Shaka Zulu",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SkZl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Stt",
+      "name": "Shantytown",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Stt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Et_Sb",
+      "name": "Sheba",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_Sb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Shp",
+      "name": "Shipyard",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Shp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SwPg",
+      "name": "Shwedagon Pagoda",
+      "aliases": [],
+      "type": "wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SwPg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Sbr",
+      "name": "Siberia",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Sbr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Scl",
+      "name": "Sicily",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Scl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SAls",
+      "name": "Siege of Alesia",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SAls.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SCtn",
+      "name": "Siege of Constantinople",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SCtn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SRhd",
+      "name": "Siege of Rhodes",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SRhd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "STry",
+      "name": "Siege of Troy",
+      "aliases": [],
+      "type": "battle",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/STry.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SVnn",
+      "name": "Siege of Vienna",
+      "aliases": [],
+      "type": "battle",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SVnn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Slk",
+      "name": "Silk",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Slk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SkRd",
+      "name": "Silk Road",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SkRd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SmBl",
+      "name": "Simon Bolivar",
+      "aliases": [],
+      "type": "advisor",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SmBl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "StCp",
+      "name": "Sistine Chapel",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/StCp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SwOs",
+      "name": "Siwa Oasis",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SwOs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SmTp",
+      "name": "Solomon's Temple",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SmTp.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ml_SE",
+      "name": "Songhai Empire",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_SE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "StAf",
+      "name": "South Africa",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/StAf.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SPE",
+      "name": "South Pole Expedition",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SPE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "G_St",
+      "name": "Sparta",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_St.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Stc",
+      "name": "Spectacles",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Stc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Spx",
+      "name": "Sphinx",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Spx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SpIl",
+      "name": "Spice Islands",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SpIl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SnJn",
+      "name": "Spinning Jenny",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SnJn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "StLb",
+      "name": "Statue of Liberty",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/StLb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SkEx",
+      "name": "Stock Exchange",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SkEx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Sth",
+      "name": "Stonehenge",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Sth.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Sub",
+      "name": "Submarine",
+      "aliases": [],
+      "type": "military",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Sub.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SzCn",
+      "name": "Suez Canal",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SzCn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Slm",
+      "name": "Suleiman I",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Slm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SnTz",
+      "name": "Sun Tzu",
+      "aliases": [],
+      "type": "advisor",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SnTz.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "SYkt",
+      "name": "Surrender at Yorktown",
+      "aliases": [],
+      "type": "battle",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/SYkt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Sng",
+      "name": "Synagogue",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Sng.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TjMh",
+      "name": "Taj Mahal",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TjMh.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Tls",
+      "name": "Telescope",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Tls.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TrFm",
+      "name": "Terrace Farming",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TrFm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TcAm",
+      "name": "Terracotta Army",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TcAm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Bib",
+      "name": "The Bible",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Bib.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TCrb",
+      "name": "The Caribbean",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TCrb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "THH",
+      "name": "The Horns of Hattin",
+      "aliases": [],
+      "type": "battle",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/THH.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ods",
+      "name": "The Odyssey",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ods.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Orc",
+      "name": "The Oracle",
+      "aliases": [],
+      "type": "wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Orc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "PlHc",
+      "name": "The Pillar of Hercules",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/PlHc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Qrn",
+      "name": "The Quoran",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Qrn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Thr",
+      "name": "Theatre",
+      "aliases": [],
+      "type": "building",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Thr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Tmm",
+      "name": "Thermometer",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Tmm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TYW",
+      "name": "Thirty Years War",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TYW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "TmAq",
+      "name": "Thomas Aquino",
+      "aliases": [
+        "Thomas Aquinas"
+      ],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/TmAq.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ThKd",
+      "name": "Three Kingdoms",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ThKd.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "RTK",
+      "name": "Three Kingdoms",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/RTK.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Tbt",
+      "name": "Tibet",
+      "aliases": [],
+      "type": "colony",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Tbt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ttn",
+      "name": "Titanic",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ttn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ttv",
+      "name": "Titusville",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ttv.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Tkg",
+      "name": "Tokugawa",
+      "aliases": [],
+      "type": "advisor",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Tkg.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Trm",
+      "name": "Trireme",
+      "aliases": [],
+      "type": "military",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Trm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ulr",
+      "name": "Uluru",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ulr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Ar_UC",
+      "name": "Umayyad Caliphate",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_UC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "UTC",
+      "name": "Uncle Tom's Cabin",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/UTC.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Uni",
+      "name": "University",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Uni.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Unb",
+      "name": "Uraniborg",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Unb.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "UbCt",
+      "name": "Urban Center",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/UbCt.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vcn",
+      "name": "Vaccine",
+      "aliases": [],
+      "type": "golden_age",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vcn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "VdlW",
+      "name": "Vandalic War",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/VdlW.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vk_Vr",
+      "name": "Varangians",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Vr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Vtc",
+      "name": "Vatican",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vtc.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vrs",
+      "name": "Versailles",
+      "aliases": [],
+      "type": "wonder",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vrs.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vsv",
+      "name": "Vesuvius",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vsv.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "VtFl",
+      "name": "Victoria Falls",
+      "aliases": [],
+      "type": "natural_wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/VtFl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "VkgR",
+      "name": "Viking Raids",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/VkgR.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vgn",
+      "name": "Virginia",
+      "aliases": [],
+      "type": "colony",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vgn.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Vtk",
+      "name": "Voortrekker",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vtk.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WCpr",
+      "name": "War of Cyprus",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WCpr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WJE",
+      "name": "War of Jenkins' Ear",
+      "aliases": [],
+      "type": "war",
+      "age": 3,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WJE.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WRss",
+      "name": "War of the Roses",
+      "aliases": [],
+      "type": "war",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WRss.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WcTw",
+      "name": "Wardenclyffe Tower",
+      "aliases": [],
+      "type": "wonder",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WcTw.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WSts",
+      "name": "Warring States",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WSts.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "WAlx",
+      "name": "Wars of Alexander",
+      "aliases": [],
+      "type": "war",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/WAlx.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Wtm",
+      "name": "Watermill",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Wtm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Wdm",
+      "name": "Windmill",
+      "aliases": [],
+      "type": "building",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Wdm.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Mg_YD",
+      "name": "Yuan Dynasty",
+      "aliases": [],
+      "type": "dynasty",
+      "age": null,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_YD.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "dynasty_cards.py"
+    },
+    {
+      "id": "Zpl",
+      "name": "Zeppelin",
+      "aliases": [],
+      "type": "building",
+      "age": 4,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Zpl.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "ZhXi",
+      "name": "Zhu Xi",
+      "aliases": [],
+      "type": "advisor",
+      "age": 2,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/ZhXi.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    },
+    {
+      "id": "Zgr",
+      "name": "Ziggurat",
+      "aliases": [],
+      "type": "building",
+      "age": 1,
+      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Zgr.jpg",
+      "faqReviewStatus": "pending",
+      "metadataSource": "progress_cards.py"
+    }
+  ]
+}

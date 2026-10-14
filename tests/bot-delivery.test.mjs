@@ -7,22 +7,28 @@ const expected = { guildId: '706912380067643473', channelId: '155887815164638826
 const userId = '229311536827465728';
 const dmId = '1559000000000000001';
 test('DM reminder goes only to the intended private channel; off goes only to the public channel', async () => {
-  const requests = [];
+  const requests = [], messages = [];
   const transport = botDelivery('secret', expected, { fetcher: async (url, options) => {
     requests.push(url);
     if (url.endsWith('/users/@me/channels')) {
       assert.equal(JSON.parse(options.body).recipient_id, userId);
       return Response.json({ id: dmId, type: 1, recipients: [{ id: userId }] });
     }
+    messages.push(JSON.parse(options.body));
     const channelId = url.includes(dmId) ? dmId : expected.channelId;
     return Response.json({ id: 'message', channel_id: channelId, mentions: [{ id: userId }] });
   } });
   const payload = turnMessage('Kayser', { id: '1' }, userId);
   await transport.sendReminder(payload, userId, () => true);
   assert.deepEqual(requests, ['https://discord.com/api/v10/users/@me/channels', `https://discord.com/api/v10/channels/${dmId}/messages`]);
+  assert.equal(messages[0].content, 'Din tur i [Parti 1](<https://games.tabony.net/nations/1/>)');
+  assert.deepEqual(messages[0].allowed_mentions, { parse: [], users: [], roles: [] });
+  assert.ok(payload.content.startsWith(`<@${userId}>`), 'DM delivery must not mutate the original payload');
   requests.length = 0;
   await transport.sendReminder(payload, userId, () => false);
   assert.deepEqual(requests, [`https://discord.com/api/v10/channels/${expected.channelId}/messages`]);
+  assert.equal(messages[1].content, payload.content);
+  assert.deepEqual(messages[1].allowed_mentions, { parse: [], users: [userId] });
 });
 test('blocked DM, wrong recipient, or changed delivery mode never falls back to a public message', async () => {
   for (const scenario of ['blocked', 'wrong-recipient', 'changed-mode', 'turn-expired']) {

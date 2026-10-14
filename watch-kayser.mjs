@@ -2,6 +2,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isIP } from 'node:net';
 import { observe } from './turn-state.mjs';
 import { webhookUrl, verifyDiscordDestination, sendDiscord, turnMessage } from './discord.mjs';
 import { discoverPublicMatches, addDiscoveredMatches } from './match-discovery.mjs';
@@ -30,6 +31,9 @@ if (!Number.isFinite(seconds) || seconds < 0) throw new Error('Invalid duration'
 const matches = config.matches.map(match => ({ ...match, state: null, status: 'connecting', backoff: 1000 }));
 const events = [];
 const discoveryIntervalMs = 5 * 60 * 1000;
+// These requests return full snapshots, so keep idle checks infrequent.
+const snapshotCheckIntervalMs = 5 * 60 * 1000;
+const gameSilenceTimeoutMs = 2 * snapshotCheckIntervalMs;
 const discoveryAbort = new AbortController();
 let discoveryTimer, discoveryStatus = 'checking public match lists';
 let discoveryBusy = false, discoveryAgain = false, lastDiscovery = null;
@@ -281,9 +285,9 @@ function connect(m) {
     m.backoff = Math.min(m.backoff * 2, 30000);
   });
   m.heartbeat = setInterval(() => {
-    if (Date.now() - m.lastResponse > 60000) connect(m);
+    if (Date.now() - m.lastResponse > gameSilenceTimeoutMs) connect(m);
     else if (socket.readyState === WebSocket.OPEN) socket.send('null');
-  }, 20000);
+  }, snapshotCheckIntervalMs);
 }
 process.on('SIGINT', stop);
 process.on('SIGTERM', stop);
@@ -293,7 +297,12 @@ if (!args.includes('--no-dashboard')) {
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
     dashboard = await startDashboard({ port, snapshot,
-      auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings(), { sessionPath: join(dataDirectory, 'admin-sessions.json') }) : null,
+      auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings(), {
+        sessionPath: join(dataDirectory, 'admin-sessions.json'),
+        // Cloud admin already trusts Railway's HTTPS ingress. X-Real-IP must
+        // be replaced by that ingress; never expose this port via a TCP proxy.
+        clientAddress: req => isIP(req.headers['x-real-ip'] ?? '') ? req.headers['x-real-ip'] : req.socket.remoteAddress,
+      }) : null,
       subscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         const next = addSubscriber(subscriptions, username, userId);

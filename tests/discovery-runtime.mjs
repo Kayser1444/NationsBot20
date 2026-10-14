@@ -1,6 +1,6 @@
 // Offline integration check of the actual observer: no network or real Discord posts.
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync, readdirSync, copyFileSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, readdirSync, copyFileSync, cpSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -20,6 +20,8 @@ globalThis.WebSocket = class extends EventTarget {
     queueMicrotask(() => this.dispatchEvent(new Event('open')));
   }
   send() {
+    // Bad server frames must not crash the observer or its fresh snapshot check.
+    for (const data of ['null', '[]', '"invalid"', '{broken']) this.dispatchEvent(new MessageEvent('message', { data }));
     const player = this.url.endsWith('/900000/') ? 'Kayser' : 'Other';
     this.dispatchEvent(new MessageEvent('message', { data: JSON.stringify({ replaying: false, move_number: 1, state: { game_over: 0, next_move_player: player } }) }));
     if (this.url.endsWith('/900000/') && connections.filter(url => url === this.url).length === 1) {
@@ -41,8 +43,8 @@ globalThis.fetch = async (url, options = {}) => {
         return Response.json({ id: dmChannel, type: 1, recipients: [{ id: recipient }] });
       }
       posts.push(JSON.parse(options.body));
-      const isTurn = JSON.parse(options.body).content.includes('<@');
-      const channelId = isTurn && (dmEnabled || (shared && JSON.parse(options.body).content.includes('<@'+secondUser+'>'))) ? dmChannel : '1558878151646388264';
+      const isTurn = JSON.parse(options.body).content.includes('/nations/900000/');
+      const channelId = isTurn && (dmEnabled || (shared && !JSON.parse(options.body).content.includes('<@'))) ? dmChannel : '1558878151646388264';
       assert.ok(address.endsWith(`/channels/${channelId}/messages`));
       return Response.json({ id: 'test-message', channel_id: channelId, mentions: [{ id: '229311536827465728' }] });
     }
@@ -60,6 +62,7 @@ const dataDir = mkdtempSync(join(tmpdir(), 'nations-runtime-'));
 const configDir = mkdtempSync(join(tmpdir(), 'nations-persistent-config-'));
 const root = fileURLToPath(new URL('../', import.meta.url));
 for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dataDir, name));
+for (const name of ['cards', 'faq']) cpSync(join(root, 'data', name), join(dataDir, 'data', name), { recursive: true });
 writeFileSync(join(dataDir, 'sm-season.json'), JSON.stringify({ season: 11, divisions: {} }));
 const config = { subscriptions: { Kayser: '229311536827465728' }, matches: [],
   userLocales: { '229311536827465728': 'en-US' },
@@ -75,13 +78,22 @@ await import(pathToFileURL(join(dataDir, 'watch-kayser.mjs')));
 await new Promise(resolve => realTimeout(resolve, 2300));
 assert.ok(listingChecks >= 4, 'discovery must run repeatedly');
 assert.equal(connections.filter(url => url.endsWith('/900000/')).length, shared ? 3 : 2, 'one observer plus one fresh check per recipient');
-const turnPosts = posts.filter(post => post.content.includes('<@'));
+const turnPosts = posts.filter(post => post.content.includes('/nations/900000/'));
 assert.equal(turnPosts.length, shared ? 2 : 1);
-if(shared){assert.match(turnPosts[1].content, /<@821001820309815368>/);assert.ok(turnPosts[1].content.includes('Din tur i'));}
-assert.match(turnPosts[0].content, /<@229311536827465728>/);
+for (const post of turnPosts) {
+  const privateReminder = dmEnabled || (shared && post === turnPosts[1]);
+  if (privateReminder) {
+    assert.ok(!post.content.includes('<@'));
+    assert.deepEqual(post.allowed_mentions, { parse: [], users: [], roles: [] });
+  } else {
+    assert.match(post.content, /<@229311536827465728>/);
+    assert.deepEqual(post.allowed_mentions, { parse: [], users: ['229311536827465728'] });
+  }
+}
+if(shared){assert.ok(turnPosts[1].content.includes('Din tur i'));}
 assert.match(turnPosts[0].content, /900000/);
 assert.ok(turnPosts[0].content.includes(dmEnabled ? 'Din tur i' : 'Your turn in'), 'reminders follow persisted language preferences in either delivery mode');
-const statusPosts = posts.filter(post => !post.content.includes('<@'));
+const statusPosts = posts.filter(post => !post.content.includes('/nations/900000/'));
 assert.equal(statusPosts.length, 2);
 assert.equal(statusPosts[0].content, '🟢 Bevakningen har startat.');
 assert.equal(statusPosts[1].content, '⚪ Bevakningen har stängts av.');
@@ -89,4 +101,4 @@ assert.deepEqual(statusPosts[0].allowed_mentions, { parse: [], users: [], roles:
 assert.equal(closedConnections.filter(url => url.endsWith('/900000/')).length, shared ? 3 : 2, 'all sockets close and discovery does not reopen completed games');
 rmSync(dataDir, { recursive: true, force: true });
 rmSync(configDir, { recursive: true, force: true });
-console.log(`PASS: one ${dmEnabled ? 'DM-only' : 'channel'} turn mention; completion disconnects; startup/shutdown each post once without mentions.`);
+console.log(`PASS: ${shared ? 'channel and DM' : dmEnabled ? 'DM-only' : 'channel'} reminders; only channel reminders mention users; completion disconnects; startup/shutdown each post once without mentions.`);

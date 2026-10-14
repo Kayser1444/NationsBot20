@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node start-cloud.mjs",
+    "dev": "node --env-file=.env.dev start-dev.mjs",
     "test": "node --test --test-isolation=none tests/*.test.mjs"
   },
   "type": "module",

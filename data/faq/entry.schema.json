@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Nations FAQ entry draft",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "sourceId", "sourcePages", "heading", "category", "sourceText", "review", "bullets", "cardLinks", "relatedEntryIds"],
+  "properties": {
+    "id": { "type": "string", "minLength": 1 },
+    "sourceId": { "type": "string", "minLength": 1 },
+    "sourcePages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } },
+    "heading": { "type": "string", "minLength": 1 },
+    "category": { "enum": ["general", "card_type", "card", "nation", "dynasty", "other"] },
+    "sourceText": { "type": "string", "minLength": 1 },
+    "review": { "$ref": "#/$defs/review" },
+    "bullets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "language", "kind", "text", "review"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "language": { "enum": ["en-US", "sv-SE"] },
+          "kind": { "enum": ["quotation", "summary", "translation"] },
+          "text": { "type": "string", "minLength": 1 },
+          "review": { "$ref": "#/$defs/review" }
+        }
+      }
+    },
+    "cardLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["cardId", "relation", "review"],
+        "properties": {
+          "cardId": { "type": "string", "minLength": 1 },
+          "relation": { "enum": ["own_entry", "cross_reference", "general_rule"] },
+          "review": { "$ref": "#/$defs/review" }
+        }
+      }
+    },
+    "relatedEntryIds": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  },
+  "$defs": {
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reviewer", "reviewedAt", "notes"],
+      "properties": {
+        "status": { "enum": ["pending", "approved", "rejected"] },
+        "reviewer": { "type": ["string", "null"] },
+        "reviewedAt": { "type": ["string", "null"] },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

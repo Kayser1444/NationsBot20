@@ -18,6 +18,9 @@ export const commands = [
   { name: 'language', description: 'Choose your bot language or follow Discord automatically', type: 1, options: [
     { name: 'locale', description: 'Swedish (sv-SE), English (en-US), or automatic (auto)', type: 3, required: true, autocomplete: true, max_length: 35 },
   ] },
+  { name: 'card', description: 'Visa kortbild och källkontrollerade FAQ-punkter', type: 1, options: [
+    { name: 'name', description: 'Kortnamn (pilot: Porcelain Tower)', type: 3, required: true, autocomplete: true, max_length: 100 },
+  ] },
 ];
 export const helpMessage = text('sv-SE', 'help');
 const quote = name => '`' + name.replace(/[`\r\n]/g, '') + '`';
@@ -99,9 +102,10 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
   if (own && own !== name) return t('switchName', { name: quote(own) });
   try { validateSubscriptions({ [name]: userId }); } catch { return t('invalidName'); }
   if (dm != null && !['on', 'off'].includes(dm)) return t('dmUsage');
+  const enablingDm = dm === 'on' && !getDm(userId);
   if (dm != null) setDm(userId, dm === 'on');
   if (own !== name) commit(addSubscriber(current, name, userId));
-  onNotificationsEnabled();
+  if (own !== name || enablingDm) onNotificationsEnabled();
   if (own === name) return t('already', { name: quote(name) }) + ' ' + t(getDm(userId) ? 'modeDm' : 'modeChannel');
   return t('subscribed', { name: quote(name), destination: t(getDm(userId) ? 'destinationDm' : 'destinationChannel') });
 }

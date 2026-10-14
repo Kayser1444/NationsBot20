@@ -1,12 +1,13 @@
 // Offline verification of pinned observers, shared sockets and subscription removal.
 import assert from 'node:assert/strict';
-import { mkdtempSync, readdirSync, copyFileSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, readdirSync, copyFileSync, cpSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dir = mkdtempSync(join(tmpdir(), 'sm-runtime-'));
 for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dir, name));
+for (const name of ['cards', 'faq']) cpSync(join(root, 'data', name), join(dir, 'data', name), { recursive: true });
 const match = { id: '1', title: 'S11-1A-P1', players: ['A', 'B', 'C', 'D'] };
 writeFileSync(join(dir, 'sm-season.json'), JSON.stringify({ season: 11, divisions: { '1A': { players: match.players, matches: [match] } } }));
 const config = { username: 'A', subscriptions: { A: '229311536827465728' }, discord: {}, matches: [match] };

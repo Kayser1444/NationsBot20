@@ -6,13 +6,13 @@ import { Events, GatewayIntentBits, MessageFlags, Routes } from 'discord.js';
 import { startDiscordBot } from '../discord-bot.mjs';
 const userId = '229311536827465728';
 async function fixture(t) {
-  let client, member = true, banned = false, lookups = 0, subscriptions = {}, reads = 0;
+  let client, onlyForeign = false, member = true, banned = false, lookups = 0, subscriptions = {}, reads = 0;
   const registered = [], deleted = [], sent = [];
   class FakeClient extends EventEmitter {
-    constructor(options) { super(); this.options = options; this.application = { id: 'app' }; this.rest = {
+    constructor(options) { super(); this.options = options; this.guilds = { cache: new Map([['guild', {}], ['another-server', {}]]) }; this.application = { id: 'app' }; this.rest = {
       post: async (route, payload) => registered.push({ route, ...payload }),
       get: async route => {
-        if (route.includes('/members/')) { lookups++; if (!member) throw new Error('unknown member'); return { user: { id: userId }, nick: 'Kayser (Owner)' }; }
+        if (route.includes('/members/')) { lookups++; if (onlyForeign && route.includes('/guilds/guild/')) throw new Error('not an SM member'); if (!member) throw new Error('unknown member'); return { user: { id: userId }, nick: 'Kayser (Owner)' }; }
         return [{ type: 1, name: 'smtable', id: 'old-table' }, { type: 1, name: 'notifications', id: 'old-notifications' }, { type: 1, name: 'foreign', id: 'keep' }];
       },
       delete: async route => deleted.push(route),
@@ -42,13 +42,29 @@ async function fixture(t) {
     };
     await client.listeners(Events.InteractionCreate)[0](interaction); return replies;
   }
-  return { run, registered, deleted, sent, client, service, deny: () => { member = false; }, ban: () => { banned = true; }, counts: () => ({ lookups, reads }), subscriptions: () => subscriptions };
+  return { run, registered, deleted, sent, client, service, foreignOnly: () => { onlyForeign = true; }, deny: () => { member = false; }, ban: () => { banned = true; }, counts: () => ({ lookups, reads }), subscriptions: () => subscriptions };
 }
 test('global commands support server and bot DM, while old owned guild registrations are removed', async t => {
   const f = await fixture(t);
   assert.deepEqual(f.client.options.intents, [GatewayIntentBits.Guilds]);
   for (const command of f.registered) { assert.equal(command.route, Routes.applicationCommands('app')); assert.deepEqual(command.body.contexts, [0, 1]); assert.deepEqual(command.body.integration_types, [0]); }
   assert.deepEqual(f.deleted.map(route => route.split('/').at(-1)), ['old-table', 'old-notifications']);
+});
+
+test('card replies in DM use the FAQ bank, membership check and bans without reading subscriptions', async t => {
+  const f = await fixture(t);
+  f.foreignOnly();
+  const reply = await f.run('card', { name: 'PcTw' });
+  assert.deepEqual(reply[0], {});
+  assert.equal(reply[1].embeds[0].title, 'Porcelain Tower');
+  assert.equal(reply.length, 2, 'FAQ starts collapsed in the same DM message');
+  assert.match(reply[1].components[0].components[0].label, /Visa FAQ \(13\)/);
+  assert.ok(reply.every(part => !part.flags));
+  assert.equal(f.counts().reads, 0);
+  f.deny();
+  assert.match((await f.run('card', { name: 'PcTw' }))[1].content, /Medlemskapet/);
+  f.ban();
+  assert.match((await f.run('card', { name: 'PcTw' }))[1].content, /spärrad/);
 });
 test('SM replies directly in DM regardless of dm:on and general commands use membership nickname', async t => {
   const f = await fixture(t);
@@ -83,4 +99,16 @@ test('SM commands pass the effective language override, falling back to the inte
   assert.equal((await f.run('smtable'))[1].content, 'en-US');
   f.service.getLanguageOverride = () => null;
   assert.equal((await f.run('smtable'))[1].content, 'sv-SE');
+});
+
+test('DM accepts membership exclusively in another installed community', async t => {
+  const f = await fixture(t); f.foreignOnly();
+  assert.equal((await f.run('smtable'))[1].content, 'SM auto');
+  assert.equal(f.counts().lookups, 2);
+});
+
+test('DM cannot disable private delivery and rejection does not create a subscription', async t => {
+  const f = await fixture(t);
+  assert.match((await f.run('notifications', { dm: 'off' }))[1].content, /Kanalpåminnelser/);
+  assert.deepEqual(f.subscriptions(), {});
 });

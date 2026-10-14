@@ -55,7 +55,13 @@ export function botDelivery(token, expected, { fetcher = fetch } = {}) {
         channelId = channel.id;
       }
       if (getDm(userId) !== dm || !isCurrent() || signal?.aborted) throw new DiscordDeliveryError('Inställningen eller turen ändrades före leverans.');
-      return sendToChannel(channelId, payload, signal);
+      const prefix = `<@${userId}> — `;
+      const messagePayload = dm ? {
+        ...payload,
+        content: payload.content.startsWith(prefix) ? payload.content.slice(prefix.length) : payload.content,
+        allowed_mentions: { parse: [], users: [], roles: [] },
+      } : payload;
+      return sendToChannel(channelId, messagePayload, signal);
     },
   };
 }

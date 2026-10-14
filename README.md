@@ -4,6 +4,14 @@ A standalone Discord reminder bot for the online Nations board game at
 https://games.tabony.net/nations/. It observes public game information without
 logging into the game, submitting moves or posting game chat.
 
+## Quick links
+
+- [NationsBot administration console](https://nationsbot20-production.up.railway.app/) — subscriptions, monitoring status and logs; sign in with the configured Discord owner account.
+- [Railway production service](https://railway.com/project/54e5d506-6518-484c-bbd6-2e5dd7449c80/service/5f489d1a-3442-45c3-b8cb-4b07cd4d4ce3?environmentId=4ae89d35-d82d-42e1-b5cd-2132cc248db0) — deployments, service logs, variables and volume settings; Railway access required.
+- [Nations on Tabony Games](https://games.tabony.net/nations/) — the online game, ongoing games and match pages.
+- [GitHub repository](https://github.com/Kayser1444/NationsBot20) — maintained source code and CI.
+- [Discord application settings](https://discord.com/developers/applications/1558936899446374570) — NationsBot 2.0 bot and OAuth settings; application access required.
+
 English commands with Swedish or English replies:
 
 - `/notifications on [nationsname]` enables turn reminders; omitted names reuse
@@ -50,13 +58,16 @@ Subscriptions and user preferences are saved in `/data/friends.json` on Railway'
 persistent volume: `subscriptions`, `lastNationsNames`, `dmPreferences` and
 `userLocales` (last observed Discord locale) plus `languagePreferences` (explicit
 bot language overrides), keyed by Discord user ID. Locale
-capture happens on commands in the designated channel; it does not sample the
+capture happens when users invoke commands; it does not sample the
 server member list. Delivery history lives separately in `friends-outbox.json`.
 
 ## Current observation method
 
 The bot scans public ongoing-game lists every five minutes and maintains one
-spectator WebSocket per watched game, shared between subscribers. A separate
+spectator WebSocket per watched game, shared between subscribers. A
+full-state check runs every five minutes on each connection; move updates still
+arrive immediately. Connections reconnect after more than ten minutes without
+a response, checked at the five-minute interval. A separate
 fresh state check validates pending reminders before delivery. Outages are retried;
 subscriptions, preferences, queued reminders and confirmed turns are persisted.
 Ambiguous Discord acknowledgements can still cause duplicate messages.
@@ -64,6 +75,41 @@ Ambiguous Discord acknowledgements can still cause duplicate messages.
 The [draft server-feed PR](https://github.com/Logitude/TabonyGames/pull/2) proposes
 a single metadata/turn feed to replace scraping. This notifier does not yet use
 that feed; it can be hosted independently of that PR's deployment.
+
+## Railway staging
+
+[Staging service](https://railway.com/project/54e5d506-6518-484c-bbd6-2e5dd7449c80/service/706a9b41-d46e-4e16-84a2-4e97b27f455a?environmentId=99f87381-4455-43f3-99fa-b7bb9a6c1495)
+uses the `staging` Git branch; production continues to use `main`.
+The environments have separate Discord credentials, destinations and volumes.
+Staging uses the NationsBot Dev application on the personal test server.
+
+Settings: Dockerfile builder, Wait for CI enabled, one replica, Serverless off,
+On Failure restart policy (10 retries), and its own volume mounted at `/data`.
+Use `NATIONS_DATA_DIR=/data`, the test server/channel IDs and the test bot token
+as `NATIONS_DISCORD_BOT_TOKEN`. Do not copy production variables or migration
+bundles. The web admin console is initially disabled (`NATIONS_ADMIN_ENABLED=0`);
+Discord commands and Railway logs provide the first deployment smoke test.
+Testing HTTPS/OAuth requires a separate staging domain and test-app OAuth setup.
+
+Stop the local testbot with Ctrl+C before starting staging: both use the same
+Discord application. Stop staging before returning to local Discord testing.
+Test subscriptions start empty and persist only on the staging volume.
+
+Release workflow:
+
+1. Commit the intended feature on a feature branch, run the automated checks,
+   then fast-forward `staging` to that commit and push it. Do not force-push.
+2. Verify Railway builds the Dockerfile and starts the bot. Check deployment logs
+   for Discord readiness; use the test bot's `/help`, `/status` and a test
+   subscription in the test channel. Check channel and DM reminders as needed.
+3. Restart staging and confirm subscriptions persist and Discord reconnects.
+4. After approval, fast-forward `main` to the **same tested commit** and push it.
+   Confirm production's deployed Git SHA matches staging's tested SHA. Any new
+   code or merge commit must be tested again before promotion.
+
+Do not deploy uncommitted working files as a release candidate. Staging proves
+that its own build and configuration work; production credentials and volume
+contents still differ. Staging consumes Railway credits while running.
 
 ## Railway deployment
 
@@ -154,6 +200,16 @@ last 30 days (absolute expiry) and survive bot restarts via `/data/admin-session
 Only hashes of session tokens, the owner ID, expiry and CSRF data are stored,
 with private file permissions. Logout revokes the session on disk immediately.
 Changing the configured owner, OAuth client or HTTPS origin invalidates saved sessions.
+Login starts are limited to 20 per client IP in a five-minute window, with at most
+five pending flows per client. The pending-flow cache holds at most 1,000 entries;
+when full, a fresh flow replaces the oldest rather than blocking all new logins.
+Distributed traffic can therefore expire an older pending flow, requiring a fresh
+sign-in, while single-use state and browser binding remain enforced. Cloud mode
+uses Railway HTTP ingress's validated `X-Real-IP`; absent or invalid values fall
+back to the socket address. Keep the application port behind that ingress, which
+must overwrite client-IP headers; do not expose it through a TCP proxy or a proxy
+that passes user-supplied `X-Real-IP` unchanged. Clients sharing an IP share the
+login limit. The local console does not use forwarded client-IP headers.
 OAuth tokens, client secrets and raw session cookies are never saved to the volume
 or exposed in the dashboard. Subscriptions remain in the existing `/data` files.
 Login uses `prompt=none` to reuse prior Discord authorization; when Discord
@@ -188,6 +244,80 @@ Block/unblock endpoints use the same owner authentication and CSRF protection as
 subscription management. A Discord message already submitted before a block
 cannot be recalled; subsequent reminders are suppressed.
 
+## Local development with live Discord
+
+Run a separate **NationsBot Dev** application in a test channel on the existing
+Nations Discord server. Production continues on Railway while this bot runs on
+your computer. No public URL, tunnel or Railway deployment is needed for Discord
+commands and reminders; the local bot connects outbound to Discord's Gateway.
+
+1. In the [Discord Developer Portal](https://discord.com/developers/applications),
+   create a new application named **NationsBot Dev**. Copy its Application ID.
+   Obtain its own bot token in the Bot settings; keep it private.
+2. Install this new application on the existing Nations server using Guild Install
+   with `bot` and `applications.commands` scopes. Give it **View Channel** and
+   **Send Messages** in a dedicated test channel such as `#nations-bot-dev`.
+   Review channel overrides so it only has the access needed for testing.
+   No Administrator or privileged Gateway intents are needed.
+3. Enable Discord Developer Mode and copy the test channel's ID. The default
+   server ID in the example is the existing Nations server.
+4. From this repository, install dependencies once and create the private config:
+
+   ```powershell
+   npm ci
+   Copy-Item dev.env.example .env.dev
+   ```
+
+   Fill in the development application ID, bot token and test channel ID in
+   `.env.dev`. Never paste the token into chat or commit it. This file is ignored
+   by Git. Production environment variables are not used for these credentials.
+5. Start the local bot:
+
+   ```powershell
+   npm run dev
+   ```
+
+   Open [the local development console](http://127.0.0.1:24682). The console is
+   local to this computer; it does not test the production HTTPS/OAuth login.
+   Stop with Ctrl+C. Restart the command after changing code or `.env.dev`.
+
+The launcher checks the token's application identity and channel/server before
+starting. The known production application and reminder channel are refused.
+Configuration, subscriptions, caches, logs and delivery history are kept under
+`.data/dev/`, separate from production and other local profiles. An existing dev
+configuration with a different destination refuses startup. It starts with no
+subscriptions; production subscribers and pending reminders are never imported.
+The test bot observes real public Nations games and sends real Discord messages
+and DMs for its own subscriptions. Only subscribe willing testers.
+
+Commands that change notifications, DM mode or language are limited to five per
+Discord account per ten-second window. `/status`, `/help`, `/smtable` and autocomplete
+remain available during that cooldown. A new subscription or a change from channel
+delivery to DM can send a control DM, at most once per account per minute; repeating
+an already active subscription does not send another control. These short limits
+are held in memory and reset on a bot restart. The outbox retains per-user receipts
+for the currently observed turn across unsubscribe/resubscribe and restarts, so
+off/on does not replay a confirmed reminder. New recipients and observed turn
+changes still receive their reminders. Malformed game frames are ignored by both
+the observer and the fresh check before delivery.
+
+### Smoke test and release workflow
+
+- In the test channel select commands belonging to **NationsBot Dev** (Discord
+  may also list the production bot's commands). Run `/help`, `/status` and
+  `/notifications on nationsname:<your-name>` and check the local console.
+- Check channel reminders for a real pending turn, then try DM delivery with
+  `/notifications on dm:on`. Test `/language` and `/notifications off` as needed.
+  Starting a subscription while your turn is pending can immediately remind you.
+- Use the local console to test subscription changes, user details and blocking.
+  Check `.data/dev/friends.log` for failures. Test state persists between runs.
+- Develop on a feature branch, run `npm test` and the runtime checks below, then
+  test against Discord with `npm run dev`. Keep unapproved work off the Railway
+  deployment branch (`main`). Pushing or merging into that branch can deploy it;
+  starting the local test bot does not deploy anything.
+
+Discord setup reference: [official quick start](https://docs.discord.com/developers/quick-start/getting-started).
+
 ## Local development
 
 Install Node.js 24, then:
@@ -213,6 +343,33 @@ This enables the administration dashboard at `http://127.0.0.1:24680` only on th
 local machine. The existing local prototype and Windows launchers can continue
 to run independently until the deliberate cloud cutover.
 
+### Local card and FAQ pilot
+
+`/card name:Porcelain Tower` shows the card image, a compact type/age row and
+13 sourced FAQ summary points from ten checked passages in FAQ++ 1.11. FAQ starts
+collapsed; **Show FAQ / Hide FAQ** updates the same card message. Each point
+identifies its original heading and page. Long answers have previous/next page
+buttons, and closing the FAQ leaves no extra messages behind. Swedish and English follow
+the caller's language preference. Successful server replies are public in the
+calling channel; DM replies stay in DM. Existing bans and DM membership checks
+apply, and no reminder subscription is required. Unknown or unsupported card
+names receive private help in server channels.
+
+The expanded state is shared by everyone viewing a public card message. Button
+clicks retain the card's original language and recheck bans and DM membership.
+The buttons continue working after a local bot restart while the same card remains
+available. Run `npm run dev` and use `/card name:Porcelain Tower` from **NationsBot Dev**
+to try it locally; the production bot is separate.
+
+This local pilot enables only Porcelain Tower. The FAQ bank contains 216 text
+entries; 206 remain pending review. The preliminary card metadata catalog is not
+fully enabled. See [FAQ data and reproduction](data/faq/README.md) and
+[content review](data/faq/review.md). The Docker build includes the runtime JSON
+files; the source PDFs and images stay local. No deployment is part of this change.
+
+Message splitting and embed limits follow the
+[Discord message documentation](https://docs.discord.com/developers/resources/message).
+
 ## License
 
 MIT. This repository contains the notifier, not the Nations game engine or assets.
@@ -220,7 +377,7 @@ MIT. This repository contains the notifier, not the Nations game engine or asset
 
 ### Svenska mästerskapet
 
-`/smtable div:1A`, `div:2A` eller `div:2B` visar en publik tabell i valfri kanal på den konfigurerade servern. Utan `div` används Nations-namnet från avsändarens aktiva prenumeration. Tabellen visas direkt i DM när kommandot körs där, annars publikt i serverkanalen. Automatiskt vald grupp markeras i rubriken. Övriga kommandon behåller sina privata svar och kanalbegränsningar. Om serverns Integrations-inställningar begränsar kommandon till påminnelsekanalen behöver `/smtable` ges tillgång till övriga kanaler där det ska användas.
+`/smtable div:1A`, `div:2A` eller `div:2B` visar en publik tabell i valfri kanal på alla servrar där boten finns. Utan `div` används Nations-namnet från avsändarens aktiva prenumeration. Tabellen visas direkt i DM när kommandot körs där, annars publikt i serverkanalen. Automatiskt vald grupp markeras i rubriken. Övriga kommandon behåller sina privata svar. Endast valet av kanalpåminnelser kräver SM-serverns påminnelsekanal. Om serverns Integrations-inställningar begränsar kommandon till påminnelsekanalen behöver `/smtable` ges tillgång till övriga kanaler där det ska användas.
 
 `sm-season.json` är den manuellt granskade säsongslåsningen: säsong, deltagare och exakt parti-ID för varje grupp. Säsong 11 har 21 låsta partier. SM-tabeller tar aldrig in nya parti-ID:n från matchsökningen. Vid nästa säsong uppdateras och kontrolleras låsningen manuellt, sedan startas bevakningen om. Ett ändrat säsongslås gör den gamla diskcachen ogiltig.
 
@@ -230,6 +387,13 @@ Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare 
 
 Partier i Nations-valet (round 0, Drafting Phase) bevakas men ger inga grupppoäng innan spelstart. Dessa partier anges uttryckligen i tabellsvaret.
 
-Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in the configured server before accessing subscriptions, and honor user bans. /smtable replies directly in the DM without a separate dm option. Other server-channel restrictions remain in force. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.
+Slash commands are registered globally for server channels and the bot’s own DMs (guild installation only). DM calls verify membership in at least one server where the bot is currently installed (with a bounded lookup deadline; failures deny access) before accessing subscriptions, and honor user bans. /smtable replies directly in the DM without a separate dm option. All commands, including /smtable, work in every channel of every installed server. New communities need no server settings and receive reminders only by DM. The configured guild/channel remain the SM channel-delivery exception: dm:off is accepted only there, including for existing users. Enabling notifications elsewhere or in DM without an explicit delivery choice selects DM, even if the user previously selected SM channel delivery. Subscriptions and preferences are shared by Discord user ID, so joining multiple communities does not duplicate reminders. Existing owned guild command registrations are removed after global registration succeeds to avoid duplicates.
 
 SM standings, tiebreaker labels, warnings and automatic division labels use the caller’s effective Swedish/English language preference, matching other commands. Language is applied when rendering; every user shares the same cached standings.
+
+
+### Preparing public community invitations
+
+Before making invitations available, enable **Public Bot** in Discord Developer Portal and provide a guild-install invitation with the `bot` and `applications.commands` scopes. New servers require no setup commands, reminder channels, or per-server configuration. The existing SM guild/channel configuration remains required for the existing delivery service. No new privileged gateway intents are required.
+
+This code update does not change Developer Portal settings or deploy the service. Validate on a second server before publishing invitations: subscribe, receive a test DM and reminder, verify that dm:off is rejected there, and run /smtable. Test DM commands with an account that belongs only to the second server. Membership checks authorize commands; they do not automatically remove existing subscriptions when a member leaves a server.
