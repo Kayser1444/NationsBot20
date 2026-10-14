@@ -289,6 +289,7 @@ China B-side - Special efect: If you pass frst you receive 1 Food extra. Technic
 
 ### Kortkopplingar
 
+- nation-China · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -311,6 +312,7 @@ Svensk rubrik: Etiopien
 
 ### Kortkopplingar
 
+- nation-Ethiopia · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -333,6 +335,7 @@ Greece B-side - Special efect: see Golden Age/Bonus.
 
 ### Kortkopplingar
 
+- nation-Greece · own_entry · pending
 
 Hänvisningar: golden-age-bonus
 
@@ -356,6 +359,7 @@ Sida 2 · nation · approved
 - PcTw · cross_reference · approved
 - J_Epr · cross_reference · pending
 - J_Hkd · cross_reference · pending
+- nation-Japan · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -378,6 +382,7 @@ Svensk rubrik: Korea
 
 ### Kortkopplingar
 
+- nation-Korea · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -401,6 +406,7 @@ Svensk rubrik: Mongoliet
 ### Kortkopplingar
 
 - Mg_Stp · cross_reference · pending
+- nation-Mongolia · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -423,6 +429,7 @@ Persia B-side - When playing the frst Dynasty, replace one colony space. When pl
 
 ### Kortkopplingar
 
+- nation-Persia · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -445,6 +452,7 @@ Svensk rubrik: Polen
 
 ### Kortkopplingar
 
+- nation-Poland · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -467,6 +475,7 @@ Rome B-side - The 2 Strength is always active, you cannot deploy a worker on it.
 
 ### Kortkopplingar
 
+- nation-Rome · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -489,6 +498,7 @@ Svensk rubrik: Venedig
 
 ### Kortkopplingar
 
+- nation-Venice · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -512,6 +522,7 @@ Svensk rubrik: Vikingar
 ### Kortkopplingar
 
 - Vk_OlUp · cross_reference · pending
+- nation-Vikings · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2903,6 +2914,7 @@ Hajj from Mali – If you have 2 or less Gold then nothing happens.
 ### Kortkopplingar
 
 - FD_HM · own_entry · pending
+- nation-Mali · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3645,6 +3657,7 @@ Svensk rubrik: USA: Democratic Republicans
 
 - Am_DR · own_entry · pending
 - Turmoil · cross_reference · pending
+- nation-America · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3668,6 +3681,7 @@ Svensk rubrik: Araberna: Abbasid Caliphate
 ### Kortkopplingar
 
 - Ar_AC · own_entry · pending
+- nation-Arabs · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3691,6 +3705,7 @@ Svensk rubrik: Kina: Qin Dynasty
 ### Kortkopplingar
 
 - C_QD · own_entry · pending
+- nation-China · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3714,6 +3729,7 @@ Svensk rubrik: Egypten: Old Kingdom
 ### Kortkopplingar
 
 - Eg_OK · own_entry · pending
+- nation-Egypt · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3738,6 +3754,7 @@ Svensk rubrik: Etiopien: Axumite Kingdom
 
 - Et_AK · own_entry · pending
 - Bnk · cross_reference · pending
+- nation-Ethiopia · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3762,6 +3779,7 @@ Svensk rubrik: Indien: Mauryan Empire
 
 - I_My · own_entry · pending
 - Ind · cross_reference · pending
+- nation-India · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3786,6 +3804,7 @@ Svensk rubrik: Indien: Mughal Empire
 
 - I_Mg · own_entry · pending
 - Ind · cross_reference · pending
+- nation-India · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3810,6 +3829,7 @@ Svensk rubrik: Japan: Heian Period
 
 - ArNt · cross_reference · pending
 - J_HP · own_entry · pending
+- nation-Japan · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3841,6 +3861,7 @@ Svensk rubrik: Japan: Edo Period
 - Pg_Tpl · cross_reference · pending
 - Pl_Tpl · cross_reference · pending
 - Ps_Tpl · cross_reference · pending
+- nation-Japan · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3864,6 +3885,7 @@ Svensk rubrik: Korea: Joseon Kingdom
 ### Kortkopplingar
 
 - K_JK · own_entry · pending
+- nation-Korea · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3887,6 +3909,7 @@ Svensk rubrik: Mali: Mali Empire
 ### Kortkopplingar
 
 - Ml_ME · own_entry · pending
+- nation-Mali · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3910,6 +3933,7 @@ Svensk rubrik: Mongoliet: Golden Horde
 ### Kortkopplingar
 
 - Mg_GH · own_entry · pending
+- nation-Mongolia · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3933,6 +3957,7 @@ Svensk rubrik: Mongoliet: Yuan Dynasty
 ### Kortkopplingar
 
 - Mg_YD · own_entry · pending
+- nation-Mongolia · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3956,6 +3981,7 @@ Svensk rubrik: Persien: Achaemenid Empire
 ### Kortkopplingar
 
 - Ps_AE · own_entry · pending
+- nation-Persia · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3980,6 +4006,7 @@ Svensk rubrik: Persien: Sassanid Empire
 
 - Ps_SE · own_entry · pending
 - Turmoil · cross_reference · pending
+- nation-Persia · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4003,6 +4030,7 @@ Svensk rubrik: Polen: Jagellonian Dynasty
 ### Kortkopplingar
 
 - Pl_JD · own_entry · pending
+- nation-Poland · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4027,6 +4055,7 @@ Svensk rubrik: Polen: Polish-Lithuanian Commonwealth
 
 - Pl_PLC · own_entry · pending
 - PcTw · cross_reference · approved
+- nation-Poland · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4050,6 +4079,7 @@ Svensk rubrik: Portugal: Portugese Empire
 ### Kortkopplingar
 
 - Pg_PE · own_entry · pending
+- nation-Portugal · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4076,6 +4106,7 @@ Svensk rubrik: Portugal: Kingdom of Leon
 - Pg_KL · own_entry · pending
 - Mtz · cross_reference · pending
 - Ri_Ex · cross_reference · pending
+- nation-Portugal · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4099,6 +4130,7 @@ Svensk rubrik: Rom: Roman Republic
 ### Kortkopplingar
 
 - R_RR · own_entry · pending
+- nation-Rome · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4122,6 +4154,7 @@ Svensk rubrik: Venedig: Domains of the Sea
 ### Kortkopplingar
 
 - Vn_DS · own_entry · pending
+- nation-Venice · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4146,6 +4179,7 @@ Svensk rubrik: Venedig: Pactum Warmundi
 
 - Bnk · cross_reference · pending
 - Vn_PW · own_entry · pending
+- nation-Venice · general_rule · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4169,6 +4203,7 @@ Svensk rubrik: Vikingar: Normans
 ### Kortkopplingar
 
 - Vk_Nm · own_entry · pending
+- nation-Vikings · general_rule · pending
 
 Hänvisningar: Inga identifierade
 

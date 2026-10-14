@@ -606,7 +606,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-China",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Kina · B-sida"
     },
@@ -651,7 +662,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Ethiopia",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Etiopien"
     },
@@ -696,7 +718,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Greece",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [
         "golden-age-bonus"
       ],
@@ -773,6 +806,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Japan",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": []
@@ -818,7 +861,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Korea",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Korea"
     },
@@ -873,6 +927,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Mongolia",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -919,7 +983,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Persia",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Persien · B-sida"
     },
@@ -964,7 +1039,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Poland",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Polen"
     },
@@ -1009,7 +1095,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Rome",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Rom · B-sida"
     },
@@ -1054,7 +1151,18 @@
           }
         }
       ],
-      "cardLinks": [],
+      "cardLinks": [
+        {
+          "cardId": "nation-Venice",
+          "relation": "own_entry",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        }
+      ],
       "relatedEntryIds": [],
       "headingSv": "Venedig"
     },
@@ -1103,6 +1211,16 @@
         {
           "cardId": "Vk_OlUp",
           "relation": "cross_reference",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        },
+        {
+          "cardId": "nation-Vikings",
+          "relation": "own_entry",
           "review": {
             "status": "pending",
             "reviewer": null,
@@ -7541,6 +7659,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Mali",
+          "relation": "cross_reference",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": []
@@ -9497,6 +9625,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-America",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -9552,6 +9690,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Arabs",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -9609,6 +9757,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-China",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -9664,6 +9822,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Egypt",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -9732,6 +9900,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-Ethiopia",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -9792,6 +9970,16 @@
         {
           "cardId": "Ind",
           "relation": "cross_reference",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
+        },
+        {
+          "cardId": "nation-India",
+          "relation": "general_rule",
           "review": {
             "status": "pending",
             "reviewer": null,
@@ -9864,6 +10052,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-India",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -9929,6 +10127,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Japan",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10066,6 +10274,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Japan",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10121,6 +10339,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Korea",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10178,6 +10406,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-Mali",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10233,6 +10471,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Mongolia",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10290,6 +10538,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-Mongolia",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10345,6 +10603,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Persia",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10412,6 +10680,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Persia",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10467,6 +10745,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Poland",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10534,6 +10822,16 @@
             "reviewedAt": "2026-10-14",
             "notes": "Source text, summaries and listed links visually checked against the supplied PDF. No user editorial sign-off is implied. Other corpus entries remain pending."
           }
+        },
+        {
+          "cardId": "nation-Poland",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10589,6 +10887,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Portugal",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10676,6 +10984,16 @@
             "reviewedAt": null,
             "notes": "Metadata match only; FAQ content and card link require review."
           }
+        },
+        {
+          "cardId": "nation-Portugal",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10732,6 +11050,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-Rome",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10787,6 +11115,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Venice",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],
@@ -10854,6 +11192,16 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "cardId": "nation-Venice",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
+          }
         }
       ],
       "relatedEntryIds": [],
@@ -10909,6 +11257,16 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "cardId": "nation-Vikings",
+          "relation": "general_rule",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Metadata match only; FAQ content and card link require review."
           }
         }
       ],

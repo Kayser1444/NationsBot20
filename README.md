@@ -362,10 +362,12 @@ The buttons continue working after a local bot restart while the same card remai
 available. Run `npm run dev` and use `/card name:Porcelain Tower` from **NationsBot Dev**
 to try it locally; the production bot is separate.
 
-The inventory enables 503 entries across all card types, including starting-board
-variants and the special cards named in FAQ++ 1.11. All 479 FAQ card headings map
-to the inventory. 422 public Tabony JPEG images have been checked; starting-board
-variants and seven additional FAQ cards explicitly report a missing image.
+The inventory enables 520 entries across all card types, including 17 nations,
+starting-board variants and the special cards named in FAQ++ 1.11. All 479 FAQ card
+headings map to the inventory. 422 public Tabony card images and 17 player boards
+have been checked. The 74 starting cards are extracted from the boards and served
+by a separate Railway image listener. Seven additional FAQ cards still report a
+missing image. Nation entries show their board and applicable nation/dynasty FAQ.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation.
 The FAQ bank contains 216 text entries; 206 remain pending review. Pending points
@@ -377,7 +379,7 @@ once each. Empty card headings do not create FAQ points. Displaying content does
 not change its review status. See [card coverage and image checks](data/cards/README.md),
 [FAQ data and reproduction](data/faq/README.md) and
 [content review](data/faq/review.md). The Docker build includes the runtime JSON
-files; the source PDFs and images stay local. The expanded catalog is deployed to
+files and the extracted starting-card PNGs; source PDFs and full source boards stay local. The expanded catalog is deployed to
 the separate Railway staging service; production remains separate.
 
 Message splitting and embed limits follow the

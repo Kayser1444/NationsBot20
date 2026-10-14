@@ -31,6 +31,8 @@ def main():
                         attrs[statement.targets[0].id] = ast.literal_eval(statement.value)
                     except (ValueError, TypeError):
                         pass
+                    if isinstance(statement.value, ast.List) and all(isinstance(value, (ast.Name, ast.Constant)) for value in statement.value.elts):
+                        attrs[statement.targets[0].id] = [value.id if isinstance(value, ast.Name) else value.value for value in statement.value.elts]
             classes[node.name] = (attrs, [base.id for base in node.bases if isinstance(base, ast.Name)], filename)
 
     def ancestors(name):
@@ -48,6 +50,19 @@ def main():
     nations = {attrs['abbr']: attrs['name'] for name, (attrs, _, _) in classes.items()
                if 'Nation' in ancestors(name) and isinstance(attrs.get('abbr'), str) and isinstance(attrs.get('name'), str)}
     for name, (attrs, _, filename) in classes.items():
+        if 'Nation' not in ancestors(name) or not isinstance(attrs.get('abbr'), str) or not isinstance(attrs.get('name'), str):
+            continue
+        ident = 'nation-' + attrs['name']
+        nation = existing.setdefault(ident, dict(id=ident, aliases=[], faqReviewStatus='pending'))
+        nation.update(name=attrs['name'], type='nation', age=None, boardSide='B',
+                      imageUrl=f"https://games.tabony.net/static/public/Nations/nations/{attrs['name']}.jpg", metadataSource=filename)
+        for key, prefix in [('advisors', 'A'), ('buildings_military', 'BM'), ('colonies', 'C'), ('wonders', 'W')]:
+            for index, cls in enumerate(attrs.get(key, []), 1):
+                if cls in classes and 'StartingCard' in ancestors(cls):
+                    abbr = classes[cls][0].get('abbr', '').strip()
+                    card = existing.setdefault(abbr, dict(id=abbr, aliases=[], faqReviewStatus='pending'))
+                    card['boardSource'] = dict(nation=attrs['name'], slot=f'{prefix}{index}', url=nation['imageUrl'])
+    for name, (attrs, _, filename) in classes.items():
         bases = ancestors(name)
         kind = next((value for base, value in types.items() if base in bases), None)
         ident = attrs.get('abbr')
@@ -61,7 +76,8 @@ def main():
         ident = ident.strip()
         card = existing.setdefault(ident, dict(id=ident, aliases=[], faqReviewStatus='pending'))
         card.update(name=title, type=kind, age=inherited(name, 'age'), metadataSource=filename)
-        card['imageUrl'] = f'https://games.tabony.net/static/public/Nations/cards/{ident}.jpg'
+        if not card.get('imageAsset'):
+            card['imageUrl'] = f'https://games.tabony.net/static/public/Nations/cards/{ident}.jpg'
         if 'StartingCard' in bases:
             card['variant'] = nations.get(ident.split('_')[0], ident.split('_')[0])
             aliases.append(f"{card['variant']} {title}")

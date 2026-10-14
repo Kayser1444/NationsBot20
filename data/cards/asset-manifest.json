@@ -1,0 +1,1191 @@
+{
+  "schemaVersion": 1,
+  "provenance": "Printed starting cards extracted without redrawing from public Tabony player boards; rectangles from the game template.",
+  "templateSha256": "1e0f7dd66dc495c6162aa2e2080277914f33d8b6d09b97a4378c07a9dcd65e2c",
+  "files": [
+    {
+      "cardId": "Am_Adb",
+      "filename": "Am_Adb.090a6164c82e.png",
+      "sha256": "090a6164c82e8dadb8c6c9de720687464008a310ab382556db82c85e472554fa",
+      "bytes": 95403,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "sourceSha256": "0dca45aa196d0f713d1b3530ad0de9e926e51cc039a6217bd9a52ff424c53dad",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "R_Aqd",
+      "filename": "R_Aqd.38c1d3640860.png",
+      "sha256": "38c1d3640860a1c6fae39d2d8678ffea9791b35e4b104330a75ab2f09ea7586d",
+      "bytes": 104314,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "sourceSha256": "1de95165b3d16f96c7ae13e176e2f57b6cccc0dc2ccb7254665065398f5f3858",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "K_Arc",
+      "filename": "K_Arc.7aec8e07e166.png",
+      "sha256": "7aec8e07e16643d46bee5da8a5a9f2561125d52d3156673fd9abbd818a31e13f",
+      "bytes": 89691,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "sourceSha256": "fa0d5ca3f1e507156e328cd00630515b8cbb7255fc7bd7c090f9cedb0fee2515",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ar_Axm",
+      "filename": "Ar_Axm.adbafda1a5da.png",
+      "sha256": "adbafda1a5da5d6f17e57ba8b570ed6cdab03412e6facd083bfb3ceb1b78e2b2",
+      "bytes": 92575,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "sourceSha256": "b85152f9f13adb5b5737f69db1d42c0a22a673c94b9e82abba254f51f35355f2",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "C_Axm",
+      "filename": "C_Axm.e43d052a52d1.png",
+      "sha256": "e43d052a52d11312888f8a8cc2d750a1d6a8af55fc4786377b5fcec45ed43f90",
+      "bytes": 95352,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "sourceSha256": "66fe2cac32be934e5726a43f4cfd90f02076c3efc7a9e4f5d24164ab594ad3ba",
+      "crop": {
+        "left": 607,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Et_Axm",
+      "filename": "Et_Axm.50917d701916.png",
+      "sha256": "50917d701916bc04ad56d75639e23ecdd3e60f6fa433e44025bbc0768870d3e5",
+      "bytes": 93064,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "sourceSha256": "7af5976a4012611abb3db1af421c2e14d7982a9f0e2591b7e366e1c4e6f7aba1",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_Axm",
+      "filename": "J_Axm.3225157a93ab.png",
+      "sha256": "3225157a93ab152a61acc22b68d8bba1fbc5a7c3a09281a6038724ae1e3a4637",
+      "bytes": 90185,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pl_Axm",
+      "filename": "Pl_Axm.a699d9f1c396.png",
+      "sha256": "a699d9f1c396f65e977ca3f2cf4399fc27adc2bfc346614c28dee02584602899",
+      "bytes": 93521,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "sourceSha256": "00eececab2925a338b754986c2e1e32d251b87410ff07fbaf6087ec692dfa5a0",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ps_Axm",
+      "filename": "Ps_Axm.553289e2fe13.png",
+      "sha256": "553289e2fe13483d1cae2c29437ed19d4e573fb3dc747f0c9f4089804889cd08",
+      "bytes": 95653,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "sourceSha256": "23413f08d2b64134b3d80fabd67c45b490e759d952b91f79db7d4bf4cfac05d9",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ar_Bzr",
+      "filename": "Ar_Bzr.02b13447117e.png",
+      "sha256": "02b13447117e9e50c715a1b193000fdcf27f19d5fc0c51aa856db7149e3c6503",
+      "bytes": 103436,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "sourceSha256": "b85152f9f13adb5b5737f69db1d42c0a22a673c94b9e82abba254f51f35355f2",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vk_Bsk",
+      "filename": "Vk_Bsk.d22ccebb1b66.png",
+      "sha256": "d22ccebb1b66c0f36a7645b475083015350ff025837179da11d992fe0c1cd848",
+      "bytes": 93135,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "sourceSha256": "ded67a9d6eb11ba6951d0f0d2888eccd21873b373ede059732f55e2bf8474b49",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Am_Brv",
+      "filename": "Am_Brv.aa810c02c4cc.png",
+      "sha256": "aa810c02c4ccdd42e6caa9473826feb3c43b018142d4db1edb50ebe0036a66e1",
+      "bytes": 93245,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "sourceSha256": "0dca45aa196d0f713d1b3530ad0de9e926e51cc039a6217bd9a52ff424c53dad",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Eg_Brw",
+      "filename": "Eg_Brw.5a857eda8c15.png",
+      "sha256": "5a857eda8c1518e0e4dcb46feb0b09afcf5514ee5a964a21b2e24f5a12105b08",
+      "bytes": 104603,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "sourceSha256": "f6adf2147c6f63b35abaeaf4099e013ea985f136c629a2fbabc8a6030a84faf0",
+      "crop": {
+        "left": 228,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Am_BfHd",
+      "filename": "Am_BfHd.d15b9a61f3d6.png",
+      "sha256": "d15b9a61f3d68d78b7a0965b04436e13a57df09a886c62a5ab55b90587fc8049",
+      "bytes": 104193,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "sourceSha256": "0dca45aa196d0f713d1b3530ad0de9e926e51cc039a6217bd9a52ff424c53dad",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Eg_Crv",
+      "filename": "Eg_Crv.aab6acb13af7.png",
+      "sha256": "aab6acb13af70e0f0d715b7424704f2644b972175ae8f772890ff206acb77482",
+      "bytes": 101639,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "sourceSha256": "f6adf2147c6f63b35abaeaf4099e013ea985f136c629a2fbabc8a6030a84faf0",
+      "crop": {
+        "left": 798,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Mg_Crv",
+      "filename": "Mg_Crv.c321bda19640.png",
+      "sha256": "c321bda196408a0c84a6d3cc5db5b73998e43226100e2648c219415261d00d8f",
+      "bytes": 101981,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "sourceSha256": "4f2d607158f56f47addd907068d8d77e4aab073a384876a156e5d0c8523430ce",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pg_Crv",
+      "filename": "Pg_Crv.2e9d935afb39.png",
+      "sha256": "2e9d935afb39b9dca39eb6646e180cca7f1b8729f72fc6b8fcf5a22167cb1e2d",
+      "bytes": 92797,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "sourceSha256": "0188337f7b2ff693f552c6f02805b819e47e7267988868a7d06578f03f131334",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "I_Crt",
+      "filename": "I_Crt.4dfff5674de5.png",
+      "sha256": "4dfff5674de5f73ec79cddac616c105b82209ba891c836852bf8850d2591c3a3",
+      "bytes": 98325,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "sourceSha256": "7a4fb431733ff9ac16f333df979af18081ffa970d76366a24828e1de87056d10",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "K_CfAc",
+      "filename": "K_CfAc.3698d1d1586f.png",
+      "sha256": "3698d1d1586f4cc1663365d03f812d7ce1697154aca2d5f48445d3e31ba76b31",
+      "bytes": 104125,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "sourceSha256": "fa0d5ca3f1e507156e328cd00630515b8cbb7255fc7bd7c090f9cedb0fee2515",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vn_Ctn",
+      "filename": "Vn_Ctn.aa714026d7dc.png",
+      "sha256": "aa714026d7dc504c86b4cfd423d15db447717e255456327b93a4ba778e1f0a35",
+      "bytes": 79056,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "sourceSha256": "0c6ddde36a3c36bd29c1d5a70eeee65f229fdf85647b63b78ad2f80332a4de94",
+      "crop": {
+        "left": 210,
+        "top": 317,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_Epr",
+      "filename": "J_Epr.bb502505264d.png",
+      "sha256": "bb502505264d10c62aa27740a6cd7c77dd343041403964a6fb27081d80d97ba2",
+      "bytes": 97768,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 20,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "C_Frm",
+      "filename": "C_Frm.4decd5cbb730.png",
+      "sha256": "4decd5cbb73060ae37e648f2e1ae4e2b984e3a72565b4ef059d18daf1c4f97fc",
+      "bytes": 104143,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "sourceSha256": "66fe2cac32be934e5726a43f4cfd90f02076c3efc7a9e4f5d24164ab594ad3ba",
+      "crop": {
+        "left": 228,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Et_Frm",
+      "filename": "Et_Frm.88a34e87bb78.png",
+      "sha256": "88a34e87bb78c773ad013837ec4b70f170f2555f203a0b90a9fadbff0e84ed21",
+      "bytes": 104662,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "sourceSha256": "7af5976a4012611abb3db1af421c2e14d7982a9f0e2591b7e366e1c4e6f7aba1",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "G_Frm",
+      "filename": "G_Frm.87a01989755e.png",
+      "sha256": "87a01989755e307724fbb62e39c0f159490ac73d27a94974fa9fbae1fda4f09a",
+      "bytes": 104231,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "sourceSha256": "83984a10e26ad58518c94e34853993139bcda6397392a5996a7dcc50c28f11a8",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "I_Frm",
+      "filename": "I_Frm.9fe205f58dc7.png",
+      "sha256": "9fe205f58dc7e1b45d040c3dd5a54414407e22f1fcadc94fc18f6f49bebdd758",
+      "bytes": 104253,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "sourceSha256": "7a4fb431733ff9ac16f333df979af18081ffa970d76366a24828e1de87056d10",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ml_Frm",
+      "filename": "Ml_Frm.fd23ff17411b.png",
+      "sha256": "fd23ff17411bb947e62b2ff3718886811e3ca100b199d6c6d4f5b6e3107ab4f3",
+      "bytes": 104463,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "sourceSha256": "06c18a58763247397b3b94b8bb5f929113acf1fab3501173f9104b891a828152",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pg_Frm",
+      "filename": "Pg_Frm.4d44ee55ff07.png",
+      "sha256": "4d44ee55ff07df126c0f47827eb4e812fcae5050e2283b3c73d3734eb760b4b2",
+      "bytes": 104375,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "sourceSha256": "0188337f7b2ff693f552c6f02805b819e47e7267988868a7d06578f03f131334",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "R_Frm",
+      "filename": "R_Frm.d285f764422f.png",
+      "sha256": "d285f764422f8a20a941b63a38dec97ec7ab071d5b9824d49c4142f178a3b80d",
+      "bytes": 103956,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "sourceSha256": "1de95165b3d16f96c7ae13e176e2f57b6cccc0dc2ccb7254665065398f5f3858",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vk_Frm",
+      "filename": "Vk_Frm.25a2b10127d7.png",
+      "sha256": "25a2b10127d771619ec5d2820b2ef41ada2869e10a0d70d81841671e92ede7de",
+      "bytes": 104393,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "sourceSha256": "ded67a9d6eb11ba6951d0f0d2888eccd21873b373ede059732f55e2bf8474b49",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vn_Frm",
+      "filename": "Vn_Frm.3dafb167064e.png",
+      "sha256": "3dafb167064e26c3798f1ecc2f724e59fd1689001abe1e0e9bc03f7b3ca61219",
+      "bytes": 104644,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "sourceSha256": "0c6ddde36a3c36bd29c1d5a70eeee65f229fdf85647b63b78ad2f80332a4de94",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pl_Frg",
+      "filename": "Pl_Frg.9e076678d2b8.png",
+      "sha256": "9e076678d2b82c7fa46cc303d6e714764e2dbc6d3f000f7cdc2d2447f77de5d6",
+      "bytes": 105457,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "sourceSha256": "00eececab2925a338b754986c2e1e32d251b87410ff07fbaf6087ec692dfa5a0",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vn_GlBw",
+      "filename": "Vn_GlBw.bf924a9ff4e4.png",
+      "sha256": "bf924a9ff4e419d33ccce84f5ea3ac200b9a401e4fe64f267d278b1bf1d715ac",
+      "bytes": 102822,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "sourceSha256": "0c6ddde36a3c36bd29c1d5a70eeee65f229fdf85647b63b78ad2f80332a4de94",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ml_GdMn",
+      "filename": "Ml_GdMn.baa14c7e2401.png",
+      "sha256": "baa14c7e240128146c86d6ccd78fcea4d98e323a9ed9d41644e242c2f77740db",
+      "bytes": 97207,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "sourceSha256": "06c18a58763247397b3b94b8bb5f929113acf1fab3501173f9104b891a828152",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_Hkd",
+      "filename": "J_Hkd.de2b21485c27.png",
+      "sha256": "de2b21485c2778f22a7f0cbfcac1a4e2944216fee1ec5fd1dba73da2d4a64829",
+      "bytes": 86505,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 989,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "G_Hpl",
+      "filename": "G_Hpl.02d73b738ad1.png",
+      "sha256": "02d73b738ad1a0b714858598690604a2596bfdff51accebf68c055593cd21f08",
+      "bytes": 96493,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "sourceSha256": "83984a10e26ad58518c94e34853993139bcda6397392a5996a7dcc50c28f11a8",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Mg_HsAr",
+      "filename": "Mg_HsAr.d47db3fef787.png",
+      "sha256": "d47db3fef7872ba41613a121e6eb2895150b35612d19b38ac6d8542ecd111514",
+      "bytes": 97401,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "sourceSha256": "4f2d607158f56f47addd907068d8d77e4aab073a384876a156e5d0c8523430ce",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ar_Kba",
+      "filename": "Ar_Kba.3892ace93435.png",
+      "sha256": "3892ace93435526403bc816e97edd5f142a5714ec004fe990b2c825784b9e5b4",
+      "bytes": 99193,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "sourceSha256": "b85152f9f13adb5b5737f69db1d42c0a22a673c94b9e82abba254f51f35355f2",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "R_Lgn",
+      "filename": "R_Lgn.80b491554922.png",
+      "sha256": "80b491554922734821e1aec651745c6a147e34bdfc61a7881790f5a94941bf4e",
+      "bytes": 95555,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "sourceSha256": "1de95165b3d16f96c7ae13e176e2f57b6cccc0dc2ccb7254665065398f5f3858",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pg_Lth",
+      "filename": "Pg_Lth.b72ed3c35d49.png",
+      "sha256": "b72ed3c35d499b626cdca4c08531437543bb35b72ab41861bf3c86cc4f8c3b8d",
+      "bytes": 105894,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "sourceSha256": "0188337f7b2ff693f552c6f02805b819e47e7267988868a7d06578f03f131334",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "G_Lyc",
+      "filename": "G_Lyc.f915a49eba0f.png",
+      "sha256": "f915a49eba0f52ca4b0abe037c813329a12a3e667f261e0fa51f410d48bbdf19",
+      "bytes": 101589,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "sourceSha256": "83984a10e26ad58518c94e34853993139bcda6397392a5996a7dcc50c28f11a8",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vk_OlUp",
+      "filename": "Vk_OlUp.b8576e20fd59.png",
+      "sha256": "b8576e20fd5908e02e9ea27ad19b01f4fa835017ba0181b1b38e65b489177164",
+      "bytes": 94131,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "sourceSha256": "ded67a9d6eb11ba6951d0f0d2888eccd21873b373ede059732f55e2bf8474b49",
+      "crop": {
+        "left": 435,
+        "top": 318,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "C_Pgd",
+      "filename": "C_Pgd.b3a72db08fb7.png",
+      "sha256": "b3a72db08fb7f9cc8f53d5ce0b7dec8a153a1dcf090e8339fc259195516831b4",
+      "bytes": 101959,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "sourceSha256": "66fe2cac32be934e5726a43f4cfd90f02076c3efc7a9e4f5d24164ab594ad3ba",
+      "crop": {
+        "left": 798,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Eg_Prm",
+      "filename": "Eg_Prm.bb02d1e47769.png",
+      "sha256": "bb02d1e477694265955b94a1451f2f0c04db1c0da7335fbe34d490cb413f6b4f",
+      "bytes": 101650,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "sourceSha256": "f6adf2147c6f63b35abaeaf4099e013ea985f136c629a2fbabc8a6030a84faf0",
+      "crop": {
+        "left": 435,
+        "top": 318,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ar_Qry",
+      "filename": "Ar_Qry.7cfd343cc487.png",
+      "sha256": "7cfd343cc4878a6f4012db40ea1239b12587d7d98d5e6172959142b8e7c121e5",
+      "bytes": 103946,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "sourceSha256": "b85152f9f13adb5b5737f69db1d42c0a22a673c94b9e82abba254f51f35355f2",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "C_Qry",
+      "filename": "C_Qry.23b14c9e72d3.png",
+      "sha256": "23b14c9e72d3eb44906d162d7df81467207cfb61e30d1a620fa0c8eea40f168b",
+      "bytes": 104431,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "sourceSha256": "66fe2cac32be934e5726a43f4cfd90f02076c3efc7a9e4f5d24164ab594ad3ba",
+      "crop": {
+        "left": 418,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Eg_Qry",
+      "filename": "Eg_Qry.3cd6669fd11f.png",
+      "sha256": "3cd6669fd11f47bd6d386e59f53deb5b6b147f1eddb82a12fb99332b6a136e2d",
+      "bytes": 104352,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "sourceSha256": "f6adf2147c6f63b35abaeaf4099e013ea985f136c629a2fbabc8a6030a84faf0",
+      "crop": {
+        "left": 418,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Et_qry",
+      "filename": "Et_qry.ae59918496ce.png",
+      "sha256": "ae59918496cee2b0db4e3678aa5cf698c3e53dffebfb8e90fcf7b6a430d56b81",
+      "bytes": 104309,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "sourceSha256": "7af5976a4012611abb3db1af421c2e14d7982a9f0e2591b7e366e1c4e6f7aba1",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "G_Qry",
+      "filename": "G_Qry.a2c04932b67c.png",
+      "sha256": "a2c04932b67cb0008be2de7d75ab61d34f5ff478df77e3f28e2f4d4b57210f13",
+      "bytes": 104293,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "sourceSha256": "83984a10e26ad58518c94e34853993139bcda6397392a5996a7dcc50c28f11a8",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "I_Qry",
+      "filename": "I_Qry.fda2730a2b75.png",
+      "sha256": "fda2730a2b750f4b9f376106913233cac761b170d972ebbbfb3006bc355bc6ac",
+      "bytes": 103942,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "sourceSha256": "7a4fb431733ff9ac16f333df979af18081ffa970d76366a24828e1de87056d10",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_Qry",
+      "filename": "J_Qry.c2c0fa23044d.png",
+      "sha256": "c2c0fa23044d9c99a6e99c0a44144425a6964dc349d18fa74ddc02cf749105a0",
+      "bytes": 106916,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "K_Qry",
+      "filename": "K_Qry.eea4138a90c9.png",
+      "sha256": "eea4138a90c9b738f1a416dd03276a5fd6a557b0ab27a4d1702e3c27320c38b2",
+      "bytes": 104043,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "sourceSha256": "fa0d5ca3f1e507156e328cd00630515b8cbb7255fc7bd7c090f9cedb0fee2515",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ml_Qry",
+      "filename": "Ml_Qry.2ca52c2df92f.png",
+      "sha256": "2ca52c2df92f1bcebc60ecd360a57a1955fe5440e8555668d302880bf223fb5e",
+      "bytes": 103900,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "sourceSha256": "06c18a58763247397b3b94b8bb5f929113acf1fab3501173f9104b891a828152",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pl_Qry",
+      "filename": "Pl_Qry.ffb0e0d67d7a.png",
+      "sha256": "ffb0e0d67d7af0ebf3385e4f318d023af84acff883ecfc5e7c3e026c2b9e1b9c",
+      "bytes": 106951,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "sourceSha256": "00eececab2925a338b754986c2e1e32d251b87410ff07fbaf6087ec692dfa5a0",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ps_Qry",
+      "filename": "Ps_Qry.a953ea35664a.png",
+      "sha256": "a953ea35664a1eb74714893b127e9f7e92b63af502e3c150eaf5ca81752f7a2e",
+      "bytes": 104311,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "sourceSha256": "23413f08d2b64134b3d80fabd67c45b490e759d952b91f79db7d4bf4cfac05d9",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "R_Qry",
+      "filename": "R_Qry.98921daba939.png",
+      "sha256": "98921daba9394a6b3dfe27f44cc95f6af8cd62197d92d693792e9b299c8fc468",
+      "bytes": 104257,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "sourceSha256": "1de95165b3d16f96c7ae13e176e2f57b6cccc0dc2ccb7254665065398f5f3858",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vk_Qry",
+      "filename": "Vk_Qry.bf941a2db9b3.png",
+      "sha256": "bf941a2db9b37621d37b643fcfae878ad3a9333d0f09e8d42c02b84cce6ade31",
+      "bytes": 106740,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "sourceSha256": "ded67a9d6eb11ba6951d0f0d2888eccd21873b373ede059732f55e2bf8474b49",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vn_Qry",
+      "filename": "Vn_Qry.05aa5bd5cf08.png",
+      "sha256": "05aa5bd5cf083f5ed4fb3ea08376320f6c874ba5e847a231a7a247c3c52827e1",
+      "bytes": 104380,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "sourceSha256": "0c6ddde36a3c36bd29c1d5a70eeee65f229fdf85647b63b78ad2f80332a4de94",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_RcFd",
+      "filename": "J_RcFd.5ca6b11c98bc.png",
+      "sha256": "5ca6b11c98bc4c09d47eb4f5e626a2797a6d7d43b77bcb7c5a889ccb53b9a846",
+      "bytes": 98110,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ml_StCv",
+      "filename": "Ml_StCv.4a3410e53c2e.png",
+      "sha256": "4a3410e53c2e019f30c3e0383f48348c54879a266e1b8cdab622b7a6d71eeef7",
+      "bytes": 100207,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "sourceSha256": "06c18a58763247397b3b94b8bb5f929113acf1fab3501173f9104b891a828152",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vk_StCh",
+      "filename": "Vk_StCh.612f89d83b27.png",
+      "sha256": "612f89d83b27591b7baa49b56e2b077de050b21dec760b9e8928e86f38bc0e7a",
+      "bytes": 93437,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "sourceSha256": "ded67a9d6eb11ba6951d0f0d2888eccd21873b373ede059732f55e2bf8474b49",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Et_Stl",
+      "filename": "Et_Stl.77aa2c9e0900.png",
+      "sha256": "77aa2c9e09003b0c5861e11b11719e541accbcdad669fd608f14aaeaeffd1bb6",
+      "bytes": 93150,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "sourceSha256": "7af5976a4012611abb3db1af421c2e14d7982a9f0e2591b7e366e1c4e6f7aba1",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Mg_Stp",
+      "filename": "Mg_Stp.61ec55c8fdb2.png",
+      "sha256": "61ec55c8fdb2589b1563e7732eb7481fd8f6360484339c55a0f96d5909bcce76",
+      "bytes": 83004,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "sourceSha256": "4f2d607158f56f47addd907068d8d77e4aab073a384876a156e5d0c8523430ce",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Am_Tpe",
+      "filename": "Am_Tpe.7b6ed73033b4.png",
+      "sha256": "7b6ed73033b4dd4466e96101853cbfac6903c26228060cd80f5544594d3ad083",
+      "bytes": 98785,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "sourceSha256": "0dca45aa196d0f713d1b3530ad0de9e926e51cc039a6217bd9a52ff424c53dad",
+      "crop": {
+        "left": 418,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Eg_Tpl",
+      "filename": "Eg_Tpl.aef85a29346d.png",
+      "sha256": "aef85a29346d26c3b7cfa1a91082b38afc27553af8bc3223ec2616bcc0b29ee6",
+      "bytes": 103598,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "sourceSha256": "f6adf2147c6f63b35abaeaf4099e013ea985f136c629a2fbabc8a6030a84faf0",
+      "crop": {
+        "left": 607,
+        "top": 35,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "I_Tpl",
+      "filename": "I_Tpl.e00829528757.png",
+      "sha256": "e00829528757ea775d7a465953898d94c054280748b9e6fbcc0527d92c996eb1",
+      "bytes": 96939,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "sourceSha256": "7a4fb431733ff9ac16f333df979af18081ffa970d76366a24828e1de87056d10",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "J_Tpl",
+      "filename": "J_Tpl.4ff42be788c1.png",
+      "sha256": "4ff42be788c10f1848a93f52884ef344548cf531c9423fed3fbb6fb593bf319d",
+      "bytes": 104704,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "sourceSha256": "c77a64257782af15ad9a129dcf29f2fb54a9854f54fb120e679dfd6a8ff56efc",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "K_Tpl",
+      "filename": "K_Tpl.95fc001b7cfc.png",
+      "sha256": "95fc001b7cfc55b8b10ac1039fccccbc16f483b0255ff4d1afdfdb2b512163ec",
+      "bytes": 104750,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "sourceSha256": "fa0d5ca3f1e507156e328cd00630515b8cbb7255fc7bd7c090f9cedb0fee2515",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pg_Tpl",
+      "filename": "Pg_Tpl.b44ee8b439c7.png",
+      "sha256": "b44ee8b439c73be4a64546bbdd69c3b316a626beaa6af6da50e4646775868ad9",
+      "bytes": 99456,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "sourceSha256": "0188337f7b2ff693f552c6f02805b819e47e7267988868a7d06578f03f131334",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Pl_Tpl",
+      "filename": "Pl_Tpl.efd5fa68a165.png",
+      "sha256": "efd5fa68a165e7afada7cc6d16f1765926b5f5837fde204ae8cff0eadf4246ef",
+      "bytes": 98847,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "sourceSha256": "00eececab2925a338b754986c2e1e32d251b87410ff07fbaf6087ec692dfa5a0",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ps_Tpl",
+      "filename": "Ps_Tpl.47e77a54bc3d.png",
+      "sha256": "47e77a54bc3d390c24c7bf1d4cf74b2002703446d4332be9bb4a41439b4e0949",
+      "bytes": 103073,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "sourceSha256": "23413f08d2b64134b3d80fabd67c45b490e759d952b91f79db7d4bf4cfac05d9",
+      "crop": {
+        "left": 989,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Vn_Trm",
+      "filename": "Vn_Trm.e0741f123ad6.png",
+      "sha256": "e0741f123ad6c2ceb0bd7ac3ed59563c0427eed38177fac431d68ce96ae9da06",
+      "bytes": 95494,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "sourceSha256": "0c6ddde36a3c36bd29c1d5a70eeee65f229fdf85647b63b78ad2f80332a4de94",
+      "crop": {
+        "left": 607,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "I_Vrn",
+      "filename": "I_Vrn.b50993102ea7.png",
+      "sha256": "b50993102ea78b925aae4c492ba1e8ab0c09db47bbd740d99503c4208fffd8eb",
+      "bytes": 103514,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "sourceSha256": "7a4fb431733ff9ac16f333df979af18081ffa970d76366a24828e1de87056d10",
+      "crop": {
+        "left": 435,
+        "top": 318,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Mg_Yrt",
+      "filename": "Mg_Yrt.ab55703bdb64.png",
+      "sha256": "ab55703bdb643039141c1f46dfd98c2cde16728e3621ba8074c061cbb0078c1a",
+      "bytes": 99787,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "sourceSha256": "4f2d607158f56f47addd907068d8d77e4aab073a384876a156e5d0c8523430ce",
+      "crop": {
+        "left": 228,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    },
+    {
+      "cardId": "Ps_Zgr",
+      "filename": "Ps_Zgr.c2dd8b79a0c7.png",
+      "sha256": "c2dd8b79a0c72b07c084f98a0ac420a2e52ad353f4f718a64aa00e939660d758",
+      "bytes": 101691,
+      "width": 164,
+      "height": 254,
+      "sourceUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "sourceSha256": "23413f08d2b64134b3d80fabd67c45b490e759d952b91f79db7d4bf4cfac05d9",
+      "crop": {
+        "left": 798,
+        "top": 34,
+        "width": 164,
+        "height": 254
+      }
+    }
+  ]
+}

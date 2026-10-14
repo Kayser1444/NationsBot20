@@ -8,7 +8,7 @@ let cursor = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
   while (cursor < cards.length) {
     const card = cards[cursor++];
-    if (!/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/cards\/[A-Za-z0-9_-]+\.jpg$/.test(card.imageUrl)) throw new Error('Unexpected image URL: ' + card.id);
+    if (!/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/(?:cards\/[A-Za-z0-9_-]+|nations\/[A-Za-z]+)\.jpg$/.test(card.imageUrl)) throw new Error('Unexpected image URL: ' + card.id);
     const response = await fetch(card.imageUrl, { method: 'HEAD', redirect: 'error', signal: AbortSignal.timeout(20000) });
     const contentType = response.headers.get('content-type');
     if (response.status !== 404 && !(response.ok && contentType?.startsWith('image/jpeg'))) throw new Error(`Image check failed: ${card.id}: ${response.status} ${contentType}`);

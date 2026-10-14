@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { text } from './language.mjs';
+import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './card-images.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const normalize = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim();
@@ -12,7 +13,8 @@ const silent = { parse: [], users: [], roles: [] };
 const embedLength = embed => [embed.title, embed.description, embed.footer?.text, embed.author?.name,
   ...(embed.fields ?? []).flatMap(field => [field.name, field.value])].reduce((sum, value) => sum + (value?.length ?? 0), 0);
 
-export function createCardBank({ catalog, sources, entries }) {
+export function createCardBank({ catalog, sources, entries, assetOrigin = null }) {
+  if (assetOrigin) assetOrigin = cardAssetOrigin({ NATIONS_CARD_ASSET_ORIGIN: assetOrigin });
   const cards = catalog.cards.filter(card => card.enabled);
   const sourceById = new Map(sources.sources.map(source => [source.id, source]));
   const allCards = new Set(catalog.cards.map(card => card.id));
@@ -23,7 +25,8 @@ export function createCardBank({ catalog, sources, entries }) {
         entry.relatedEntryIds.some(id => !entryIds.has(id))) throw new Error('Invalid FAQ reference: ' + entry.id);
   }
   for (const card of cards) {
-    if (card.imageUrl !== null && !/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/cards\/[A-Za-z0-9_-]+\.jpg$/.test(card.imageUrl)) throw new Error('Invalid card image: ' + card.id);
+    if (card.imageUrl !== null && !tabonyImage(card.imageUrl)) throw new Error('Invalid card image: ' + card.id);
+    if (card.imageAsset && (!cardAssetName(card.imageAsset) || !card.imageAsset.startsWith(card.id + '.'))) throw new Error('Invalid local card image: ' + card.id);
   }
   function resolve(query) {
     const selected = normalize(query);
@@ -66,14 +69,14 @@ export function createCardBank({ catalog, sources, entries }) {
     const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === language)
       .map(bullet => ({ entry, bullet })));
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
-    const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}**`;
+    const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}${card.boardSide ? ' · ' + text(language, 'cardBoardSide', { side: card.boardSide }) : ''}**`;
     const description = language === 'sv-SE' ? card.descriptionSv : card.descriptionEn;
-    const hasImage = card.imageUrl && card.imageCheck?.status === 200 && card.imageCheck.url === card.imageUrl;
+    const imageUrl = cardImageUrl(card, assetOrigin);
     const message = { content: text(language, 'cardHeading'), allowed_mentions: silent, embeds: [
-      { title: card.name, color: 12092983, ...(hasImage ? { url: card.imageUrl, image: { url: card.imageUrl } } : {}) },
+      { title: card.name, color: 12092983, ...(imageUrl ? { url: imageUrl, image: { url: imageUrl } } : {}) },
       { description: metadata + (description ? '\n' + description : ''), color: 12092983 },
     ] };
-    if (!hasImage) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
+    if (!imageUrl) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
@@ -138,4 +141,4 @@ export function createCardBank({ catalog, sources, entries }) {
   return { resolve, autocomplete, render, renderButton };
 }
 
-export const cardBank = createCardBank({ catalog: read('./data/cards/catalog.json'), sources: read('./data/faq/sources.json'), entries: read('./data/faq/entries.json') });
+export const cardBank = createCardBank({ catalog: read('./data/cards/catalog.json'), sources: read('./data/faq/sources.json'), entries: read('./data/faq/entries.json'), assetOrigin: cardAssetOrigin() });

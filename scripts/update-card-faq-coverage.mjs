@@ -25,6 +25,19 @@ for (const [id, aliases] of Object.entries(supplemental.aliases)) {
   card.aliases = [...new Set([...card.aliases, ...aliases])];
 }
 const pending = { status: 'pending', reviewer: null, reviewedAt: null, notes: 'Metadata match only; FAQ content and card link require review.' };
+const nationAliases = { America: ['USA', 'Amerika'], Arabs: ['Araberna', 'Araber'], China: ['Kina'], Egypt: ['Egypten'],
+  Ethiopia: ['Etiopien'], Greece: ['Grekland'], India: ['Indien'], Japan: [], Korea: [], Mali: [], Mongolia: ['Mongoliet'],
+  Persia: ['Persien'], Poland: ['Polen'], Portugal: [], Rome: ['Rom'], Venice: ['Venedig'], Vikings: ['Vikingar', 'Vikingarna'] };
+for (const nation of catalog.cards.filter(card => card.type === 'nation')) {
+  nation.aliases = [...new Set([...nation.aliases, ...nationAliases[nation.name]])];
+  for (const entry of entries.entries) {
+    const own = entry.category === 'nation' && entry.heading.replace(/ B-side$/, '') === nation.name;
+    const dynasty = entry.category === 'dynasty' && entry.heading.startsWith(nation.name + ':');
+    if ((own || dynasty) && !entry.cardLinks.some(link => link.cardId === nation.id)) {
+      entry.cardLinks.push({ cardId: nation.id, relation: own ? 'own_entry' : 'general_rule', review: { ...pending } });
+    }
+  }
+}
 const coverage = [];
 for (const item of index.items) {
   const type = types[item.section];

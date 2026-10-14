@@ -8,6 +8,10 @@
 !data/
 !data/cards/
 !data/cards/catalog.json
+!data/cards/asset-manifest.json
+!public/
+!public/card-assets/
+!public/card-assets/*.png
 !data/faq/
 !data/faq/entries.json
 !data/faq/sources.json

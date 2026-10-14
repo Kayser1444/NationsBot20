@@ -120,7 +120,7 @@ test('every FAQ card heading is inventoried and all localized points retain cita
     if (image) {
       assert.equal(card.imageCheck.status, 200, card.id);
       assert.equal(image.url, card.imageCheck.url);
-    } else assert.match(content(reply), /Ingen separat kortbild/);
+    } else assert.match(content(reply), /Kortbilden är inte tillgänglig/);
     for (const language of ['sv-SE', 'en-US']) {
       const localized = cardBank.render(card.id, language);
       const pages = Array.from({ length: localized.faqPageCount }, (_, faqPage) => cardBank.render(card.id, language, { faqPage }));

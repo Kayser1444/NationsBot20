@@ -118,7 +118,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_Adb.jpg",
+      "imageUrl": null,
       "variant": "America",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Am_Adb.jpg",
@@ -126,7 +126,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "America",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg"
+      },
+      "imageAsset": "Am_Adb.090a6164c82e.png"
     },
     {
       "id": "And",
@@ -232,6 +238,27 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-America",
+      "aliases": [
+        "USA",
+        "Amerika"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "America",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "ACW",
@@ -383,7 +410,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_Aqd.jpg",
+      "imageUrl": null,
       "variant": "Rome",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/R_Aqd.jpg",
@@ -391,7 +418,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Rome",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg"
+      },
+      "imageAsset": "R_Aqd.38c1d3640860.png"
     },
     {
       "id": "ArNt",
@@ -409,6 +442,27 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Arabs",
+      "aliases": [
+        "Araberna",
+        "Araber"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Arabs",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "Arc",
@@ -437,7 +491,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_Arc.jpg",
+      "imageUrl": null,
       "variant": "Korea",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/K_Arc.jpg",
@@ -445,7 +499,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Korea",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg"
+      },
+      "imageAsset": "K_Arc.7aec8e07e166.png"
     },
     {
       "id": "Acm",
@@ -637,7 +697,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_Axm.jpg",
+      "imageUrl": null,
       "variant": "Arabs",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ar_Axm.jpg",
@@ -645,7 +705,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Arabs",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg"
+      },
+      "imageAsset": "Ar_Axm.adbafda1a5da.png"
     },
     {
       "id": "C_Axm",
@@ -657,7 +723,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_Axm.jpg",
+      "imageUrl": null,
       "variant": "China",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/C_Axm.jpg",
@@ -665,7 +731,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "China",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg"
+      },
+      "imageAsset": "C_Axm.e43d052a52d1.png"
     },
     {
       "id": "Et_Axm",
@@ -677,7 +749,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_Axm.jpg",
+      "imageUrl": null,
       "variant": "Ethiopia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Et_Axm.jpg",
@@ -685,7 +757,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Ethiopia",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg"
+      },
+      "imageAsset": "Et_Axm.50917d701916.png"
     },
     {
       "id": "J_Axm",
@@ -697,7 +775,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_Axm.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_Axm.jpg",
@@ -705,7 +783,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_Axm.3225157a93ab.png"
     },
     {
       "id": "Pl_Axm",
@@ -717,7 +801,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_Axm.jpg",
+      "imageUrl": null,
       "variant": "Poland",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pl_Axm.jpg",
@@ -725,7 +809,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Poland",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg"
+      },
+      "imageAsset": "Pl_Axm.a699d9f1c396.png"
     },
     {
       "id": "Ps_Axm",
@@ -737,7 +827,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_Axm.jpg",
+      "imageUrl": null,
       "variant": "Persia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ps_Axm.jpg",
@@ -745,7 +835,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Persia",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg"
+      },
+      "imageAsset": "Ps_Axm.553289e2fe13.png"
     },
     {
       "id": "Et_AK",
@@ -1182,7 +1278,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_Bzr.jpg",
+      "imageUrl": null,
       "variant": "Arabs",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ar_Bzr.jpg",
@@ -1190,7 +1286,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Arabs",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg"
+      },
+      "imageAsset": "Ar_Bzr.02b13447117e.png"
     },
     {
       "id": "BR_PM",
@@ -1239,7 +1341,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Bsk.jpg",
+      "imageUrl": null,
       "variant": "Vikings",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vk_Bsk.jpg",
@@ -1247,7 +1349,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Vikings",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg"
+      },
+      "imageAsset": "Vk_Bsk.d22ccebb1b66.png"
     },
     {
       "id": "BgBn",
@@ -1367,7 +1475,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_Brv.jpg",
+      "imageUrl": null,
       "variant": "America",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Am_Brv.jpg",
@@ -1375,7 +1483,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "America",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg"
+      },
+      "imageAsset": "Am_Brv.aa810c02c4cc.png"
     },
     {
       "id": "Brz",
@@ -1441,7 +1555,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_Brw.jpg",
+      "imageUrl": null,
       "variant": "Egypt",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Eg_Brw.jpg",
@@ -1449,7 +1563,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Egypt",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg"
+      },
+      "imageAsset": "Eg_Brw.5a857eda8c15.png"
     },
     {
       "id": "BtMs",
@@ -1495,7 +1615,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_BfHd.jpg",
+      "imageUrl": null,
       "variant": "America",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Am_BfHd.jpg",
@@ -1503,7 +1623,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "America",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg"
+      },
+      "imageAsset": "Am_BfHd.d15b9a61f3d6.png"
     },
     {
       "id": "BAW",
@@ -1603,7 +1729,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_Crv.jpg",
+      "imageUrl": null,
       "variant": "Egypt",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Eg_Crv.jpg",
@@ -1611,7 +1737,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Egypt",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg"
+      },
+      "imageAsset": "Eg_Crv.aab6acb13af7.png"
     },
     {
       "id": "Mg_Crv",
@@ -1623,7 +1755,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_Crv.jpg",
+      "imageUrl": null,
       "variant": "Mongolia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mg_Crv.jpg",
@@ -1631,7 +1763,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mongolia",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg"
+      },
+      "imageAsset": "Mg_Crv.c321bda19640.png"
     },
     {
       "id": "Pg_Crv",
@@ -1643,7 +1781,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_Crv.jpg",
+      "imageUrl": null,
       "variant": "Portugal",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pg_Crv.jpg",
@@ -1651,7 +1789,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Portugal",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg"
+      },
+      "imageAsset": "Pg_Crv.2e9d935afb39.png"
     },
     {
       "id": "CrLn",
@@ -1785,7 +1929,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Crt.jpg",
+      "imageUrl": null,
       "variant": "India",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/I_Crt.jpg",
@@ -1793,7 +1937,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "India",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg"
+      },
+      "imageAsset": "I_Crt.4dfff5674de5.png"
     },
     {
       "id": "Cht",
@@ -1828,6 +1978,26 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-China",
+      "aliases": [
+        "Kina"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "China",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "CKN",
@@ -2033,7 +2203,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_CfAc.jpg",
+      "imageUrl": null,
       "variant": "Korea",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/K_CfAc.jpg",
@@ -2041,7 +2211,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Korea",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg"
+      },
+      "imageAsset": "K_CfAc.3698d1d1586f.png"
     },
     {
       "id": "Con",
@@ -2104,7 +2280,7 @@
       "type": "colony",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_Ctn.jpg",
+      "imageUrl": null,
       "variant": "Venice",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vn_Ctn.jpg",
@@ -2112,7 +2288,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Venice",
+        "slot": "C2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg"
+      },
+      "imageAsset": "Vn_Ctn.aa714026d7dc.png"
     },
     {
       "id": "CtEx",
@@ -2497,6 +2679,26 @@
       "enabled": true
     },
     {
+      "id": "nation-Egypt",
+      "aliases": [
+        "Egypten"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Egypt",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "EnAq",
       "name": "Eleanor of Aquitaine",
       "aliases": [],
@@ -2574,7 +2776,7 @@
       "type": "advisor",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_Epr.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_Epr.jpg",
@@ -2582,7 +2784,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "A1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_Epr.bb502505264d.png"
     },
     {
       "id": "EgSl",
@@ -2660,6 +2868,26 @@
       "enabled": true
     },
     {
+      "id": "nation-Ethiopia",
+      "aliases": [
+        "Etiopien"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Ethiopia",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "Fct",
       "name": "Factory",
       "aliases": [],
@@ -2720,7 +2948,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_Frm.jpg",
+      "imageUrl": null,
       "variant": "China",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/C_Frm.jpg",
@@ -2728,7 +2956,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "China",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg"
+      },
+      "imageAsset": "C_Frm.4decd5cbb730.png"
     },
     {
       "id": "Et_Frm",
@@ -2740,7 +2974,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_Frm.jpg",
+      "imageUrl": null,
       "variant": "Ethiopia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Et_Frm.jpg",
@@ -2748,7 +2982,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Ethiopia",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg"
+      },
+      "imageAsset": "Et_Frm.88a34e87bb78.png"
     },
     {
       "id": "G_Frm",
@@ -2760,7 +3000,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_Frm.jpg",
+      "imageUrl": null,
       "variant": "Greece",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/G_Frm.jpg",
@@ -2768,7 +3008,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Greece",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg"
+      },
+      "imageAsset": "G_Frm.87a01989755e.png"
     },
     {
       "id": "I_Frm",
@@ -2780,7 +3026,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Frm.jpg",
+      "imageUrl": null,
       "variant": "India",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/I_Frm.jpg",
@@ -2788,7 +3034,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "India",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg"
+      },
+      "imageAsset": "I_Frm.9fe205f58dc7.png"
     },
     {
       "id": "Ml_Frm",
@@ -2800,7 +3052,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_Frm.jpg",
+      "imageUrl": null,
       "variant": "Mali",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ml_Frm.jpg",
@@ -2808,7 +3060,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mali",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg"
+      },
+      "imageAsset": "Ml_Frm.fd23ff17411b.png"
     },
     {
       "id": "Pg_Frm",
@@ -2820,7 +3078,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_Frm.jpg",
+      "imageUrl": null,
       "variant": "Portugal",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pg_Frm.jpg",
@@ -2828,7 +3086,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Portugal",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg"
+      },
+      "imageAsset": "Pg_Frm.4d44ee55ff07.png"
     },
     {
       "id": "R_Frm",
@@ -2840,7 +3104,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_Frm.jpg",
+      "imageUrl": null,
       "variant": "Rome",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/R_Frm.jpg",
@@ -2848,7 +3112,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Rome",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg"
+      },
+      "imageAsset": "R_Frm.d285f764422f.png"
     },
     {
       "id": "Vk_Frm",
@@ -2860,7 +3130,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Frm.jpg",
+      "imageUrl": null,
       "variant": "Vikings",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vk_Frm.jpg",
@@ -2868,7 +3138,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Vikings",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg"
+      },
+      "imageAsset": "Vk_Frm.25a2b10127d7.png"
     },
     {
       "id": "Vn_Frm",
@@ -2880,7 +3156,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_Frm.jpg",
+      "imageUrl": null,
       "variant": "Venice",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vn_Frm.jpg",
@@ -2888,7 +3164,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Venice",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg"
+      },
+      "imageAsset": "Vn_Frm.3dafb167064e.png"
     },
     {
       "id": "FsIn",
@@ -3039,7 +3321,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_Frg.jpg",
+      "imageUrl": null,
       "variant": "Poland",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pl_Frg.jpg",
@@ -3047,7 +3329,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Poland",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg"
+      },
+      "imageAsset": "Pl_Frg.9e076678d2b8.png"
     },
     {
       "id": "Frm",
@@ -3215,7 +3503,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_GlBw.jpg",
+      "imageUrl": null,
       "variant": "Venice",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vn_GlBw.jpg",
@@ -3223,7 +3511,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Venice",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg"
+      },
+      "imageAsset": "Vn_GlBw.bf924a9ff4e4.png"
     },
     {
       "id": "Ml_GdMn",
@@ -3235,7 +3529,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_GdMn.jpg",
+      "imageUrl": null,
       "variant": "Mali",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ml_GdMn.jpg",
@@ -3243,7 +3537,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mali",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg"
+      },
+      "imageAsset": "Ml_GdMn.baa14c7e2401.png"
     },
     {
       "id": "Mg_GH",
@@ -3431,6 +3731,26 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Greece",
+      "aliases": [
+        "Grekland"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Greece",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "GFG",
@@ -3802,7 +4122,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_Hkd.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_Hkd.jpg",
@@ -3810,7 +4130,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "BM5",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_Hkd.de2b21485c27.png"
     },
     {
       "id": "HgKg",
@@ -3839,7 +4165,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_Hpl.jpg",
+      "imageUrl": null,
       "variant": "Greece",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/G_Hpl.jpg",
@@ -3847,7 +4173,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Greece",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg"
+      },
+      "imageAsset": "G_Hpl.02d73b738ad1.png"
     },
     {
       "id": "Hpl",
@@ -3893,7 +4225,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_HsAr.jpg",
+      "imageUrl": null,
       "variant": "Mongolia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mg_HsAr.jpg",
@@ -3901,7 +4233,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mongolia",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg"
+      },
+      "imageAsset": "Mg_HsAr.d47db3fef787.png"
     },
     {
       "id": "Hsp",
@@ -4109,6 +4447,26 @@
       "enabled": true
     },
     {
+      "id": "nation-India",
+      "aliases": [
+        "Indien"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "India",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "IrWk",
       "name": "Iron Working",
       "aliases": [],
@@ -4216,6 +4574,24 @@
       "enabled": true
     },
     {
+      "id": "nation-Japan",
+      "aliases": [],
+      "faqReviewStatus": "pending",
+      "name": "Japan",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "K_JK",
       "name": "Joseon Kingdom",
       "aliases": [],
@@ -4242,7 +4618,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_Kba.jpg",
+      "imageUrl": null,
       "variant": "Arabs",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ar_Kba.jpg",
@@ -4250,7 +4626,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Arabs",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg"
+      },
+      "imageAsset": "Ar_Kba.3892ace93435.png"
     },
     {
       "id": "Klv",
@@ -4319,6 +4701,24 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Korea",
+      "aliases": [],
+      "faqReviewStatus": "pending",
+      "name": "Korea",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "K_KK",
@@ -4430,7 +4830,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_Lgn.jpg",
+      "imageUrl": null,
       "variant": "Rome",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/R_Lgn.jpg",
@@ -4438,7 +4838,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Rome",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg"
+      },
+      "imageAsset": "R_Lgn.80b491554922.png"
     },
     {
       "id": "Lib",
@@ -4501,7 +4907,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_Lth.jpg",
+      "imageUrl": null,
       "variant": "Portugal",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pg_Lth.jpg",
@@ -4509,7 +4915,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Portugal",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg"
+      },
+      "imageAsset": "Pg_Lth.b72ed3c35d49.png"
     },
     {
       "id": "LnZx",
@@ -4611,7 +5023,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_Lyc.jpg",
+      "imageUrl": null,
       "variant": "Greece",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/G_Lyc.jpg",
@@ -4619,7 +5031,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Greece",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg"
+      },
+      "imageAsset": "G_Lyc.f915a49eba0f.png"
     },
     {
       "id": "Lyc",
@@ -4759,6 +5177,24 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Mali",
+      "aliases": [],
+      "faqReviewStatus": "pending",
+      "name": "Mali",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "Ml_ME",
@@ -5141,6 +5577,26 @@
       "enabled": true
     },
     {
+      "id": "nation-Mongolia",
+      "aliases": [
+        "Mongoliet"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Mongolia",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "Mtz",
       "name": "Montezuma",
       "aliases": [],
@@ -5473,7 +5929,7 @@
       "type": "wonder",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_OlUp.jpg",
+      "imageUrl": null,
       "variant": "Vikings",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vk_OlUp.jpg",
@@ -5481,7 +5937,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Vikings",
+        "slot": "W1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg"
+      },
+      "imageAsset": "Vk_OlUp.b8576e20fd59.png"
     },
     {
       "id": "OpmW",
@@ -5578,7 +6040,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_Pgd.jpg",
+      "imageUrl": null,
       "variant": "China",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/C_Pgd.jpg",
@@ -5586,7 +6048,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "China",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg"
+      },
+      "imageAsset": "C_Pgd.b3a72db08fb7.png"
     },
     {
       "id": "Pgd",
@@ -5714,6 +6182,26 @@
       "enabled": true
     },
     {
+      "id": "nation-Persia",
+      "aliases": [
+        "Persien"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Persia",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "PtGr",
       "name": "Peter the Great",
       "aliases": [],
@@ -5838,6 +6326,26 @@
       "enabled": true
     },
     {
+      "id": "nation-Poland",
+      "aliases": [
+        "Polen"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Poland",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
       "id": "Pl_PLC",
       "name": "Polish-Lithuanian Commonwealth",
       "aliases": [],
@@ -5870,6 +6378,24 @@
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/PcTw.jpg",
         "checkedAt": "2026-10-14T18:35:13.274Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
+    },
+    {
+      "id": "nation-Portugal",
+      "aliases": [],
+      "faqReviewStatus": "pending",
+      "name": "Portugal",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
         "status": 200,
         "contentType": "image/jpeg"
       }
@@ -6039,7 +6565,7 @@
       "type": "wonder",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_Prm.jpg",
+      "imageUrl": null,
       "variant": "Egypt",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Eg_Prm.jpg",
@@ -6047,7 +6573,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Egypt",
+        "slot": "W1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg"
+      },
+      "imageAsset": "Eg_Prm.bb02d1e47769.png"
     },
     {
       "id": "Prm",
@@ -6133,7 +6665,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ar_Qry.jpg",
+      "imageUrl": null,
       "variant": "Arabs",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ar_Qry.jpg",
@@ -6141,7 +6673,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Arabs",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Arabs.jpg"
+      },
+      "imageAsset": "Ar_Qry.7cfd343cc487.png"
     },
     {
       "id": "C_Qry",
@@ -6153,7 +6691,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/C_Qry.jpg",
+      "imageUrl": null,
       "variant": "China",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/C_Qry.jpg",
@@ -6161,7 +6699,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "China",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/China.jpg"
+      },
+      "imageAsset": "C_Qry.23b14c9e72d3.png"
     },
     {
       "id": "Eg_Qry",
@@ -6173,7 +6717,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_Qry.jpg",
+      "imageUrl": null,
       "variant": "Egypt",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Eg_Qry.jpg",
@@ -6181,7 +6725,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Egypt",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg"
+      },
+      "imageAsset": "Eg_Qry.3cd6669fd11f.png"
     },
     {
       "id": "Et_qry",
@@ -6193,7 +6743,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_qry.jpg",
+      "imageUrl": null,
       "variant": "Ethiopia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Et_qry.jpg",
@@ -6201,7 +6751,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Ethiopia",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg"
+      },
+      "imageAsset": "Et_qry.ae59918496ce.png"
     },
     {
       "id": "G_Qry",
@@ -6213,7 +6769,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/G_Qry.jpg",
+      "imageUrl": null,
       "variant": "Greece",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/G_Qry.jpg",
@@ -6221,7 +6777,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Greece",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Greece.jpg"
+      },
+      "imageAsset": "G_Qry.a2c04932b67c.png"
     },
     {
       "id": "I_Qry",
@@ -6233,7 +6795,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Qry.jpg",
+      "imageUrl": null,
       "variant": "India",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/I_Qry.jpg",
@@ -6241,7 +6803,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "India",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg"
+      },
+      "imageAsset": "I_Qry.fda2730a2b75.png"
     },
     {
       "id": "J_Qry",
@@ -6253,7 +6821,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_Qry.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_Qry.jpg",
@@ -6261,7 +6829,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_Qry.c2c0fa23044d.png"
     },
     {
       "id": "K_Qry",
@@ -6273,7 +6847,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_Qry.jpg",
+      "imageUrl": null,
       "variant": "Korea",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/K_Qry.jpg",
@@ -6281,7 +6855,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Korea",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg"
+      },
+      "imageAsset": "K_Qry.eea4138a90c9.png"
     },
     {
       "id": "Ml_Qry",
@@ -6293,7 +6873,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_Qry.jpg",
+      "imageUrl": null,
       "variant": "Mali",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ml_Qry.jpg",
@@ -6301,7 +6881,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mali",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg"
+      },
+      "imageAsset": "Ml_Qry.2ca52c2df92f.png"
     },
     {
       "id": "Pl_Qry",
@@ -6313,7 +6899,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_Qry.jpg",
+      "imageUrl": null,
       "variant": "Poland",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pl_Qry.jpg",
@@ -6321,7 +6907,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Poland",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg"
+      },
+      "imageAsset": "Pl_Qry.ffb0e0d67d7a.png"
     },
     {
       "id": "Ps_Qry",
@@ -6333,7 +6925,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_Qry.jpg",
+      "imageUrl": null,
       "variant": "Persia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ps_Qry.jpg",
@@ -6341,7 +6933,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Persia",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg"
+      },
+      "imageAsset": "Ps_Qry.a953ea35664a.png"
     },
     {
       "id": "R_Qry",
@@ -6353,7 +6951,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/R_Qry.jpg",
+      "imageUrl": null,
       "variant": "Rome",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/R_Qry.jpg",
@@ -6361,7 +6959,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Rome",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg"
+      },
+      "imageAsset": "R_Qry.98921daba939.png"
     },
     {
       "id": "Vk_Qry",
@@ -6373,7 +6977,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_Qry.jpg",
+      "imageUrl": null,
       "variant": "Vikings",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vk_Qry.jpg",
@@ -6381,7 +6985,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Vikings",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg"
+      },
+      "imageAsset": "Vk_Qry.bf941a2db9b3.png"
     },
     {
       "id": "Vn_Qry",
@@ -6393,7 +7003,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_Qry.jpg",
+      "imageUrl": null,
       "variant": "Venice",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vn_Qry.jpg",
@@ -6401,7 +7011,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Venice",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg"
+      },
+      "imageAsset": "Vn_Qry.05aa5bd5cf08.png"
     },
     {
       "id": "Qbc",
@@ -6552,7 +7168,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_RcFd.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_RcFd.jpg",
@@ -6560,7 +7176,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_RcFd.5ca6b11c98bc.png"
     },
     {
       "id": "Rfm",
@@ -6654,6 +7276,26 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Rome",
+      "aliases": [
+        "Rom"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Rome",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Rome.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "RmJl",
@@ -6791,7 +7433,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ml_StCv.jpg",
+      "imageUrl": null,
       "variant": "Mali",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ml_StCv.jpg",
@@ -6799,7 +7441,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mali",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mali.jpg"
+      },
+      "imageAsset": "Ml_StCv.4a3410e53c2e.png"
     },
     {
       "id": "Smr",
@@ -7548,7 +8196,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vk_StCh.jpg",
+      "imageUrl": null,
       "variant": "Vikings",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vk_StCh.jpg",
@@ -7556,7 +8204,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Vikings",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg"
+      },
+      "imageAsset": "Vk_StCh.612f89d83b27.png"
     },
     {
       "id": "Et_Stl",
@@ -7568,7 +8222,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Et_Stl.jpg",
+      "imageUrl": null,
       "variant": "Ethiopia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Et_Stl.jpg",
@@ -7576,7 +8230,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Ethiopia",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Ethiopia.jpg"
+      },
+      "imageAsset": "Et_Stl.77aa2c9e0900.png"
     },
     {
       "id": "Mg_Stp",
@@ -7588,7 +8248,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_Stp.jpg",
+      "imageUrl": null,
       "variant": "Mongolia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mg_Stp.jpg",
@@ -7596,7 +8256,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mongolia",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg"
+      },
+      "imageAsset": "Mg_Stp.61ec55c8fdb2.png"
     },
     {
       "id": "SkEx",
@@ -7802,7 +8468,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Am_Tpe.jpg",
+      "imageUrl": null,
       "variant": "America",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Am_Tpe.jpg",
@@ -7810,7 +8476,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "America",
+        "slot": "BM2",
+        "url": "https://games.tabony.net/static/public/Nations/nations/America.jpg"
+      },
+      "imageAsset": "Am_Tpe.7b6ed73033b4.png"
     },
     {
       "id": "Tls",
@@ -7839,7 +8511,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Eg_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Egypt",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Eg_Tpl.jpg",
@@ -7847,7 +8519,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Egypt",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Egypt.jpg"
+      },
+      "imageAsset": "Eg_Tpl.aef85a29346d.png"
     },
     {
       "id": "I_Tpl",
@@ -7859,7 +8537,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Tpl.jpg",
+      "imageUrl": null,
       "variant": "India",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/I_Tpl.jpg",
@@ -7867,7 +8545,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "India",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg"
+      },
+      "imageAsset": "I_Tpl.e00829528757.png"
     },
     {
       "id": "J_Tpl",
@@ -7879,7 +8563,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/J_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Japan",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/J_Tpl.jpg",
@@ -7887,7 +8571,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Japan",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Japan.jpg"
+      },
+      "imageAsset": "J_Tpl.4ff42be788c1.png"
     },
     {
       "id": "K_Tpl",
@@ -7899,7 +8589,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/K_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Korea",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/K_Tpl.jpg",
@@ -7907,7 +8597,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Korea",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Korea.jpg"
+      },
+      "imageAsset": "K_Tpl.95fc001b7cfc.png"
     },
     {
       "id": "Pg_Tpl",
@@ -7919,7 +8615,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pg_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Portugal",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pg_Tpl.jpg",
@@ -7927,7 +8623,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Portugal",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Portugal.jpg"
+      },
+      "imageAsset": "Pg_Tpl.b44ee8b439c7.png"
     },
     {
       "id": "Pl_Tpl",
@@ -7939,7 +8641,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Pl_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Poland",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Pl_Tpl.jpg",
@@ -7947,7 +8649,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Poland",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Poland.jpg"
+      },
+      "imageAsset": "Pl_Tpl.efd5fa68a165.png"
     },
     {
       "id": "Ps_Tpl",
@@ -7959,7 +8667,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_Tpl.jpg",
+      "imageUrl": null,
       "variant": "Persia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ps_Tpl.jpg",
@@ -7967,7 +8675,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Persia",
+        "slot": "BM4",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg"
+      },
+      "imageAsset": "Ps_Tpl.47e77a54bc3d.png"
     },
     {
       "id": "TrFm",
@@ -8341,7 +9055,7 @@
       "type": "military",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Vn_Trm.jpg",
+      "imageUrl": null,
       "variant": "Venice",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Vn_Trm.jpg",
@@ -8349,7 +9063,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Venice",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg"
+      },
+      "imageAsset": "Vn_Trm.e0741f123ad6.png"
     },
     {
       "id": "TM_KE",
@@ -8542,7 +9262,7 @@
       "type": "wonder",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/I_Vrn.jpg",
+      "imageUrl": null,
       "variant": "India",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/I_Vrn.jpg",
@@ -8550,7 +9270,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "India",
+        "slot": "W1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/India.jpg"
+      },
+      "imageAsset": "I_Vrn.b50993102ea7.png"
     },
     {
       "id": "Vk_Vr",
@@ -8585,6 +9311,26 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Venice",
+      "aliases": [
+        "Venedig"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Venice",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Venice.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "Vrs",
@@ -8653,6 +9399,27 @@
         "contentType": "image/jpeg"
       },
       "enabled": true
+    },
+    {
+      "id": "nation-Vikings",
+      "aliases": [
+        "Vikingar",
+        "Vikingarna"
+      ],
+      "faqReviewStatus": "pending",
+      "name": "Vikings",
+      "type": "nation",
+      "age": null,
+      "boardSide": "B",
+      "imageUrl": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+      "metadataSource": "nations.py",
+      "enabled": true,
+      "imageCheck": {
+        "url": "https://games.tabony.net/static/public/Nations/nations/Vikings.jpg",
+        "checkedAt": "2026-10-14T20:00:33.393Z",
+        "status": 200,
+        "contentType": "image/jpeg"
+      }
     },
     {
       "id": "Vgn",
@@ -8893,7 +9660,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Mg_Yrt.jpg",
+      "imageUrl": null,
       "variant": "Mongolia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Mg_Yrt.jpg",
@@ -8901,7 +9668,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Mongolia",
+        "slot": "BM1",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Mongolia.jpg"
+      },
+      "imageAsset": "Mg_Yrt.ab55703bdb64.png"
     },
     {
       "id": "Zpl",
@@ -8947,7 +9720,7 @@
       "type": "building",
       "age": 0,
       "metadataSource": "nations.py",
-      "imageUrl": "https://games.tabony.net/static/public/Nations/cards/Ps_Zgr.jpg",
+      "imageUrl": null,
       "variant": "Persia",
       "imageCheck": {
         "url": "https://games.tabony.net/static/public/Nations/cards/Ps_Zgr.jpg",
@@ -8955,7 +9728,13 @@
         "status": 404,
         "contentType": "text/html"
       },
-      "enabled": true
+      "enabled": true,
+      "boardSource": {
+        "nation": "Persia",
+        "slot": "BM3",
+        "url": "https://games.tabony.net/static/public/Nations/nations/Persia.jpg"
+      },
+      "imageAsset": "Ps_Zgr.c2dd8b79a0c7.png"
     },
     {
       "id": "Zgr",

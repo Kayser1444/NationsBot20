@@ -16,7 +16,7 @@ Status 2026-10-14: **FAQ++ 1.11 importerad** från användarens `Reference/faq++
 - `translations-sv.json`: 206 svenska översättningar och 77 svenska rubriker, med SHA-256 för dokumentet och motsvarande engelska text. Ändrad källtext stoppar återapplicering tills översättningen uppdaterats. Originaltext, engelska punkter och granskningsbeslut bevaras.
 
 Ändra svenska översättningar i `translations-sv.json` och kör `scripts/apply-faq-translations.mjs`; skriptet uppdaterar både registret och granskningsunderlaget. Det avbryter om engelska källtexter har ändrats eller en tidigare godkänd/avvisad översättning skulle skrivas över med annan text.
-- `../cards/catalog.json`: 503 sökbara metadataobjekt från Tabonys spelimplementation och kompletteringar från FAQ:n. Pythonkällan läses med AST utan att köra spelkod. Bildstatus och FAQ-granskning hanteras separat.
+- `../cards/catalog.json`: 520 sökbara metadataobjekt, inklusive 17 nationsposter och 74 startkort med extraherade bilder. Pythonkällan läses med AST utan att köra spelkod. Bildstatus och FAQ-granskning hanteras separat.
 - `../cards/faq-coverage.json`: inventeringskopplingar för samtliga kortnamnsrubriker, inklusive specialkort och startvarianter. Nya FAQ-kopplingar är `pending`.
 
 Original-PDF:en ligger i `Reference`; renderade sidor och extraherad text finns under `work/faq-source/`. PDF-textlagret tappar bokstäver i ligaturer (t.ex. `efect`, `frst`). Originaltexten bevaras, medan kontrollerade sammanfattningar använder vanlig stavning. Dokumentets SHA-256 identifierar exakt vilket original genomgången avser.
