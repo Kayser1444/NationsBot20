@@ -62,7 +62,7 @@ test('FAQ buttons update the original card, preserve its language, and collapse 
   assert.deepEqual(opened.map(call => call.type), ['ack', 'update']);
   assert.equal(opened[1].payload.embeds[0].title, 'Porcelain Tower');
   assert.match(opened[1].payload.embeds[2].description, /French Revolution/);
-  assert.match(opened[1].payload.embeds[2].description, /English summary/);
+  assert.match(opened[1].payload.embeds[2].description, /FAQ\+\+ 1.11.*points/);
   assert.deepEqual(opened[1].payload.allowedMentions, { parse: [], users: [], roles: [] });
   const closeId = opened[1].payload.components[0].components[0].custom_id;
   const closed = await f.click(closeId);

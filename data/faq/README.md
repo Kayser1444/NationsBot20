@@ -2,7 +2,7 @@
 
 Status 2026-10-14: **FAQ++ 1.11 importerad** från användarens `Reference/faq++1.11.pdf`. Dokumentet är daterat 5 december 2017 och omfattar tio sidor. Vi har 216 textposter och 547 indexrubriker. Tio poster med 13 svarspunkter per språk är källkontrollerade av Codex för Porcelain Tower; resterande 206 poster och deras automatiska kopplingar är `pending`. Det innebär ingen användargranskning eller kontroll av vilken version som nu kan laddas ner från BGG.
 
-`/card` använder registret via `card-bank.mjs` i den separata Railway-stagingmiljön. Kortinventeringen omfattar 503 poster, 422 verifierade bildlänkar och samtliga 479 kortnamnsrubriker i FAQ:n. FAQ-innehållet är fortfarande ett granskat piloturval för Porcelain Tower; övriga kort kan visas med bild/metadata utan att deras FAQ-text godkänns. Se [kortinventering och bildstatus](../cards/README.md).
+`/card` använder registret via `card-bank.mjs` i den separata Railway-stagingmiljön. Kortinventeringen omfattar 503 poster, 422 verifierade bildlänkar och samtliga 479 kortnamnsrubriker i FAQ:n. Alla kopplade FAQ-punkter, även `pending`, visas på användarens begäran med en kort disclaimer. Relevanta korttypsregler och uttryckliga regelhänvisningar ingår också. Visningen ändrar inga granskningsbeslut. Se [kortinventering och bildstatus](../cards/README.md).
 
 ## Filer och ansvar
 
@@ -46,7 +46,7 @@ DM-kommandot förbereds i `work/card-preview-command.txt`. Samma renderer använ
 6. Generera `review.md` med post-ID, sidor, originaltext, föreslagna svarspunkter, kortkopplingar och plats för granskningsanteckningar.
 7. Användaren granskar innehåll, formulering och kopplingar. `pending` blir aldrig automatiskt `approved` vid import.
 
-Alla poster tas med i granskningsunderlaget. För normal `/card`-visning används endast godkända punkter där både källpost och kortkoppling är godkända. En ofärdig koppling ska beskrivas som ofärdig, inte som att officiella FAQ-poster saknas. Fullständighetsstatus gäller en viss dokumentversion och ett visst kort.
+Alla poster tas med i granskningsunderlaget. `/card` visar både `approved` och `pending` poster, punkter och kopplingar. `rejected` och okända granskningsstatusar visas inte. **”FAQ-text och kortkopplingar är inte fullständigt granskade.”** står kortfattat under metadata när FAQ-punkter finns och ligger kvar när FAQ:n öppnas. Om svensk sammanfattning saknas visas det engelska originalet med en språknotis. Granskning sker fortsatt separat i `review.md`; inget blir automatiskt godkänt. Ett kort utan kopplade punkter beskrivs som att koppling saknas i den importerade versionen. Fullständighetsstatus gäller en viss dokumentversion och ett visst kort.
 
 ## Föreslagen Discord-layout
 
@@ -58,7 +58,7 @@ FAQ:n börjar hopfälld. En knapp under kortbilden växlar mellan **Visa FAQ (an
 Hopfällt: kortbild + kompakt metadata + [Visa FAQ (antal)]
 
 Utfällt: kortbild + kompakt metadata
-FAQ · [verifierad version] · [antal] granskade punkter
+FAQ · [verifierad version] · [antal] punkter
 - [Första granskade regeln med sina villkor.]
 - [Nästa granskade regel eller relevant korshänvisning.]
 

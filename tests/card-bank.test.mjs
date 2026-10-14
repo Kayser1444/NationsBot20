@@ -62,19 +62,19 @@ test('Porcelain Tower shows its own rules and every named cross-reference with s
   assert.equal(cardBank.render('Titanic').ok, true, 'available images do not require FAQ review');
 });
 
-test('pending source text, summary or link is excluded independently', () => {
+test('rejected source text, summary or link is excluded independently', () => {
   for (const level of ['source', 'bullet', 'link']) {
     const data = fixtures();
     const entry = data.entries.entries.find(entry => entry.id === 'event-anarchism');
-    if (level === 'source') entry.review.status = 'pending';
-    if (level === 'bullet') for (const bullet of entry.bullets) bullet.review.status = 'pending';
-    if (level === 'link') entry.cardLinks.find(link => link.cardId === 'PcTw').review.status = 'pending';
+    if (level === 'source') entry.review.status = 'rejected';
+    if (level === 'bullet') for (const bullet of entry.bullets) bullet.review.status = 'rejected';
+    if (level === 'link') entry.cardLinks.find(link => link.cardId === 'PcTw').review.status = 'rejected';
     const text = allPages(createCardBank(data), 'sv-SE').map(content).join('\n');
     assert.ok(!text.includes('Anarchism'));
   }
 });
 
-test('every FAQ card heading is inventoried, while pending FAQ content stays hidden', () => {
+test('every FAQ card heading is inventoried and pending FAQ points are accessible with a disclaimer', () => {
   const { catalog, entries } = fixtures();
   const coverage = read('cards/faq-coverage.json');
   assert.equal(coverage.items.length, 479);
@@ -93,20 +93,54 @@ test('every FAQ card heading is inventoried, while pending FAQ content stays hid
       assert.equal(card.imageCheck.status, 200, card.id);
       assert.equal(image.url, card.imageCheck.url);
     } else assert.match(content(reply), /Ingen separat kortbild/);
-    if (card.faqReviewStatus === 'pending') {
-      assert.equal(reply.pointCount, 0, card.id);
-      assert.ok(reply.messages[0].components[0].components[0].disabled);
+    for (const language of ['sv-SE', 'en-US']) {
+      const localized = cardBank.render(card.id, language);
+      const pages = Array.from({ length: localized.faqPageCount }, (_, faqPage) => cardBank.render(card.id, language, { faqPage }));
+      for (const page of pages) assertMessageLimits(page);
+      if (localized.pointCount) {
+        assert.ok(!localized.messages[0].components[0].components[0].disabled, card.id);
+        assert.match(content(localized), language === 'sv-SE' ? /inte fullständigt granskade/ : /not been fully reviewed/);
+      }
+      const direct = entries.entries.filter(entry => entry.cardLinks.some(link => link.cardId === card.id && ['pending', 'approved'].includes(link.review.status)));
+      for (const entry of direct) assert.ok(localized.entryIds.includes(entry.id), card.id + ': ' + entry.id);
     }
   }
   assert.equal(entries.entries.filter(entry => entry.review.status === 'approved').length, 10);
   const cabin = cardBank.render("Tom’s Cabin");
   assert.equal(cabin.cardId, 'UTC');
   assert.match(cabin.messages[0].embeds[0].image.url, /UTC\.jpg$/);
-  assert.equal(cabin.pointCount, 0);
-  assert.ok(!content(cabin).includes('Remove all Buildings'));
+  assert.equal(cabin.pointCount, 2);
+  const opened = cardBank.render('UTC', 'sv-SE', { faqPage: 0 });
+  assert.match(content(opened), /Remove all Buildings/);
+  assert.match(content(opened), /Golden Age Bonus/);
+  assert.match(content(opened), /Engelskt original/);
+  assert.match(content(opened), /inte fullständigt granskade/);
   for (const name of ['Nikola Tesla', 'Hagia Sophia', 'Kremlin', 'Mechanical Turk', 'Hussar', 'Turmoil', 'Siberia 2']) {
     assert.equal(cardBank.render(name).ok, true, name);
   }
+});
+
+test('pending states remain pending, related rules are deduplicated, and unavailable review states stay hidden', () => {
+  const data = fixtures();
+  const entry = data.entries.entries.find(entry => entry.id === 'golden-age-uncle-tom-s-cabin');
+  const bonus = data.entries.entries.find(entry => entry.id === 'golden-age-bonus');
+  entry.relatedEntryIds.push(bonus.id);
+  bonus.relatedEntryIds.push(entry.id);
+  const before = JSON.stringify(data);
+  const bank = createCardBank(data);
+  const reply = bank.render('UTC', 'sv-SE', { faqPage: 0 });
+  assert.equal(reply.pointCount, 2);
+  assert.equal(new Set(reply.entryIds).size, reply.entryIds.length);
+  assert.equal(JSON.stringify(data), before, 'display must not approve or modify source data');
+  for (const status of ['rejected', 'unknown']) {
+    entry.review.status = status;
+    const hidden = createCardBank(data).render('UTC', 'sv-SE', { faqPage: 0 });
+    assert.ok(!content(hidden).includes('Remove all Buildings'));
+    assert.equal(hidden.pointCount, 1);
+  }
+  const sejong = cardBank.render('SjGr', 'sv-SE', { faqPage: 0 });
+  assert.ok(sejong.entryIds.includes('golden-age-bonus'), 'an explicit reference includes its rule');
+  assert.equal(cardBank.render('Aqd').pointCount, 0, 'an empty heading is not a fabricated rule');
 });
 
 test('large-catalog suggestions disambiguate variants and keep exact matches ahead of partial matches', () => {
@@ -158,7 +192,7 @@ test('button IDs retain language and support open, close and fresh bank instance
   const closed = cardBank.render('PcTw', 'en-US');
   const openId = closed.messages[0].components[0].components[0].custom_id;
   const opened = createCardBank(fixtures()).renderButton(openId);
-  assert.match(content(opened), /English summary/);
+  assert.match(content(opened), /FAQ\+\+ 1.11.*points/);
   const closeId = opened.messages[0].components[0].components[0].custom_id;
   assert.deepEqual(cardBank.renderButton(closeId).messages, closed.messages);
   assert.deepEqual(cardBank.renderButton(openId).messages, opened.messages, 'repeated open clicks are idempotent');

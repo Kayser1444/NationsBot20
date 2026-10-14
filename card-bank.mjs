@@ -4,7 +4,10 @@ import { text } from './language.mjs';
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const normalize = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim();
 const escape = value => String(value).replace(/[\\`*_\[\]<>~|]/g, '\\$&');
-const approved = value => value?.review?.status === 'approved';
+// Pending imports are visible with a disclaimer; rejected or unknown states stay hidden.
+const visible = value => ['approved', 'pending'].includes(value?.review?.status);
+const typeRules = { advisor: ['advisor-advisor'], battle: ['battle-battle'], golden_age: ['golden-age-bonus'],
+  wonder: ['wonder-wonder'], natural_wonder: ['natural-wonders-natural-wonders'], event: ['event-event'] };
 const silent = { parse: [], users: [], roles: [] };
 const embedLength = embed => [embed.title, embed.description, embed.footer?.text, embed.author?.name,
   ...(embed.fields ?? []).flatMap(field => [field.name, field.value])].reduce((sum, value) => sum + (value?.length ?? 0), 0);
@@ -45,10 +48,29 @@ export function createCardBank({ catalog, sources, entries }) {
     if (!['sv-SE', 'en-US'].includes(language)) language = 'en-US';
     const card = resolve(query);
     if (!card) return { ok: false, messages: [{ content: text(language, 'cardUnavailable'), allowed_mentions: silent }] };
-    const matched = entries.entries.filter(entry => approved(entry) && entry.cardLinks.some(link => link.cardId === card.id && approved(link)));
-    matched.sort((a, b) => Number(!a.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && approved(link))) -
-      Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && approved(link))) || a.sourcePages[0] - b.sourcePages[0]);
-    const points = matched.flatMap(entry => entry.bullets.filter(bullet => approved(bullet) && bullet.language === language).map(bullet => ({ entry, bullet })));
+    const matched = entries.entries.filter(entry => visible(entry) && (
+      entry.cardLinks.some(link => link.cardId === card.id && visible(link)) ||
+      (typeRules[card.type] ?? []).includes(entry.id) && !entry.cardLinks.some(link => link.cardId === card.id && link.review?.status === 'rejected')));
+    // Follow explicit rule references, once each, without copying text between entries.
+    const selectedIds = new Set(matched.map(entry => entry.id));
+    for (let i = 0; i < matched.length; i++) for (const id of matched[i].relatedEntryIds) {
+      const related = entries.entries.find(entry => entry.id === id);
+      if (related && visible(related) && !selectedIds.has(id) &&
+          !related.cardLinks.some(link => link.cardId === card.id && link.review?.status === 'rejected')) {
+        selectedIds.add(id);
+        matched.push(related);
+      }
+    }
+    matched.sort((a, b) => Number(!a.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) -
+      Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) || a.sourcePages[0] - b.sourcePages[0]);
+    let englishFallback = false;
+    const points = matched.flatMap(entry => {
+      const available = entry.bullets.filter(visible);
+      const localized = available.filter(bullet => bullet.language === language);
+      const selected = localized.length ? localized : available.filter(bullet => bullet.language === 'en-US');
+      if (selected.length && selected[0].language !== language) englishFallback = true;
+      return selected.map(bullet => ({ entry, bullet }));
+    });
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
     const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}**`;
     const description = language === 'sv-SE' ? card.descriptionSv : card.descriptionEn;
@@ -58,8 +80,9 @@ export function createCardBank({ catalog, sources, entries }) {
       { description: metadata + (description ? '\n' + description : ''), color: 12092983 },
     ] };
     if (!hasImage) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
+    if (points.length) message.embeds[1].description += '\n' + text(language, 'cardFaqDisclaimer');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
-    const footer = '\n\n' + text(language, card.faqReviewStatus === 'pilot_reviewed' ? 'cardFaqPilotScope' : 'cardFaqScope') + '\n' +
+    const footer = '\n\n' + (englishFallback ? text(language, 'cardFaqEnglishFallback') + '\n' : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;

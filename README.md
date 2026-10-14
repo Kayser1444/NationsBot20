@@ -346,7 +346,8 @@ to run independently until the deliberate cloud cutover.
 ### Card inventory and FAQ
 
 `/card name:Porcelain Tower` shows the card image, a compact type/age row and
-13 sourced FAQ summary points from ten checked passages in FAQ++ 1.11. FAQ starts
+the linked FAQ++ 1.11 points, including imports pending review. A short disclaimer
+states that FAQ text and card links have not been fully reviewed. FAQ starts
 collapsed; **Show FAQ / Hide FAQ** updates the same card message. Each point
 identifies its original heading and page. Long answers have previous/next page
 buttons, and closing the FAQ leaves no extra messages behind. Swedish and English follow
@@ -367,8 +368,12 @@ to the inventory. 422 public Tabony JPEG images have been checked; starting-boar
 variants and seven additional FAQ cards explicitly report a missing image.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation.
-The FAQ bank contains 216 text entries; 206 remain pending review. Enabling a card
-does not approve its FAQ content. See [card coverage and image checks](data/cards/README.md),
+The FAQ bank contains 216 text entries; 206 remain pending review. Pending points
+and links are visible with the disclaimer, while rejected content stays hidden.
+Swedish replies use the English original where a Swedish summary is unavailable,
+with a language note. Card-type rules and explicitly referenced rules are included
+once each. Empty card headings do not create FAQ points. Displaying content does
+not change its review status. See [card coverage and image checks](data/cards/README.md),
 [FAQ data and reproduction](data/faq/README.md) and
 [content review](data/faq/review.md). The Docker build includes the runtime JSON
 files; the source PDFs and images stay local. The expanded catalog is deployed to
