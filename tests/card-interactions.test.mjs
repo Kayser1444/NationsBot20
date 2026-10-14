@@ -54,12 +54,12 @@ async function fixture(t, prepareImage = async reply => reply.messages[0]) {
     await client.listeners(Events.InteractionCreate)[0](interaction);
     return calls;
   }
-  async function slashCard() {
+  async function slashCard(overrides = {}) {
     const calls = [];
     const interaction = {commandName:'card',guildId:'guild',channelId:'channel',context:0,locale:'sv-SE',user:{id:'user'},
       options:{getString:()=> 'PcTw'}, isButton:()=>false,isChatInputCommand:()=>true,isAutocomplete:()=>false,
       deferReply:async()=>{interaction.deferred=true;calls.push({type:'ack'});},
-      editReply:async payload=>calls.push({type:'update',payload}),followUp:async()=>assert.fail('No extra message')};
+      editReply:async payload=>calls.push({type:'update',payload}),followUp:async()=>assert.fail('No extra message'),...overrides};
     await client.listeners(Events.InteractionCreate)[0](interaction);
     return calls;
   }
@@ -80,6 +80,9 @@ test('slash card uploads the image on the first edit and FAQ clicks keep its exi
   assert.deepEqual(opened[1].payload.attachments,[{id:'image',filename:'card-PcTw.jpg'}]);
   assert.equal(opened[1].payload.files,undefined);
   assert.equal(downloads,1);
+  const withoutUploadPermission=await f.slashCard({appPermissions:{has:permission=>permission !== 'AttachFiles'}});
+  assert.equal(withoutUploadPermission[1].payload.files,undefined);
+  assert.match(withoutUploadPermission[1].payload.embeds[0].image.url,/^https:\/\/games.tabony.net\//);
   const hidden=await f.click(openId(),{message:{author:{id:'app'},attachments:new Map(),embeds:[{image:{url:'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg?ex=temporary'}}]}});
   assert.equal(hidden[1].payload.files,undefined);
   assert.equal(hidden[1].payload.attachments,undefined);

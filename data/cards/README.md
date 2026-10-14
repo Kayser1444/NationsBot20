@@ -47,6 +47,8 @@ Det första kortsvaret skickar bildens bytes som en Discord-bilaga med `attachme
 
 ## Bildtjänst på Railway
 
+På servrar där boten saknar `Attach Files` används bildens publika källadress i stället för en uppladdning. Detta påverkar inte FAQ-knapparna eller befintliga uppladdade bilder.
+
 Sätt `NATIONS_CARD_ASSETS_ENABLED=1` och `NATIONS_CARD_ASSET_ORIGIN=https://<publik-staging-domän>`. Rikta den publika domänen till port **8081**, eller en uttryckligen vald `NATIONS_CARD_ASSET_PORT`. Denna port har en separat HTTP-server som endast levererar manifestets PNG- och JPEG-filer under `/card-assets/`. Adminpanelen, API:er, prenumerationer och andra filer finns inte på denna server. Adminpanelens befintliga inställningar och port är separata. Discord-bilagor för lokala bilder fungerar även utan en publik HTTP-origin.
 
 Bildfiler och manifest byggs in i Dockerbilden och använder ingen plats på prenumerationsvolymen. Filnamnets checksumma gör URL:en versionsunik; bilderna kan därför cachas permanent. `GET`, `HEAD` och ETag stöds. `sharp` behövs bara vid extrahering, inte i driften. De fullständiga källbrädena sparas i det ignorerade `Reference/tabony-boards`.

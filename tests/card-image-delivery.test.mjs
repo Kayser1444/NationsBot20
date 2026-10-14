@@ -52,6 +52,15 @@ test('Discord hides embedded uploads from attachments; FAQ must reuse the CDN im
   }
 });
 
+test('servers without Attach Files keep source images without fetching or uploading',async()=>{
+  const prepare=createCardImageDelivery({cards,fetchImage:async()=>assert.fail('No upload permission')});
+  const reply=cardBank.render('PcTw');
+  assert.deepEqual(await prepare(reply,{allowUpload:false}),reply.messages[0]);
+  const saved=await prepare(reply,{allowUpload:false,imageUrl:'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg'});
+  assert.equal(saved.files,undefined);
+  assert.match(saved.embeds[0].image.url,/cdn.discordapp.com/);
+});
+
 test('concurrent requests coalesce, cache is bounded, and failed or invalid downloads keep the source image',async()=>{
   let downloads=0, release;
   const waiting=new Promise(resolve=>{release=resolve;});

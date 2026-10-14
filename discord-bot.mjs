@@ -61,7 +61,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             const reply = cardBank.renderButton(interaction.customId);
             if (!reply?.ok) { await privateReply('cardFaqExpired'); return; }
             const message = await prepareImage(reply, {attachments:[...(interaction.message?.attachments?.values?.() ?? [])],
-              imageUrl:interaction.message?.embeds?.[0]?.image?.url});
+              imageUrl:interaction.message?.embeds?.[0]?.image?.url,allowUpload:interaction.appPermissions?.has('AttachFiles') !== false});
             if (stopped) return;
             await interaction.editReply(interactionPayload(message));
           } catch {
@@ -110,7 +110,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           if (cardCommand) {
             service.captureLocale?.(interaction.user.id, interaction.locale);
-            const message = await prepareImage(cardReply);
+            const message = await prepareImage(cardReply, {allowUpload:interaction.appPermissions?.has('AttachFiles') !== false});
             if (stopped) return;
             await interaction.editReply(interactionPayload(message));
             for (const message of cardReply.messages.slice(1)) {

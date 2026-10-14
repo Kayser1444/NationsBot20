@@ -46,7 +46,7 @@ export function createCardImageDelivery({ cards, fetchImage = fetch, localAssets
     pending.set(url, loading);
     return loading;
   }
-  return async function prepare(reply, {attachments = [], imageUrl = null} = {}) {
+  return async function prepare(reply, {attachments = [], imageUrl = null, allowUpload = true} = {}) {
     const card = byId.get(reply?.cardId);
     if (!reply?.ok || !card) return reply?.messages?.[0];
     const original = reply.messages[0];
@@ -65,6 +65,7 @@ export function createCardImageDelivery({ cards, fetchImage = fetch, localAssets
     } catch { /* An absent or unrelated image requires a fresh verified upload. */ }
     const withImage = url => ({...original, embeds:original.embeds.map((embed,index) => index === 0 ? {...embed,image:{url}} : {...embed})});
     if (!retained && embedded) return withImage(embedded);
+    if (!retained && !allowUpload) return original;
     const body = retained ? null : await bytes(card);
     if (!retained && !body) return original; // A source outage leaves the existing source link usable.
     const message = withImage('attachment://' + filename);
