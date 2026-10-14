@@ -28,6 +28,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-faq-nations-faq-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Dokumentet förklarar kortsamspel och effekter i Nations, utgivet av Lautapelit.fi 2013, expansionen Dynasties från 2015 och samtliga promokort. Viktiga regler som är lätta att missa upprepas. Du behöver inte läsa dokumentet för att spela, men kan slå upp kort som du är osäker på. Ändringar i den senaste versionen är röda och i den näst senaste orange. Alla ändringar efter version 1.0 har en versionsnotering. Hänvisningar, exempelvis till Guldålder/Bonus, är klickbara länkar i PDF:en.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
@@ -62,6 +74,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-campaign-rules-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Spela en serie partier där alla börjar på svårighetsgraden Prince. Varje gång du vinner höjer du din svårighetsgrad: Prince → King → Emperor. Den som vinner på Emperor vinner kampanjen. [1.7] Varianten föreslogs av Gustavo Alves.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -76,7 +100,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kampanjregler"
     },
     {
       "id": "general-first-game",
@@ -105,10 +130,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-first-game-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Försök att ha alla arbetare utplacerade vid varje rundas slut, särskilt den första. Lägg inte så mycket sten på underverk att du inte kan placera ut alla arbetare. Satsa inte för ensidigt på militär styrka, stabilitet eller böcker. Som nybörjare bör du producera minst 3 sten, 3 guld och 2 mat i slutet av första rundan och försöka förbättra detta senare.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Första partiet"
     },
     {
       "id": "general-components",
@@ -137,10 +175,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-components-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om dina spelbräden är lätt konkava kan du försiktigt böja dem åt motsatt håll för att göra dem plana.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Spelmaterial"
     },
     {
       "id": "general-production",
@@ -169,6 +220,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-production-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Resurser produceras innan de förbrukas. Du behöver därför exempelvis inte spara resurser från förra rundan för militärens underhåll. Fyrkantiga effekter, som militär styrka och stabilitet, räknas om omedelbart: en arbetare på Jaguar Warrior minskar stabiliteten med 1 vid utplacering och återställer den när arbetaren tas bort. Stabiliteten ändras inte igen under produktionen av den anledningen. Du får inte frivilligt spendera fler resurser än du har och ta poängförlusten; det kan bara inträffa när du tvingas förlora resurser. [1.2]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -183,7 +246,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Produktion"
     },
     {
       "id": "general-architects",
@@ -212,10 +276,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-architects-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Alla arkitekter tas bort från arkitektfältet innan nya läggs dit i början av rundan. Arkitekter sparas aldrig mellan rundor: både privata och gemensamma arkitekter som inte används går förlorade.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Arkitekter"
     },
     {
       "id": "general-cards",
@@ -244,10 +321,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-cards-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Symbolerna anger kortuppsättning: + avancerat kort, ⨯ expertkort, ● promokort och ⅅ Dynasties. Med ”du” avses nationen som har eller köper kortet, eller påverkas av händelsen. Kort påverkar normalt bara sin egen nation. Effekter för mest/minst kan också påverka andra; effekter för alla omfattar även den egna nationen. Ett övertäckt kort, även ett tryckt startkort, kan aldrig användas igen, även om det täckande kortet tas bort. Ett borttaget kort kan vändas upp och ned för att markera en tom plats utan effekt; nya kort av samma typ får placeras där. En specialhandling på ditt spelarbräde kan ersätta en vanlig handling. Du får använda den samma runda som kortet köps, men inte samma tur, eftersom du bara gör en handling per tur. Dragna kort som ska kastas läggs i kasthögen. Om en eras kort mot förmodan tar slut blandas den erans kastade kort till en ny draghög. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kort"
     },
     {
       "id": "general-most-and-least",
@@ -276,10 +366,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-most-and-least-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "”Produktion: Om mest militär styrka: +2 sten” ger 2 extra sten om du ensam är starkast under produktionsfasen. Delad förstaplats ger inget. ”Om X: ta bort” gäller omedelbart när villkoret uppfylls, även under det korta ögonblick då någon tar bort en arbetare för att flytta den till en annan byggnad eller ett annat militärkort. Kortet och dess effekter försvinner då direkt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Mest och minst"
     },
     {
       "id": "general-resource-loss",
@@ -309,10 +412,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-resource-loss-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Exempel: Du börjar produktionsfasen med 2 mat och 3 böcker och producerar inga böcker. Du ska betala 3 mat: betala 2 mat, förlora 1 segerpoäng för matbristen och betala 1 bok för den mat som saknas. Efter produktionen har du 6 sten. Du besegras i ett krig och ska förlora 1 segerpoäng och 3 mat; din stabilitet är 0. Förlora krigets segerpoäng och ersätt de 3 maten med böcker. Du förlorar ingen ytterligare segerpoäng för mat, eftersom du redan gjort det denna runda. Betala dina 2 böcker, förlora 1 segerpoäng för bokbristen och betala 1 sten. Vid en svält på −2 mat ersätter du först saknad mat med böcker och sedan saknade böcker med andra resurser. Betala 2 valfria resurser, utan nya poängstraff för mat eller böcker denna runda. Totalt har du förlorat 1 segerpoäng för matbrist, 1 för bokbrist och 1 för kriget och har 0 mat, 0 böcker och 3 sten kvar. Nästa runda kan du åter förlora poäng för mat- och bokbrist. Om alla resurser är slut och du redan fått straffet för den saknade resurstypen och för bokbrist tillkommer inget ytterligare straff för den återstående skulden. Du kan inte heller förlora fler segerpoäng när du har 0. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Resursförluster"
     },
     {
       "id": "general-workers",
@@ -341,10 +457,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-workers-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "En arbetare flyttas normalt från befolkningsspåret till resursområdet endast under tillväxtfasen. Arbetare får normalt inte flyttas tillbaka, men händelser och särskilda korteffekter kan göra undantag. Utplacering sker i handlingsfasen, inte i tillväxtfasen. När en arbetare återlämnas läggs den på valfri tom plats på ditt befolkningsspår. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Arbetare"
     },
     {
       "id": "general-5-players",
@@ -373,10 +502,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "general-5-players-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Högst två spelare kan ha ”mest”. Om exakt två delar den absoluta förstaplatsen har båda mest. Om en spelare ensam har mest och två delar andraplatsen har bara förstaplatsen mest. Om minst tre delar den absoluta förstaplatsen har ingen mest. Minst två spelare har ”minst”. Om minst två delar den absoluta sistaplatsen har bara dessa minst. Om en spelare ensam har minst och minst två delar näst sist har även dessa spelare minst. Alla spelare kan ha minst. [1.5]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Fem spelare"
     },
     {
       "id": "nations-nations",
@@ -405,10 +547,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-nations-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De flesta av dessa anmärkningar om Dynasties finns även i expansionens regelbok och upprepas här för att vara lätta att hitta.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Nationer"
     },
     {
       "id": "nations-china-b-side",
@@ -437,10 +592,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-china-b-side-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Specialeffekten ger 1 extra mat om du passar först. Maten erhålls formellt under produktionsfasen, men kan normalt tas direkt när du passar för att vara lättare att komma ihåg. Du kan få högst 1 mat för detta. Med fem spelare får du bonusen om du passar först eller tvåa.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kina · B-sida"
     },
     {
       "id": "nations-ethiopia",
@@ -469,10 +637,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-ethiopia-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När den nya spelarordningen bestäms lägger du din stabilitet till din militära styrka och använder summan som styrka. Stabiliteten används fortfarande som vanligt för att avgöra lika styrka. Regeln ändrar aldrig din faktiska styrka på spelbrädet.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Etiopien"
     },
     {
       "id": "nations-greece-b-side",
@@ -501,12 +682,25 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-greece-b-side-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Specialeffekten förklaras under Guldålder/Bonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
       "relatedEntryIds": [
         "golden-age-bonus"
-      ]
+      ],
+      "headingSv": "Grekland · B-sida"
     },
     {
       "id": "nations-japan",
@@ -610,10 +804,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-korea-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När förmågan används tas arkitekterna från förrådet, inte från de arkitekter som är tillgängliga denna runda. Betala ingen sten. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Korea"
     },
     {
       "id": "nations-mongolia",
@@ -642,6 +849,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-mongolia-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När någon spelare, även du, besegras i krig betalar den spelaren 2 extra av den resurstyp som anges på krigskortet. Stabilitet kan minska förlusten som vanligt. [1.8] Negativ militär styrka under produktionen orsakar uppror: du förlorar 1 segerpoäng samt 1 bok för varje styrkesteg under 0, som vid negativ stabilitet. Du börjar med 4 arbetare och kan ha högst 12. [1.7] Köper du ett krig med negativ styrka placeras krigsmarkören på 0. [1.8] Steppe är en vanlig plats för byggnader och militär, men arbetare får inte placeras där förrän ett nytt kort lagts på platsen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -656,7 +875,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Mongoliet"
     },
     {
       "id": "nations-persia-b-side",
@@ -685,10 +905,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-persia-b-side-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När du spelar den första dynastin ersätter du en koloniplats. Den andra dynastin ersätter samma koloniplats.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Persien · B-sida"
     },
     {
       "id": "nations-poland",
@@ -717,10 +950,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-poland-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För att få bonusen måste ett krig pågå och du får inte besegras i det.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Polen"
     },
     {
       "id": "nations-rome-b-side",
@@ -749,10 +995,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-rome-b-side-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De 2 i militär styrka är alltid aktiva; du kan inte placera en arbetare där. Du börjar alltså spelet med 2 i militär styrka. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Rom · B-sida"
     },
     {
       "id": "nations-venice",
@@ -781,10 +1040,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-venice-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "I solospel får du alltid specialbonusens effekt. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Venedig"
     },
     {
       "id": "nations-vikings",
@@ -813,6 +1085,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "nations-vikings-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Specialregeln genomförs efter att alla spelare avslutat produktionsfasen. Du får inga resurser själv. I solospel kan du bara minska skuggans böcker. [1.11] Old Uppsala får ersättas för att undvika dess negativa segerpoäng vid spelets slut.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -827,7 +1111,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vikingar"
     },
     {
       "id": "advisor-advisor",
@@ -856,10 +1141,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-advisor-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De stora fyrkantiga respektive runda värdena längst ned på de flesta rådgivare anger permanenta effekter respektive produktionseffekter. Du får dessa så länge du har rådgivaren, oberoende av rådgivarens övriga effekter.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Rådgivare"
     },
     {
       "id": "advisor-augustus",
@@ -887,6 +1185,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-augustus-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -932,6 +1242,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-hatshepsut-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du måste ha Hatshepsut när underverket färdigställs för att få 3 böcker. Tidigare färdigställda underverk ger ingen retroaktiv bonus när du skaffar henne. När Titanic färdigställs får du bonusen även om Titanic gör att du förlorar Hatshepsut. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -986,6 +1308,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-qin-shi-huang-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1030,6 +1364,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-saint-augustine-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1076,6 +1422,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-archimedes-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "En gång per runda får du ta en arkitekt från förrådet och använda den som en vanlig arkitekt. Effekten får användas samma runda som du köper Archimedes.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1118,6 +1476,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-boudica-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får ha militär styrka från andra kort, men förlorar Boudica omedelbart om minst en arbetare är placerad på ett militärkort. Se Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1165,6 +1535,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-cyrus-the-great-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du producerar bonusguldet endast i produktionsfasen och bara om du köpt minst en koloni under rundan. Flera kolonier ger ingen extra bonus. Kolonin får ha köpts före Cyrus; det räcker att du har kvar honom under produktionen och uppfyller villkoret. [1.6]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1207,6 +1589,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-buddha-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du måste hoppa över rundans första tur endast om du hade Buddha redan förra rundan, inte om du köper honom som första handling denna runda. [1.10] I solospel måste du slå tärningen efter den överhoppade turen. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1251,6 +1645,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-hannibal-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ditt plundringsvärde räknas som 1 högre. När du köper ett slag får du därför 1 mer av den valda resursen än normalt. Andra nationer betalar 1 extra guld utöver det vanliga priset när de köper slag.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1293,6 +1699,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-sun-tzu-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "I stället för rundans första tur tar du två turer i följd. Du måste ha haft Sun Tzu sedan föregående runda; att köpa honom som första handling ger ingen omedelbar extrahandling. Har du honom i början av din första handling får du båda handlingarna även om du ersätter honom med den första. I solospel slår du för skuggan efter de två handlingarna, även om du bara placerat arbetare på byggnader: ett slag totalt efter båda handlingarna. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1337,6 +1755,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-anna-komnene-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Bortse från alla negativa produktions- och stabilitetseffekter per arbetare på dina militärkort.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1379,6 +1809,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-harald-hardrada-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1425,6 +1867,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-sejong-the-great-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När du köper en guldålder får du 2 sten. Detta skiljer sig från regeln Guldålder/Bonus. [1.1]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1469,6 +1923,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-thomas-aquino-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1515,6 +1981,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-abu-bakr-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När du köper ett slag får du 2 extra böcker, oavsett vilken resurs du väljer från slaget.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1557,6 +2035,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-eleanor-of-aquitaine-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får bonusguldet om du köpt minst en koloni denna runda. Fler än en koloni ger ingen extra bonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1601,6 +2091,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-mansa-musa-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du måste ha Mansa Musa när handlingen börjar. Om ditt sista guld går åt till att köpa honom får du ingen effekt. Om det sista guldet i stället används till att köpa en annan rådgivare får du effekten. [1.1] Bonusen kan erhållas flera gånger per runda om du når 0 guld, skaffar mer och sedan spenderar allt igen. [1.2] Guldet måste spenderas som en handling; att förlora det räcker inte. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1643,6 +2145,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-alhazen-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "En gång per runda får du använda en hel handling till att välja två kort på utvecklingsbrädet och byta plats på dem. Du får inte göra något mer under den turen, särskilt inte köpa något kort. Nästa gång det är din tur får du köpa kort som vanligt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1687,6 +2201,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-genghis-khan-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Alla nationer, även din egen, har 3 lägre stabilitet så länge du har Genghis Khan.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1729,6 +2255,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-marco-polo-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får byta med förrådet: betala antingen 2 mat eller 2 sten för att få 4 guld.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1862,6 +2400,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-elizabeth-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Bonusstyrkan räknas endast när du kontrollerar om kriget besegrar dig, inte i något annat sammanhang.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1904,6 +2454,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-galileo-galilei-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du slipper endast kortets vanliga inköpspris i guld. Om du köper en guldålder och vill köpa segerpoäng måste den kostnaden betalas som vanligt. Förmågan får användas för naturliga underverk, vanliga underverk och guldåldrar. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -1948,6 +2510,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-isabella-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Bonusen gäller varje koloni från renässansen, era III. Kolonier från era I, II och IIII ger ingen bonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -1990,6 +2564,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-montezuma-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten inträffar omedelbart när ett krig eller ett slag köps. Kingdom of Leon ger bara 3 extra böcker, inte 3 för kriget och ytterligare 3 för slaget. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2044,6 +2630,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-martin-luther-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Varje nation, även din egen, som besegras i krig måste betala 4 extra mat. Maten läggs till krigets övriga resursförlust. Spelarna väljer i omvänd spelarordning vilka förluster stabiliteten ska minska. Stabiliteten får delas mellan förlusten från Martin Luther och krigets vanliga resursförlust.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2086,6 +2684,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-pocahontas-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Det höjda kravet för att erövra kolonier gäller även dig.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2130,6 +2740,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-tokugawa-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Bonusen räknas per kort från den aktuella eran: renässanskort under runda 5–6 och industrikort under runda 7–8.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2172,6 +2794,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-niccolo-machiavelli-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Visa båda händelsekorten för alla spelare och kasta det som inte väljs. [1.5] I solospel drar du två solohändelsebrickor och väljer en. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2216,6 +2850,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-peter-the-great-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Välj en av de tre resursbonusarna om din militära styrka är högre än krigets styrka.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2258,6 +2904,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-suleiman-i-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Så länge du är starkast och har arbetare kvar att ta får du ta en arbetare varje gång det är din tur.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2302,6 +2960,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-florence-nightingale-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du förlorar fortfarande böcker vid resursbrist, eller andra resurser om böcker saknas. Kortet påverkar inte krig. Effekten omfattar endast guld, sten, mat och böcker, inte militär styrka eller stabilitet. [1.10]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2344,6 +3014,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-frederick-the-great-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Utplaceringskostnaden kan aldrig bli lägre än 1 sten.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2388,6 +3070,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-abraham-lincoln-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Så länge du har arbetare kvar att ta får du ta en arbetare varje gång det är din tur.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2430,6 +3124,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-benjamin-disraeli-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får bonusmaten om du köpt minst en koloni denna runda. Fler än en koloni ger ingen extra bonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2474,6 +3180,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-marie-curie-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Två gånger per runda får du ta en arkitekt från förrådet och använda den som en vanlig arkitekt. Effekten får användas samma runda som du köper Marie Curie.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2516,6 +3234,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-alfred-nobel-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De två effekterna är oberoende. Du får inte köpa krig även om du saknar arbetare på byggnader från industrialismen, era IIII. Stenbonusen erhålls endast under produktionsfasen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2560,6 +3290,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-shaka-zulu-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Det är andra nationer som får bonusen när de köper en koloni, inte du.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2602,6 +3344,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-simon-bolivar-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Att ta bort en koloni är en separat handling. Du får ingen bonus när du ersätter en koloni med en ny. [1.5] Förtryckta kolonier får tas bort om det inte uttryckligen är förbjudet. Täck platsen med ett nedvänt kort; platsen kan senare användas som vanligt. [1.11]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2646,6 +3400,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "advisor-nikola-tesla-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Handlingen får utföras valfritt antal gånger per runda, men bara en gång per tur. Använd tärningen från solospelet.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2688,6 +3454,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "advisor-frederic-chopin-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Din produktion av böcker fördubblas, inte hela ditt bokinnehav. Som en handling får en annan spelare köpa kortet från dess ägare genom att betala 5 guld till förrådet. När spelaren som har Chopin har passat kan andra inte längre köpa honom.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2732,10 +3510,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "battle-battle-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får bara använda ett militärkorts plundringsvärde om minst en arbetare är placerad på kortet. Flera arbetare på samma kort ger ingen skillnad och multiplicerar aldrig slagets effekter.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Slag"
     },
     {
       "id": "building-coffffee-house",
@@ -2764,6 +3555,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "building-coffffee-house-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "I solospel får du alltid specialeffekten. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2778,7 +3581,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Coffee House"
     },
     {
       "id": "colony-grand-duchy-of-finland",
@@ -2806,6 +3610,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "colony-grand-duchy-of-finland-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Specialhandlingen låter dig hoppa över en tur utan att passa.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2851,10 +3667,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "golden-age-bonus-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Guldåldersbonus X ger X extra av den resurs du väljer från en köpt guldålder. Om du i stället betalar resurser för segerpoäng betalar du X mindre. Lägsta kostnad är 0; köpet av segerpoäng kan aldrig ge dig resurser. Flera guldåldersbonusar läggs ihop: bonus 1 och bonus 2 ger tillsammans bonus 3.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Guldålder · Bonus"
     },
     {
       "id": "golden-age-antikythera-mechanism",
@@ -2882,6 +3711,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "golden-age-antikythera-mechanism-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Guldåldersbonus påverkar inte alternativet att dra kort. Alla byggnader och underverk som dras måste spelas på ditt spelarbräde; de får inte kastas. [1.8] Naturliga underverk räknas som underverk, så du slutar dra när ett sådant visas. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -2926,6 +3767,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "golden-age-arabian-nights-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När din plats i spelarordningen hoppas över eftersom du har passat får du 2 böcker. Guldåldersbonus påverkar inte detta alternativ. Kasta kortet vid rundans slut. [1.9] I solospel ger det första alternativet ingenting. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -2968,6 +3821,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "golden-age-le-vite-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Guldåldersbonus påverkar inte alternativet att lägga till arkitekter. Ta arkitekterna från förrådet och lägg dem på arkitektfältet.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3012,6 +3877,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "golden-age-uncle-tom-s-cabin-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Guldåldersbonus påverkar inte alternativet att ta bort byggnader. Alla spelare, även du, måste ta bort alla byggnader med en utplaceringskostnad på 1 sten. De borttagna korten ligger kvar på sina platser men vänds nedåt och fungerar som tomma platser för nya byggnader eller militärkort.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3054,6 +3931,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "military-assassin-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Minst en arbetare måste vara placerad på kortet för att ge effekten. Effekten erhålls utöver de vanliga effekterna när du köper ett slag. Varje annan spelare väljer mellan att betala mat och att förlora sin rådgivare. Om Zhu Xi mördas kastas han, både när han är ensam och när han ersatts en gång. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3144,7 +4033,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Underverk"
     },
     {
       "id": "wonder-colosseum",
@@ -3172,6 +4062,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-colosseum-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Underverket får färdigställas även om du inte har 2 mat att betala. Du måste då betala 1 segerpoäng samt böcker för den mat som saknas. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3215,6 +4117,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-great-lighthouse-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Varje gång du betalar 3 guld för ett köpt kort, normalt ett kort från rad 3, får du 1 bok. Om en annan nation har Hannibal gäller detta även slag från rad 2.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3289,6 +4203,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-sphinx-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får 5 sten för varje underverk du färdigställer efter Sphinx.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3331,6 +4257,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-solomon-s-temple-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Poängen delas ut samtidigt som poängen för böcker. Du kan därför få högst 4 segerpoäng om templet byggs under antiken och du inte besegras i något krig under hela spelet.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3445,6 +4383,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-terracotta-army-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Alla nationer med lägst stabilitet när Terracotta Army färdigställs, även din egen, förlorar 4 guld.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3488,6 +4438,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-petra-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får byta med förrådet: betala 1 mat för antingen 3 böcker, 3 guld eller 3 sten.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3530,6 +4492,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-great-library-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se Guldålder/Bonus. Villkoret att kortet förloras vid lägst stabilitet har sin vanliga betydelse: du förlorar kortet om du har lägst stabilitet. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3586,6 +4560,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-alhambra-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "En gång per runda får du ta en arkitekt från förrådet och använda den som en vanlig arkitekt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3628,6 +4614,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-notre-dame-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3777,6 +4775,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-angkor-wat-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3822,6 +4832,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-chichen-itza-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får segerpoängen omedelbart, oavsett militär styrka och oavsett om någon nation, även din egen, kommer att besegras.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3864,6 +4886,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-great-wall-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om du passar först skyddas du endast från den segerpoäng som förloras direkt genom kriget. Resursförlust och poängförlust på grund av resursbrist påverkas inte.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3908,6 +4942,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-piazza-san-marco-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får byta med förrådet: betala 2 guld för antingen 5 böcker, 5 mat eller 5 sten.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -3950,6 +4996,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-hagia-sophia-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se regeln Mest och minst.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -3995,6 +5053,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-shwedagon-pagoda-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Lägg en markör här när du använder handlingen för att visa var den extra stabiliteten kommer från. Kasta markörerna vid rundans slut och minska stabiliteten lika mycket. Bonusstabiliteten tas bort före slutpoängräkningen, som är en separat fas efter sista rundan. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4059,6 +5129,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-sistine-chapel-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får böckerna när du på vanligt sätt anlitar en arkitekt för att bygga på ett underverk. Du får inte anlita arkitekter utan att bygga på ett underverk. [1.2]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4101,6 +5183,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-versailles-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Under resten av rundan då Versailles färdigställs räknas du som att du har lägst stabilitet, liksom nationer i uppror. Detta gäller både händelser och andra effekter. Stabilitetsmarkören flyttas inte; positiv stabilitet får fortfarande minska resursförlusten vid nederlag i krig. [1.3] Bortse från Versailles-ägarens faktiska stabilitet när det avgörs om andra har högst stabilitet. [1.5]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4210,6 +5304,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-royal-society-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Specialhandlingen tar bara bort den vanliga stenkostnaden för att placera ut en arbetare. Militärens underhåll fungerar som vanligt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4252,6 +5358,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-uraniborg-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Se Guldålder/Bonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4297,6 +5415,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-himeji-castle-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För att få 4 sten måste du köpa en byggnad och lägga den ovanpå en byggnad från en tidigare era, exempelvis en byggnad från era III på en från era I eller II.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4351,6 +5481,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-red-fort-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Varje gång du betalar 1 guld för ett köpt kort, normalt från rad 1, får du 2 mat.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4393,6 +5535,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-kremlin-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Så länge du är ensam starkast får du 4 extra stabilitet. Om någon får lika hög eller högre militär styrka förlorar du bonusen omedelbart.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4437,6 +5591,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-mechanical-turk-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De 2 segerpoängen vid färdigställandet stannar hos nationen som byggde underverket, även om det ges bort. Mechanical Turk får inte ersättas av ett annat underverk, men får själv ersätta ett underverk när det byggs eller tas emot från en annan spelare. Mottagaren väljer underverksplats. Om alla platser är upptagna av kort som inte får ersättas kan spelaren inte köpa ett nytt naturligt underverk eller färdigställa ett vanligt underverk. Du får inte heller ge Mechanical Turk till en spelare om det skulle fylla den sista ersättningsbara platsen och spelaren redan utforskar ett naturligt underverk. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4479,6 +5645,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-oresund-dues-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får 2 sten varje gång din tur skulle ha infallit om du inte hade passat. I solospel får du ingenting för att passa. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4523,6 +5701,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-south-pole-expedition-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Underverket får färdigställas även om du inte har 5 mat att betala. Du måste då betala 1 segerpoäng samt böcker för den mat som saknas. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4565,6 +5755,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-big-ben-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Poängen delas ut vid slutpoängräkningen. Endast dina egna kolonier räknas. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4609,6 +5811,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-brandenburg-gate-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nationen med högst militär styrka får både sten och guld, även om det är din egen nation som bygger Brandenburg Gate.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4651,6 +5865,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-british-museum-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nationen med lägst militär styrka förlorar 10 böcker, även om det är din egen nation som bygger British Museum.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4695,6 +5921,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "wonder-mit-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Direkt efter att du köpt och placerat en ny byggnad får du placera en arbetare på den utan den vanliga stenkostnaden. Du får först ta bort en redan utplacerad arbetare för att placera den på detta sätt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4737,6 +5975,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "wonder-statue-of-liberty-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten gäller endast vid slutpoängräkningen. Du måste ha fler arbetare än var och en av de andra spelarna för att få bonusen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4846,10 +6096,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "natural-wonders-natural-wonders-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Naturliga underverk får inte ersättas. Om alla dina underverksplatser upptas av underverk som inte får ersättas kan du varken köpa ett naturligt underverk eller färdigställa ett vanligt underverk. Vanliga underverk får ersättas av naturliga underverk. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Naturliga underverk"
     },
     {
       "id": "natural-wonders-vesuvius",
@@ -4877,6 +6140,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "natural-wonders-vesuvius-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Vid slutet av varje era måste du återlämna en arbetare till befolkningsspåret. Det får vara en arbetare som inte är utplacerad. [2.0]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -4921,6 +6196,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "natural-wonders-siberia-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Lägg kortet ”Siberia ...is a vast region” åt sidan vid spelstart; det används bara om Siberia upptäcks. Du måste ha två lediga eller ersättningsbara underverksplatser för att köpa Siberia. När Siberia upptäcks placeras det som vanligt på en underverksplats, och det extra Siberia-kortet läggs på en annan av dina underverksplatser.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -4963,6 +6250,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "natural-wonders-sahara-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Bonusstyrkan räknas endast när du kontrollerar om kriget besegrar dig, inte i något annat sammanhang. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5007,6 +6306,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "natural-wonders-hawaii-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Lägg en markör på underhållskostnaden för arbetaren som kortet ger för att visa att den inte räknas. Denna arbetare slipper underhållskostnaden permanent.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5049,6 +6360,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "natural-wonders-spice-islands-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får 4 extra av den resurs du väljer, men endast om du väljer att ta resurser. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5093,6 +6416,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "natural-wonders-titusville-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Sten räknas dubbelt endast under steg E, Resurser, i slutpoängräkningen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5135,6 +6470,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "natural-wonders-victoria-falls-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Kasta alla kolonier som finns kvar på rad 4 vid rundans slut. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5179,6 +6526,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "natural-wonders-uluru-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "I solospel får du ingenting när underverket upptäcks. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5222,10 +6581,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-event-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För positiva effekter måste du vara bäst för att få belöningen; negativa effekter drabbar alla berörda. Kom ihåg femspelarreglerna på regelbokens sida 21. Val som alla ska göra genomförs i omvänd spelarordning. Arbetare tas aldrig bort helt från spelarbrädet. Stabilitet minskar bara förluster vid nederlag i krig, inte förluster från händelser. [1.3] Varje effekt inträffar bara en gång om inget annat anges. Även effekter som börjar med ”får” ger alltså bara ett val. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Händelser"
     },
     {
       "id": "event-ashokas-conversion",
@@ -5253,6 +6625,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-ashokas-conversion-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Arbetarna tas bort från sina kort och blir tillgängliga för utplacering nästa runda. Flera arbetare får tas bort. Detta görs i omvänd spelarordning. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5297,6 +6681,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-bronze-age-collapse-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nationen med högst militär styrka och nationen med högst stabilitet är skyddade. Om samma nation har båda är den skyddad. Övriga förlorar 1 segerpoäng.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5339,6 +6735,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-christianity-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är valfri; du måste inte använda den även om du kan.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5383,6 +6791,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-han-dynasty-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Det är valfritt att ta emot effekten, men du måste ta båda delarna eller ingen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5425,6 +6845,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-hellenism-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om flera delar högst militär styrka förlorar alla 2 mat.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5469,6 +6901,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-jain-ascetism-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får tillbaka segerpoäng som förlorats direkt genom nederlag i krig eller genom resursbetalningen vid nederlaget. Betala först så mycket resurser du kan innan du ersätter bristen med böcker och 1 segerpoäng. Spelaren med högst stabilitet får inte de segerpoäng som andra förlorat i kriget. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5511,6 +6955,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-olympic-games-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts. Med fem spelare går nationen med högst stabilitet först och den med näst högst tvåa. Lika avgörs med spelarordningen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5555,6 +7011,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-qin-unifcation-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Alla nationer med högre militär styrka än rundans krig får 1 segerpoäng. Om inget krig köpts händer ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5569,7 +7037,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Qin Unification"
     },
     {
       "id": "event-spartacus-revolt",
@@ -5597,6 +7066,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-spartacus-revolt-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5641,6 +7122,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-rigveda-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För att göra effekten lättare att hålla reda på kan du i de flesta situationer ta boken direkt när du köper ett krig eller ett slag.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5683,6 +7176,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-sea-peoples-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får bara ta bort en arkitekt från ett underverk under uppförande, inte en arkitekt som du har tillgång till att använda, exempelvis från Archimedes.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5737,6 +7242,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-zoroastrian-revival-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nationen med högst stabilitet väljer mellan att få 4 sten och att låta de andra förlora 3 mat. Vid delad högst stabilitet händer ingenting. Med fem spelare gör nationen med högst stabilitet valet; spelarordningen avgör lika.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5779,6 +7296,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-black-death-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Errata: ”ta bort” ska vara ”återlämna”. Arbetaren läggs på valfri plats på befolkningsspåret. Om ingen arbetare ännu tagits läggs den ovanpå valfri sida och tas först vid tillväxt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5823,6 +7352,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-ecological-collapse-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts. Alla väljer innan ordningen ändras. Alla som betalar hamnar före alla som inte betalar, men den inbördes ordningen inom respektive grupp behålls. Det är frivilligt att betala 2 mat, och eftersom det är ett val får du bara välja det om du har maten. [1.10]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5865,6 +7406,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-feudal-dues-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Errata: ”turordning” ska vara ”spelarordning”. Hoppa över fasen för ny spelarordning denna runda.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5909,6 +7462,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-fourth-crusade-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nationen med lägst militär styrka förlorar böcker endast om den starkaste nationen betalar guldet. Om den starkaste inte vill eller kan betala händer ingenting. Med fem spelare gör den starkaste nationen valet; vid lika väljer den som står först i spelarordningen. Den negativa effekten drabbar som vanligt de två svagaste nationerna. Om den starkaste betalar får även den näst starkaste betala för att få bonusen, men det valet påverkar inte de svagaste nationerna. [1.10]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -5951,6 +7516,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-hajj-from-mali-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om du har högst 2 guld händer ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -5995,6 +7572,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-iconoclasm-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du förlorar både 2 mat och 2 guld.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6038,6 +7627,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-peace-of-god-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om inget krig köpts händer ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6080,6 +7681,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-song-resistance-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får tillbaka alla resurser och segerpoäng som förlorats genom nederlag i krig, inklusive straff för resursbrist.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6125,6 +7738,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-stupor-mundi-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För att hålla reda på effekten kan du tillfälligt spara rundans köpta guldålderskort bredvid ditt spelarbräde.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6167,6 +7792,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-zanj-revolt-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6211,6 +7848,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-absolute-monarchy-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får inte kasta en rådgivare för sig; den måste ersättas med en ny rådgivare.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6253,6 +7902,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-dutch-revolt-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6297,6 +7958,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-glorious-revolution-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är valfri: du gör antingen båda delarna eller ingen. Med fem spelare väljer nationen med näst högst stabilitet först. Om båda väljer effekten hamnar näst högst stabilitet sist och högst stabilitet näst sist.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6339,6 +8012,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-janissaries-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Det är valfritt att ta emot effekten, men du måste ta båda delarna eller ingen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6383,6 +8068,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-kangxi-era-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6425,6 +8122,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-little-ice-age-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är valfri och valen görs i omvänd spelarordning.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6469,6 +8178,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-magellan-s-expedition-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten gäller varje koloni som köpts under rundan och kan därför ge bonus flera gånger. Guldet erhålls först när händelsen inträffar.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6511,6 +8232,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-mercantilism-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är valfri och valen görs i omvänd spelarordning. Flera arbetare får tas bort från sina kort och flyttas till området för tillgängliga arbetare.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6555,6 +8288,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-muntzer-revolt-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6597,6 +8342,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-papal-indulgence-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Den kostnadsfria arkitekten tas från förrådet och måste användas omedelbart eller gå förlorad. Den kostar ingen sten att använda. Vid delad högst stabilitet betalar alla 2 guld.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6641,6 +8398,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-peace-of-westphalia-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6683,6 +8452,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-pilgrims-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Den som har mest mat måste ta arbetaren; det är inte valfritt. Vid delad högst mängd mat händer ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6792,6 +8573,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-sinking-of-the-vasa-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du väljer mellan att förlora guld och att tillfälligt minska militär styrka. [1.5] Om flera delar lägst stabilitet görs valen i omvänd spelarordning. Du får inte välja minskad styrka om det skulle ge negativ styrka. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6834,6 +8627,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-american-revolution-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är obligatorisk: om du har en koloni måste du ta bort den.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -6943,6 +8748,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-emigration-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Errata: ”ta bort” ska vara ”återlämna”. Arbetaren läggs på valfri plats på befolkningsspåret. Om ingen arbetare ännu tagits läggs den ovanpå valfri sida och tas först vid tillväxt.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -6985,6 +8802,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-entente-cordiale-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Arbetarna får placeras på olika militärkort. Du får först ta bort utplacerade arbetare för att kunna placera dem igen, även från ett militärkort till ett annat.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -7094,6 +8923,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-great-exhibition-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De kostnadsfria arkitekterna tas från förrådet och måste användas omedelbart eller gå förlorade. De kostar ingen sten att använda. Om Wardenclyffe Tower färdigställs får dess handlingar utföras direkt, men högst ett krig får fortfarande köpas per runda och det kastas vid rundans slut. [1.11]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7136,6 +8977,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-industrial-revolution-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "För att få belöningen måste du ha fler arbetare placerade på byggnader från industrialismen, era IIII, än var och en av de andra spelarna. Vid lika händer ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -7180,6 +9033,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-march-to-moscow-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är obligatorisk: om du har en koloni måste du ta bort den.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7222,6 +9087,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-scramble-for-africa-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får 1 segerpoäng om du har minst en koloni från industrialismen, era IIII. Fler sådana kolonier ger inte fler poäng. Enbart äldre kolonier ger ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -7266,6 +9143,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-sepoy-mutiny-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7308,6 +9197,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-sokoto-caliphate-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten är valfri och valen görs i omvänd spelarordning.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -7352,6 +9253,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-taiping-rebellion-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Omordningen görs efter att den nya spelarordningen bestämts.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7394,6 +9307,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "event-tonghak-movement-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du både förlorar böckerna och får stenen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -7438,6 +9363,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "event-weltpolitik-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får både 5 guld och 5 sten per koloni från industrialismen, era IIII. Äldre kolonier ger ingenting.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7481,10 +9418,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-dynasties-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "De flesta av dessa anmärkningar finns även i regelboken till Dynasties och upprepas här för att vara lätta att hitta.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Dynastier"
     },
     {
       "id": "dynasties-america-democratic-republicans",
@@ -7513,6 +9463,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-america-democratic-republicans-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Handlingen får användas om minst en av spelarna med lägst militär styrka har minst ett dynastikort kvar och det finns ett Turmoil-kort tillgängligt för varje sådan spelare. Flera kan dela lägst styrka, och med fem spelare omfattas minst två spelare. Spelare utan dynastikort påverkas inte. Varje berörd spelare väljer dynasti om flera finns, tar ett Turmoil-kort och spelar dynastin. America får 3 böcker per spelare som spelade en dynasti. I solospel får du ingenting, eftersom skuggan saknar dynastier och inget förändras. [1.8] Handlingen får inte användas om America själv hör till spelarna med lägst militär styrka. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7537,7 +9499,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "USA: Democratic Republicans"
     },
     {
       "id": "dynasties-arabs-abbasid-caliphate",
@@ -7566,6 +9529,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-arabs-abbasid-caliphate-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När en annan spelare köper en guldålder får du köpa segerpoäng som om du själv köpt kortet, oavsett den andra spelarens val. Dina guldåldersbonusar gäller och kan sänka priset. I solospel får du köpa segerpoäng när skuggan tar bort en guldålder. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7580,7 +9555,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Araberna: Abbasid Caliphate"
     },
     {
       "id": "dynasties-china-qin-dynasty",
@@ -7609,6 +9585,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-china-qin-dynasty-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Arkitekten tas från förrådet, kostar ingen sten och används omedelbart. En arbetare som inte är utplacerad får återlämnas till befolkningsspåret. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7623,7 +9611,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kina: Qin Dynasty"
     },
     {
       "id": "dynasties-egypt-old-kingdom",
@@ -7652,6 +9641,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-egypt-old-kingdom-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Errata: ”ersätt eller ta bort arkitekt” ska vara ”Handling: ta bort rådgivare”. [1.8] Handlingen tar bara bort en rådgivare, även om du har flera. [1.10]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7666,7 +9667,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Egypten: Old Kingdom"
     },
     {
       "id": "dynasties-ethiopia-axumite-kingdom",
@@ -7696,6 +9698,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-ethiopia-axumite-kingdom-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Markören ligger kvar tills kortet köpts eller kastats och påverkar inte dig själv. Andra betalar det vanliga priset till banken och dessutom 3 guld till dig. I solospel får du bonusen om skuggan tar bort kortet. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7720,7 +9734,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Etiopien: Axumite Kingdom"
     },
     {
       "id": "dynasties-india-mauryan-empire",
@@ -7749,6 +9764,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-india-mauryan-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När du tar en arbetare i tillväxtfasen får du välja att ta 2 extra, totalt 3. Om bara en arbetare finns kvar att ta får du ta den som enda extra arbetare, totalt 2. Finns fler tillgängliga får du inte välja att ta bara en extra. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7773,7 +9800,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Indien: Mauryan Empire"
     },
     {
       "id": "dynasties-india-mughal-empire",
@@ -7802,6 +9830,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-india-mughal-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Med denna dynasti får du 1 segerpoäng varje gång ett av dina underverk färdigställs och flyttas till en underverksplats. Naturliga underverk omfattas inte, eftersom de upptäcks.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7826,7 +9866,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Indien: Mughal Empire"
     },
     {
       "id": "dynasties-japan-heian-period",
@@ -7855,6 +9896,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-japan-heian-period-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får böckerna endast när du väljer guldålderns vanliga bokeffekt, inte för specialeffekter som ger böcker på andra sätt, exempelvis Arabian Nights. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -7879,7 +9932,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Japan: Heian Period"
     },
     {
       "id": "dynasties-japan-edo-period",
@@ -7907,6 +9961,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "dynasties-japan-edo-period-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du skyddas från alla effekter som utlöses när du besegras. Exempelvis tas Solomon's Temple inte bort. [1.11]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -8002,7 +10068,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Japan: Edo Period"
     },
     {
       "id": "dynasties-korea-joseon-kingdom",
@@ -8031,6 +10098,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-korea-joseon-kingdom-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Endast en resurstyp får läggas på kortet per runda. Efter upplösningsfasen fördubblas resurserna och tas tillbaka. Om du lagt dit 3 guld lägger du alltså till 3 från förrådet och får tillbaka totalt 6. Sista rundan sker återlämningen före slutpoängräkningen. Om Joseon Kingdom av någon anledning tas bort innan resurserna återlämnats går de förlorade. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8045,7 +10124,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Korea: Joseon Kingdom"
     },
     {
       "id": "dynasties-mali-mali-empire",
@@ -8074,6 +10154,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-mali-mali-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Errata: ”ta bort arkitekt” ska vara ”ta bort rådgivare”. [1.8] Handlingen tar bara bort en rådgivare, även om du har flera. [1.10]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8088,7 +10180,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Mali: Mali Empire"
     },
     {
       "id": "dynasties-mongolia-golden-horde",
@@ -8117,6 +10210,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-mongolia-golden-horde-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "I solospel får du, för varje krig skuggan tar bort, det som kriget skulle ha kostat att köpa. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8131,7 +10236,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Mongoliet: Golden Horde"
     },
     {
       "id": "dynasties-mongolia-yuan-dynasty",
@@ -8160,6 +10266,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-mongolia-yuan-dynasty-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Arbetarna tas från ditt vanliga arbetarförråd på befolkningsspåret, på samma sätt som under tillväxtfasen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8174,7 +10292,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Mongoliet: Yuan Dynasty"
     },
     {
       "id": "dynasties-persia-achaemenid-empire",
@@ -8203,6 +10322,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-persia-achaemenid-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du får använda hela din första handling till en kostnadsfri utplacering. Gör du det får du inte göra något annat som del av samma handling.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8217,7 +10348,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Persien: Achaemenid Empire"
     },
     {
       "id": "dynasties-persia-sassanid-empire",
@@ -8246,6 +10378,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-persia-sassanid-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten utlöses när du tar ett Turmoil-kort och väljer 2 guld. Ta guldet och kasta Turmoil-kortet. Du slipper då de vanliga −2 stabilitet som kortet ger denna runda. Om du byter till en annan dynasti får du de vanliga −2 stabilitet under rundan.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8270,7 +10414,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Persien: Sassanid Empire"
     },
     {
       "id": "dynasties-poland-jagellonian-dynasty",
@@ -8299,6 +10444,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-poland-jagellonian-dynasty-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Om du använder förmågan och står först i spelarordningen får du ta två turer direkt efter varandra. [1.7]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8313,7 +10470,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Polen: Jagellonian Dynasty"
     },
     {
       "id": "dynasties-poland-polish-lithuanian-commonwealth",
@@ -8378,7 +10536,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Polen: Polish-Lithuanian Commonwealth"
     },
     {
       "id": "dynasties-portugal-portugese-empire",
@@ -8407,6 +10566,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-portugal-portugese-empire-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Kasta alla kolonier på dina underverksplatser när du spelar en ny dynasti. Vanliga underverk får ersättas av kolonier. Kolonier på underverksplatser får ersättas av vanliga eller naturliga underverk. Naturliga underverk får inte ersättas. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8421,7 +10592,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Portugal: Portugese Empire"
     },
     {
       "id": "dynasties-portugal-kingdom-of-leon",
@@ -8449,6 +10621,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "dynasties-portugal-kingdom-of-leon-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När krigsköpet har genomförts behandlas det som om du också hade köpt ett slag utan kostnad. [1.11] Med Montezuma får du bara 3 extra böcker för krigsköpet, inte 3 för kriget och ytterligare 3 för slaget. Rigveda, Abu Bakr och andra slagköpsbonusar fungerar som om du hade köpt ett slag. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -8494,7 +10678,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Portugal: Kingdom of Leon"
     },
     {
       "id": "dynasties-rome-roman-republic",
@@ -8523,6 +10708,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-rome-roman-republic-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ta en arkitekt av dem som är tillgängliga denna runda, kasta den och öka din stabilitet med 1 för rundan.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8537,7 +10734,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Rom: Roman Republic"
     },
     {
       "id": "dynasties-venice-domains-of-the-sea",
@@ -8566,6 +10764,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-venice-domains-of-the-sea-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Kasta kolonin, inte detta kort. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8580,7 +10790,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Venedig: Domains of the Sea"
     },
     {
       "id": "dynasties-venice-pactum-warmundi",
@@ -8609,6 +10820,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-venice-pactum-warmundi-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "När en annan spelare köper ett slag eller en koloni får du 1 guld från banken. I solospel får du 1 guld för varje slag eller koloni som skuggan tar bort. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8633,7 +10856,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Venedig: Pactum Warmundi"
     },
     {
       "id": "dynasties-vikings-normans",
@@ -8662,6 +10886,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "dynasties-vikings-normans-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ditt vanliga plundringsvärde ökar med 3.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8676,7 +10912,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vikingar: Normans"
     },
     {
       "id": "faq-q-can-you-build-the-same-building-military-card-several-times",
@@ -8705,10 +10942,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-can-you-build-the-same-building-military-card-several-times-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja. Alla byggnads- och militärkort är unika, men med B-sidorna kan du ha två av samma kort.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kan samma byggnads- eller militärkort byggas flera gånger?"
     },
     {
       "id": "faq-q-can-you-place-many-workers-on-a-building-military",
@@ -8737,10 +10987,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-can-you-place-many-workers-on-a-building-military-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja, men bara en arbetare per handling. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kan flera arbetare placeras på samma byggnad eller militärkort?"
     },
     {
       "id": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military",
@@ -8769,10 +11032,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nej. Segerpoäng för arbetare på byggnader och militärkort räknas först vid spelets slut.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Ger utplacering av en arbetare på en byggnad eller ett militärkort segerpoäng?"
     },
     {
       "id": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
@@ -8801,10 +11077,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Båda nationerna får bonusen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vem får bonusen från en starkast-händelse om två nationer delar högst styrka med fem spelare?"
     },
     {
       "id": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
@@ -8833,10 +11122,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ingen av nationerna får bonusen.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vem får bonusen från en starkast-händelse om tre nationer delar högst styrka med fem spelare?"
     },
     {
       "id": "faq-q-what-does-the-books-on-the-solo-tiles-mean",
@@ -8865,10 +11167,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-what-does-the-books-on-the-solo-tiles-mean-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Böckerna anger hur många böcker skuggan får i början av rundan. Handlingarna vid tärningsslag 5 eller 6 kan sedan ändra skuggans totala bokinnehav ytterligare.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vad betyder böckerna på solobrickorna?"
     },
     {
       "id": "faq-q-is-the-shadow-opponent-afected-by-war",
@@ -8897,10 +11212,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-is-the-shadow-opponent-afected-by-war-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nej, skuggan förlorar inte ens böcker på grund av kriget. [1.2]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Påverkas skuggan av krig?"
     },
     {
       "id": "faq-q-can-the-shadow-take-turmoil-cards",
@@ -8929,6 +11257,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-can-the-shadow-take-turmoil-cards-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nej, men skuggan slår tärningen när du tar ett Turmoil-kort. [1.8]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -8943,7 +11283,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Kan skuggan ta Turmoil-kort?"
     },
     {
       "id": "faq-q-should-i-roll-the-die-after-every-action",
@@ -8972,10 +11313,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-should-i-roll-the-die-after-every-action-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja, utom efter att en arbetare placerats på en byggnad. Att passa är ingen handling och utlöser inget tärningsslag. [1.6]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Ska tärningen slås efter varje handling?"
     },
     {
       "id": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all",
@@ -9004,10 +11358,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja. Skuggan slår tärningen innan du gör en handling. För det slaget spelar det ingen roll om din första handling är att passa eller placera en arbetare på en byggnad, trots att dessa inte följs av ett nytt tärningsslag. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Slår skuggan tärningen om jag står tvåa i spelarordningen och passar direkt?"
     },
     {
       "id": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated",
@@ -9036,10 +11403,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nej. Värdena återställs varje gång en ny solohändelsebricka dras. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Sparas skuggans styrka och stabilitet mellan rundor?"
     },
     {
       "id": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again",
@@ -9069,10 +11449,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Kriget kastas. Precis som i det vanliga spelet kan bara ett krig köpas per runda. Skuggans tärningsslag representerar att den köper kort. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vad händer om skuggan slår fram ännu ett krig när ett krig redan köpts eller slagits fram?"
     },
     {
       "id": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst",
@@ -9101,10 +11494,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Effekten tillämpas varje gång. [1.4]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Gäller effekten varje gång tärningen visar 5 eller 6, eller bara första gången?"
     },
     {
       "id": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well",
@@ -9133,6 +11539,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja, ett Turmoil-kort tas också bort. [1.9]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -9147,7 +11565,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Tas även ett Turmoil-kort bort när ett tärningsslag tar bort en arkitekt i solospel?"
     },
     {
       "id": "faq-q-what-happens-when-i-take-a-worker",
@@ -9176,10 +11595,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-what-happens-when-i-take-a-worker-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Du måste antingen betala 3 mat i varje produktionsfas eller sänka din stabilitet med 3. Det finns ingen annan direkt kostnad för arbetaren, förutom att du avstår från möjligheten att ta din tillväxtbonus.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vad händer när jag tar en arbetare?"
     },
     {
       "id": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers",
@@ -9207,6 +11639,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "”Scoring” avser slutpoängräkningen. Andra poängtillfällen anges annorlunda, exempelvis ”I slutet av varje era: +1 segerpoäng” på Solomon's Temple.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -9302,7 +11746,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "När räknas poängen för exempelvis Statue of Liberty?"
     },
     {
       "id": "faq-q-how-are-used-markers-placed",
@@ -9331,10 +11776,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-how-are-used-markers-placed-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Lägg bara en använd-markör på ett kort om handlingen har en gräns för hur många turer den får användas under en runda, exempelvis en gång per runda. En handling utan sådan gräns får användas flera gånger per runda.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "När ska använd-markörer placeras?"
     },
     {
       "id": "faq-q-how-many-rounds-is-the-game",
@@ -9363,10 +11821,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-how-many-rounds-is-the-game-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Spelet har 8 rundor: fyra eror med två rundor vardera. Vid varje eras slut ges poäng för böcker. Segerpoängsmarkörer på poängbrädet påminner om detta.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Hur många rundor har spelet?"
     },
     {
       "id": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2",
@@ -9394,6 +11865,18 @@
             "reviewer": null,
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
+          }
+        },
+        {
+          "id": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Ja. Arbetaren tas först bort från sitt kort, vilket inte är en handling, och placeras sedan ut igen. Du kan därför förlora en rådgivare vars villkor kräver att du inte har lägst stabilitet, exempelvis Qin Shi Huang.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
           }
         }
       ],
@@ -9499,7 +11982,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Minskar stabiliteten först med 1 och ökar sedan med 2 när en arbetare flyttas från Temple till Ziggurat?"
     },
     {
       "id": "faq-q-how-is-player-order-determined-for-nations-in-revolt",
@@ -9528,6 +12012,18 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-how-is-player-order-determined-for-nations-in-revolt-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Alla spelare i uppror räknas som lika och lägst. Deras inbördes spelarordning ändras därför inte om de har lika styrka och båda är i uppror. Detta gäller även en spelare som just färdigställt Versailles. [1.1]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [
@@ -9542,7 +12038,8 @@
           }
         }
       ],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Hur bestäms spelarordningen för nationer i uppror?"
     },
     {
       "id": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game",
@@ -9571,10 +12068,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Stabiliteten summeras som vanligt. Negativ stabilitet minskar alltså ditt sammanlagda resursvärde. [1.1]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Hur räknas negativ stabilitet vid spelets slut?"
     },
     {
       "id": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3",
@@ -9603,10 +12113,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Nej. Använd det antal kolumner som gäller för spelarantalet och lika många kort på varje rad. [1.3]",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Skiljer sig rad 1 på utvecklingsbrädet från rad 2 och 3?"
     },
     {
       "id": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war",
@@ -9635,10 +12158,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "Tecknet ”o” i regelbokens mening om krigsstyrka på sida 15 ska vara siffran 0.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Vad betyder bokstaven o i meningen om krigsstyrka på regelbokens sida 15?"
     },
     {
       "id": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom",
@@ -9667,10 +12203,23 @@
             "reviewedAt": null,
             "notes": "Automatically imported; review required."
           }
+        },
+        {
+          "id": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom-sv",
+          "language": "sv-SE",
+          "kind": "translation",
+          "text": "IV var det ursprungliga och logiska valet. Tryckeriet varnade dock för att en liten felskärning antingen kunde kapa V:ets nederdel eller göra att det hamnade för högt. Därför ändrades det först till IIII. Eftersom IIII ibland förväxlades med III ändrades det slutligen till II II.",
+          "review": {
+            "status": "pending",
+            "reviewer": null,
+            "reviewedAt": null,
+            "notes": "Swedish translation by Codex; English source preserved and protected by SHA-256."
+          }
         }
       ],
       "cardLinks": [],
-      "relatedEntryIds": []
+      "relatedEntryIds": [],
+      "headingSv": "Varför anges den fjärde eran som II II i stället för IV längst ned på korten?"
     }
   ]
 }

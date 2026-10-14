@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { writeFaqReview } from './write-faq-review.mjs';
 const root = new URL('../', import.meta.url);
 const read = path => JSON.parse(readFileSync(new URL(path, root), 'utf8'));
 const write = (path, value) => writeFileSync(new URL(path, root), JSON.stringify(value, null, 2) + '\n');
@@ -33,15 +34,5 @@ for (const [id, selected] of Object.entries(pilot.cards)) {
 write('data/faq/entries.json', database);
 write('data/cards/catalog.json', catalog);
 const approved = database.entries.filter(entry => entry.review.status === 'approved');
-const lines = ['# FAQ++ 1.11: genomgång', '', `Importerade textposter: ${database.entries.length}. Källkontrollerat piloturval: ${approved.length}.`,
-  '', 'Pilotens svenska och engelska sammanfattningar samt kortkopplingar har kontrollerats av Codex mot originalet. Övriga poster är pending. Ingen användargranskning antyds.',
-  '', 'Originalets PDF-textlager har felaktiga ligaturer (t.ex. “efect”, “frst”). Råtexten bevaras; sammanfattningarna använder normal stavning.', ''];
-for (const entry of database.entries) {
-  lines.push(`## ${entry.id}: ${entry.heading}`, '', `Sida ${entry.sourcePages.join(', ')} · ${entry.category} · ${entry.review.status}`, '',
-    '### Originaltext', '', entry.sourceText, '', '### Svarspunkter', '',
-    ...entry.bullets.map(bullet => `- ${bullet.language} (${bullet.kind}, ${bullet.review.status}): ${bullet.text}`), '',
-    '### Kortkopplingar', '', ...entry.cardLinks.map(link => `- ${link.cardId} · ${link.relation} · ${link.review.status}`), '',
-    `Hänvisningar: ${entry.relatedEntryIds.join(', ') || 'Inga identifierade'}`, '', '- [ ] Användarens innehållsgranskning', '');
-}
-writeFileSync(new URL('data/faq/review.md', root), lines.join('\n'));
+writeFaqReview(database);
 console.log(`Applied ${approved.length} source-checked pilot entries; remaining ${database.entries.length - approved.length} entries pending.`);

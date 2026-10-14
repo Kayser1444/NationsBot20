@@ -4,7 +4,7 @@ import { text } from './language.mjs';
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const normalize = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim();
 const escape = value => String(value).replace(/[\\`*_\[\]<>~|]/g, '\\$&');
-// Pending imports are visible with a disclaimer; rejected or unknown states stay hidden.
+// Review decisions are independent of publication; rejected or unknown states stay hidden.
 const visible = value => ['approved', 'pending'].includes(value?.review?.status);
 const typeRules = { advisor: ['advisor-advisor'], battle: ['battle-battle'], golden_age: ['golden-age-bonus'],
   wonder: ['wonder-wonder'], natural_wonder: ['natural-wonders-natural-wonders'], event: ['event-event'] };
@@ -63,14 +63,8 @@ export function createCardBank({ catalog, sources, entries }) {
     }
     matched.sort((a, b) => Number(!a.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) -
       Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) || a.sourcePages[0] - b.sourcePages[0]);
-    let englishFallback = false;
-    const points = matched.flatMap(entry => {
-      const available = entry.bullets.filter(visible);
-      const localized = available.filter(bullet => bullet.language === language);
-      const selected = localized.length ? localized : available.filter(bullet => bullet.language === 'en-US');
-      if (selected.length && selected[0].language !== language) englishFallback = true;
-      return selected.map(bullet => ({ entry, bullet }));
-    });
+    const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === language)
+      .map(bullet => ({ entry, bullet })));
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
     const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}**`;
     const description = language === 'sv-SE' ? card.descriptionSv : card.descriptionEn;
@@ -80,9 +74,8 @@ export function createCardBank({ catalog, sources, entries }) {
       { description: metadata + (description ? '\n' + description : ''), color: 12092983 },
     ] };
     if (!hasImage) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
-    if (points.length) message.embeds[1].description += '\n' + text(language, 'cardFaqDisclaimer');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
-    const footer = '\n\n' + (englishFallback ? text(language, 'cardFaqEnglishFallback') + '\n' : '') +
+    const footer = '\n\n' +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;
@@ -91,7 +84,8 @@ export function createCardBank({ catalog, sources, entries }) {
     if (capacity < 100) throw new Error('Card metadata leaves no space for FAQ pages.');
     const lines = [];
     for (const { entry, bullet } of points) {
-      const label = `- **${escape(entry.heading)} · ${text(language, 'cardPage')} ${entry.sourcePages.join(', ')}:** `;
+      const heading = language === 'sv-SE' ? entry.headingSv ?? entry.heading : entry.heading;
+      const label = `- **${escape(heading)} · ${text(language, 'cardPage')} ${entry.sourcePages.join(', ')}:** `;
       let remaining = escape(bullet.text.replace(/\s+/g, ' ').trim());
       const pointCapacity = capacity - label.length;
       if (pointCapacity < 100) throw new Error('FAQ heading is too long: ' + entry.id);

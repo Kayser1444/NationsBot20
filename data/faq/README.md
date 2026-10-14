@@ -2,7 +2,7 @@
 
 Status 2026-10-14: **FAQ++ 1.11 importerad** från användarens `Reference/faq++1.11.pdf`. Dokumentet är daterat 5 december 2017 och omfattar tio sidor. Vi har 216 textposter och 547 indexrubriker. Tio poster med 13 svarspunkter per språk är källkontrollerade av Codex för Porcelain Tower; resterande 206 poster och deras automatiska kopplingar är `pending`. Det innebär ingen användargranskning eller kontroll av vilken version som nu kan laddas ner från BGG.
 
-`/card` använder registret via `card-bank.mjs` i den separata Railway-stagingmiljön. Kortinventeringen omfattar 503 poster, 422 verifierade bildlänkar och samtliga 479 kortnamnsrubriker i FAQ:n. Alla kopplade FAQ-punkter, även `pending`, visas på användarens begäran med en kort disclaimer. Relevanta korttypsregler och uttryckliga regelhänvisningar ingår också. Visningen ändrar inga granskningsbeslut. Se [kortinventering och bildstatus](../cards/README.md).
+`/card` använder registret via `card-bank.mjs` i den separata Railway-stagingmiljön. Kortinventeringen omfattar 503 poster, 422 verifierade bildlänkar och samtliga 479 kortnamnsrubriker i FAQ:n. Alla 216 textposter har nu svenska svarspunkter; de 206 som saknade svenska har översatts och de 10 pilotposternas svenska sammanfattningar behålls. Alla kopplade punkter, även `pending`, visas utan granskningsdisclaimer enligt användarens önskemål. Relevanta korttypsregler och uttryckliga regelhänvisningar ingår också. Varje punkt behåller källsidan och FAQ-vyn länkar till den engelska källan. Visningen ändrar inga granskningsbeslut. Se [kortinventering och bildstatus](../cards/README.md).
 
 ## Filer och ansvar
 
@@ -13,6 +13,9 @@ Status 2026-10-14: **FAQ++ 1.11 importerad** från användarens `Reference/faq++
 - `index.json`: alla 547 rubriker, även sådana utan egen regeltext. Tomma kortposter blir inte påhittade regler.
 - `document.json`: bevarade textblock, dokumentkontext, spalter och positioner. Alla 1804 extraherade rader redovisas.
 - `pilot-review.json`: separat källkontrollerat urval, svenska/engelska sammanfattningar, kortkopplingar och källtextens checksummor. Importören godkänner inga poster automatiskt.
+- `translations-sv.json`: 206 svenska översättningar och 77 svenska rubriker, med SHA-256 för dokumentet och motsvarande engelska text. Ändrad källtext stoppar återapplicering tills översättningen uppdaterats. Originaltext, engelska punkter och granskningsbeslut bevaras.
+
+Ändra svenska översättningar i `translations-sv.json` och kör `scripts/apply-faq-translations.mjs`; skriptet uppdaterar både registret och granskningsunderlaget. Det avbryter om engelska källtexter har ändrats eller en tidigare godkänd/avvisad översättning skulle skrivas över med annan text.
 - `../cards/catalog.json`: 503 sökbara metadataobjekt från Tabonys spelimplementation och kompletteringar från FAQ:n. Pythonkällan läses med AST utan att köra spelkod. Bildstatus och FAQ-granskning hanteras separat.
 - `../cards/faq-coverage.json`: inventeringskopplingar för samtliga kortnamnsrubriker, inklusive specialkort och startvarianter. Nya FAQ-kopplingar är `pending`.
 
@@ -28,6 +31,7 @@ python scripts/import-card-catalog.py --game-source <sökväg-till-nations-pytho
 node scripts/update-card-faq-coverage.mjs
 node scripts/verify-card-images.mjs
 node scripts/review-faq-pilot.mjs
+node scripts/apply-faq-translations.mjs
 node work/render-card-preview.mjs PcTw sv-SE
 node work/build-card-preview.mjs work/card-preview-faq.json
 ```
@@ -46,7 +50,7 @@ DM-kommandot förbereds i `work/card-preview-command.txt`. Samma renderer använ
 6. Generera `review.md` med post-ID, sidor, originaltext, föreslagna svarspunkter, kortkopplingar och plats för granskningsanteckningar.
 7. Användaren granskar innehåll, formulering och kopplingar. `pending` blir aldrig automatiskt `approved` vid import.
 
-Alla poster tas med i granskningsunderlaget. `/card` visar både `approved` och `pending` poster, punkter och kopplingar. `rejected` och okända granskningsstatusar visas inte. **”FAQ-text och kortkopplingar är inte fullständigt granskade.”** står kortfattat under metadata när FAQ-punkter finns och ligger kvar när FAQ:n öppnas. Om svensk sammanfattning saknas visas det engelska originalet med en språknotis. Granskning sker fortsatt separat i `review.md`; inget blir automatiskt godkänt. Ett kort utan kopplade punkter beskrivs som att koppling saknas i den importerade versionen. Fullständighetsstatus gäller en viss dokumentversion och ett visst kort.
+Alla poster tas med i granskningsunderlaget. `/card` visar både `approved` och `pending` poster, punkter och kopplingar. `rejected` och okända granskningsstatusar visas inte. Svenska svar visar enbart svenska regeltexter och engelska svar enbart engelska, utan granskningsdisclaimer eller språknotis. Kortnamn behålls på engelska, medan allmänna rubriker och frågor översätts. Granskning sker fortsatt separat i `review.md`; inget blir automatiskt godkänt. Källsidor och länk till den engelska FAQ:n finns kvar för kontroll av översättningen. Ett kort utan kopplade punkter beskrivs som att koppling saknas i den importerade versionen. Fullständighetsstatus gäller en viss dokumentversion och ett visst kort.
 
 ## Föreslagen Discord-layout
 

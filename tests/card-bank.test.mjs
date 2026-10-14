@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { cardBank, createCardBank } from '../card-bank.mjs';
 const read = path => JSON.parse(readFileSync(new URL('../data/' + path, import.meta.url), 'utf8'));
 const fixtures = () => ({ catalog: read('cards/catalog.json'), sources: read('faq/sources.json'), entries: read('faq/entries.json') });
@@ -37,6 +38,33 @@ test('FAQ import preserves column continuations, wrapped names and every extract
   assert.equal(read('faq/sources.json').sources[0].reviewComplete, false);
 });
 
+test('all FAQ entries have Swedish translations tied to their unchanged English sources', () => {
+  const entries = read('faq/entries.json').entries;
+  const translations = read('faq/translations-sv.json');
+  const hash = value => createHash('sha256').update(value).digest('hex');
+  assert.equal(translations.sourceSha256, read('faq/sources.json').sources[0].sha256);
+  assert.equal(translations.translations.length, 206);
+  for (const entry of entries) {
+    const english = entry.bullets.filter(bullet => bullet.language === 'en-US');
+    const swedish = entry.bullets.filter(bullet => bullet.language === 'sv-SE');
+    assert.ok(swedish.length, entry.id);
+    assert.equal(swedish.length, english.length, entry.id);
+    for (const bullet of swedish) assert.ok(bullet.text.trim(), bullet.id);
+    if (entry.id.startsWith('faq-q-') || entry.category === 'card_type') assert.ok(entry.headingSv, entry.id);
+  }
+  for (const item of translations.translations) {
+    const entry = entries.find(entry => entry.id === item.entryId);
+    const original = entry.bullets.find(bullet => bullet.id === item.sourceBulletId);
+    assert.equal(hash(entry.sourceText), item.sourceTextSha256, item.entryId);
+    assert.equal(hash(original.text), item.sourceBulletSha256, item.entryId);
+    const versions = value => value.match(/\[\d+\.\d+\]/g) ?? [];
+    assert.deepEqual(versions(item.text), versions(original.text), item.entryId);
+  }
+  const faq = cardBank.render('Turmoil', 'sv-SE', { faqPage: 0 });
+  assert.match(content(faq), /Kan skuggan ta Turmoil/);
+  assert.ok(!content(faq).includes('Q: Can the shadow'));
+});
+
 test('Porcelain Tower shows its own rules and every named cross-reference with sources in both languages', () => {
   const corpus = read('faq/entries.json').entries;
   const expected = corpus.filter(entry => entry.sourceText.includes('Porcelain Tower')).map(entry => entry.id);
@@ -51,7 +79,7 @@ test('Porcelain Tower shows its own rules and every named cross-reference with s
     assert.match(reply.messages[0].components[0].components[0].label, /13/);
     const pages = allPages(cardBank, language);
     const text = pages.map(content).join('\n');
-    assert.match(text, /Poland: Polish-Lithuanian Commonwealth/);
+    assert.match(text, language === 'sv-SE' ? /Polen: Polish-Lithuanian Commonwealth/ : /Poland: Polish-Lithuanian Commonwealth/);
     assert.match(text, /FAQ\+\+ 1.11/);
     assert.match(reply.messages[0].embeds[1].description, /II/);
     assert.ok(!text.includes('||'), 'FAQ is ordinary text, without spoilers');
@@ -74,7 +102,7 @@ test('rejected source text, summary or link is excluded independently', () => {
   }
 });
 
-test('every FAQ card heading is inventoried and pending FAQ points are accessible with a disclaimer', () => {
+test('every FAQ card heading is inventoried and all localized points retain citations without a disclaimer', () => {
   const { catalog, entries } = fixtures();
   const coverage = read('cards/faq-coverage.json');
   assert.equal(coverage.items.length, 479);
@@ -96,10 +124,17 @@ test('every FAQ card heading is inventoried and pending FAQ points are accessibl
     for (const language of ['sv-SE', 'en-US']) {
       const localized = cardBank.render(card.id, language);
       const pages = Array.from({ length: localized.faqPageCount }, (_, faqPage) => cardBank.render(card.id, language, { faqPage }));
-      for (const page of pages) assertMessageLimits(page);
+      for (const page of pages) {
+        assertMessageLimits(page);
+        assert.ok(!/FAQ-text och kortkopplingar|not been fully reviewed|Engelskt original/.test(content(page)));
+        if (localized.pointCount) {
+          assert.match(page.messages[0].embeds[2].description, /\[FAQ\+\+ 1\.11\]\(<https:\/\/boardgamegeek\.com\/filepage\/96855\/faq-official>\)/);
+          assert.match(page.messages[0].embeds[2].description, language === 'sv-SE' ? / · s\. \d/ : / · p\. \d/);
+        }
+      }
+      assert.equal(localized.pointCount, cardBank.render(card.id, language === 'sv-SE' ? 'en-US' : 'sv-SE').pointCount, card.id);
       if (localized.pointCount) {
         assert.ok(!localized.messages[0].components[0].components[0].disabled, card.id);
-        assert.match(content(localized), language === 'sv-SE' ? /inte fullständigt granskade/ : /not been fully reviewed/);
       }
       const direct = entries.entries.filter(entry => entry.cardLinks.some(link => link.cardId === card.id && ['pending', 'approved'].includes(link.review.status)));
       for (const entry of direct) assert.ok(localized.entryIds.includes(entry.id), card.id + ': ' + entry.id);
@@ -111,10 +146,11 @@ test('every FAQ card heading is inventoried and pending FAQ points are accessibl
   assert.match(cabin.messages[0].embeds[0].image.url, /UTC\.jpg$/);
   assert.equal(cabin.pointCount, 2);
   const opened = cardBank.render('UTC', 'sv-SE', { faqPage: 0 });
-  assert.match(content(opened), /Remove all Buildings/);
-  assert.match(content(opened), /Golden Age Bonus/);
-  assert.match(content(opened), /Engelskt original/);
-  assert.match(content(opened), /inte fullständigt granskade/);
+  assert.match(content(opened), /utplaceringskostnad på 1 sten/);
+  assert.match(content(opened), /Guldåldersbonus/);
+  assert.ok(!content(opened).includes('Remove all Buildings'));
+  const english = cardBank.render('UTC', 'en-US', { faqPage: 0 });
+  assert.match(content(english), /Remove all Buildings/);
   for (const name of ['Nikola Tesla', 'Hagia Sophia', 'Kremlin', 'Mechanical Turk', 'Hussar', 'Turmoil', 'Siberia 2']) {
     assert.equal(cardBank.render(name).ok, true, name);
   }
@@ -135,7 +171,7 @@ test('pending states remain pending, related rules are deduplicated, and unavail
   for (const status of ['rejected', 'unknown']) {
     entry.review.status = status;
     const hidden = createCardBank(data).render('UTC', 'sv-SE', { faqPage: 0 });
-    assert.ok(!content(hidden).includes('Remove all Buildings'));
+    assert.ok(!content(hidden).includes('utplaceringskostnad'));
     assert.equal(hidden.pointCount, 1);
   }
   const sejong = cardBank.render('SjGr', 'sv-SE', { faqPage: 0 });

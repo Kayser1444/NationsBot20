@@ -346,8 +346,8 @@ to run independently until the deliberate cloud cutover.
 ### Card inventory and FAQ
 
 `/card name:Porcelain Tower` shows the card image, a compact type/age row and
-the linked FAQ++ 1.11 points, including imports pending review. A short disclaimer
-states that FAQ text and card links have not been fully reviewed. FAQ starts
+the linked FAQ++ 1.11 points, including imports pending review. All 216 FAQ entries
+have Swedish text as well as the preserved English version. FAQ starts
 collapsed; **Show FAQ / Hide FAQ** updates the same card message. Each point
 identifies its original heading and page. Long answers have previous/next page
 buttons, and closing the FAQ leaves no extra messages behind. Swedish and English follow
@@ -369,9 +369,10 @@ variants and seven additional FAQ cards explicitly report a missing image.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation.
 The FAQ bank contains 216 text entries; 206 remain pending review. Pending points
-and links are visible with the disclaimer, while rejected content stays hidden.
-Swedish replies use the English original where a Swedish summary is unavailable,
-with a language note. Card-type rules and explicitly referenced rules are included
+and links are visible without a review disclaimer, while rejected content stays hidden.
+Swedish replies use Swedish text consistently; English replies use the English
+version. Every point keeps its source page, and each FAQ page links to the original
+English FAQ++ PDF for verification. Card-type rules and explicit references are included
 once each. Empty card headings do not create FAQ points. Displaying content does
 not change its review status. See [card coverage and image checks](data/cards/README.md),
 [FAQ data and reproduction](data/faq/README.md) and

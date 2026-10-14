@@ -31,8 +31,9 @@ python scripts/import-card-catalog.py --game-source <sökväg-till-nations-pytho
 node scripts/update-card-faq-coverage.mjs
 node scripts/verify-card-images.mjs
 node scripts/review-faq-pilot.mjs
+node scripts/apply-faq-translations.mjs
 ```
 
 Importen läser Python med AST utan att köra spelkod och bevarar befintliga granskningsbeslut. Bildkontrollen gör högst fyra samtidiga HEAD-anrop, kontrollerar bara nya/ändrade adresser och avbryter vid nätverksfel eller andra oväntade svar. Använd `--all` för en ny kontroll av alla adresser. Bildkontroller körs manuellt, aldrig vid Discord-kommandon. FAQ-PDF:en behöver inte importeras om för att uppdatera kortkatalogen.
 
-Tillgängliga kortbilder är oberoende av FAQ-granskningen. FAQ-vyn visar både godkända och `pending` källposter, punkter och kortkopplingar med den korta disclaimern **”FAQ-text och kortkopplingar är inte fullständigt granskade.”** Avvisat innehåll visas inte. Granskningsstatus ändras inte av visningen. Porcelain Tower har fortfarande 13 källkontrollerade punkter. Övriga kort visar importerade punkter, relevanta korttypsregler och uttryckliga regelhänvisningar, utan dubbletter. Engelskt original används där svensk sammanfattning saknas; detta anges i FAQ-vyn. Tomma kortrubriker skapar inga regelpunkter.
+Tillgängliga kortbilder är oberoende av FAQ-granskningen. FAQ-vyn visar både godkända och `pending` källposter, punkter och kortkopplingar utan granskningsdisclaimer, enligt användarens önskemål. Avvisat innehåll visas inte och visningen ändrar inga granskningsbeslut. Alla 216 FAQ-poster har svenska svarspunkter; engelska originaltexter bevaras. Svaret följer användarens språk utan att blanda svenska och engelska regeltexter. Kortnamn behålls på engelska. Varje punkt anger källsida och varje FAQ-sida länkar till den engelska FAQ++-källan. Relevanta korttypsregler och uttryckliga regelhänvisningar tas med utan dubbletter. Tomma kortrubriker skapar inga regelpunkter.
