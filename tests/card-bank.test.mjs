@@ -128,15 +128,15 @@ test('every FAQ card heading is inventoried and all localized points retain cita
         assertMessageLimits(page);
         assert.ok(!/FAQ-text och kortkopplingar|not been fully reviewed|Engelskt original/.test(content(page)));
         if (localized.pointCount) {
-          assert.match(page.messages[0].embeds[2].description, /\[FAQ\+\+ 1\.11\]\(<https:\/\/boardgamegeek\.com\/filepage\/96855\/faq-official>\)/);
-          assert.match(page.messages[0].embeds[2].description, language === 'sv-SE' ? / · s\. \d/ : / · p\. \d/);
+          assert.match(page.messages[0].embeds.at(-1).description, /\[FAQ\+\+ 1\.11\]\(<https:\/\/boardgamegeek\.com\/filepage\/96855\/faq-official>\)/);
+          assert.match(page.messages[0].embeds.at(-1).description, language === 'sv-SE' ? / · s\. \d/ : / · p\. \d/);
         }
       }
       assert.equal(localized.pointCount, cardBank.render(card.id, language === 'sv-SE' ? 'en-US' : 'sv-SE').pointCount, card.id);
       if (localized.pointCount) {
         assert.ok(!localized.messages[0].components[0].components[0].disabled, card.id);
       }
-      const direct = entries.entries.filter(entry => entry.cardLinks.some(link => link.cardId === card.id && ['pending', 'approved'].includes(link.review.status)));
+      const direct = entries.entries.filter(entry => !(card.type==='nation'&&entry.category==='dynasty') && entry.cardLinks.some(link => link.cardId === card.id && ['pending', 'approved'].includes(link.review.status)));
       for (const entry of direct) assert.ok(localized.entryIds.includes(entry.id), card.id + ': ' + entry.id);
     }
   }

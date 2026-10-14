@@ -38,7 +38,7 @@ test('all starting variants map to real extracted PNGs and keep the correct nati
   assert.equal(cardsById.get('Ps_Zgr').boardSource.slot, 'BM3');
 });
 
-test('every nation has a public player board, localized aliases and applicable nation/dynasty FAQ', () => {
+test('every nation has its resource board, exactly its two dynasties and only applicable nation FAQ', () => {
   const nations = catalog.cards.filter(card => card.type === 'nation');
   assert.equal(nations.length, 17);
   const renderer = bank();
@@ -54,15 +54,24 @@ test('every nation has a public player board, localized aliases and applicable n
     assert.equal(createHash('sha256').update(body).digest('hex'), file.sourceSha256);
     assert.ok(reply.messages[0].embeds[1].description.includes(nation.boardSide + '-sida'));
     assert.equal(nation.boardSide, ['China','Egypt','Greece','Persia','Rome'].includes(nation.name) ? 'B' : 'D');
-    const applicable = entries.filter(entry => entry.category === 'nation' && entry.heading.replace(/ B-side$/, '') === nation.name ||
-      entry.category === 'dynasty' && entry.heading.startsWith(nation.name + ':'));
+    const applicable = entries.filter(entry => entry.category === 'nation' && entry.heading.replace(/ B-side$/, '') === nation.name);
     for (const entry of applicable) assert.ok(reply.entryIds.includes(entry.id), nation.id + ': ' + entry.id);
+    assert.ok(reply.entryIds.every(id=>entries.find(entry=>entry.id===id).category!=='dynasty'));
+    const dynasties=catalog.cards.filter(card=>card.type==='dynasty'&&card.nation===nation.name);
+    assert.equal(dynasties.length,2,nation.name);
+    assert.deepEqual(reply.messages[0].embeds.slice(2).map(embed=>embed.title),dynasties.map(card=>card.name));
+    assert.deepEqual(reply.imageTargets.map(target=>target.cardId),[nation.id,...dynasties.map(card=>card.id)]);
+    for(const [index,dynasty] of dynasties.entries()) assert.equal(reply.messages[0].embeds[index+2].image.url,dynasty.imageCheck.url);
   }
   assert.equal(renderer.resolve('Kina').id, 'nation-China');
   assert.equal(renderer.resolve('Vikingarna').id, 'nation-Vikings');
   assert.equal(renderer.render('Japan').messages[0].embeds[0].title, 'Japan');
   assert.ok(renderer.render('Japan').entryIds.includes('nations-japan'));
-  assert.equal(renderer.autocomplete('Kina')[0].value, 'nation-China');
+  assert.equal(renderer.autocompleteNations('Kina')[0].value, 'nation-China');
+  assert.equal(renderer.autocompleteNations('').length,17);
+  assert.ok(renderer.autocomplete('Kina').every(choice=>choice.value!=='nation-China'));
+  assert.equal(renderer.renderNation('Porcelain Tower').ok,false);
+  assert.equal(renderer.renderNation('Kina').cardId,'nation-China');
   assert.throws(() => cardAssetOrigin({ NATIONS_CARD_ASSET_ORIGIN: 'http://example.test' }), /HTTPS/);
   assert.throws(() => cardAssetOrigin({ NATIONS_CARD_ASSET_ORIGIN: 'https://example.test/other' }), /HTTPS/);
 });

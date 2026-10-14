@@ -2813,7 +2813,7 @@
       "faqReviewStatus": "pending",
       "metadataSource": "User-supplied promo card scan",
       "type": "golden_age",
-      "age": 1,
+      "age": 2,
       "promo": true,
       "tabonyImplemented": false,
       "enabled": true,

@@ -46,31 +46,36 @@ export function createCardImageDelivery({ cards, fetchImage = fetch, localAssets
     pending.set(url, loading);
     return loading;
   }
-  return async function prepare(reply, {attachments = [], imageUrl = null, allowUpload = true} = {}) {
-    const card = byId.get(reply?.cardId);
-    if (!reply?.ok || !card) return reply?.messages?.[0];
+  return async function prepare(reply, {attachments = [], embeds = [], imageUrl = null, allowUpload = true} = {}) {
+    if (!reply?.ok || !byId.has(reply.cardId)) return reply?.messages?.[0];
     const original = reply.messages[0];
-    const filename = card.imageAsset ?? 'card-' + card.id + '.jpg';
-    const retained = attachments.find(file => (file.name ?? file.filename) === filename && file.id);
-    // Discord can move an embedded upload out of `attachments` into embed.image.
-    // Reuse only the expected file on Discord's CDN; omit attachments when editing
-    // that hidden upload. Unsigned CDN URLs are refreshed by Discord itself.
-    let embedded;
-    try {
-      const url = new URL(imageUrl);
-      if (['https://cdn.discordapp.com','https://media.discordapp.net'].includes(url.origin) && !url.username && !url.password &&
-          /^\/attachments\/\d+\/\d+\//.test(url.pathname) && url.pathname.split('/').length === 5 && url.pathname.split('/').at(-1) === filename) {
-        embedded = url.origin + url.pathname;
-      }
-    } catch { /* An absent or unrelated image requires a fresh verified upload. */ }
-    const withImage = url => ({...original, embeds:original.embeds.map((embed,index) => index === 0 ? {...embed,image:{url}} : {...embed})});
-    if (!retained && embedded) return withImage(embedded);
-    if (!retained && !allowUpload) return original;
-    const body = retained ? null : await bytes(card);
-    if (!retained && !body) return original; // A source outage leaves the existing source link usable.
-    const message = withImage('attachment://' + filename);
-    if (retained) message.attachments = [{id:retained.id, filename}];
-    else { message.attachments = []; message.files = [{attachment:body, name:filename}]; }
+    const targets = reply.imageTargets ?? [{cardId:reply.cardId,embedIndex:0}];
+    const images = await Promise.all(targets.map(async target => {
+      const card = byId.get(target.cardId);
+      if (!card) return null;
+      const filename = card.imageAsset ?? 'card-' + card.id + '.jpg';
+      let retained = attachments.find(file => (file.name ?? file.filename) === filename && file.id);
+      // Discord can hide embedded uploads from `attachments`. Recover the ID,
+      // keeping attachment:// so an edit cannot expose a standalone duplicate.
+      try {
+        const url = new URL(embeds[target.embedIndex]?.image?.url ?? (target.embedIndex === 0 ? imageUrl : null));
+        if (['https://cdn.discordapp.com','https://media.discordapp.net'].includes(url.origin) && !url.username && !url.password &&
+            /^\/attachments\/\d+\/\d+\//.test(url.pathname) && url.pathname.split('/').length === 5 && url.pathname.split('/').at(-1) === filename) {
+          retained ??= {id:url.pathname.split('/')[3]};
+        }
+      } catch { /* An absent or unrelated image requires a fresh verified upload. */ }
+      if (retained) return {...target,filename,id:retained.id};
+      if (!allowUpload) return null;
+      const body = await bytes(card);
+      return body ? {...target,filename,body} : null;
+    }));
+    if (!images.some(Boolean)) return original; // Source links remain usable during an outage.
+    const message = {...original,embeds:original.embeds.map(embed => ({...embed})),attachments:[]};
+    for (const image of images.filter(Boolean)) {
+      message.embeds[image.embedIndex].image = {url:'attachment://' + image.filename};
+      if (image.id) message.attachments.push({id:image.id,filename:image.filename});
+      else (message.files ??= []).push({attachment:image.body,name:image.filename});
+    }
     return message;
   };
 }

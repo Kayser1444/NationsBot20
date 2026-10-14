@@ -369,11 +369,17 @@ The 74 starting cards are extracted from Tabony boards. Nation entries use 17 su
 player boards with printed starting resource amounts (base B sides and expansion D sides).
 These and 12 supplied/local promo-card scans make 103 local files served by a separate
 Railway image listener. Hussar still lacks a complete card image. Promo entries explicitly
-state that they are outside the Tabony game implementation. Nation entries show their board and applicable nation/dynasty FAQ.
+state that they are outside the Tabony game implementation. `/nation name:China` shows
+the resource board and both of that nation's dynasty cards. Its FAQ contains the nation
+rules; dynasty FAQ remains available by looking up the dynasty itself with `/card`.
+Nation suggestions live in `/nation`, with Swedish aliases such as `Kina`. Existing
+`/card` nation lookups and FAQ buttons remain compatible.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation. All 34 dynasty entries identify their nation.
 The first reply uploads the image as a Discord attachment; FAQ edits retain it,
-including after bot restart. Remote image downloads have bounded caching, size and timeout
+including after bot restart. Hidden embedded files retain their IDs and `attachment://`
+references on every edit; converting them to CDN links exposes duplicate standalone images.
+Nation replies retain all three image attachments together. Remote downloads have bounded caching, size and timeout
 limits and fall back to the source URL on failure. Local images need no HTTP fetch.
 The FAQ bank contains 216 text entries; 206 remain pending review. Pending points
 and links are visible without a review disclaimer, while rejected content stays hidden.

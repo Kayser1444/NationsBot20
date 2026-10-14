@@ -12,6 +12,8 @@ const files=read('cards/asset-manifest.json').files;
 test('promo scans keep existing FAQ identities, show type/era and the Tabony note, and upload real local images',async()=>{
   assert.equal(catalog.cards.length,526);
   assert.equal(promos.length,13);
+  assert.equal(cardBank.resolve('Engineering Genius').age,2);
+  assert.match(cardBank.render('Engineering Genius','sv-SE').messages[0].embeds[1].description,/Era II\*\*/);
   const bank=createCardBank({catalog,sources:read('faq/sources.json'),entries:read('faq/entries.json'),assetOrigin:'https://cards.example.test'});
   for(const spec of promos){
     const card=catalog.cards.find(card=>card.id===spec.id);

@@ -21,6 +21,9 @@ export const commands = [
   { name: 'card', description: 'Visa kortbild och FAQ-punkter', type: 1, options: [
     { name: 'name', description: 'Kortnamn – välj bland namnförslagen', type: 3, required: true, autocomplete: true, max_length: 100 },
   ] },
+  { name: 'nation', description: 'Visa nationsbräde, båda dynastikorten och nationens FAQ', type: 1, options: [
+    { name: 'name', description: 'Nation – välj bland namnförslagen', type: 3, required: true, autocomplete: true, max_length: 100 },
+  ] },
 ];
 export const helpMessage = text('sv-SE', 'help');
 const quote = name => '`' + name.replace(/[`\r\n]/g, '') + '`';

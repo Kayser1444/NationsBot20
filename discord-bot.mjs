@@ -61,7 +61,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             const reply = cardBank.renderButton(interaction.customId);
             if (!reply?.ok) { await privateReply('cardFaqExpired'); return; }
             const message = await prepareImage(reply, {attachments:[...(interaction.message?.attachments?.values?.() ?? [])],
-              imageUrl:interaction.message?.embeds?.[0]?.image?.url,allowUpload:interaction.appPermissions?.has('AttachFiles') !== false});
+              embeds:interaction.message?.embeds,allowUpload:interaction.appPermissions?.has('AttachFiles') !== false});
             if (stopped) return;
             await interaction.editReply(interactionPayload(message));
           } catch {
@@ -74,7 +74,8 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
         // All installed servers share user subscriptions; only SM has channel delivery.
         const inDm = !interaction.guildId && interaction.context === 1;
         const smTable = interaction.commandName === 'smtable';
-        const cardCommand = interaction.commandName === 'card';
+        const nationCommand = interaction.commandName === 'nation';
+        const cardCommand = interaction.commandName === 'card' || nationCommand;
         let allowed = !interaction.user.bot && (inDm || !!interaction.guildId);
         let dmMember = null;
         const language = () => resolveLanguage(interaction.locale ?? service.getLocale?.(interaction.user.id), service.getLanguageOverride?.(interaction.user.id));
@@ -97,13 +98,13 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             const focused = interaction.options.getFocused(true);
             const choices = !allowed || service.isBanned?.(interaction.user.id) ? []
               : interaction.commandName === 'language' && focused.name === 'locale' ? autocompleteLanguages(focused.value)
-              : cardCommand && focused.name === 'name' ? cardBank.autocomplete(focused.value, language())
+              : cardCommand && focused.name === 'name' ? (nationCommand ? cardBank.autocompleteNations : cardBank.autocomplete)(focused.value, language())
               : interaction.commandName === 'notifications' && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : [];
             await interaction.respond(choices);
             return;
           }
           const cardReply = cardCommand && allowed && !service.isBanned?.(interaction.user.id)
-            ? cardBank.render(interaction.options.getString('name'), language()) : null;
+            ? (nationCommand ? cardBank.renderNation : cardBank.render)(interaction.options.getString('name'), language()) : null;
           if (!interaction.deferred) await interaction.deferReply(inDm || ((smTable || cardReply?.ok) && allowed && !service.isBanned?.(interaction.user.id)) ? {} : { flags: MessageFlags.Ephemeral });
           if (stopped) return;
           if (!allowed) { await interaction.editReply({ content: text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
@@ -190,7 +191,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
               await client.rest.delete(Routes.applicationGuildCommand(client.application.id, guildId, old.id));
             }
           }
-          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off (dm:on|off), /status, /help, /language, /smtable och /card är registrerade för server och DM.'); }
+          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off (dm:on|off), /status, /help, /language, /smtable, /card och /nation är registrerade för server och DM.'); }
         } catch { fail('Discord-kommandona kunde inte registreras. Kontrollera att boten är tillagd på rätt server.'); }
       });
       readyTimer = setTimeout(() => { fail('Discord-boten kunde inte ansluta inom 30 sekunder. Kontrollera token och starta om.'); client.destroy(); }, 30000);

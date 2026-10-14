@@ -63,9 +63,43 @@ async function fixture(t, prepareImage = async reply => reply.messages[0]) {
     await client.listeners(Events.InteractionCreate)[0](interaction);
     return calls;
   }
-  return { click, slashCard, requests, errors, ban: () => { banned = true; }, deny: () => { member = false; } };
+  async function autocomplete(commandName,query){
+    let choices;
+    await client.listeners(Events.InteractionCreate)[0]({commandName,guildId:'guild',locale:'sv-SE',user:{id:'user'},
+      isButton:()=>false,isChatInputCommand:()=>false,isAutocomplete:()=>true,
+      options:{getFocused:()=>({name:'name',value:query})},respond:async value=>{choices=value;}});
+    return choices;
+  }
+  return { click, slashCard, autocomplete, requests, errors, ban: () => { banned = true; }, deny: () => { member = false; } };
 }
 const openId = () => cardBank.render('PcTw', 'en-US').messages[0].components[0].components[0].custom_id;
+
+test('slash nation supports public and DM replies, nation-only suggestions and FAQ edits retaining all three images',async t=>{
+  const cards=JSON.parse(readFileSync(new URL('../data/cards/catalog.json',import.meta.url),'utf8')).cards;
+  const prepare=createCardImageDelivery({cards,fetchImage:async()=>new Response(Buffer.from([255,216,255,217]),{headers:{'content-type':'image/jpeg'}})});
+  const f=await fixture(t,prepare);
+  assert.equal((await f.autocomplete('nation','')).length,17);
+  assert.equal((await f.autocomplete('nation','Kina'))[0].value,'nation-China');
+  assert.ok((await f.autocomplete('card','Kina')).every(choice=>choice.value!=='nation-China'));
+  for(const context of [{guildId:'guild',context:0},{guildId:null,context:1}]){
+    const calls=await f.slashCard({...context,commandName:'nation',options:{getString:()=> 'Kina'}});
+    assert.deepEqual(calls.map(call=>call.type),['ack','update']);
+    const message=calls[1].payload;
+    assert.equal(message.embeds[0].title,'China');assert.equal(message.files.length,3);
+    assert.deepEqual(message.embeds.slice(2).map(embed=>embed.title),['Ming Dynasty','Qin Dynasty']);
+    const embeds=message.embeds.map(embed=>({...embed,...(embed.image?{image:{url:'https://cdn.discordapp.com/attachments/123/'+(1000+message.files.findIndex(file=>embed.image.url==='attachment://'+file.name))+'/'+embed.image.url.slice(13)}}:{})}));
+    const opened=await f.click(message.components[0].components[0].custom_id,{message:{author:{id:'app'},embeds,attachments:new Map()}});
+    assert.equal(opened[1].payload.files,undefined);assert.equal(opened[1].payload.attachments.length,3);
+    assert.deepEqual(opened[1].payload.embeds.slice(0,4).map(embed=>embed.image?.url),message.embeds.map(embed=>embed.image?.url));
+    assert.match(opened[1].payload.embeds.at(-1).description,/FAQ\+\+/);
+    assert.ok(!/Kina: Qin Dynasty|Kina: Ming Dynasty/.test(opened[1].payload.embeds.at(-1).description));
+  }
+  const invalid=await f.slashCard({commandName:'nation',options:{getString:()=> 'PcTw'}});
+  assert.match(invalid[1].payload.content,/Nationsnamnet/);
+  f.ban();assert.deepEqual(await f.autocomplete('nation',''),[]);
+  assert.match((await f.slashCard({commandName:'nation'}))[1].payload.content,/spärrad/);
+  assert.deepEqual(f.errors,[]);
+});
 
 test('slash card uploads the image on the first edit and FAQ clicks keep its existing attachment',async t=>{
   const cards=JSON.parse(readFileSync(new URL('../data/cards/catalog.json',import.meta.url),'utf8')).cards;
@@ -85,8 +119,8 @@ test('slash card uploads the image on the first edit and FAQ clicks keep its exi
   assert.match(withoutUploadPermission[1].payload.embeds[0].image.url,/^https:\/\/games.tabony.net\//);
   const hidden=await f.click(openId(),{message:{author:{id:'app'},attachments:new Map(),embeds:[{image:{url:'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg?ex=temporary'}}]}});
   assert.equal(hidden[1].payload.files,undefined);
-  assert.equal(hidden[1].payload.attachments,undefined);
-  assert.equal(hidden[1].payload.embeds[0].image.url,'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg');
+  assert.deepEqual(hidden[1].payload.attachments,[{id:'456',filename:'card-PcTw.jpg'}]);
+  assert.equal(hidden[1].payload.embeds[0].image.url,'attachment://card-PcTw.jpg');
   assert.equal(downloads,1);
   assert.deepEqual(f.errors,[]);
 });

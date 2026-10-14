@@ -29,9 +29,9 @@ test('first reply contains image bytes before any FAQ click; FAQ edits reuse the
   assert.deepEqual(closed.attachments,opened.attachments);
 });
 
-test('local starting cards and resource boards upload directly without HTTP',async()=>{
+test('local starting cards upload directly without HTTP',async()=>{
   const prepare=createCardImageDelivery({cards,fetchImage:async()=>assert.fail('No HTTP for local assets')});
-  for(const id of ['J_Epr','nation-China']){
+  for(const id of ['J_Epr']){
     const card=cards.find(card=>card.id===id);
     const message=await prepare(cardBank.render(id));
     assert.equal(message.embeds[0].image.url,'attachment://'+card.imageAsset);
@@ -40,13 +40,30 @@ test('local starting cards and resource boards upload directly without HTTP',asy
   }
 });
 
-test('Discord hides embedded uploads from attachments; FAQ must reuse the CDN image without another upload',async()=>{
+test('nation delivery uploads one board and two dynasties, then retains all three hidden images without fetching',async()=>{
+  let downloads=0;
+  const prepare=createCardImageDelivery({cards,fetchImage:async()=>{downloads++;return response();}});
+  const reply=cardBank.renderNation('Kina','sv-SE');
+  const initial=await prepare(reply);
+  assert.equal(initial.files.length,3);
+  assert.equal(downloads,2,'only dynasties use HTTP; the board is local');
+  const embeds=initial.embeds.map(embed=>({...embed,...(embed.image?{image:{url:'https://cdn.discordapp.com/attachments/123/'+(1000+initial.files.findIndex(file=>embed.image.url==='attachment://'+file.name))+'/'+embed.image.url.slice(13)+'?ex=temporary'}}:{})}));
+  const afterRestart=createCardImageDelivery({cards,fetchImage:async()=>assert.fail('all images already uploaded')});
+  for(const faqPage of [0,null]){
+    const saved=await afterRestart(cardBank.renderNation('China','sv-SE',{faqPage}),{embeds});
+    assert.equal(saved.files,undefined);
+    assert.deepEqual(saved.attachments,initial.files.map((file,index)=>({id:String(1000+index),filename:file.name})));
+    assert.deepEqual(saved.embeds.filter(embed=>embed.image).map(embed=>embed.image.url),initial.embeds.filter(embed=>embed.image).map(embed=>embed.image.url));
+  }
+});
+
+test('hidden embedded uploads retain their file ID and attachment reference so FAQ cannot expose a second image',async()=>{
   const prepare=createCardImageDelivery({cards,fetchImage:async()=>response()});
   const imageUrl='https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg?ex=temporary&hm=signature';
   const message=await prepare(cardBank.render('PcTw','sv-SE',{faqPage:0}),{attachments:[],imageUrl});
   assert.equal(message.files,undefined,'hidden embedded uploads must not be downloaded and uploaded again');
-  assert.equal(message.attachments,undefined,'omit attachments to preserve the hidden embedded file');
-  assert.equal(message.embeds[0].image.url,'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg');
+  assert.deepEqual(message.attachments,[{id:'456',filename:'card-PcTw.jpg'}]);
+  assert.equal(message.embeds[0].image.url,'attachment://card-PcTw.jpg');
   for(const unrelated of ['https://example.test/attachments/123/456/card-PcTw.jpg','https://cdn.discordapp.com/attachments/123/456/other.jpg']){
     assert.ok((await prepare(cardBank.render('PcTw'),{imageUrl:unrelated})).files);
   }
@@ -58,7 +75,7 @@ test('servers without Attach Files keep source images without fetching or upload
   assert.deepEqual(await prepare(reply,{allowUpload:false}),reply.messages[0]);
   const saved=await prepare(reply,{allowUpload:false,imageUrl:'https://cdn.discordapp.com/attachments/123/456/card-PcTw.jpg'});
   assert.equal(saved.files,undefined);
-  assert.match(saved.embeds[0].image.url,/cdn.discordapp.com/);
+  assert.equal(saved.embeds[0].image.url,'attachment://card-PcTw.jpg');
 });
 
 test('concurrent requests coalesce, cache is bounded, and failed or invalid downloads keep the source image',async()=>{

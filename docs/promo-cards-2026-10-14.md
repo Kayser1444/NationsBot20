@@ -8,7 +8,7 @@ Tolv kortframsidor är separerade och normaliserade till 164 × 254 pixlar: elva
 | Potemkin Village | Byggnad | III |
 | Power Grid | Guldålder | IIII |
 | Julius Agricola | Rådgivare | I |
-| Engineering Genius | Guldålder | I |
+| Engineering Genius | Guldålder | II |
 | Solar Eclipse / Spring and Autumn Period | Ett händelsekort, två sökbara namn | I |
 | Nikola Tesla | Rådgivare | IIII |
 | Hagia Sophia | Underverk | II |

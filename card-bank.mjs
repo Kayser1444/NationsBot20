@@ -37,13 +37,13 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     if (progress.length === 1) return progress[0];
     return found.length === 1 ? found[0] : null;
   }
-  function autocomplete(query, language = 'en-US') {
+  function autocomplete(query, language = 'en-US', { nations = false } = {}) {
     const selected = normalize(query);
     const rank = card => Math.min(...[card.name, ...card.aliases].map(name => {
       const value = normalize(name);
       return value === selected ? 0 : value.startsWith(selected) ? 1 : value.includes(selected) ? 2 : 3;
     }));
-    return cards.filter(card => rank(card) < 3)
+    return cards.filter(card => (card.type === 'nation') === nations && rank(card) < 3)
       .sort((a, b) => rank(a) - rank(b) || Number(Boolean(a.variant)) - Number(Boolean(b.variant)) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id)).slice(0, 25)
       .map(card => ({ name: `${card.name}${card.variant ? ' (' + card.variant + ')' : ''} · ${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}`.slice(0, 100), value: card.id }));
   }
@@ -51,14 +51,15 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     if (!['sv-SE', 'en-US'].includes(language)) language = 'en-US';
     const card = resolve(query);
     if (!card) return { ok: false, messages: [{ content: text(language, 'cardUnavailable'), allowed_mentions: silent }] };
-    const matched = entries.entries.filter(entry => visible(entry) && (
+    const applicable = entry => visible(entry) && !(card.type === 'nation' && entry.category === 'dynasty');
+    const matched = entries.entries.filter(entry => applicable(entry) && (
       entry.cardLinks.some(link => link.cardId === card.id && visible(link)) ||
       (typeRules[card.type] ?? []).includes(entry.id) && !entry.cardLinks.some(link => link.cardId === card.id && link.review?.status === 'rejected')));
     // Follow explicit rule references, once each, without copying text between entries.
     const selectedIds = new Set(matched.map(entry => entry.id));
     for (let i = 0; i < matched.length; i++) for (const id of matched[i].relatedEntryIds) {
       const related = entries.entries.find(entry => entry.id === id);
-      if (related && visible(related) && !selectedIds.has(id) &&
+      if (related && applicable(related) && !selectedIds.has(id) &&
           !related.cardLinks.some(link => link.cardId === card.id && link.review?.status === 'rejected')) {
         selectedIds.add(id);
         matched.push(related);
@@ -72,10 +73,19 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     const metadata = `**${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}${card.boardSide ? ' · ' + text(language, 'cardBoardSide', { side: card.boardSide }) : ''}**`;
     const description = language === 'sv-SE' ? card.descriptionSv : card.descriptionEn;
     const imageUrl = cardImageUrl(card, assetOrigin);
-    const message = { content: text(language, 'cardHeading'), allowed_mentions: silent, embeds: [
+    const message = { content: text(language, card.type === 'nation' ? 'nationHeading' : 'cardHeading'), allowed_mentions: silent, embeds: [
       { title: card.name, color: 12092983, ...(imageUrl ? { url: imageUrl, image: { url: imageUrl } } : {}) },
       { description: metadata + (description ? '\n' + description : '') + (card.promo ? '\n' + text(language, 'cardPromoNote') : ''), color: 12092983 },
     ] };
+    const imageTargets = [{cardId:card.id,embedIndex:0}];
+    if (card.type === 'nation') {
+      for (const dynasty of cards.filter(candidate => candidate.type === 'dynasty' && candidate.nation === card.name)) {
+        const url = cardImageUrl(dynasty, assetOrigin);
+        imageTargets.push({cardId:dynasty.id,embedIndex:message.embeds.length});
+        message.embeds.push({title:dynasty.name,description:text(language,'cardType_dynasty') + ' · ' + card.name,
+          color:12092983,...(url ? {url,image:{url}} : {})});
+      }
+    }
     if (!imageUrl && !card.imageAsset) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' +
@@ -130,7 +140,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       message.embeds[1].description += '\n' + text(language, 'cardFaqPending');
     }
     message.components = [{ type: 1, components: buttons }];
-    return { ok: true, cardId: card.id, messages: [message], entryIds: matched.map(entry => entry.id),
+    return { ok: true, cardId: card.id, imageTargets, messages: [message], entryIds: matched.map(entry => entry.id),
       pointCount: points.length, faqPageCount: pages.length, faqPage };
   }
   function renderButton(customId) {
@@ -138,7 +148,12 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     if (!match || customId.length > 100) return null;
     return render(match[1], match[2], { faqPage: match[3] === 'closed' ? null : Number(match[3]) });
   }
-  return { resolve, autocomplete, render, renderButton };
+  function renderNation(query, language = 'en-US', options) {
+    if (resolve(query)?.type !== 'nation') return {ok:false,messages:[{content:text(language,'nationUnavailable'),allowed_mentions:silent}]};
+    return render(query,language,options);
+  }
+  return { resolve, autocomplete, render, renderButton, renderNation,
+    autocompleteNations:(query,language) => autocomplete(query,language,{nations:true}) };
 }
 
 export const cardBank = createCardBank({ catalog: read('./data/cards/catalog.json'), sources: read('./data/faq/sources.json'), entries: read('./data/faq/entries.json'), assetOrigin: cardAssetOrigin() });
