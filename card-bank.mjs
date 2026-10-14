@@ -20,18 +20,26 @@ export function createCardBank({ catalog, sources, entries }) {
         entry.relatedEntryIds.some(id => !entryIds.has(id))) throw new Error('Invalid FAQ reference: ' + entry.id);
   }
   for (const card of cards) {
-    if (!/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/cards\/[A-Za-z0-9_-]+\.jpg$/.test(card.imageUrl)) throw new Error('Invalid card image: ' + card.id);
+    if (card.imageUrl !== null && !/^https:\/\/games\.tabony\.net\/static\/public\/Nations\/cards\/[A-Za-z0-9_-]+\.jpg$/.test(card.imageUrl)) throw new Error('Invalid card image: ' + card.id);
   }
   function resolve(query) {
     const selected = normalize(query);
-    const found = cards.filter(card => card.id === query || [card.name, ...card.aliases].some(name => normalize(name) === selected));
+    const byId = cards.find(card => card.id === query);
+    if (byId) return byId;
+    const found = cards.filter(card => [card.name, ...card.aliases].some(name => normalize(name) === selected));
+    const progress = found.filter(card => !card.variant);
+    if (progress.length === 1) return progress[0];
     return found.length === 1 ? found[0] : null;
   }
   function autocomplete(query, language = 'en-US') {
     const selected = normalize(query);
-    return cards.filter(card => [card.name, ...card.aliases].some(name => normalize(name).includes(selected)))
-      .sort((a, b) => a.name.localeCompare(b.name)).slice(0, 25)
-      .map(card => ({ name: `${card.name} · ${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : ''}`.slice(0, 100), value: card.id }));
+    const rank = card => Math.min(...[card.name, ...card.aliases].map(name => {
+      const value = normalize(name);
+      return value === selected ? 0 : value.startsWith(selected) ? 1 : value.includes(selected) ? 2 : 3;
+    }));
+    return cards.filter(card => rank(card) < 3)
+      .sort((a, b) => rank(a) - rank(b) || Number(Boolean(a.variant)) - Number(Boolean(b.variant)) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id)).slice(0, 25)
+      .map(card => ({ name: `${card.name}${card.variant ? ' (' + card.variant + ')' : ''} · ${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}`.slice(0, 100), value: card.id }));
   }
   function render(query, language = 'en-US', { faqPage = null } = {}) {
     if (!['sv-SE', 'en-US'].includes(language)) language = 'en-US';
@@ -42,14 +50,16 @@ export function createCardBank({ catalog, sources, entries }) {
       Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && approved(link))) || a.sourcePages[0] - b.sourcePages[0]);
     const points = matched.flatMap(entry => entry.bullets.filter(bullet => approved(bullet) && bullet.language === language).map(bullet => ({ entry, bullet })));
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
-    const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : ''}**`;
+    const metadata = `**${text(language, 'cardType_' + card.type)}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}**`;
     const description = language === 'sv-SE' ? card.descriptionSv : card.descriptionEn;
-    const message = { content: text(language, 'cardPilot'), allowed_mentions: silent, embeds: [
-      { title: card.name, url: card.imageUrl, color: 12092983, image: { url: card.imageUrl } },
+    const hasImage = card.imageUrl && card.imageCheck?.status === 200 && card.imageCheck.url === card.imageUrl;
+    const message = { content: text(language, 'cardHeading'), allowed_mentions: silent, embeds: [
+      { title: card.name, color: 12092983, ...(hasImage ? { url: card.imageUrl, image: { url: card.imageUrl } } : {}) },
       { description: metadata + (description ? '\n' + description : ''), color: 12092983 },
     ] };
+    if (!hasImage) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
-    const footer = '\n\n' + text(language, 'cardFaqScope') + '\n' +
+    const footer = '\n\n' + text(language, card.faqReviewStatus === 'pilot_reviewed' ? 'cardFaqPilotScope' : 'cardFaqScope') + '\n' +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;

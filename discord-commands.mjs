@@ -19,7 +19,7 @@ export const commands = [
     { name: 'locale', description: 'Swedish (sv-SE), English (en-US), or automatic (auto)', type: 3, required: true, autocomplete: true, max_length: 35 },
   ] },
   { name: 'card', description: 'Visa kortbild och källkontrollerade FAQ-punkter', type: 1, options: [
-    { name: 'name', description: 'Kortnamn (pilot: Porcelain Tower)', type: 3, required: true, autocomplete: true, max_length: 100 },
+    { name: 'name', description: 'Kortnamn – välj bland namnförslagen', type: 3, required: true, autocomplete: true, max_length: 100 },
   ] },
 ];
 export const helpMessage = text('sv-SE', 'help');

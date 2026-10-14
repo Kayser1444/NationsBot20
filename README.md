@@ -343,7 +343,7 @@ This enables the administration dashboard at `http://127.0.0.1:24680` only on th
 local machine. The existing local prototype and Windows launchers can continue
 to run independently until the deliberate cloud cutover.
 
-### Local card and FAQ pilot
+### Card inventory and FAQ
 
 `/card name:Porcelain Tower` shows the card image, a compact type/age row and
 13 sourced FAQ summary points from ten checked passages in FAQ++ 1.11. FAQ starts
@@ -361,11 +361,18 @@ The buttons continue working after a local bot restart while the same card remai
 available. Run `npm run dev` and use `/card name:Porcelain Tower` from **NationsBot Dev**
 to try it locally; the production bot is separate.
 
-This local pilot enables only Porcelain Tower. The FAQ bank contains 216 text
-entries; 206 remain pending review. The preliminary card metadata catalog is not
-fully enabled. See [FAQ data and reproduction](data/faq/README.md) and
+The inventory enables 503 entries across all card types, including starting-board
+variants and the special cards named in FAQ++ 1.11. All 479 FAQ card headings map
+to the inventory. 422 public Tabony JPEG images have been checked; starting-board
+variants and seven additional FAQ cards explicitly report a missing image.
+Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
+cards sharing a name by type, age and starting nation.
+The FAQ bank contains 216 text entries; 206 remain pending review. Enabling a card
+does not approve its FAQ content. See [card coverage and image checks](data/cards/README.md),
+[FAQ data and reproduction](data/faq/README.md) and
 [content review](data/faq/review.md). The Docker build includes the runtime JSON
-files; the source PDFs and images stay local. No deployment is part of this change.
+files; the source PDFs and images stay local. The expanded catalog is deployed to
+the separate Railway staging service; production remains separate.
 
 Message splitting and embed limits follow the
 [Discord message documentation](https://docs.discord.com/developers/resources/message).

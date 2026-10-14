@@ -59,7 +59,7 @@ test('Porcelain Tower shows its own rules and every named cross-reference with s
   }
   assert.deepEqual(cardBank.autocomplete('porc').map(option => option.value), ['PcTw']);
   assert.equal(cardBank.render('Porc').ok, false, 'partial names require an explicit autocomplete choice');
-  assert.equal(cardBank.render('Titanic').ok, false, 'unreviewed card metadata is not silently exposed');
+  assert.equal(cardBank.render('Titanic').ok, true, 'available images do not require FAQ review');
 });
 
 test('pending source text, summary or link is excluded independently', () => {
@@ -72,6 +72,62 @@ test('pending source text, summary or link is excluded independently', () => {
     const text = allPages(createCardBank(data), 'sv-SE').map(content).join('\n');
     assert.ok(!text.includes('Anarchism'));
   }
+});
+
+test('every FAQ card heading is inventoried, while pending FAQ content stays hidden', () => {
+  const { catalog, entries } = fixtures();
+  const coverage = read('cards/faq-coverage.json');
+  assert.equal(coverage.items.length, 479);
+  const ids = new Set(catalog.cards.map(card => card.id));
+  for (const item of coverage.items) {
+    assert.ok(item.cardIds.length, item.heading);
+    for (const id of item.cardIds) assert.ok(ids.has(id), item.heading + ': ' + id);
+  }
+  for (const card of catalog.cards) {
+    const reply = cardBank.render(card.id, 'sv-SE');
+    assert.equal(reply.ok, true, card.id);
+    assert.equal(reply.messages[0].embeds[0].title, card.name);
+    assertMessageLimits(reply);
+    const image = reply.messages[0].embeds[0].image;
+    if (image) {
+      assert.equal(card.imageCheck.status, 200, card.id);
+      assert.equal(image.url, card.imageCheck.url);
+    } else assert.match(content(reply), /Ingen separat kortbild/);
+    if (card.faqReviewStatus === 'pending') {
+      assert.equal(reply.pointCount, 0, card.id);
+      assert.ok(reply.messages[0].components[0].components[0].disabled);
+    }
+  }
+  assert.equal(entries.entries.filter(entry => entry.review.status === 'approved').length, 10);
+  const cabin = cardBank.render("Tom’s Cabin");
+  assert.equal(cabin.cardId, 'UTC');
+  assert.match(cabin.messages[0].embeds[0].image.url, /UTC\.jpg$/);
+  assert.equal(cabin.pointCount, 0);
+  assert.ok(!content(cabin).includes('Remove all Buildings'));
+  for (const name of ['Nikola Tesla', 'Hagia Sophia', 'Kremlin', 'Mechanical Turk', 'Hussar', 'Turmoil', 'Siberia 2']) {
+    assert.equal(cardBank.render(name).ok, true, name);
+  }
+});
+
+test('large-catalog suggestions disambiguate variants and keep exact matches ahead of partial matches', () => {
+  const choices = cardBank.autocomplete('');
+  assert.equal(choices.length, 25);
+  assert.ok(choices.every(choice => choice.name.length <= 100));
+  assert.equal(new Set(choices.map(choice => choice.value)).size, 25);
+  assert.deepEqual(cardBank.autocomplete('three kingdoms').map(choice => choice.value).sort(), ['RTK', 'ThKd']);
+  assert.equal(cardBank.resolve('Three Kingdoms'), null);
+  assert.equal(cardBank.render('RTK').cardId, 'RTK');
+  assert.equal(cardBank.render('ThKd').cardId, 'ThKd');
+  assert.equal(cardBank.render('Aqueduct').cardId, 'Aqd', 'progress card is preferred over its starting variant');
+  assert.equal(cardBank.render('Rome Aqueduct').cardId, 'R_Aqd');
+  assert.equal(cardBank.resolve('Farm'), null, 'starting board variants require an explicit choice');
+  assert.match(cardBank.autocomplete('China Farm')[0].name, /China.*Startkort|China.*Starting card/);
+  assert.equal(cardBank.autocomplete('Tom’s Cabin')[0].value, 'UTC');
+  assert.equal(cardBank.autocomplete('Tesla')[0].value, 'faq-nikola-tesla');
+  assert.equal(cardBank.autocomplete('no such card 123456').length, 0);
+  const data = fixtures();
+  data.catalog.cards.find(card => card.id === 'PcTw').imageUrl = 'https://example.com/card.jpg';
+  assert.throws(() => createCardBank(data), /Invalid card image/);
 });
 
 test('long FAQ points survive pagination with repeated source labels and no empty pages', () => {
@@ -110,5 +166,5 @@ test('button IDs retain language and support open, close and fresh bank instance
     assert.equal(cardBank.renderButton(id), null);
   }
   assert.equal(cardBank.renderButton('cardfaq:1:PcTw:en-US:9999').ok, false);
-  assert.equal(cardBank.renderButton('cardfaq:1:Titanic:en-US:0').ok, false);
+  assert.equal(cardBank.renderButton('cardfaq:1:missing-card:en-US:0').ok, false);
 });

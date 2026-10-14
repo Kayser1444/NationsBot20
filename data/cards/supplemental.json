@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "nations-faq-official",
+  "note": "Cards named in FAQ++ 1.11 but absent from the local Tabony game implementation. Image URLs remain null until a real public asset is verified. These metadata additions do not approve FAQ rules.",
+  "cards": [
+    { "id": "faq-nikola-tesla", "name": "Nikola Tesla", "aliases": ["Tesla"], "type": "advisor", "age": 4, "faqHeadingId": "advisor-nikola-tesla" },
+    { "id": "faq-hagia-sophia", "name": "Hagia Sophia", "aliases": [], "type": "wonder", "age": 2, "faqHeadingId": "wonder-hagia-sophia" },
+    { "id": "faq-kremlin", "name": "Kremlin", "aliases": [], "type": "wonder", "age": 3, "faqHeadingId": "wonder-kremlin" },
+    { "id": "faq-mechanical-turk", "name": "Mechanical Turk", "aliases": ["The Turk"], "type": "wonder", "age": 3, "faqHeadingId": "wonder-mechanical-turk" },
+    { "id": "faq-antikythera-mechanism", "name": "Antikythera Mechanism", "aliases": [], "type": "golden_age", "age": 1, "faqHeadingId": "golden-age-antikythera-mechanism" },
+    { "id": "faq-grand-duchy-of-finland", "name": "Grand Duchy of Finland", "aliases": ["Finland"], "type": "colony", "age": 4, "faqHeadingId": "colony-grand-duchy-of-finland" },
+    { "id": "faq-hussar", "name": "Hussar", "aliases": [], "type": "military", "age": 4, "faqHeadingId": "military-hussar" }
+  ],
+  "aliases": {
+    "UTC": ["Tom's Cabin", "Uncle Toms Cabin", "Toms Cabin"],
+    "ScAl": ["Sacrifcial Altar"],
+    "CfHs": ["Coffffee House"],
+    "Plp": ["Phillipines"],
+    "DvCm": ["Divina Comedia"],
+    "Lsp": ["Longboats"],
+    "Rfm": ["Riflfleman"],
+    "WcTw": ["Wardenclyffffe Tower"],
+    "At_ZR": ["Atilla"],
+    "QU_OG": ["Qin Unifcation"],
+    "SM_GS": ["Religious Schism"],
+    "SA_DA": ["Dreyfus Affffair"],
+    "EK_FVC": ["Krakatoa"],
+    "SME_WS": ["Women's Suffffrage"]
+  }
+}

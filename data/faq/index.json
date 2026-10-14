@@ -512,7 +512,10 @@
         516.28
       ],
       "hasRule": true,
-      "cardId": "Agt"
+      "cardId": "Agt",
+      "cardIds": [
+        "Agt"
+      ]
     },
     {
       "id": "advisor-hatshepsut",
@@ -528,7 +531,10 @@
         526.88
       ],
       "hasRule": true,
-      "cardId": "Hss"
+      "cardId": "Hss",
+      "cardIds": [
+        "Hss"
+      ]
     },
     {
       "id": "advisor-qin-shi-huang",
@@ -544,7 +550,10 @@
         610.58
       ],
       "hasRule": true,
-      "cardId": "QSH"
+      "cardId": "QSH",
+      "cardIds": [
+        "QSH"
+      ]
     },
     {
       "id": "advisor-saint-augustine",
@@ -560,7 +569,10 @@
         631.58
       ],
       "hasRule": true,
-      "cardId": "StAg"
+      "cardId": "StAg",
+      "cardIds": [
+        "StAg"
+      ]
     },
     {
       "id": "advisor-archimedes",
@@ -576,7 +588,10 @@
         652.58
       ],
       "hasRule": true,
-      "cardId": "Acm"
+      "cardId": "Acm",
+      "cardIds": [
+        "Acm"
+      ]
     },
     {
       "id": "advisor-boudica",
@@ -592,7 +607,10 @@
         704.88
       ],
       "hasRule": true,
-      "cardId": "Bdc"
+      "cardId": "Bdc",
+      "cardIds": [
+        "Bdc"
+      ]
     },
     {
       "id": "advisor-cyrus-the-great",
@@ -609,7 +627,10 @@
         757.28
       ],
       "hasRule": true,
-      "cardId": "CrGr"
+      "cardId": "CrGr",
+      "cardIds": [
+        "CrGr"
+      ]
     },
     {
       "id": "advisor-buddha",
@@ -625,7 +646,10 @@
         127.78
       ],
       "hasRule": true,
-      "cardId": "Bdh"
+      "cardId": "Bdh",
+      "cardIds": [
+        "Bdh"
+      ]
     },
     {
       "id": "advisor-hannibal",
@@ -641,7 +665,10 @@
         200.98
       ],
       "hasRule": true,
-      "cardId": "Hnb"
+      "cardId": "Hnb",
+      "cardIds": [
+        "Hnb"
+      ]
     },
     {
       "id": "advisor-sun-tzu",
@@ -657,7 +684,10 @@
         274.28
       ],
       "hasRule": true,
-      "cardId": "SnTz"
+      "cardId": "SnTz",
+      "cardIds": [
+        "SnTz"
+      ]
     },
     {
       "id": "advisor-hypatia",
@@ -673,7 +703,10 @@
         451.98
       ],
       "hasRule": false,
-      "cardId": "Hpt"
+      "cardId": "Hpt",
+      "cardIds": [
+        "Hpt"
+      ]
     },
     {
       "id": "advisor-anna-komnene",
@@ -689,7 +722,10 @@
         487.18
       ],
       "hasRule": true,
-      "cardId": "AnKn"
+      "cardId": "AnKn",
+      "cardIds": [
+        "AnKn"
+      ]
     },
     {
       "id": "advisor-harald-hardrada",
@@ -705,7 +741,10 @@
         529.18
       ],
       "hasRule": true,
-      "cardId": "HrHd"
+      "cardId": "HrHd",
+      "cardIds": [
+        "HrHd"
+      ]
     },
     {
       "id": "advisor-sejong-the-great",
@@ -721,7 +760,10 @@
         550.18
       ],
       "hasRule": true,
-      "cardId": "SjGr"
+      "cardId": "SjGr",
+      "cardIds": [
+        "SjGr"
+      ]
     },
     {
       "id": "advisor-thomas-aquino",
@@ -737,7 +779,10 @@
         592.08
       ],
       "hasRule": true,
-      "cardId": "TmAq"
+      "cardId": "TmAq",
+      "cardIds": [
+        "TmAq"
+      ]
     },
     {
       "id": "advisor-abu-bakr",
@@ -753,7 +798,10 @@
         613.08
       ],
       "hasRule": true,
-      "cardId": "AbBk"
+      "cardId": "AbBk",
+      "cardIds": [
+        "AbBk"
+      ]
     },
     {
       "id": "advisor-eleanor-of-aquitaine",
@@ -769,7 +817,10 @@
         644.58
       ],
       "hasRule": true,
-      "cardId": "EnAq"
+      "cardId": "EnAq",
+      "cardIds": [
+        "EnAq"
+      ]
     },
     {
       "id": "advisor-mansa-musa",
@@ -785,7 +836,10 @@
         686.48
       ],
       "hasRule": true,
-      "cardId": "MsMs"
+      "cardId": "MsMs",
+      "cardIds": [
+        "MsMs"
+      ]
     },
     {
       "id": "advisor-alhazen",
@@ -801,7 +855,10 @@
         85.98
       ],
       "hasRule": true,
-      "cardId": "Ahz"
+      "cardId": "Ahz",
+      "cardIds": [
+        "Ahz"
+      ]
     },
     {
       "id": "advisor-genghis-khan",
@@ -817,7 +874,10 @@
         180.08
       ],
       "hasRule": true,
-      "cardId": "GgKn"
+      "cardId": "GgKn",
+      "cardIds": [
+        "GgKn"
+      ]
     },
     {
       "id": "advisor-marco-polo",
@@ -833,7 +893,10 @@
         211.58
       ],
       "hasRule": true,
-      "cardId": "McPl"
+      "cardId": "McPl",
+      "cardIds": [
+        "McPl"
+      ]
     },
     {
       "id": "advisor-zhu-xi",
@@ -849,7 +912,10 @@
         242.98
       ],
       "hasRule": true,
-      "cardId": "ZhXi"
+      "cardId": "ZhXi",
+      "cardIds": [
+        "ZhXi"
+      ]
     },
     {
       "id": "advisor-elizabeth",
@@ -865,7 +931,10 @@
         487.18
       ],
       "hasRule": true,
-      "cardId": "Elz"
+      "cardId": "Elz",
+      "cardIds": [
+        "Elz"
+      ]
     },
     {
       "id": "advisor-galileo-galilei",
@@ -881,7 +950,10 @@
         529.08
       ],
       "hasRule": true,
-      "cardId": "GlGl"
+      "cardId": "GlGl",
+      "cardIds": [
+        "GlGl"
+      ]
     },
     {
       "id": "advisor-isabella",
@@ -897,7 +969,10 @@
         612.78
       ],
       "hasRule": true,
-      "cardId": "Isb"
+      "cardId": "Isb",
+      "cardIds": [
+        "Isb"
+      ]
     },
     {
       "id": "advisor-montezuma",
@@ -913,7 +988,10 @@
         654.68
       ],
       "hasRule": true,
-      "cardId": "Mtz"
+      "cardId": "Mtz",
+      "cardIds": [
+        "Mtz"
+      ]
     },
     {
       "id": "advisor-martin-luther",
@@ -929,7 +1007,10 @@
         707.18
       ],
       "hasRule": true,
-      "cardId": "MtLt"
+      "cardId": "MtLt",
+      "cardIds": [
+        "MtLt"
+      ]
     },
     {
       "id": "advisor-pocahontas",
@@ -945,7 +1026,10 @@
         85.98
       ],
       "hasRule": true,
-      "cardId": "Pch"
+      "cardId": "Pch",
+      "cardIds": [
+        "Pch"
+      ]
     },
     {
       "id": "advisor-tokugawa",
@@ -961,7 +1045,10 @@
         117.48
       ],
       "hasRule": true,
-      "cardId": "Tkg"
+      "cardId": "Tkg",
+      "cardIds": [
+        "Tkg"
+      ]
     },
     {
       "id": "advisor-niccolo-machiavelli",
@@ -977,7 +1064,10 @@
         169.98
       ],
       "hasRule": true,
-      "cardId": "NcMc"
+      "cardId": "NcMc",
+      "cardIds": [
+        "NcMc"
+      ]
     },
     {
       "id": "advisor-peter-the-great",
@@ -993,7 +1083,10 @@
         232.78
       ],
       "hasRule": true,
-      "cardId": "PtGr"
+      "cardId": "PtGr",
+      "cardIds": [
+        "PtGr"
+      ]
     },
     {
       "id": "advisor-suleiman-i",
@@ -1009,7 +1102,10 @@
         274.68
       ],
       "hasRule": true,
-      "cardId": "Slm"
+      "cardId": "Slm",
+      "cardIds": [
+        "Slm"
+      ]
     },
     {
       "id": "advisor-carolus-linneaus",
@@ -1025,7 +1121,10 @@
         316.58
       ],
       "hasRule": false,
-      "cardId": "CrLn"
+      "cardId": "CrLn",
+      "cardIds": [
+        "CrLn"
+      ]
     },
     {
       "id": "advisor-florence-nightingale",
@@ -1041,7 +1140,10 @@
         351.78
       ],
       "hasRule": true,
-      "cardId": "FrNg"
+      "cardId": "FrNg",
+      "cardIds": [
+        "FrNg"
+      ]
     },
     {
       "id": "advisor-frederick-the-great",
@@ -1057,7 +1159,10 @@
         414.58
       ],
       "hasRule": true,
-      "cardId": "FdGr"
+      "cardId": "FdGr",
+      "cardIds": [
+        "FdGr"
+      ]
     },
     {
       "id": "advisor-lin-zexu",
@@ -1073,7 +1178,10 @@
         435.58
       ],
       "hasRule": false,
-      "cardId": "LnZx"
+      "cardId": "LnZx",
+      "cardIds": [
+        "LnZx"
+      ]
     },
     {
       "id": "advisor-marie-antoinette",
@@ -1089,7 +1197,10 @@
         446.08
       ],
       "hasRule": false,
-      "cardId": "MrAn"
+      "cardId": "MrAn",
+      "cardIds": [
+        "MrAn"
+      ]
     },
     {
       "id": "advisor-abraham-lincoln",
@@ -1105,7 +1216,10 @@
         456.68
       ],
       "hasRule": true,
-      "cardId": "AhLc"
+      "cardId": "AhLc",
+      "cardIds": [
+        "AhLc"
+      ]
     },
     {
       "id": "advisor-benjamin-disraeli",
@@ -1121,7 +1235,10 @@
         498.58
       ],
       "hasRule": true,
-      "cardId": "BjDr"
+      "cardId": "BjDr",
+      "cardIds": [
+        "BjDr"
+      ]
     },
     {
       "id": "advisor-marie-curie",
@@ -1137,7 +1254,10 @@
         540.48
       ],
       "hasRule": true,
-      "cardId": "MrCr"
+      "cardId": "MrCr",
+      "cardIds": [
+        "MrCr"
+      ]
     },
     {
       "id": "advisor-alfred-nobel",
@@ -1153,7 +1273,10 @@
         592.78
       ],
       "hasRule": true,
-      "cardId": "AfNb"
+      "cardId": "AfNb",
+      "cardIds": [
+        "AfNb"
+      ]
     },
     {
       "id": "advisor-shaka-zulu",
@@ -1169,7 +1292,10 @@
         655.58
       ],
       "hasRule": true,
-      "cardId": "SkZl"
+      "cardId": "SkZl",
+      "cardIds": [
+        "SkZl"
+      ]
     },
     {
       "id": "advisor-simon-bolivar",
@@ -1185,7 +1311,10 @@
         687.08
       ],
       "hasRule": true,
-      "cardId": "SmBl"
+      "cardId": "SmBl",
+      "cardIds": [
+        "SmBl"
+      ]
     },
     {
       "id": "advisor-nikola-tesla",
@@ -1201,7 +1330,10 @@
         44.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-nikola-tesla",
+      "cardIds": [
+        "faq-nikola-tesla"
+      ]
     },
     {
       "id": "advisor-frederic-chopin",
@@ -1217,7 +1349,10 @@
         96.48
       ],
       "hasRule": true,
-      "cardId": "FdCp"
+      "cardId": "FdCp",
+      "cardIds": [
+        "FdCp"
+      ]
     },
     {
       "id": "battle-battle",
@@ -1249,7 +1384,10 @@
         316.98
       ],
       "hasRule": false,
-      "cardId": "BCnn"
+      "cardId": "BCnn",
+      "cardIds": [
+        "BCnn"
+      ]
     },
     {
       "id": "battle-battle-of-kadesh",
@@ -1265,7 +1403,10 @@
         327.48
       ],
       "hasRule": false,
-      "cardId": "BKds"
+      "cardId": "BKds",
+      "cardIds": [
+        "BKds"
+      ]
     },
     {
       "id": "battle-siege-of-alesia",
@@ -1281,7 +1422,10 @@
         338.08
       ],
       "hasRule": false,
-      "cardId": "SAls"
+      "cardId": "SAls",
+      "cardIds": [
+        "SAls"
+      ]
     },
     {
       "id": "battle-siege-of-troy",
@@ -1297,7 +1441,10 @@
         348.58
       ],
       "hasRule": false,
-      "cardId": "STry"
+      "cardId": "STry",
+      "cardIds": [
+        "STry"
+      ]
     },
     {
       "id": "battle-battle-of-thermopylae",
@@ -1313,7 +1460,10 @@
         359.18
       ],
       "hasRule": false,
-      "cardId": "BTmp"
+      "cardId": "BTmp",
+      "cardIds": [
+        "BTmp"
+      ]
     },
     {
       "id": "battle-milvian-bridge",
@@ -1329,7 +1479,10 @@
         369.68
       ],
       "hasRule": false,
-      "cardId": "MvBr"
+      "cardId": "MvBr",
+      "cardIds": [
+        "MvBr"
+      ]
     },
     {
       "id": "battle-battle-of-issus",
@@ -1345,7 +1498,10 @@
         380.28
       ],
       "hasRule": false,
-      "cardId": "BIss"
+      "cardId": "BIss",
+      "cardIds": [
+        "BIss"
+      ]
     },
     {
       "id": "battle-crossing-the-alps",
@@ -1361,7 +1517,10 @@
         390.78
       ],
       "hasRule": false,
-      "cardId": "CsAp"
+      "cardId": "CsAp",
+      "cardIds": [
+        "CsAp"
+      ]
     },
     {
       "id": "battle-battle-of-agincourt",
@@ -1377,7 +1536,10 @@
         425.98
       ],
       "hasRule": false,
-      "cardId": "BAgc"
+      "cardId": "BAgc",
+      "cardIds": [
+        "BAgc"
+      ]
     },
     {
       "id": "battle-battle-of-hastings",
@@ -1393,7 +1555,10 @@
         436.58
       ],
       "hasRule": false,
-      "cardId": "BHst"
+      "cardId": "BHst",
+      "cardIds": [
+        "BHst"
+      ]
     },
     {
       "id": "battle-battle-of-poitiers",
@@ -1409,7 +1574,10 @@
         447.08
       ],
       "hasRule": false,
-      "cardId": "BPtr"
+      "cardId": "BPtr",
+      "cardIds": [
+        "BPtr"
+      ]
     },
     {
       "id": "battle-battle-of-tannenberg",
@@ -1425,7 +1593,10 @@
         457.68
       ],
       "hasRule": false,
-      "cardId": "BTnb"
+      "cardId": "BTnb",
+      "cardIds": [
+        "BTnb"
+      ]
     },
     {
       "id": "battle-battle-of-manzikert",
@@ -1441,7 +1612,10 @@
         468.18
       ],
       "hasRule": false,
-      "cardId": "BMzk"
+      "cardId": "BMzk",
+      "cardIds": [
+        "BMzk"
+      ]
     },
     {
       "id": "battle-the-horns-of-hattin",
@@ -1457,7 +1631,10 @@
         478.78
       ],
       "hasRule": false,
-      "cardId": "THH"
+      "cardId": "THH",
+      "cardIds": [
+        "THH"
+      ]
     },
     {
       "id": "battle-battle-of-ain-jalut",
@@ -1473,7 +1650,10 @@
         489.28
       ],
       "hasRule": false,
-      "cardId": "BAJ"
+      "cardId": "BAJ",
+      "cardIds": [
+        "BAJ"
+      ]
     },
     {
       "id": "battle-siege-of-constantinople",
@@ -1489,7 +1669,10 @@
         499.88
       ],
       "hasRule": false,
-      "cardId": "SCtn"
+      "cardId": "SCtn",
+      "cardIds": [
+        "SCtn"
+      ]
     },
     {
       "id": "battle-battle-of-poltava",
@@ -1505,7 +1688,10 @@
         535.08
       ],
       "hasRule": false,
-      "cardId": "BPtv"
+      "cardId": "BPtv",
+      "cardIds": [
+        "BPtv"
+      ]
     },
     {
       "id": "battle-fall-of-constantinople",
@@ -1521,7 +1707,10 @@
         545.58
       ],
       "hasRule": false,
-      "cardId": "FCtn"
+      "cardId": "FCtn",
+      "cardIds": [
+        "FCtn"
+      ]
     },
     {
       "id": "battle-la-noche-triste",
@@ -1537,7 +1726,10 @@
         556.18
       ],
       "hasRule": false,
-      "cardId": "LNT"
+      "cardId": "LNT",
+      "cardIds": [
+        "LNT"
+      ]
     },
     {
       "id": "battle-siege-of-rhodes",
@@ -1553,7 +1745,10 @@
         566.68
       ],
       "hasRule": false,
-      "cardId": "SRhd"
+      "cardId": "SRhd",
+      "cardIds": [
+        "SRhd"
+      ]
     },
     {
       "id": "battle-battle-of-cajamarca",
@@ -1569,7 +1764,10 @@
         577.28
       ],
       "hasRule": false,
-      "cardId": "BCjm"
+      "cardId": "BCjm",
+      "cardIds": [
+        "BCjm"
+      ]
     },
     {
       "id": "battle-battle-of-noryang",
@@ -1585,7 +1783,10 @@
         587.78
       ],
       "hasRule": false,
-      "cardId": "BNry"
+      "cardId": "BNry",
+      "cardIds": [
+        "BNry"
+      ]
     },
     {
       "id": "battle-fall-of-louisburg",
@@ -1601,7 +1802,10 @@
         598.38
       ],
       "hasRule": false,
-      "cardId": "FLsb"
+      "cardId": "FLsb",
+      "cardIds": [
+        "FLsb"
+      ]
     },
     {
       "id": "battle-siege-of-vienna",
@@ -1617,7 +1821,10 @@
         608.88
       ],
       "hasRule": false,
-      "cardId": "SVnn"
+      "cardId": "SVnn",
+      "cardIds": [
+        "SVnn"
+      ]
     },
     {
       "id": "battle-battle-of-tsushima",
@@ -1633,7 +1840,10 @@
         644.08
       ],
       "hasRule": false,
-      "cardId": "BTsm"
+      "cardId": "BTsm",
+      "cardIds": [
+        "BTsm"
+      ]
     },
     {
       "id": "battle-battle-of-waterloo",
@@ -1649,7 +1859,10 @@
         654.68
       ],
       "hasRule": false,
-      "cardId": "BWtl"
+      "cardId": "BWtl",
+      "cardIds": [
+        "BWtl"
+      ]
     },
     {
       "id": "battle-fashoda-incident",
@@ -1665,7 +1878,10 @@
         665.18
       ],
       "hasRule": false,
-      "cardId": "FsIn"
+      "cardId": "FsIn",
+      "cardIds": [
+        "FsIn"
+      ]
     },
     {
       "id": "battle-surrender-at-yorktown",
@@ -1681,7 +1897,10 @@
         675.78
       ],
       "hasRule": false,
-      "cardId": "SYkt"
+      "cardId": "SYkt",
+      "cardIds": [
+        "SYkt"
+      ]
     },
     {
       "id": "battle-battle-of-austerlitz",
@@ -1697,7 +1916,10 @@
         686.28
       ],
       "hasRule": false,
-      "cardId": "BAtl"
+      "cardId": "BAtl",
+      "cardIds": [
+        "BAtl"
+      ]
     },
     {
       "id": "battle-battle-of-borodino",
@@ -1713,7 +1935,10 @@
         696.88
       ],
       "hasRule": false,
-      "cardId": "BBrd"
+      "cardId": "BBrd",
+      "cardIds": [
+        "BBrd"
+      ]
     },
     {
       "id": "battle-battle-of-trafalgar",
@@ -1729,7 +1954,10 @@
         707.38
       ],
       "hasRule": false,
-      "cardId": "BTfg"
+      "cardId": "BTfg",
+      "cardIds": [
+        "BTfg"
+      ]
     },
     {
       "id": "battle-battle-of-balaclava",
@@ -1745,7 +1973,10 @@
         717.98
       ],
       "hasRule": false,
-      "cardId": "BBlc"
+      "cardId": "BBlc",
+      "cardIds": [
+        "BBlc"
+      ]
     },
     {
       "id": "building-building",
@@ -1777,7 +2008,18 @@
         93.08
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": null,
+      "cardIds": [
+        "C_Frm",
+        "Et_Frm",
+        "G_Frm",
+        "I_Frm",
+        "Ml_Frm",
+        "Pg_Frm",
+        "R_Frm",
+        "Vk_Frm",
+        "Vn_Frm"
+      ]
     },
     {
       "id": "building-quarry",
@@ -1793,7 +2035,23 @@
         103.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": null,
+      "cardIds": [
+        "Ar_Qry",
+        "C_Qry",
+        "Eg_Qry",
+        "Et_qry",
+        "G_Qry",
+        "I_Qry",
+        "J_Qry",
+        "K_Qry",
+        "Ml_Qry",
+        "Pl_Qry",
+        "Ps_Qry",
+        "R_Qry",
+        "Vk_Qry",
+        "Vn_Qry"
+      ]
     },
     {
       "id": "building-caravan",
@@ -1809,7 +2067,12 @@
         114.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": null,
+      "cardIds": [
+        "Eg_Crv",
+        "Mg_Crv",
+        "Pg_Crv"
+      ]
     },
     {
       "id": "building-temple",
@@ -1825,7 +2088,16 @@
         124.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": null,
+      "cardIds": [
+        "Eg_Tpl",
+        "I_Tpl",
+        "J_Tpl",
+        "K_Tpl",
+        "Pg_Tpl",
+        "Pl_Tpl",
+        "Ps_Tpl"
+      ]
     },
     {
       "id": "building-aqueduct",
@@ -1841,7 +2113,10 @@
         159.88
       ],
       "hasRule": false,
-      "cardId": "Aqd"
+      "cardId": "Aqd",
+      "cardIds": [
+        "Aqd"
+      ]
     },
     {
       "id": "building-brewery",
@@ -1857,7 +2132,10 @@
         170.48
       ],
       "hasRule": false,
-      "cardId": "Brw"
+      "cardId": "Brw",
+      "cardIds": [
+        "Brw"
+      ]
     },
     {
       "id": "building-city-wall",
@@ -1873,7 +2151,10 @@
         180.98
       ],
       "hasRule": false,
-      "cardId": "CtWl"
+      "cardId": "CtWl",
+      "cardIds": [
+        "CtWl"
+      ]
     },
     {
       "id": "building-forum",
@@ -1889,7 +2170,10 @@
         191.58
       ],
       "hasRule": false,
-      "cardId": "Frm"
+      "cardId": "Frm",
+      "cardIds": [
+        "Frm"
+      ]
     },
     {
       "id": "building-lighthouse",
@@ -1905,7 +2189,10 @@
         202.08
       ],
       "hasRule": false,
-      "cardId": "Lth"
+      "cardId": "Lth",
+      "cardIds": [
+        "Lth"
+      ]
     },
     {
       "id": "building-lyceum",
@@ -1921,7 +2208,10 @@
         212.68
       ],
       "hasRule": false,
-      "cardId": "Lyc"
+      "cardId": "Lyc",
+      "cardIds": [
+        "Lyc"
+      ]
     },
     {
       "id": "building-synagogue",
@@ -1937,7 +2227,10 @@
         223.18
       ],
       "hasRule": false,
-      "cardId": "Sng"
+      "cardId": "Sng",
+      "cardIds": [
+        "Sng"
+      ]
     },
     {
       "id": "building-ziggurat",
@@ -1953,7 +2246,10 @@
         233.78
       ],
       "hasRule": false,
-      "cardId": "Zgr"
+      "cardId": "Zgr",
+      "cardIds": [
+        "Zgr"
+      ]
     },
     {
       "id": "building-granary",
@@ -1969,7 +2265,10 @@
         244.28
       ],
       "hasRule": false,
-      "cardId": "Grn"
+      "cardId": "Grn",
+      "cardIds": [
+        "Grn"
+      ]
     },
     {
       "id": "building-mine",
@@ -1985,7 +2284,10 @@
         254.88
       ],
       "hasRule": false,
-      "cardId": "Min"
+      "cardId": "Min",
+      "cardIds": [
+        "Min"
+      ]
     },
     {
       "id": "building-pagoda",
@@ -2001,7 +2303,10 @@
         265.38
       ],
       "hasRule": false,
-      "cardId": "Pgd"
+      "cardId": "Pgd",
+      "cardIds": [
+        "Pgd"
+      ]
     },
     {
       "id": "building-confucian-academy",
@@ -2017,7 +2322,10 @@
         275.98
       ],
       "hasRule": false,
-      "cardId": "CfAc"
+      "cardId": "CfAc",
+      "cardIds": [
+        "CfAc"
+      ]
     },
     {
       "id": "building-forge",
@@ -2033,7 +2341,10 @@
         286.48
       ],
       "hasRule": false,
-      "cardId": "Frg"
+      "cardId": "Frg",
+      "cardIds": [
+        "Frg"
+      ]
     },
     {
       "id": "building-library",
@@ -2049,7 +2360,10 @@
         297.08
       ],
       "hasRule": false,
-      "cardId": "Lib"
+      "cardId": "Lib",
+      "cardIds": [
+        "Lib"
+      ]
     },
     {
       "id": "building-vatican",
@@ -2065,7 +2379,10 @@
         307.58
       ],
       "hasRule": false,
-      "cardId": "Vtc"
+      "cardId": "Vtc",
+      "cardIds": [
+        "Vtc"
+      ]
     },
     {
       "id": "building-silk-road",
@@ -2081,7 +2398,10 @@
         318.18
       ],
       "hasRule": false,
-      "cardId": "SkRd"
+      "cardId": "SkRd",
+      "cardIds": [
+        "SkRd"
+      ]
     },
     {
       "id": "building-cathedral",
@@ -2097,7 +2417,10 @@
         353.38
       ],
       "hasRule": false,
-      "cardId": "Cat"
+      "cardId": "Cat",
+      "cardIds": [
+        "Cat"
+      ]
     },
     {
       "id": "building-madrasa",
@@ -2113,7 +2436,10 @@
         363.88
       ],
       "hasRule": false,
-      "cardId": "Mdr"
+      "cardId": "Mdr",
+      "cardIds": [
+        "Mdr"
+      ]
     },
     {
       "id": "building-market",
@@ -2129,7 +2455,10 @@
         374.48
       ],
       "hasRule": false,
-      "cardId": "Mkt"
+      "cardId": "Mkt",
+      "cardIds": [
+        "Mkt"
+      ]
     },
     {
       "id": "building-monastery",
@@ -2145,7 +2474,10 @@
         384.98
       ],
       "hasRule": false,
-      "cardId": "Mon"
+      "cardId": "Mon",
+      "cardIds": [
+        "Mon"
+      ]
     },
     {
       "id": "building-mosque",
@@ -2161,7 +2493,10 @@
         395.58
       ],
       "hasRule": false,
-      "cardId": "Msq"
+      "cardId": "Msq",
+      "cardIds": [
+        "Msq"
+      ]
     },
     {
       "id": "building-university",
@@ -2177,7 +2512,10 @@
         406.08
       ],
       "hasRule": false,
-      "cardId": "Uni"
+      "cardId": "Uni",
+      "cardIds": [
+        "Uni"
+      ]
     },
     {
       "id": "building-watermill",
@@ -2193,7 +2531,10 @@
         416.68
       ],
       "hasRule": false,
-      "cardId": "Wtm"
+      "cardId": "Wtm",
+      "cardIds": [
+        "Wtm"
+      ]
     },
     {
       "id": "building-windmill",
@@ -2209,7 +2550,10 @@
         427.18
       ],
       "hasRule": false,
-      "cardId": "Wdm"
+      "cardId": "Wdm",
+      "cardIds": [
+        "Wdm"
+      ]
     },
     {
       "id": "building-ball-court",
@@ -2225,7 +2569,10 @@
         437.78
       ],
       "hasRule": false,
-      "cardId": "BlCt"
+      "cardId": "BlCt",
+      "cardIds": [
+        "BlCt"
+      ]
     },
     {
       "id": "building-castle",
@@ -2241,7 +2588,10 @@
         448.28
       ],
       "hasRule": false,
-      "cardId": "Cas"
+      "cardId": "Cas",
+      "cardIds": [
+        "Cas"
+      ]
     },
     {
       "id": "building-guild-hall",
@@ -2257,7 +2607,10 @@
         458.88
       ],
       "hasRule": false,
-      "cardId": "GdHl"
+      "cardId": "GdHl",
+      "cardIds": [
+        "GdHl"
+      ]
     },
     {
       "id": "building-hippodrome",
@@ -2273,7 +2626,10 @@
         469.38
       ],
       "hasRule": false,
-      "cardId": "Hip"
+      "cardId": "Hip",
+      "cardIds": [
+        "Hip"
+      ]
     },
     {
       "id": "building-mint",
@@ -2289,7 +2645,10 @@
         479.98
       ],
       "hasRule": false,
-      "cardId": "Mnt"
+      "cardId": "Mnt",
+      "cardIds": [
+        "Mnt"
+      ]
     },
     {
       "id": "building-ocean-fishing",
@@ -2305,7 +2664,10 @@
         490.48
       ],
       "hasRule": false,
-      "cardId": "OcFs"
+      "cardId": "OcFs",
+      "cardIds": [
+        "OcFs"
+      ]
     },
     {
       "id": "building-hansa",
@@ -2321,7 +2683,10 @@
         501.08
       ],
       "hasRule": false,
-      "cardId": "Han"
+      "cardId": "Han",
+      "cardIds": [
+        "Han"
+      ]
     },
     {
       "id": "building-knights-templar",
@@ -2337,7 +2702,10 @@
         511.58
       ],
       "hasRule": false,
-      "cardId": "KnTp"
+      "cardId": "KnTp",
+      "cardIds": [
+        "KnTp"
+      ]
     },
     {
       "id": "building-colonial-trading",
@@ -2353,7 +2721,10 @@
         546.78
       ],
       "hasRule": false,
-      "cardId": "ClTr"
+      "cardId": "ClTr",
+      "cardIds": [
+        "ClTr"
+      ]
     },
     {
       "id": "building-courthouse",
@@ -2369,7 +2740,10 @@
         557.38
       ],
       "hasRule": false,
-      "cardId": "Cth"
+      "cardId": "Cth",
+      "cardIds": [
+        "Cth"
+      ]
     },
     {
       "id": "building-dike",
@@ -2385,7 +2759,10 @@
         567.88
       ],
       "hasRule": false,
-      "cardId": "Dik"
+      "cardId": "Dik",
+      "cardIds": [
+        "Dik"
+      ]
     },
     {
       "id": "building-observatory",
@@ -2401,7 +2778,10 @@
         578.48
       ],
       "hasRule": false,
-      "cardId": "Obs"
+      "cardId": "Obs",
+      "cardIds": [
+        "Obs"
+      ]
     },
     {
       "id": "building-parliament",
@@ -2417,7 +2797,10 @@
         588.98
       ],
       "hasRule": false,
-      "cardId": "Plm"
+      "cardId": "Plm",
+      "cardIds": [
+        "Plm"
+      ]
     },
     {
       "id": "building-sawmill",
@@ -2433,7 +2816,10 @@
         599.58
       ],
       "hasRule": false,
-      "cardId": "Swm"
+      "cardId": "Swm",
+      "cardIds": [
+        "Swm"
+      ]
     },
     {
       "id": "building-terrace-farming",
@@ -2449,7 +2835,10 @@
         610.08
       ],
       "hasRule": false,
-      "cardId": "TrFm"
+      "cardId": "TrFm",
+      "cardIds": [
+        "TrFm"
+      ]
     },
     {
       "id": "building-theatre",
@@ -2465,7 +2854,10 @@
         620.68
       ],
       "hasRule": false,
-      "cardId": "Thr"
+      "cardId": "Thr",
+      "cardIds": [
+        "Thr"
+      ]
     },
     {
       "id": "building-bank",
@@ -2481,7 +2873,10 @@
         631.18
       ],
       "hasRule": false,
-      "cardId": "Bnk"
+      "cardId": "Bnk",
+      "cardIds": [
+        "Bnk"
+      ]
     },
     {
       "id": "building-sacrifcial-altar",
@@ -2497,7 +2892,10 @@
         641.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "ScAl",
+      "cardIds": [
+        "ScAl"
+      ]
     },
     {
       "id": "building-shipyard",
@@ -2513,7 +2911,10 @@
         652.28
       ],
       "hasRule": false,
-      "cardId": "Shp"
+      "cardId": "Shp",
+      "cardIds": [
+        "Shp"
+      ]
     },
     {
       "id": "building-chateau",
@@ -2529,7 +2930,10 @@
         662.88
       ],
       "hasRule": false,
-      "cardId": "Cht"
+      "cardId": "Cht",
+      "cardIds": [
+        "Cht"
+      ]
     },
     {
       "id": "building-hammam",
@@ -2545,7 +2949,10 @@
         673.38
       ],
       "hasRule": false,
-      "cardId": "Hmm"
+      "cardId": "Hmm",
+      "cardIds": [
+        "Hmm"
+      ]
     },
     {
       "id": "building-printing-press",
@@ -2561,7 +2968,10 @@
         683.98
       ],
       "hasRule": false,
-      "cardId": "PrPr"
+      "cardId": "PrPr",
+      "cardIds": [
+        "PrPr"
+      ]
     },
     {
       "id": "building-potosi",
@@ -2577,7 +2987,10 @@
         694.48
       ],
       "hasRule": false,
-      "cardId": "Pts"
+      "cardId": "Pts",
+      "cardIds": [
+        "Pts"
+      ]
     },
     {
       "id": "building-coffffee-house",
@@ -2593,7 +3006,10 @@
         705.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "CfHs",
+      "cardIds": [
+        "CfHs"
+      ]
     },
     {
       "id": "building-factory",
@@ -2609,7 +3025,10 @@
         750.68
       ],
       "hasRule": false,
-      "cardId": "Fct"
+      "cardId": "Fct",
+      "cardIds": [
+        "Fct"
+      ]
     },
     {
       "id": "building-hospital",
@@ -2625,7 +3044,10 @@
         761.28
       ],
       "hasRule": false,
-      "cardId": "Hsp"
+      "cardId": "Hsp",
+      "cardIds": [
+        "Hsp"
+      ]
     },
     {
       "id": "building-hydro-plant",
@@ -2641,7 +3063,10 @@
         44.18
       ],
       "hasRule": false,
-      "cardId": "HdPl"
+      "cardId": "HdPl",
+      "cardIds": [
+        "HdPl"
+      ]
     },
     {
       "id": "building-penal-colony",
@@ -2657,7 +3082,10 @@
         54.68
       ],
       "hasRule": false,
-      "cardId": "PnCl"
+      "cardId": "PnCl",
+      "cardIds": [
+        "PnCl"
+      ]
     },
     {
       "id": "building-railroad",
@@ -2673,7 +3101,10 @@
         65.28
       ],
       "hasRule": false,
-      "cardId": "Rlr"
+      "cardId": "Rlr",
+      "cardIds": [
+        "Rlr"
+      ]
     },
     {
       "id": "building-urban-center",
@@ -2689,7 +3120,10 @@
         75.78
       ],
       "hasRule": false,
-      "cardId": "UbCt"
+      "cardId": "UbCt",
+      "cardIds": [
+        "UbCt"
+      ]
     },
     {
       "id": "building-voortrekker",
@@ -2705,7 +3139,10 @@
         86.38
       ],
       "hasRule": false,
-      "cardId": "Vtk"
+      "cardId": "Vtk",
+      "cardIds": [
+        "Vtk"
+      ]
     },
     {
       "id": "building-zeppelin",
@@ -2721,7 +3158,10 @@
         96.88
       ],
       "hasRule": false,
-      "cardId": "Zpl"
+      "cardId": "Zpl",
+      "cardIds": [
+        "Zpl"
+      ]
     },
     {
       "id": "building-engineering-school",
@@ -2737,7 +3177,10 @@
         107.48
       ],
       "hasRule": false,
-      "cardId": "EgSl"
+      "cardId": "EgSl",
+      "cardIds": [
+        "EgSl"
+      ]
     },
     {
       "id": "building-sewer-system",
@@ -2753,7 +3196,10 @@
         117.98
       ],
       "hasRule": false,
-      "cardId": "SwSt"
+      "cardId": "SwSt",
+      "cardIds": [
+        "SwSt"
+      ]
     },
     {
       "id": "building-stock-exchange",
@@ -2769,7 +3215,10 @@
         128.58
       ],
       "hasRule": false,
-      "cardId": "SkEx"
+      "cardId": "SkEx",
+      "cardIds": [
+        "SkEx"
+      ]
     },
     {
       "id": "building-coal-mine",
@@ -2785,7 +3234,10 @@
         139.08
       ],
       "hasRule": false,
-      "cardId": "ClMn"
+      "cardId": "ClMn",
+      "cardIds": [
+        "ClMn"
+      ]
     },
     {
       "id": "building-national-park",
@@ -2801,7 +3253,10 @@
         149.68
       ],
       "hasRule": false,
-      "cardId": "NtPk"
+      "cardId": "NtPk",
+      "cardIds": [
+        "NtPk"
+      ]
     },
     {
       "id": "building-radio",
@@ -2817,7 +3272,10 @@
         160.18
       ],
       "hasRule": false,
-      "cardId": "Rad"
+      "cardId": "Rad",
+      "cardIds": [
+        "Rad"
+      ]
     },
     {
       "id": "building-shantytown",
@@ -2833,7 +3291,10 @@
         170.78
       ],
       "hasRule": false,
-      "cardId": "Stt"
+      "cardId": "Stt",
+      "cardIds": [
+        "Stt"
+      ]
     },
     {
       "id": "building-department-store",
@@ -2849,7 +3310,10 @@
         181.28
       ],
       "hasRule": false,
-      "cardId": "DpSr"
+      "cardId": "DpSr",
+      "cardIds": [
+        "DpSr"
+      ]
     },
     {
       "id": "colony-colony",
@@ -2881,7 +3345,10 @@
         249.78
       ],
       "hasRule": false,
-      "cardId": "Hsn"
+      "cardId": "Hsn",
+      "cardIds": [
+        "Hsn"
+      ]
     },
     {
       "id": "colony-israel",
@@ -2897,7 +3364,10 @@
         260.38
       ],
       "hasRule": false,
-      "cardId": "Isr"
+      "cardId": "Isr",
+      "cardIds": [
+        "Isr"
+      ]
     },
     {
       "id": "colony-macedonia",
@@ -2913,7 +3383,10 @@
         270.88
       ],
       "hasRule": false,
-      "cardId": "Mcd"
+      "cardId": "Mcd",
+      "cardIds": [
+        "Mcd"
+      ]
     },
     {
       "id": "colony-nubia",
@@ -2929,7 +3402,10 @@
         281.48
       ],
       "hasRule": false,
-      "cardId": "Nub"
+      "cardId": "Nub",
+      "cardIds": [
+        "Nub"
+      ]
     },
     {
       "id": "colony-babylonia",
@@ -2945,7 +3421,10 @@
         291.98
       ],
       "hasRule": false,
-      "cardId": "Bbl"
+      "cardId": "Bbl",
+      "cardIds": [
+        "Bbl"
+      ]
     },
     {
       "id": "colony-gaul",
@@ -2961,7 +3440,10 @@
         302.58
       ],
       "hasRule": false,
-      "cardId": "Gal"
+      "cardId": "Gal",
+      "cardIds": [
+        "Gal"
+      ]
     },
     {
       "id": "colony-armenia",
@@ -2977,7 +3459,10 @@
         313.08
       ],
       "hasRule": false,
-      "cardId": "Arm"
+      "cardId": "Arm",
+      "cardIds": [
+        "Arm"
+      ]
     },
     {
       "id": "colony-hindu-kush",
@@ -2993,7 +3478,10 @@
         323.68
       ],
       "hasRule": false,
-      "cardId": "HdKs"
+      "cardId": "HdKs",
+      "cardIds": [
+        "HdKs"
+      ]
     },
     {
       "id": "colony-greenland",
@@ -3009,7 +3497,10 @@
         358.88
       ],
       "hasRule": false,
-      "cardId": "Grl"
+      "cardId": "Grl",
+      "cardIds": [
+        "Grl"
+      ]
     },
     {
       "id": "colony-lombardy",
@@ -3025,7 +3516,10 @@
         369.38
       ],
       "hasRule": false,
-      "cardId": "Lbd"
+      "cardId": "Lbd",
+      "cardIds": [
+        "Lbd"
+      ]
     },
     {
       "id": "colony-sicily",
@@ -3041,7 +3535,10 @@
         379.98
       ],
       "hasRule": false,
-      "cardId": "Scl"
+      "cardId": "Scl",
+      "cardIds": [
+        "Scl"
+      ]
     },
     {
       "id": "colony-tibet",
@@ -3057,7 +3554,10 @@
         390.48
       ],
       "hasRule": false,
-      "cardId": "Tbt"
+      "cardId": "Tbt",
+      "cardIds": [
+        "Tbt"
+      ]
     },
     {
       "id": "colony-england",
@@ -3073,7 +3573,10 @@
         401.08
       ],
       "hasRule": false,
-      "cardId": "Eng"
+      "cardId": "Eng",
+      "cardIds": [
+        "Eng"
+      ]
     },
     {
       "id": "colony-prussia",
@@ -3089,7 +3592,10 @@
         411.58
       ],
       "hasRule": false,
-      "cardId": "Prs"
+      "cardId": "Prs",
+      "cardIds": [
+        "Prs"
+      ]
     },
     {
       "id": "colony-crusader-states",
@@ -3105,7 +3611,10 @@
         422.18
       ],
       "hasRule": false,
-      "cardId": "CsSt"
+      "cardId": "CsSt",
+      "cardIds": [
+        "CsSt"
+      ]
     },
     {
       "id": "colony-saharan-trade",
@@ -3121,7 +3630,10 @@
         432.68
       ],
       "hasRule": false,
-      "cardId": "ShTd"
+      "cardId": "ShTd",
+      "cardIds": [
+        "ShTd"
+      ]
     },
     {
       "id": "colony-aztec-empire",
@@ -3137,7 +3649,10 @@
         467.88
       ],
       "hasRule": false,
-      "cardId": "AzEp"
+      "cardId": "AzEp",
+      "cardIds": [
+        "AzEp"
+      ]
     },
     {
       "id": "colony-incan-empire",
@@ -3153,7 +3668,10 @@
         478.48
       ],
       "hasRule": false,
-      "cardId": "IcEp"
+      "cardId": "IcEp",
+      "cardIds": [
+        "IcEp"
+      ]
     },
     {
       "id": "colony-quebec",
@@ -3169,7 +3687,10 @@
         488.98
       ],
       "hasRule": false,
-      "cardId": "Qbc"
+      "cardId": "Qbc",
+      "cardIds": [
+        "Qbc"
+      ]
     },
     {
       "id": "colony-south-africa",
@@ -3185,7 +3706,10 @@
         499.58
       ],
       "hasRule": false,
-      "cardId": "StAf"
+      "cardId": "StAf",
+      "cardIds": [
+        "StAf"
+      ]
     },
     {
       "id": "colony-brazil",
@@ -3201,7 +3725,10 @@
         510.08
       ],
       "hasRule": false,
-      "cardId": "Brz"
+      "cardId": "Brz",
+      "cardIds": [
+        "Brz"
+      ]
     },
     {
       "id": "colony-phillipines",
@@ -3217,7 +3744,10 @@
         520.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Plp",
+      "cardIds": [
+        "Plp"
+      ]
     },
     {
       "id": "colony-the-caribbean",
@@ -3233,7 +3763,10 @@
         531.18
       ],
       "hasRule": false,
-      "cardId": "TCrb"
+      "cardId": "TCrb",
+      "cardIds": [
+        "TCrb"
+      ]
     },
     {
       "id": "colony-virginia",
@@ -3249,7 +3782,10 @@
         541.78
       ],
       "hasRule": false,
-      "cardId": "Vgn"
+      "cardId": "Vgn",
+      "cardIds": [
+        "Vgn"
+      ]
     },
     {
       "id": "colony-congo",
@@ -3265,7 +3801,10 @@
         576.98
       ],
       "hasRule": false,
-      "cardId": "Con"
+      "cardId": "Con",
+      "cardIds": [
+        "Con"
+      ]
     },
     {
       "id": "colony-india",
@@ -3281,7 +3820,10 @@
         587.48
       ],
       "hasRule": false,
-      "cardId": "Ind"
+      "cardId": "Ind",
+      "cardIds": [
+        "Ind"
+      ]
     },
     {
       "id": "colony-nigeria",
@@ -3297,7 +3839,10 @@
         598.08
       ],
       "hasRule": false,
-      "cardId": "Ngr"
+      "cardId": "Ngr",
+      "cardIds": [
+        "Ngr"
+      ]
     },
     {
       "id": "colony-ostafrika-tanganyika-africa",
@@ -3313,7 +3858,10 @@
         608.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Oak",
+      "cardIds": [
+        "Oak"
+      ]
     },
     {
       "id": "colony-orientale-in-translations-1-4",
@@ -3345,7 +3893,10 @@
         629.68
       ],
       "hasRule": false,
-      "cardId": "Agr"
+      "cardId": "Agr",
+      "cardIds": [
+        "Agr"
+      ]
     },
     {
       "id": "colony-hong-kong",
@@ -3361,7 +3912,10 @@
         640.28
       ],
       "hasRule": false,
-      "cardId": "HgKg"
+      "cardId": "HgKg",
+      "cardIds": [
+        "HgKg"
+      ]
     },
     {
       "id": "colony-australia",
@@ -3377,7 +3931,10 @@
         650.78
       ],
       "hasRule": false,
-      "cardId": "Arl"
+      "cardId": "Arl",
+      "cardIds": [
+        "Arl"
+      ]
     },
     {
       "id": "colony-libya",
@@ -3393,7 +3950,10 @@
         661.38
       ],
       "hasRule": false,
-      "cardId": "Lby"
+      "cardId": "Lby",
+      "cardIds": [
+        "Lby"
+      ]
     },
     {
       "id": "colony-grand-duchy-of-finland",
@@ -3409,7 +3969,10 @@
         671.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-grand-duchy-of-finland",
+      "cardIds": [
+        "faq-grand-duchy-of-finland"
+      ]
     },
     {
       "id": "golden-age-golden-age",
@@ -3458,7 +4021,10 @@
         168.48
       ],
       "hasRule": false,
-      "cardId": "And"
+      "cardId": "And",
+      "cardIds": [
+        "And"
+      ]
     },
     {
       "id": "golden-age-iron-working",
@@ -3474,7 +4040,10 @@
         179.08
       ],
       "hasRule": false,
-      "cardId": "IrWk"
+      "cardId": "IrWk",
+      "cardIds": [
+        "IrWk"
+      ]
     },
     {
       "id": "golden-age-map-making",
@@ -3490,7 +4059,10 @@
         189.58
       ],
       "hasRule": false,
-      "cardId": "MpMk"
+      "cardId": "MpMk",
+      "cardIds": [
+        "MpMk"
+      ]
     },
     {
       "id": "golden-age-the-bible",
@@ -3506,7 +4078,10 @@
         200.18
       ],
       "hasRule": false,
-      "cardId": "Bib"
+      "cardId": "Bib",
+      "cardIds": [
+        "Bib"
+      ]
     },
     {
       "id": "golden-age-silk",
@@ -3522,7 +4097,10 @@
         210.68
       ],
       "hasRule": false,
-      "cardId": "Slk"
+      "cardId": "Slk",
+      "cardIds": [
+        "Slk"
+      ]
     },
     {
       "id": "golden-age-the-odyssey",
@@ -3538,7 +4116,10 @@
         221.28
       ],
       "hasRule": false,
-      "cardId": "Ods"
+      "cardId": "Ods",
+      "cardIds": [
+        "Ods"
+      ]
     },
     {
       "id": "golden-age-coinage",
@@ -3554,7 +4135,10 @@
         231.78
       ],
       "hasRule": false,
-      "cardId": "Cng"
+      "cardId": "Cng",
+      "cardIds": [
+        "Cng"
+      ]
     },
     {
       "id": "golden-age-mahabharata",
@@ -3570,7 +4154,10 @@
         242.38
       ],
       "hasRule": false,
-      "cardId": "Mhb"
+      "cardId": "Mhb",
+      "cardIds": [
+        "Mhb"
+      ]
     },
     {
       "id": "golden-age-antikythera-mechanism",
@@ -3586,7 +4173,10 @@
         252.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-antikythera-mechanism",
+      "cardIds": [
+        "faq-antikythera-mechanism"
+      ]
     },
     {
       "id": "golden-age-compass",
@@ -3602,7 +4192,10 @@
         361.28
       ],
       "hasRule": false,
-      "cardId": "Cmp"
+      "cardId": "Cmp",
+      "cardIds": [
+        "Cmp"
+      ]
     },
     {
       "id": "golden-age-divina-comedia",
@@ -3618,7 +4211,10 @@
         371.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "DvCm",
+      "cardIds": [
+        "DvCm"
+      ]
     },
     {
       "id": "golden-age-heavy-plough",
@@ -3634,7 +4230,10 @@
         382.38
       ],
       "hasRule": false,
-      "cardId": "HvPl"
+      "cardId": "HvPl",
+      "cardIds": [
+        "HvPl"
+      ]
     },
     {
       "id": "golden-age-magna-carta",
@@ -3650,7 +4249,10 @@
         392.88
       ],
       "hasRule": false,
-      "cardId": "MnCt"
+      "cardId": "MnCt",
+      "cardIds": [
+        "MnCt"
+      ]
     },
     {
       "id": "golden-age-spectacles",
@@ -3666,7 +4268,10 @@
         403.48
       ],
       "hasRule": false,
-      "cardId": "Stc"
+      "cardId": "Stc",
+      "cardIds": [
+        "Stc"
+      ]
     },
     {
       "id": "golden-age-three-kingdoms",
@@ -3682,7 +4287,10 @@
         413.98
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "RTK",
+      "cardIds": [
+        "RTK"
+      ]
     },
     {
       "id": "golden-age-gunpowder",
@@ -3698,7 +4306,10 @@
         424.58
       ],
       "hasRule": false,
-      "cardId": "Gpd"
+      "cardId": "Gpd",
+      "cardIds": [
+        "Gpd"
+      ]
     },
     {
       "id": "golden-age-the-quoran",
@@ -3714,7 +4325,10 @@
         435.08
       ],
       "hasRule": false,
-      "cardId": "Qrn"
+      "cardId": "Qrn",
+      "cardIds": [
+        "Qrn"
+      ]
     },
     {
       "id": "golden-age-arabian-nights",
@@ -3730,7 +4344,10 @@
         445.68
       ],
       "hasRule": true,
-      "cardId": "ArNt"
+      "cardId": "ArNt",
+      "cardIds": [
+        "ArNt"
+      ]
     },
     {
       "id": "golden-age-clocks",
@@ -3746,7 +4363,10 @@
         564.48
       ],
       "hasRule": false,
-      "cardId": "Clk"
+      "cardId": "Clk",
+      "cardIds": [
+        "Clk"
+      ]
     },
     {
       "id": "golden-age-gutenberg-bible",
@@ -3762,7 +4382,10 @@
         574.98
       ],
       "hasRule": false,
-      "cardId": "GbBb"
+      "cardId": "GbBb",
+      "cardIds": [
+        "GbBb"
+      ]
     },
     {
       "id": "golden-age-microscope",
@@ -3778,7 +4401,10 @@
         585.58
       ],
       "hasRule": false,
-      "cardId": "Mcs"
+      "cardId": "Mcs",
+      "cardIds": [
+        "Mcs"
+      ]
     },
     {
       "id": "golden-age-romeo-and-juliet",
@@ -3794,7 +4420,10 @@
         596.08
       ],
       "hasRule": false,
-      "cardId": "RmJl"
+      "cardId": "RmJl",
+      "cardIds": [
+        "RmJl"
+      ]
     },
     {
       "id": "golden-age-don-quixote",
@@ -3810,7 +4439,10 @@
         606.68
       ],
       "hasRule": false,
-      "cardId": "DnQx"
+      "cardId": "DnQx",
+      "cardIds": [
+        "DnQx"
+      ]
     },
     {
       "id": "golden-age-telescope",
@@ -3826,7 +4458,10 @@
         617.18
       ],
       "hasRule": false,
-      "cardId": "Tls"
+      "cardId": "Tls",
+      "cardIds": [
+        "Tls"
+      ]
     },
     {
       "id": "golden-age-principia",
@@ -3842,7 +4477,10 @@
         627.78
       ],
       "hasRule": false,
-      "cardId": "Pcp"
+      "cardId": "Pcp",
+      "cardIds": [
+        "Pcp"
+      ]
     },
     {
       "id": "golden-age-thermometer",
@@ -3858,7 +4496,10 @@
         638.28
       ],
       "hasRule": false,
-      "cardId": "Tmm"
+      "cardId": "Tmm",
+      "cardIds": [
+        "Tmm"
+      ]
     },
     {
       "id": "golden-age-le-vite",
@@ -3874,7 +4515,10 @@
         648.88
       ],
       "hasRule": true,
-      "cardId": "LeVt"
+      "cardId": "LeVt",
+      "cardIds": [
+        "LeVt"
+      ]
     },
     {
       "id": "golden-age-das-kapital",
@@ -3890,7 +4534,10 @@
         725.88
       ],
       "hasRule": false,
-      "cardId": "DsKp"
+      "cardId": "DsKp",
+      "cardIds": [
+        "DsKp"
+      ]
     },
     {
       "id": "golden-age-dynamite",
@@ -3906,7 +4553,10 @@
         736.38
       ],
       "hasRule": false,
-      "cardId": "Dnm"
+      "cardId": "Dnm",
+      "cardIds": [
+        "Dnm"
+      ]
     },
     {
       "id": "golden-age-origin-of-species",
@@ -3922,7 +4572,10 @@
         746.98
       ],
       "hasRule": false,
-      "cardId": "OgSc"
+      "cardId": "OgSc",
+      "cardIds": [
+        "OgSc"
+      ]
     },
     {
       "id": "golden-age-vaccine",
@@ -3938,7 +4591,10 @@
         757.48
       ],
       "hasRule": false,
-      "cardId": "Vcn"
+      "cardId": "Vcn",
+      "cardIds": [
+        "Vcn"
+      ]
     },
     {
       "id": "golden-age-candide",
@@ -3954,7 +4610,10 @@
         768.08
       ],
       "hasRule": false,
-      "cardId": "Cdd"
+      "cardId": "Cdd",
+      "cardIds": [
+        "Cdd"
+      ]
     },
     {
       "id": "golden-age-electricity",
@@ -3970,7 +4629,10 @@
         44.18
       ],
       "hasRule": false,
-      "cardId": "Etc"
+      "cardId": "Etc",
+      "cardIds": [
+        "Etc"
+      ]
     },
     {
       "id": "golden-age-kalevala",
@@ -3986,7 +4648,10 @@
         54.68
       ],
       "hasRule": false,
-      "cardId": "Klv"
+      "cardId": "Klv",
+      "cardIds": [
+        "Klv"
+      ]
     },
     {
       "id": "golden-age-spinning-jenny",
@@ -4002,7 +4667,10 @@
         65.28
       ],
       "hasRule": false,
-      "cardId": "SnJn"
+      "cardId": "SnJn",
+      "cardIds": [
+        "SnJn"
+      ]
     },
     {
       "id": "golden-age-uncle-tom-s-cabin",
@@ -4018,7 +4686,10 @@
         75.78
       ],
       "hasRule": true,
-      "cardId": "UTC"
+      "cardId": "UTC",
+      "cardIds": [
+        "UTC"
+      ]
     },
     {
       "id": "military-military",
@@ -4050,7 +4721,15 @@
         238.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": null,
+      "cardIds": [
+        "Ar_Axm",
+        "C_Axm",
+        "Et_Axm",
+        "J_Axm",
+        "Pl_Axm",
+        "Ps_Axm"
+      ]
     },
     {
       "id": "military-chariot",
@@ -4066,7 +4745,10 @@
         273.58
       ],
       "hasRule": false,
-      "cardId": "Crt"
+      "cardId": "Crt",
+      "cardIds": [
+        "Crt"
+      ]
     },
     {
       "id": "military-hoplite",
@@ -4082,7 +4764,10 @@
         284.08
       ],
       "hasRule": false,
-      "cardId": "Hpl"
+      "cardId": "Hpl",
+      "cardIds": [
+        "Hpl"
+      ]
     },
     {
       "id": "military-immortal",
@@ -4098,7 +4783,10 @@
         294.68
       ],
       "hasRule": false,
-      "cardId": "Imt"
+      "cardId": "Imt",
+      "cardIds": [
+        "Imt"
+      ]
     },
     {
       "id": "military-legionary",
@@ -4114,7 +4802,10 @@
         305.18
       ],
       "hasRule": false,
-      "cardId": "Lgn"
+      "cardId": "Lgn",
+      "cardIds": [
+        "Lgn"
+      ]
     },
     {
       "id": "military-archer",
@@ -4130,7 +4821,10 @@
         315.78
       ],
       "hasRule": false,
-      "cardId": "Arc"
+      "cardId": "Arc",
+      "cardIds": [
+        "Arc"
+      ]
     },
     {
       "id": "military-trireme",
@@ -4146,7 +4840,10 @@
         326.28
       ],
       "hasRule": false,
-      "cardId": "Trm"
+      "cardId": "Trm",
+      "cardIds": [
+        "Trm"
+      ]
     },
     {
       "id": "military-elephant",
@@ -4162,7 +4859,10 @@
         336.88
       ],
       "hasRule": false,
-      "cardId": "Elp"
+      "cardId": "Elp",
+      "cardIds": [
+        "Elp"
+      ]
     },
     {
       "id": "military-phalanx",
@@ -4178,7 +4878,10 @@
         347.38
       ],
       "hasRule": false,
-      "cardId": "Plx"
+      "cardId": "Plx",
+      "cardIds": [
+        "Plx"
+      ]
     },
     {
       "id": "military-praetorian-guard",
@@ -4194,7 +4897,10 @@
         357.98
       ],
       "hasRule": false,
-      "cardId": "PtGd"
+      "cardId": "PtGd",
+      "cardIds": [
+        "PtGd"
+      ]
     },
     {
       "id": "military-camel-archer",
@@ -4210,7 +4916,10 @@
         393.18
       ],
       "hasRule": false,
-      "cardId": "CmAr"
+      "cardId": "CmAr",
+      "cardIds": [
+        "CmAr"
+      ]
     },
     {
       "id": "military-cho-ko-nu",
@@ -4226,7 +4935,10 @@
         403.68
       ],
       "hasRule": false,
-      "cardId": "CKN"
+      "cardId": "CKN",
+      "cardIds": [
+        "CKN"
+      ]
     },
     {
       "id": "military-horse-archer",
@@ -4242,7 +4954,10 @@
         414.28
       ],
       "hasRule": false,
-      "cardId": "HsAr"
+      "cardId": "HsAr",
+      "cardIds": [
+        "HsAr"
+      ]
     },
     {
       "id": "military-longboats",
@@ -4258,7 +4973,10 @@
         424.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Lsp",
+      "cardIds": [
+        "Lsp"
+      ]
     },
     {
       "id": "military-knight",
@@ -4274,7 +4992,10 @@
         435.38
       ],
       "hasRule": false,
-      "cardId": "Knt"
+      "cardId": "Knt",
+      "cardIds": [
+        "Knt"
+      ]
     },
     {
       "id": "military-longbowman",
@@ -4290,7 +5011,10 @@
         445.88
       ],
       "hasRule": false,
-      "cardId": "Lbm"
+      "cardId": "Lbm",
+      "cardIds": [
+        "Lbm"
+      ]
     },
     {
       "id": "military-cataphract",
@@ -4306,7 +5030,10 @@
         456.48
       ],
       "hasRule": false,
-      "cardId": "Ctp"
+      "cardId": "Ctp",
+      "cardIds": [
+        "Ctp"
+      ]
     },
     {
       "id": "military-greek-fire-galley",
@@ -4322,7 +5049,10 @@
         466.98
       ],
       "hasRule": false,
-      "cardId": "GFG"
+      "cardId": "GFG",
+      "cardIds": [
+        "GFG"
+      ]
     },
     {
       "id": "military-assassin",
@@ -4338,7 +5068,10 @@
         477.58
       ],
       "hasRule": true,
-      "cardId": "Ass"
+      "cardId": "Ass",
+      "cardIds": [
+        "Ass"
+      ]
     },
     {
       "id": "military-conquistador",
@@ -4354,7 +5087,10 @@
         596.38
       ],
       "hasRule": false,
-      "cardId": "Cqd"
+      "cardId": "Cqd",
+      "cardIds": [
+        "Cqd"
+      ]
     },
     {
       "id": "military-jaguar-warrior",
@@ -4370,7 +5106,10 @@
         606.88
       ],
       "hasRule": false,
-      "cardId": "JgWr"
+      "cardId": "JgWr",
+      "cardIds": [
+        "JgWr"
+      ]
     },
     {
       "id": "military-redcoat",
@@ -4386,7 +5125,10 @@
         617.48
       ],
       "hasRule": false,
-      "cardId": "Rdc"
+      "cardId": "Rdc",
+      "cardIds": [
+        "Rdc"
+      ]
     },
     {
       "id": "military-samurai",
@@ -4402,7 +5144,10 @@
         627.98
       ],
       "hasRule": false,
-      "cardId": "Smr"
+      "cardId": "Smr",
+      "cardIds": [
+        "Smr"
+      ]
     },
     {
       "id": "military-frigate",
@@ -4418,7 +5163,10 @@
         638.58
       ],
       "hasRule": false,
-      "cardId": "Fgt"
+      "cardId": "Fgt",
+      "cardIds": [
+        "Fgt"
+      ]
     },
     {
       "id": "military-ranger",
@@ -4434,7 +5182,10 @@
         649.08
       ],
       "hasRule": false,
-      "cardId": "Rng"
+      "cardId": "Rng",
+      "cardIds": [
+        "Rng"
+      ]
     },
     {
       "id": "military-hakkapeliitta",
@@ -4450,7 +5201,10 @@
         659.68
       ],
       "hasRule": false,
-      "cardId": "Hkp"
+      "cardId": "Hkp",
+      "cardIds": [
+        "Hkp"
+      ]
     },
     {
       "id": "military-mercenary",
@@ -4466,7 +5220,10 @@
         670.18
       ],
       "hasRule": false,
-      "cardId": "Mcn"
+      "cardId": "Mcn",
+      "cardIds": [
+        "Mcn"
+      ]
     },
     {
       "id": "military-privateer",
@@ -4482,7 +5239,10 @@
         680.78
       ],
       "hasRule": false,
-      "cardId": "Pvt"
+      "cardId": "Pvt",
+      "cardIds": [
+        "Pvt"
+      ]
     },
     {
       "id": "military-cavalry",
@@ -4498,7 +5258,10 @@
         715.98
       ],
       "hasRule": false,
-      "cardId": "Cvr"
+      "cardId": "Cvr",
+      "cardIds": [
+        "Cvr"
+      ]
     },
     {
       "id": "military-cossack",
@@ -4514,7 +5277,10 @@
         726.48
       ],
       "hasRule": false,
-      "cardId": "Csk"
+      "cardId": "Csk",
+      "cardIds": [
+        "Csk"
+      ]
     },
     {
       "id": "military-hussar",
@@ -4530,7 +5296,10 @@
         737.08
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "faq-hussar",
+      "cardIds": [
+        "faq-hussar"
+      ]
     },
     {
       "id": "military-riflfleman",
@@ -4546,7 +5315,10 @@
         747.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Rfm",
+      "cardIds": [
+        "Rfm"
+      ]
     },
     {
       "id": "military-conscript",
@@ -4562,7 +5334,10 @@
         758.18
       ],
       "hasRule": false,
-      "cardId": "Cns"
+      "cardId": "Cns",
+      "cardIds": [
+        "Cns"
+      ]
     },
     {
       "id": "military-submarine",
@@ -4578,7 +5353,10 @@
         768.68
       ],
       "hasRule": false,
-      "cardId": "Sub"
+      "cardId": "Sub",
+      "cardIds": [
+        "Sub"
+      ]
     },
     {
       "id": "military-dreadnought",
@@ -4594,7 +5372,10 @@
         44.18
       ],
       "hasRule": false,
-      "cardId": "Drn"
+      "cardId": "Drn",
+      "cardIds": [
+        "Drn"
+      ]
     },
     {
       "id": "military-machine-gunner",
@@ -4610,7 +5391,10 @@
         54.68
       ],
       "hasRule": false,
-      "cardId": "McGn"
+      "cardId": "McGn",
+      "cardIds": [
+        "McGn"
+      ]
     },
     {
       "id": "military-boxers",
@@ -4626,7 +5410,10 @@
         65.28
       ],
       "hasRule": false,
-      "cardId": "Bxr"
+      "cardId": "Bxr",
+      "cardIds": [
+        "Bxr"
+      ]
     },
     {
       "id": "war-war",
@@ -4658,7 +5445,10 @@
         133.78
       ],
       "hasRule": false,
-      "cardId": "HncI"
+      "cardId": "HncI",
+      "cardIds": [
+        "HncI"
+      ]
     },
     {
       "id": "war-pelopponesian-war",
@@ -4674,7 +5464,10 @@
         144.28
       ],
       "hasRule": false,
-      "cardId": "PlpW"
+      "cardId": "PlpW",
+      "cardIds": [
+        "PlpW"
+      ]
     },
     {
       "id": "war-warring-states",
@@ -4690,7 +5483,10 @@
         154.88
       ],
       "hasRule": false,
-      "cardId": "WSts"
+      "cardId": "WSts",
+      "cardIds": [
+        "WSts"
+      ]
     },
     {
       "id": "war-wars-of-alexander",
@@ -4706,7 +5502,10 @@
         165.38
       ],
       "hasRule": false,
-      "cardId": "WAlx"
+      "cardId": "WAlx",
+      "cardIds": [
+        "WAlx"
+      ]
     },
     {
       "id": "war-parthian-wars",
@@ -4722,7 +5521,10 @@
         175.98
       ],
       "hasRule": false,
-      "cardId": "PrtW"
+      "cardId": "PrtW",
+      "cardIds": [
+        "PrtW"
+      ]
     },
     {
       "id": "war-three-kingdoms",
@@ -4738,7 +5540,10 @@
         186.48
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "ThKd",
+      "cardIds": [
+        "ThKd"
+      ]
     },
     {
       "id": "war-hyksos-invasion",
@@ -4754,7 +5559,10 @@
         197.08
       ],
       "hasRule": false,
-      "cardId": "HksI"
+      "cardId": "HksI",
+      "cardIds": [
+        "HksI"
+      ]
     },
     {
       "id": "war-punic-wars",
@@ -4770,7 +5578,10 @@
         207.58
       ],
       "hasRule": false,
-      "cardId": "PncW"
+      "cardId": "PncW",
+      "cardIds": [
+        "PncW"
+      ]
     },
     {
       "id": "war-byzantine-arab-war",
@@ -4786,7 +5597,10 @@
         242.78
       ],
       "hasRule": false,
-      "cardId": "BAW"
+      "cardId": "BAW",
+      "cardIds": [
+        "BAW"
+      ]
     },
     {
       "id": "war-first-crusade",
@@ -4802,7 +5616,10 @@
         253.38
       ],
       "hasRule": false,
-      "cardId": "FstC"
+      "cardId": "FstC",
+      "cardIds": [
+        "FstC"
+      ]
     },
     {
       "id": "war-hundred-years-war",
@@ -4818,7 +5635,10 @@
         263.88
       ],
       "hasRule": false,
-      "cardId": "HYW"
+      "cardId": "HYW",
+      "cardIds": [
+        "HYW"
+      ]
     },
     {
       "id": "war-reconquista",
@@ -4834,7 +5654,10 @@
         274.48
       ],
       "hasRule": false,
-      "cardId": "Rcq"
+      "cardId": "Rcq",
+      "cardIds": [
+        "Rcq"
+      ]
     },
     {
       "id": "war-viking-raids",
@@ -4850,7 +5673,10 @@
         284.98
       ],
       "hasRule": false,
-      "cardId": "VkgR"
+      "cardId": "VkgR",
+      "cardIds": [
+        "VkgR"
+      ]
     },
     {
       "id": "war-war-of-the-roses",
@@ -4866,7 +5692,10 @@
         295.58
       ],
       "hasRule": false,
-      "cardId": "WRss"
+      "cardId": "WRss",
+      "cardIds": [
+        "WRss"
+      ]
     },
     {
       "id": "war-mongol-invasions",
@@ -4882,7 +5711,10 @@
         306.08
       ],
       "hasRule": false,
-      "cardId": "MngI"
+      "cardId": "MngI",
+      "cardIds": [
+        "MngI"
+      ]
     },
     {
       "id": "war-vandalic-war",
@@ -4898,7 +5730,10 @@
         316.68
       ],
       "hasRule": false,
-      "cardId": "VdlW"
+      "cardId": "VdlW",
+      "cardIds": [
+        "VdlW"
+      ]
     },
     {
       "id": "war-great-northern-war",
@@ -4914,7 +5749,10 @@
         351.88
       ],
       "hasRule": false,
-      "cardId": "GNW"
+      "cardId": "GNW",
+      "cardIds": [
+        "GNW"
+      ]
     },
     {
       "id": "war-imjin-war",
@@ -4930,7 +5768,10 @@
         362.38
       ],
       "hasRule": false,
-      "cardId": "ImjW"
+      "cardId": "ImjW",
+      "cardIds": [
+        "ImjW"
+      ]
     },
     {
       "id": "war-mughal-invasion",
@@ -4946,7 +5787,10 @@
         372.98
       ],
       "hasRule": false,
-      "cardId": "MghI"
+      "cardId": "MghI",
+      "cardIds": [
+        "MghI"
+      ]
     },
     {
       "id": "war-war-of-jenkins-ear",
@@ -4962,7 +5806,10 @@
         383.48
       ],
       "hasRule": false,
-      "cardId": "WJE"
+      "cardId": "WJE",
+      "cardIds": [
+        "WJE"
+      ]
     },
     {
       "id": "war-cortes-expedition",
@@ -4978,7 +5825,10 @@
         394.08
       ],
       "hasRule": false,
-      "cardId": "CtEx"
+      "cardId": "CtEx",
+      "cardIds": [
+        "CtEx"
+      ]
     },
     {
       "id": "war-dutch-liberation-war",
@@ -4994,7 +5844,10 @@
         404.58
       ],
       "hasRule": false,
-      "cardId": "DLW"
+      "cardId": "DLW",
+      "cardIds": [
+        "DLW"
+      ]
     },
     {
       "id": "war-thirty-years-war",
@@ -5010,7 +5863,10 @@
         415.18
       ],
       "hasRule": false,
-      "cardId": "TYW"
+      "cardId": "TYW",
+      "cardIds": [
+        "TYW"
+      ]
     },
     {
       "id": "war-war-of-cyprus",
@@ -5026,7 +5882,10 @@
         425.68
       ],
       "hasRule": false,
-      "cardId": "WCpr"
+      "cardId": "WCpr",
+      "cardIds": [
+        "WCpr"
+      ]
     },
     {
       "id": "war-balkan-wars",
@@ -5042,7 +5901,10 @@
         460.88
       ],
       "hasRule": false,
-      "cardId": "BknW"
+      "cardId": "BknW",
+      "cardIds": [
+        "BknW"
+      ]
     },
     {
       "id": "war-franco-prussian-war",
@@ -5058,7 +5920,10 @@
         471.48
       ],
       "hasRule": false,
-      "cardId": "FPW"
+      "cardId": "FPW",
+      "cardIds": [
+        "FPW"
+      ]
     },
     {
       "id": "war-opium-war",
@@ -5074,7 +5939,10 @@
         481.98
       ],
       "hasRule": false,
-      "cardId": "OpmW"
+      "cardId": "OpmW",
+      "cardIds": [
+        "OpmW"
+      ]
     },
     {
       "id": "war-second-boer-war",
@@ -5090,7 +5958,10 @@
         492.58
       ],
       "hasRule": false,
-      "cardId": "SBW"
+      "cardId": "SBW",
+      "cardIds": [
+        "SBW"
+      ]
     },
     {
       "id": "war-anglo-afghan-war",
@@ -5106,7 +5977,10 @@
         503.08
       ],
       "hasRule": false,
-      "cardId": "AAW"
+      "cardId": "AAW",
+      "cardIds": [
+        "AAW"
+      ]
     },
     {
       "id": "war-napoleonic-war",
@@ -5122,7 +5996,10 @@
         513.68
       ],
       "hasRule": false,
-      "cardId": "NplW"
+      "cardId": "NplW",
+      "cardIds": [
+        "NplW"
+      ]
     },
     {
       "id": "war-american-civil-war",
@@ -5138,7 +6015,10 @@
         524.18
       ],
       "hasRule": false,
-      "cardId": "ACW"
+      "cardId": "ACW",
+      "cardIds": [
+        "ACW"
+      ]
     },
     {
       "id": "war-crimean-war",
@@ -5154,7 +6034,10 @@
         534.78
       ],
       "hasRule": false,
-      "cardId": "CmnW"
+      "cardId": "CmnW",
+      "cardIds": [
+        "CmnW"
+      ]
     },
     {
       "id": "wonder-wonder",
@@ -5186,7 +6069,10 @@
         692.48
       ],
       "hasRule": true,
-      "cardId": "Cls"
+      "cardId": "Cls",
+      "cardIds": [
+        "Cls"
+      ]
     },
     {
       "id": "wonder-hanging-gardens",
@@ -5202,7 +6088,10 @@
         744.88
       ],
       "hasRule": false,
-      "cardId": "HgGd"
+      "cardId": "HgGd",
+      "cardIds": [
+        "HgGd"
+      ]
     },
     {
       "id": "wonder-pyramids",
@@ -5218,7 +6107,10 @@
         755.38
       ],
       "hasRule": false,
-      "cardId": "Prm"
+      "cardId": "Prm",
+      "cardIds": [
+        "Prm"
+      ]
     },
     {
       "id": "wonder-stonehenge",
@@ -5234,7 +6126,10 @@
         765.98
       ],
       "hasRule": false,
-      "cardId": "Sth"
+      "cardId": "Sth",
+      "cardIds": [
+        "Sth"
+      ]
     },
     {
       "id": "wonder-great-lighthouse",
@@ -5250,7 +6145,10 @@
         44.18
       ],
       "hasRule": true,
-      "cardId": "GrLh"
+      "cardId": "GrLh",
+      "cardIds": [
+        "GrLh"
+      ]
     },
     {
       "id": "wonder-sphinx",
@@ -5266,7 +6164,10 @@
         96.58
       ],
       "hasRule": true,
-      "cardId": "Spx"
+      "cardId": "Spx",
+      "cardIds": [
+        "Spx"
+      ]
     },
     {
       "id": "wonder-the-oracle",
@@ -5282,7 +6183,10 @@
         128.08
       ],
       "hasRule": false,
-      "cardId": "Orc"
+      "cardId": "Orc",
+      "cardIds": [
+        "Orc"
+      ]
     },
     {
       "id": "wonder-solomon-s-temple",
@@ -5298,7 +6202,10 @@
         138.58
       ],
       "hasRule": true,
-      "cardId": "SmTp"
+      "cardId": "SmTp",
+      "cardIds": [
+        "SmTp"
+      ]
     },
     {
       "id": "wonder-terracotta-army",
@@ -5314,7 +6221,10 @@
         211.88
       ],
       "hasRule": true,
-      "cardId": "TcAm"
+      "cardId": "TcAm",
+      "cardIds": [
+        "TcAm"
+      ]
     },
     {
       "id": "wonder-petra",
@@ -5330,7 +6240,10 @@
         253.78
       ],
       "hasRule": true,
-      "cardId": "Ptr"
+      "cardId": "Ptr",
+      "cardIds": [
+        "Ptr"
+      ]
     },
     {
       "id": "wonder-great-library",
@@ -5346,7 +6259,10 @@
         285.18
       ],
       "hasRule": true,
-      "cardId": "GrLr"
+      "cardId": "GrLr",
+      "cardIds": [
+        "GrLr"
+      ]
     },
     {
       "id": "wonder-alhambra",
@@ -5362,7 +6278,10 @@
         362.18
       ],
       "hasRule": true,
-      "cardId": "Ahb"
+      "cardId": "Ahb",
+      "cardIds": [
+        "Ahb"
+      ]
     },
     {
       "id": "wonder-notre-dame",
@@ -5378,7 +6297,10 @@
         404.08
       ],
       "hasRule": true,
-      "cardId": "NtDm"
+      "cardId": "NtDm",
+      "cardIds": [
+        "NtDm"
+      ]
     },
     {
       "id": "wonder-porcelain-tower",
@@ -5394,7 +6316,10 @@
         414.68
       ],
       "hasRule": true,
-      "cardId": "PcTw"
+      "cardId": "PcTw",
+      "cardIds": [
+        "PcTw"
+      ]
     },
     {
       "id": "wonder-sankore-university",
@@ -5410,7 +6335,10 @@
         519.28
       ],
       "hasRule": false,
-      "cardId": "SkUn"
+      "cardId": "SkUn",
+      "cardIds": [
+        "SkUn"
+      ]
     },
     {
       "id": "wonder-angkor-wat",
@@ -5426,7 +6354,10 @@
         529.78
       ],
       "hasRule": true,
-      "cardId": "AkWt"
+      "cardId": "AkWt",
+      "cardIds": [
+        "AkWt"
+      ]
     },
     {
       "id": "wonder-chichen-itza",
@@ -5442,7 +6373,10 @@
         540.38
       ],
       "hasRule": true,
-      "cardId": "CcIz"
+      "cardId": "CcIz",
+      "cardIds": [
+        "CcIz"
+      ]
     },
     {
       "id": "wonder-moai-statues",
@@ -5458,7 +6392,10 @@
         582.28
       ],
       "hasRule": false,
-      "cardId": "MoSt"
+      "cardId": "MoSt",
+      "cardIds": [
+        "MoSt"
+      ]
     },
     {
       "id": "wonder-krak-des-chevaliers",
@@ -5474,7 +6411,10 @@
         592.78
       ],
       "hasRule": false,
-      "cardId": "KrCv"
+      "cardId": "KrCv",
+      "cardIds": [
+        "KrCv"
+      ]
     },
     {
       "id": "wonder-great-wall",
@@ -5490,7 +6430,10 @@
         603.38
       ],
       "hasRule": true,
-      "cardId": "GrWl"
+      "cardId": "GrWl",
+      "cardIds": [
+        "GrWl"
+      ]
     },
     {
       "id": "wonder-piazza-san-marco",
@@ -5506,7 +6449,10 @@
         655.68
       ],
       "hasRule": true,
-      "cardId": "PSM"
+      "cardId": "PSM",
+      "cardIds": [
+        "PSM"
+      ]
     },
     {
       "id": "wonder-hagia-sophia",
@@ -5522,7 +6468,10 @@
         687.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-hagia-sophia",
+      "cardIds": [
+        "faq-hagia-sophia"
+      ]
     },
     {
       "id": "wonder-shwedagon-pagoda",
@@ -5538,7 +6487,10 @@
         708.18
       ],
       "hasRule": true,
-      "cardId": "SwPg"
+      "cardId": "SwPg",
+      "cardIds": [
+        "SwPg"
+      ]
     },
     {
       "id": "wonder-machu-picchu",
@@ -5554,7 +6506,10 @@
         110.58
       ],
       "hasRule": false,
-      "cardId": "McPc"
+      "cardId": "McPc",
+      "cardIds": [
+        "McPc"
+      ]
     },
     {
       "id": "wonder-sistine-chapel",
@@ -5570,7 +6525,10 @@
         121.18
       ],
       "hasRule": true,
-      "cardId": "StCp"
+      "cardId": "StCp",
+      "cardIds": [
+        "StCp"
+      ]
     },
     {
       "id": "wonder-taj-mahal",
@@ -5586,7 +6544,10 @@
         173.48
       ],
       "hasRule": false,
-      "cardId": "TjMh"
+      "cardId": "TjMh",
+      "cardIds": [
+        "TjMh"
+      ]
     },
     {
       "id": "wonder-versailles",
@@ -5602,7 +6563,10 @@
         184.08
       ],
       "hasRule": true,
-      "cardId": "Vrs"
+      "cardId": "Vrs",
+      "cardIds": [
+        "Vrs"
+      ]
     },
     {
       "id": "wonder-potala-palace",
@@ -5618,7 +6582,10 @@
         319.98
       ],
       "hasRule": true,
-      "cardId": "PtPl"
+      "cardId": "PtPl",
+      "cardIds": [
+        "PtPl"
+      ]
     },
     {
       "id": "wonder-royal-society",
@@ -5634,7 +6601,10 @@
         361.88
       ],
       "hasRule": true,
-      "cardId": "RySc"
+      "cardId": "RySc",
+      "cardIds": [
+        "RySc"
+      ]
     },
     {
       "id": "wonder-uraniborg",
@@ -5650,7 +6620,10 @@
         414.28
       ],
       "hasRule": true,
-      "cardId": "Unb"
+      "cardId": "Unb",
+      "cardIds": [
+        "Unb"
+      ]
     },
     {
       "id": "wonder-forbidden-palace",
@@ -5666,7 +6639,10 @@
         435.28
       ],
       "hasRule": false,
-      "cardId": "FbPl"
+      "cardId": "FbPl",
+      "cardIds": [
+        "FbPl"
+      ]
     },
     {
       "id": "wonder-himeji-castle",
@@ -5682,7 +6658,10 @@
         445.78
       ],
       "hasRule": true,
-      "cardId": "HmCs"
+      "cardId": "HmCs",
+      "cardIds": [
+        "HmCs"
+      ]
     },
     {
       "id": "wonder-red-fort",
@@ -5698,7 +6677,10 @@
         508.58
       ],
       "hasRule": true,
-      "cardId": "RdFt"
+      "cardId": "RdFt",
+      "cardIds": [
+        "RdFt"
+      ]
     },
     {
       "id": "wonder-kremlin",
@@ -5714,7 +6696,10 @@
         540.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-kremlin",
+      "cardIds": [
+        "faq-kremlin"
+      ]
     },
     {
       "id": "wonder-mechanical-turk",
@@ -5730,7 +6715,10 @@
         592.38
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "faq-mechanical-turk",
+      "cardIds": [
+        "faq-mechanical-turk"
+      ]
     },
     {
       "id": "wonder-oresund-dues",
@@ -5746,7 +6734,10 @@
         65.08
       ],
       "hasRule": true,
-      "cardId": "OsDs"
+      "cardId": "OsDs",
+      "cardIds": [
+        "OsDs"
+      ]
     },
     {
       "id": "wonder-darwin-s-voyage",
@@ -5762,7 +6753,10 @@
         142.08
       ],
       "hasRule": false,
-      "cardId": "DwVy"
+      "cardId": "DwVy",
+      "cardIds": [
+        "DwVy"
+      ]
     },
     {
       "id": "wonder-ford-motor-company",
@@ -5778,7 +6772,10 @@
         152.58
       ],
       "hasRule": false,
-      "cardId": "FMC"
+      "cardId": "FMC",
+      "cardIds": [
+        "FMC"
+      ]
     },
     {
       "id": "wonder-south-pole-expedition",
@@ -5794,7 +6791,10 @@
         163.18
       ],
       "hasRule": true,
-      "cardId": "SPE"
+      "cardId": "SPE",
+      "cardIds": [
+        "SPE"
+      ]
     },
     {
       "id": "wonder-suez-canal",
@@ -5810,7 +6810,10 @@
         215.48
       ],
       "hasRule": false,
-      "cardId": "SzCn"
+      "cardId": "SzCn",
+      "cardIds": [
+        "SzCn"
+      ]
     },
     {
       "id": "wonder-big-ben",
@@ -5826,7 +6829,10 @@
         226.08
       ],
       "hasRule": true,
-      "cardId": "BgBn"
+      "cardId": "BgBn",
+      "cardIds": [
+        "BgBn"
+      ]
     },
     {
       "id": "wonder-brandenburg-gate",
@@ -5842,7 +6848,10 @@
         257.48
       ],
       "hasRule": true,
-      "cardId": "BbGt"
+      "cardId": "BbGt",
+      "cardIds": [
+        "BbGt"
+      ]
     },
     {
       "id": "wonder-british-museum",
@@ -5858,7 +6867,10 @@
         299.38
       ],
       "hasRule": true,
-      "cardId": "BtMs"
+      "cardId": "BtMs",
+      "cardIds": [
+        "BtMs"
+      ]
     },
     {
       "id": "wonder-mit",
@@ -5874,7 +6886,10 @@
         341.28
       ],
       "hasRule": true,
-      "cardId": "MIT"
+      "cardId": "MIT",
+      "cardIds": [
+        "MIT"
+      ]
     },
     {
       "id": "wonder-statue-of-liberty",
@@ -5890,7 +6905,10 @@
         404.08
       ],
       "hasRule": true,
-      "cardId": "StLb"
+      "cardId": "StLb",
+      "cardIds": [
+        "StLb"
+      ]
     },
     {
       "id": "wonder-titanic",
@@ -5906,7 +6924,10 @@
         445.98
       ],
       "hasRule": true,
-      "cardId": "Ttn"
+      "cardId": "Ttn",
+      "cardIds": [
+        "Ttn"
+      ]
     },
     {
       "id": "wonder-wardenclyffffe-tower",
@@ -5922,7 +6943,10 @@
         540.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "WcTw",
+      "cardIds": [
+        "WcTw"
+      ]
     },
     {
       "id": "natural-wonders-natural-wonders",
@@ -5954,7 +6978,10 @@
         684.08
       ],
       "hasRule": false,
-      "cardId": "PlHc"
+      "cardId": "PlHc",
+      "cardIds": [
+        "PlHc"
+      ]
     },
     {
       "id": "natural-wonders-mount-ararat",
@@ -5970,7 +6997,10 @@
         694.68
       ],
       "hasRule": false,
-      "cardId": "MtAr"
+      "cardId": "MtAr",
+      "cardIds": [
+        "MtAr"
+      ]
     },
     {
       "id": "natural-wonders-vesuvius",
@@ -5986,7 +7016,10 @@
         705.18
       ],
       "hasRule": true,
-      "cardId": "Vsv"
+      "cardId": "Vsv",
+      "cardIds": [
+        "Vsv"
+      ]
     },
     {
       "id": "natural-wonders-mount-kailash",
@@ -6002,7 +7035,10 @@
         747.08
       ],
       "hasRule": false,
-      "cardId": "MtKl"
+      "cardId": "MtKl",
+      "cardIds": [
+        "MtKl"
+      ]
     },
     {
       "id": "natural-wonders-siwa-oasis",
@@ -6018,7 +7054,10 @@
         757.68
       ],
       "hasRule": false,
-      "cardId": "SwOs"
+      "cardId": "SwOs",
+      "cardIds": [
+        "SwOs"
+      ]
     },
     {
       "id": "natural-wonders-siberia",
@@ -6034,7 +7073,10 @@
         63.68
       ],
       "hasRule": true,
-      "cardId": "Sbr"
+      "cardId": "Sbr",
+      "cardIds": [
+        "Sbr"
+      ]
     },
     {
       "id": "natural-wonders-sahara",
@@ -6050,7 +7092,10 @@
         178.78
       ],
       "hasRule": true,
-      "cardId": "Shr"
+      "cardId": "Shr",
+      "cardIds": [
+        "Shr"
+      ]
     },
     {
       "id": "natural-wonders-aurora-borealis",
@@ -6066,7 +7111,10 @@
         220.68
       ],
       "hasRule": false,
-      "cardId": "ArBr"
+      "cardId": "ArBr",
+      "cardIds": [
+        "ArBr"
+      ]
     },
     {
       "id": "natural-wonders-grand-banks",
@@ -6082,7 +7130,10 @@
         231.18
       ],
       "hasRule": false,
-      "cardId": "GrBk"
+      "cardId": "GrBk",
+      "cardIds": [
+        "GrBk"
+      ]
     },
     {
       "id": "natural-wonders-hawaii",
@@ -6098,7 +7149,10 @@
         241.78
       ],
       "hasRule": true,
-      "cardId": "Hwi"
+      "cardId": "Hwi",
+      "cardIds": [
+        "Hwi"
+      ]
     },
     {
       "id": "natural-wonders-great-barrier-reef",
@@ -6114,7 +7168,10 @@
         318.78
       ],
       "hasRule": false,
-      "cardId": "GBR"
+      "cardId": "GBR",
+      "cardIds": [
+        "GBR"
+      ]
     },
     {
       "id": "natural-wonders-grand-canyon",
@@ -6130,7 +7187,10 @@
         329.28
       ],
       "hasRule": false,
-      "cardId": "GrCy"
+      "cardId": "GrCy",
+      "cardIds": [
+        "GrCy"
+      ]
     },
     {
       "id": "natural-wonders-great-plains",
@@ -6146,7 +7206,10 @@
         339.88
       ],
       "hasRule": false,
-      "cardId": "GrPl"
+      "cardId": "GrPl",
+      "cardIds": [
+        "GrPl"
+      ]
     },
     {
       "id": "natural-wonders-spice-islands",
@@ -6162,7 +7225,10 @@
         350.38
       ],
       "hasRule": true,
-      "cardId": "SpIl"
+      "cardId": "SpIl",
+      "cardIds": [
+        "SpIl"
+      ]
     },
     {
       "id": "natural-wonders-cape-of-good-hope",
@@ -6178,7 +7244,10 @@
         381.88
       ],
       "hasRule": false,
-      "cardId": "CGH"
+      "cardId": "CGH",
+      "cardIds": [
+        "CGH"
+      ]
     },
     {
       "id": "natural-wonders-titusville",
@@ -6194,7 +7263,10 @@
         417.08
       ],
       "hasRule": true,
-      "cardId": "Ttv"
+      "cardId": "Ttv",
+      "cardIds": [
+        "Ttv"
+      ]
     },
     {
       "id": "natural-wonders-northwest-passage",
@@ -6210,7 +7282,10 @@
         448.48
       ],
       "hasRule": false,
-      "cardId": "NwPs"
+      "cardId": "NwPs",
+      "cardIds": [
+        "NwPs"
+      ]
     },
     {
       "id": "natural-wonders-victoria-falls",
@@ -6226,7 +7301,10 @@
         459.08
       ],
       "hasRule": true,
-      "cardId": "VtFl"
+      "cardId": "VtFl",
+      "cardIds": [
+        "VtFl"
+      ]
     },
     {
       "id": "natural-wonders-uluru",
@@ -6242,7 +7320,10 @@
         490.48
       ],
       "hasRule": true,
-      "cardId": "Ulr"
+      "cardId": "Ulr",
+      "cardIds": [
+        "Ulr"
+      ]
     },
     {
       "id": "event-event",
@@ -6274,7 +7355,10 @@
         63.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "AM_CH",
+      "cardIds": [
+        "AM_CH"
+      ]
     },
     {
       "id": "event-ashokas-conversion",
@@ -6290,7 +7374,10 @@
         74.28
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "He_AC",
+      "cardIds": [
+        "He_AC"
+      ]
     },
     {
       "id": "event-assyrian-deportations",
@@ -6306,7 +7393,10 @@
         126.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "AD_JA",
+      "cardIds": [
+        "AD_JA"
+      ]
     },
     {
       "id": "event-atilla",
@@ -6322,7 +7412,10 @@
         137.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "At_ZR",
+      "cardIds": [
+        "At_ZR"
+      ]
     },
     {
       "id": "event-bread-and-games",
@@ -6338,7 +7431,10 @@
         147.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "BG_Ch",
+      "cardIds": [
+        "BG_Ch"
+      ]
     },
     {
       "id": "event-bronze-age-collapse",
@@ -6354,7 +7450,10 @@
         158.28
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SP_BAC",
+      "cardIds": [
+        "SP_BAC"
+      ]
     },
     {
       "id": "event-christianity",
@@ -6370,7 +7469,10 @@
         221.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "BG_Ch",
+      "cardIds": [
+        "BG_Ch"
+      ]
     },
     {
       "id": "event-code-of-hammurabi",
@@ -6386,7 +7488,10 @@
         242.08
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "AM_CH",
+      "cardIds": [
+        "AM_CH"
+      ]
     },
     {
       "id": "event-exodus",
@@ -6402,7 +7507,10 @@
         252.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Ri_Ex",
+      "cardIds": [
+        "Ri_Ex"
+      ]
     },
     {
       "id": "event-han-dynasty",
@@ -6418,7 +7526,10 @@
         263.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "PR_HD",
+      "cardIds": [
+        "PR_HD"
+      ]
     },
     {
       "id": "event-hellenism",
@@ -6434,7 +7545,10 @@
         294.58
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "He_AC",
+      "cardIds": [
+        "He_AC"
+      ]
     },
     {
       "id": "event-ionian-colonisation",
@@ -6450,7 +7564,10 @@
         315.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SOB_IC",
+      "cardIds": [
+        "SOB_IC"
+      ]
     },
     {
       "id": "event-jain-ascetism",
@@ -6466,7 +7583,10 @@
         326.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AD_JA",
+      "cardIds": [
+        "AD_JA"
+      ]
     },
     {
       "id": "event-olympic-games",
@@ -6482,7 +7602,10 @@
         420.28
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "QU_OG",
+      "cardIds": [
+        "QU_OG"
+      ]
     },
     {
       "id": "event-pax-romana",
@@ -6498,7 +7621,10 @@
         483.08
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "PR_HD",
+      "cardIds": [
+        "PR_HD"
+      ]
     },
     {
       "id": "event-philosophy",
@@ -6514,7 +7640,10 @@
         493.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Ta_Ph",
+      "cardIds": [
+        "Ta_Ph"
+      ]
     },
     {
       "id": "event-qin-unifcation",
@@ -6530,7 +7659,10 @@
         504.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "QU_OG",
+      "cardIds": [
+        "QU_OG"
+      ]
     },
     {
       "id": "event-spartacus-revolt",
@@ -6546,7 +7678,10 @@
         556.58
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "YTR_SR",
+      "cardIds": [
+        "YTR_SR"
+      ]
     },
     {
       "id": "event-rigveda",
@@ -6562,7 +7697,10 @@
         587.98
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "Ri_Ex",
+      "cardIds": [
+        "Ri_Ex"
+      ]
     },
     {
       "id": "event-sea-peoples",
@@ -6578,7 +7716,10 @@
         629.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SP_BAC",
+      "cardIds": [
+        "SP_BAC"
+      ]
     },
     {
       "id": "event-shang-oracle-bones",
@@ -6594,7 +7735,10 @@
         682.28
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SOB_IC",
+      "cardIds": [
+        "SOB_IC"
+      ]
     },
     {
       "id": "event-taoism",
@@ -6610,7 +7754,10 @@
         692.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Ta_Ph",
+      "cardIds": [
+        "Ta_Ph"
+      ]
     },
     {
       "id": "event-yellow-turban-rebellion",
@@ -6626,7 +7773,10 @@
         703.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "YTR_SR",
+      "cardIds": [
+        "YTR_SR"
+      ]
     },
     {
       "id": "event-zoroastrian-revival",
@@ -6642,7 +7792,10 @@
         713.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "At_ZR",
+      "cardIds": [
+        "At_ZR"
+      ]
     },
     {
       "id": "event-benedictine-rule",
@@ -6658,7 +7811,10 @@
         89.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "BR_PM",
+      "cardIds": [
+        "BR_PM"
+      ]
     },
     {
       "id": "event-black-death",
@@ -6674,7 +7830,10 @@
         100.28
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "BD_HPJ",
+      "cardIds": [
+        "BD_HPJ"
+      ]
     },
     {
       "id": "event-caste-system",
@@ -6690,7 +7849,10 @@
         173.48
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "EC_CS",
+      "cardIds": [
+        "EC_CS"
+      ]
     },
     {
       "id": "event-chanson-de-roland",
@@ -6706,7 +7868,10 @@
         184.08
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CR_ZR",
+      "cardIds": [
+        "CR_ZR"
+      ]
     },
     {
       "id": "event-council-of-clermont",
@@ -6722,7 +7887,10 @@
         194.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "PG_CC",
+      "cardIds": [
+        "PG_CC"
+      ]
     },
     {
       "id": "event-ecological-collapse",
@@ -6738,7 +7906,10 @@
         205.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "EC_CS",
+      "cardIds": [
+        "EC_CS"
+      ]
     },
     {
       "id": "event-feudal-dues",
@@ -6754,7 +7925,10 @@
         320.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "FD_HM",
+      "cardIds": [
+        "FD_HM"
+      ]
     },
     {
       "id": "event-fourth-crusade",
@@ -6770,7 +7944,10 @@
         351.68
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "FC_SR",
+      "cardIds": [
+        "FC_SR"
+      ]
     },
     {
       "id": "event-hajj-from-mali",
@@ -6786,7 +7963,10 @@
         518.98
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "FD_HM",
+      "cardIds": [
+        "FD_HM"
+      ]
     },
     {
       "id": "event-hanseatic-salt-trade",
@@ -6802,7 +7982,10 @@
         539.98
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SB_HST",
+      "cardIds": [
+        "SB_HST"
+      ]
     },
     {
       "id": "event-hunt-for-prester-john",
@@ -6818,7 +8001,10 @@
         550.48
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "BD_HPJ",
+      "cardIds": [
+        "BD_HPJ"
+      ]
     },
     {
       "id": "event-iconoclasm",
@@ -6834,7 +8020,10 @@
         561.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "RL_Ic",
+      "cardIds": [
+        "RL_Ic"
+      ]
     },
     {
       "id": "event-imperial-examination",
@@ -6850,7 +8039,10 @@
         582.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "IE_JC",
+      "cardIds": [
+        "IE_JC"
+      ]
     },
     {
       "id": "event-justinian-code",
@@ -6866,7 +8058,10 @@
         592.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "IE_JC",
+      "cardIds": [
+        "IE_JC"
+      ]
     },
     {
       "id": "event-martyrdom-of-ali",
@@ -6882,7 +8077,10 @@
         603.28
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "MA_Sc",
+      "cardIds": [
+        "MA_Sc"
+      ]
     },
     {
       "id": "event-paper-money",
@@ -6898,7 +8096,10 @@
         613.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "BR_PM",
+      "cardIds": [
+        "BR_PM"
+      ]
     },
     {
       "id": "event-peace-of-god",
@@ -6914,7 +8115,10 @@
         624.38
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "PG_CC",
+      "cardIds": [
+        "PG_CC"
+      ]
     },
     {
       "id": "event-raid-on-lindisfarne",
@@ -6930,7 +8134,10 @@
         645.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "RL_Ic",
+      "cardIds": [
+        "RL_Ic"
+      ]
     },
     {
       "id": "event-religious-schism",
@@ -6946,7 +8153,10 @@
         655.88
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SM_GS",
+      "cardIds": [
+        "SM_GS"
+      ]
     },
     {
       "id": "event-sack-of-baghdad",
@@ -6962,7 +8172,10 @@
         666.48
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SB_HST",
+      "cardIds": [
+        "SB_HST"
+      ]
     },
     {
       "id": "event-scholasticism",
@@ -6978,7 +8191,10 @@
         676.98
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "MA_Sc",
+      "cardIds": [
+        "MA_Sc"
+      ]
     },
     {
       "id": "event-song-resistance",
@@ -6994,7 +8210,10 @@
         687.58
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "FC_SR",
+      "cardIds": [
+        "FC_SR"
+      ]
     },
     {
       "id": "event-stupor-mundi",
@@ -7011,7 +8230,10 @@
         739.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SM_GS",
+      "cardIds": [
+        "SM_GS"
+      ]
     },
     {
       "id": "event-zanj-revolt",
@@ -7027,7 +8249,10 @@
         54.58
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "CR_ZR",
+      "cardIds": [
+        "CR_ZR"
+      ]
     },
     {
       "id": "event-absolute-monarchy",
@@ -7043,7 +8268,10 @@
         110.68
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AM_SWT",
+      "cardIds": [
+        "AM_SWT"
+      ]
     },
     {
       "id": "event-african-slave-trade",
@@ -7059,7 +8287,10 @@
         142.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "AST_GR",
+      "cardIds": [
+        "AST_GR"
+      ]
     },
     {
       "id": "event-blackbeard",
@@ -7075,7 +8306,10 @@
         152.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Bl_HCA",
+      "cardIds": [
+        "Bl_HCA"
+      ]
     },
     {
       "id": "event-city-upon-a-hill",
@@ -7091,7 +8325,10 @@
         163.28
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "LIA_CUH",
+      "cardIds": [
+        "LIA_CUH"
+      ]
     },
     {
       "id": "event-columbian-exchange",
@@ -7107,7 +8344,10 @@
         173.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CE_EJ",
+      "cardIds": [
+        "CE_EJ"
+      ]
     },
     {
       "id": "event-council-of-trent",
@@ -7123,7 +8363,10 @@
         184.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Ja_CT",
+      "cardIds": [
+        "Ja_CT"
+      ]
     },
     {
       "id": "event-crop-rotation",
@@ -7139,7 +8382,10 @@
         194.88
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CR_Me",
+      "cardIds": [
+        "CR_Me"
+      ]
     },
     {
       "id": "event-dutch-revolt",
@@ -7155,7 +8401,10 @@
         205.48
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "Pi_DR",
+      "cardIds": [
+        "Pi_DR"
+      ]
     },
     {
       "id": "event-expulsion-of-jews",
@@ -7171,7 +8420,10 @@
         236.88
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CE_EJ",
+      "cardIds": [
+        "CE_EJ"
+      ]
     },
     {
       "id": "event-glorious-revolution",
@@ -7187,7 +8439,10 @@
         247.48
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AST_GR",
+      "cardIds": [
+        "AST_GR"
+      ]
     },
     {
       "id": "event-habeas-corpus-act",
@@ -7203,7 +8458,10 @@
         331.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Bl_HCA",
+      "cardIds": [
+        "Bl_HCA"
+      ]
     },
     {
       "id": "event-janissaries",
@@ -7219,7 +8477,10 @@
         341.68
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "Ja_CT",
+      "cardIds": [
+        "Ja_CT"
+      ]
     },
     {
       "id": "event-kangxi-era",
@@ -7235,7 +8496,10 @@
         362.68
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "TM_KE",
+      "cardIds": [
+        "TM_KE"
+      ]
     },
     {
       "id": "event-little-ice-age",
@@ -7251,7 +8515,10 @@
         394.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "LIA_CUH",
+      "cardIds": [
+        "LIA_CUH"
+      ]
     },
     {
       "id": "event-magellan-s-expedition",
@@ -7267,7 +8534,10 @@
         415.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "ME_PI",
+      "cardIds": [
+        "ME_PI"
+      ]
     },
     {
       "id": "event-mercantilism",
@@ -7283,7 +8553,10 @@
         467.58
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "CR_Me",
+      "cardIds": [
+        "CR_Me"
+      ]
     },
     {
       "id": "event-muntzer-revolt",
@@ -7299,7 +8572,10 @@
         519.98
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "ST_MR",
+      "cardIds": [
+        "ST_MR"
+      ]
     },
     {
       "id": "event-papal-indulgence",
@@ -7315,7 +8591,10 @@
         551.38
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "ME_PI",
+      "cardIds": [
+        "ME_PI"
+      ]
     },
     {
       "id": "event-peace-of-westphalia",
@@ -7331,7 +8610,10 @@
         614.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SV_PW",
+      "cardIds": [
+        "SV_PW"
+      ]
     },
     {
       "id": "event-pilgrims",
@@ -7347,7 +8629,10 @@
         645.68
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "Pi_DR",
+      "cardIds": [
+        "Pi_DR"
+      ]
     },
     {
       "id": "event-salem-witch-trials",
@@ -7363,7 +8648,10 @@
         677.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AM_SWT",
+      "cardIds": [
+        "AM_SWT"
+      ]
     },
     {
       "id": "event-sinking-of-the-vasa",
@@ -7379,7 +8667,10 @@
         698.08
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SV_PW",
+      "cardIds": [
+        "SV_PW"
+      ]
     },
     {
       "id": "event-spice-trade",
@@ -7395,7 +8686,10 @@
         54.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "ST_MR",
+      "cardIds": [
+        "ST_MR"
+      ]
     },
     {
       "id": "event-tulip-mania",
@@ -7411,7 +8705,10 @@
         65.18
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "TM_KE",
+      "cardIds": [
+        "TM_KE"
+      ]
     },
     {
       "id": "event-american-revolution",
@@ -7427,7 +8724,10 @@
         100.38
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AR_FR",
+      "cardIds": [
+        "AR_FR"
+      ]
     },
     {
       "id": "event-anarchism",
@@ -7443,7 +8743,10 @@
         131.78
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "An_GE",
+      "cardIds": [
+        "An_GE"
+      ]
     },
     {
       "id": "event-californian-gold-rush",
@@ -7459,7 +8762,10 @@
         152.78
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CGR_IPB",
+      "cardIds": [
+        "CGR_IPB"
+      ]
     },
     {
       "id": "event-dreyfus-affffair",
@@ -7475,7 +8781,10 @@
         163.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SA_DA",
+      "cardIds": [
+        "SA_DA"
+      ]
     },
     {
       "id": "event-emigration",
@@ -7491,7 +8800,10 @@
         173.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "We_Em",
+      "cardIds": [
+        "We_Em"
+      ]
     },
     {
       "id": "event-entente-cordiale",
@@ -7507,7 +8819,10 @@
         247.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "EC_GS",
+      "cardIds": [
+        "EC_GS"
+      ]
     },
     {
       "id": "event-first-vatican-council",
@@ -7523,7 +8838,10 @@
         320.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "EK_FVC",
+      "cardIds": [
+        "EK_FVC"
+      ]
     },
     {
       "id": "event-french-revolution",
@@ -7539,7 +8857,10 @@
         330.98
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "AR_FR",
+      "cardIds": [
+        "AR_FR"
+      ]
     },
     {
       "id": "event-general-strike",
@@ -7555,7 +8876,10 @@
         383.28
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "EC_GS",
+      "cardIds": [
+        "EC_GS"
+      ]
     },
     {
       "id": "event-great-exhibition",
@@ -7571,7 +8895,10 @@
         393.88
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "An_GE",
+      "cardIds": [
+        "An_GE"
+      ]
     },
     {
       "id": "event-industrial-revolution",
@@ -7587,7 +8914,10 @@
         487.98
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "Ro_IR",
+      "cardIds": [
+        "Ro_IR"
+      ]
     },
     {
       "id": "event-irish-potato-blight",
@@ -7603,7 +8933,10 @@
         540.38
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "CGR_IPB",
+      "cardIds": [
+        "CGR_IPB"
+      ]
     },
     {
       "id": "event-krakatoa",
@@ -7619,7 +8952,10 @@
         550.88
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "EK_FVC",
+      "cardIds": [
+        "EK_FVC"
+      ]
     },
     {
       "id": "event-march-to-moscow",
@@ -7635,7 +8971,10 @@
         561.48
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "MM_TR",
+      "cardIds": [
+        "MM_TR"
+      ]
     },
     {
       "id": "event-romanticism",
@@ -7651,7 +8990,10 @@
         592.88
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "Ro_IR",
+      "cardIds": [
+        "Ro_IR"
+      ]
     },
     {
       "id": "event-scramble-for-africa",
@@ -7667,7 +9009,10 @@
         603.48
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SA_DA",
+      "cardIds": [
+        "SA_DA"
+      ]
     },
     {
       "id": "event-sepoy-mutiny",
@@ -7683,7 +9028,10 @@
         655.78
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "TM_SM",
+      "cardIds": [
+        "TM_SM"
+      ]
     },
     {
       "id": "event-sick-man-of-europe",
@@ -7699,7 +9047,10 @@
         687.28
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SME_WS",
+      "cardIds": [
+        "SME_WS"
+      ]
     },
     {
       "id": "event-sokoto-caliphate",
@@ -7715,7 +9066,10 @@
         697.78
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "SC_TCO",
+      "cardIds": [
+        "SC_TCO"
+      ]
     },
     {
       "id": "event-taiping-rebellion",
@@ -7731,7 +9085,10 @@
         729.28
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "MM_TR",
+      "cardIds": [
+        "MM_TR"
+      ]
     },
     {
       "id": "event-tennis-court-oath",
@@ -7747,7 +9104,10 @@
         760.68
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SC_TCO",
+      "cardIds": [
+        "SC_TCO"
+      ]
     },
     {
       "id": "event-tonghak-movement",
@@ -7763,7 +9123,10 @@
         44.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "TM_SM",
+      "cardIds": [
+        "TM_SM"
+      ]
     },
     {
       "id": "event-weltpolitik",
@@ -7779,7 +9142,10 @@
         65.18
       ],
       "hasRule": true,
-      "cardId": null
+      "cardId": "We_Em",
+      "cardIds": [
+        "We_Em"
+      ]
     },
     {
       "id": "event-women-s-suffffrage",
@@ -7795,7 +9161,10 @@
         96.58
       ],
       "hasRule": false,
-      "cardId": null
+      "cardId": "SME_WS",
+      "cardIds": [
+        "SME_WS"
+      ]
     },
     {
       "id": "dynasties-dynasties",
@@ -7827,7 +9196,10 @@
         177.48
       ],
       "hasRule": false,
-      "cardId": "Am_FP"
+      "cardId": "Am_FP",
+      "cardIds": [
+        "Am_FP"
+      ]
     },
     {
       "id": "dynasties-america-democratic-republicans",
@@ -7843,7 +9215,10 @@
         187.98
       ],
       "hasRule": true,
-      "cardId": "Am_DR"
+      "cardId": "Am_DR",
+      "cardIds": [
+        "Am_DR"
+      ]
     },
     {
       "id": "dynasties-arabs-umayyad-caliphate",
@@ -7859,7 +9234,10 @@
         449.48
       ],
       "hasRule": false,
-      "cardId": "Ar_UC"
+      "cardId": "Ar_UC",
+      "cardIds": [
+        "Ar_UC"
+      ]
     },
     {
       "id": "dynasties-arabs-abbasid-caliphate",
@@ -7875,7 +9253,10 @@
         459.98
       ],
       "hasRule": true,
-      "cardId": "Ar_AC"
+      "cardId": "Ar_AC",
+      "cardIds": [
+        "Ar_AC"
+      ]
     },
     {
       "id": "dynasties-china-qin-dynasty",
@@ -7891,7 +9272,10 @@
         585.48
       ],
       "hasRule": true,
-      "cardId": "C_QD"
+      "cardId": "C_QD",
+      "cardIds": [
+        "C_QD"
+      ]
     },
     {
       "id": "dynasties-china-ming-dynasty",
@@ -7907,7 +9291,10 @@
         637.88
       ],
       "hasRule": false,
-      "cardId": "C_MD"
+      "cardId": "C_MD",
+      "cardIds": [
+        "C_MD"
+      ]
     },
     {
       "id": "dynasties-egypt-new-kingdom",
@@ -7923,7 +9310,10 @@
         648.38
       ],
       "hasRule": false,
-      "cardId": "Eg_NK"
+      "cardId": "Eg_NK",
+      "cardIds": [
+        "Eg_NK"
+      ]
     },
     {
       "id": "dynasties-egypt-old-kingdom",
@@ -7939,7 +9329,10 @@
         658.98
       ],
       "hasRule": true,
-      "cardId": "Eg_OK"
+      "cardId": "Eg_OK",
+      "cardIds": [
+        "Eg_OK"
+      ]
     },
     {
       "id": "dynasties-ethiopia-axumite-kingdom",
@@ -7956,7 +9349,10 @@
         721.78
       ],
       "hasRule": true,
-      "cardId": "Et_AK"
+      "cardId": "Et_AK",
+      "cardIds": [
+        "Et_AK"
+      ]
     },
     {
       "id": "dynasties-ethiopia-sheba",
@@ -7972,7 +9368,10 @@
         85.98
       ],
       "hasRule": false,
-      "cardId": "Et_Sb"
+      "cardId": "Et_Sb",
+      "cardIds": [
+        "Et_Sb"
+      ]
     },
     {
       "id": "dynasties-greece-athens",
@@ -7988,7 +9387,10 @@
         96.48
       ],
       "hasRule": false,
-      "cardId": "G_At"
+      "cardId": "G_At",
+      "cardIds": [
+        "G_At"
+      ]
     },
     {
       "id": "dynasties-greece-sparta",
@@ -8004,7 +9406,10 @@
         107.08
       ],
       "hasRule": false,
-      "cardId": "G_St"
+      "cardId": "G_St",
+      "cardIds": [
+        "G_St"
+      ]
     },
     {
       "id": "dynasties-india-mauryan-empire",
@@ -8020,7 +9425,10 @@
         117.58
       ],
       "hasRule": true,
-      "cardId": "I_My"
+      "cardId": "I_My",
+      "cardIds": [
+        "I_My"
+      ]
     },
     {
       "id": "dynasties-india-mughal-empire",
@@ -8036,7 +9444,10 @@
         201.28
       ],
       "hasRule": true,
-      "cardId": "I_Mg"
+      "cardId": "I_Mg",
+      "cardIds": [
+        "I_Mg"
+      ]
     },
     {
       "id": "dynasties-japan-heian-period",
@@ -8052,7 +9463,10 @@
         274.68
       ],
       "hasRule": true,
-      "cardId": "J_HP"
+      "cardId": "J_HP",
+      "cardIds": [
+        "J_HP"
+      ]
     },
     {
       "id": "dynasties-japan-edo-period",
@@ -8068,7 +9482,10 @@
         337.48
       ],
       "hasRule": true,
-      "cardId": "J_EP"
+      "cardId": "J_EP",
+      "cardIds": [
+        "J_EP"
+      ]
     },
     {
       "id": "dynasties-korea-koryo-kingdom",
@@ -8084,7 +9501,10 @@
         389.78
       ],
       "hasRule": false,
-      "cardId": "K_KK"
+      "cardId": "K_KK",
+      "cardIds": [
+        "K_KK"
+      ]
     },
     {
       "id": "dynasties-korea-joseon-kingdom",
@@ -8100,7 +9520,10 @@
         400.38
       ],
       "hasRule": true,
-      "cardId": "K_JK"
+      "cardId": "K_JK",
+      "cardIds": [
+        "K_JK"
+      ]
     },
     {
       "id": "dynasties-mali-mali-empire",
@@ -8116,7 +9539,10 @@
         536.28
       ],
       "hasRule": true,
-      "cardId": "Ml_ME"
+      "cardId": "Ml_ME",
+      "cardIds": [
+        "Ml_ME"
+      ]
     },
     {
       "id": "dynasties-mali-songhai-empire",
@@ -8132,7 +9558,10 @@
         588.68
       ],
       "hasRule": false,
-      "cardId": "Ml_SE"
+      "cardId": "Ml_SE",
+      "cardIds": [
+        "Ml_SE"
+      ]
     },
     {
       "id": "dynasties-mongolia-golden-horde",
@@ -8148,7 +9577,10 @@
         599.18
       ],
       "hasRule": true,
-      "cardId": "Mg_GH"
+      "cardId": "Mg_GH",
+      "cardIds": [
+        "Mg_GH"
+      ]
     },
     {
       "id": "dynasties-mongolia-yuan-dynasty",
@@ -8164,7 +9596,10 @@
         641.08
       ],
       "hasRule": true,
-      "cardId": "Mg_YD"
+      "cardId": "Mg_YD",
+      "cardIds": [
+        "Mg_YD"
+      ]
     },
     {
       "id": "dynasties-persia-achaemenid-empire",
@@ -8180,7 +9615,10 @@
         682.98
       ],
       "hasRule": true,
-      "cardId": "Ps_AE"
+      "cardId": "Ps_AE",
+      "cardIds": [
+        "Ps_AE"
+      ]
     },
     {
       "id": "dynasties-persia-sassanid-empire",
@@ -8196,7 +9634,10 @@
         724.88
       ],
       "hasRule": true,
-      "cardId": "Ps_SE"
+      "cardId": "Ps_SE",
+      "cardIds": [
+        "Ps_SE"
+      ]
     },
     {
       "id": "dynasties-poland-jagellonian-dynasty",
@@ -8212,7 +9653,10 @@
         96.38
       ],
       "hasRule": true,
-      "cardId": "Pl_JD"
+      "cardId": "Pl_JD",
+      "cardIds": [
+        "Pl_JD"
+      ]
     },
     {
       "id": "dynasties-poland-polish-lithuanian-commonwealth",
@@ -8228,7 +9672,10 @@
         138.28
       ],
       "hasRule": true,
-      "cardId": "Pl_PLC"
+      "cardId": "Pl_PLC",
+      "cardIds": [
+        "Pl_PLC"
+      ]
     },
     {
       "id": "dynasties-portugal-portugese-empire",
@@ -8244,7 +9691,10 @@
         222.08
       ],
       "hasRule": true,
-      "cardId": "Pg_PE"
+      "cardId": "Pg_PE",
+      "cardIds": [
+        "Pg_PE"
+      ]
     },
     {
       "id": "dynasties-portugal-kingdom-of-leon",
@@ -8260,7 +9710,10 @@
         326.68
       ],
       "hasRule": true,
-      "cardId": "Pg_KL"
+      "cardId": "Pg_KL",
+      "cardIds": [
+        "Pg_KL"
+      ]
     },
     {
       "id": "dynasties-rome-roman-republic",
@@ -8276,7 +9729,10 @@
         431.28
       ],
       "hasRule": true,
-      "cardId": "R_RR"
+      "cardId": "R_RR",
+      "cardIds": [
+        "R_RR"
+      ]
     },
     {
       "id": "dynasties-rome-roman-empire",
@@ -8292,7 +9748,10 @@
         473.18
       ],
       "hasRule": false,
-      "cardId": "R_RE"
+      "cardId": "R_RE",
+      "cardIds": [
+        "R_RE"
+      ]
     },
     {
       "id": "dynasties-venice-domains-of-the-sea",
@@ -8308,7 +9767,10 @@
         483.78
       ],
       "hasRule": true,
-      "cardId": "Vn_DS"
+      "cardId": "Vn_DS",
+      "cardIds": [
+        "Vn_DS"
+      ]
     },
     {
       "id": "dynasties-venice-pactum-warmundi",
@@ -8324,7 +9786,10 @@
         515.18
       ],
       "hasRule": true,
-      "cardId": "Vn_PW"
+      "cardId": "Vn_PW",
+      "cardIds": [
+        "Vn_PW"
+      ]
     },
     {
       "id": "dynasties-vikings-normans",
@@ -8340,7 +9805,10 @@
         588.58
       ],
       "hasRule": true,
-      "cardId": "Vk_Nm"
+      "cardId": "Vk_Nm",
+      "cardIds": [
+        "Vk_Nm"
+      ]
     },
     {
       "id": "dynasties-vikings-varangians",
@@ -8356,7 +9824,10 @@
         609.58
       ],
       "hasRule": false,
-      "cardId": "Vk_Vr"
+      "cardId": "Vk_Vr",
+      "cardIds": [
+        "Vk_Vr"
+      ]
     },
     {
       "id": "faq-faq",

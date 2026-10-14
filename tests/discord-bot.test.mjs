@@ -199,7 +199,7 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   const unknownCard = makeInteraction({ commandName: 'card', options: { getString: () => 'unknown' } });
   await instance.listeners(Events.InteractionCreate)[0](unknownCard);
   assert.equal(unknownCard.replies[0].flags, MessageFlags.Ephemeral);
-  assert.match(unknownCard.replies[1].content, /piloturvalet/);
+  assert.match(unknownCard.replies[1].content, /namnförslagen/);
   f.service.getStatus = () => ({ matches: 100, discordEnabled: true, matchList: Array.from({ length: 100 }, (_, i) => ({ id: String(3000 + i), title: 'Testparti ' + i, connected: i % 2 === 0 })) });
   const status = makeInteraction({ commandName: 'status', locale: 'en-US', followUp: async options => status.replies.push(options) });
   await instance.listeners(Events.InteractionCreate)[0](status);

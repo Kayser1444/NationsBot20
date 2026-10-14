@@ -2,7 +2,7 @@
 
 Status 2026-10-14: **FAQ++ 1.11 importerad** från användarens `Reference/faq++1.11.pdf`. Dokumentet är daterat 5 december 2017 och omfattar tio sidor. Vi har 216 textposter och 547 indexrubriker. Tio poster med 13 svarspunkter per språk är källkontrollerade av Codex för Porcelain Tower; resterande 206 poster och deras automatiska kopplingar är `pending`. Det innebär ingen användargranskning eller kontroll av vilken version som nu kan laddas ner från BGG.
 
-Det lokala `/card`-kommandot använder registret via `card-bank.mjs`. Piloturvalet innehåller Porcelain Tower. Kod och data är lokala och inte driftssatta.
+`/card` använder registret via `card-bank.mjs` i den separata Railway-stagingmiljön. Kortinventeringen omfattar 503 poster, 422 verifierade bildlänkar och samtliga 479 kortnamnsrubriker i FAQ:n. FAQ-innehållet är fortfarande ett granskat piloturval för Porcelain Tower; övriga kort kan visas med bild/metadata utan att deras FAQ-text godkänns. Se [kortinventering och bildstatus](../cards/README.md).
 
 ## Filer och ansvar
 
@@ -13,7 +13,8 @@ Det lokala `/card`-kommandot använder registret via `card-bank.mjs`. Piloturval
 - `index.json`: alla 547 rubriker, även sådana utan egen regeltext. Tomma kortposter blir inte påhittade regler.
 - `document.json`: bevarade textblock, dokumentkontext, spalter och positioner. Alla 1804 extraherade rader redovisas.
 - `pilot-review.json`: separat källkontrollerat urval, svenska/engelska sammanfattningar, kortkopplingar och källtextens checksummor. Importören godkänner inga poster automatiskt.
-- `../cards/catalog.json`: 372 preliminära metadataobjekt från den lokala Tabony-implementationen, lästa med AST utan att köra spelkoden. Endast den bildkontrollerade Porcelain Tower-posten är aktiverad i piloten.
+- `../cards/catalog.json`: 503 sökbara metadataobjekt från Tabonys spelimplementation och kompletteringar från FAQ:n. Pythonkällan läses med AST utan att köra spelkod. Bildstatus och FAQ-granskning hanteras separat.
+- `../cards/faq-coverage.json`: inventeringskopplingar för samtliga kortnamnsrubriker, inklusive specialkort och startvarianter. Nya FAQ-kopplingar är `pending`.
 
 Original-PDF:en ligger i `Reference`; renderade sidor och extraherad text finns under `work/faq-source/`. PDF-textlagret tappar bokstäver i ligaturer (t.ex. `efect`, `frst`). Originaltexten bevaras, medan kontrollerade sammanfattningar använder vanlig stavning. Dokumentets SHA-256 identifierar exakt vilket original genomgången avser.
 
@@ -23,6 +24,9 @@ Kör med Python som har `pdfplumber` och ange sökvägen till den lokala Nations
 
 ```text
 python scripts/import-faq.py --game-source <sökväg-till-nations-pythonkällan>
+python scripts/import-card-catalog.py --game-source <sökväg-till-nations-pythonkällan>
+node scripts/update-card-faq-coverage.mjs
+node scripts/verify-card-images.mjs
 node scripts/review-faq-pilot.mjs
 node work/render-card-preview.mjs PcTw sv-SE
 node work/build-card-preview.mjs work/card-preview-faq.json

@@ -1,0 +1,5313 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "nations-faq-official",
+  "note": "Inventory coverage only. All newly added FAQ links remain pending. Multiple IDs may represent starting-board variants.",
+  "items": [
+    {
+      "headingId": "advisor-augustus",
+      "heading": "Augustus",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "Agt"
+      ]
+    },
+    {
+      "headingId": "advisor-hatshepsut",
+      "heading": "Hatshepsut",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "Hss"
+      ]
+    },
+    {
+      "headingId": "advisor-qin-shi-huang",
+      "heading": "Qin Shi Huang",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "QSH"
+      ]
+    },
+    {
+      "headingId": "advisor-saint-augustine",
+      "heading": "Saint Augustine",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "StAg"
+      ]
+    },
+    {
+      "headingId": "advisor-archimedes",
+      "heading": "Archimedes",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "Acm"
+      ]
+    },
+    {
+      "headingId": "advisor-boudica",
+      "heading": "Boudica",
+      "section": "Advisor",
+      "sourcePages": [
+        2
+      ],
+      "cardIds": [
+        "Bdc"
+      ]
+    },
+    {
+      "headingId": "advisor-cyrus-the-great",
+      "heading": "Cyrus the Great",
+      "section": "Advisor",
+      "sourcePages": [
+        2,
+        3
+      ],
+      "cardIds": [
+        "CrGr"
+      ]
+    },
+    {
+      "headingId": "advisor-buddha",
+      "heading": "Buddha",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Bdh"
+      ]
+    },
+    {
+      "headingId": "advisor-hannibal",
+      "heading": "Hannibal",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Hnb"
+      ]
+    },
+    {
+      "headingId": "advisor-sun-tzu",
+      "heading": "Sun Tzu",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "SnTz"
+      ]
+    },
+    {
+      "headingId": "advisor-hypatia",
+      "heading": "Hypatia",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Hpt"
+      ]
+    },
+    {
+      "headingId": "advisor-anna-komnene",
+      "heading": "Anna Komnene",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "AnKn"
+      ]
+    },
+    {
+      "headingId": "advisor-harald-hardrada",
+      "heading": "Harald Hardrada",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "HrHd"
+      ]
+    },
+    {
+      "headingId": "advisor-sejong-the-great",
+      "heading": "Sejong the Great",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "SjGr"
+      ]
+    },
+    {
+      "headingId": "advisor-thomas-aquino",
+      "heading": "Thomas Aquino",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "TmAq"
+      ]
+    },
+    {
+      "headingId": "advisor-abu-bakr",
+      "heading": "Abu Bakr",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "AbBk"
+      ]
+    },
+    {
+      "headingId": "advisor-eleanor-of-aquitaine",
+      "heading": "Eleanor of Aquitaine",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "EnAq"
+      ]
+    },
+    {
+      "headingId": "advisor-mansa-musa",
+      "heading": "Mansa Musa",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "MsMs"
+      ]
+    },
+    {
+      "headingId": "advisor-alhazen",
+      "heading": "Alhazen",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Ahz"
+      ]
+    },
+    {
+      "headingId": "advisor-genghis-khan",
+      "heading": "Genghis Khan",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "GgKn"
+      ]
+    },
+    {
+      "headingId": "advisor-marco-polo",
+      "heading": "Marco Polo",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "McPl"
+      ]
+    },
+    {
+      "headingId": "advisor-zhu-xi",
+      "heading": "Zhu Xi",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "ZhXi"
+      ]
+    },
+    {
+      "headingId": "advisor-elizabeth",
+      "heading": "Elizabeth",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Elz"
+      ]
+    },
+    {
+      "headingId": "advisor-galileo-galilei",
+      "heading": "Galileo Galilei",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "GlGl"
+      ]
+    },
+    {
+      "headingId": "advisor-isabella",
+      "heading": "Isabella",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Isb"
+      ]
+    },
+    {
+      "headingId": "advisor-montezuma",
+      "heading": "Montezuma",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Mtz"
+      ]
+    },
+    {
+      "headingId": "advisor-martin-luther",
+      "heading": "Martin Luther",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "MtLt"
+      ]
+    },
+    {
+      "headingId": "advisor-pocahontas",
+      "heading": "Pocahontas",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Pch"
+      ]
+    },
+    {
+      "headingId": "advisor-tokugawa",
+      "heading": "Tokugawa",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Tkg"
+      ]
+    },
+    {
+      "headingId": "advisor-niccolo-machiavelli",
+      "heading": "Niccolo Machiavelli",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "NcMc"
+      ]
+    },
+    {
+      "headingId": "advisor-peter-the-great",
+      "heading": "Peter the Great",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "PtGr"
+      ]
+    },
+    {
+      "headingId": "advisor-suleiman-i",
+      "heading": "Suleiman I",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "Slm"
+      ]
+    },
+    {
+      "headingId": "advisor-carolus-linneaus",
+      "heading": "Carolus Linneaus",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "CrLn"
+      ]
+    },
+    {
+      "headingId": "advisor-florence-nightingale",
+      "heading": "Florence Nightingale",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "FrNg"
+      ]
+    },
+    {
+      "headingId": "advisor-frederick-the-great",
+      "heading": "Frederick the Great",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "FdGr"
+      ]
+    },
+    {
+      "headingId": "advisor-lin-zexu",
+      "heading": "Lin Zexu",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "LnZx"
+      ]
+    },
+    {
+      "headingId": "advisor-marie-antoinette",
+      "heading": "Marie Antoinette",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "MrAn"
+      ]
+    },
+    {
+      "headingId": "advisor-abraham-lincoln",
+      "heading": "Abraham Lincoln",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "AhLc"
+      ]
+    },
+    {
+      "headingId": "advisor-benjamin-disraeli",
+      "heading": "Benjamin Disraeli",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "BjDr"
+      ]
+    },
+    {
+      "headingId": "advisor-marie-curie",
+      "heading": "Marie Curie",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "MrCr"
+      ]
+    },
+    {
+      "headingId": "advisor-alfred-nobel",
+      "heading": "Alfred Nobel",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "AfNb"
+      ]
+    },
+    {
+      "headingId": "advisor-shaka-zulu",
+      "heading": "Shaka Zulu",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "SkZl"
+      ]
+    },
+    {
+      "headingId": "advisor-simon-bolivar",
+      "heading": "Simon Bolivar",
+      "section": "Advisor",
+      "sourcePages": [
+        3
+      ],
+      "cardIds": [
+        "SmBl"
+      ]
+    },
+    {
+      "headingId": "advisor-nikola-tesla",
+      "heading": "Nikola Tesla",
+      "section": "Advisor",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "faq-nikola-tesla"
+      ]
+    },
+    {
+      "headingId": "advisor-frederic-chopin",
+      "heading": "Frédéric Chopin",
+      "section": "Advisor",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "FdCp"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-cannae",
+      "heading": "Battle of Cannae",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BCnn"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-kadesh",
+      "heading": "Battle of Kadesh",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BKds"
+      ]
+    },
+    {
+      "headingId": "battle-siege-of-alesia",
+      "heading": "Siege of Alesia",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SAls"
+      ]
+    },
+    {
+      "headingId": "battle-siege-of-troy",
+      "heading": "Siege of Troy",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "STry"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-thermopylae",
+      "heading": "Battle of Thermopylae",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BTmp"
+      ]
+    },
+    {
+      "headingId": "battle-milvian-bridge",
+      "heading": "Milvian Bridge",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "MvBr"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-issus",
+      "heading": "Battle of Issus",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BIss"
+      ]
+    },
+    {
+      "headingId": "battle-crossing-the-alps",
+      "heading": "Crossing the Alps",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "CsAp"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-agincourt",
+      "heading": "Battle of Agincourt",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BAgc"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-hastings",
+      "heading": "Battle of Hastings",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BHst"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-poitiers",
+      "heading": "Battle of Poitiers",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BPtr"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-tannenberg",
+      "heading": "Battle of Tannenberg",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BTnb"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-manzikert",
+      "heading": "Battle of Manzikert",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BMzk"
+      ]
+    },
+    {
+      "headingId": "battle-the-horns-of-hattin",
+      "heading": "The Horns of Hattin",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "THH"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-ain-jalut",
+      "heading": "Battle of Ain Jalut",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BAJ"
+      ]
+    },
+    {
+      "headingId": "battle-siege-of-constantinople",
+      "heading": "Siege of Constantinople",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SCtn"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-poltava",
+      "heading": "Battle of Poltava",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BPtv"
+      ]
+    },
+    {
+      "headingId": "battle-fall-of-constantinople",
+      "heading": "Fall of Constantinople",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "FCtn"
+      ]
+    },
+    {
+      "headingId": "battle-la-noche-triste",
+      "heading": "La Noche Triste",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "LNT"
+      ]
+    },
+    {
+      "headingId": "battle-siege-of-rhodes",
+      "heading": "Siege of Rhodes",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SRhd"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-cajamarca",
+      "heading": "Battle of Cajamarca",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BCjm"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-noryang",
+      "heading": "Battle of Noryang",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BNry"
+      ]
+    },
+    {
+      "headingId": "battle-fall-of-louisburg",
+      "heading": "Fall of Louisburg",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "FLsb"
+      ]
+    },
+    {
+      "headingId": "battle-siege-of-vienna",
+      "heading": "Siege of Vienna",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SVnn"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-tsushima",
+      "heading": "Battle of Tsushima",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BTsm"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-waterloo",
+      "heading": "Battle of Waterloo",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BWtl"
+      ]
+    },
+    {
+      "headingId": "battle-fashoda-incident",
+      "heading": "Fashoda Incident",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "FsIn"
+      ]
+    },
+    {
+      "headingId": "battle-surrender-at-yorktown",
+      "heading": "Surrender at Yorktown",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SYkt"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-austerlitz",
+      "heading": "Battle of Austerlitz",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BAtl"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-borodino",
+      "heading": "Battle of Borodino",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BBrd"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-trafalgar",
+      "heading": "Battle of Trafalgar",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BTfg"
+      ]
+    },
+    {
+      "headingId": "battle-battle-of-balaclava",
+      "heading": "Battle of Balaclava",
+      "section": "Battle",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BBlc"
+      ]
+    },
+    {
+      "headingId": "building-farm",
+      "heading": "Farm",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "C_Frm",
+        "Et_Frm",
+        "G_Frm",
+        "I_Frm",
+        "Ml_Frm",
+        "Pg_Frm",
+        "R_Frm",
+        "Vk_Frm",
+        "Vn_Frm"
+      ]
+    },
+    {
+      "headingId": "building-quarry",
+      "heading": "Quarry",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Ar_Qry",
+        "C_Qry",
+        "Eg_Qry",
+        "Et_qry",
+        "G_Qry",
+        "I_Qry",
+        "J_Qry",
+        "K_Qry",
+        "Ml_Qry",
+        "Pl_Qry",
+        "Ps_Qry",
+        "R_Qry",
+        "Vk_Qry",
+        "Vn_Qry"
+      ]
+    },
+    {
+      "headingId": "building-caravan",
+      "heading": "Caravan",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Eg_Crv",
+        "Mg_Crv",
+        "Pg_Crv"
+      ]
+    },
+    {
+      "headingId": "building-temple",
+      "heading": "Temple",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Eg_Tpl",
+        "I_Tpl",
+        "J_Tpl",
+        "K_Tpl",
+        "Pg_Tpl",
+        "Pl_Tpl",
+        "Ps_Tpl"
+      ]
+    },
+    {
+      "headingId": "building-aqueduct",
+      "heading": "Aqueduct",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Aqd"
+      ]
+    },
+    {
+      "headingId": "building-brewery",
+      "heading": "Brewery",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Brw"
+      ]
+    },
+    {
+      "headingId": "building-city-wall",
+      "heading": "City Wall",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "CtWl"
+      ]
+    },
+    {
+      "headingId": "building-forum",
+      "heading": "Forum",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Frm"
+      ]
+    },
+    {
+      "headingId": "building-lighthouse",
+      "heading": "Lighthouse",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Lth"
+      ]
+    },
+    {
+      "headingId": "building-lyceum",
+      "heading": "Lyceum",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Lyc"
+      ]
+    },
+    {
+      "headingId": "building-synagogue",
+      "heading": "Synagogue",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Sng"
+      ]
+    },
+    {
+      "headingId": "building-ziggurat",
+      "heading": "Ziggurat",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Zgr"
+      ]
+    },
+    {
+      "headingId": "building-granary",
+      "heading": "Granary",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Grn"
+      ]
+    },
+    {
+      "headingId": "building-mine",
+      "heading": "Mine",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Min"
+      ]
+    },
+    {
+      "headingId": "building-pagoda",
+      "heading": "Pagoda",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Pgd"
+      ]
+    },
+    {
+      "headingId": "building-confucian-academy",
+      "heading": "Confucian Academy",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "CfAc"
+      ]
+    },
+    {
+      "headingId": "building-forge",
+      "heading": "Forge",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Frg"
+      ]
+    },
+    {
+      "headingId": "building-library",
+      "heading": "Library",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Lib"
+      ]
+    },
+    {
+      "headingId": "building-vatican",
+      "heading": "Vatican",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Vtc"
+      ]
+    },
+    {
+      "headingId": "building-silk-road",
+      "heading": "Silk Road",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SkRd"
+      ]
+    },
+    {
+      "headingId": "building-cathedral",
+      "heading": "Cathedral",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Cat"
+      ]
+    },
+    {
+      "headingId": "building-madrasa",
+      "heading": "Madrasa",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Mdr"
+      ]
+    },
+    {
+      "headingId": "building-market",
+      "heading": "Market",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Mkt"
+      ]
+    },
+    {
+      "headingId": "building-monastery",
+      "heading": "Monastery",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Mon"
+      ]
+    },
+    {
+      "headingId": "building-mosque",
+      "heading": "Mosque",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Msq"
+      ]
+    },
+    {
+      "headingId": "building-university",
+      "heading": "University",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Uni"
+      ]
+    },
+    {
+      "headingId": "building-watermill",
+      "heading": "Watermill",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Wtm"
+      ]
+    },
+    {
+      "headingId": "building-windmill",
+      "heading": "Windmill",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Wdm"
+      ]
+    },
+    {
+      "headingId": "building-ball-court",
+      "heading": "Ball Court",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "BlCt"
+      ]
+    },
+    {
+      "headingId": "building-castle",
+      "heading": "Castle",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Cas"
+      ]
+    },
+    {
+      "headingId": "building-guild-hall",
+      "heading": "Guild Hall",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "GdHl"
+      ]
+    },
+    {
+      "headingId": "building-hippodrome",
+      "heading": "Hippodrome",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Hip"
+      ]
+    },
+    {
+      "headingId": "building-mint",
+      "heading": "Mint",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Mnt"
+      ]
+    },
+    {
+      "headingId": "building-ocean-fishing",
+      "heading": "Ocean Fishing",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "OcFs"
+      ]
+    },
+    {
+      "headingId": "building-hansa",
+      "heading": "Hansa",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Han"
+      ]
+    },
+    {
+      "headingId": "building-knights-templar",
+      "heading": "Knights Templar",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "KnTp"
+      ]
+    },
+    {
+      "headingId": "building-colonial-trading",
+      "heading": "Colonial Trading",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "ClTr"
+      ]
+    },
+    {
+      "headingId": "building-courthouse",
+      "heading": "Courthouse",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Cth"
+      ]
+    },
+    {
+      "headingId": "building-dike",
+      "heading": "Dike",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Dik"
+      ]
+    },
+    {
+      "headingId": "building-observatory",
+      "heading": "Observatory",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Obs"
+      ]
+    },
+    {
+      "headingId": "building-parliament",
+      "heading": "Parliament",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Plm"
+      ]
+    },
+    {
+      "headingId": "building-sawmill",
+      "heading": "Sawmill",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Swm"
+      ]
+    },
+    {
+      "headingId": "building-terrace-farming",
+      "heading": "Terrace Farming",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "TrFm"
+      ]
+    },
+    {
+      "headingId": "building-theatre",
+      "heading": "Theatre",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Thr"
+      ]
+    },
+    {
+      "headingId": "building-bank",
+      "heading": "Bank",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Bnk"
+      ]
+    },
+    {
+      "headingId": "building-sacrifcial-altar",
+      "heading": "Sacrifcial Altar",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "ScAl"
+      ]
+    },
+    {
+      "headingId": "building-shipyard",
+      "heading": "Shipyard",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Shp"
+      ]
+    },
+    {
+      "headingId": "building-chateau",
+      "heading": "Chateau",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Cht"
+      ]
+    },
+    {
+      "headingId": "building-hammam",
+      "heading": "Hammam",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Hmm"
+      ]
+    },
+    {
+      "headingId": "building-printing-press",
+      "heading": "Printing Press",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "PrPr"
+      ]
+    },
+    {
+      "headingId": "building-potosi",
+      "heading": "Potosi",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Pts"
+      ]
+    },
+    {
+      "headingId": "building-coffffee-house",
+      "heading": "Coffffee House",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "CfHs"
+      ]
+    },
+    {
+      "headingId": "building-factory",
+      "heading": "Factory",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Fct"
+      ]
+    },
+    {
+      "headingId": "building-hospital",
+      "heading": "Hospital",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Hsp"
+      ]
+    },
+    {
+      "headingId": "building-hydro-plant",
+      "heading": "Hydro Plant",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "HdPl"
+      ]
+    },
+    {
+      "headingId": "building-penal-colony",
+      "heading": "Penal Colony",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "PnCl"
+      ]
+    },
+    {
+      "headingId": "building-railroad",
+      "heading": "Railroad",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Rlr"
+      ]
+    },
+    {
+      "headingId": "building-urban-center",
+      "heading": "Urban Center",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "UbCt"
+      ]
+    },
+    {
+      "headingId": "building-voortrekker",
+      "heading": "Voortrekker",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Vtk"
+      ]
+    },
+    {
+      "headingId": "building-zeppelin",
+      "heading": "Zeppelin",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Zpl"
+      ]
+    },
+    {
+      "headingId": "building-engineering-school",
+      "heading": "Engineering School",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "EgSl"
+      ]
+    },
+    {
+      "headingId": "building-sewer-system",
+      "heading": "Sewer System",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SwSt"
+      ]
+    },
+    {
+      "headingId": "building-stock-exchange",
+      "heading": "Stock Exchange",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "SkEx"
+      ]
+    },
+    {
+      "headingId": "building-coal-mine",
+      "heading": "Coal Mine",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "ClMn"
+      ]
+    },
+    {
+      "headingId": "building-national-park",
+      "heading": "National Park",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "NtPk"
+      ]
+    },
+    {
+      "headingId": "building-radio",
+      "heading": "Radio",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Rad"
+      ]
+    },
+    {
+      "headingId": "building-shantytown",
+      "heading": "Shantytown",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Stt"
+      ]
+    },
+    {
+      "headingId": "building-department-store",
+      "heading": "Department Store",
+      "section": "Building",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "DpSr"
+      ]
+    },
+    {
+      "headingId": "colony-hispania",
+      "heading": "Hispania",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Hsn"
+      ]
+    },
+    {
+      "headingId": "colony-israel",
+      "heading": "Israel",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Isr"
+      ]
+    },
+    {
+      "headingId": "colony-macedonia",
+      "heading": "Macedonia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Mcd"
+      ]
+    },
+    {
+      "headingId": "colony-nubia",
+      "heading": "Nubia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Nub"
+      ]
+    },
+    {
+      "headingId": "colony-babylonia",
+      "heading": "Babylonia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Bbl"
+      ]
+    },
+    {
+      "headingId": "colony-gaul",
+      "heading": "Gaul",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Gal"
+      ]
+    },
+    {
+      "headingId": "colony-armenia",
+      "heading": "Armenia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Arm"
+      ]
+    },
+    {
+      "headingId": "colony-hindu-kush",
+      "heading": "Hindu Kush",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "HdKs"
+      ]
+    },
+    {
+      "headingId": "colony-greenland",
+      "heading": "Greenland",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Grl"
+      ]
+    },
+    {
+      "headingId": "colony-lombardy",
+      "heading": "Lombardy",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Lbd"
+      ]
+    },
+    {
+      "headingId": "colony-sicily",
+      "heading": "Sicily",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Scl"
+      ]
+    },
+    {
+      "headingId": "colony-tibet",
+      "heading": "Tibet",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Tbt"
+      ]
+    },
+    {
+      "headingId": "colony-england",
+      "heading": "England",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Eng"
+      ]
+    },
+    {
+      "headingId": "colony-prussia",
+      "heading": "Prussia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Prs"
+      ]
+    },
+    {
+      "headingId": "colony-crusader-states",
+      "heading": "Crusader States",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "CsSt"
+      ]
+    },
+    {
+      "headingId": "colony-saharan-trade",
+      "heading": "Saharan Trade",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "ShTd"
+      ]
+    },
+    {
+      "headingId": "colony-aztec-empire",
+      "heading": "Aztec Empire",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "AzEp"
+      ]
+    },
+    {
+      "headingId": "colony-incan-empire",
+      "heading": "Incan Empire",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "IcEp"
+      ]
+    },
+    {
+      "headingId": "colony-quebec",
+      "heading": "Quebec",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Qbc"
+      ]
+    },
+    {
+      "headingId": "colony-south-africa",
+      "heading": "South Africa",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "StAf"
+      ]
+    },
+    {
+      "headingId": "colony-brazil",
+      "heading": "Brazil",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Brz"
+      ]
+    },
+    {
+      "headingId": "colony-phillipines",
+      "heading": "Phillipines",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Plp"
+      ]
+    },
+    {
+      "headingId": "colony-the-caribbean",
+      "heading": "The Caribbean",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "TCrb"
+      ]
+    },
+    {
+      "headingId": "colony-virginia",
+      "heading": "Virginia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Vgn"
+      ]
+    },
+    {
+      "headingId": "colony-congo",
+      "heading": "Congo",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Con"
+      ]
+    },
+    {
+      "headingId": "colony-india",
+      "heading": "India",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Ind"
+      ]
+    },
+    {
+      "headingId": "colony-nigeria",
+      "heading": "Nigeria",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Ngr"
+      ]
+    },
+    {
+      "headingId": "colony-ostafrika-tanganyika-africa",
+      "heading": "Ostafrika (Tanganyika/Africa",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Oak"
+      ]
+    },
+    {
+      "headingId": "colony-algeria",
+      "heading": "Algeria",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Agr"
+      ]
+    },
+    {
+      "headingId": "colony-hong-kong",
+      "heading": "Hong Kong",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "HgKg"
+      ]
+    },
+    {
+      "headingId": "colony-australia",
+      "heading": "Australia",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Arl"
+      ]
+    },
+    {
+      "headingId": "colony-libya",
+      "heading": "Libya",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "Lby"
+      ]
+    },
+    {
+      "headingId": "colony-grand-duchy-of-finland",
+      "heading": "Grand Duchy of Finland",
+      "section": "Colony",
+      "sourcePages": [
+        4
+      ],
+      "cardIds": [
+        "faq-grand-duchy-of-finland"
+      ]
+    },
+    {
+      "headingId": "golden-age-aeneid",
+      "heading": "Aeneid",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "And"
+      ]
+    },
+    {
+      "headingId": "golden-age-iron-working",
+      "heading": "Iron Working",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "IrWk"
+      ]
+    },
+    {
+      "headingId": "golden-age-map-making",
+      "heading": "Map Making",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "MpMk"
+      ]
+    },
+    {
+      "headingId": "golden-age-the-bible",
+      "heading": "The Bible",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Bib"
+      ]
+    },
+    {
+      "headingId": "golden-age-silk",
+      "heading": "Silk",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Slk"
+      ]
+    },
+    {
+      "headingId": "golden-age-the-odyssey",
+      "heading": "The Odyssey",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Ods"
+      ]
+    },
+    {
+      "headingId": "golden-age-coinage",
+      "heading": "Coinage",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cng"
+      ]
+    },
+    {
+      "headingId": "golden-age-mahabharata",
+      "heading": "Mahabharata",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Mhb"
+      ]
+    },
+    {
+      "headingId": "golden-age-antikythera-mechanism",
+      "heading": "Antikythera Mechanism",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "faq-antikythera-mechanism"
+      ]
+    },
+    {
+      "headingId": "golden-age-compass",
+      "heading": "Compass",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cmp"
+      ]
+    },
+    {
+      "headingId": "golden-age-divina-comedia",
+      "heading": "Divina Comedia",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "DvCm"
+      ]
+    },
+    {
+      "headingId": "golden-age-heavy-plough",
+      "heading": "Heavy Plough",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HvPl"
+      ]
+    },
+    {
+      "headingId": "golden-age-magna-carta",
+      "heading": "Magna Carta",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "MnCt"
+      ]
+    },
+    {
+      "headingId": "golden-age-spectacles",
+      "heading": "Spectacles",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Stc"
+      ]
+    },
+    {
+      "headingId": "golden-age-three-kingdoms",
+      "heading": "Three Kingdoms",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "RTK"
+      ]
+    },
+    {
+      "headingId": "golden-age-gunpowder",
+      "heading": "Gunpowder",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Gpd"
+      ]
+    },
+    {
+      "headingId": "golden-age-the-quoran",
+      "heading": "The Quoran",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Qrn"
+      ]
+    },
+    {
+      "headingId": "golden-age-arabian-nights",
+      "heading": "Arabian Nights",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "ArNt"
+      ]
+    },
+    {
+      "headingId": "golden-age-clocks",
+      "heading": "Clocks",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Clk"
+      ]
+    },
+    {
+      "headingId": "golden-age-gutenberg-bible",
+      "heading": "Gutenberg Bible",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "GbBb"
+      ]
+    },
+    {
+      "headingId": "golden-age-microscope",
+      "heading": "Microscope",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Mcs"
+      ]
+    },
+    {
+      "headingId": "golden-age-romeo-and-juliet",
+      "heading": "Romeo and Juliet",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "RmJl"
+      ]
+    },
+    {
+      "headingId": "golden-age-don-quixote",
+      "heading": "Don Quixote",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "DnQx"
+      ]
+    },
+    {
+      "headingId": "golden-age-telescope",
+      "heading": "Telescope",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Tls"
+      ]
+    },
+    {
+      "headingId": "golden-age-principia",
+      "heading": "Principia",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Pcp"
+      ]
+    },
+    {
+      "headingId": "golden-age-thermometer",
+      "heading": "Thermometer",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Tmm"
+      ]
+    },
+    {
+      "headingId": "golden-age-le-vite",
+      "heading": "Le Vite",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "LeVt"
+      ]
+    },
+    {
+      "headingId": "golden-age-das-kapital",
+      "heading": "Das Kapital",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "DsKp"
+      ]
+    },
+    {
+      "headingId": "golden-age-dynamite",
+      "heading": "Dynamite",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Dnm"
+      ]
+    },
+    {
+      "headingId": "golden-age-origin-of-species",
+      "heading": "Origin of Species",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "OgSc"
+      ]
+    },
+    {
+      "headingId": "golden-age-vaccine",
+      "heading": "Vaccine",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Vcn"
+      ]
+    },
+    {
+      "headingId": "golden-age-candide",
+      "heading": "Candide",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cdd"
+      ]
+    },
+    {
+      "headingId": "golden-age-electricity",
+      "heading": "Electricity",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Etc"
+      ]
+    },
+    {
+      "headingId": "golden-age-kalevala",
+      "heading": "Kalevala",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Klv"
+      ]
+    },
+    {
+      "headingId": "golden-age-spinning-jenny",
+      "heading": "Spinning Jenny",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "SnJn"
+      ]
+    },
+    {
+      "headingId": "golden-age-uncle-tom-s-cabin",
+      "heading": "Uncle Tom's Cabin",
+      "section": "Golden Age",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "UTC"
+      ]
+    },
+    {
+      "headingId": "military-axeman",
+      "heading": "Axeman",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Ar_Axm",
+        "C_Axm",
+        "Et_Axm",
+        "J_Axm",
+        "Pl_Axm",
+        "Ps_Axm"
+      ]
+    },
+    {
+      "headingId": "military-chariot",
+      "heading": "Chariot",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Crt"
+      ]
+    },
+    {
+      "headingId": "military-hoplite",
+      "heading": "Hoplite",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Hpl"
+      ]
+    },
+    {
+      "headingId": "military-immortal",
+      "heading": "Immortal",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Imt"
+      ]
+    },
+    {
+      "headingId": "military-legionary",
+      "heading": "Legionary",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Lgn"
+      ]
+    },
+    {
+      "headingId": "military-archer",
+      "heading": "Archer",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Arc"
+      ]
+    },
+    {
+      "headingId": "military-trireme",
+      "heading": "Trireme",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Trm"
+      ]
+    },
+    {
+      "headingId": "military-elephant",
+      "heading": "Elephant",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Elp"
+      ]
+    },
+    {
+      "headingId": "military-phalanx",
+      "heading": "Phalanx",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Plx"
+      ]
+    },
+    {
+      "headingId": "military-praetorian-guard",
+      "heading": "Praetorian Guard",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "PtGd"
+      ]
+    },
+    {
+      "headingId": "military-camel-archer",
+      "heading": "Camel Archer",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "CmAr"
+      ]
+    },
+    {
+      "headingId": "military-cho-ko-nu",
+      "heading": "Cho-Ko-Nu",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "CKN"
+      ]
+    },
+    {
+      "headingId": "military-horse-archer",
+      "heading": "Horse Archer",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HsAr"
+      ]
+    },
+    {
+      "headingId": "military-longboats",
+      "heading": "Longboats",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Lsp"
+      ]
+    },
+    {
+      "headingId": "military-knight",
+      "heading": "Knight",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Knt"
+      ]
+    },
+    {
+      "headingId": "military-longbowman",
+      "heading": "Longbowman",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Lbm"
+      ]
+    },
+    {
+      "headingId": "military-cataphract",
+      "heading": "Cataphract",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Ctp"
+      ]
+    },
+    {
+      "headingId": "military-greek-fire-galley",
+      "heading": "Greek Fire Galley",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "GFG"
+      ]
+    },
+    {
+      "headingId": "military-assassin",
+      "heading": "Assassin",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Ass"
+      ]
+    },
+    {
+      "headingId": "military-conquistador",
+      "heading": "Conquistador",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cqd"
+      ]
+    },
+    {
+      "headingId": "military-jaguar-warrior",
+      "heading": "Jaguar Warrior",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "JgWr"
+      ]
+    },
+    {
+      "headingId": "military-redcoat",
+      "heading": "Redcoat",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Rdc"
+      ]
+    },
+    {
+      "headingId": "military-samurai",
+      "heading": "Samurai",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Smr"
+      ]
+    },
+    {
+      "headingId": "military-frigate",
+      "heading": "Frigate",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Fgt"
+      ]
+    },
+    {
+      "headingId": "military-ranger",
+      "heading": "Ranger",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Rng"
+      ]
+    },
+    {
+      "headingId": "military-hakkapeliitta",
+      "heading": "Hakkapeliitta",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Hkp"
+      ]
+    },
+    {
+      "headingId": "military-mercenary",
+      "heading": "Mercenary",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Mcn"
+      ]
+    },
+    {
+      "headingId": "military-privateer",
+      "heading": "Privateer",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Pvt"
+      ]
+    },
+    {
+      "headingId": "military-cavalry",
+      "heading": "Cavalry",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cvr"
+      ]
+    },
+    {
+      "headingId": "military-cossack",
+      "heading": "Cossack",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Csk"
+      ]
+    },
+    {
+      "headingId": "military-hussar",
+      "heading": "Hussar",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "faq-hussar"
+      ]
+    },
+    {
+      "headingId": "military-riflfleman",
+      "heading": "Riflfleman",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Rfm"
+      ]
+    },
+    {
+      "headingId": "military-conscript",
+      "heading": "Conscript",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cns"
+      ]
+    },
+    {
+      "headingId": "military-submarine",
+      "heading": "Submarine",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Sub"
+      ]
+    },
+    {
+      "headingId": "military-dreadnought",
+      "heading": "Dreadnought",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Drn"
+      ]
+    },
+    {
+      "headingId": "military-machine-gunner",
+      "heading": "Machine Gunner",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "McGn"
+      ]
+    },
+    {
+      "headingId": "military-boxers",
+      "heading": "Boxers",
+      "section": "Military",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Bxr"
+      ]
+    },
+    {
+      "headingId": "war-hunnic-invasions",
+      "heading": "Hunnic Invasions",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HncI"
+      ]
+    },
+    {
+      "headingId": "war-pelopponesian-war",
+      "heading": "Pelopponesian War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "PlpW"
+      ]
+    },
+    {
+      "headingId": "war-warring-states",
+      "heading": "Warring States",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "WSts"
+      ]
+    },
+    {
+      "headingId": "war-wars-of-alexander",
+      "heading": "Wars of Alexander",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "WAlx"
+      ]
+    },
+    {
+      "headingId": "war-parthian-wars",
+      "heading": "Parthian Wars",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "PrtW"
+      ]
+    },
+    {
+      "headingId": "war-three-kingdoms",
+      "heading": "Three Kingdoms",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "ThKd"
+      ]
+    },
+    {
+      "headingId": "war-hyksos-invasion",
+      "heading": "Hyksos Invasion",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HksI"
+      ]
+    },
+    {
+      "headingId": "war-punic-wars",
+      "heading": "Punic Wars",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "PncW"
+      ]
+    },
+    {
+      "headingId": "war-byzantine-arab-war",
+      "heading": "Byzantine-Arab War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "BAW"
+      ]
+    },
+    {
+      "headingId": "war-first-crusade",
+      "heading": "First Crusade",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "FstC"
+      ]
+    },
+    {
+      "headingId": "war-hundred-years-war",
+      "heading": "Hundred Years War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HYW"
+      ]
+    },
+    {
+      "headingId": "war-reconquista",
+      "heading": "Reconquista",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Rcq"
+      ]
+    },
+    {
+      "headingId": "war-viking-raids",
+      "heading": "Viking Raids",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "VkgR"
+      ]
+    },
+    {
+      "headingId": "war-war-of-the-roses",
+      "heading": "War of the Roses",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "WRss"
+      ]
+    },
+    {
+      "headingId": "war-mongol-invasions",
+      "heading": "Mongol Invasions",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "MngI"
+      ]
+    },
+    {
+      "headingId": "war-vandalic-war",
+      "heading": "Vandalic War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "VdlW"
+      ]
+    },
+    {
+      "headingId": "war-great-northern-war",
+      "heading": "Great Northern War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "GNW"
+      ]
+    },
+    {
+      "headingId": "war-imjin-war",
+      "heading": "Imjin War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "ImjW"
+      ]
+    },
+    {
+      "headingId": "war-mughal-invasion",
+      "heading": "Mughal Invasion",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "MghI"
+      ]
+    },
+    {
+      "headingId": "war-war-of-jenkins-ear",
+      "heading": "War of Jenkins' Ear",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "WJE"
+      ]
+    },
+    {
+      "headingId": "war-cortes-expedition",
+      "heading": "Cortes Expedition",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "CtEx"
+      ]
+    },
+    {
+      "headingId": "war-dutch-liberation-war",
+      "heading": "Dutch Liberation War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "DLW"
+      ]
+    },
+    {
+      "headingId": "war-thirty-years-war",
+      "heading": "Thirty Years War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "TYW"
+      ]
+    },
+    {
+      "headingId": "war-war-of-cyprus",
+      "heading": "War of Cyprus",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "WCpr"
+      ]
+    },
+    {
+      "headingId": "war-balkan-wars",
+      "heading": "Balkan Wars",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "BknW"
+      ]
+    },
+    {
+      "headingId": "war-franco-prussian-war",
+      "heading": "Franco-Prussian War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "FPW"
+      ]
+    },
+    {
+      "headingId": "war-opium-war",
+      "heading": "Opium War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "OpmW"
+      ]
+    },
+    {
+      "headingId": "war-second-boer-war",
+      "heading": "Second Boer War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "SBW"
+      ]
+    },
+    {
+      "headingId": "war-anglo-afghan-war",
+      "heading": "Anglo-Afghan War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "AAW"
+      ]
+    },
+    {
+      "headingId": "war-napoleonic-war",
+      "heading": "Napoleonic War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "NplW"
+      ]
+    },
+    {
+      "headingId": "war-american-civil-war",
+      "heading": "American Civil War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "ACW"
+      ]
+    },
+    {
+      "headingId": "war-crimean-war",
+      "heading": "Crimean War",
+      "section": "War",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "CmnW"
+      ]
+    },
+    {
+      "headingId": "wonder-colosseum",
+      "heading": "Colosseum",
+      "section": "Wonder",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Cls"
+      ]
+    },
+    {
+      "headingId": "wonder-hanging-gardens",
+      "heading": "Hanging Gardens",
+      "section": "Wonder",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "HgGd"
+      ]
+    },
+    {
+      "headingId": "wonder-pyramids",
+      "heading": "Pyramids",
+      "section": "Wonder",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Prm"
+      ]
+    },
+    {
+      "headingId": "wonder-stonehenge",
+      "heading": "Stonehenge",
+      "section": "Wonder",
+      "sourcePages": [
+        5
+      ],
+      "cardIds": [
+        "Sth"
+      ]
+    },
+    {
+      "headingId": "wonder-great-lighthouse",
+      "heading": "Great Lighthouse",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "GrLh"
+      ]
+    },
+    {
+      "headingId": "wonder-sphinx",
+      "heading": "Sphinx",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Spx"
+      ]
+    },
+    {
+      "headingId": "wonder-the-oracle",
+      "heading": "The Oracle",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Orc"
+      ]
+    },
+    {
+      "headingId": "wonder-solomon-s-temple",
+      "heading": "Solomon's Temple",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SmTp"
+      ]
+    },
+    {
+      "headingId": "wonder-terracotta-army",
+      "heading": "Terracotta Army",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "TcAm"
+      ]
+    },
+    {
+      "headingId": "wonder-petra",
+      "heading": "Petra",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Ptr"
+      ]
+    },
+    {
+      "headingId": "wonder-great-library",
+      "heading": "Great Library",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "GrLr"
+      ]
+    },
+    {
+      "headingId": "wonder-alhambra",
+      "heading": "Alhambra",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Ahb"
+      ]
+    },
+    {
+      "headingId": "wonder-notre-dame",
+      "heading": "Notre Dame",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "NtDm"
+      ]
+    },
+    {
+      "headingId": "wonder-porcelain-tower",
+      "heading": "Porcelain Tower",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "PcTw"
+      ]
+    },
+    {
+      "headingId": "wonder-sankore-university",
+      "heading": "Sankore University",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SkUn"
+      ]
+    },
+    {
+      "headingId": "wonder-angkor-wat",
+      "heading": "Angkor Wat",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "AkWt"
+      ]
+    },
+    {
+      "headingId": "wonder-chichen-itza",
+      "heading": "Chichen Itza",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "CcIz"
+      ]
+    },
+    {
+      "headingId": "wonder-moai-statues",
+      "heading": "Moai Statues",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "MoSt"
+      ]
+    },
+    {
+      "headingId": "wonder-krak-des-chevaliers",
+      "heading": "Krak des Chevaliers",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "KrCv"
+      ]
+    },
+    {
+      "headingId": "wonder-great-wall",
+      "heading": "Great Wall",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "GrWl"
+      ]
+    },
+    {
+      "headingId": "wonder-piazza-san-marco",
+      "heading": "Piazza San Marco",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "PSM"
+      ]
+    },
+    {
+      "headingId": "wonder-hagia-sophia",
+      "heading": "Hagia Sophia",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "faq-hagia-sophia"
+      ]
+    },
+    {
+      "headingId": "wonder-shwedagon-pagoda",
+      "heading": "Shwedagon Pagoda",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SwPg"
+      ]
+    },
+    {
+      "headingId": "wonder-machu-picchu",
+      "heading": "Machu Picchu",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "McPc"
+      ]
+    },
+    {
+      "headingId": "wonder-sistine-chapel",
+      "heading": "Sistine Chapel",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "StCp"
+      ]
+    },
+    {
+      "headingId": "wonder-taj-mahal",
+      "heading": "Taj Mahal",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "TjMh"
+      ]
+    },
+    {
+      "headingId": "wonder-versailles",
+      "heading": "Versailles",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Vrs"
+      ]
+    },
+    {
+      "headingId": "wonder-potala-palace",
+      "heading": "Potala Palace",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "PtPl"
+      ]
+    },
+    {
+      "headingId": "wonder-royal-society",
+      "heading": "Royal Society",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "RySc"
+      ]
+    },
+    {
+      "headingId": "wonder-uraniborg",
+      "heading": "Uraniborg",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Unb"
+      ]
+    },
+    {
+      "headingId": "wonder-forbidden-palace",
+      "heading": "Forbidden Palace",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "FbPl"
+      ]
+    },
+    {
+      "headingId": "wonder-himeji-castle",
+      "heading": "Himeji Castle",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "HmCs"
+      ]
+    },
+    {
+      "headingId": "wonder-red-fort",
+      "heading": "Red Fort",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "RdFt"
+      ]
+    },
+    {
+      "headingId": "wonder-kremlin",
+      "heading": "Kremlin",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "faq-kremlin"
+      ]
+    },
+    {
+      "headingId": "wonder-mechanical-turk",
+      "heading": "Mechanical Turk",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "faq-mechanical-turk"
+      ]
+    },
+    {
+      "headingId": "wonder-oresund-dues",
+      "heading": "Öresund Dues",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "OsDs"
+      ]
+    },
+    {
+      "headingId": "wonder-darwin-s-voyage",
+      "heading": "Darwin's Voyage",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "DwVy"
+      ]
+    },
+    {
+      "headingId": "wonder-ford-motor-company",
+      "heading": "Ford Motor Company",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "FMC"
+      ]
+    },
+    {
+      "headingId": "wonder-south-pole-expedition",
+      "heading": "South Pole Expedition",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SPE"
+      ]
+    },
+    {
+      "headingId": "wonder-suez-canal",
+      "heading": "Suez Canal",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SzCn"
+      ]
+    },
+    {
+      "headingId": "wonder-big-ben",
+      "heading": "Big Ben",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "BgBn"
+      ]
+    },
+    {
+      "headingId": "wonder-brandenburg-gate",
+      "heading": "Brandenburg Gate",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "BbGt"
+      ]
+    },
+    {
+      "headingId": "wonder-british-museum",
+      "heading": "British Museum",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "BtMs"
+      ]
+    },
+    {
+      "headingId": "wonder-mit",
+      "heading": "MIT",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "MIT"
+      ]
+    },
+    {
+      "headingId": "wonder-statue-of-liberty",
+      "heading": "Statue of Liberty",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "StLb"
+      ]
+    },
+    {
+      "headingId": "wonder-titanic",
+      "heading": "Titanic",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Ttn"
+      ]
+    },
+    {
+      "headingId": "wonder-wardenclyffffe-tower",
+      "heading": "Wardenclyffffe Tower",
+      "section": "Wonder",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "WcTw"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-the-pillar-of-hercules",
+      "heading": "The Pillar of Hercules",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "PlHc"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-mount-ararat",
+      "heading": "Mount Ararat",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "MtAr"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-vesuvius",
+      "heading": "Vesuvius",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "Vsv"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-mount-kailash",
+      "heading": "Mount Kailash",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "MtKl"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-siwa-oasis",
+      "heading": "Siwa Oasis",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        6
+      ],
+      "cardIds": [
+        "SwOs"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-siberia",
+      "heading": "Siberia",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Sbr"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-sahara",
+      "heading": "Sahara",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Shr"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-aurora-borealis",
+      "heading": "Aurora Borealis",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "ArBr"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-grand-banks",
+      "heading": "Grand Banks",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "GrBk"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-hawaii",
+      "heading": "Hawaii",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Hwi"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-great-barrier-reef",
+      "heading": "Great Barrier Reef",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "GBR"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-grand-canyon",
+      "heading": "Grand Canyon",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "GrCy"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-great-plains",
+      "heading": "Great Plains",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "GrPl"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-spice-islands",
+      "heading": "Spice Islands",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SpIl"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-cape-of-good-hope",
+      "heading": "Cape of Good Hope",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "CGH"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-titusville",
+      "heading": "Titusville",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ttv"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-northwest-passage",
+      "heading": "Northwest Passage",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "NwPs"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-victoria-falls",
+      "heading": "Victoria Falls",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "VtFl"
+      ]
+    },
+    {
+      "headingId": "natural-wonders-uluru",
+      "heading": "Uluru",
+      "section": "Natural Wonders",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ulr"
+      ]
+    },
+    {
+      "headingId": "event-aryan-migration",
+      "heading": "Aryan Migration",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "AM_CH"
+      ]
+    },
+    {
+      "headingId": "event-ashokas-conversion",
+      "heading": "Ashokas conversion",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "He_AC"
+      ]
+    },
+    {
+      "headingId": "event-assyrian-deportations",
+      "heading": "Assyrian deportations",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "AD_JA"
+      ]
+    },
+    {
+      "headingId": "event-atilla",
+      "heading": "Atilla",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "At_ZR"
+      ]
+    },
+    {
+      "headingId": "event-bread-and-games",
+      "heading": "Bread and Games",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BG_Ch"
+      ]
+    },
+    {
+      "headingId": "event-bronze-age-collapse",
+      "heading": "Bronze Age Collapse",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SP_BAC"
+      ]
+    },
+    {
+      "headingId": "event-christianity",
+      "heading": "Christianity",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BG_Ch"
+      ]
+    },
+    {
+      "headingId": "event-code-of-hammurabi",
+      "heading": "Code of Hammurabi",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "AM_CH"
+      ]
+    },
+    {
+      "headingId": "event-exodus",
+      "heading": "Exodus",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ri_Ex"
+      ]
+    },
+    {
+      "headingId": "event-han-dynasty",
+      "heading": "Han dynasty",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "PR_HD"
+      ]
+    },
+    {
+      "headingId": "event-hellenism",
+      "heading": "Hellenism",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "He_AC"
+      ]
+    },
+    {
+      "headingId": "event-ionian-colonisation",
+      "heading": "Ionian Colonisation",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SOB_IC"
+      ]
+    },
+    {
+      "headingId": "event-jain-ascetism",
+      "heading": "Jain Ascetism",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "AD_JA"
+      ]
+    },
+    {
+      "headingId": "event-olympic-games",
+      "heading": "Olympic games",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "QU_OG"
+      ]
+    },
+    {
+      "headingId": "event-pax-romana",
+      "heading": "Pax Romana",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "PR_HD"
+      ]
+    },
+    {
+      "headingId": "event-philosophy",
+      "heading": "Philosophy",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ta_Ph"
+      ]
+    },
+    {
+      "headingId": "event-qin-unifcation",
+      "heading": "Qin Unifcation",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "QU_OG"
+      ]
+    },
+    {
+      "headingId": "event-spartacus-revolt",
+      "heading": "Spartacus revolt",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "YTR_SR"
+      ]
+    },
+    {
+      "headingId": "event-rigveda",
+      "heading": "Rigveda",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ri_Ex"
+      ]
+    },
+    {
+      "headingId": "event-sea-peoples",
+      "heading": "Sea Peoples",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SP_BAC"
+      ]
+    },
+    {
+      "headingId": "event-shang-oracle-bones",
+      "heading": "Shang Oracle Bones",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SOB_IC"
+      ]
+    },
+    {
+      "headingId": "event-taoism",
+      "heading": "Taoism",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "Ta_Ph"
+      ]
+    },
+    {
+      "headingId": "event-yellow-turban-rebellion",
+      "heading": "Yellow Turban Rebellion",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "YTR_SR"
+      ]
+    },
+    {
+      "headingId": "event-zoroastrian-revival",
+      "heading": "Zoroastrian revival",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "At_ZR"
+      ]
+    },
+    {
+      "headingId": "event-benedictine-rule",
+      "heading": "Benedictine Rule",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BR_PM"
+      ]
+    },
+    {
+      "headingId": "event-black-death",
+      "heading": "Black Death",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BD_HPJ"
+      ]
+    },
+    {
+      "headingId": "event-caste-system",
+      "heading": "Caste system",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "EC_CS"
+      ]
+    },
+    {
+      "headingId": "event-chanson-de-roland",
+      "heading": "Chanson de Roland",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "CR_ZR"
+      ]
+    },
+    {
+      "headingId": "event-council-of-clermont",
+      "heading": "Council of Clermont",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "PG_CC"
+      ]
+    },
+    {
+      "headingId": "event-ecological-collapse",
+      "heading": "Ecological Collapse",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "EC_CS"
+      ]
+    },
+    {
+      "headingId": "event-feudal-dues",
+      "heading": "Feudal dues",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "FD_HM"
+      ]
+    },
+    {
+      "headingId": "event-fourth-crusade",
+      "heading": "Fourth Crusade",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "FC_SR"
+      ]
+    },
+    {
+      "headingId": "event-hajj-from-mali",
+      "heading": "Hajj from Mali",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "FD_HM"
+      ]
+    },
+    {
+      "headingId": "event-hanseatic-salt-trade",
+      "heading": "Hanseatic Salt Trade",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SB_HST"
+      ]
+    },
+    {
+      "headingId": "event-hunt-for-prester-john",
+      "heading": "Hunt for Prester John",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BD_HPJ"
+      ]
+    },
+    {
+      "headingId": "event-iconoclasm",
+      "heading": "Iconoclasm",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "RL_Ic"
+      ]
+    },
+    {
+      "headingId": "event-imperial-examination",
+      "heading": "Imperial Examination",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "IE_JC"
+      ]
+    },
+    {
+      "headingId": "event-justinian-code",
+      "heading": "Justinian Code",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "IE_JC"
+      ]
+    },
+    {
+      "headingId": "event-martyrdom-of-ali",
+      "heading": "Martyrdom of Ali",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "MA_Sc"
+      ]
+    },
+    {
+      "headingId": "event-paper-money",
+      "heading": "Paper Money",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "BR_PM"
+      ]
+    },
+    {
+      "headingId": "event-peace-of-god",
+      "heading": "Peace of God",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "PG_CC"
+      ]
+    },
+    {
+      "headingId": "event-raid-on-lindisfarne",
+      "heading": "Raid on Lindisfarne",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "RL_Ic"
+      ]
+    },
+    {
+      "headingId": "event-religious-schism",
+      "heading": "Religious Schism",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SM_GS"
+      ]
+    },
+    {
+      "headingId": "event-sack-of-baghdad",
+      "heading": "Sack of Baghdad",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "SB_HST"
+      ]
+    },
+    {
+      "headingId": "event-scholasticism",
+      "heading": "Scholasticism",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "MA_Sc"
+      ]
+    },
+    {
+      "headingId": "event-song-resistance",
+      "heading": "Song Resistance",
+      "section": "Event",
+      "sourcePages": [
+        7
+      ],
+      "cardIds": [
+        "FC_SR"
+      ]
+    },
+    {
+      "headingId": "event-stupor-mundi",
+      "heading": "Stupor Mundi",
+      "section": "Event",
+      "sourcePages": [
+        7,
+        8
+      ],
+      "cardIds": [
+        "SM_GS"
+      ]
+    },
+    {
+      "headingId": "event-zanj-revolt",
+      "heading": "Zanj Revolt",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CR_ZR"
+      ]
+    },
+    {
+      "headingId": "event-absolute-monarchy",
+      "heading": "Absolute Monarchy",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AM_SWT"
+      ]
+    },
+    {
+      "headingId": "event-african-slave-trade",
+      "heading": "African Slave Trade",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AST_GR"
+      ]
+    },
+    {
+      "headingId": "event-blackbeard",
+      "heading": "Blackbeard",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Bl_HCA"
+      ]
+    },
+    {
+      "headingId": "event-city-upon-a-hill",
+      "heading": "City Upon a Hill",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "LIA_CUH"
+      ]
+    },
+    {
+      "headingId": "event-columbian-exchange",
+      "heading": "Columbian Exchange",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CE_EJ"
+      ]
+    },
+    {
+      "headingId": "event-council-of-trent",
+      "heading": "Council of Trent",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ja_CT"
+      ]
+    },
+    {
+      "headingId": "event-crop-rotation",
+      "heading": "Crop Rotation",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CR_Me"
+      ]
+    },
+    {
+      "headingId": "event-dutch-revolt",
+      "heading": "Dutch Revolt",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Pi_DR"
+      ]
+    },
+    {
+      "headingId": "event-expulsion-of-jews",
+      "heading": "Expulsion of Jews",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CE_EJ"
+      ]
+    },
+    {
+      "headingId": "event-glorious-revolution",
+      "heading": "Glorious revolution",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AST_GR"
+      ]
+    },
+    {
+      "headingId": "event-habeas-corpus-act",
+      "heading": "Habeas Corpus Act",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Bl_HCA"
+      ]
+    },
+    {
+      "headingId": "event-janissaries",
+      "heading": "Janissaries",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ja_CT"
+      ]
+    },
+    {
+      "headingId": "event-kangxi-era",
+      "heading": "Kangxi Era",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "TM_KE"
+      ]
+    },
+    {
+      "headingId": "event-little-ice-age",
+      "heading": "Little Ice Age",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "LIA_CUH"
+      ]
+    },
+    {
+      "headingId": "event-magellan-s-expedition",
+      "heading": "Magellan's expedition",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "ME_PI"
+      ]
+    },
+    {
+      "headingId": "event-mercantilism",
+      "heading": "Mercantilism",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CR_Me"
+      ]
+    },
+    {
+      "headingId": "event-muntzer-revolt",
+      "heading": "Muntzer Revolt",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "ST_MR"
+      ]
+    },
+    {
+      "headingId": "event-papal-indulgence",
+      "heading": "Papal Indulgence",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "ME_PI"
+      ]
+    },
+    {
+      "headingId": "event-peace-of-westphalia",
+      "heading": "Peace of Westphalia",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SV_PW"
+      ]
+    },
+    {
+      "headingId": "event-pilgrims",
+      "heading": "Pilgrims",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Pi_DR"
+      ]
+    },
+    {
+      "headingId": "event-salem-witch-trials",
+      "heading": "Salem Witch Trials",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AM_SWT"
+      ]
+    },
+    {
+      "headingId": "event-sinking-of-the-vasa",
+      "heading": "Sinking of the Vasa",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SV_PW"
+      ]
+    },
+    {
+      "headingId": "event-spice-trade",
+      "heading": "Spice Trade",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "ST_MR"
+      ]
+    },
+    {
+      "headingId": "event-tulip-mania",
+      "heading": "Tulip Mania",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "TM_KE"
+      ]
+    },
+    {
+      "headingId": "event-american-revolution",
+      "heading": "American Revolution",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AR_FR"
+      ]
+    },
+    {
+      "headingId": "event-anarchism",
+      "heading": "Anarchism",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "An_GE"
+      ]
+    },
+    {
+      "headingId": "event-californian-gold-rush",
+      "heading": "Californian Gold Rush",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CGR_IPB"
+      ]
+    },
+    {
+      "headingId": "event-dreyfus-affffair",
+      "heading": "Dreyfus Affffair",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SA_DA"
+      ]
+    },
+    {
+      "headingId": "event-emigration",
+      "heading": "Emigration",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "We_Em"
+      ]
+    },
+    {
+      "headingId": "event-entente-cordiale",
+      "heading": "Entente Cordiale",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "EC_GS"
+      ]
+    },
+    {
+      "headingId": "event-first-vatican-council",
+      "heading": "First Vatican Council",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "EK_FVC"
+      ]
+    },
+    {
+      "headingId": "event-french-revolution",
+      "heading": "French Revolution",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "AR_FR"
+      ]
+    },
+    {
+      "headingId": "event-general-strike",
+      "heading": "General strike",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "EC_GS"
+      ]
+    },
+    {
+      "headingId": "event-great-exhibition",
+      "heading": "Great Exhibition",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "An_GE"
+      ]
+    },
+    {
+      "headingId": "event-industrial-revolution",
+      "heading": "Industrial Revolution",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ro_IR"
+      ]
+    },
+    {
+      "headingId": "event-irish-potato-blight",
+      "heading": "Irish Potato Blight",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "CGR_IPB"
+      ]
+    },
+    {
+      "headingId": "event-krakatoa",
+      "heading": "Krakatoa",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "EK_FVC"
+      ]
+    },
+    {
+      "headingId": "event-march-to-moscow",
+      "heading": "March to Moscow",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "MM_TR"
+      ]
+    },
+    {
+      "headingId": "event-romanticism",
+      "heading": "Romanticism",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ro_IR"
+      ]
+    },
+    {
+      "headingId": "event-scramble-for-africa",
+      "heading": "Scramble for Africa",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SA_DA"
+      ]
+    },
+    {
+      "headingId": "event-sepoy-mutiny",
+      "heading": "Sepoy Mutiny",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "TM_SM"
+      ]
+    },
+    {
+      "headingId": "event-sick-man-of-europe",
+      "heading": "Sick Man of Europe",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SME_WS"
+      ]
+    },
+    {
+      "headingId": "event-sokoto-caliphate",
+      "heading": "Sokoto Caliphate",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SC_TCO"
+      ]
+    },
+    {
+      "headingId": "event-taiping-rebellion",
+      "heading": "Taiping Rebellion",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "MM_TR"
+      ]
+    },
+    {
+      "headingId": "event-tennis-court-oath",
+      "heading": "Tennis Court Oath",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SC_TCO"
+      ]
+    },
+    {
+      "headingId": "event-tonghak-movement",
+      "heading": "Tonghak movement",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "TM_SM"
+      ]
+    },
+    {
+      "headingId": "event-weltpolitik",
+      "heading": "Weltpolitik",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "We_Em"
+      ]
+    },
+    {
+      "headingId": "event-women-s-suffffrage",
+      "heading": "Women's Suffffrage",
+      "section": "Event",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "SME_WS"
+      ]
+    },
+    {
+      "headingId": "dynasties-america-federalist-party",
+      "heading": "America: Federalist Party",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Am_FP"
+      ]
+    },
+    {
+      "headingId": "dynasties-america-democratic-republicans",
+      "heading": "America: Democratic Republicans",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Am_DR"
+      ]
+    },
+    {
+      "headingId": "dynasties-arabs-umayyad-caliphate",
+      "heading": "Arabs: Umayyad Caliphate",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ar_UC"
+      ]
+    },
+    {
+      "headingId": "dynasties-arabs-abbasid-caliphate",
+      "heading": "Arabs: Abbasid Caliphate",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Ar_AC"
+      ]
+    },
+    {
+      "headingId": "dynasties-china-qin-dynasty",
+      "heading": "China: Qin Dynasty",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "C_QD"
+      ]
+    },
+    {
+      "headingId": "dynasties-china-ming-dynasty",
+      "heading": "China: Ming Dynasty",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "C_MD"
+      ]
+    },
+    {
+      "headingId": "dynasties-egypt-new-kingdom",
+      "heading": "Egypt: New Kingdom",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Eg_NK"
+      ]
+    },
+    {
+      "headingId": "dynasties-egypt-old-kingdom",
+      "heading": "Egypt: Old Kingdom",
+      "section": "Dynasties",
+      "sourcePages": [
+        8
+      ],
+      "cardIds": [
+        "Eg_OK"
+      ]
+    },
+    {
+      "headingId": "dynasties-ethiopia-axumite-kingdom",
+      "heading": "Ethiopia: Axumite Kingdom",
+      "section": "Dynasties",
+      "sourcePages": [
+        8,
+        9
+      ],
+      "cardIds": [
+        "Et_AK"
+      ]
+    },
+    {
+      "headingId": "dynasties-ethiopia-sheba",
+      "heading": "Ethiopia: Sheba",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Et_Sb"
+      ]
+    },
+    {
+      "headingId": "dynasties-greece-athens",
+      "heading": "Greece: Athens",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "G_At"
+      ]
+    },
+    {
+      "headingId": "dynasties-greece-sparta",
+      "heading": "Greece: Sparta",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "G_St"
+      ]
+    },
+    {
+      "headingId": "dynasties-india-mauryan-empire",
+      "heading": "India: Mauryan Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "I_My"
+      ]
+    },
+    {
+      "headingId": "dynasties-india-mughal-empire",
+      "heading": "India: Mughal Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "I_Mg"
+      ]
+    },
+    {
+      "headingId": "dynasties-japan-heian-period",
+      "heading": "Japan: Heian Period",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "J_HP"
+      ]
+    },
+    {
+      "headingId": "dynasties-japan-edo-period",
+      "heading": "Japan: Edo Period",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "J_EP"
+      ]
+    },
+    {
+      "headingId": "dynasties-korea-koryo-kingdom",
+      "heading": "Korea: Koryo Kingdom",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "K_KK"
+      ]
+    },
+    {
+      "headingId": "dynasties-korea-joseon-kingdom",
+      "heading": "Korea: Joseon Kingdom",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "K_JK"
+      ]
+    },
+    {
+      "headingId": "dynasties-mali-mali-empire",
+      "heading": "Mali: Mali Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Ml_ME"
+      ]
+    },
+    {
+      "headingId": "dynasties-mali-songhai-empire",
+      "heading": "Mali: Songhai Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Ml_SE"
+      ]
+    },
+    {
+      "headingId": "dynasties-mongolia-golden-horde",
+      "heading": "Mongolia: Golden Horde",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Mg_GH"
+      ]
+    },
+    {
+      "headingId": "dynasties-mongolia-yuan-dynasty",
+      "heading": "Mongolia: Yuan Dynasty",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Mg_YD"
+      ]
+    },
+    {
+      "headingId": "dynasties-persia-achaemenid-empire",
+      "heading": "Persia: Achaemenid Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Ps_AE"
+      ]
+    },
+    {
+      "headingId": "dynasties-persia-sassanid-empire",
+      "heading": "Persia: Sassanid Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Ps_SE"
+      ]
+    },
+    {
+      "headingId": "dynasties-poland-jagellonian-dynasty",
+      "heading": "Poland: Jagellonian Dynasty",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Pl_JD"
+      ]
+    },
+    {
+      "headingId": "dynasties-poland-polish-lithuanian-commonwealth",
+      "heading": "Poland: Polish-Lithuanian Commonwealth",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Pl_PLC"
+      ]
+    },
+    {
+      "headingId": "dynasties-portugal-portugese-empire",
+      "heading": "Portugal: Portugese Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Pg_PE"
+      ]
+    },
+    {
+      "headingId": "dynasties-portugal-kingdom-of-leon",
+      "heading": "Portugal: Kingdom of Leon",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Pg_KL"
+      ]
+    },
+    {
+      "headingId": "dynasties-rome-roman-republic",
+      "heading": "Rome: Roman Republic",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "R_RR"
+      ]
+    },
+    {
+      "headingId": "dynasties-rome-roman-empire",
+      "heading": "Rome: Roman Empire",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "R_RE"
+      ]
+    },
+    {
+      "headingId": "dynasties-venice-domains-of-the-sea",
+      "heading": "Venice: Domains of the Sea",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Vn_DS"
+      ]
+    },
+    {
+      "headingId": "dynasties-venice-pactum-warmundi",
+      "heading": "Venice: Pactum Warmundi",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Vn_PW"
+      ]
+    },
+    {
+      "headingId": "dynasties-vikings-normans",
+      "heading": "Vikings: Normans",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Vk_Nm"
+      ]
+    },
+    {
+      "headingId": "dynasties-vikings-varangians",
+      "heading": "Vikings: Varangians",
+      "section": "Dynasties",
+      "sourcePages": [
+        9
+      ],
+      "cardIds": [
+        "Vk_Vr"
+      ]
+    }
+  ]
+}

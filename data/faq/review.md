@@ -39,6 +39,7 @@ Campaign rules Play a series of games. All players start the frst game on Prince
 
 ### Kortkopplingar
 
+- J_Epr · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -308,6 +309,8 @@ Sida 2 · nation · approved
 ### Kortkopplingar
 
 - PcTw · cross_reference · approved
+- J_Epr · cross_reference · pending
+- J_Hkd · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -346,6 +349,7 @@ Sida 2 · nation · pending
 
 ### Kortkopplingar
 
+- Mg_Stp · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -441,6 +445,7 @@ Sida 2 · nation · pending
 
 ### Kortkopplingar
 
+- Vk_OlUp · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1265,6 +1270,7 @@ Sida 4 · card · pending
 
 ### Kortkopplingar
 
+- faq-nikola-tesla · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1323,6 +1329,7 @@ Sida 4 · card · pending
 
 ### Kortkopplingar
 
+- CfHs · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1342,6 +1349,7 @@ Sida 4 · card · pending
 
 ### Kortkopplingar
 
+- faq-grand-duchy-of-finland · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1380,6 +1388,7 @@ Sida 5 · card · pending
 
 ### Kortkopplingar
 
+- faq-antikythera-mechanism · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1482,6 +1491,7 @@ Wonder You can place a ready Wonder over an existing wonder, even if you have fr
 ### Kortkopplingar
 
 - PcTw · general_rule · approved
+- faq-mechanical-turk · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1523,6 +1533,8 @@ Sida 6 · card · pending
 
 - GrLh · own_entry · pending
 - Hnb · cross_reference · pending
+- Lth · cross_reference · pending
+- Pg_Lth · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1563,6 +1575,13 @@ Sida 6 · card · pending
 ### Kortkopplingar
 
 - SmTp · own_entry · pending
+- Eg_Tpl · cross_reference · pending
+- I_Tpl · cross_reference · pending
+- J_Tpl · cross_reference · pending
+- K_Tpl · cross_reference · pending
+- Pg_Tpl · cross_reference · pending
+- Pl_Tpl · cross_reference · pending
+- Ps_Tpl · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1623,6 +1642,7 @@ Sida 6 · card · pending
 ### Kortkopplingar
 
 - GrLr · own_entry · pending
+- Lib · cross_reference · pending
 
 Hänvisningar: golden-age-bonus
 
@@ -1787,6 +1807,7 @@ Sida 6 · card · pending
 
 ### Kortkopplingar
 
+- faq-hagia-sophia · own_entry · pending
 
 Hänvisningar: general-most-and-least
 
@@ -1807,6 +1828,8 @@ Sida 6 · card · pending
 ### Kortkopplingar
 
 - SwPg · own_entry · pending
+- C_Pgd · cross_reference · pending
+- Pgd · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1929,6 +1952,7 @@ Sida 6 · card · pending
 ### Kortkopplingar
 
 - HmCs · own_entry · pending
+- Cas · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1968,6 +1992,7 @@ Sida 6 · card · pending
 
 ### Kortkopplingar
 
+- faq-kremlin · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -1987,6 +2012,7 @@ Sida 6 · card · pending
 
 ### Kortkopplingar
 
+- faq-mechanical-turk · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2366,6 +2392,7 @@ Ashokas conversion – Workers are undeployed, so will be available to deploy ne
 
 ### Kortkopplingar
 
+- He_AC · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2385,6 +2412,7 @@ Bronze Age Collapse – The Nation with most Strength is safe, as well as the Na
 
 ### Kortkopplingar
 
+- SP_BAC · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2404,6 +2432,7 @@ Christianity – This is a choice, you do not have to do it even if you can.
 
 ### Kortkopplingar
 
+- BG_Ch · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2423,6 +2452,7 @@ Han dynasty – Taking this is a choice, but you must take both or none.
 
 ### Kortkopplingar
 
+- PR_HD · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2442,6 +2472,7 @@ Hellenism – If most Strength is shared all lose 2 Food.
 
 ### Kortkopplingar
 
+- He_AC · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2461,6 +2492,7 @@ Jain Ascetism – If you lost any VP due to being defeated by War or lost any VP
 
 ### Kortkopplingar
 
+- AD_JA · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2480,6 +2512,7 @@ Olympic games – This reordering comes after the new player order has been dete
 
 ### Kortkopplingar
 
+- QU_OG · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2499,6 +2532,7 @@ Qin Unifcation – All Nations with more Strength than the War Strength this rou
 
 ### Kortkopplingar
 
+- QU_OG · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2518,6 +2552,7 @@ Spartacus revolt – This reordering comes after the new player order has been d
 
 ### Kortkopplingar
 
+- YTR_SR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2537,6 +2572,7 @@ Rigveda – To make tracking this easier you can in most situations take the Boo
 
 ### Kortkopplingar
 
+- Ri_Ex · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2557,6 +2593,7 @@ Sea Peoples – You may only remove an architect on a wonder under construction,
 ### Kortkopplingar
 
 - Acm · cross_reference · pending
+- SP_BAC · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2576,6 +2613,7 @@ Zoroastrian revival – This is a choice for the Nation with most Stability. Eit
 
 ### Kortkopplingar
 
+- At_ZR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2595,6 +2633,7 @@ Black Death – Errata: ”Remove” should be ”Return”. Worker is placed in
 
 ### Kortkopplingar
 
+- BD_HPJ · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2614,6 +2653,7 @@ Ecological Collapse – This reordering comes after the new player order has bee
 
 ### Kortkopplingar
 
+- EC_CS · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2633,6 +2673,7 @@ Feudal dues – Errata: "turn order" should be "player order". Skip the Player o
 
 ### Kortkopplingar
 
+- FD_HM · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2652,6 +2693,7 @@ Fourth Crusade - Nation with least Strength only loses books if Nation with most
 
 ### Kortkopplingar
 
+- FC_SR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2671,6 +2713,7 @@ Hajj from Mali – If you have 2 or less Gold then nothing happens.
 
 ### Kortkopplingar
 
+- FD_HM · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2690,6 +2733,7 @@ Iconoclasm – You lose both 2 Food and 2 Gold.
 
 ### Kortkopplingar
 
+- RL_Ic · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2709,6 +2753,7 @@ Peace of God – If no War was bought then nothing happens.
 
 ### Kortkopplingar
 
+- PG_CC · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2728,6 +2773,7 @@ Song Resistance – If you lost any resources or VP due to being defeated by War
 
 ### Kortkopplingar
 
+- FC_SR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2747,6 +2793,7 @@ Stupor Mundi – To keep track of this you can temporarily keep Golden Age cards
 
 ### Kortkopplingar
 
+- SM_GS · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2766,6 +2813,7 @@ Zanj Revolt – This reordering comes after the new player order has been determ
 
 ### Kortkopplingar
 
+- CR_ZR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2785,6 +2833,7 @@ Absolute Monarchy – You cannot discard an advisor on its own, it must be repla
 
 ### Kortkopplingar
 
+- AM_SWT · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2804,6 +2853,7 @@ Dutch Revolt – This reordering comes after the new player order has been deter
 
 ### Kortkopplingar
 
+- Pi_DR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2823,6 +2873,7 @@ Glorious revolution – This is a choice, you either do both or nothing happens.
 
 ### Kortkopplingar
 
+- AST_GR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2842,6 +2893,7 @@ Janissaries – Taking this is a choice, but you must take both or none.
 
 ### Kortkopplingar
 
+- Ja_CT · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2861,6 +2913,7 @@ Kangxi Era – This reordering comes after the new player order has been determi
 
 ### Kortkopplingar
 
+- TM_KE · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2880,6 +2933,7 @@ Little Ice Age – This is a choice, done in reverse player order.
 
 ### Kortkopplingar
 
+- LIA_CUH · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2899,6 +2953,7 @@ Magellan's expedition – This is for every Colony bought this round, so you can
 
 ### Kortkopplingar
 
+- ME_PI · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2918,6 +2973,7 @@ Mercantilism – This is a choice, done in reverse player order. You can undeplo
 
 ### Kortkopplingar
 
+- CR_Me · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2937,6 +2993,7 @@ Muntzer Revolt – This reordering comes after the new player order has been det
 
 ### Kortkopplingar
 
+- ST_MR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2956,6 +3013,7 @@ Papal Indulgence - The free architect comes from the supply, must be used immedi
 
 ### Kortkopplingar
 
+- ME_PI · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2975,6 +3033,7 @@ Peace of Westphalia – This reordering comes after the new player order has bee
 
 ### Kortkopplingar
 
+- SV_PW · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -2994,6 +3053,7 @@ Pilgrims – Most Food must take the worker, there is no choice. If shared most 
 
 ### Kortkopplingar
 
+- Pi_DR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3015,6 +3075,7 @@ Salem Witch Trials – Remove both advisors if you have Porcelain Tower.
 ### Kortkopplingar
 
 - PcTw · cross_reference · approved
+- AM_SWT · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3034,6 +3095,7 @@ Sinking of the Vasa – This is a choice between gold loss and temporary reducti
 
 ### Kortkopplingar
 
+- SV_PW · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3053,6 +3115,7 @@ American Revolution – This is not a choice, if you have a Colony you must remo
 
 ### Kortkopplingar
 
+- AR_FR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3074,6 +3137,7 @@ Anarchism - Remove both advisors if you have Porcelain Tower.
 ### Kortkopplingar
 
 - PcTw · cross_reference · approved
+- An_GE · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3093,6 +3157,7 @@ Emigration – Errata: ”Remove” should be ”Return”. Worker is placed int
 
 ### Kortkopplingar
 
+- We_Em · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3112,6 +3177,7 @@ Entente Cordiale – The workers may be deployed to diferent military cards. You
 
 ### Kortkopplingar
 
+- EC_GS · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3133,6 +3199,7 @@ French Revolution – This is not a choice, if you have an Advisor you must remo
 ### Kortkopplingar
 
 - PcTw · cross_reference · approved
+- AR_FR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3152,6 +3219,7 @@ Great Exhibition - The free architects come from the supply, must be used immedi
 
 ### Kortkopplingar
 
+- An_GE · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3171,6 +3239,7 @@ Industrial Revolution – To win this you must have more workers deployed in Ind
 
 ### Kortkopplingar
 
+- Ro_IR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3190,6 +3259,7 @@ March to Moscow – This is not a choice, if you have a Colony you must remove i
 
 ### Kortkopplingar
 
+- MM_TR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3209,6 +3279,7 @@ Scramble for Africa – You only get 1 VP if you have at least 1 Industrial (age
 
 ### Kortkopplingar
 
+- SA_DA · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3228,6 +3299,7 @@ Sepoy Mutiny – This reordering comes after the new player order has been deter
 
 ### Kortkopplingar
 
+- TM_SM · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3247,6 +3319,7 @@ Sokoto Caliphate – This is a choice, done in reverse player order.
 
 ### Kortkopplingar
 
+- SC_TCO · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3266,6 +3339,7 @@ Taiping Rebellion – This reordering comes after the new player order has been 
 
 ### Kortkopplingar
 
+- MM_TR · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3285,6 +3359,7 @@ Tonghak movement – You both lose the books and gain the stone.
 
 ### Kortkopplingar
 
+- TM_SM · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3304,6 +3379,7 @@ Weltpolitik – You get both 5 gold and 5 stone per Industrial (age 4) Colony, n
 
 ### Kortkopplingar
 
+- We_Em · own_entry · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3343,6 +3419,7 @@ Sida 8 · dynasty · pending
 ### Kortkopplingar
 
 - Am_DR · own_entry · pending
+- Turmoil · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3444,6 +3521,7 @@ Sida 9 · dynasty · pending
 ### Kortkopplingar
 
 - I_My · own_entry · pending
+- Ind · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3464,6 +3542,7 @@ Sida 9 · dynasty · pending
 ### Kortkopplingar
 
 - I_Mg · own_entry · pending
+- Ind · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3506,6 +3585,13 @@ Sida 9 · dynasty · pending
 
 - J_EP · own_entry · pending
 - SmTp · cross_reference · pending
+- Eg_Tpl · cross_reference · pending
+- I_Tpl · cross_reference · pending
+- J_Tpl · cross_reference · pending
+- K_Tpl · cross_reference · pending
+- Pg_Tpl · cross_reference · pending
+- Pl_Tpl · cross_reference · pending
+- Ps_Tpl · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3626,6 +3712,7 @@ Sida 9 · dynasty · pending
 ### Kortkopplingar
 
 - Ps_SE · own_entry · pending
+- Turmoil · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3710,6 +3797,7 @@ Sida 9 · dynasty · pending
 - AbBk · cross_reference · pending
 - Pg_KL · own_entry · pending
 - Mtz · cross_reference · pending
+- Ri_Ex · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -3943,6 +4031,7 @@ Q: Can the shadow take Turmoil cards? A: No, but it will roll when you do. [1.8]
 
 ### Kortkopplingar
 
+- Turmoil · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4057,6 +4146,7 @@ Q: When an architect is removed by a die roll in the solo game, is a Turmoil car
 
 ### Kortkopplingar
 
+- Turmoil · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4097,6 +4187,13 @@ Q: When does "Scoring" happen, like on Statue of Liberty? (Scoring: +2 VP if mos
 
 - SmTp · cross_reference · pending
 - StLb · cross_reference · pending
+- Eg_Tpl · cross_reference · pending
+- I_Tpl · cross_reference · pending
+- J_Tpl · cross_reference · pending
+- K_Tpl · cross_reference · pending
+- Pg_Tpl · cross_reference · pending
+- Pl_Tpl · cross_reference · pending
+- Ps_Tpl · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
@@ -4156,6 +4253,14 @@ Q: If I move a worker from a Temple (Stability 1) to a Ziggurat (Stability 2), i
 
 - QSH · cross_reference · pending
 - Zgr · cross_reference · pending
+- Eg_Tpl · cross_reference · pending
+- I_Tpl · cross_reference · pending
+- J_Tpl · cross_reference · pending
+- K_Tpl · cross_reference · pending
+- Pg_Tpl · cross_reference · pending
+- Pl_Tpl · cross_reference · pending
+- Ps_Tpl · cross_reference · pending
+- Ps_Zgr · cross_reference · pending
 
 Hänvisningar: Inga identifierade
 
