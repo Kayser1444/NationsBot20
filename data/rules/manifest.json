@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 1,
+  "books": [
+    {
+      "id": "base",
+      "title": "Nations - base game rulebook",
+      "markdown": "base.md",
+      "sourceFile": "Reference/Nations_rulebook_ENG_2014-03-17_small.pdf",
+      "edition": "2014-03-17",
+      "sourceSha256": "3b737953ce9da301c2c5ed194abb9441c93781492304bb002a5913f7737e1c67",
+      "markdownSha256": "de79616498c073eb9f98bfadc9ef42d05f840da8abe5db27f72de82bc08d8872",
+      "pageCount": 24,
+      "review": "layout-reviewed; full independent proofreading pending",
+      "pages": [
+        {
+          "page": 1,
+          "startLine": 37,
+          "endLine": 41,
+          "headings": [
+            "Rulebook"
+          ]
+        },
+        {
+          "page": 2,
+          "startLine": 43,
+          "endLine": 73,
+          "headings": [
+            "Introduction",
+            "Credits",
+            "Idea of the game"
+          ]
+        },
+        {
+          "page": 3,
+          "startLine": 75,
+          "endLine": 109,
+          "headings": [
+            "Game Components",
+            "Component inventory (visual transcription)"
+          ]
+        },
+        {
+          "page": 4,
+          "startLine": 111,
+          "endLine": 129,
+          "headings": [
+            "Setup for 4 players"
+          ]
+        },
+        {
+          "page": 5,
+          "startLine": 131,
+          "endLine": 139,
+          "headings": []
+        },
+        {
+          "page": 6,
+          "startLine": 141,
+          "endLine": 183,
+          "headings": [
+            "Scoring Board Setup"
+          ]
+        },
+        {
+          "page": 7,
+          "startLine": 185,
+          "endLine": 213,
+          "headings": [
+            "Player Board Setup",
+            "Progress Board Setup"
+          ]
+        },
+        {
+          "page": 8,
+          "startLine": 215,
+          "endLine": 245,
+          "headings": [
+            "Game Concepts",
+            "Resources",
+            "Victory Points",
+            "Stability and Military Strength",
+            "Workers"
+          ]
+        },
+        {
+          "page": 9,
+          "startLine": 247,
+          "endLine": 293,
+          "headings": [
+            "Progress Cards",
+            "Events"
+          ]
+        },
+        {
+          "page": 10,
+          "startLine": 295,
+          "endLine": 331,
+          "headings": [
+            "Resolving Ties",
+            "Resource loss",
+            "Removing",
+            "Taking and Returning Workers",
+            "Deploying and undeploying Workers",
+            "Hiring",
+            "Interpretation of symbols"
+          ]
+        },
+        {
+          "page": 11,
+          "startLine": 333,
+          "endLine": 363,
+          "headings": [
+            "Base, advanced and expert cards",
+            "Difficulty levels",
+            "For your first few games"
+          ]
+        },
+        {
+          "page": 12,
+          "startLine": 365,
+          "endLine": 421,
+          "headings": [
+            "Playing the Game",
+            "Maintenance Phase",
+            "1. Round Marker",
+            "2. Progress Cards"
+          ]
+        },
+        {
+          "page": 13,
+          "startLine": 423,
+          "endLine": 443,
+          "headings": [
+            "3. Growth",
+            "4. New Events",
+            "5. Architects"
+          ]
+        },
+        {
+          "page": 14,
+          "startLine": 445,
+          "endLine": 481,
+          "headings": [
+            "Action Phase",
+            "The Actions",
+            "A. Buy a Progress Card"
+          ]
+        },
+        {
+          "page": 15,
+          "startLine": 483,
+          "endLine": 501,
+          "headings": []
+        },
+        {
+          "page": 16,
+          "startLine": 503,
+          "endLine": 523,
+          "headings": []
+        },
+        {
+          "page": 17,
+          "startLine": 525,
+          "endLine": 545,
+          "headings": [
+            "B. Deploy a Worker",
+            "C. Hire Architect",
+            "D. Special Action"
+          ]
+        },
+        {
+          "page": 18,
+          "startLine": 547,
+          "endLine": 565,
+          "headings": [
+            "Resolution Phase",
+            "1. Production",
+            "2. Player order"
+          ]
+        },
+        {
+          "page": 19,
+          "startLine": 567,
+          "endLine": 595,
+          "headings": [
+            "3. War",
+            "4. Events",
+            "5. Famine",
+            "(6.) Score at the end of each age"
+          ]
+        },
+        {
+          "page": 20,
+          "startLine": 597,
+          "endLine": 633,
+          "headings": [
+            "Game end",
+            "Final scoring"
+          ]
+        },
+        {
+          "page": 21,
+          "startLine": 635,
+          "endLine": 661,
+          "headings": [
+            "Additional rules & clarifications",
+            "Recommendations to learn the game"
+          ]
+        },
+        {
+          "page": 22,
+          "startLine": 663,
+          "endLine": 743,
+          "headings": [
+            "1 Player Variant"
+          ]
+        },
+        {
+          "page": 23,
+          "startLine": 745,
+          "endLine": 783,
+          "headings": [
+            "Appendix",
+            "Notes and reminders",
+            "Historical notes"
+          ]
+        },
+        {
+          "page": 24,
+          "startLine": 785,
+          "endLine": 855,
+          "headings": [
+            "Game Summary",
+            "Round",
+            "Game end",
+            "Scoring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynasties",
+      "title": "Nations: Dynasties - expansion rulebook",
+      "markdown": "dynasties.md",
+      "sourceFile": "Reference/Nations_Dynasties_Manual_ENG_2015-08-24_web.pdf",
+      "edition": "2015-08-24",
+      "sourceSha256": "2350e99152dd8237724d9d824351268b8bbb855b097bec45f5ac680bc80a2f23",
+      "markdownSha256": "3da6bbc78177d5c6380155aea76ed0a86f9266b521de14d900c583b3a2ebf636",
+      "pageCount": 4,
+      "review": "layout-reviewed; full independent proofreading pending",
+      "pages": [
+        {
+          "page": 1,
+          "startLine": 17,
+          "endLine": 43,
+          "headings": [
+            "Nina Håkansson, Einar Rosén, Robert Rosén, Rustan Håkansson",
+            "Introduction",
+            "Components",
+            "Progress cards"
+          ]
+        },
+        {
+          "page": 2,
+          "startLine": 45,
+          "endLine": 73,
+          "headings": [
+            "Dynasties and Turmoil",
+            "Natural Wonders",
+            "Special notes"
+          ]
+        },
+        {
+          "page": 3,
+          "startLine": 75,
+          "endLine": 137,
+          "headings": []
+        },
+        {
+          "page": 4,
+          "startLine": 139,
+          "endLine": 213,
+          "headings": [
+            "Round Summary",
+            "Credits"
+          ]
+        }
+      ]
+    }
+  ]
+}

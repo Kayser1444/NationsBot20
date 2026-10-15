@@ -3,6 +3,9 @@ import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscr
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
+  { name: 'question', description: 'Ask about Nations rules or the Tabony implementation', type: 1, options: [
+    { name: 'question', description: 'Your rules or implementation question; no ongoing games or external lookups', type: 3, required: true, min_length: 5, max_length: 1200 },
+  ] },
   { name: 'reminders', description: 'Daily reminders, independent of notifications', type: 1, options: [
     { name: 'on', description: 'Enable daily reminders', type: 1, options: [
       { name: 'time', description: 'Daily time HH:mm; omit for every 24 hours since your turn began', type: 3 },

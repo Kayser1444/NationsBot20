@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, auth = null }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, auth = null }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -50,6 +50,11 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
         .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : '')); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
+    if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
+    if (req.method === 'GET' && url.pathname.startsWith('/api/questions/')) {
+      const record = questionLog?.read(url.pathname.slice('/api/questions/'.length));
+      json(record ? 200 : 404, record ?? { error: 'Frågan finns inte i loggen.' }); return;
+    }
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
     try {

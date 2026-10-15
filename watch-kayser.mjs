@@ -12,6 +12,7 @@ import { Outbox } from './outbox.mjs';
 import { liveSnapshot } from './live-snapshot.mjs';
 import { ServiceStatus } from './service-status.mjs';
 import { startDashboard } from './dashboard.mjs';
+import { createQuestionLog } from './question-log.mjs';
 import { adminSettings, createDiscordAuth } from './admin-auth.mjs';
 import { EventLog } from './event-log.mjs';
 import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPreviousNationsName, readDmPreference, saveDmPreference, readUserLocale, saveUserLocale, readLanguageOverride, readBotLanguage, saveLanguagePreference } from './subscriptions.mjs';
@@ -59,6 +60,7 @@ const journal = new TurnJournal(join(dataDirectory, profile.replace('.json', '-t
 const reminderNames = () => Object.values(readReminderPreferences(configPath)).filter(p => p.enabled).map(p => p.name);
 const watches = name => Object.hasOwn(subscriptions, name) || reminderNames().includes(name);
 const log = new EventLog(join(dataDirectory, profile.replace('.json', '.log')));
+const questionLog = createQuestionLog({ directory: dataDirectory, report: (message, level) => log.add(message, level) });
 const sm = profile === 'friends.json' ? new SmTableCache(JSON.parse(readFileSync(new URL('./sm-season.json', import.meta.url), 'utf8')), {
   path: join(dataDirectory, 'sm-table-cache.json'), report: (message, level) => log.add(message, level),
 }) : null;
@@ -342,7 +344,7 @@ if (!args.includes('--no-dashboard')) {
   const port = args.includes('--port') ? Number(args[args.indexOf('--port') + 1]) : profile === 'friends.json' ? 24680 : 24681;
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
-    dashboard = await startDashboard({ port, snapshot,
+    dashboard = await startDashboard({ port, snapshot, questionLog,
       auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings(), {
         sessionPath: join(dataDirectory, 'admin-sessions.json'),
         // Cloud admin already trusts Railway's HTTPS ingress. X-Real-IP must
@@ -395,7 +397,7 @@ void refreshMatches();
 if (outbox) outboxTimer = setTimeout(flushOutbox, 0);
 void serviceStatus?.start();
 if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args.includes('--no-bot-commands')) {
-  bot = startDiscordBot({ token: process.env.NATIONS_DISCORD_BOT_TOKEN,
+  bot = startDiscordBot({ token: process.env.NATIONS_DISCORD_BOT_TOKEN, questionLog,
     guildId: config.discord.guildId, channelId: config.discord.channelId,
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {

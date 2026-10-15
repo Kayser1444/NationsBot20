@@ -21,6 +21,7 @@
 <div class="panel"><h2>Senaste händelser</h2><div id="activity" class="activity"></div></div>
 </section>
 <section class="panel" style="margin-bottom:20px"><h2>Spärrade Discord-användare</h2><p class="muted">Spärren gäller bara NationsBot. Den stänger inte av användaren från Discord-servern. Hävning återställer ingen prenumeration.</p><div class="scroll"><table><thead><tr><th>Discord-ID</th><th>Tidigare Nations-namn</th><th>Spärrad sedan</th><th></th></tr></thead><tbody id="bans"></tbody></table></div><form id="ban-user"><label for="ban-id">Spärra ett Discord-ID även utan aktiv prenumeration</label><input id="ban-id" required pattern="[0-9]{17,20}" inputmode="numeric" placeholder="17–20 siffror" autocomplete="off"><button id="ban-save" type="submit" style="margin-top:12px">Avsluta och spärra</button></form></section>
+<section class="panel"><h2>Frågor och svar</h2><p class="muted">Originalkonversationer sparas i högst 30 dagar, högst 500 frågor. Engelska maskinöversättningar visas separat.</p><form id="question-search"><label for="question-term">Sök fråga, användare eller kanal</label><input id="question-term"><label for="question-status">Status</label><select id="question-status"><option value="">Alla</option><option value="processing">Pågår</option><option value="answered">Besvarad</option><option value="failed">Fel</option><option value="denied">Avvisad</option><option value="interrupted">Avbruten</option></select><button>Sök</button></form><p id="question-count" role="status"></p><div class="scroll"><table><thead><tr><th>Tid</th><th>Användare</th><th>Plats</th><th>Fråga</th><th>Status / tid</th></tr></thead><tbody id="question-list"></tbody></table></div><button id="question-prev" type="button">Föregående</button> <button id="question-next" type="button">Nästa</button><article id="question-detail" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere"></article></section>
 <section class="panel"><h2>Partier</h2><p id="discovery" class="muted"></p><div class="scroll"><table><thead><tr><th>Parti</th><th>Tur</th><th>Anslutning</th><th>Betänketid</th></tr></thead><tbody id="matches"></tbody></table></div></section>
 <section class="panel"><h2>Betänketid</h2><p class="muted">Loggen börjar vid aktivering. Första intervallet är ofullständigt. Tider mäts när turbyten observeras; avbrott kan påverka noggrannheten.</p><form id="track-game"><label for="tracking-id">Parti-ID</label><input id="tracking-id" required pattern="[0-9]+"><button>Aktivera mätning</button></form><div id="thinking-games"></div><div class="scroll"><table><thead><tr><th>Parti</th><th>Spelare</th><th>Start</th><th>Slut</th><th>Sekunder</th><th>Anmärkning</th></tr></thead><tbody id="thinking-log"></tbody></table></div></section>
 <footer>Du kan stänga fönstret utan att stoppa bevakningen. __STOP_HINT__ <span id="updated"></span></footer>
@@ -111,6 +112,35 @@ async function banUser(userId,name,button){
 }
 el('ban-user').onsubmit=async event=>{event.preventDefault();await banUser(el('ban-id').value.trim(),null,el('ban-save'))};
 el('track-game').onsubmit=async event=>{event.preventDefault();try{await change('POST','/api/thinking/'+encodeURIComponent(el('tracking-id').value));feedback('Mätning aktiverad.')}catch(e){feedback(e.message,true)}};
+
+let questionOffset=0,questionSelected=null,questionVersion='',questionBusy=false,questionGeneration=0;
+async function refreshQuestions(){
+ if(questionBusy)return;questionBusy=true;const generation=questionGeneration;
+ try{
+ const params=new URLSearchParams({offset:questionOffset,search:el('question-term').value,status:el('question-status').value});
+ const response=await fetch('/api/questions?'+params,{cache:'no-store'});if(response.status===401){location.assign('/');return}if(!response.ok)throw new Error();const data=await response.json();if(generation!==questionGeneration)return;
+ text('question-count',data.available?data.total+' frågor i loggen':'Frågeloggen är inte tillgänglig.');
+ el('question-prev').disabled=questionOffset===0;el('question-next').disabled=questionOffset+20>=data.total;
+ el('question-list').replaceChildren();for(const record of data.records){const row=document.createElement('tr');cell(row,new Date(record.startedAt).toLocaleString('sv-SE'));cell(row,(record.userName||'Okänd')+' · '+record.userId);cell(row,record.location==='dm'?'DM':(record.guildName||'Server')+' / '+(record.channelName||'Okänd kanal'));const action=cell(row,'');const button=document.createElement('button');button.type='button';button.textContent=record.question;button.onclick=()=>{questionSelected=record.id;questionVersion='';void refreshQuestionDetail()};action.append(button);cell(row,record.status+' · '+(record.durationMs==null?'pågår':(record.durationMs/1000).toFixed(1)+' s'));el('question-list').append(row)}
+ await refreshQuestionDetail();
+ }catch{text('question-count','Frågeloggen kunde inte hämtas.')}finally{questionBusy=false}
+}
+async function refreshQuestionDetail(){
+ if(!questionSelected)return;const id=questionSelected;try{const response=await fetch('/api/questions/'+encodeURIComponent(id),{cache:'no-store'});if(id!==questionSelected)return;if(!response.ok){text('question-detail','Frågan finns inte längre i loggen.');return}const r=await response.json();if(id!==questionSelected)return;const version=JSON.stringify(r);if(version===questionVersion)return;questionVersion=version;
+ const body=el('question-detail');body.replaceChildren();const add=(tag,value)=>{const node=document.createElement(tag);node.textContent=value;body.append(node)};
+ add('h3','Originalkonversation');add('p',(r.userName||'Okänd')+' · '+r.userId+'\n'+(r.location==='dm'?'DM':(r.guildName||'Server')+' / '+(r.channelName||'Kanal'))+' · kanal-ID '+(r.channelId||'–'));
+ add('p','Fråga ['+(r.questionLanguage||r.requestedLanguage||'?')+']:\n'+r.question);
+ if(r.acknowledgement){add('p','Kvittens · '+r.acknowledgement.delivery+'\n'+r.acknowledgement.text);if(!['sv','en'].includes((r.requestedLanguage||'en').split('-')[0]))add('p','Engelsk översättning av kvittensen (lokal språktext):\n'+r.acknowledgement.englishText)}
+ for(const [i,part] of r.parts.entries())add('p','Svar '+(i+1)+'/'+r.parts.length+' ['+(r.answerLanguage||'?')+'] · '+part.delivery+'\n'+part.text);
+ if(r.translation&&r.translation.status!=='not-needed'){add('h3','Engelsk maskinöversättning · '+(r.translation.status==='complete'?'komplett':'ofullständig'));add('p','Översatt från originalkonversationen ovan. Detta är inte texten som skickades till Discord.');if(r.translation.question)add('p','Question (translated):\n'+r.translation.question);for(const [i,part] of r.translation.parts.entries())if(part)add('p','Answer '+(i+1)+' (translated):\n'+part)}
+ add('h3','Diagnostik');const requests=r.telemetry.filter(e=>e.type==='request');add('p','Status: '+r.status+' · leverans: '+r.deliveryStatus+'\nTotal tid: '+(r.durationMs==null?'pågår':r.durationMs+' ms')+' · kvittens: '+(r.acknowledgementMs??'–')+' ms · första riktiga svar: '+(r.firstResponseMs??'–')+' ms · undersökning: '+(r.modelDurationMs??'–')+' ms\nAPI-anrop: '+requests.length+' · rapporterade token: '+r.usage.inputTokens+' in / '+r.usage.outputTokens+' ut ('+r.usage.reportedRequests+' anrop med förbrukningsdata)'+(r.failure?'\nFel: '+r.failure:''));for(const event of r.telemetry)add('p',JSON.stringify(event));
+ }catch{text('question-detail','Detaljer kunde inte hämtas.')}
+}
+el('question-search').onsubmit=event=>{event.preventDefault();questionGeneration++;questionOffset=0;void refreshQuestions()};
+el('question-prev').onclick=()=>{questionGeneration++;questionOffset=Math.max(0,questionOffset-20);void refreshQuestions()};
+el('question-next').onclick=()=>{questionGeneration++;questionOffset+=20;void refreshQuestions()};
+void refreshQuestions();setInterval(refreshQuestions,5000);
+
 void refresh();setInterval(refresh,2000);
 </script>
 </html>

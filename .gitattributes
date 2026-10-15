@@ -1,1 +1,4 @@
 * text=auto
+data/rules/*.md text eol=lf
+data/cards/library/*.json text eol=lf
+data/cards/library/*.md text eol=lf

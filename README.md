@@ -1,5 +1,8 @@
 # Nations Bot 2.0
 
+The opt-in `/question` pilot answers rules and implementation questions using
+local FAQ and Tabony source snapshots. See [setup and limits](docs/question.md).
+
 A standalone Discord reminder bot for the online Nations board game at
 https://games.tabony.net/nations/. It observes public game information without
 logging into the game, submitting moves or posting game chat.

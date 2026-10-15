@@ -133,13 +133,14 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   f.service.getLanguageOverride = userId => languageOverrides[userId] ?? null;
   f.service.setLanguage = (userId, locale) => { if (locale === 'auto') delete languageOverrides[userId]; else languageOverrides[userId] = locale; };
   const bot = startDiscordBot({ token: 'not-a-real-token', guildId: 'guild', channelId: 'channel', service: f.service, now: () => clock,
+    questions: { ask: async ({ userId, question, language }) => `Answer ${userId} ${question} ${language}`, close() {} },
     prepareImage: async reply => reply.messages[0],
     onState: state => states.push(state), loadLibrary: async () => ({ Client: FakeClient, Events, GatewayIntentBits, MessageFlags, Routes }),
   });
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['reminders', 'smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
+  assert.deepEqual(registered.map(item => item.body.name), ['question', 'reminders', 'smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
   assert.deepEqual(registered.find(item => item.body.name === 'notifications').body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
@@ -162,6 +163,11 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   assert.deepEqual(capturedLocales, [{ userId: first, locale: 'sv-SE' }]);
   assert.equal(interaction.replies[0].flags, MessageFlags.Ephemeral);
   assert.deepEqual(interaction.replies[1].allowedMentions, { parse: [] });
+  const question = makeInteraction({ commandName: 'question', options: { getString: () => 'Poland and Porcelain Tower?' } });
+  await instance.listeners(Events.InteractionCreate)[0](question);
+  assert.equal(question.replies[0].flags, MessageFlags.Ephemeral);
+  assert.match(question.replies[1].content, /Poland and Porcelain Tower/);
+  assert.deepEqual(question.replies[1].allowedMentions, { parse: [] });
   const help = makeInteraction({ commandName: 'help' });
   await instance.listeners(Events.InteractionCreate)[0](help);
   assert.equal(help.replies[0].flags, MessageFlags.Ephemeral);

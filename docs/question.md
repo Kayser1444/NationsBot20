@@ -1,0 +1,181 @@
+# Local Nations questions
+
+`/question question:…` investigates Nations rules and the Tabony implementation.
+This is an opt-in pilot. The command is registered alongside other commands but
+does not perform AI requests until explicitly enabled. These changes are local;
+deployment and a real-model smoke test are separate steps.
+
+## Railway staging
+
+Keep the `OPENAI_API_KEY` secret. Add `NATIONS_QUESTION_ENABLED=1` and
+`NATIONS_QUESTION_USER_IDS=<your Discord user ID>`. The latter accepts comma-separated
+IDs; if absent, `NATIONS_ADMIN_OWNER_ID` is used. Without an owner/allowlist, questions
+remain disabled. The API key alone never enables the feature.
+
+Use the existing single replica and persistent `/data` volume. Cloud startup
+prepares `NATIONS_CONFIG_DIR`; the question service stores its data in a `questions`
+subdirectory. Local development uses its own configuration directory.
+
+Model: **`gpt-6-luna`**, fixed, with no fallback or automatic API retry.
+The question and selected source excerpts are sent to OpenAI. The investigation
+has no web search, MCP, shell, code execution or ongoing-match tools. Existing
+turn monitoring and image delivery keep their existing network connections.
+
+## Source copies
+
+The packaged seed in `data/question/tabony-snapshot.json` preserves the Python
+source, LICENSE, copyright notice, commit ID and per-file SHA-256 hashes from the
+unmodified local `Logitude/nations` clone at
+`9c344205b1802c9583d20c749b89a4cfa52516f7`. This JSON is reference data, never executed.
+
+A separate updater attempts a fetch at startup when due, then checks the schedule
+hourly. A persisted attempt timestamp limits it to once per 24 hours, including
+after restarts and failed attempts. It resolves a fixed public GitHub `main` to a
+commit, then downloads a fixed list of source files from that commit. It sends no
+GitHub token. Redirects, arbitrary repositories and question-supplied URLs are not
+allowed. Downloads have time and size limits.
+
+Only a complete, validated snapshot is atomically published to
+`questions/tabony-snapshot.json`. Failure retains the previous version or bundled
+seed. Each question holds one immutable in-memory snapshot throughout. Answers
+show commit ID and last successful fetch date; these do not establish the version
+deployed on the Tabony website.
+
+The corpus includes Python code, original English FAQ++ 1.11 entries, and the
+English base-game and Dynasties rulebooks in [page-addressable Markdown](../data/rules/README.md).
+Each page has an edition, PDF page number and source checksum. The importer fixes
+overlapping text and ligature spacing, uses explicit reading regions and labels
+visual annotations separately. Full independent proofreading is pending; tiny
+card/board artwork is not a complete card catalogue. The prompt distinguishes
+rulebook/FAQ evidence from implementation and flags gaps or unreviewed extraction.
+Website code is not included. Generated answers do not modify `/card` summaries.
+
+The [English card effect library](../data/cards/library/README.md) adds all 526
+catalogue identities, 99 image-reviewed event effects on 50 event cards, and
+implementation-derived descriptions/fields for other cards where available.
+Unreviewed printed text and metadata-only records are explicitly labeled.
+Use `search_cards` for remembered effects and forgotten names, then read the
+candidate source. The initial prompt lists a compact card index rather than all
+575 card/effect records, reducing repeated context cost.
+
+## Limits and isolation
+
+Only `search_cards`, `search_sources` and `read_source` are exposed to the model. They resolve
+in-memory source IDs; they cannot read arbitrary paths, credentials, subscriptions
+or game state. The AI transport calls only the fixed OpenAI Responses endpoint,
+rejects redirects and sets `store:false`. External links in generated text are
+removed; Discord previews and mentions are suppressed. Accuracy and instruction
+compliance still require evaluation even though tool access is restricted.
+
+- One investigation at a time; a 120-second API deadline.
+- One question/user/minute, five/user/UTC day, 20 overall/UTC day.
+- Six API requests/question, 120 overall/UTC day.
+- 5,000 output tokens/request, including reasoning and administrator translations.
+- 90,000 bytes maximum serialized context/request.
+- Eight local tools/API response, 100 lines or 10,000 characters/read, 14 hits/search.
+- Card lookup returns at most eight ranked candidates per search.
+
+`questions/usage.json` persists counts and last-use times before spending. Failures
+and timeouts count as attempts. It stores no questions, answers or keys. Corrupt
+accounting disables questions rather than resetting counters. Missing/corrupt
+sources disable questions without stopping reminders. These are application work
+limits, not an exact dollar-denominated billing cap. Use one replica and do not
+reset the ledger to bypass limits.
+
+## Answers and administrator log
+
+Accepted questions first receive a quick acknowledgement with a tentative local
+search hint (rulebook, FAQ, card library and/or Tabony code). This uses local
+language templates and keyword routing, with no extra API request; it does not
+promise which source will actually settle the question. Access/quota rejections
+receive just the rejection. The acknowledgement is retained as its own message
+with delivery status, timing and a local English rendering for administrator review.
+
+The actual answer uses one or two follow-ups: at most three messages including
+the acknowledgement. When both perspectives matter, the prompt prefers official
+rulebook/FAQ/verified card evidence first, then the Tabony implementation and any
+differences. This is guidance, not a required two-part answer.
+Each original part is limited to 1,800 UTF-16 code units and the complete Discord
+payload (numbering and source footer included) to 2,000. Overlong or malformed
+answers fail validation rather than being silently truncated. Guild replies and
+follow-ups are private. Discord.js handles REST rate limits; failed or uncertain
+deliveries are not retried and a delivered first part is never overwritten.
+
+The existing owner panel exposes a searchable, paginated question log, protected
+by its existing Discord owner session on Railway. It stores user ID/name,
+server/channel IDs/names or DM, original question, original answer parts, delivery
+status, total/acknowledgement/first-answer/investigation times, safe local tool
+diagnostics, model,
+API attempt count and reported token usage. Token totals cover only responses
+that supplied usage, so failed calls may still cost money. No keys, authorization
+headers or interaction tokens are logged. Conversation details are fetched
+separately and are not included in the frequently polled status response.
+
+`questions/conversations.json` is stored atomically on the data volume, retaining
+at most 500 conversations for 30 days. Retention is applied on startup and new
+questions; expired records are immediately excluded from reads. Interrupted work
+is marked after restart. An unreadable or unwritable log blocks new investigations
+without stopping reminders. Keep one replica.
+
+Structured model output includes detected question/answer languages and English
+translations for text in languages other than Swedish or English. These are
+generated in the same completion (extra output tokens, no separate API request),
+shown separately with a machine-translation label, and never sent to Discord.
+Originals are always retained. Missing translations are explicitly incomplete;
+rejected questions or failed investigations can have no translation available.
+Translation accuracy and language detection still need live evaluation.
+
+## Validation
+
+Run `npm test`. Tests use simulated HTTP: daily updates, upstream failures,
+atomic publication, quota persistence, local-only tools, model/endpoint pinning,
+context bounds and Discord handling. No paid API request is made by these tests.
+
+### Later staging test
+
+Local automated checks currently pass (171 tests). The feature has not been
+deployed or tested against the real model. The next steps are:
+
+1. Deploy this feature to staging with the owner allowlist and a persistent data
+   volume. Keep the key in Railway variables.
+2. Ask the question below. Check that the acknowledgement arrives before the
+   investigation finishes, names a tentative search path, and is followed by at
+   most two answer messages. Each message must fit 2,000 characters.
+3. Open the owner panel's question log. Check identity, channel/DM, exact messages,
+   acknowledgement time, first-answer time, final duration and delivery status.
+4. Try a French or German question. Check the original conversation and its
+   separately labeled English translation, including the acknowledgement.
+5. Try a remembered card effect, a FAQ-only question and insufficient evidence.
+   Check the distinction between verified card text, official rules and code.
+6. Request an ongoing-match lookup: the investigation must explain that its
+   local sources cannot inspect live games. Check cooldown and quota rejections
+   without spending extra model requests.
+7. Check reported tokens and actual project usage before widening access. Verify
+   that a restart retains logs, usage counters and the last good source snapshot.
+
+First live staging question:
+
+`/question question:Can another player buy Poland's advisor on Porcelain Tower for 3 gold with Polish-Lithuanian Commonwealth?`
+
+Check citations, tracing of `wonderful_advisors` and Porcelain Tower placement,
+separation of FAQ and implementation, and API project usage. Also test insufficient
+evidence, a FAQ-only question and a request to inspect an ongoing match. Local
+tests verify orchestration, not Luna's answer quality. Never put keys in Discord
+or repository files.
+
+## Railway tools
+
+The Railway Docker image runs Node.js and includes these sources. The model does
+not inherit Codex's workstation tools. OpenAI function calling lets it request our
+application functions; the bot executes them locally and returns bounded results.
+
+For this corpus, text search and card ranking run directly in Node over a local
+in-memory index. No executable, vector service, Python or OCR is needed at
+question time. `ripgrep` could be installed in the Dockerfile later, but merely
+installing it would not expose a tool to the model. Any wrapper would still need
+to restrict source roots, arguments, output and duration. The current tools cannot
+invoke a shell or read live games, arbitrary URLs, secrets or subscription files.
+
+References: [Railway Dockerfiles](https://docs.railway.com/builds/dockerfiles),
+[Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
+[function calling](https://developers.openai.com/api/docs/guides/function-calling).

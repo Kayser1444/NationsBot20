@@ -4,19 +4,22 @@ import { createDisplayNameCache, statusServiceWithNames } from './status-turns.m
 import { rateLimit } from './rate-limit.mjs';
 import { cardBank } from './card-bank.mjs';
 import { prepareCardImage } from './card-image-delivery.mjs';
+import { createQuestionService } from './question-service.mjs';
+import { createQuestionLog } from './question-log.mjs';
+import { deliverQuestion } from './question-delivery.mjs';
 
 const interactionPayload = message => {
   const { allowed_mentions, ...body } = message;
   return { ...body, allowedMentions: allowed_mentions };
 };
 
-export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now, prepareImage = prepareCardImage }) {
+export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now, prepareImage = prepareCardImage, questionLog = createQuestionLog({ directory: process.env.NATIONS_CONFIG_DIR, report, now }), questions = createQuestionService({ directory: process.env.NATIONS_CONFIG_DIR, report }) }) {
   const edits = rateLimit({ limit: 5, windowMs: 10000, now });
   const dmControls = rateLimit({ limit: 1, windowMs: 60000, now });
   let client, displayNames, stopped = false, readyTimer;
   const state = value => { if (!stopped) onState(value); };
   const fail = message => { if (!stopped) { state('Fel · behöver åtgärdas'); report(message, 'error'); } };
-  const close = () => { stopped = true; clearTimeout(readyTimer); edits.clear(); dmControls.clear(); client?.destroy(); onState('Avstängd'); };
+  const close = () => { stopped = true; questions.close(); clearTimeout(readyTimer); edits.clear(); dmControls.clear(); client?.destroy(); onState('Avstängd'); };
   state('Ansluter');
   const ready = (async () => {
     try {
@@ -107,6 +110,13 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             ? (nationCommand ? cardBank.renderNation : cardBank.render)(interaction.options.getString('name'), language()) : null;
           if (!interaction.deferred) await interaction.deferReply(inDm || ((smTable || cardReply?.ok) && allowed && !service.isBanned?.(interaction.user.id)) ? {} : { flags: MessageFlags.Ephemeral });
           if (stopped) return;
+          if (interaction.commandName === 'question') {
+            service.captureLocale?.(interaction.user.id, interaction.locale);
+            const denial = !allowed ? text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel') : service.isBanned?.(interaction.user.id) ? text(language(), 'userBanned') : null;
+            await deliverQuestion({ interaction, questions: denial ? { ask: async () => denial } : questions, log: questionLog, language: language(), flags: MessageFlags, now,
+              cancelled: () => stopped || (!denial && service.isBanned?.(interaction.user.id)) });
+            return;
+          }
           if (!allowed) { await interaction.editReply({ content: text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
           if (cardCommand) {
@@ -193,7 +203,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
               await client.rest.delete(Routes.applicationGuildCommand(client.application.id, guildId, old.id));
             }
           }
-          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off (dm:on|off), /status, /help, /language, /smtable, /card och /nation är registrerade för server och DM.'); }
+          if (!stopped) { state('Igång'); report('Discord-boten är igång. /notifications on|off (dm:on|off), /status, /help, /language, /smtable, /card, /nation och /question är registrerade för server och DM.'); }
         } catch { fail('Discord-kommandona kunde inte registreras. Kontrollera att boten är tillagd på rätt server.'); }
       });
       readyTimer = setTimeout(() => { fail('Discord-boten kunde inte ansluta inom 30 sekunder. Kontrollera token och starta om.'); client.destroy(); }, 30000);

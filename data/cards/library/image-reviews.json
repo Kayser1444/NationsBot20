@@ -1,0 +1,1468 @@
+{
+  "schemaVersion": 1,
+  "language": "en",
+  "scope": "Gameplay names and effects, Architects and famine. Historical dates, artwork, and set symbols are not transcribed.",
+  "cards": [
+    {
+      "cardId": "AM_SWT",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Absolute_Monarchy.jpg",
+        "sha256": "83e2cf49c390449f9303a3e172dc7fd24038f0e3cee043c54cf10eb017081c17"
+      },
+      "architects": 2,
+      "famine": -5,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Absolute Monarchy",
+          "text": "All Nations with Antiquity or Medieval Advisor: -4 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Salem Witch Trials",
+          "text": "Least [Stability]: -3 [Gold] or remove Advisor",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "AST_GR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/African_Slave_Trade.jpg",
+        "sha256": "492af40ac4a9e8112860c25df21ccf1f4051eef82f7d1c8603c205fef8d0f3fa"
+      },
+      "architects": 1,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "African Slave Trade",
+          "text": "Least [Military]: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Glorious revolution",
+          "text": "Most [Stability]: May go last: +6 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "AR_FR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/American_revolution.jpg",
+        "sha256": "5b0ee3f9fce1412b61ebcede475fba0007fddf6ce69e0c3723705c0a6018ffbc"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "American revolution",
+          "text": "Least [Military]: Remove Colony, if none: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "French Revolution",
+          "text": "Least [Stability]: Remove Advisor, if none: -2 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "An_GE",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Anarchism.jpg",
+        "sha256": "60dd57b962618f60a43eef0dd8478dd29b62cdf9fe8c4d124d932e149ae7febd"
+      },
+      "architects": 1,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Anarchism",
+          "text": "Least [Military]: Remove Advisors and -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Great Exhibition",
+          "text": "Most [Stability]: May hire 2 [Architect] for free",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "AM_CH",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Aryan_Migration.jpg",
+        "sha256": "c6e824ceeabccd5cb2fcd1272a49b53068ab812adfed9f8a95a916322399264a"
+      },
+      "architects": 2,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Aryan Migration",
+          "text": "Least [Military]: -3 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Code of Hammurabi",
+          "text": "All except least [Stability]: +3 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "AD_JA",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Assyrian_Deportations.jpg",
+        "sha256": "d180416ca82b03a330ddd1cd8235edf3eff82f4d8ff7e3c93fc863747b186f35"
+      },
+      "architects": 1,
+      "famine": 0,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Assyrian deportations",
+          "text": "Least [Military]: Return 1 [Worker]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Jain Ascetism",
+          "text": "Most [Stability]: Regain all [VP] lost to War this round",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "At_ZR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Attila.jpg",
+        "sha256": "e1d2e58eee209435f08f39900a0ab56e118686a7bcefbf22188ca80448752a7f"
+      },
+      "architects": 2,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Attila",
+          "text": "Least [Military]: -3 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Zoroastrian revival",
+          "text": "Most [Stability]: +4 [Stone] or others -3 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "BR_PM",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Benedectine_Rule.jpg",
+        "sha256": "b5044f1d06bf53bfd192a5340d79f924d9f59936cb4c19477b53ec163ce7f7a1"
+      },
+      "architects": 3,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Benedictine Rule",
+          "text": "Most [Stability]: +4 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Paper Money",
+          "text": "All: May -3 [Food]: +5 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "BD_HPJ",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Black_Death.jpg",
+        "sha256": "0520f14cb98a427cadea3266b9d161865c74abd61f622fcbbd828c1d4cb2a513"
+      },
+      "architects": 1,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Black Death",
+          "text": "All: Return 1 [Worker]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Hunt for Prester John",
+          "text": "Most [Military]: +3 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "Bl_HCA",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Blackbeard.jpg",
+        "sha256": "7520dd3b92fe08fdd254c00e92fe9af48b508fb67118fd5b618d74230d077283"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Blackbeard",
+          "text": "Least [Military]: -5 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Habeas Corpus Act",
+          "text": "Most [Stability]: +1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "BG_Ch",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Bread_and_Games.jpg",
+        "sha256": "4da94748c1e901b81695fe5a79a6b61489054f6b191abd6d813af38f43dc29a0"
+      },
+      "architects": 2,
+      "famine": 0,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Bread and Games",
+          "text": "Most [Stability]: +3 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Christianity",
+          "text": "All: May -4 [Food]: +6 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "CGR_IPB",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Californian_Gold_Rush.jpg",
+        "sha256": "e3db07f1317491745558f751a486e6c7390d2d388c97ce08813c840e50c8c2a9"
+      },
+      "architects": 0,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Californian Gold Rush",
+          "text": "Most [Military]: +8 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Irish Potato Blight",
+          "text": "Least [Stability]: -8 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "CR_ZR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Chanson_de_Roland.jpg",
+        "sha256": "704233ea629d3927378f3bd1147726382c4a0c67f4b8471539d99b3f5ada0936"
+      },
+      "architects": 1,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Chanson de Roland",
+          "text": "Least [Military]: -1 [Books]; Most [Military]: +3 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Zanj Revolt",
+          "text": "Least [Stability]: Go last and -2 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "CE_EJ",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Columbian_Exchange.jpg",
+        "sha256": "7ad766235134e75b2a5caa1b6bbf86fed627f4e9f7d75a93adbc6368d0a8faed"
+      },
+      "architects": 1,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Columbian Exchange",
+          "text": "Most [Military]: +3 [Food]; Least [Military]: -3 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Expulsion of Jews",
+          "text": "Least [Stability]: -5 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "CR_Me",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Crop_Rotation.jpg",
+        "sha256": "40cbc87543677596fcf834ee51dd9a5ab1e6aa887dfaffc0c804c420179f83ca"
+      },
+      "architects": 2,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Crop Rotation",
+          "text": "Most [Stability]: +6 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Mercantilism",
+          "text": "All: May undeploy Building [Worker]: +2 [Stone] for each",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "EC_CS",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Ecological_Collapse.jpg",
+        "sha256": "238ec34816a264d6b4ee00a5f146b2d86d36a37c85d9a6d9dc1d17e6e96d6803"
+      },
+      "architects": 2,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Ecological Collapse",
+          "text": "All: -2 [Food] or go last",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Caste system",
+          "text": "Least [Stability]: -4 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "EC_GS",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Entente_Cordiale.jpg",
+        "sha256": "e09b221bf6da45fbf0b4424fcd27c9567556326712982c06f438db026333cecf"
+      },
+      "architects": 2,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Entente Cordiale",
+          "text": "Most [Military]: May deploy 2 [Worker] to Military for free",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "General strike",
+          "text": "Least [Stability]: -6 [Stone]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "EK_FVC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Eruption_of_Krakatoa.jpg",
+        "sha256": "bb82c73557372dfb53a1f96c8241466a8f073990340111b0beef65d491b6f0fb"
+      },
+      "architects": 1,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Eruption of Krakatoa",
+          "text": "Least [Food]: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "First Vatican Council",
+          "text": "Most [Stability]: +10 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "FD_HM",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Feudal_dues.jpg",
+        "sha256": "ab5558ecce8c0eb854e1b913b6019141579f712e8f7773b8532cd4e6ab2d13f4"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Feudal dues",
+          "text": "All: No change in player order this round",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Hajj from Mali",
+          "text": "Least [Stability]: Lose all [Gold] except 2",
+          "searchPhrases": [
+            "The nation with the lowest stability keeps only two gold; discard all remaining gold.",
+            "Least stability: retain at most 2 gold."
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "FC_SR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Fourth_Crusade.jpg",
+        "sha256": "794f77ec47aca6b4ed6958d03964004c936e9107ab455ef645c0b9247a37aeb2"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Fourth Crusade",
+          "text": "Most [Military]: May -3 [Gold]: +1 [VP] and least [Military]: -4 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Song Resistance",
+          "text": "Most [Stability]: Regain all [Food] [Stone] [Gold] [Books] [VP] lost to War this round",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "He_AC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Hellenism.jpg",
+        "sha256": "112074defbcbcacf10552268031efff5ff8a1279df8e6ea883dc72df95cbaf4d"
+      },
+      "architects": 0,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Hellenism",
+          "text": "Most [Military]: +2 [Stone]; Others: -2 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Ashokas conversion",
+          "text": "All: May undeploy Military [Worker]: +2 [Books] for each",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "IE_JC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Imperial_Examination.jpg",
+        "sha256": "b921d3763dc356664f06169de60c5748ca46077d152f20d65e7937a55705e341"
+      },
+      "architects": 1,
+      "famine": 0,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Imperial Examination",
+          "text": "All with a Medieval Advisor: +1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Justinian Code",
+          "text": "Most [Stability]: +1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "promo-imperium-rex",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/promo-scans/sheet.jpg",
+        "sha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+        "crop": [
+          3,
+          3,
+          147,
+          229
+        ]
+      },
+      "architects": 3,
+      "famine": -6,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Imperium Rex",
+          "text": "Game ends after this round. 1) Famine. 2) Score [Books]. 3) Final scoring.",
+          "searchPhrases": [
+            "The event that ends the game early after the current round."
+          ]
+        }
+      ]
+    },
+    {
+      "cardId": "Ja_CT",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Janissaries.jpg",
+        "sha256": "d3f2649c907b21f87fde2595d0764528bb39f4be7e1e1c797dd99f035a092203"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Janissaries",
+          "text": "Most [Military]: May take 2 [Worker] and +4 [Stone]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Council of Trent",
+          "text": "Most [Stability]: +5 [Stone]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "LIA_CUH",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Little_Ice_Age.jpg",
+        "sha256": "2eee389a5b541aabad5e3b831755c16bbb87ff1f39359c1881becaa2b3fd92bc"
+      },
+      "architects": 1,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Little Ice Age",
+          "text": "All: -3 [Food] or -5 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "City Upon a Hill",
+          "text": "Most [Stability]: +6 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "ME_PI",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Magellan_s_expedition.jpg",
+        "sha256": "3fe7118ad32a952aa01c7bf962db934005f033cb298f1edf3e30626825852342"
+      },
+      "architects": 2,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Magellan's expedition",
+          "text": "All: +5 [Gold] per Colony bought this round",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Papal Indulgence",
+          "text": "Most [Stability]: May hire 1 [Architect] for free; Others: -2 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "MM_TR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/March_to_Moscow.jpg",
+        "sha256": "6f06b8eae74881db2ee4b8e68624cd1913820de0397a24dd32886b02a4b6e512"
+      },
+      "architects": 1,
+      "famine": -5,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "March to Moscow",
+          "text": "Least [Food]: Remove Colony, if none: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Taiping Rebellion",
+          "text": "Least [Stability]: Go last and -10 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "MA_Sc",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Martyrdom_of_Ali.jpg",
+        "sha256": "29eb3e7640e88c0c1a5bd984a91150e055006281170edf81044caea375c7b41d"
+      },
+      "architects": 1,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Martyrdom of Ali",
+          "text": "Least [Military]: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Scholasticism",
+          "text": "Most [Stability]: +3 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "PR_HD",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Pax_Romana.jpg",
+        "sha256": "fd3cd6f1669587483d6b5b4ec6297b5b5e1751a2d743b839a95dbdf2a356a878"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Pax Romana",
+          "text": "Most [Military]: +1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Han dynasty",
+          "text": "Most [Stability]: May take 1 [Worker] and +3 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "PG_CC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Peace_of_God.jpg",
+        "sha256": "3cf5b056a47763f892c3938fc2588d4f0566115c121203f78b339ea960e8bf2a"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Peace of God",
+          "text": "Most [Military]: If War was bought by another Nation: +4 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Council of Clermont",
+          "text": "All: +1 [VP] per Medieval Colony",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "Pi_DR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Pilgrims.jpg",
+        "sha256": "3b9e99329499056a70653718a57ff7d13dba2e37bacbc28f072a60872ee3bf73"
+      },
+      "architects": 3,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Pilgrims",
+          "text": "Most [Food]: Take 1 [Worker]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Dutch Revolt",
+          "text": "Least [Stability]: Go last and -3 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "QU_OG",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Qin_Unification.jpg",
+        "sha256": "bfbf09cfce0a6b3d47a9cacc6338024f9cdc78873fed0c00c867ff17700fb87d"
+      },
+      "architects": 1,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Qin Unification",
+          "text": "All: if [Military] > War [Military]: +1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Olympic games",
+          "text": "Most [Stability]: Go first",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "RL_Ic",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Raid_on_Lindisfarne.jpg",
+        "sha256": "aceeca0f9c739d1f8a1d9375de47190ef62372c3052f3c7d13a3faf753ef9526"
+      },
+      "architects": 2,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Raid on Lindisfarne",
+          "text": "Least [Military]: -4 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Iconoclasm",
+          "text": "Least [Stability]: -2 [Food], -2 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "Ri_Ex",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Rigveda.jpg",
+        "sha256": "dc9d64bc86a72d520f77b371a3aed37b264fa3d8c5a5ae5ecaa99b571c556f50"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Rigveda",
+          "text": "All: +1 [Books] per War and Battle one bought this round",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Exodus",
+          "text": "Most [Food]: +4 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "Ro_IR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Romanticism.jpg",
+        "sha256": "fa1c900b999c98a46c013f72e38f3b376a2a07984659437c803303c19d651f51"
+      },
+      "architects": 2,
+      "famine": -6,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Romanticism",
+          "text": "First to Pass: +5 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Industrial Revolution",
+          "text": "Most [Worker] in Industrial Buildings: +1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SB_HST",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Sack_of_Baghdad.jpg",
+        "sha256": "ac627981b36751146f30017ac3a8e4daed592bd4935b21e4815b3f590bb043fd"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Sack of Baghdad",
+          "text": "Least [Military]: -5 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Hanseatic Salt Trade",
+          "text": "Most [Food]: +4 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SA_DA",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Scramble_for_Africa.jpg",
+        "sha256": "6d7f5427b60d57166350625e3814e084a8c44e2b00a5dd21af6b5c117ceb137c"
+      },
+      "architects": 1,
+      "famine": -4,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Scramble for Africa",
+          "text": "All: if at least 1 Industrial Colony: +1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Dreyfus Affair",
+          "text": "Least [Stability]: -8 [Books]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SP_BAC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Sea_Peoples.jpg",
+        "sha256": "cc36caadb7bd35ff2f02e0658fe69e698fcbd26b15671a1730612c4908f31321"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Sea Peoples",
+          "text": "Least [Military]: Remove [Architect] or -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Bronze Age Collapse",
+          "text": "All except most [Military] and/or [Stability]: -1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SOB_IC",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Shang_Oracle_Bones.jpg",
+        "sha256": "0ae7615542776205db58dfbc37c568086d43a5253f29169d89d43c4059801ff0"
+      },
+      "architects": 1,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Shang Oracle Bones",
+          "text": "Least [Stability]: -3 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Ionian Colonisation",
+          "text": "Most [Food]: +3 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SME_WS",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Sick_Man_of_Europe.jpg",
+        "sha256": "f845ed1466be5cf119817bdbb7e6645073b958b6d6f94219a7e25137ab3fc1dc"
+      },
+      "architects": 3,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Sick Man of Europe",
+          "text": "Least [Military]: -8 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Women's Suffrage",
+          "text": "Most [Stability]: +1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SV_PW",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Sinking_of_the_Vasa.jpg",
+        "sha256": "55691e410a6047e9e1d362f837b99436d01d1da423ed63a135e1655275b99fd0"
+      },
+      "architects": 0,
+      "famine": 0,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Sinking of the Vasa",
+          "text": "Least [Stability]: -3 [Gold] or -10 [Military] for \"Peace of Westphalia\"",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Peace of Westphalia",
+          "text": "Least [Military]: -5 [Food]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SC_TCO",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Sokoto_Caliphate.jpg",
+        "sha256": "1ac05e1de40b8c8663e6c02c9567bd7d27278551ad24b4a4f29b8bb7cf1f18cc"
+      },
+      "architects": 0,
+      "famine": -3,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Sokoto Caliphate",
+          "text": "All: May -4 [Food]: +8 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Tennis Court Oath",
+          "text": "Least [Stability]: -7 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "promo-solar-eclipse-spring-and-autumn-period",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/promo-scans/sheet.jpg",
+        "sha256": "c0785fda10ed0fb1173bc34dbcfef585510537dae0a27bfd97668fd6240152cf",
+        "crop": [
+          301,
+          234,
+          147,
+          230
+        ]
+      },
+      "architects": 2,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Solar Eclipse",
+          "text": "Player order is determined by Passing order, e.g. First to pass is player 1.",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Spring and Autumn Period",
+          "text": "All: Compare [Military] with players left and right. If higher than one: +2 [Stone] or if higher than two: +1 [VP].",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "ST_MR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Spice_Trade.jpg",
+        "sha256": "b55f62284eaa9684ff2d6694b44baa04acc2a988183d821a0971dd6693e5b60f"
+      },
+      "architects": 0,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Spice Trade",
+          "text": "Most [Food]: +4 [Gold]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Muntzer Revolt",
+          "text": "Least [Stability]: Go last and -3 [Stone]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "SM_GS",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Stupor_Mundi.jpg",
+        "sha256": "9ee6f8b93a24d5630dd1e51f9d5f1006a242a5f3045c89b50b121dff35a07e6c"
+      },
+      "architects": 2,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Stupor Mundi",
+          "text": "Most bought Golden Ages this round: +4 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Great Schism",
+          "text": "Least [Stability]: -3 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "Ta_Ph",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Taoism.jpg",
+        "sha256": "26e32ff347c6054b0d80f055eba248c3f33357147adbe55b8a3390c9c24630ab"
+      },
+      "architects": 1,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Taoism",
+          "text": "First to Pass: +3 [Books]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Philosophy",
+          "text": "Most [Stability]: +1 [VP]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "TM_SM",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Tonghak_movement.jpg",
+        "sha256": "350b86184ab238cd28ca2814f34870113322a6d880266a6c37094f6ae2efdefd"
+      },
+      "architects": 0,
+      "famine": -5,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Tonghak movement",
+          "text": "Least [Military]: -8 [Books], +2 [Stone]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Sepoy Mutiny",
+          "text": "Least [Stability]: Go last and -5 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "TM_KE",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Tulip_Mania.jpg",
+        "sha256": "d2de60e4bbf9a17989a20ee9dfd12c48557ffc3b1cc21e1464a6a46f7e14fc09"
+      },
+      "architects": 0,
+      "famine": -1,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Tulip Mania",
+          "text": "Last to Pass: -1 [VP]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Kangxi Era",
+          "text": "Most [Stability]: Go first and +3 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "We_Em",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Weltpolitik.jpg",
+        "sha256": "7c8a432370173bdab3ee76784f479d4f557f0e9770c0b246356fa9b31cec0881"
+      },
+      "architects": 2,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Weltpolitik",
+          "text": "All: +5 [Gold], +5 [Stone] per Industrial Colony",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Emigration",
+          "text": "Least [Stability]: Return 1 [Worker]",
+          "searchPhrases": []
+        }
+      ]
+    },
+    {
+      "cardId": "YTR_SR",
+      "review": {
+        "status": "image-verified",
+        "reviewer": "Codex",
+        "reviewedAt": "2026-10-15",
+        "method": "Visually compared English names, symbol-normalized gameplay effects, Architect count and famine with the supplied original image/crop; not user editorial sign-off."
+      },
+      "sourceImage": {
+        "file": "Reference/Nations_assets/Event_Cards/Yellow_Turban_Rebellion.jpg",
+        "sha256": "975ca627e544ae48d9d15763a9666c4e66d7482f7f852e1b9ad4f31fac248ed1"
+      },
+      "architects": 1,
+      "famine": -2,
+      "effects": [
+        {
+          "slot": "a",
+          "name": "Yellow Turban Rebellion",
+          "text": "Least [Military]: -3 [Food]",
+          "searchPhrases": []
+        },
+        {
+          "slot": "b",
+          "name": "Spartacus revolt",
+          "text": "Least [Stability]: Go last and -1 [Gold]",
+          "searchPhrases": []
+        }
+      ]
+    }
+  ]
+}

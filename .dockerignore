@@ -16,3 +16,11 @@
 !data/faq/
 !data/faq/entries.json
 !data/faq/sources.json
+!data/question/
+!data/question/tabony-snapshot.json
+!data/rules/
+!data/rules/*.md
+!data/rules/manifest.json
+!data/cards/library/
+!data/cards/library/entries.json
+!data/cards/library/manifest.json
