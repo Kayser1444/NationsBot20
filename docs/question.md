@@ -16,7 +16,7 @@ Use the existing single replica and persistent `/data` volume. Cloud startup
 prepares `NATIONS_CONFIG_DIR`; the question service stores its data in a `questions`
 subdirectory. Local development uses its own configuration directory.
 
-Model: **`gpt-6-luna`**, fixed, with no fallback or automatic API retry.
+Model: **`gpt-6.1-sol`**, fixed, with no fallback or automatic API retry.
 The question and selected source excerpts are sent to OpenAI. The investigation
 has no web search, MCP, shell, code execution or ongoing-match tools. Existing
 turn monitoring and image delivery keep their existing network connections.
@@ -172,7 +172,7 @@ First live staging question:
 Check citations, tracing of `wonderful_advisors` and Porcelain Tower placement,
 separation of FAQ and implementation, and API project usage. Also test insufficient
 evidence, a FAQ-only question and a request to inspect an ongoing match. Local
-tests verify orchestration, not Luna's answer quality. Never put keys in Discord
+tests verify orchestration, not Sol's answer quality. Never put keys in Discord
 or repository files.
 
 ## Railway tools
@@ -189,5 +189,5 @@ to restrict source roots, arguments, output and duration. The current tools cann
 invoke a shell or read live games, arbitrary URLs, secrets or subscription files.
 
 References: [Railway Dockerfiles](https://docs.railway.com/builds/dockerfiles),
-[Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
+[GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol),
 [function calling](https://developers.openai.com/api/docs/guides/function-calling).

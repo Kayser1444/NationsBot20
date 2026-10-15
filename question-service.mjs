@@ -68,8 +68,8 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       } catch (error) {
         onAnswer({ status: 'failed', failure: ['invalid_answer', 'answer_too_long'].includes(error.code) ? error.code : 'investigation_failed' });
         report('En regelfråga kunde inte slutföras. Ingen alternativ modell används.', 'error');
-        return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller GPT-6 Luna är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
-          'The investigation could not finish within its limits, or GPT-6 Luna is unavailable. This attempt counts toward your quota. Try a narrower question.');
+        return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller GPT-6.1 Sol är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
+          'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
     },
     close() { closed = true; controller.abort(); sourceStore.close(); },

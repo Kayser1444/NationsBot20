@@ -116,13 +116,13 @@ test('a failed partial download cannot replace last good snapshot', async t => {
   store.close();
 });
 
-test('agent follows local read tools and sends only to Responses using Luna', async () => {
+test('agent follows local read tools and sends only to Responses using Sol', async () => {
   const sent = []; let reservations = 0;
   const text = await investigateQuestion({ question: 'Can Poland sell the advisor on Porcelain Tower?', language: 'en-US', corpus: corpus(), apiKey: 'test-only',
     reserveRequest: () => reservations++, fetcher: async (url, options) => {
       assert.equal(url, 'https://api.openai.com/v1/responses'); assert.equal(options.redirect, 'error');
       const body = JSON.parse(options.body); sent.push(body);
-      assert.equal(body.model, 'gpt-6-luna'); assert.equal(body.store, false);
+      assert.equal(body.model, 'gpt-6.1-sol'); assert.equal(body.store, false);
       assert.equal(body.text.format.type, 'json_schema'); assert.equal(body.text.format.strict, true);
       assert.equal(body.max_output_tokens, 5000);
       assert.deepEqual(body.tools.map(tool => tool.name), ['search_cards', 'search_sources', 'read_source']);

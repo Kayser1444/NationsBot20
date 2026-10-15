@@ -1,5 +1,5 @@
 import { questionAnswerFormat, parseQuestionAnswer } from './question-answer.mjs';
-export const questionModel = 'gpt-6-luna';
+export const questionModel = 'gpt-6.1-sol';
 export const maxQuestionRequests = 6;
 const tools = [
   { type: 'function', name: 'search_cards', description: 'Ranked local card lookup by English name or effect; translate the query to English. Use short focused queries such as "gain worker"; use card_type="event" for event questions to exclude other cards. Returns up to eight candidates, not an exhaustive list or a ruling. Retry empty searches with fewer words; read_source checks candidate effects.', strict: true,
