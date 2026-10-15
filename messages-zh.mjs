@@ -10,6 +10,7 @@ export default {
   "cardBoardSide": "{side} 面 · 王朝",
   "cardAge": "时代",
   "cardPage": "页",
+  "cardMachineTranslated": "机器翻译",
   "cardSource": "来源",
   "cardFaqHeading": "**FAQ++ {version} · {count} 条**",
   "cardFaqContinuation": "**FAQ · 续**",

@@ -1,4 +1,5 @@
 export default {
+  cardMachineTranslated: "Maskinöversatt",
   remindersOn: "Dagliga påminnelser på: {time} ({timezone}), oberoende av /notifications.",
   remindersOff: "Dagliga påminnelser av. /notifications påverkas inte.",
   remindersInvalid: "Ange time:HH:mm och en giltig IANA-tidszon, t.ex. Europe/Stockholm. Standard: GMT.",

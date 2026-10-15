@@ -88,7 +88,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     }
     if (!imageUrl && !card.imageAsset) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
-    const footer = '\n\n' +
+    const footer = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;

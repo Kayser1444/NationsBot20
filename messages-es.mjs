@@ -10,6 +10,7 @@ export default {
   "cardBoardSide": "Lado {side} · Dinastías",
   "cardAge": "Era",
   "cardPage": "p.",
+  "cardMachineTranslated": "Traducción automática",
   "cardSource": "Fuente",
   "cardFaqHeading": "**FAQ++ {version} · {count} puntos**",
   "cardFaqContinuation": "**FAQ · continuación**",

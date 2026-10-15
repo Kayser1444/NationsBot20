@@ -10,6 +10,7 @@ export default {
   "cardBoardSide": "Seite {side} · Dynastien",
   "cardAge": "Zeitalter",
   "cardPage": "S.",
+  "cardMachineTranslated": "Maschinell übersetzt",
   "cardSource": "Quelle",
   "cardFaqHeading": "**FAQ++ {version} · {count} Punkte**",
   "cardFaqContinuation": "**FAQ · Fortsetzung**",

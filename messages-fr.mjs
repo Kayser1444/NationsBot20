@@ -10,6 +10,7 @@ export default {
   "cardBoardSide": "Face {side} · Dynasties",
   "cardAge": "Âge",
   "cardPage": "p.",
+  "cardMachineTranslated": "Traduction automatique",
   "cardSource": "Source",
   "cardFaqHeading": "**FAQ++ {version} · {count} points**",
   "cardFaqContinuation": "**FAQ · suite**",

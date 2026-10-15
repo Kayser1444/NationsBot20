@@ -1,4 +1,5 @@
 export default {
+  cardMachineTranslated: "Machine-translated",
   remindersOn: "Daily reminders enabled: {time} ({timezone}), independently of /notifications.",
   remindersOff: "Daily reminders disabled. /notifications is unchanged.",
   remindersInvalid: "Use time:HH:mm and a valid IANA timezone, e.g. Europe/Stockholm. Default: GMT.",
