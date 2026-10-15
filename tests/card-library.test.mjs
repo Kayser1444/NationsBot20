@@ -14,6 +14,61 @@ const corpus = () => createQuestionCorpus(snapshot, faq, loadQuestionRulebooks()
 const response = output => new Response(JSON.stringify({ status: 'completed', output: output.map(item => item.type !== 'message' ? item : ({ ...item, content: item.content.map(part => part.type !== 'output_text' ? part : ({ ...part, text: JSON.stringify({ question_language: 'en', answer_language: 'en', english_question: null, parts: [{ text: part.text, english_text: null }] }) })) })) }));
 const call = (name, args, id) => ({ type: 'function_call', name, arguments: JSON.stringify(args), call_id: id });
 
+test('compressed turn-order effects match natural English without confusing passing rewards', () => {
+  for (const query of ['first player order', 'move first turn order', 'become first player']) {
+    const names = library.search({ query, card_type: 'event' }).slice(0, 3).map(hit => hit.name).sort();
+    assert.deepEqual(names, ['Kangxi Era', 'Olympic games', 'Solar Eclipse'], query);
+  }
+  const stability = library.search({ query: 'highest stability first turn order', card_type: 'event' });
+  assert.deepEqual(stability.slice(0, 2).map(hit => hit.name).sort(), ['Kangxi Era', 'Olympic games']);
+  const olympic = library.documents.find(doc => doc.id === 'cards/QU_OG/b');
+  assert.match(olympic.text, /Most \[Stability\]: Go first/);
+  assert.match(olympic.text, /editorial, not printed rules/);
+  assert.match(olympic.searchText, /first player/);
+  const taoism = library.documents.find(doc => doc.title === 'Taoism');
+  assert.equal(/first (?:place|player) in (?:the )?(?:turn|player) order/.test(taoism.searchText), false, 'passing first is not the same as changing turn order');
+});
+
+test('compressed conditions and actions gain editorial expansions while evidence stays intact', () => {
+  const cases = [
+    ['Olympic games', /highest.*Stability/],
+    ['Dutch Revolt', /lowest.*Stability/, /last player/],
+    ['Taoism', /first.*pass/, /gain 3.*Books/i],
+    ['Tulip Mania', /last.*pass/, /lose 1.*victory points/i],
+    ['Emigration', /return 1.*Worker/i],
+  ];
+  for (const [name, ...patterns] of cases) {
+    const doc = library.documents.find(doc => doc.title === name);
+    for (const pattern of patterns) assert.match(doc.searchText, pattern, name);
+    assert.equal(doc.evidenceKind, 'printed-card');
+  }
+  const metadata = library.documents.find(doc => doc.evidenceKind === 'metadata-only');
+  assert.equal(metadata.text.includes('Expanded search wording'), false);
+  const implementation = library.documents.find(doc => doc.id === 'cards/PcTw');
+  assert.equal(implementation.evidenceKind, 'implementation-description');
+  assert.match(implementation.text, /NOT verified printed card text/);
+});
+
+test('agent can read all three turn-order candidates from the previously incomplete staging query', async () => {
+  let round = 0;
+  const text = await investigateQuestion({ question: 'vilket eventkort kan göra så att man hamnar först i turordningen?', language: 'sv-SE', corpus: corpus(), apiKey: 'test-only', reserveRequest() {},
+    fetcher: async (_url, options) => {
+      const body = JSON.parse(options.body); round++;
+      if (round === 1) return response([call('search_cards', { query: 'first player order', card_type: 'event' }, 'search')]);
+      if (round === 2) {
+        const hits = JSON.parse(body.input.find(item => item.type === 'function_call_output' && item.call_id === 'search').output).slice(0, 3);
+        assert.deepEqual(hits.map(hit => hit.name).sort(), ['Kangxi Era', 'Olympic games', 'Solar Eclipse']);
+        return response(hits.map((hit, i) => call('read_source', { id: hit.id, start: 1, count: 50 }, 'read' + i)));
+      }
+      const sources = body.input.filter(item => item.type === 'function_call_output' && item.call_id.startsWith('read')).map(item => JSON.parse(item.output));
+      assert.equal(sources.length, 3);
+      assert.ok(sources.filter(source => ['Olympic games', 'Kangxi Era'].includes(source.title)).every(source => source.excerpt.includes('Most [Stability]: Go first')));
+      return response([{ type: 'message', content: [{ type: 'output_text', text: sources.map(source => source.title).join(', ') }] }]);
+    } });
+  assert.match(text, /Olympic games/); assert.match(text, /Kangxi Era/); assert.match(text, /Solar Eclipse/);
+  assert.equal(round, 3);
+});
+
 test('worker event lookup reproduces the staging phrase and ranks actual population gains first', () => {
   const expected = ['Han dynasty', 'Janissaries', 'Pilgrims'];
   for (const query of ['Events that give workers, add workers to supply or player board, recruit worker', 'events gain workers', 'event take worker']) {

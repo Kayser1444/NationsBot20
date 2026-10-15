@@ -14,11 +14,34 @@ const aliases = { lowest: 'least', lower: 'least', highest: 'most', money: 'gold
 export const cardSearchTokens = value => [...new Set((fold(value).replace(/-\s*(\d+)/g, ' lose $1 ').replace(/\+\s*(\d+)/g, ' gain $1 ').match(/[a-z0-9]+/g) ?? [])
   .filter(word => !stop.has(word)).map(word => aliases[word] ?? word))];
 
+// Deterministic editorial wording for retrieval, never a replacement for the source.
+// Expand within each individual effect, preserving conditions, choices and amounts.
+function expandedCardText(text) {
+  if (!text) return '';
+  const resource = label => label === 'VP' ? 'victory points (VP)' : label;
+  return text
+    .replace(/\b(Most|Least)\s+\[([^\]]+)\]/g, (_, comparison, label) =>
+      `the nation with the ${comparison === 'Most' ? 'highest / most' : 'lowest / least'} ${resource(label)}`)
+    .replace(/\bGo first\b/gi, 'move to first place in turn order; become the first player in player order')
+    .replace(/\bGo last\b/gi, 'move to last place in turn order; become the last player in player order')
+    .replace(/\bFirst to Pass\b/gi, 'the first player to pass (stop taking actions)')
+    .replace(/\bLast to Pass\b/gi, 'the last player to pass (stop taking actions)')
+    .replace(/\bPassing order\b/gi, 'passing order (the order in which players pass and stop taking actions)')
+    .replace(/\bPlayer order\b/gi, 'player order (turn order)')
+    .replace(/\+(\d+)\s*\[([^\]]+)\]/g, (_, amount, label) => `gain ${amount} ${resource(label)}`)
+    .replace(/-(\d+)\s*\[([^\]]+)\]/g, (_, amount, label) => `lose ${amount} ${resource(label)}`)
+    .replace(/\[VP\]/g, 'victory points (VP)');
+}
+
 // Keep the action tied to its resource: gaining Stone for undeploying a Worker
 // must not rank as highly as actually taking a new Worker.
 const effectRelations = value => new Set([...fold(value).replace(/-\s*(\d+)/g, ' lose $1 ').replace(/\+\s*(\d+)/g, ' gain $1 ')
   .matchAll(/\b(gain|take|receive|recruit|add|lose|return|discard)\s+(?:up to\s+)?(?:\d+\s*)?\[?(workers?|gold|food|stone|books?|architects?|vp|stability|military)\b/g)]
   .map(([, action, resource]) => `${aliases[action] ?? action}:${aliases[resource] ?? resource}`));
+const orderEffects = value => new Set([
+  ...(/\bgo first\b|first place in turn order|first player in player order|first to pass is player 1/i.test(value) ? ['first'] : []),
+  ...(/\bgo last\b|last place in turn order|last player in player order/i.test(value) ? ['last'] : []),
+]);
 
 export function loadQuestionCards() {
   const root = new URL('./data/cards/library/', import.meta.url);
@@ -47,6 +70,8 @@ export function createCardLibrary(library) {
       const id = `cards/${card.id}${entry.slot ? '/' + entry.slot : ''}`;
       const evidenceKind = printed ? 'printed-card' : implementation ? 'implementation-description' : 'metadata-only';
       const status = printed ? 'image-verified' : 'image-transcription-pending';
+      const expanded = expandedCardText(entry.text);
+      const searchPhrases = [...(entry.searchPhrases ?? []), ...(expanded && expanded !== entry.text ? [`Expanded search wording: ${expanded}`] : [])];
       const lines = [`# ${entry.name}`, `Card ID: ${card.id}`, `Whole card: ${card.name}`, `Type: ${card.type}; Age: ${card.age ?? 'not specified'}`,
         `Evidence: ${evidenceKind}; review: ${status}`, ''];
       if (printed) {
@@ -54,23 +79,23 @@ export function createCardLibrary(library) {
           `Architects: ${printed.architects}; Famine: ${printed.famine}`,
           `Image SHA-256: ${printed.sourceImage.sha256}`, `Image source: ${printed.sourceImage.file}`,
           `Review: ${printed.review.reviewer}, ${printed.review.reviewedAt}. Historical dates, artwork and set symbols are outside this transcription.`, '');
-        if (entry.searchPhrases?.length) lines.push('## Search paraphrases (editorial, not printed rules)', ...entry.searchPhrases, '');
       } else if (implementation) {
         lines.push('## Tabony implementation description - NOT verified printed card text',
           `Implementation description commit: ${implementation.commit}. Check the current code snapshot before making implementation claims.`, entry.text || 'No special-effect description available.');
         for (const fact of implementation.facts) lines.push(`${fact.label}: ${fact.value}`);
         lines.push('Description and numerical fields may not cover all behavior; follow the referenced class and its handlers.');
       } else lines.push('Metadata only. No effect text is available. Do not infer an ability from the card name.');
+      if (searchPhrases.length) lines.push('## Search paraphrases (editorial, not printed rules)', ...searchPhrases, '');
       if (implementation) lines.push('## Implementation source references', ...implementation.sources.map(ref => `code/${ref.file}:${ref.line} (commit ${implementation.commit})`));
       documents.push({ id, title: entry.name, kind: 'card', cardId: card.id, cardName: card.name, type: card.type, age: card.age,
         evidenceKind, review: status, ...(printed ? { imageSha256: printed.sourceImage.sha256 } : {}),
         ...(implementation ? { implementationCommit: implementation.commit } : {}), text: lines.join('\n'),
-        searchText: [entry.text, ...(entry.searchPhrases ?? []), ...(printed ? [] : (implementation?.facts ?? []).map(fact => `${fact.label}: ${fact.value}`))].join(' '),
+        searchText: [entry.text, ...searchPhrases, ...(printed ? [] : (implementation?.facts ?? []).map(fact => `${fact.label}: ${fact.value}`))].join(' '),
         searchNames: [entry.name, card.name, ...(card.aliases ?? [])].join(' ') });
     }
   }
   const index = documents.map(doc => ({ doc, body: new Set(cardSearchTokens(doc.searchText)), names: new Set(cardSearchTokens(doc.title)),
-    aliases: new Set(cardSearchTokens(doc.searchNames)), relations: effectRelations(doc.searchText) }));
+    aliases: new Set(cardSearchTokens(doc.searchNames)), relations: effectRelations(doc.searchText), order: orderEffects(doc.searchText) }));
   const frequencies = new Map();
   for (const item of index) for (const word of new Set([...item.body, ...item.names, ...item.aliases])) frequencies.set(word, (frequencies.get(word) ?? 0) + 1);
   const types = new Set(documents.map(doc => doc.type));
@@ -92,6 +117,8 @@ export function createCardLibrary(library) {
       if (coverage < 0.4) score = 0;
       else {
         for (const relation of item.relations) if (relation.split(':').every(term => terms.includes(term))) score += 15;
+        if (terms.some(term => ['order', 'player', 'turn'].includes(term)))
+          for (const position of item.order) if (terms.includes(position)) score += 20;
         score *= coverage * coverage;
       }
       return { item, score, matched };

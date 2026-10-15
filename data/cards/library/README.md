@@ -61,6 +61,24 @@ or general semantic search. Scores indicate relevance, not confidence. The agent
 reads candidate records and checks target, amount, timing and conditions before
 answering; unclear descriptions should yield multiple candidates or clarification.
 
+At load time the index also builds deterministic English expansions of compressed
+effect wording. For example, `Go first` becomes first place in turn/player order,
+`Most [Stability]` becomes the nation with the highest Stability, `First to Pass`
+describes the first player to stop taking actions, and signed resource amounts
+become gain/lose wording (`VP` also expands to victory points). These phrases are
+shown under **Search paraphrases (editorial, not printed rules)** when reading the
+source; the original transcription, review status and source hashes are unchanged.
+Expansions operate on individual effects, preserving split-event boundaries and
+adding no new abilities to metadata-only cards. They do not resolve ties or add
+timing rules. Explicit first/last turn-order effects get a ranking boost for
+turn-order queries; merely passing first does not establish such an effect.
+
+The logged query `first player order` now retrieves **Olympic games**, **Kangxi
+Era**, and **Solar Eclipse** as its first three candidates. The agent must still
+read the original effects to distinguish highest-Stability placement from passing
+order. This remains lexical retrieval with curated expansions, not unrestricted
+semantic understanding or a guarantee of exhaustive results.
+
 ## Rebuild and review
 
 ```text
