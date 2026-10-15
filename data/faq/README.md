@@ -85,3 +85,12 @@ Varje post har tre separata frågor:
 3. Är posten kopplad till rätt kort, även när kortet omnämns under en annan rubrik?
 
 Förkortningarna i kortkopplingarna ska komma från den verifierade kortkatalogen. Exempelvis är Porcelain Towers bild-ID `PcTw`; visningsnamnet är inte filnamnet.
+
+
+## Tyska, franska, spanska och förenklad kinesiska
+
+Alla 216 textposter har även 219 svarspunkter per språk för `de`, `fr`, `es-ES` och `zh-CN`. Översättningarna ligger i `translations-de.json`, `translations-fr.json`, `translations-es.json` och `translations-zh.json`. Varje svarspunkt anger källpost, engelsk punkt och SHA-256 för båda texter, samt dokumentets checksumma. De engelska och svenska texterna är oförändrade. Allmänna rubriker och frågor översätts separat i `headingTranslations`; tryckta kort- och nationsnamn behålls.
+
+Texterna är maskinöversatta med Google Translate med skyddade namn, versionstaggar och en gemensam spelordlista för bland annat runda, spelares tur, resurser och poäng. Stickprov och särskilda rättningar av komplexa regler dokumenteras i översättningsfilerna; detta är inte ett fullständigt innehållsgodkännande. De nya punkterna har granskningsstatus `pending`. Befintliga granskningsbeslut på original och kortkopplingar ändras inte.
+
+Kör `node scripts/apply-faq-translations.mjs` för alla språk, eller ange `sv`, `de`, `fr`, `es` och/eller `zh` för en delmängd. Skriptet kontrollerar samtliga valda filer innan det sparar registret, vägrar att skriva över ändrade godkända/avvisade översättningar, och uppdaterar `review.md`. En ny import eller ändring av engelska källpunkter kräver att översättningarnas källkontroller uppdateras. Runtime använder enbart det lokala registret och har inget beroende av Google Translate.

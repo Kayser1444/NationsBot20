@@ -12,7 +12,7 @@ export default {
   "cardPage": "p.",
   "cardSource": "Fuente",
   "cardFaqHeading": "**FAQ++ {version} · {count} puntos**",
-  "cardFaqContinuation": "**FAQ · continuación · resumen en inglés**",
+  "cardFaqContinuation": "**FAQ · continuación**",
   "cardFaqPending": "No hay entradas de FAQ asociadas a esta carta en esta versión.",
   "cardFaqShow": "Mostrar FAQ ({count})",
   "cardFaqHide": "Ocultar FAQ",
@@ -106,5 +106,5 @@ export default {
   "remindersOff": "Recordatorios diarios desactivados. /notifications no cambia.",
   "remindersInvalid": "Usa time:HH:mm y una zona IANA válida, como Europe/Stockholm. Por defecto: GMT.",
   "remindersStatus": "Recordatorios diarios: {value}.",
-  "help": "**Nations Bot 2.0 — ayuda**\n/notifications on [nationsname] [dm:on|off] activa avisos de turno; /notifications off los desactiva. Privados por defecto; envío al canal solo en el canal de SM. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] activa recordatorios diarios independientes; sin time, cada 24 horas desde el inicio del turno; sin timezone, GMT. /reminders off los desactiva. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto elige el idioma. /status muestra ajustes y partidas. /smtable [div:1A|2A|2B] muestra SM. /card name y /nation name muestran imágenes y FAQ. /help muestra esta ayuda. Las partidas nuevas se detectan en cinco minutos. Los miembros pueden usar comandos por privado. Permite mensajes del bot. La FAQ sigue en inglés si no hay traducción."
+  "help": "**Nations Bot 2.0 — ayuda**\n/notifications on [nationsname] [dm:on|off] activa avisos de turno; /notifications off los desactiva. Privados por defecto; envío al canal solo en el canal de SM. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] activa recordatorios diarios independientes; sin time, cada 24 horas desde el inicio del turno; sin timezone, GMT. /reminders off los desactiva. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto elige el idioma. /status muestra ajustes y partidas. /smtable [div:1A|2A|2B] muestra SM. /card name y /nation name muestran imágenes y FAQ. /help muestra esta ayuda. Las partidas nuevas se detectan en cinco minutos. Los miembros pueden usar comandos por privado. Permite mensajes del bot. La FAQ está disponible en los seis idiomas del bot. Los nombres impresos de las cartas se mantienen en inglés."
 };

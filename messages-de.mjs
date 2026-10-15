@@ -12,7 +12,7 @@ export default {
   "cardPage": "S.",
   "cardSource": "Quelle",
   "cardFaqHeading": "**FAQ++ {version} · {count} Punkte**",
-  "cardFaqContinuation": "**FAQ · Fortsetzung · englische Zusammenfassung**",
+  "cardFaqContinuation": "**FAQ · Fortsetzung**",
   "cardFaqPending": "In dieser Version sind keine FAQ-Einträge mit dieser Karte verknüpft.",
   "cardFaqShow": "FAQ anzeigen ({count})",
   "cardFaqHide": "FAQ ausblenden",
@@ -106,5 +106,5 @@ export default {
   "remindersOff": "Tägliche Erinnerungen deaktiviert. /notifications bleibt unverändert.",
   "remindersInvalid": "Nutze time:HH:mm und eine gültige IANA-Zeitzone, z. B. Europe/Stockholm. Standard: GMT.",
   "remindersStatus": "Tägliche Erinnerungen: {value}.",
-  "help": "**Nations Bot 2.0 — Hilfe**\n/notifications on [nationsname] [dm:on|off] aktiviert Zugbenachrichtigungen; /notifications off beendet sie. DM ist Standard. Kanalzustellung ist nur im SM-Kanal wählbar. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] aktiviert tägliche Erinnerungen unabhängig davon; ohne time alle 24 Stunden seit Zugbeginn, ohne timezone GMT. /reminders off deaktiviert sie. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto wählt die Sprache. /status zeigt Einstellungen und Partien. /smtable [div:1A|2A|2B] zeigt SM. /card name und /nation name zeigen Bilder und FAQ. /help zeigt diese Hilfe. Neue Partien werden innerhalb von fünf Minuten entdeckt. Befehle funktionieren auch per DM für Servermitglieder. Erlaube DMs vom Bot. FAQ-Inhalte bleiben auf Englisch, sofern keine Übersetzung vorliegt."
+  "help": "**Nations Bot 2.0 — Hilfe**\n/notifications on [nationsname] [dm:on|off] aktiviert Zugbenachrichtigungen; /notifications off beendet sie. DM ist Standard. Kanalzustellung ist nur im SM-Kanal wählbar. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] aktiviert tägliche Erinnerungen unabhängig davon; ohne time alle 24 Stunden seit Zugbeginn, ohne timezone GMT. /reminders off deaktiviert sie. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto wählt die Sprache. /status zeigt Einstellungen und Partien. /smtable [div:1A|2A|2B] zeigt SM. /card name und /nation name zeigen Bilder und FAQ. /help zeigt diese Hilfe. Neue Partien werden innerhalb von fünf Minuten entdeckt. Befehle funktionieren auch per DM für Servermitglieder. Erlaube DMs vom Bot. FAQ-Texte sind in allen sechs Botsprachen verfügbar. Gedruckte Kartennamen bleiben auf Englisch."
 };

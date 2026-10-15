@@ -10,6 +10,8 @@
     "sourcePages": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } },
     "heading": { "type": "string", "minLength": 1 },
     "headingSv": { "type": "string", "minLength": 1 },
+    "headingTranslations": { "type": "object", "propertyNames": { "enum": ["de", "fr", "es-ES", "zh-CN"] },
+      "additionalProperties": { "type": "string", "minLength": 1 } },
     "category": { "enum": ["general", "card_type", "card", "nation", "dynasty", "other"] },
     "sourceText": { "type": "string", "minLength": 1 },
     "review": { "$ref": "#/$defs/review" },
@@ -21,7 +23,7 @@
         "required": ["id", "language", "kind", "text", "review"],
         "properties": {
           "id": { "type": "string", "minLength": 1 },
-          "language": { "enum": ["en-US", "sv-SE"] },
+          "language": { "enum": ["en-US", "sv-SE", "de", "fr", "es-ES", "zh-CN"] },
           "kind": { "enum": ["quotation", "summary", "translation"] },
           "text": { "type": "string", "minLength": 1 },
           "review": { "$ref": "#/$defs/review" }

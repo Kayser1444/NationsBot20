@@ -12,7 +12,7 @@ export default {
   "cardPage": "p.",
   "cardSource": "Source",
   "cardFaqHeading": "**FAQ++ {version} · {count} points**",
-  "cardFaqContinuation": "**FAQ · suite · résumé en anglais**",
+  "cardFaqContinuation": "**FAQ · suite**",
   "cardFaqPending": "Aucune entrée FAQ associée à cette carte dans cette version.",
   "cardFaqShow": "Afficher la FAQ ({count})",
   "cardFaqHide": "Masquer la FAQ",
@@ -106,5 +106,5 @@ export default {
   "remindersOff": "Rappels quotidiens désactivés. /notifications reste inchangé.",
   "remindersInvalid": "Utilisez time:HH:mm et un fuseau IANA valide, comme Europe/Stockholm. Par défaut : GMT.",
   "remindersStatus": "Rappels quotidiens : {value}.",
-  "help": "**Nations Bot 2.0 — aide**\n/notifications on [nationsname] [dm:on|off] active les notifications de tour ; /notifications off les arrête. Messages privés par défaut, envoi en salon uniquement dans le salon SM prévu. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] active indépendamment les rappels quotidiens ; sans time, toutes les 24 heures depuis le début du tour ; sans timezone, GMT. /reminders off les désactive. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto choisit la langue. /status affiche les paramètres et parties. /smtable [div:1A|2A|2B] affiche le SM. /card name et /nation name affichent images et FAQ. /help affiche cette aide. Nouvelles parties détectées sous cinq minutes. Les membres peuvent aussi utiliser les commandes en privé. Autorisez les messages du bot. La FAQ reste en anglais en l’absence de traduction."
+  "help": "**Nations Bot 2.0 — aide**\n/notifications on [nationsname] [dm:on|off] active les notifications de tour ; /notifications off les arrête. Messages privés par défaut, envoi en salon uniquement dans le salon SM prévu. /reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname] active indépendamment les rappels quotidiens ; sans time, toutes les 24 heures depuis le début du tour ; sans timezone, GMT. /reminders off les désactive. /language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto choisit la langue. /status affiche les paramètres et parties. /smtable [div:1A|2A|2B] affiche le SM. /card name et /nation name affichent images et FAQ. /help affiche cette aide. Nouvelles parties détectées sous cinq minutes. Les membres peuvent aussi utiliser les commandes en privé. Autorisez les messages du bot. La FAQ est disponible dans les six langues du bot. Les noms imprimés des cartes restent en anglais."
 };

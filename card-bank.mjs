@@ -67,7 +67,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     }
     matched.sort((a, b) => Number(!a.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) -
       Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) || a.sourcePages[0] - b.sourcePages[0]);
-    const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === (['sv-SE', 'en-US'].includes(language) ? language : 'en-US'))
+    const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === language)
       .map(bullet => ({ entry, bullet })));
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
     const metadata = `**${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}${card.boardSide ? ' · ' + text(language, 'cardBoardSide', { side: card.boardSide }) : ''}**`;
@@ -97,7 +97,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     if (capacity < 100) throw new Error('Card metadata leaves no space for FAQ pages.');
     const lines = [];
     for (const { entry, bullet } of points) {
-      const heading = language === 'sv-SE' ? entry.headingSv ?? entry.heading : entry.heading;
+      const heading = language === 'sv-SE' ? entry.headingSv ?? entry.heading : entry.headingTranslations?.[language] ?? entry.heading;
       const label = `- **${escape(heading)} · ${text(language, 'cardPage')} ${entry.sourcePages.join(', ')}:** `;
       let remaining = escape(bullet.text.replace(/\s+/g, ' ').trim());
       const pointCapacity = capacity - label.length;

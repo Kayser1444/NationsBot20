@@ -16,10 +16,12 @@ for (const [id, selected] of Object.entries(pilot.entries)) {
     throw new Error('Reviewed source passage changed: ' + id);
   }
   entry.review = { ...review };
+  const otherLanguages = entry.bullets.filter(bullet => !['sv-SE', 'en-US'].includes(bullet.language));
   entry.bullets = selected.bullets.flatMap((bullet, index) => ['sv', 'en'].map(language => ({
     id: `${id}-${index + 1}-${language}`, language: language === 'sv' ? 'sv-SE' : 'en-US', kind: 'summary',
     text: bullet[language], review: { ...review },
   })));
+  entry.bullets.push(...otherLanguages);
   for (const link of selected.cardLinks) {
     const existing = entry.cardLinks.find(item => item.cardId === link.cardId && item.relation === link.relation);
     if (existing) existing.review = { ...review };

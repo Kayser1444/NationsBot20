@@ -12,7 +12,7 @@ logging into the game, submitting moves or posting game chat.
 - [GitHub repository](https://github.com/Kayser1444/NationsBot20) — maintained source code and CI.
 - [Discord application settings](https://discord.com/developers/applications/1558936899446374570) — NationsBot 2.0 bot and OAuth settings; application access required.
 
-English commands with Swedish or English replies:
+English commands with replies in Swedish, English, German, French, Spanish or Simplified Chinese:
 
 - `/notifications on [nationsname]` enables turn reminders; omitted names reuse
   your last subscription or match your Discord display name.
@@ -39,7 +39,7 @@ an array of Discord IDs instead of a single ID. The outbox retains per-recipient
 turn receipts, upgrading old confirmed turns without resending them on startup.
 Admin removal and blocking affect only the selected Discord account.
 - `/language locale:sv-SE` selects Swedish; `/language locale:en-US` selects
-  English. Typeahead suggests both supported languages and `auto`.
+  English. Typeahead suggests sv-SE, en-US, de, fr, es-ES, zh-CN and `auto`.
 - `/language locale:auto` removes your override and follows your Discord locale.
   Swedish locales use Swedish; English variants and unsupported or unknown locales
   use English. Commands update the remembered Discord locale automatically.
@@ -433,4 +433,13 @@ Schemaläggaren kontrollerar var 30:e sekund och verifierar den aktuella turen f
 
 Ägarpanelen låter dig välja **Mät betänketid** för ett parti eller ange dess ID under **Betänketid**. Alla spelares observerade intervall sparas, även om samma spelare gör flera drag i följd. Pågående intervall visas också. **Stoppa mätning** avslutar intervallet och behåller loggen. Val och logg lagras i `<profil>-turn-journal.json` under tjänstens datakatalog (`NATIONS_DATA_DIR`), separat från händelseloggen. Första intervallet och intervall vid anslutningsavbrott markeras som ofullständiga. Obevakad tid under avbrott tilldelas inte någon spelare. Historiska turbyten före aktivering kan inte återskapas; tiderna bygger på när botten observerar spelstatus, inte serverns historiska dragtider.
 
-Språkval: svenska (`sv-SE`), engelska (`en-US`), tyska (`de`), franska (`fr`), spanska (`es-ES`) och förenklad kinesiska (`zh-CN`). `/language locale:auto` följer Discord-språket, med engelska som reserv. Kortbilder och källmaterial i FAQ behåller befintliga språk; nya språk får engelska FAQ-texter och översatta kontroller.
+Språkval: svenska (`sv-SE`), engelska (`en-US`), tyska (`de`), franska (`fr`), spanska (`es-ES`) och förenklad kinesiska (`zh-CN`). `/language locale:auto` följer Discord-språket, med engelska som reserv. FAQ-texten finns på alla sex språk. Kortbilder och tryckta kortnamn behåller sina befintliga språk; källhänvisningar länkar till den engelska FAQ:n.
+
+
+### Flerspråkig FAQ
+
+Samtliga 216 FAQ-poster (219 engelska svarspunkter) har översättningar till tyska, franska, spanska och förenklad kinesiska, utöver de befintliga svenska texterna. `/language` styr även FAQ-text och allmänna frågerubriker i `/card` och `/nation`. Tryckta kort- och nationsnamn, versionsreferenser, källsidor och källänkar bevaras. Knappar och sidindelning behåller det valda språket.
+
+De fyra nya språken är maskinöversättningar från Google Translate med en gemensam spelordlista och stickprovskontroll av regeltolkningar. De är `pending` i granskningsunderlaget och är inte officiella eller fullständigt innehållsgranskade översättningar. Visningen följer samma befintliga regler för `pending` och `rejected` som övrig FAQ. Ingen översättning godkänns automatiskt.
+
+Redigera `data/faq/translations-{de,fr,es,zh}.json` och kör `node scripts/apply-faq-translations.mjs` för att uppdatera FAQ-registret och granskningsunderlaget. Importen verifierar SHA-256 för dokument, källtext och varje engelsk svarspunkt, samt bevarar versionstaggar och granskningsbeslut. `node scripts/apply-faq-translations.mjs sv` återapplicerar enbart svenska. Översättningen är förberedd i Git; inga översättningstjänster anropas när botten körs.

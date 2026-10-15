@@ -1,0 +1,1772 @@
+{
+  "schemaVersion": 1,
+  "language": "fr",
+  "sourceSha256": "d9639ea5b25291309210907e7fc5a358156777e45b8f842f661a6b0ab56c97f6",
+  "provenance": "Machine translation via Google Translate with Codex terminology and source-checked corrections, prepared from preserved English FAQ bullets on 2026-10-15. Printed card and nation names and version references preserved. Translation review remains pending.",
+  "translations": [
+    {
+      "entryId": "nations-faq-nations-faq",
+      "sourceTextSha256": "1cd7c2961da76394c592ce55be839a0fd7a23600845abe1efa09d30aaf6416a7",
+      "sourceBulletId": "nations-faq-nations-faq-en",
+      "sourceBulletSha256": "04a0a72a10ef1c622e86c23300dac545e374bedcc7a5bd4dba786c93177bca94",
+      "text": "Ce document contient des descriptions détaillées d'à peu près tout ce que vous pourriez vous poser concernant les interactions entre cartes et des commentaires sur les effets du jeu de société Nations, publié par Lautapelit.f 2013 ainsi que de l'extension Dynasties publiée en 2015 et de toutes les cartes promotionnelles. Les règles importantes qui pourraient manquer lors de la lecture du livret de règles sont répétées. Vous n'avez pas besoin de lire ce document pour jouer au jeu. Cependant, si vous n'êtes pas sûr d'une carte spécifique, vous pouvez la rechercher ici. Les mises à jour de la dernière version sont marquées en rouge, les deuxièmes dernières sont marquées en orange et toutes les mises à jour après la version 1.0 ont une [note] indiquant la dernière mise à jour. Les références (comme « Voir Golden Age/Bonus ») sont des liens, donc dans la version pdf, vous pouvez cliquer dessus."
+    },
+    {
+      "entryId": "general-campaign-rules",
+      "sourceTextSha256": "c8694f9a1acfdccc79b6f21878ef52e5787441123be58d23495571699430c284",
+      "sourceBulletId": "general-campaign-rules-en",
+      "sourceBulletSha256": "552f307e4baf9954a5991856c2a6c76e1dd3c9e518f5b7704c3f4f6751b77ca7",
+      "text": "Jouez à une série de jeux. Tous les joueurs commencent la première partie sur Prince. Chaque fois que vous gagnez, vous augmentez votre difficulté (Prince->King, King- >Emperor). Si vous gagnez au niveau Emperor, vous gagnez la campagne. [1.7] Merci à Gustavo Alves d'avoir suggéré cette variante !"
+    },
+    {
+      "entryId": "general-first-game",
+      "sourceTextSha256": "82ed219dafa47cb0f8b1fcb86de2daac957c23a8e72032de2d30415eaca57d44",
+      "sourceBulletId": "general-first-game-en",
+      "sourceBulletSha256": "8d104ce158b8c3040534c14c6345b68f73b0ddf01a5240aa40931fa76f57408b",
+      "text": "Essayez de ne pas avoir de travailleurs non déployés à la fin d'une manche, en particulier à la fin de la première manche. Évitez de trop bâtir sur des merveilles au point de ne pas pouvoir déployer tous vos travailleurs. Il est important de ne pas trop s’engager sur la force, la stabilité et les livres. À la fin de la première manche, vous devez (en tant que débutant) produire au moins 3 Pierres, 3 Or et 2 Nourriture. Essayez d'améliorer cela dans la version ultérieure de manches."
+    },
+    {
+      "entryId": "general-components",
+      "sourceTextSha256": "6938de9825d7af9eec6983e5dcf0efb77d85498f5aedcc0a084f48559d08beb5",
+      "sourceBulletId": "general-components-en",
+      "sourceBulletSha256": "72ff54350f958307f6a704fe2a680a40956290abad38450eafe58a487e613f96",
+      "text": "Si vos planches sont légèrement concaves, vous pouvez les plier légèrement dans l'autre sens pour les rendre plus grosses."
+    },
+    {
+      "entryId": "general-production",
+      "sourceTextSha256": "6eb044a927bcd00dbd815f1b8648b1dca8c68a333f847b554fd85fcb7d42def1",
+      "sourceBulletId": "general-production-en",
+      "sourceBulletSha256": "5e7de3cfeb8ad0263d835ae63a4d4b823aae36421c70b25768b7ff6247ba4c00",
+      "text": "Les ressources sont produites avant d’être consommées : il n’est donc pas nécessaire d’en conserver de la manche précédente pour entretenir votre armée. Les effets carrés, comme la force militaire et la stabilité, s’appliquent immédiatement. Déployer un ouvrier sur Jaguar Warriors réduit votre stabilité de 1 ; retirer cet ouvrier l’augmente de 1. La présence d’un ouvrier sur Jaguar Warrior ne modifie pas à nouveau la stabilité pendant la production. Vous ne pouvez pas volontairement dépenser plus de ressources que vous n’en avez en acceptant de perdre des PV ; cette situation ne peut résulter que d’une perte imposée. [1.2]"
+    },
+    {
+      "entryId": "general-architects",
+      "sourceTextSha256": "0c070504ea38be2121d087466df418159eeef45754eb63cb8c1381732194618b",
+      "sourceBulletId": "general-architects-en",
+      "sourceBulletSha256": "d6d047c94b96db271a0d6c0ad1c8eaf2915c8b32b8460a47d539d2cb456a0342",
+      "text": "Tous les architectes sont effacés de l'espace des architectes avant d'y placer de nouveaux au début d'une manche. Les architectes ne s'accumulent jamais, donc ceux qui ne sont pas utilisés lors d'une manche (privé ou public) sont perdus."
+    },
+    {
+      "entryId": "general-cards",
+      "sourceTextSha256": "b8bf0a1603f470c8987fab56ae23a3ba6a9fb05ced94c77d309970f184f2fc9d",
+      "sourceBulletId": "general-cards-en",
+      "sourceBulletSha256": "aa12a5dcdfaaec6a5d0aa4cbcbe82297ab53290d4b98a9ac6eba10e6786162e6",
+      "text": "Dans ce document, les paquets de cartes qui ne sont pas dans le paquet de cartes de base sont représentés par ces symboles : + : carte avancée ⨯ : carte expert ● : carte promotionnelle ⅅ : extension Dynasties Dans ce document, « Vous » fait référence à la Nation qui possède ou achète la carte décrite, ou qui est affectée par l'événement décrit. Les cartes n'affectent normalement que la nation dans laquelle elles sont placées. Certaines cartes, en particulier celles qui ont un effet sur les nations qui possèdent le moins ou le plus de quelque chose, peuvent également en affecter d'autres. Un autre type notable est que lorsque les cartes affectent Tout, elles affecteront également la Nation dans laquelle elles se trouvent. Une carte couverte par une autre carte (y compris les cartes de départ imprimées) ne peut plus jamais être utilisée, même si une carte qui la recouvrait est retirée. Au lieu de retirer une carte, vous pouvez la retourner pour montrer qu'il n'y a aucune carte ayant un effet dans cette position. De nouvelles cartes du même type peuvent être placées ici normalement. Une action spéciale qui vous est offerte par une carte de votre plateau joueur peut être utilisée à la place d'une action normale. Vous pouvez utiliser l'action spéciale d'une carte dans le même manche que vous l'avez achetée, mais pas dans le même tour (car vous ne pouvez effectuer qu'une seule action par tour). Défaussez les cartes tirées et défaussées. Dans le cas extrêmement improbable où vous seriez à court de cartes d’un âge donné, mélangez toutes les cartes défaussées de cet âge et piochez-en de nouvelles. [1.8]"
+    },
+    {
+      "entryId": "general-most-and-least",
+      "sourceTextSha256": "af0b8265575b3108e5bfb97239e1e03d194595a69d87370fc46b38c6b9c230e5",
+      "sourceBulletId": "general-most-and-least-en",
+      "sourceBulletSha256": "cd56dae883af5a2f97d678e072c8bd77f5f904abe775839f00f8eea9ed47d37c",
+      "text": "« Production : si vous avez le plus de force militaire : +2 pierres » signifie que vous recevez 2 pierres supplémentaires si vous avez seul la force militaire la plus élevée pendant la phase de production. Une égalité ne rapporte rien. « Si X : retirer » signifie que vous devez retirer la carte et perdre ses effets dès que la condition X est remplie, même pendant le bref instant où un ouvrier est retiré avant d’être déployé sur un autre bâtiment ou une autre carte militaire."
+    },
+    {
+      "entryId": "general-resource-loss",
+      "sourceTextSha256": "978ad3e3a8a12d5371466b04372b69658ba0c44240ffb252d268351c98053723",
+      "sourceBulletId": "general-resource-loss-en",
+      "sourceBulletSha256": "bc6bf525854607716fad4ebd3d44b58d2672436898a6d00735c3bfabc7406246",
+      "text": "Dans le pire des cas : au début de la phase de production, vous disposez de 2 aliments et de 3 livres. Vous ne produisez aucun livre. Vous devez payer 3 nourriture, mais n'en avoir que 2. Vous payez 2 nourriture, perdez 1 PV à cause du manque de nourriture et payez 1 livre (car c'était 1 nourriture que vous ne pouviez pas payer). Après la production, vous disposez de 6 pierres. Une guerre a été achetée cette manche et vous êtes vaincu, provoquant une perte de 1 PV et 3 nourriture (votre stabilité est de 0, donc ne réduisant pas les effets). Vous perdez 1 PV et, parce que vous n'avez pas de nourriture, vous devez perdre 3 livres à la place, mais vous ne perdez pas de point par manque de nourriture puisque vous avez déjà perdu un point de nourriture cette manche. Vous perdez 2 livres, perdez 1 PV à cause du manque de livres et payez 1 pierre. La famine est de -2 nourriture. Parce que vous n’avez pas de nourriture, vous devez combler la différence avec des livres. Parce que vous n’avez pas de livres, vous devez combler la différence en utilisant d’autres ressources. Vous ne perdez pas de point pour la nourriture ou les livres, car vous avez déjà perdu des points pour les deux cette manche. Vous perdez 2 de toute autre ressource (ou combinaison de ressources) pour payer la famine. Au total, vous avez perdu 1 PV faute de nourriture, 1 PV faute de livres et 1 PV pour la guerre. Vous avez 0 nourriture, 0 livre et 3 pierres. Dans le prochain manche, vous risquez de perdre à nouveau des PV pour la nourriture et les livres. Dans le cas encore plus extrême où vous avez payé toutes vos ressources, payé 1 VP de pénalité pour ne pas avoir assez de ressources et 1 VP de pénalité pour ne pas avoir assez de livres, payé tout le reste de vos ressources et devriez quand même payer plus. Ensuite, vous n’obtenez aucune pénalité supplémentaire, tout comme dans le cas d’avoir 0 PV, vous ne pouvez pas perdre plus de PV. [1.3]"
+    },
+    {
+      "entryId": "general-workers",
+      "sourceTextSha256": "e0f2a71e34e36dc7df51f51994be5d92ae7b1f15cf37b2958254982cc179f70c",
+      "sourceBulletId": "general-workers-en",
+      "sourceBulletSha256": "016ce9f200ec45e5857e72032a117edb3cece5382ea05caa8e0d9736e95d6c6b",
+      "text": "Prendre un ouvrier de votre piste de population et le déplacer vers votre zone de ressources ne peut normalement être effectué que pendant la phase de croissance. Normalement, vous ne pouvez jamais déplacer les ouvriers vers votre piste de population. Les événements et effets spéciaux sur les cartes peuvent annuler cela. Les travailleurs peuvent être déployés dans la phase d’action et non dans la phase de croissance. Lorsque vous renvoyez un ouvrier, remettez-le sur votre piste de population. Vous pouvez le placer sur n'importe lequel de vos espaces vides. [1.8]"
+    },
+    {
+      "entryId": "general-5-players",
+      "sourceTextSha256": "c3db216960c49f1bc289bfeb11b866ba8dac0c84cf7a39901111fb9621301f57",
+      "sourceBulletId": "general-5-players-en",
+      "sourceBulletSha256": "3cdc460493437ee5e6d83e434135bcca922d3a9e3674d54ffbbd3aeba0a7733a",
+      "text": "À cinq joueurs, au maximum 2 joueurs peuvent avoir « le plus » d’une valeur. Si exactement deux joueurs partagent le maximum, tous deux ont « le plus », et personne d’autre. Si un joueur a seul le maximum et que les deux suivants sont à égalité à la deuxième place, seul le premier a « le plus ». Si trois joueurs ou plus partagent le maximum, personne n’a « le plus ». Au minimum 2 joueurs ont « le moins ». Si au moins deux joueurs partagent le minimum, seuls ces joueurs ont « le moins ». Si un seul joueur a le minimum et qu’au moins deux partagent la deuxième valeur la plus basse, le dernier et tous ceux à cette deuxième valeur ont « le moins ». Tous les joueurs peuvent donc avoir « le moins ». [1.5]"
+    },
+    {
+      "entryId": "nations-nations",
+      "sourceTextSha256": "21acf39b7ddda1c2278a61da75abd184c95f4d0552dbd60e7a56cc999e81fef4",
+      "sourceBulletId": "nations-nations-en",
+      "sourceBulletSha256": "3315139b4747e2240c637a813bdd0250fd81ac71dee8caceeb282a53c9fbf9e7",
+      "text": "Notez que la plupart de ces notes concernant Dynasties se trouvent dans le livre de règles Dynasties et sont répétées ici pour en faciliter l'accès."
+    },
+    {
+      "entryId": "nations-china-b-side",
+      "sourceTextSha256": "33a5f4970d034e1b71fa113c4a420e4cfec9f78aa9340116c82acaeb4ba98119",
+      "sourceBulletId": "nations-china-b-side-en",
+      "sourceBulletSha256": "d34584f8351c4ce51ca9e77ed9a8c73a8f042a57de26522a505f4dedf628e484",
+      "text": "Effet spécial : si vous réussissez le premier, vous recevez 1 nourriture supplémentaire. Techniquement, vous le recevez pendant la phase de production, mais pour que ce soit plus facile à retenir, vous pouvez normalement le prendre juste après avoir réussi. Vous ne pouvez recevoir qu’un maximum de 1 nourriture en passant le premier. Sur 5 joueurs vous recevez le bonus si vous réussissez le premier ou le deuxième."
+    },
+    {
+      "entryId": "nations-ethiopia",
+      "sourceTextSha256": "3ea16020a9f08622f71142e7726f3d1add619e22d95d45aadc84af93651296ca",
+      "sourceBulletId": "nations-ethiopia-en",
+      "sourceBulletSha256": "62cafe5deea5ab9f4d9ff4cadb3059c8445fa5c8ffaca4f0ce07755c624b4ce9",
+      "text": "Lorsque vous déterminez l'ordre des nouveaux joueurs, comptez votre stabilité comme de la force et ajoutez-la à votre force. Utilisez la somme comme votre force. Votre Stabilité compte toujours normalement pour briser les liens de Force. Vous n’augmentez jamais votre Force sur le plateau à cause de cette règle."
+    },
+    {
+      "entryId": "nations-greece-b-side",
+      "sourceTextSha256": "13cb85fe835cf4ebd8e261cd044770d39606be5a021a370805618b77fcff1e09",
+      "sourceBulletId": "nations-greece-b-side-en",
+      "sourceBulletSha256": "908b1479d0e1a2646e89d17e1f4a61dddf3e202b10ef92c92e5532b45144ee9c",
+      "text": "Effet spécial : voir Âge d'Or/Bonus."
+    },
+    {
+      "entryId": "nations-japan",
+      "sourceTextSha256": "856badc598305972a5ed998e8f49d5372cf946c5f2db0f5a0201e79ea171af40",
+      "sourceBulletId": "nations-japan-1-en",
+      "sourceBulletSha256": "ff4239385306a2f09929c65b62b26316474a636c17453080f79789801e3796c0",
+      "text": "La règle Emperor de Japan écarte les conseillers achetés avant leur placement, ils ne peuvent donc pas être placés sur Porcelain Tower."
+    },
+    {
+      "entryId": "nations-korea",
+      "sourceTextSha256": "84c494f892647a56e994847c0bf66709193108b1c5a9450fab86060430c27e2d",
+      "sourceBulletId": "nations-korea-en",
+      "sourceBulletSha256": "0671fe9efc6ac04219374dfe9b7c2f0b6f526d31745fad2af548884df28e20f9",
+      "text": "Règle spéciale : prenez les Architectes de la réserve lorsque vous utilisez cette capacité, pas les Architectes disponibles pour cette manche. Ne payez aucune pierre. [1.7]"
+    },
+    {
+      "entryId": "nations-mongolia",
+      "sourceTextSha256": "1cb6e7e610b2598d19fe124ede9ae40a69912b9252dd125f27d9929037b283b8",
+      "sourceBulletId": "nations-mongolia-en",
+      "sourceBulletSha256": "b6dcc9a61c6e969786e1f7137713210ab089c076667b69c1c0e3a4deece781cc",
+      "text": "Règle spéciale : lorsqu'un joueur (y compris vous) est vaincu par une guerre, payez 2 ressources supplémentaires identiques à celles indiquées sur la carte de guerre. Peut être atténué par la stabilité normalement. [1.8] Ouvriers : Si vous avez moins de 0 Force pendant la production, cela provoque une révolte (-1 VP, -1 Livre par négatif, idem que pour la stabilité négative). Vous commencez avec 4 ouvriers, votre maximum est de 12. [1.7] Si vous avez moins de 0 Force et achetez une guerre, placez le marqueur de guerre sur 0 force. [1.8] Steppe : Il s'agit d'un espace normal pour les bâtiments et les militaires, mais vous ne pouvez pas y déployer d'ouvriers avant d'y avoir placé une nouvelle carte."
+    },
+    {
+      "entryId": "nations-persia-b-side",
+      "sourceTextSha256": "62c3ee861d5fcf1b4564bd0cbc467dea46ff92cfcf4d5af743169619a4ec61de",
+      "sourceBulletId": "nations-persia-b-side-en",
+      "sourceBulletSha256": "40abe498254fbda65d03b31a406f9caccb9dabd884a77055bc9b2659c4578f65",
+      "text": "Lorsque vous jouez la première Dynastie, remplacez une case de colonie. Lorsque vous jouez le second, remplacez la même case colonie."
+    },
+    {
+      "entryId": "nations-poland",
+      "sourceTextSha256": "bd209abc5b4f905a307c3e446c0b6c176e62f795500eab62a6846813e5471c3a",
+      "sourceBulletId": "nations-poland-en",
+      "sourceBulletSha256": "f0fc4ab269ff9cc8e17529c9c22a95299b01c95d3786961db4bd62af5f46ef3a",
+      "text": "Règle spéciale : Pour obtenir le bonus, il doit y avoir une guerre et vous ne devez pas être vaincu."
+    },
+    {
+      "entryId": "nations-rome-b-side",
+      "sourceTextSha256": "2a7165b18c75dd53d5798515314e8cccb2e00835381587ba459f8ef2d0f86ffa",
+      "sourceBulletId": "nations-rome-b-side-en",
+      "sourceBulletSha256": "92c39298c9f718952d353c9f42081e8c8625831c5518345cb35601f3e61c85d2",
+      "text": "La Force 2 est toujours active, vous ne pouvez pas y déployer d'ouvrier. Cela signifie que vous démarrez le jeu avec 2 Force. [1.4]"
+    },
+    {
+      "entryId": "nations-venice",
+      "sourceTextSha256": "a730b7b5c7f345b908d5de1d4307bb0002579e759dfeb83851ce27550b9bcf52",
+      "sourceBulletId": "nations-venice-en",
+      "sourceBulletSha256": "1ddd1f00582d7df3272ee4fcfe7cecba0c7967c1b68b231c4aad55ae89f8b62c",
+      "text": "Spécial : En solo, vous obtenez toujours le bonus. [1.8]"
+    },
+    {
+      "entryId": "nations-vikings",
+      "sourceTextSha256": "cb61b62423cb791bf895f722f6956cbfcf6c31fffcdc2cb6704eea5739771bfa",
+      "sourceBulletId": "nations-vikings-en",
+      "sourceBulletSha256": "e1a21865d8cf014b26c0f0be452e8fe1aaa570acb310fc0808926208cc6d1f7a",
+      "text": "Règle spéciale : cet effet est effectué une fois que tous les joueurs ont terminé la phase de production. Vous ne gagnez aucune ressource. En solo, vous ne pouvez réduire les livres que pour l'ombre. [1.11] Old Uppsala : Notez que cette Merveille peut être remplacée pour éviter les PV négatifs en fin de partie."
+    },
+    {
+      "entryId": "advisor-advisor",
+      "sourceTextSha256": "9dc01c0e50e1a2a1676d2948032e329d371b8987f7dc176a2a4b1e5a6dcd4a57",
+      "sourceBulletId": "advisor-advisor-en",
+      "sourceBulletSha256": "8baa1962e39c55c728d1abe98c8e1a82530da12584c061a66d1c042c1c9344ce",
+      "text": "Le grand carré ou valeurs manche au bas de la plupart des conseillers sont des effets permanents (carrés) ou des effets de production (manche) dont vous bénéficiez tant que vous avez le conseiller et quel que soit tout autre effet sur le conseiller."
+    },
+    {
+      "entryId": "advisor-augustus",
+      "sourceTextSha256": "17c9725eea0229c2e14c38cd4d90daf4d52de56209f23f386efbff28cadb5993",
+      "sourceBulletId": "advisor-augustus-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "advisor-hatshepsut",
+      "sourceTextSha256": "f0f10b6b05c87413af5ef705c934b366d82783013eade8e374badee248d34c0b",
+      "sourceBulletId": "advisor-hatshepsut-en",
+      "sourceBulletSha256": "cf21234f9335bd2995ce2d408664a4e339f34c6c680508e2602ebbd2b4967877",
+      "text": "Vous devez avoir Hatshepsut au moment où votre merveille est prête à obtenir 3 livres, vous n'obtenez aucun bonus pour les merveilles déjà terminées en prenant Hatshepsut. Lorsque vous terminez Titanic, vous obtenez le bonus même si vous perdez Hatshepsut. [1.3]"
+    },
+    {
+      "entryId": "advisor-qin-shi-huang",
+      "sourceTextSha256": "6fd8a2bae1ed3816cbe20f6ef939e05e0a5bec60475dc26f13ba374fa22ffedd",
+      "sourceBulletId": "advisor-qin-shi-huang-en",
+      "sourceBulletSha256": "2982f09ff9a8722ebce32c2d6ad1181c5a5e8fdec6952c9391e8b0f60d84e1c2",
+      "text": "Voir Le plus et le moins ."
+    },
+    {
+      "entryId": "advisor-saint-augustine",
+      "sourceTextSha256": "e4d86259b142623f52cf09d200cc51361bed2fb5c989d89f5df5bb026ee42b21",
+      "sourceBulletId": "advisor-saint-augustine-en",
+      "sourceBulletSha256": "2982f09ff9a8722ebce32c2d6ad1181c5a5e8fdec6952c9391e8b0f60d84e1c2",
+      "text": "Voir Le plus et le moins ."
+    },
+    {
+      "entryId": "advisor-archimedes",
+      "sourceTextSha256": "a1fa856d00ea188bff2f13314a3e1408a2bdaf1bb307e1a9a92d528271f07be0",
+      "sourceBulletId": "advisor-archimedes-en",
+      "sourceBulletSha256": "5cd5a27f4df7e68b5d5f21ca3a3824b69fd11371c37412a6b6a58d10155ad5d5",
+      "text": "Vous pouvez prendre un architecte de la réserve une fois par manche et l'utiliser comme un architecte normal. Vous pouvez utiliser cet effet dans la manche que vous achetez Archimedes."
+    },
+    {
+      "entryId": "advisor-boudica",
+      "sourceTextSha256": "afe3659548a7c1857a7a3aabe32d6854655567803ae58e94bd6c82fda6845abc",
+      "sourceBulletId": "advisor-boudica-en",
+      "sourceBulletSha256": "061b71ff01ab478d9aadd7eb2228172a3d17be429e03f61c62d4b62ba9b04703",
+      "text": "Vous pouvez avoir de la Force provenant d'autres cartes, mais si vous avez au moins 1 ouvrier déployé sur une carte militaire, vous perdez immédiatement Boudica, voir Le plus et le moins ."
+    },
+    {
+      "entryId": "advisor-cyrus-the-great",
+      "sourceTextSha256": "ef051e83b6b17651fe43705c092b656bd8f3049c7eb3239e9ea1949c92589099",
+      "sourceBulletId": "advisor-cyrus-the-great-en",
+      "sourceBulletSha256": "005c3c19c999ec4d1197cbf4b64259c262e92041e66329df961fbe8739581608",
+      "text": "Vous produisez l'or bonus (rappelez-vous, uniquement pendant la phase de production) si vous avez acheté au moins une colonie pendant cette manche, pas de supplément pour en acheter plus d'une. Notez que vous pouvez acheter une colonie avant d’acheter Cyrus. Tant que vous possédez toujours la carte pendant la production et que vous remplissez les conditions, vous obtenez le bonus. [1.6]"
+    },
+    {
+      "entryId": "advisor-buddha",
+      "sourceTextSha256": "ec8de620d3e941a72a2785795e10a57339adf116ecfdd4a235bd137c07304d05",
+      "sourceBulletId": "advisor-buddha-en",
+      "sourceBulletSha256": "8877df64eea5ab79e2edbc80c4859df9ad4b082f3bfd17a5e872cd2d01bebe51",
+      "text": "Vous ne sautez votre premier tour d’une manche que si vous possédiez déjà Buddha pendant la manche précédente. Acheter Buddha comme première action d’une manche ne vous oblige pas à sauter ce tour. [1.10] En solo, lancez le dé après avoir sauté votre tour. [1.4]"
+    },
+    {
+      "entryId": "advisor-hannibal",
+      "sourceTextSha256": "5ac870154886c574a36da3f1327f9e32b323e2bec914a9048482a1c51271c499",
+      "sourceBulletId": "advisor-hannibal-en",
+      "sourceBulletSha256": "b44722e1120c0833d2bcaf55eaac7bfc5bae6e038797f4a428b535b7ae45cfdd",
+      "text": "Les valeurs de votre raid comptent pour 1 de plus, donc lorsque vous achetez une bataille, vous obtenez 1 ressource de plus que ce que vous auriez reçu normalement. Les autres Nations doivent payer 1 or de plus que le coût normal lorsqu'ils achètent des batailles."
+    },
+    {
+      "entryId": "advisor-sun-tzu",
+      "sourceTextSha256": "1649a4f403c7a0e30db5bf89faeb1aca7165ea1566751176e0b198f587c2ab97",
+      "sourceBulletId": "advisor-sun-tzu-en",
+      "sourceBulletSha256": "d5fa55f4986d4d5aa7e59c90be50ae400ddaceaa65b8d0df791d5c4facbd0c21",
+      "text": "À la place de votre premier tour d’une manche, jouez deux tours consécutifs. Vous devez posséder Sun Tzu depuis la manche précédente : l’acheter comme première action ne donne pas immédiatement un tour supplémentaire. Si vous le possédez au début de votre première action de la manche, vous bénéficiez des deux actions même si vous le remplacez avec la première. En solo, lancez une seule fois le dé pour l’ombre après les deux actions, même si vous n’avez fait que déployer des ouvriers sur des bâtiments. [1.7]"
+    },
+    {
+      "entryId": "advisor-anna-komnene",
+      "sourceTextSha256": "764bf211d4c3de7b9894c886dbfd0fe6631b09167d8333e3255baf41455c0920",
+      "sourceBulletId": "advisor-anna-komnene-en",
+      "sourceBulletSha256": "0fa370c52c3d5574998fdaa74f059476c03e926bdaf41933f7951ea326950842",
+      "text": "Traitez tous les effets négatifs de production et de stabilité par ouvrier sur vos cartes militaires comme s'ils n'existaient pas."
+    },
+    {
+      "entryId": "advisor-harald-hardrada",
+      "sourceTextSha256": "7d001fef890b3adf7f962fde6eae401b00f5f18d3dad0715fceb4870bc9e6ec1",
+      "sourceBulletId": "advisor-harald-hardrada-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "advisor-sejong-the-great",
+      "sourceTextSha256": "f8a4fa1c0504573688c5b40198649f8f086dbfb11a8e55232ba739049818d7f3",
+      "sourceBulletId": "advisor-sejong-the-great-en",
+      "sourceBulletSha256": "c2b59506d8904327bc9feb509d3029872374934548effe3b564518857bbed42f",
+      "text": "Lorsque vous achetez un Golden Age, vous obtenez 2 pierres. C’est différent de Golden Age/Bonus. [1.1]"
+    },
+    {
+      "entryId": "advisor-thomas-aquino",
+      "sourceTextSha256": "14a3314fb32e6688c7e07709a342666153a9c1e4a1b405feed4a1d3a361820d5",
+      "sourceBulletId": "advisor-thomas-aquino-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "advisor-abu-bakr",
+      "sourceTextSha256": "e9161d9fe939ac80c69740ad914ca21d3532da4b770c32e5e467a8248c0fca9c",
+      "sourceBulletId": "advisor-abu-bakr-en",
+      "sourceBulletSha256": "b3f836c25710a2f467f97c56bf6240fb60550904358eae05e47dd6801a194203",
+      "text": "Quelle que soit la ressource que vous choisissez lorsque vous achetez une bataille, vous obtenez 2 livres supplémentaires."
+    },
+    {
+      "entryId": "advisor-eleanor-of-aquitaine",
+      "sourceTextSha256": "0153b428b4af5f86e722be6d2c3a5d7513b6998b8368ba838e2f7ebbcb2e8fb1",
+      "sourceBulletId": "advisor-eleanor-of-aquitaine-en",
+      "sourceBulletSha256": "22597081280d73a43a9ca2295b86ebdcfc135404e0c7b12f9abfa3307819681b",
+      "text": "Vous obtenez l'or bonus si vous avez acheté au moins une colonie au cours de cette manche, pas de supplément pour en acheter plus d'une."
+    },
+    {
+      "entryId": "advisor-mansa-musa",
+      "sourceTextSha256": "b45929be0a49bca4277e03ca089bd5cb64101f5201606e21320d4d76d045c7bf",
+      "sourceBulletId": "advisor-mansa-musa-en",
+      "sourceBulletSha256": "2b7e8f3ca42807570bed6effa57cfe80ab54ead2cecf8d720bb273a93ba43ec7",
+      "text": "Vous devez avoir Mansa Musa au début de votre action pour bénéficier des effets, dépenser votre dernier Or pour l'acheter ne vous donne pas son effet. Si vous utilisez votre dernier or pour acheter un autre conseiller, vous obtenez l'effet. [1.1] Vous pouvez obtenir le bonus plusieurs fois dans une manche si vous descendez à 0 or, puis en générez plus, puis dépensez tout à nouveau. [1.2] Vous devez dépenser votre or par une action, et non le perdre, pour obtenir l'effet. [1.4]"
+    },
+    {
+      "entryId": "advisor-alhazen",
+      "sourceTextSha256": "775d8a005f4439ecb69c43da26fa13a959870c9263bd9707f58f7a75ea68981e",
+      "sourceBulletId": "advisor-alhazen-en",
+      "sourceBulletSha256": "ec486b682e193ff60585088b54ea30e3c51cccee5f35469628f778c4042617eb",
+      "text": "Une fois par manche, vous pouvez utiliser une action complète pour choisir deux cartes sur le tableau de progression. Ces deux cartes changent de place. Comme d'habitude, vous ne pouvez plus effectuer d'action, notamment vous ne pouvez acheter aucune carte ce tour. La prochaine fois que ce sera votre tour, vous pourrez acheter des cartes normalement."
+    },
+    {
+      "entryId": "advisor-genghis-khan",
+      "sourceTextSha256": "3a86bc28e6be9d2788fd5aac2e7d98abe7d741ec4290530f5a275fbd72c2c146",
+      "sourceBulletId": "advisor-genghis-khan-en",
+      "sourceBulletSha256": "27160ad101abb5dfd110fd17b0f2995aab46023534098822c5714d15a5200354",
+      "text": "Tous les Nations, y compris vous, ont 3 points de stabilité en moins tant que vous possédez le Genghis Khan."
+    },
+    {
+      "entryId": "advisor-marco-polo",
+      "sourceTextSha256": "e2e1e9d1634c3173133167f84bb2befa97ac5f4a8cc263e7246c435f51bdcd88",
+      "sourceBulletId": "advisor-marco-polo-en",
+      "sourceBulletSha256": "dff648f33e2ee0b38672683f8b53c742025844c2549c0dd7667f9629cd90a687",
+      "text": "Vous pouvez échanger avec la réserve, 2 aliments ou 2 pierres pour obtenir 4 pièces d'or."
+    },
+    {
+      "entryId": "advisor-zhu-xi",
+      "sourceTextSha256": "d025e2582ed55cc71565d9d9d47d55630e30af72bc4d7a4d4fde828ec9d8c925",
+      "sourceBulletId": "advisor-zhu-xi-1-en",
+      "sourceBulletSha256": "f850925e3688ed2645e63ff45ad7449699273ceaf3abd37059e89790bb95bd93",
+      "text": "Zhu Xi ne concerne que son propre emplacement de conseiller. Placer ou remplacer des conseillers sur Porcelain Tower ne l’affecte pas."
+    },
+    {
+      "entryId": "advisor-zhu-xi",
+      "sourceTextSha256": "d025e2582ed55cc71565d9d9d47d55630e30af72bc4d7a4d4fde828ec9d8c925",
+      "sourceBulletId": "advisor-zhu-xi-2-en",
+      "sourceBulletSha256": "e3873b174f4835fd2e44e9486e912d64c793f7b26657ca9dc54ae81b39e678d4",
+      "text": "Au premier remplacement, Zhu Xi et le nouveau conseiller restent ensemble sur le même emplacement. Le remplacement suivant les retire tous les deux. Si un effet retire le nouveau conseiller, Zhu Xi est également retiré. Les événements et autres effets peuvent toujours retirer Zhu Xi normalement."
+    },
+    {
+      "entryId": "advisor-elizabeth",
+      "sourceTextSha256": "867cfa4ebe9bf7970bb36aac1d94ccfac74ab52ccc6a343a7de293098ad5f35d",
+      "sourceBulletId": "advisor-elizabeth-en",
+      "sourceBulletSha256": "d5cd451c85a7fb3d84a420d2c5a5ee7e109dc2ed54d011e30b53f0213e6dbe01",
+      "text": "Le bonus de Force n'est pris en compte que lorsque vous vérifiez si vous êtes touché par la guerre, et non dans aucun autre but."
+    },
+    {
+      "entryId": "advisor-galileo-galilei",
+      "sourceTextSha256": "1031c2d4e6d12d13bf8d36a73db6ff148f8f678746cfc16f1d6acfba5b1977c2",
+      "sourceBulletId": "advisor-galileo-galilei-en",
+      "sourceBulletSha256": "9e1e4ff19288f1b804e3d7a87317a788573b4af93d2c0f0d9ec3f3f80d3c4ab5",
+      "text": "Vous ne payez que le coût normal en or pour acheter la carte. Si vous achetez un Âge d'Or et souhaitez acheter des PV, vous devez payer ce coût normalement. Vous pouvez utiliser cette capacité pour acheter des merveilles naturelles ainsi que des merveilles et des âges d'or normaux. [1.8]"
+    },
+    {
+      "entryId": "advisor-isabella",
+      "sourceTextSha256": "de5b7546ea34678750b45ca7e62e2233a8d91f58a4da332ca60b0c0c0dd83d26",
+      "sourceBulletId": "advisor-isabella-en",
+      "sourceBulletSha256": "440b3f759f0400d9066919960e6df734f26045477f571111a471415bb1801d31",
+      "text": "Le bonus s’applique à chaque colonie de la Renaissance (âge 3). Les colonies des âges 1, 2 ou 4 ne donnent aucun bonus."
+    },
+    {
+      "entryId": "advisor-montezuma",
+      "sourceTextSha256": "8c7c1cc0bcf1af653ca83a2657800111cf9d3fed463f9417983c72c8debf2425",
+      "sourceBulletId": "advisor-montezuma-en",
+      "sourceBulletSha256": "be7e1512b1fe182689edc832003f4f2d6a547d6768d9ebcaa85e2d46642b0853",
+      "text": "C'est un effet immédiat lors de l'achat d'une guerre ou d'une bataille. Seulement 3 livres bonus de Kingdom of Leon, pas 3 chacun de War et Battle. [1.8]"
+    },
+    {
+      "entryId": "advisor-martin-luther",
+      "sourceTextSha256": "7dffea4f1b6c52410052d1d1bbb8dfc2d4705ad85c3e805e6488d08d75ca0b3f",
+      "sourceBulletId": "advisor-martin-luther-en",
+      "sourceBulletSha256": "bee16ad8d0c26b3f2165521355bed97b08b83d6a53a224dac264a6ba9826ebdb",
+      "text": "Toute Nation, y compris vous, qui est vaincue par une Guerre doit payer 4 nourritures supplémentaires. Ces 4 vivres s'ajoutent à la perte de ressources encourue par la Guerre. Choisissez les ressources à atténuer avec la stabilité dans l'ordre inverse des joueurs. Les effets de stabilité peuvent être divisés pour réduire une partie de la perte de Martin Luther et une partie de la perte normale de ressources due à la guerre."
+    },
+    {
+      "entryId": "advisor-pocahontas",
+      "sourceTextSha256": "c82a725c81492b0be217f7345b368ba24f83602f4c56dfb3d92f612aa1d980ad",
+      "sourceBulletId": "advisor-pocahontas-en",
+      "sourceBulletSha256": "3bfaed95d24d0bfa81ac7fa63cf275c6324131500c2243dbdb855b3cb7892a67",
+      "text": "L’augmentation des exigences pour conquérir des colonies s’applique également à vous."
+    },
+    {
+      "entryId": "advisor-tokugawa",
+      "sourceTextSha256": "b2a5f6d83ceabf4b8d39eee3603810b389f1133d324fb28b733bf7c60106b77a",
+      "sourceBulletId": "advisor-tokugawa-en",
+      "sourceBulletSha256": "858f8a31988bd846a5ecb4c6a2bf4f46eed43380921e06a8bb8436a177de8367",
+      "text": "Le bonus est par carte de l'âge actuel, donc pendant manche 5 et 6 cartes Renaissance sont comptées, pendant manche 7 et 8 cartes Industrielles."
+    },
+    {
+      "entryId": "advisor-niccolo-machiavelli",
+      "sourceTextSha256": "acde0c72a5e47e855d93f66e33f038f39a9720c2b801155c3f0e1bdf40f9d89a",
+      "sourceBulletId": "advisor-niccolo-machiavelli-en",
+      "sourceBulletSha256": "a58ce42e6a03644f6d120ca097de5693ec45242a3d7a3456d2a99f1dc9de5252",
+      "text": "Vous devez montrer les deux cartes d’événement historique à tous les joueurs. Supprimez l'événement qui n'est pas sélectionné. [1.5] En solo, piochez deux tuiles événement solo et choisissez-en une. [1.8]"
+    },
+    {
+      "entryId": "advisor-peter-the-great",
+      "sourceTextSha256": "6c622bcb59828f196e96acf9a69bd0a24d38b55ca7eaa4d78b311cb867078e1c",
+      "sourceBulletId": "advisor-peter-the-great-en",
+      "sourceBulletSha256": "5d63cac3e18fbe1997c69dc50b719c1c109c911c550663d925d0747ac1b5a0ae",
+      "text": "Choisissez l'un des 3 bonus de ressources si votre Force est supérieure à la Force de la Guerre."
+    },
+    {
+      "entryId": "advisor-suleiman-i",
+      "sourceTextSha256": "ead084a14e59dd2e7369c87d3e511e54fe2276ffcaf6ab2dc25fc1454fa46030",
+      "sourceBulletId": "advisor-suleiman-i-en",
+      "sourceBulletSha256": "9f46335d4636f2bb23db1ec2936ec7e242ff65ef91aae8522b54f021a9315c63",
+      "text": "Tant que vous êtes le plus fort (et que vous avez des ouvriers que vous pouvez prendre), vous pouvez en prendre un à chaque fois qu'il s'agit de votre tour."
+    },
+    {
+      "entryId": "advisor-florence-nightingale",
+      "sourceTextSha256": "cd5d23f74b4818e917e8832680f5867875aad933e53b4eac65a1de319f7f0096",
+      "sourceBulletId": "advisor-florence-nightingale-en",
+      "sourceBulletSha256": "2a1877d8f63387b234c3a58a850fe90d14625ce42c7a32cc3886fe003aa124e0",
+      "text": "Vous perdrez toujours des livres si vous manquez de ressources (ou d'autres ressources si vous manquez de livres). Aucun effet sur la guerre. N’affecte que l’or, la pierre, la nourriture, les livres – PAS la force et la stabilité. [1.10]"
+    },
+    {
+      "entryId": "advisor-frederick-the-great",
+      "sourceTextSha256": "ce719fd8a67c508bf49d40b0b5bc8af458c2d3321ee8bec451b2101ac14398fe",
+      "sourceBulletId": "advisor-frederick-the-great-en",
+      "sourceBulletSha256": "20d57d9b75a41131b2836c392e0908924cca13499be2073c5332edde72d4cedd",
+      "text": "Le coût minimum de déploiement est de 1 pierre."
+    },
+    {
+      "entryId": "advisor-abraham-lincoln",
+      "sourceTextSha256": "3307c7c1511fc746a3e433d167b2d972834d57f5a6e532b29725c9bd42de03d7",
+      "sourceBulletId": "advisor-abraham-lincoln-en",
+      "sourceBulletSha256": "f23e5f787449a4c3a435b32c67b34ec3fbbb79803f2a20317ea597d4d9bf8d16",
+      "text": "Tant que vous avez des ouvriers que vous pouvez embaucher, vous pouvez en embaucher un à chaque fois qu'il s'agit de votre tour."
+    },
+    {
+      "entryId": "advisor-benjamin-disraeli",
+      "sourceTextSha256": "17260cfa25cc73116204ac34acfad20c7ea4123e4baec4efa7ff3232c84d0cb7",
+      "sourceBulletId": "advisor-benjamin-disraeli-en",
+      "sourceBulletSha256": "51dba06c19bac6f15a330693b28ff430022ee56e35e01a08de95d4d4691211cd",
+      "text": "Vous obtenez la nourriture bonus si vous avez acheté au moins une colonie pendant cette manche, pas de supplément pour en acheter plus d'une."
+    },
+    {
+      "entryId": "advisor-marie-curie",
+      "sourceTextSha256": "ff3566d252f1dd7b9b4ff62385846c53ce0535f32c0e352164992535a5d7c757",
+      "sourceBulletId": "advisor-marie-curie-en",
+      "sourceBulletSha256": "3cba85a192025ef9490a7cf1e130ae6e871ca21c19b0bc3aacc6d2f9cb1f7a4d",
+      "text": "Vous pouvez prendre un architecte de la réserve deux fois par manche et l'utiliser comme un architecte normal. Vous pouvez utiliser cet effet dans la manche que vous achetez Marie Curie."
+    },
+    {
+      "entryId": "advisor-alfred-nobel",
+      "sourceTextSha256": "ebdfe068adc95616e0d45f10b4b141e8a1cca404c71eecd682eb4c9580286bb8",
+      "sourceBulletId": "advisor-alfred-nobel-en",
+      "sourceBulletSha256": "d40c204026429561d1252287986c33f93c36f64578265ec575d84fb5d040f7fe",
+      "text": "Les deux effets sont indépendants. Vous ne pouvez pas acheter de guerre, même si vous n’avez aucun ouvrier sur des bâtiments industriels (âge 4). Le bonus de pierre ne s’applique que pendant la phase de production."
+    },
+    {
+      "entryId": "advisor-shaka-zulu",
+      "sourceTextSha256": "7d67d4c61f86821677542aebf710868a2d714b1ebc0c525b2ee3e1549efacaae",
+      "sourceBulletId": "advisor-shaka-zulu-en",
+      "sourceBulletSha256": "e6a120745b519b1ec6ed31743d4670a1d02d86c61854caa38a5e461fca2e4c95",
+      "text": "Les autres Nations obtiennent le bonus lors de l'achat d'une colonie, pas vous."
+    },
+    {
+      "entryId": "advisor-simon-bolivar",
+      "sourceTextSha256": "242f21d60f2bed380f4ec1b664da32fee6e22d86a43990e255fd792c6ac45456",
+      "sourceBulletId": "advisor-simon-bolivar-en",
+      "sourceBulletSha256": "00e33a693ebb56633b9e4edac8dd5d09e5076dc8e09b5de1ce540556173ba755",
+      "text": "Supprimer une colonie est une action à part, vous n'obtenez pas de bonus si vous remplacez une colonie par une nouvelle. [1.5] Les colonies pré-imprimées peuvent être retirées sauf interdiction spécifique. Placez une carte face vers le bas pour couvrir l'emplacement, l'emplacement pourra ensuite être utilisé normalement. [1.11]"
+    },
+    {
+      "entryId": "advisor-nikola-tesla",
+      "sourceTextSha256": "0fa8af12b15cd1df4dfd249732c94074b0f021b94931bcb2f972076db18c19ba",
+      "sourceBulletId": "advisor-nikola-tesla-en",
+      "sourceBulletSha256": "8c01af8ab06c264672522d08b82f6c27a7ed4bde011b187ffcf2480843b28a8a",
+      "text": "Cette action peut être effectuée autant de fois que vous le souhaitez dans une manche, mais une seule fois par tour. Utilisez le dé pour le jeu solo."
+    },
+    {
+      "entryId": "advisor-frederic-chopin",
+      "sourceTextSha256": "0140ec7809afb2938bfca261db79b44b5180de89f486778f7ac2e7bafb87328e",
+      "sourceBulletId": "advisor-frederic-chopin-en",
+      "sourceBulletSha256": "29574db0fee452a63ebf5f16ea72bea72db57edc6370e6e0229ac40ca340c801",
+      "text": "Votre production de livres est doublée (pas le nombre total de livres !). Cette carte peut être achetée à un autre joueur par une action en payant 5 Or à la réserve. Lorsque le joueur avec Chopin est décédé, Chopin ne peut plus être acheté par d'autres joueurs."
+    },
+    {
+      "entryId": "battle-battle",
+      "sourceTextSha256": "6f97027ae8a7f9f36e1cab6b303b9365d1b1958fb71b5b513b76ac7c39b6c448",
+      "sourceBulletId": "battle-battle-en",
+      "sourceBulletSha256": "3c7a670b1fa2a6e9c04c3b230b29ad1e30e64f69d614fb0b54d6afbfb422baa3",
+      "text": "N'oubliez pas que vous ne bénéficiez de la meilleure valeur de Raid que si vous avez au moins 1 ouvrier sur cette carte militaire. Avoir plus d'un ouvrier sur une carte ne fait aucune différence, vous n'obtenez jamais de multiples effets de bataille."
+    },
+    {
+      "entryId": "building-coffffee-house",
+      "sourceTextSha256": "e93b807f8879bcc8228a6af1fef3c2455378837eba11208137546aae832a91f6",
+      "sourceBulletId": "building-coffffee-house-en",
+      "sourceBulletSha256": "46abc49d394cc026c39f4bdff376cc9f01783d143a0f7f6706b3ddb74e00836e",
+      "text": "En solo, vous obtenez toujours l'effet spécial. [1.8]"
+    },
+    {
+      "entryId": "colony-grand-duchy-of-finland",
+      "sourceTextSha256": "4ea12248555ace9f2c20bede27a705fbffeac5ddb4982e5bcc60c93bb3a6ff20",
+      "sourceBulletId": "colony-grand-duchy-of-finland-en",
+      "sourceBulletSha256": "171b876b9f8daccc178cfc04ab26e70fae39346d949e63f65f424cbc9b2a3f97",
+      "text": "Cette action spéciale vous permet de sauter un tour sans passer."
+    },
+    {
+      "entryId": "golden-age-bonus",
+      "sourceTextSha256": "222cb9f8b5027d45c468e96f9762fc1262d175b6a30882b1cca8919e74cbac60",
+      "sourceBulletId": "golden-age-bonus-en",
+      "sourceBulletSha256": "aa447aeb191849a4f596e6d3f72864279958c02060301cb7f7a41f0988231b0b",
+      "text": "Le bonus X de l'âge d'or signifie que vous obtenez X plus de la même ressource que celle que vous obtenez lors d'un âge d'or que vous achetez, ou si vous payez des ressources pour obtenir le VP, vous payez X moins. Minimum 0, vous ne pouvez pas gagner de ressources en achetant des PV. Si vous avez plusieurs effets de bonus de l'Âge d'Or, ils s'appliquent tous, donc si vous avez à la fois le bonus 1 et le bonus 2, vous avez effectivement le bonus de l'Âge d'Or 3."
+    },
+    {
+      "entryId": "golden-age-antikythera-mechanism",
+      "sourceTextSha256": "584d44090856bddcde534361e42b5990f466359fa27e47d07eb9a0c1078f27a7",
+      "sourceBulletId": "golden-age-antikythera-mechanism-en",
+      "sourceBulletSha256": "ba523c6b6e0ace0bffdc2c05e4dff851ed68cb38150ccc5ee62fba12649b1d86",
+      "text": "Le Golden Age Bonus n’a aucun effet sur le choix de piocher des cartes. Vous devez jouer n’importe quel bâtiment ou merveille que vous piochez sur votre plateau joueur, vous ne pouvez pas les défausser. [1.8] Les merveilles naturelles comptent comme des merveilles, vous vous arrêtez lorsqu'une se révèle. [1.9]"
+    },
+    {
+      "entryId": "golden-age-arabian-nights",
+      "sourceTextSha256": "82d130453909a157239afc0d284d41ae8450528c139a88a725cb10b44d8871c1",
+      "sourceBulletId": "golden-age-arabian-nights-en",
+      "sourceBulletSha256": "aa57a1c117f6251b6ea817be76506fe15b732ad56eb9e8bf45eeb77fb5f633f1",
+      "text": "Lorsqu'il s'agit de votre tour dans la commande tour, mais que vous êtes ignoré parce que vous avez réussi, vous obtenez 2 livres. Le Golden Age Bonus n’a aucun effet lorsque vous choisissez cette option. Défaussez cette carte à la fin de la manche. [1.9] En solo, vous n'obtenez rien en choisissant la première option. [1.8]"
+    },
+    {
+      "entryId": "golden-age-le-vite",
+      "sourceTextSha256": "a68ae209cc3ce1bfd89088e3aea3457e17a76be9f885f468865e186f2c1611e0",
+      "sourceBulletId": "golden-age-le-vite-en",
+      "sourceBulletSha256": "0733e6a6217310fc86677be604f8ebfdfc984d1fd4bd6e188bbb8ae71cfa14d5",
+      "text": "Le Golden Age Bonus n’a aucun effet lors du choix d’ajouter des architectes. Prenez les architectes de la réserve et ajoutez-les à l'espace des architectes."
+    },
+    {
+      "entryId": "golden-age-uncle-tom-s-cabin",
+      "sourceTextSha256": "e77b117de3bfcd96a152e22a6642555c016ee045789b34cb7db732ef0b9d6f8b",
+      "sourceBulletId": "golden-age-uncle-tom-s-cabin-en",
+      "sourceBulletSha256": "415ad3030462f155059e71c743e4decfa059fbdfae286f8ac2c021a8c97b5fe8",
+      "text": "Le bonus de l'âge d'or n'a aucun effet lorsque vous choisissez de supprimer des bâtiments. Tous les joueurs, vous y compris, doivent supprimer tous les bâtiments dont le coût de déploiement est de 1 pierre. Les cartes supprimées sont laissées dans leurs espaces sur les plateaux de joueur, mais retournées face cachée, et fonctionnent désormais comme des espaces vides pour les nouvelles cartes Bâtiment/Militaire."
+    },
+    {
+      "entryId": "military-assassin",
+      "sourceTextSha256": "64477bff268db328a8cc6c2350e83695928e8d489451c3b3408e4b5855679b53",
+      "sourceBulletId": "military-assassin-en",
+      "sourceBulletSha256": "486fdce476a8630f37ba327ac32cb96bc9ca56415c74bf2e7b387cd2ee67eb5f",
+      "text": "Vous devez avoir un ouvrier déployé sur cette carte pour obtenir l'effet. Vous bénéficiez de l'effet en plus des effets normaux de l'achat d'une bataille. Chaque autre joueur choisit soit de payer de la nourriture, soit de perdre son conseiller. Si Zhu Xi est assassiné, il est défaussé, aussi bien s'il est seul que s'il a été remplacé une fois. [1.9]"
+    },
+    {
+      "entryId": "wonder-wonder",
+      "sourceTextSha256": "d7f336eab6687141c2951d9b3d35655b8aba52f4c9b3eeac768175352484ce03",
+      "sourceBulletId": "wonder-wonder-1-en",
+      "sourceBulletSha256": "93a4ead6c758c99f02594bcdb86a1225de73fd87ace4d8c9271b1ef843ef6b7d",
+      "text": "Une Merveille prête peut remplacer une Merveille existante même avec des espaces de Merveille libres, à l'exception de Mechanical Turk. L'effet d'une Merveille déclenché par la réalisation d'une Merveille s'applique toujours lorsque la nouvelle Merveille remplace celle fournissant cet effet."
+    },
+    {
+      "entryId": "wonder-colosseum",
+      "sourceTextSha256": "df2d58cbc83746be1a24101a2537ed0fc18fae4a4c68ff6c33dc9fe98bd24580",
+      "sourceBulletId": "wonder-colosseum-en",
+      "sourceBulletSha256": "cf3d2e8e28b98c8963a48b446c0c9ada1f53e83cf75998b0bd0d8cbd7e68330d",
+      "text": "Vous pouvez réaliser cette merveille même si vous n'avez pas 2 nourritures à payer, mais vous devrez alors payer 1 PV plus des livres pour la nourriture que vous ne pouviez pas payer. [1.3]"
+    },
+    {
+      "entryId": "wonder-great-lighthouse",
+      "sourceTextSha256": "af7d51747981a3f0d6917fd9b356b2b35a05d1255523aab0b93f2ca71f6efbf3",
+      "sourceBulletId": "wonder-great-lighthouse-en",
+      "sourceBulletSha256": "38fd254af20ab600ab8fd96381df5c0430a3e04a766690a011ab18c45c6098d2",
+      "text": "Chaque fois que vous payez 3 pièces d'or pour une carte que vous achetez (normalement une carte de la rangée 3), vous obtenez 1 livre. Si une autre nation possède Hannibal, elle combat également à partir de la rangée 2."
+    },
+    {
+      "entryId": "wonder-sphinx",
+      "sourceTextSha256": "a3a23fea4eb5a27e10a574b0c80cd0ff2e1b5d6ed727344b0f24137db0f3b558",
+      "sourceBulletId": "wonder-sphinx-en",
+      "sourceBulletSha256": "f980af66bcf234db41fb2da7febd66245cddab6159930f665605a0ef8ef10e39",
+      "text": "Pour chaque merveille que vous complétez après Sphinx, vous obtenez 5 pierres."
+    },
+    {
+      "entryId": "wonder-solomon-s-temple",
+      "sourceTextSha256": "7bb819dcc5b8ccad56a94b146e962d9f07db05347b09b0f0c302d5576e031e56",
+      "sourceBulletId": "wonder-solomon-s-temple-en",
+      "sourceBulletSha256": "a3dabf58d127ba5ab22df43f597d29a14e288c2ec314e70aa670505884247450",
+      "text": "Marquez pour cela en même temps que vous marquez pour les livres. Cela signifie que vous pouvez obtenir un maximum de 4 PV si vous construisez Solomon's Temple dans l'Antiquité et que vous n'êtes pas vaincu par une guerre pendant toute la partie."
+    },
+    {
+      "entryId": "wonder-terracotta-army",
+      "sourceTextSha256": "e9fbfbd3afcfa31d40d65af4e961be1b78bd5465f33684f2d2632b203114db00",
+      "sourceBulletId": "wonder-terracotta-army-en",
+      "sourceBulletSha256": "2b7b6bea430e91e83ed0d4db943c24d0ec25d3bb480487de2dc12eb298428189",
+      "text": "Tous les Nations ayant le moins de stabilité lorsque le Terracotta Army est prêt (même vous) perdent 4 pièces d'or."
+    },
+    {
+      "entryId": "wonder-petra",
+      "sourceTextSha256": "c5b50da54b36ea7a87e1dc71c0f3ee14d2d28dcc4d4575a38a98b0d9103b8112",
+      "sourceBulletId": "wonder-petra-en",
+      "sourceBulletSha256": "b49f2c2eaf370d222f0a6a7eb15c1bc5cdc00ef9f8ddaf3242c28d6cccf4ea74",
+      "text": "Vous pouvez échanger avec la réserve, 1 nourriture contre 3 livres ou 3 pièces d'or ou 3 pierres."
+    },
+    {
+      "entryId": "wonder-great-library",
+      "sourceTextSha256": "04bba09f317427a43b0540f16bc628a8e7e20d5abf0dd46b4133e89434c2fa81",
+      "sourceBulletId": "wonder-great-library-en",
+      "sourceBulletSha256": "97661f16b0d450c6d41aa42218b4c0e2c6703904fdf47aa209deefb71ab238db",
+      "text": "Voir Âge d'Or/Bonus. Perdue si la moindre [stabilité] a le sens normal, vous perdez la carte si vous avez le moins de stabilité. [1.7]"
+    },
+    {
+      "entryId": "wonder-alhambra",
+      "sourceTextSha256": "87cf9c077b35ebfd3e8a400081010b9281c4639f62c5c39fada63194c78caaea",
+      "sourceBulletId": "wonder-alhambra-en",
+      "sourceBulletSha256": "db463f79f5c044a0214ce2f4b3aa70538b489f5c393958a17b381c25d684e9db",
+      "text": "Vous pouvez prendre un architecte de la réserve une fois par manche et l'utiliser comme un architecte normal."
+    },
+    {
+      "entryId": "wonder-notre-dame",
+      "sourceTextSha256": "bf687791334adbc6c9e3e18667343149fa8f6620741bf36b812c0e797498f9c1",
+      "sourceBulletId": "wonder-notre-dame-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "wonder-porcelain-tower",
+      "sourceTextSha256": "32f811f617f049a07025d242f665057a1eba4e3813daf73a08295f8cea84297a",
+      "sourceBulletId": "wonder-porcelain-tower-1-en",
+      "sourceBulletSha256": "c88ae94f4d699c78248d7c385fae65bd9a154c0d3b63ea0e644c0ba181b8758e",
+      "text": "Si un effet retire votre conseiller alors que vous en avez deux, les deux sont retirés."
+    },
+    {
+      "entryId": "wonder-porcelain-tower",
+      "sourceTextSha256": "32f811f617f049a07025d242f665057a1eba4e3813daf73a08295f8cea84297a",
+      "sourceBulletId": "wonder-porcelain-tower-2-en",
+      "sourceBulletSha256": "8a6d2ebb3f0f8c8a4e8f0799fd0c162f0e2c2a4f0e324fd50d10a340236dea60",
+      "text": "Après avoir perdu le conseiller placé sur Porcelain Tower, vous pouvez y en placer un autre. Vous pouvez aussi remplacer le conseiller du bâtiment par un autre."
+    },
+    {
+      "entryId": "wonder-porcelain-tower",
+      "sourceTextSha256": "32f811f617f049a07025d242f665057a1eba4e3813daf73a08295f8cea84297a",
+      "sourceBulletId": "wonder-porcelain-tower-3-en",
+      "sourceBulletSha256": "7bac030c1dc3be966e9ccbbd9076fec82e11e5fef793144a9779080353b86ada",
+      "text": "Une merveille achevée peut remplacer Porcelain Tower et le conseiller qui s’y trouve."
+    },
+    {
+      "entryId": "wonder-angkor-wat",
+      "sourceTextSha256": "567db83e1ed819a52df2f85336672503b15e3827731c9ca6428d9448399fd0f8",
+      "sourceBulletId": "wonder-angkor-wat-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "wonder-chichen-itza",
+      "sourceTextSha256": "896801ee9e9fb05a0e6d73cc68d6179fdc394517e596c49e001384cad8979f90",
+      "sourceBulletId": "wonder-chichen-itza-en",
+      "sourceBulletSha256": "1c66b7402717ab7d40b4bc6a669b1eab0053c29b52c930cef95f4899f8a00c49",
+      "text": "Vous obtenez le PV immédiatement, quelle que soit votre force ou si un Nations (même vous) sera vaincu."
+    },
+    {
+      "entryId": "wonder-great-wall",
+      "sourceTextSha256": "65459e3c5a665427f86bfa1f97f0e502da89deca35a7e1140e70d83c72906812",
+      "sourceBulletId": "wonder-great-wall-en",
+      "sourceBulletSha256": "f3e389756e56a999346df9f1662d6cb8da6986abcb5fe804aeacd07f6525e1c5",
+      "text": "Si vous passez en premier, vous n'êtes protégé que contre la perte de 1 VP directement occasionnée par la guerre, cela n'a aucun effet sur la perte de ressources ou sur l'absence de perte de VP de ressources."
+    },
+    {
+      "entryId": "wonder-piazza-san-marco",
+      "sourceTextSha256": "a57d361807b861d348116db45161cdae5e460284d4cbad76f6b68d522b4224ab",
+      "sourceBulletId": "wonder-piazza-san-marco-en",
+      "sourceBulletSha256": "6e2b80567f39676124b6b85fab896d947b3b593e4473eb2514bf8f4ffcee4f24",
+      "text": "Vous pouvez échanger avec la réserve, 2 pièces d'or contre 5 livres ou 5 nourriture ou 5 pierres."
+    },
+    {
+      "entryId": "wonder-hagia-sophia",
+      "sourceTextSha256": "99c7e898a8d259eaf22abecba9449309b963d640a08037b5645f9486726d5b28",
+      "sourceBulletId": "wonder-hagia-sophia-en",
+      "sourceBulletSha256": "5414370737d8e0b0580e4b22aab5e6cd9554b15172adacc1195d8b13683b362b",
+      "text": "Voir Le plus et le moins."
+    },
+    {
+      "entryId": "wonder-shwedagon-pagoda",
+      "sourceTextSha256": "02e2e89513cd07057a155d9bb6c8a93cc62bd7f9b614f9b62fa8e09f91060e30",
+      "sourceBulletId": "wonder-shwedagon-pagoda-en",
+      "sourceBulletSha256": "16d03039506a5d5506b44e8ffedc40dc9daf0ff1eac663a90f0b88ad7fd85d6b",
+      "text": "Placez un jeton ici lorsque vous effectuez cette action, pour vous rappeler d'où vient votre stabilité supplémentaire. Défaussez les jetons à la fin de la manche et réduisez votre stabilité en conséquence. Supprimez la stabilité supplémentaire avant le décompte de fin de partie, c'est-à-dire une phase distincte après le dernière manche. [1.9]"
+    },
+    {
+      "entryId": "wonder-sistine-chapel",
+      "sourceTextSha256": "b006400b33d3ecb459fabc5df122ec9d522e170e101a722e47576c9c12268448",
+      "sourceBulletId": "wonder-sistine-chapel-en",
+      "sourceBulletSha256": "0b2cbb97d0070a26cab3796421387e5caf5deb482ca546ef2405e74ec3cb35a9",
+      "text": "Vous obtenez les livres lorsque vous engagez normalement un architecte pour construire sur une merveille, vous ne pouvez pas embaucher des architectes sans construire sur une merveille. [1.2]"
+    },
+    {
+      "entryId": "wonder-versailles",
+      "sourceTextSha256": "800f7042ec6af58ed9affeb72b299646edae9dc28feef9a684d1e0850f15163a",
+      "sourceBulletId": "wonder-versailles-en",
+      "sourceBulletSha256": "e161177bb4ad1220c5ba84488876199f34f9e9145d28a6c48996b315f508ea0c",
+      "text": "Pour le reste de la manche, une fois le Versailles terminé, vous comptez comme ayant le moins de stabilité, tout comme les nations en révolte. Cela vaut à la fois pour les événements et pour d’autres effets. Votre marqueur de stabilité n'est pas déplacé, si vous avez une stabilité positive, il peut atténuer la perte de ressources due à une défaite dans une guerre. [1.3] Ignorez la valeur de stabilité réelle de la nation qui a construit Versailles lorsque vous vérifiez si les autres sont les plus stables. [1.5]"
+    },
+    {
+      "entryId": "wonder-potala-palace",
+      "sourceTextSha256": "c3618eb451b11bde392e6d58438e8738b97211c7b21a4d3df015ca2ae61fb7c9",
+      "sourceBulletId": "wonder-potala-palace-1-en",
+      "sourceBulletSha256": "78e4f7fde137cc75723edaba2dd07ca93d5cb6b1162b00a9ef7c8b1199e06c53",
+      "text": "Potala Palace s’applique uniquement à la notation finale. Porcelain Tower avec deux conseillers rapporte 2 PV."
+    },
+    {
+      "entryId": "wonder-royal-society",
+      "sourceTextSha256": "f2bc6f2d43628d3f858b796df6792ed09ab447e08f8bc8fd1ea2cd792b7560eb",
+      "sourceBulletId": "wonder-royal-society-en",
+      "sourceBulletSha256": "dcbd361eb7828222a950fb46208bfd1bb13349384773b09445fcea64c8cb98b1",
+      "text": "Ne payez pas le coût normal de la pierre lorsque vous placez un ouvrier avec cette action spéciale. L'entretien militaire fonctionne normalement."
+    },
+    {
+      "entryId": "wonder-uraniborg",
+      "sourceTextSha256": "5c43259008782795265b52d8413f8025eebf219233bfbe7334d7744b69038cb9",
+      "sourceBulletId": "wonder-uraniborg-en",
+      "sourceBulletSha256": "92f358b14ddff5c25b6b0ac50cc4d195deaeae024c3f7bc76b84ea29337b44dc",
+      "text": "Voir Âge d'Or/Bonus."
+    },
+    {
+      "entryId": "wonder-himeji-castle",
+      "sourceTextSha256": "84fbe79f416b624129bc181d10febcaa808dbd4e8b5176461846d62479e35cdc",
+      "sourceBulletId": "wonder-himeji-castle-en",
+      "sourceBulletSha256": "3ebb92af4897f71e14e18bed5e20f875e18577dfe8984fdb690268558055a2bd",
+      "text": "Pour recevoir les 4 pierres, vous devez acheter un bâtiment et le placer sur un bâtiment d’un âge précédent, par exemple un bâtiment d’âge 3 sur un bâtiment d’âge 1 ou 2."
+    },
+    {
+      "entryId": "wonder-red-fort",
+      "sourceTextSha256": "5292d6389069dc25f4386efbf30f66f73f7ed49362242677a1a9967e37b25c0d",
+      "sourceBulletId": "wonder-red-fort-en",
+      "sourceBulletSha256": "f38c65a50e12e37ae7b3d1a85050821dfc7dcd4604bbff3419f4f1bfbf44a780",
+      "text": "Chaque fois que vous payez 1 Or pour une carte que vous achetez (normalement une carte de la rangée 1), vous obtenez 2 nourriture."
+    },
+    {
+      "entryId": "wonder-kremlin",
+      "sourceTextSha256": "3c155c4df65eb57d64e70754b60721e76b7866ed5adc392ec13aaa4fae30520b",
+      "sourceBulletId": "wonder-kremlin-en",
+      "sourceBulletSha256": "96f025fd9ac86bf6bb0571ed48bb79f527a87580393b8de808e1e532f22dbfad",
+      "text": "Tant que vous êtes le plus fort, vous disposez des 4 stabilités supplémentaires. Si vous êtes à égalité ou en dessous de quelqu'un en Force, vous perdez immédiatement le bonus."
+    },
+    {
+      "entryId": "wonder-mechanical-turk",
+      "sourceTextSha256": "9ffa710f998e3444959b14834b88efec3e6de9e10c9f730b401ea42565b1e18f",
+      "sourceBulletId": "wonder-mechanical-turk-en",
+      "sourceBulletSha256": "5691a2715b5b50eeed2573a1709b6ef7fe88129c6a86ea400faa781d02ffb6f1",
+      "text": "Les 2 PV reçus une fois prêts restent avec la Nation qui a réalisé la Merveille, même si elle est offerte. Mechanical Turk ne peut pas être remplacé par une autre merveille, mais peut remplacer une autre merveille lorsqu'elle est construite ou reçue d'un autre joueur. Le joueur qui reçoit choisit sur quelle case merveille il la placera. Mechanical Turk ne peut pas être remplacé, donc si vos emplacements sont remplis de cartes non remplaçables, vous ne pouvez pas acheter une autre merveille naturelle ni terminer une merveille normale. Vous ne pouvez pas non plus donner Mechanical Turk à quelqu'un si cela remplit le dernier emplacement non remplaçable et que ce joueur a déjà une merveille naturelle en cours d'exploration. [1.7]"
+    },
+    {
+      "entryId": "wonder-oresund-dues",
+      "sourceTextSha256": "0211c565d07387e54f08863bffdd1e70210fd39c8b7929b8eb12cb4665890d93",
+      "sourceBulletId": "wonder-oresund-dues-en",
+      "sourceBulletSha256": "d1f3a6a2add44096f643622a7a0b76f3bdfe4bdcd25c4384726a02c530f6b920",
+      "text": "Chaque fois que cela aurait été votre tour si vous n'aviez pas réussi, vous recevrez 2 pierres. En solo, vous n'obtenez rien en passant. [1.8]"
+    },
+    {
+      "entryId": "wonder-south-pole-expedition",
+      "sourceTextSha256": "1522343a6a1340faab09366a2089832758514dfde7d4728f07c09487f26314bd",
+      "sourceBulletId": "wonder-south-pole-expedition-en",
+      "sourceBulletSha256": "7aecf9f05ff6d5653fafb2dc6eb63222b03c8f7a9da6ca40b1f58e7902fdd318",
+      "text": "Vous pouvez réaliser cette merveille même si vous n'avez pas 5 nourritures à payer, mais vous devrez alors payer 1 PV plus des livres pour la nourriture que vous ne pouviez pas payer. [1.3]"
+    },
+    {
+      "entryId": "wonder-big-ben",
+      "sourceTextSha256": "1250256471d7b032dd9e2d42c6c992aaf5ce73af55c45371cb172e6702de6add",
+      "sourceBulletId": "wonder-big-ben-en",
+      "sourceBulletSha256": "8190e7fac98effab7517ffea8fa5343c46693330527de3848993668cd250ebdf",
+      "text": "Le décompte se fait lors du décompte final. Seules vos propres colonies comptent. [1.4]"
+    },
+    {
+      "entryId": "wonder-brandenburg-gate",
+      "sourceTextSha256": "f153fba752afc18ed8e342d8c1c5eed16688e039206d5e5fe758ed662870788a",
+      "sourceBulletId": "wonder-brandenburg-gate-en",
+      "sourceBulletSha256": "b0449640e55fbb54e119f2d512255c70d394e07f7c6e89c1032969af62acafdf",
+      "text": "La nation la plus forte obtient à la fois de la pierre et de l'or, même si c'est vous qui construisez le Brandenburg Gate."
+    },
+    {
+      "entryId": "wonder-british-museum",
+      "sourceTextSha256": "42a2378e6cb083d6f7a0b759fa15106bd8d069f07cbcbe18afd76c63f6419af8",
+      "sourceBulletId": "wonder-british-museum-en",
+      "sourceBulletSha256": "41d88f74b95b172623ef7fcee038340432f8718183cfbf1e59956bacfcc37460",
+      "text": "La Nation la moins Forte perd 10 livres, même si c'est vous qui construisez British Museum."
+    },
+    {
+      "entryId": "wonder-mit",
+      "sourceTextSha256": "db1a13031597432203840d2e809aba515417b78532fe6d2ea58ea0fa1cd668f8",
+      "sourceBulletId": "wonder-mit-en",
+      "sourceBulletSha256": "23749f2eda593a3d59271a3d9dc4865150cd068c97a0a1a2dc1b383e3d2d36fc",
+      "text": "Juste au moment où vous avez acheté et placé une nouvelle carte bâtiment, vous pouvez déployer un ouvrier sur cette carte sans payer le coût normal en pierre. Un travailleur peut être non déployé pour le déployer de cette manière."
+    },
+    {
+      "entryId": "wonder-statue-of-liberty",
+      "sourceTextSha256": "2ed4e740b5eaa1d75f07694a8174c01076f0daa243ea0758271e890099cc5411",
+      "sourceBulletId": "wonder-statue-of-liberty-en",
+      "sourceBulletSha256": "c5e30ade112af48d8c63fa100761e61da3dccb00cbfee46aed1d83171ff32b57",
+      "text": "Cela n'arrive que lors du décompte final. Vous devez avoir plus de travailleurs que tous les autres pour obtenir la prime."
+    },
+    {
+      "entryId": "wonder-titanic",
+      "sourceTextSha256": "fd93e4ea178ce96550a86c3f4a98f4df5180181423d70d3278974807ef78935b",
+      "sourceBulletId": "wonder-titanic-1-en",
+      "sourceBulletSha256": "dd5c60753485daf6bd60d7b1abc7c425dbf9fc2aa32ac3a3c263ce891a7ad3c0",
+      "text": "Titanic : Dans l'ordre inverse des joueurs, chaque nation paie 4 pièces d'or ou retire son conseiller. Sans conseiller, il doit payer, avec les pénalités normales en cas de pénurie. Avec Porcelain Tower, ne pas payer supprime les deux conseillers."
+    },
+    {
+      "entryId": "natural-wonders-natural-wonders",
+      "sourceTextSha256": "b6d54adbe9f31346a024e933907b80610ca33c51ed69726686b21155dfe3b204",
+      "sourceBulletId": "natural-wonders-natural-wonders-en",
+      "sourceBulletSha256": "3cac2f6a79727b6f60c0b51b69411d6cbc0949668b88f97ce3b332be95c4a792",
+      "text": "Les merveilles naturelles ne peuvent pas être remplacées. Si vos emplacements de merveilles sont remplis de merveilles qui ne peuvent pas être remplacées, vous n'êtes pas autorisé à acheter des merveilles naturelles ou à terminer des merveilles normales. Les merveilles normales peuvent être remplacées par des merveilles naturelles. [1.7]"
+    },
+    {
+      "entryId": "natural-wonders-vesuvius",
+      "sourceTextSha256": "e9224856709b8a8f15e0beccc182b2769207de067ea7e3bb1810693426693724",
+      "sourceBulletId": "natural-wonders-vesuvius-en",
+      "sourceBulletSha256": "8060ee0c3588808066dd4ec37915bf29a9e89fd7f10b018f732f9ac99ccb5b8b",
+      "text": "Vous devez remettre un ouvrier sur la piste de population à la fin de chaque âge, il peut s'agir d'un ouvrier non déployé. [2.0]"
+    },
+    {
+      "entryId": "natural-wonders-siberia",
+      "sourceTextSha256": "37ea7cfec758e14aa3b7ccf3780c0b043889e7f6807990e1ff230ca0e13c6be3",
+      "sourceBulletId": "natural-wonders-siberia-en",
+      "sourceBulletSha256": "2c52dfc68736dfe3642760202f2d4454eb1fc1f653bc3d9f7c8673cc278ce984",
+      "text": "Au début de la partie, placez la carte « Siberia ...est une vaste région » sur le côté, elle n'est utilisée que si Siberia est découverte. Vous devez disposer de deux espaces Wonder gratuits ou remplaçables pour acheter du Siberia. Lorsque Siberia est découvert, placez-le sur une case Merveille comme d'habitude, puis prenez le \"Siberia ... est une vaste région\" et placez-le sur une autre de vos cases Merveille."
+    },
+    {
+      "entryId": "natural-wonders-sahara",
+      "sourceTextSha256": "b825f9fe495b7dbce8a57c0efb27f40032b5fea64e72f1c6ced106b7e246e20a",
+      "sourceBulletId": "natural-wonders-sahara-en",
+      "sourceBulletSha256": "cc9865d9319a2887713c6cf1f4a652a1b04cc5768aefa05cb0609a367ca28d3c",
+      "text": "Le bonus de Force n'est pris en compte que lorsque vous vérifiez si vous êtes touché par la guerre, et non dans aucun autre but. [1.9]"
+    },
+    {
+      "entryId": "natural-wonders-hawaii",
+      "sourceTextSha256": "75b90887f7e3e3c7b0a547eb5081c08268d7b52bda08bd9468df7704e1ff6e15",
+      "sourceBulletId": "natural-wonders-hawaii-en",
+      "sourceBulletSha256": "e039758145bb37014347349e913f99fe5bbc392a19b7ae897e8d48f438eab11d",
+      "text": "Placez un jeton sur l'entretien de l'ouvrier que vous prenez grâce à cette carte pour montrer qu'il n'est pas compté. L'absence de coût d'entretien est permanente pour cet ouvrier."
+    },
+    {
+      "entryId": "natural-wonders-spice-islands",
+      "sourceTextSha256": "81aed7b1c673b1c0eeb1d5936c53e0521d87a62d5a63c5215873ca9318e39e0d",
+      "sourceBulletId": "natural-wonders-spice-islands-en",
+      "sourceBulletSha256": "45d1350e7e06fa757cd6744211eb047d0344f46a10efe82a8302fc19d0d2c511",
+      "text": "4 de plus de la même ressource que vous prenez, seulement si vous prenez des ressources. [1.9]"
+    },
+    {
+      "entryId": "natural-wonders-titusville",
+      "sourceTextSha256": "5c3b2dcba7ae8439971ae604f589b87fef86385ed29a425ab62df521f26f09bc",
+      "sourceBulletId": "natural-wonders-titusville-en",
+      "sourceBulletSha256": "4462aa486ed44c0133aae28d6aa0e1390ef68516b358b5b6d6958d9243882390",
+      "text": "Comptez les pierres en double uniquement pendant la phase E (Ressources) du décompte de fin de partie."
+    },
+    {
+      "entryId": "natural-wonders-victoria-falls",
+      "sourceTextSha256": "4c3e7cdc7b2697749f628b2febae89038c373a98c4be4c9964ac2a27bb1fd562",
+      "sourceBulletId": "natural-wonders-victoria-falls-en",
+      "sourceBulletSha256": "7c46ee7275f0f16dcf12800d955d05bc8c35c76f6dce34ca9d08643b05e3417e",
+      "text": "Jetez toutes les colonies restantes sur la rangée 4 à la fin de la manche. [1.8]"
+    },
+    {
+      "entryId": "natural-wonders-uluru",
+      "sourceTextSha256": "6737a17f02e5ee8380da6b6fa9ad7ca5fa674f8082448135fb72976190a83522",
+      "sourceBulletId": "natural-wonders-uluru-en",
+      "sourceBulletSha256": "4d3a636297daae7ce6f9f2b48d35adaa6351bafb588116a4da05dc54215ccf22",
+      "text": "En solo, vous n'obtenez rien en découvrant cela. [1.8]"
+    },
+    {
+      "entryId": "event-event",
+      "sourceTextSha256": "418c44312d3beca19184d7976b8b08590b3181300d3e351c9896392da034f7d1",
+      "sourceBulletId": "event-event-en",
+      "sourceBulletSha256": "be2d7a5eb311fb72d2708678467f9f8b3682bf1c5175add73d3cbc5da56e32c1",
+      "text": "N'oubliez pas que pour obtenir des effets positifs, vous devez être le meilleur pour les obtenir, mais que pour les effets négatifs, tous en souffriront. N'oubliez pas les règles pour 5 joueurs, voir page 21. N'oubliez pas que les choix que tous doivent faire sont effectués dans l'ordre inverse des joueurs. Les ouvriers ne sont jamais retirés du plateau joueur. La stabilité ne réduit que les pertes dues à la défaite en guerre, elle ne réduit pas les pertes dues aux effets des événements. [1.3] Les effets ne se produisent qu'une seule fois, sauf remarque particulière. Notez ceci en particulier pour les effets commençant par « May », vous ne pouvez faire ce choix qu'une seule fois. [1.4]"
+    },
+    {
+      "entryId": "event-ashokas-conversion",
+      "sourceTextSha256": "840d9ebfa808606e3c55ceb164d9a318a283bb83e6f2cbcbee2631c70975d395",
+      "sourceBulletId": "event-ashokas-conversion-en",
+      "sourceBulletSha256": "57ec8a70770d41b920358dea73e45f5a8e3a2f85a94f8352b7c3490af75794a9",
+      "text": "Les travailleurs ne sont pas déployés et seront donc disponibles pour le prochain déploiement manche. Plusieurs peuvent ne pas être déployés. Fait dans l'ordre inverse des joueurs. [1.4]"
+    },
+    {
+      "entryId": "event-bronze-age-collapse",
+      "sourceTextSha256": "48702bc36a3e71abc9751ac3e3491447db0877d20d136e32644d9418f2898df7",
+      "sourceBulletId": "event-bronze-age-collapse-en",
+      "sourceBulletSha256": "d099e5d193e3c5676add326542a3177b5b70c511705a95e8de72e32d955c90c6",
+      "text": "La nation la plus forte est en sécurité, tout comme la nation la plus stable. Si une nation est à la fois la plus forte et la plus stable, elle est en sécurité. D'autres perdent 1 PV."
+    },
+    {
+      "entryId": "event-christianity",
+      "sourceTextSha256": "b0b5516cba2f00adeb0d70159f1acc27137fefba5bb9d78e5be216f9428e33e4",
+      "sourceBulletId": "event-christianity-en",
+      "sourceBulletSha256": "747f252674ebee26bbeeea4f24eb06011646853cb675d945727a61dd1dcacb78",
+      "text": "C’est un choix, vous n’êtes pas obligé de le faire même si vous le pouvez."
+    },
+    {
+      "entryId": "event-han-dynasty",
+      "sourceTextSha256": "79564b7bd859c2c91982600207ae8bf966499a5d4f423b88b08ece1df2e4c4ad",
+      "sourceBulletId": "event-han-dynasty-en",
+      "sourceBulletSha256": "9c8e07a66438325405c5c9cf41b75af71e91ec04ae0317fef58934ad78b7948f",
+      "text": "Prendre ceci est un choix, mais vous devez prendre les deux ou aucun."
+    },
+    {
+      "entryId": "event-hellenism",
+      "sourceTextSha256": "95d2076cfc4067ba8233ee7fd69e769b9db9492b2778cdca69e34d34ec029bb6",
+      "sourceBulletId": "event-hellenism-en",
+      "sourceBulletSha256": "92fc93f1850e82351793b7e21cd97745ef5c635d02b26ec01a2b4f5c9a5a59f0",
+      "text": "Si la plupart des Forces sont partagées, tous perdent 2 Nourritures."
+    },
+    {
+      "entryId": "event-jain-ascetism",
+      "sourceTextSha256": "7908253a13376e84f89049983a9d456bcd69290722441fca918acf3204ebd36e",
+      "sourceBulletId": "event-jain-ascetism-en",
+      "sourceBulletSha256": "f0009f8afae6f132366470249d62e8c84f69f59b4e8b08960e967b0be22bfe34",
+      "text": "Récupérez les PV perdus à cause d’une défaite militaire, y compris les pénalités en PV pour manque de ressources lors du paiement de ses pertes. Payez d’abord autant des ressources demandées que possible avant de payer des livres et de perdre 1 PV pour le manque. Le joueur ayant le plus de stabilité ne reçoit PAS les PV perdus par les autres à cause de la guerre. [1.4]"
+    },
+    {
+      "entryId": "event-olympic-games",
+      "sourceTextSha256": "4fba032fc190e03c14878fe7699b9a025f61971b7dc87a379d68e08d50583c41",
+      "sourceBulletId": "event-olympic-games-en",
+      "sourceBulletSha256": "e760bd340494f03681fcec249b15add4feddc19acea0b0f0ccbc2aad09982a8d",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé. Sur 5 joueurs, le Nations avec le plus de stabilité passe en premier, le deuxième passe en deuxième. Les égalités sont départagées par l'ordre des joueurs."
+    },
+    {
+      "entryId": "event-qin-unifcation",
+      "sourceTextSha256": "8d3ee94d028eb3051af55d9a36758cc2b3535ce0833cfabb9eb8f4297228867f",
+      "sourceBulletId": "event-qin-unifcation-en",
+      "sourceBulletSha256": "4cb66f6ddc414a64d4a4022e6d9233ce49c5a957b65aeef6d28910aef5a34bfb",
+      "text": "Tous les Nations avec plus de force que la force de guerre, cette manche obtiennent 1 PV. Si aucune guerre n’a été achetée, rien ne se passe."
+    },
+    {
+      "entryId": "event-spartacus-revolt",
+      "sourceTextSha256": "ba64e749a425dea56011efd2e1ffda3fd0699e9e49f282acab7f95dd7541edc6",
+      "sourceBulletId": "event-spartacus-revolt-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-rigveda",
+      "sourceTextSha256": "014e3ec84135846fea98aa3c883d6f01ff3245de7f0940e8efafa182ebf49c11",
+      "sourceBulletId": "event-rigveda-en",
+      "sourceBulletSha256": "1e69934d115aa26e80e5ee88df998cfa077f99cbe2cc011278f92f88ef8915b7",
+      "text": "Pour faciliter le suivi, vous pouvez, dans la plupart des situations, prendre le livre immédiatement lorsque vous achetez une guerre ou une bataille."
+    },
+    {
+      "entryId": "event-sea-peoples",
+      "sourceTextSha256": "0115c08d5e9ebd192411be7b44064ccf11c2ca0ad4c8cfa16fd1c33490ceaf06",
+      "sourceBulletId": "event-sea-peoples-en",
+      "sourceBulletSha256": "420d3ca89ec17b001dcaf0217871f9e8af799c4e18288e29d1d562bf7d8865ae",
+      "text": "Vous ne pouvez supprimer qu'un architecte sur une merveille en construction, pas un architecte auquel vous avez accès (comme celui fourni par Archimedes)."
+    },
+    {
+      "entryId": "event-zoroastrian-revival",
+      "sourceTextSha256": "a1df17d2678afe8015cc89d0d2fb684a8f23bbd2f7f08cbb81b9a103dcd5deee",
+      "sourceBulletId": "event-zoroastrian-revival-en",
+      "sourceBulletSha256": "e3b2edab10bec017bbb45ef8cdb6103bd19d201e76360fb77051af3b5a122722",
+      "text": "C’est un choix pour la nation la plus stable. Soit vous obtenez 4 Pierres, soit les autres perdent 3 Nourritures. Si le partage est le plus important, rien ne se passe. Sur 5 joueurs, le Nations avec le plus de stabilité fait le choix, l'ordre des joueurs brise les égalités."
+    },
+    {
+      "entryId": "event-black-death",
+      "sourceTextSha256": "21c3c38786c1a02d65dc714756cba95742666df9af0dc90e71adc5baa557c361",
+      "sourceBulletId": "event-black-death-en",
+      "sourceBulletSha256": "bee112c694de4bc63c4fcad43281f20d45565c8d6f25049e4109b7bba666b920",
+      "text": "Errata : « Supprimer » devrait être « Retour ». L'ouvrier est placé sur la piste Population, vous choisissez où. Si aucun ouvrier n'a été pris, placez-le de chaque côté et prenez-le en premier lorsque vous grandissez."
+    },
+    {
+      "entryId": "event-ecological-collapse",
+      "sourceTextSha256": "c53c431be8d4d2530155a3fb4dc893897d2e117806a9b1c96a4b0242d652ee67",
+      "sourceBulletId": "event-ecological-collapse-en",
+      "sourceBulletSha256": "bb76173f1445bf02e7beee9f6d543ddbd65bda3ef29d369bbfcaa17df9e9b818",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé. Tous choisissent avant que l’ordre des joueurs ne soit mis à jour. Tous ceux qui ont payé passeront avant tous ceux qui n'ont pas payé, mais l'ordre relatif des joueurs dans ces groupes reste le même. C'est un choix de payer 2 plats ou non. Comme il s’agit d’un choix, vous n’êtes pas autorisé à le faire à moins d’avoir les ressources nécessaires pour payer. [1.10]"
+    },
+    {
+      "entryId": "event-feudal-dues",
+      "sourceTextSha256": "18af6cc41663a46d7ff9fdf6b3910f87715ee54c7e38f9a953c8fb6d245f6a6b",
+      "sourceBulletId": "event-feudal-dues-en",
+      "sourceBulletSha256": "1478793efca6895cb0e4657f2eecd7fbee3d8f286cbe45fbe5eaa81682a6ac44",
+      "text": "Errata : « Ordre tour » devrait être « Ordre des joueurs ». Ignorez la phase de commande des joueurs avec cette manche."
+    },
+    {
+      "entryId": "event-fourth-crusade",
+      "sourceTextSha256": "7ff96f8a5cc3fb0b387914bc227373ac64b531145e3f32ef70eacbe1e6903a85",
+      "sourceBulletId": "event-fourth-crusade-en",
+      "sourceBulletSha256": "8827ccffde8cb30a83b009b35f4a9eafe727854756d56aeabf0d68c9f49aa17f",
+      "text": "La nation avec le moins de force ne perd des livres que si la nation avec le plus de force a payé l'or. Si la plupart des forces ne paient pas (ou ne peuvent pas) payer d'or, rien ne se passe. Dans une partie à 5 joueurs, la nation ayant le plus de force fait le choix (et en cas d'égalité, le joueur parmi ceux qui sont en premier dans l'ordre des joueurs). L'effet négatif s'applique normalement aux deux Nations ayant le moins de résistance. Si le plus fort paie, le deuxième plus fort peut également payer pour obtenir le bonus, mais son choix n'affecte pas le Nations le plus faible. [1.10]"
+    },
+    {
+      "entryId": "event-hajj-from-mali",
+      "sourceTextSha256": "dd312b9a4b4e4e5b99705dc991fbd7192c578be85af6fb7361d0672af1acbf81",
+      "sourceBulletId": "event-hajj-from-mali-en",
+      "sourceBulletSha256": "e1ae4ccaca99c3b0b863a05a182e38efb4f4b1095b6b469cf54a59abb9ae25e2",
+      "text": "Si vous avez 2 Or ou moins, rien ne se passe."
+    },
+    {
+      "entryId": "event-iconoclasm",
+      "sourceTextSha256": "7ca8df1f9c4ede1af353c1b717cddc98fcbf142981212433cc3d128fc293d490",
+      "sourceBulletId": "event-iconoclasm-en",
+      "sourceBulletSha256": "db4651cb70c47fcdeed0f55bf0d64f6a3f2f4fb69bd7fdfae03271042ea75bae",
+      "text": "Vous perdez 2 Nourriture et 2 Or."
+    },
+    {
+      "entryId": "event-peace-of-god",
+      "sourceTextSha256": "83cd07b0bd2e3008ac9946a7b747e1324735f2e47df8214f14dc8c8c8c9610bc",
+      "sourceBulletId": "event-peace-of-god-en",
+      "sourceBulletSha256": "223aaf34f647ff44c87f7257ee6e7b2c39a475abb46fc855297baa8d4353cc0e",
+      "text": "Si aucune guerre n’a été achetée, rien ne se passe."
+    },
+    {
+      "entryId": "event-song-resistance",
+      "sourceTextSha256": "077787f9d356263890fd014441391376ec7228961bc6f73cd39fd7ed6a01d850",
+      "sourceBulletId": "event-song-resistance-en",
+      "sourceBulletSha256": "5fef7fd88e980370e7e89f4835deccf6c08ea0b944fba01d015c4df84228cc6f",
+      "text": "Si vous avez perdu des ressources ou des PV suite à une défaite lors d'une guerre, récupérez tout cela, y compris les pénalités pour manque de ressources."
+    },
+    {
+      "entryId": "event-stupor-mundi",
+      "sourceTextSha256": "9f9bfe847fb271d24626fff800d38ee47463b2b2f79f805d07097faa2eb3d8c4",
+      "sourceBulletId": "event-stupor-mundi-en",
+      "sourceBulletSha256": "cd19fe6531f2e8a486ff13d78aee77d649af873397e3b2c67d7d8ff6c9fda26b",
+      "text": "Pour garder une trace de cela, vous pouvez conserver temporairement les cartes Âge d'Or que vous achetez cette manche à côté de votre plateau joueur."
+    },
+    {
+      "entryId": "event-zanj-revolt",
+      "sourceTextSha256": "0349e3992e436d6822b6d97db9ab6f6a2eb974410ddeb9cd5f36fdb438ceb711",
+      "sourceBulletId": "event-zanj-revolt-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-absolute-monarchy",
+      "sourceTextSha256": "e40b4d7c7240a9cc0d57d4903fbaea2c0538eb97e25a6056b2e9570e8a974afa",
+      "sourceBulletId": "event-absolute-monarchy-en",
+      "sourceBulletSha256": "bf47d25354659a111903d50fa51b8c539a0c4a7327811e97e3cdb852eca074c7",
+      "text": "Vous ne pouvez pas défausser un conseiller seul, il doit être remplacé par un nouveau conseiller."
+    },
+    {
+      "entryId": "event-dutch-revolt",
+      "sourceTextSha256": "b9845e6347f64ac760a296bc3878ffb2dfd337ec9a54e664121c4f3e92cf0941",
+      "sourceBulletId": "event-dutch-revolt-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-glorious-revolution",
+      "sourceTextSha256": "10b1e12e86d02eb97015428bc2ba4568274e265ceb8217253eb33a74cea68c11",
+      "sourceBulletId": "event-glorious-revolution-en",
+      "sourceBulletSha256": "1755097da71167aebeb083d6b992a6391639644563578f0a0f1c43c738a60403",
+      "text": "C'est un choix, soit vous faites les deux, soit rien ne se passe. Sur 5 joueurs, la nation ayant la deuxième plus grande stabilité choisit en premier. Si les deux font le choix, alors le deuxième vient en dernier et la plus grande stabilité passe avant-dernier."
+    },
+    {
+      "entryId": "event-janissaries",
+      "sourceTextSha256": "8531695bf7e0ade6924d0fc6147a3f5bd846c34b65bd039c5f157d82c989816f",
+      "sourceBulletId": "event-janissaries-en",
+      "sourceBulletSha256": "9c8e07a66438325405c5c9cf41b75af71e91ec04ae0317fef58934ad78b7948f",
+      "text": "Prendre ceci est un choix, mais vous devez prendre les deux ou aucun."
+    },
+    {
+      "entryId": "event-kangxi-era",
+      "sourceTextSha256": "8b658729307f83aefa912220836abba838ebbe894d32b1f2f072047e35a51b32",
+      "sourceBulletId": "event-kangxi-era-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-little-ice-age",
+      "sourceTextSha256": "469e6bd2bb5d33d88354da2c153bedaf512a2491529ff2e112ded1da26d70edb",
+      "sourceBulletId": "event-little-ice-age-en",
+      "sourceBulletSha256": "e0d0a2fc3c4d211def9320fe5a5a03675e977a8cfce5c133bbbee500705d1987",
+      "text": "Il s'agit d'un choix effectué dans l'ordre inverse des joueurs."
+    },
+    {
+      "entryId": "event-magellan-s-expedition",
+      "sourceTextSha256": "781d44200984f4dcc802f3825e3f2c3ca5cb2c25ebeaa3ca026ccfd1776e53d8",
+      "sourceBulletId": "event-magellan-s-expedition-en",
+      "sourceBulletSha256": "eb9cb043654d293e3ac96d88cc9d430b759cd61ad647df7e06a43e4e5f7985a7",
+      "text": "C'est pour chaque colonie achetée cette manche, vous pouvez donc l'obtenir plusieurs fois. Notez que vous n'obtenez l'or que lorsque l'événement se produit."
+    },
+    {
+      "entryId": "event-mercantilism",
+      "sourceTextSha256": "5f38360d70840c22ea05c58d4d404e8cc145447dd46cd2eb6a9c314d030622c3",
+      "sourceBulletId": "event-mercantilism-en",
+      "sourceBulletSha256": "bebc238dd35bba5220f7421ee96b75e333b62690c95f6823c05c5ca374b7d389",
+      "text": "Il s'agit d'un choix effectué dans l'ordre inverse des joueurs. Vous pouvez annuler le déploiement de plusieurs travailleurs. Les travailleurs se rendent dans votre zone de travailleurs disponibles."
+    },
+    {
+      "entryId": "event-muntzer-revolt",
+      "sourceTextSha256": "32df530d5e713b1190bf90d2d8007e8e7156a9921db224f0a7fffd0f32de9c8b",
+      "sourceBulletId": "event-muntzer-revolt-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-papal-indulgence",
+      "sourceTextSha256": "9a399687cf96b11a4b6accbee03ef291094159d8a945ef0d57aaf4b04c1345d2",
+      "sourceBulletId": "event-papal-indulgence-en",
+      "sourceBulletSha256": "c0d7a24c01920fd126a61ea04dab4e5e8041d80ef0e1b61a87e19655ee9a7b2e",
+      "text": "L'architecte gratuit provient de la réserve, doit être utilisé immédiatement ou être perdu et ne coûte aucune pierre à utiliser. Si la plus grande partie de la stabilité est partagée, tous paient 2 pièces d'or."
+    },
+    {
+      "entryId": "event-peace-of-westphalia",
+      "sourceTextSha256": "e50f625a87c2e63970220fe90ccc24a9abac8045c44be2d353ae91d26a2eb41b",
+      "sourceBulletId": "event-peace-of-westphalia-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-pilgrims",
+      "sourceTextSha256": "d98c85b61f40a12b911867c34e9c32c7fe29b7e2f2dd00ef296733488e043210",
+      "sourceBulletId": "event-pilgrims-en",
+      "sourceBulletSha256": "b4533ea4256a888ecff27cc477d823599fa3a5934178098c96f7467ff5199860",
+      "text": "La plupart des aliments doivent être pris par le travailleur, il n'y a pas de choix. Si le partage est le plus important, rien ne se passe."
+    },
+    {
+      "entryId": "event-salem-witch-trials",
+      "sourceTextSha256": "daec20eee38852634eaf4f1dcdbf7b1f7ef93515679271c13521f455de8d6847",
+      "sourceBulletId": "event-salem-witch-trials-1-en",
+      "sourceBulletSha256": "c90eeb458ae82d9b220aac8f93dc73236f54994e468372cbe32416a439755db7",
+      "text": "Salem Witch Trials supprime les deux conseillers si vous disposez de Porcelain Tower."
+    },
+    {
+      "entryId": "event-sinking-of-the-vasa",
+      "sourceTextSha256": "eaa9223e41526c0f89d7497cd687f83f6c359c664ef33cbd36fe8902f24068b5",
+      "sourceBulletId": "event-sinking-of-the-vasa-en",
+      "sourceBulletSha256": "72005f43e601793ee3d44c114fdd358cd6bce16611ff0ee2b48469584393a241",
+      "text": "Il s'agit d'un choix entre une perte d'or et une réduction temporaire de la Force [1.5]. Si plusieurs joueurs partagent le moins de stabilité, le choix se fait dans l'ordre inverse des joueurs. Vous ne pouvez pas choisir la réduction de la force si cela rendait votre force inférieure à 0. [1.8]"
+    },
+    {
+      "entryId": "event-american-revolution",
+      "sourceTextSha256": "7c7870b373601a1fa0e2674aa999b876f7387bd590f63f547e4ab40d467b39ff",
+      "sourceBulletId": "event-american-revolution-en",
+      "sourceBulletSha256": "aedab6c16b017fd9391161afdd6971dea685b72a5870c18c6d1237eb95ba8d1e",
+      "text": "Ce n'est pas un choix, si vous avez une colonie vous devez la supprimer."
+    },
+    {
+      "entryId": "event-anarchism",
+      "sourceTextSha256": "cc6905808fa4ef593756a7e3ffb53c19c3a3380addcebb1ea63969486de24587",
+      "sourceBulletId": "event-anarchism-1-en",
+      "sourceBulletSha256": "3cee1eba3eb9be82ebf870208582e666765e1ae307754cec9efbe13f45bdc3a4",
+      "text": "Anarchism supprime les deux conseillers si vous disposez de Porcelain Tower."
+    },
+    {
+      "entryId": "event-emigration",
+      "sourceTextSha256": "8de6c14d9f447873f519ce1ad419620004b95815e624c6ff2daa319a6c3e5a44",
+      "sourceBulletId": "event-emigration-en",
+      "sourceBulletSha256": "bee112c694de4bc63c4fcad43281f20d45565c8d6f25049e4109b7bba666b920",
+      "text": "Errata : « Supprimer » devrait être « Retour ». L'ouvrier est placé sur la piste Population, vous choisissez où. Si aucun ouvrier n'a été pris, placez-le de chaque côté et prenez-le en premier lorsque vous grandissez."
+    },
+    {
+      "entryId": "event-entente-cordiale",
+      "sourceTextSha256": "742b046794d1a025fe1c917d835c31f500e82f831704830c0c27fa25eee3a01b",
+      "sourceBulletId": "event-entente-cordiale-en",
+      "sourceBulletSha256": "ad77f1f181c12a5cb1f92a550767a8a923701ed455f06cd1f7e2f33f2e1b4169",
+      "text": "Les travailleurs peuvent être déployés sur différentes cartes militaires. Vous pouvez annuler le déploiement des travailleurs pour pouvoir les déployer. Les travailleurs peuvent ne pas être déployés à partir d'une carte militaire et être déployés sur une autre carte militaire."
+    },
+    {
+      "entryId": "event-french-revolution",
+      "sourceTextSha256": "eff4b606bf6248936cebaebe37874ca60ab42a7d35bea82355ce6b707c71e69a",
+      "sourceBulletId": "event-french-revolution-1-en",
+      "sourceBulletSha256": "54ac1455a2cf7c444b9a2185ae4339700335f98ed5069956e08ddeee64d39489",
+      "text": "French Revolution est obligatoire si vous avez un conseiller. Avec Porcelain Tower et deux conseillers, les deux sont supprimés."
+    },
+    {
+      "entryId": "event-great-exhibition",
+      "sourceTextSha256": "7fe696c8e623cdf2678569dfe4ebb15207a8407f9fc8cdc58e71af1baf40a6b2",
+      "sourceBulletId": "event-great-exhibition-en",
+      "sourceBulletSha256": "2788898a2e9396f20f1f005b3e992da6b7923666bd23eb08f01bc1d783036973",
+      "text": "Les architectes gratuits proviennent de la réserve, doivent être utilisés immédiatement ou être perdus et ne coûtent aucune pierre à utiliser. Si vous terminez Wardenclyfe Tower, les actions peuvent être entreprises immédiatement, mais la guerre est toujours limitée à 1/manche et défaussée à la fin de manche. [1.11]"
+    },
+    {
+      "entryId": "event-industrial-revolution",
+      "sourceTextSha256": "51794a18062f1ec928d9edeafe109cf84f79f6644cf6bf7dfe1443dce9c99b6b",
+      "sourceBulletId": "event-industrial-revolution-en",
+      "sourceBulletSha256": "77d6081df8952203e37600f70570a1f8025aa8339fe6989e5be40841c50ab0e5",
+      "text": "Pour remporter cet effet, vous devez avoir davantage d’ouvriers déployés sur des bâtiments industriels (âge 4) que chacun des autres joueurs. En cas d’égalité, rien ne se passe."
+    },
+    {
+      "entryId": "event-march-to-moscow",
+      "sourceTextSha256": "528cbe7a1780bce5d7b3d36aa7ff6eb32dbd1d3932957c8ab68a0850aa00018b",
+      "sourceBulletId": "event-march-to-moscow-en",
+      "sourceBulletSha256": "aedab6c16b017fd9391161afdd6971dea685b72a5870c18c6d1237eb95ba8d1e",
+      "text": "Ce n'est pas un choix, si vous avez une colonie vous devez la supprimer."
+    },
+    {
+      "entryId": "event-scramble-for-africa",
+      "sourceTextSha256": "3a80282f117bc8359475c68181c90385febec13fce542d3246ac7070ea483203",
+      "sourceBulletId": "event-scramble-for-africa-en",
+      "sourceBulletSha256": "323d02a6435a4164d54a9ab57a680eaf05c4c607703af2bd3729718121db45c7",
+      "text": "Vous recevez seulement 1 PV si vous possédez au moins 1 colonie industrielle (âge 4). En avoir plusieurs ne donne pas de PV supplémentaires ; ne posséder que des colonies plus anciennes ne rapporte rien."
+    },
+    {
+      "entryId": "event-sepoy-mutiny",
+      "sourceTextSha256": "55e968e4328b2b25d52dd9d012483b0fa2a5b0fb429510c67a0b99a76495c21f",
+      "sourceBulletId": "event-sepoy-mutiny-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-sokoto-caliphate",
+      "sourceTextSha256": "edbaf3f645f463c6f2b36de16607b34fbc2c62767c9d8fc466df7b7895247287",
+      "sourceBulletId": "event-sokoto-caliphate-en",
+      "sourceBulletSha256": "e0d0a2fc3c4d211def9320fe5a5a03675e977a8cfce5c133bbbee500705d1987",
+      "text": "Il s'agit d'un choix effectué dans l'ordre inverse des joueurs."
+    },
+    {
+      "entryId": "event-taiping-rebellion",
+      "sourceTextSha256": "f94287a2b366374bed70d8332045c6a3c5479d69e76d9370772dd0ebd4dd827c",
+      "sourceBulletId": "event-taiping-rebellion-en",
+      "sourceBulletSha256": "934e71e91e77763fc242975e8b3b7776803735fe901f2679f4565ea217942ae1",
+      "text": "Cette réorganisation intervient une fois que l'ordre des nouveaux joueurs a été déterminé."
+    },
+    {
+      "entryId": "event-tonghak-movement",
+      "sourceTextSha256": "4cd8514134f752daba03c1766dd16b01c870eb62e1a76027fd42d2a827c4ba5d",
+      "sourceBulletId": "event-tonghak-movement-en",
+      "sourceBulletSha256": "bd5f9c19ff5632af8edf908651ec5600d49d20b226dbc1556df142edc9a980c1",
+      "text": "Vous perdez tous les deux les livres et gagnez la pierre."
+    },
+    {
+      "entryId": "event-weltpolitik",
+      "sourceTextSha256": "a5512bdd4221b54e5d9e9045916093d221a6d518ab05db643d63365183fd4de5",
+      "sourceBulletId": "event-weltpolitik-en",
+      "sourceBulletSha256": "093ea8215c2db11fcdeb68c9b31c0aa8dd50ac54c286e57ca8efd4c0cd66fe63",
+      "text": "Chaque colonie industrielle (âge 4) vous rapporte à la fois 5 ors et 5 pierres. Les colonies plus anciennes ne rapportent rien."
+    },
+    {
+      "entryId": "dynasties-dynasties",
+      "sourceTextSha256": "4c296f910f4d51044270e39229684e395baa0a4f33e06e2221546015d7c6296a",
+      "sourceBulletId": "dynasties-dynasties-en",
+      "sourceBulletSha256": "39fba72d911aa2169104653d30e511d968413cc2828a6565b9a87e9aab498170",
+      "text": "Notez que la plupart de ces notes se trouvent dans le livre de règles Dynasties et sont répétées ici pour en faciliter l'accès."
+    },
+    {
+      "entryId": "dynasties-america-democratic-republicans",
+      "sourceTextSha256": "e1b41781db37bde96a96bd9dacd43b5e2c0da5930ef7650650c3bd2be6d9ea56",
+      "sourceBulletId": "dynasties-america-democratic-republicans-en",
+      "sourceBulletSha256": "917c3143a622b89e223ba21e9fc17ac045d9e98489c3e4d6b2a815deb88cb4de",
+      "text": "Cette action est disponible si au moins un des joueurs ayant le moins de Force (notez que plusieurs peuvent en avoir une égale ou une moindre, et 2 joueurs dans des parties à 5 joueurs) a au moins une carte Dynastie restante, et pour chacun de ces joueurs, il y a une carte Turmoil disponible. Si plusieurs joueurs ont le moins de Force, mais que certains n'ont pas de Dynastie, ces joueurs ne sont pas affectés. Chaque joueur concerné sélectionne quelle Dynastie jouer s'il en a plusieurs, prend une carte Turmoil et joue une carte Dynastie. Pour chaque joueur ayant joué une Dynastie, le joueur America reçoit 3 Livres. En solo, vous n'obtenez rien (l'ombre n'a pas de dynastie donc rien n'est réellement modifié) [1.8] Cette action ne peut pas être effectuée si America fait partie des joueurs ayant le moins de force. [1.9]"
+    },
+    {
+      "entryId": "dynasties-arabs-abbasid-caliphate",
+      "sourceTextSha256": "bebb4b849d5b602917682e1204551d6c22b516f95e2947044572fead07afd06e",
+      "sourceBulletId": "dynasties-arabs-abbasid-caliphate-en",
+      "sourceBulletSha256": "cddd81544df0fe02375497be6dd1f688ecf5a6c0f3d5e05f11b89fc422025e37",
+      "text": "Lorsqu'un autre joueur achète une carte Âge d'Or, vous pouvez acheter des PV comme si vous aviez acheté cette carte, quel que soit le choix de l'autre joueur. Les bonus de l'Âge d'Or s'appliquent lorsque vous achetez des PV de cette façon (c'est-à-dire que vous pouvez bénéficier d'une réduction sur les PV comme si vous aviez acheté l'Âge d'Or.). En Solo, si l'ombre supprime un âge d'or, vous pouvez acheter des PV. [1.8]"
+    },
+    {
+      "entryId": "dynasties-china-qin-dynasty",
+      "sourceTextSha256": "95ed5f156137d6f965ed526c5d6f9e54b7aac2e32f7323f02544199122bd4a72",
+      "sourceBulletId": "dynasties-china-qin-dynasty-en",
+      "sourceBulletSha256": "129dfc5ba64f538d0750e16c700ac4766def339bf9ca9a7c615c735c34148e2d",
+      "text": "L'architecte vient de l'offre. Ne payez pas de pierre. Utilisez-le immédiatement. Un travailleur non déployé peut être renvoyé sur la piste de population. [1.8]"
+    },
+    {
+      "entryId": "dynasties-egypt-old-kingdom",
+      "sourceTextSha256": "cc234fb37b08c641fe91c99db60f431deeb0d37de72622321e8785bab4e665d7",
+      "sourceBulletId": "dynasties-egypt-old-kingdom-en",
+      "sourceBulletSha256": "5f7d9e4161ff62868b98926a68ad488a48b22bd371b484c032944bf74067baa5",
+      "text": "« Remplacer ou supprimer [Architect] » est faux, devrait être « Action : Supprimer le conseiller ». [1.8] Supprimez un seul conseiller avec cette action, même si vous en avez plusieurs. [1.10]"
+    },
+    {
+      "entryId": "dynasties-ethiopia-axumite-kingdom",
+      "sourceTextSha256": "2173a9885fe037fab0aec88c6cfa4670cc00ef051a290d7a736bdf71f7b00073",
+      "sourceBulletId": "dynasties-ethiopia-axumite-kingdom-en",
+      "sourceBulletSha256": "f65444a94e15e4306966f4cbb7bfd9a62c5a66516003361a952753f2e7931b63",
+      "text": "Le jeton reste jusqu'à ce que la carte soit achetée ou défaussée. Le jeton ne vous affecte pas. Pour d'autres, le coût est le prix normal (payé à la banque) plus 3 pièces d'or (payées à vous). En Solo, si l'ombre enlève la carte vous obtenez le bonus. [1.8]"
+    },
+    {
+      "entryId": "dynasties-india-mauryan-empire",
+      "sourceTextSha256": "ced3aaa4be462bb753a8803213d7d365374671af3d76ffcfd5aa8fdcbccfea58",
+      "sourceBulletId": "dynasties-india-mauryan-empire-en",
+      "sourceBulletSha256": "cd44ab390fd926a4827c802350a802b6d5b3c33333428a2b7b1ecad70965ef94",
+      "text": "Lorsque vous prenez un Ouvrier en phase de Croissance vous pouvez choisir d’en prendre 2 supplémentaires (3 en croissance totale). Vous ne pouvez en prendre qu’un supplémentaire s’il ne vous reste qu’un seul Ouvrier à prendre (pour un total de 2). Vous ne pouvez pas choisir de prendre seulement 1 supplément si vous en avez plusieurs disponibles. [1.7]"
+    },
+    {
+      "entryId": "dynasties-india-mughal-empire",
+      "sourceTextSha256": "ae3be1ad77a19df63b9d2ca3bc72f622a60363938866323e35c9d4bdf18a8d44",
+      "sourceBulletId": "dynasties-india-mughal-empire-en",
+      "sourceBulletSha256": "f5f92c67cfd65fbb1c7e6e7d26e4bfc0f7c91d02b2873d1a9afe08d0a90806cc",
+      "text": "Lorsque vous possédez cette Dynastie, vous gagnez 1 PV à chaque fois qu'une de vos Merveilles est prête et que vous la déplacez vers une case Merveille. Remarque : cela n'affecte pas les merveilles naturelles découvertes."
+    },
+    {
+      "entryId": "dynasties-japan-heian-period",
+      "sourceTextSha256": "fb500d56062c560529e41565bceb057b0754ee2ef48b7cbbf44d1a2f6cada96f",
+      "sourceBulletId": "dynasties-japan-heian-period-en",
+      "sourceBulletSha256": "2d015f23698e94a89fbf75da4a11440d0fdc83e322e3f0fe35bcc7b6ffdd0f36",
+      "text": "Obtenez uniquement les livres en choisissant l'effet Livres normal sur les âges d'or, pas les effets spéciaux qui donnent des livres d'une autre manière comme Arabian Nights. [1.9]"
+    },
+    {
+      "entryId": "dynasties-japan-edo-period",
+      "sourceTextSha256": "5a5005c00b82383ed8ffebe202e4ed6390fe28d85a81c8959c0ea7afa258df45",
+      "sourceBulletId": "dynasties-japan-edo-period-en",
+      "sourceBulletSha256": "2f99ee7383bd33ec5537a5b1abd7e8a0cf09e6d7f3aef8126204ac06bb398eb0",
+      "text": "Vous êtes protégé de tout effet qui se déclenche lorsque vous êtes vaincu, par exemple Solomon's Temple n'est pas supprimé. [1.11]"
+    },
+    {
+      "entryId": "dynasties-korea-joseon-kingdom",
+      "sourceTextSha256": "deb11fae5ff6eaca01176c77b098f84af78571cee6ccec889a2ea68176fc8891",
+      "sourceBulletId": "dynasties-korea-joseon-kingdom-en",
+      "sourceBulletSha256": "261111848ce0d61a2b0fefd234eaa496538a81832c1f0076786a38d34059f41c",
+      "text": "Un seul type de ressource peut être placé sur la carte chaque manche. Dans le dernière manche, vous récupérez les ressources avant la fin du score. Après la phase de résolution, vous doublez les ressources et les récupérez. Donc, 3 pièces d'or placées ici signifient que vous en ajouterez 3 supplémentaires de la réserve et que vous récupérerez un total de 6 pièces d'or. Si Joseon Kingdom est supprimé pour une raison quelconque avant que vous récupériez les ressources, elles sont perdues.[1.9]"
+    },
+    {
+      "entryId": "dynasties-mali-mali-empire",
+      "sourceTextSha256": "ae1c2e82128a9fe92e13e7a436f5eca5c62fffeedd7a62759b275021013c7928",
+      "sourceBulletId": "dynasties-mali-mali-empire-en",
+      "sourceBulletSha256": "d9b3f7910d6e50ba568f01d56a85961f95f2e8e96e6d479afb9a1ebf868dfb7e",
+      "text": "« Supprimer [Architect] » est faux, devrait être « Supprimer le conseiller ». [1.8] Supprimez un seul conseiller avec cette action, même si vous en avez plusieurs. [1.10]"
+    },
+    {
+      "entryId": "dynasties-mongolia-golden-horde",
+      "sourceTextSha256": "f5a09f36537ba3e58731924259e6d43251b1f615bf7751664fd99663be77b18b",
+      "sourceBulletId": "dynasties-mongolia-golden-horde-en",
+      "sourceBulletSha256": "ec432f05cf7eb02aef1af7b59168a90469420a5842d454558c4d9df2e3d1d46d",
+      "text": "En Solo, pour chaque guerre supprimée par l'ombre, vous obtenez ce qu'il en coûterait pour l'acheter. [1.8]"
+    },
+    {
+      "entryId": "dynasties-mongolia-yuan-dynasty",
+      "sourceTextSha256": "115fe8461a9df2ad94a6dacebf70d6be136db814109827c4e353382ada5dc9eb",
+      "sourceBulletId": "dynasties-mongolia-yuan-dynasty-en",
+      "sourceBulletSha256": "7b5adc6299ba16f566f954fe66a48459388c2eb6f1d9e5826dfafa0706eaf48e",
+      "text": "Ceux-ci sont pris sur vos ouvriers normaux, comme si vous les preniez pendant la phase de croissance."
+    },
+    {
+      "entryId": "dynasties-persia-achaemenid-empire",
+      "sourceTextSha256": "b152d439f285e4c754798179392fa750cd3da86d7e1c152627fd99fd04fda3fb",
+      "sourceBulletId": "dynasties-persia-achaemenid-empire-en",
+      "sourceBulletSha256": "00875552d0a97378e783bfdd92d9a618904d9030afee5f635a4421098bc98237",
+      "text": "Vous pouvez effectuer un déploiement gratuitement comme première action complète. Si vous le faites, vous ne pouvez rien faire d'autre pendant cette action."
+    },
+    {
+      "entryId": "dynasties-persia-sassanid-empire",
+      "sourceTextSha256": "eab2c52fa001a41ed9b613c6f45ea54bf931ba05b09d3ad6c79e323f0f8f02ec",
+      "sourceBulletId": "dynasties-persia-sassanid-empire-en",
+      "sourceBulletSha256": "089e4d8038678932e336648e152bdc2d599a266111b54a4d8dc66ed8d31210ed",
+      "text": "Si vous prenez une carte Turmoil et choisissez de prendre 2 Or, alors l'effet est activé. Prenez l'Or et défaussez la carte Turmoil, ce qui signifie que vous n'obtenez pas le -2 de Stabilité normal pour la manche pour avoir pris une carte Turmoil. Si vous changez de dynastie, vous obtenez la stabilité normale de -2 pour la manche."
+    },
+    {
+      "entryId": "dynasties-poland-jagellonian-dynasty",
+      "sourceTextSha256": "e3904784b97eba4fc2a938a7acc662cbb57ee65d189c86f443df34c28acfd052",
+      "sourceBulletId": "dynasties-poland-jagellonian-dynasty-en",
+      "sourceBulletSha256": "997ef5829317a78c4adda333f085990340a3f57854c16dbd26070e434263efe2",
+      "text": "Si vous l'utilisez et êtes le premier, vous pouvez prendre deux tours l'un après l'autre. [1.7]"
+    },
+    {
+      "entryId": "dynasties-poland-polish-lithuanian-commonwealth",
+      "sourceTextSha256": "8820f9c6b0583e50d482a6a7d91387763b867a32c6de56e25097bd696b368d76",
+      "sourceBulletId": "dynasties-poland-polish-lithuanian-commonwealth-1-en",
+      "sourceBulletSha256": "ff0dd6816583b156cc1d356b6ad11917f2c573e05f33ac09979b01f910736bba",
+      "text": "Lorsque Poland joue une nouvelle Dynastie, les Conseillers sur ses espaces Merveille sont défaussés ; le conseiller sur Porcelain Tower n’est pas affecté. Si un effet supprime votre conseiller alors que vous en avez deux ou plus, tous sont supprimés."
+    },
+    {
+      "entryId": "dynasties-portugal-portugese-empire",
+      "sourceTextSha256": "6947f49f4cd9959da24c8c298da34236ae7f5f3dca58d03c0aefbaf92468501f",
+      "sourceBulletId": "dynasties-portugal-portugese-empire-en",
+      "sourceBulletSha256": "58a71ecec53cc67caf070a4dd29b10538d52fadb45728f78767124cfaa3a4b8d",
+      "text": "Défaussez toutes les colonies présentes sur vos espaces Merveilles lorsque vous jouez une nouvelle dynastie. Vous pouvez remplacer les merveilles normales par des colonies. Les colonies dans les espaces Merveilles peuvent être remplacées par des Merveilles et des Merveilles naturelles. Les merveilles naturelles ne peuvent pas être remplacées. [1.8]"
+    },
+    {
+      "entryId": "dynasties-portugal-kingdom-of-leon",
+      "sourceTextSha256": "ad18951b198dd81ad249617ac1a3bcc0af3acde74fa670c3b6e50db582cedd98",
+      "sourceBulletId": "dynasties-portugal-kingdom-of-leon-en",
+      "sourceBulletSha256": "f4df534501cd599860af5170f5f40b2d259563746383638270fad5163a0cafe1",
+      "text": "Après avoir résolu l'achat de la guerre, résolvez-le comme si vous aviez également acheté une carte de combat gratuitement. [1.11] Si vous possédez Montezuma, vous n'obtenez que 3 livres supplémentaires lors de l'achat de guerre, pas 3 de guerre et 3 de bataille. Rigveda, Abu Bakr et autres bonus pour l'achat de batailles fonctionnent comme si vous aviez acheté une bataille. [1.8]"
+    },
+    {
+      "entryId": "dynasties-rome-roman-republic",
+      "sourceTextSha256": "e215a1c0ea8325896a1d546c77ffa971194f0db05a477a27aeced1bf09443d3b",
+      "sourceBulletId": "dynasties-rome-roman-republic-en",
+      "sourceBulletSha256": "a45e867650493d3a59ef6046110579536eeedec3407d16e4a6c82235ab2453f7",
+      "text": "Prenez un architecte parmi ceux disponibles cette manche, défaussez-le et augmentez votre Stabilité de 1 pour cette manche."
+    },
+    {
+      "entryId": "dynasties-venice-domains-of-the-sea",
+      "sourceTextSha256": "35f3a67390aef29a70aafe95386240f6f5a4e20fd90341bfc5d3efb52d750d08",
+      "sourceBulletId": "dynasties-venice-domains-of-the-sea-en",
+      "sourceBulletSha256": "6c1c6db44cf9f2abe46774ac51412efa38b323824c3b45907eabc72c94e3defe",
+      "text": "Défaussez la colonie, pas cette carte. [1.8]"
+    },
+    {
+      "entryId": "dynasties-venice-pactum-warmundi",
+      "sourceTextSha256": "169a1a2da304f69e7602ad26c132ca82162b701d0420c1440d83e30a854b3698",
+      "sourceBulletId": "dynasties-venice-pactum-warmundi-en",
+      "sourceBulletSha256": "c7098e26bd4ac5a461bcb27266b32455d7d735144a789fb0fd16f12fe705ca2a",
+      "text": "Lorsqu'un autre joueur achète une bataille ou une colonie, vous recevez 1 or de la banque. En Solo, pour chaque bataille et colonie supprimée par l'ombre, vous obtenez 1 pièce d'or. [1.8]"
+    },
+    {
+      "entryId": "dynasties-vikings-normans",
+      "sourceTextSha256": "175db3afcfc2a885e685d99d9c5cbac899f7e416d4e3e7d9a3885c1df54866c0",
+      "sourceBulletId": "dynasties-vikings-normans-en",
+      "sourceBulletSha256": "f92525841503fc391c7b5976eb3016f49eaebca9a1fdb7f7366840d7c4b0eb45",
+      "text": "Votre valeur normale de Raid est augmentée de 3."
+    },
+    {
+      "entryId": "faq-q-can-you-build-the-same-building-military-card-several-times",
+      "sourceTextSha256": "e895c5e12b05e71567d3f259a9cfdd0c5bead18de46f62feafe0d10946d01391",
+      "sourceBulletId": "faq-q-can-you-build-the-same-building-military-card-several-times-en",
+      "sourceBulletSha256": "7e0d9b0de89065b875942fc6e6cbf779f340f4fbefa207dc94c248c1c25d4efc",
+      "text": "carte de bâtiment/militaire plusieurs fois ? R : Oui. Tous les bâtiments et les militaires sont uniques, mais lorsque vous jouez avec les faces B, vous pouvez avoir 2 cartes identiques."
+    },
+    {
+      "entryId": "faq-q-can-you-place-many-workers-on-a-building-military",
+      "sourceTextSha256": "e75d652db9d1183cb14fb8d06441cdbb39b38dabff7b9cd618a64efb6a1a80f2",
+      "sourceBulletId": "faq-q-can-you-place-many-workers-on-a-building-military-en",
+      "sourceBulletSha256": "494415d70963df1e826015fc88d328cf303ed3033abd77f39738a2cdeae19632",
+      "text": "un bâtiment/militaire ? R : Oui, mais un seul par action. [1.3]"
+    },
+    {
+      "entryId": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military",
+      "sourceTextSha256": "0401659b59d5951fbbff6f2d09eefa332786354579a4e6fb310465481706f759",
+      "sourceBulletId": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military-en",
+      "sourceBulletSha256": "ad1a0743fb85372d5435c20c6baef59bfbb07495baa9923db3bdbf84a199ad38",
+      "text": "ouvrier sur un bâtiment/militaire ? R : Non. Les PV pour les ouvriers et les militaires ne sont marqués qu’à la fin de la partie."
+    },
+    {
+      "entryId": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "sourceTextSha256": "85fb8b2d6a6f4813819393e9130c48fb6cd97db50311de144e2140bba43e6980",
+      "sourceBulletId": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event-en",
+      "sourceBulletSha256": "ef5e21e54c7e7c6f855f4cb80dd2a483f78929dde02469bb7c28fefa782738d9",
+      "text": "Nations ayant le plus de force, qui obtient le bonus d'un événement Nation le plus fort ? R : Les deux."
+    },
+    {
+      "entryId": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "sourceTextSha256": "265063eace845b067f76159796c399c414b7f950a83ec7e12bbc93c902c771f2",
+      "sourceBulletId": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event-en",
+      "sourceBulletSha256": "7a802df06a4db0150944a1d1a87bbf26967e4d6cb96169bb0b00aaef042d87b5",
+      "text": "Nations ayant le plus de force, qui obtient le bonus d'un événement Nation le plus fort ? R : Aucun."
+    },
+    {
+      "entryId": "faq-q-what-does-the-books-on-the-solo-tiles-mean",
+      "sourceTextSha256": "08d7abce17ecb73c1ada471cd8588d1e41a48a34b462e14a119173884256e36c",
+      "sourceBulletId": "faq-q-what-does-the-books-on-the-solo-tiles-mean-en",
+      "sourceBulletSha256": "a9240e0a81ec679f0d44bba98c73982eb4fa549e48289e07cfe8a4ec2faee888",
+      "text": "les carreaux, ça veut dire ? R : C'est le nombre de livres que l'adversaire fantôme gagne au début de cette manche. En fonction des actions indiquées sur un résultat de 5 ou 6, il peut y avoir d'autres changements dans la quantité totale de livres que l'adversaire fantôme possède sur cette manche."
+    },
+    {
+      "entryId": "faq-q-is-the-shadow-opponent-afected-by-war",
+      "sourceTextSha256": "b23de134671dcfa96255b5435cb9e22f9cd6227688920c9190c99d08b371bd2c",
+      "sourceBulletId": "faq-q-is-the-shadow-opponent-afected-by-war-en",
+      "sourceBulletSha256": "151113bc77625564060744b310b8acfa046aeb8e97fcf827bc28fb28c70a17e7",
+      "text": "par la guerre ? R : Non, il ne perd même pas de livres. [1.2]"
+    },
+    {
+      "entryId": "faq-q-can-the-shadow-take-turmoil-cards",
+      "sourceTextSha256": "1a8e6d28a07649efbcd6b2200885302399a2446218a9e6ec1ad3c85c292adf83",
+      "sourceBulletId": "faq-q-can-the-shadow-take-turmoil-cards-en",
+      "sourceBulletSha256": "1b0b05028dfcdbd00d09dae4eec0a11051c6ce0f186e7168f2fd8da784bef609",
+      "text": "des cartes ? R : Non, mais il roulera lorsque vous le ferez. [1.8]"
+    },
+    {
+      "entryId": "faq-q-should-i-roll-the-die-after-every-action",
+      "sourceTextSha256": "268becb4f95bd3f7112ff88f09de006ae8427d4fe5de4ebe93bd145df4ed6ee1",
+      "sourceBulletId": "faq-q-should-i-roll-the-die-after-every-action-en",
+      "sourceBulletSha256": "84b4914caa64cf17dc0ba2d6eb075b5ac121c90d13f13925ab2d7287a58403e8",
+      "text": "action? R : Oui, sauf après avoir déployé un travailleur dans un bâtiment. Passer n’est pas une action et ne provoque pas le lancement du dé. [1.6]"
+    },
+    {
+      "entryId": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all",
+      "sourceTextSha256": "6b28d5fd26239ee250c0fa39f7d30ff560378d05bde2033eba35d356272c9c11",
+      "sourceBulletId": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all-en",
+      "sourceBulletSha256": "8ad917bb044eb15a294d72ce1c75cf03a13613e556a5ffac4ce04244fc97ef27",
+      "text": "et je passe comme ma première action, le joueur fantôme lancera-t-il un jet ? R : Oui, le joueur de l’ombre lance le dé avant que vous n’effectuiez une action. Peu importe pour ce jet si vous passez ou déployez un ouvrier sur un bâtiment (actions qui ne sont pas suivies d'un jet) comme première action. [1.3]"
+    },
+    {
+      "entryId": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated",
+      "sourceTextSha256": "85f974f3d503743ab8d22caf273a393138b7906024e529e5c234846bd5f718cc",
+      "sourceBulletId": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated-en",
+      "sourceBulletSha256": "8951225da401e2f771d50914a3d8ce336030430b0f932c15b9b1f1e163bc3c3e",
+      "text": "valeurs pour l'ombre accumulée ? R : Non, ils sont réinitialisés à chaque fois que vous piochez une nouvelle tuile Événement solo. [1.3]"
+    },
+    {
+      "entryId": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again",
+      "sourceTextSha256": "faf60e7fbb0ba54272512d6a1ba3ceea7a4667c2d9247e5d089c599eda6db5f2",
+      "sourceBulletId": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again-en",
+      "sourceBulletSha256": "468f039bfcd42de1c2d00a897e0202a35f9dec49b646a8cdc0cec7d47781a63e",
+      "text": "lancé, que se passe-t-il si je lance à nouveau une colonne avec une guerre ? R : Elle est défaussée, comme dans le jeu normal, une seule guerre peut être achetée par manche. Le jet de dé de l’ombre représente l’achat de cartes. [1.4]"
+    },
+    {
+      "entryId": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst",
+      "sourceTextSha256": "c16ff41e307be90e75ae5330bd6c259a59672b33d1200006d8f9f923e3d84d38",
+      "sourceBulletId": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst-en",
+      "sourceBulletSha256": "77f883b067429c9dfd019b9d626d0494cc18514bfbd873470db5747ae75ccc96",
+      "text": "vous obtenez un 5 ou un 6, ou seulement le premier ? R : À chaque fois. [1.4]"
+    },
+    {
+      "entryId": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well",
+      "sourceTextSha256": "331a72bab699192f1ee1fe813e3bbd52bb41bf90b3fa7f8b4186eb1e49533128",
+      "sourceBulletId": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well-en",
+      "sourceBulletSha256": "15639ba75a14d4d79c37ac0b19b221ffad7905d48a68f8944b8f5618ee9251d6",
+      "text": "un jet de dé dans le jeu solo, une carte Turmoil est-elle également retirée ? R : Oui. [1.9]"
+    },
+    {
+      "entryId": "faq-q-what-happens-when-i-take-a-worker",
+      "sourceTextSha256": "c8fe7f1f20174e9b59fb35dafe93514c9e577dd0793ce74ebc782936ddb28a4d",
+      "sourceBulletId": "faq-q-what-happens-when-i-take-a-worker-en",
+      "sourceBulletSha256": "cdc7641b7b8b4b8fd628865ef89b0024fd0bc60673e824b078e2a9f0ede756c0",
+      "text": "travailleur? R : Soit vous devez payer 3 nourritures à chaque phase de production, soit votre stabilité diminue de 3. Il n'y a pas d'autre type de paiement pour prendre un ouvrier, à l'exception de l'opportunité perdue de prendre votre bonus."
+    },
+    {
+      "entryId": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers",
+      "sourceTextSha256": "538609edd0c389a7344a2a141c40d783747132b2b43c2e854f8cf2dbca9e6397",
+      "sourceBulletId": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers-en",
+      "sourceBulletSha256": "51cc6bc4cfc1b6a5b5ab0d26bb38235e3256c9525dfe22cfbd2db1fc9490ecbe",
+      "text": "sur Statue of Liberty ? (Score : +2 PV si la plupart des ouvriers) R : C'est le décompte de fin de partie. Tout autre score est répertorié différemment, comme \"Fin de chaque âge : +1 VP\" sur Solomon's Temple."
+    },
+    {
+      "entryId": "faq-q-how-are-used-markers-placed",
+      "sourceTextSha256": "8f4044b10a2f5e21d806d30040a751f45a20282b0ea00f8b569da9a5f6daba98",
+      "sourceBulletId": "faq-q-how-are-used-markers-placed-en",
+      "sourceBulletSha256": "43d06049b8baf19b82cdd3674520284515e6b6723e2c9597b495167c5329718a",
+      "text": "R : Ne placez des marqueurs « Utilisé » sur une carte que si l'action a une limite sur le nombre de tours qu'elle peut être utilisée dans une manche, par exemple « Action, 1 par manche ». Si une carte a une \"Action\", mais sans limite, vous pouvez l'utiliser plusieurs fois dans une manche."
+    },
+    {
+      "entryId": "faq-q-how-many-rounds-is-the-game",
+      "sourceTextSha256": "450ab98f360105a6d0cdf945570fd165e032cc9cf8a33c37d298f7eadd524ddf",
+      "sourceBulletId": "faq-q-how-many-rounds-is-the-game-en",
+      "sourceBulletSha256": "65ca94ee04890069a3189704cce41873e4328229c69eda65b6498e41a60e455a",
+      "text": "R : 8. 4 âges et chaque âge est de 2 manches. A la fin de chaque âge se trouve un petit décompte pour les Livres, avec un rappel sous la forme d'un marqueur VP sur le tableau de score."
+    },
+    {
+      "entryId": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2",
+      "sourceTextSha256": "cc44d2a70a9c3644194d47fcaf5889d027da506eebc428e1394307e6414be410",
+      "sourceBulletId": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2-en",
+      "sourceBulletSha256": "2e54d364388ed0d80587e5f69cd205afc300436c24c4ad858eb2e8f432d290e2",
+      "text": "(Stabilité 1) à un Ziggurat (Stabilité 2), ma Stabilité est-elle réduite de 1 avant d'être augmentée de 2 ? R : Oui, car le travailleur est d'abord non déployé (pas une action), puis déployé. Vous pourriez risquer de perdre un conseiller qui dépend du fait de ne pas avoir la stabilité la plus faible (par exemple Qin Shi Huang)."
+    },
+    {
+      "entryId": "faq-q-how-is-player-order-determined-for-nations-in-revolt",
+      "sourceTextSha256": "55d45448b0f7b55e9ee8e0aadc46845ea1eee8dac5332ffe0fd5e352ffa06ba9",
+      "sourceBulletId": "faq-q-how-is-player-order-determined-for-nations-in-revolt-en",
+      "sourceBulletSha256": "9fff38463a36ca9857a3657f0d3be1a4a8698ac9d04f4edc25b1d24c1223d045",
+      "text": "pour Nations en révolte ? R : Tous les joueurs en révolte comptent comme étant les plus bas et égaux, donc aucun changement dans l'ordre tour pour ceux de force égale qui sont également en révolte. Cela est également vrai pour un joueur qui vient de terminer Versailles. [1.1]"
+    },
+    {
+      "entryId": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game",
+      "sourceTextSha256": "43c53449555661470075de927b7ce92619425089396e3c90e513c192a9c4995b",
+      "sourceBulletId": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game-en",
+      "sourceBulletSha256": "82534dedcbce75efcb2f28b325d34ef683611761abbded20ce1e8c363116c31e",
+      "text": "compté à la fin du jeu ? R : Cela se résume comme d’habitude, donc une stabilité négative réduit votre total de ressources. [1.1]"
+    },
+    {
+      "entryId": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3",
+      "sourceTextSha256": "720c7631c53f017da5845d813885165275101c2f6c16770673324c8b3afdbd24",
+      "sourceBulletId": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3-en",
+      "sourceBulletSha256": "ea81adfaaf3991f7e55045cbbc6bbde645b53aaf6729cb2aba517d8ba10c4f45",
+      "text": "différent des rangées 2 et 3 ? R : Non, vous utilisez le nombre de colonnes indiqué en fonction du nombre de joueurs, même nombre de cartes sur toutes les lignes. [1.3]"
+    },
+    {
+      "entryId": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war",
+      "sourceTextSha256": "68aa2ce79e518aa71f7dbefa9b9be322ba3a7d76f841238acf5c1034660dd4b0",
+      "sourceBulletId": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war-en",
+      "sourceBulletSha256": "0d41a987ccf661152426f86010168bf0125baf7efd36ba2b9675679eef3af069",
+      "text": "Il est impossible pour une nation de subir des pertes dues à la force de la guerre. » ? R : Ce o est un 0."
+    },
+    {
+      "entryId": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom",
+      "sourceTextSha256": "673928f2c01246280247b5df20cbe00dea11331278c960066b397c49b510eb64",
+      "sourceBulletId": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom-en",
+      "sourceBulletSha256": "5d3323bae09c34f9b73c47c79fc6b6920e8d73ed7b4faf4797cadfc30e733f28",
+      "text": "\"II II\" au lieu de \"IV\" en bas ? R : IV était en effet le choix logique, et c'est ce que nous avions à l'origine. Cependant, nous l'avons d'abord changé en IIII car l'imprimeur nous a dit qu'une légère erreur de découpe des cartes enlèverait le bas du V ou que le V serait trop haut. Plus tard, IIII a parfois été mélangé avec III, nous avons donc décidé d'en faire II II."
+    }
+  ],
+  "headingTranslations": [
+    {
+      "entryId": "nations-faq-nations-faq",
+      "sourceHeadingSha256": "6e5768418a5052d5f9426aba894a3f3be010391c900065d2dfcf4940084a033f",
+      "text": "FAQ Nations++"
+    },
+    {
+      "entryId": "general-campaign-rules",
+      "sourceHeadingSha256": "bade3c0de51d53b374e4b64a1676a19aeb48e47fe34b434b3d12f15f1e701160",
+      "text": "Règles de campagne"
+    },
+    {
+      "entryId": "general-first-game",
+      "sourceHeadingSha256": "132913351327de5e4980740b0c6a99558b67c7c6a9fce06f2f08311a327c5b0c",
+      "text": "Premier match"
+    },
+    {
+      "entryId": "general-components",
+      "sourceHeadingSha256": "a150ce22160259313c47bc66940b905a9c2196924fd447f802cff12dbb1e9702",
+      "text": "Composants"
+    },
+    {
+      "entryId": "general-production",
+      "sourceHeadingSha256": "13a7c655a7d4213c0c7e77e83a7be6b267baa3f16937c401bf73371545cc9db8",
+      "text": "Production"
+    },
+    {
+      "entryId": "general-architects",
+      "sourceHeadingSha256": "7e20939e4002367d49d45e1b2bcd858c163d15b53246c57241a408906e9ac98e",
+      "text": "Architectes"
+    },
+    {
+      "entryId": "general-cards",
+      "sourceHeadingSha256": "a52fcbbc33644d315e787216b2237fa285c1811d68085140430e74f48f4cae57",
+      "text": "Cartes"
+    },
+    {
+      "entryId": "general-most-and-least",
+      "sourceHeadingSha256": "b361e49a895d0f2a4e83aa93c3a959850414fd7a8e16825c0ea53a89514164c9",
+      "text": "Le plus et le moins"
+    },
+    {
+      "entryId": "general-resource-loss",
+      "sourceHeadingSha256": "be0a281e47e123748e455c099f18207df0ed4b6940270f4d473c4e267d0b9688",
+      "text": "Perte de ressources"
+    },
+    {
+      "entryId": "general-workers",
+      "sourceHeadingSha256": "7a1ec9fe6c3b483f5420a820892c4e29c5e76f6e1bbed4671e07de3371653e98",
+      "text": "Ouvriers"
+    },
+    {
+      "entryId": "general-5-players",
+      "sourceHeadingSha256": "37279347c8d174860abdd4ab28bb43d58843536fc1b9cbfe5e54c9801920d587",
+      "text": "5 joueurs"
+    },
+    {
+      "entryId": "advisor-advisor",
+      "sourceHeadingSha256": "28da8c1f9edee99d216bf511feafd4285b7d13d6f43e6f122ae2e9e1687b40af",
+      "text": "Conseiller"
+    },
+    {
+      "entryId": "battle-battle",
+      "sourceHeadingSha256": "1b18ebbc3f490c845c2ebeca8853fcc82daefc66068eb984a445f8b1b7068438",
+      "text": "Bataille"
+    },
+    {
+      "entryId": "golden-age-bonus",
+      "sourceHeadingSha256": "d587622d277c4be4a2ed692b5a52d550abf0d9e19adb40469bb837462084dcdd",
+      "text": "Prime"
+    },
+    {
+      "entryId": "wonder-wonder",
+      "sourceHeadingSha256": "f3cb6ed65698e27784df7841575d5399ca520bed2909ba58959d01da1fb14297",
+      "text": "Merveille"
+    },
+    {
+      "entryId": "natural-wonders-natural-wonders",
+      "sourceHeadingSha256": "5be694ad098a4deaf5402a35ca4ae5f56fd79ea9e8f2e3c20482682feeca0bf6",
+      "text": "Merveilles naturelles"
+    },
+    {
+      "entryId": "event-event",
+      "sourceHeadingSha256": "4e1f49a9c8ae8a158434e647c0c410352d718984a4fcd144d26cca3c394caa02",
+      "text": "Événement"
+    },
+    {
+      "entryId": "faq-q-can-you-build-the-same-building-military-card-several-times",
+      "sourceHeadingSha256": "d7773241b5af1470f9e965c0dcfee98ec423551e459c5b46e4cb0389fedac5c2",
+      "text": "Q : Pouvez-vous construire la même carte de bâtiment/militaire plusieurs fois ?"
+    },
+    {
+      "entryId": "faq-q-can-you-place-many-workers-on-a-building-military",
+      "sourceHeadingSha256": "e2dea13ca83ae22356791b1797afa05689bfb6647c1114b40298b37a926b8789",
+      "text": "Q : Pouvez-vous placer plusieurs ouvriers sur un bâtiment/militaire ?"
+    },
+    {
+      "entryId": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military",
+      "sourceHeadingSha256": "4c6bf427e662a1293e17b425b9c4c72e1a30e4e0581f1e6d76ecabdd053c7ab7",
+      "text": "Q : Obtenez-vous des PV en plaçant un ouvrier sur un bâtiment/militaire ?"
+    },
+    {
+      "entryId": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "sourceHeadingSha256": "58875b4d33db78130c96d679943d7241eee8ee6f9ec66bb219387968ff4e1e63",
+      "text": "Q : Dans une partie à 5 joueurs avec 2 Nations ayant le plus de Force, qui obtient le bonus d'un événement Nation le plus fort ?"
+    },
+    {
+      "entryId": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+      "sourceHeadingSha256": "a05a7f263ad54937977874dd7431080b2a5634a2133800bd44fbe6f69426fa6a",
+      "text": "Q : Dans une partie à 5 joueurs avec 3 Nations ayant le plus de Force, qui obtient le bonus d'un événement Nation le plus fort ?"
+    },
+    {
+      "entryId": "faq-q-what-does-the-books-on-the-solo-tiles-mean",
+      "sourceHeadingSha256": "6218ee283fd7e0aee17fe5ddc611c52da6051962c746ffeb197a55dfd7d02d44",
+      "text": "Q : Que signifient les Livres sur les tuiles Solo ?"
+    },
+    {
+      "entryId": "faq-q-is-the-shadow-opponent-afected-by-war",
+      "sourceHeadingSha256": "903144fa40d7010889b3da978765e228676d360b30c8f51ae106d5bf7d5327af",
+      "text": "Q : L’adversaire fantôme est-il affecté par la guerre ?"
+    },
+    {
+      "entryId": "faq-q-can-the-shadow-take-turmoil-cards",
+      "sourceHeadingSha256": "9d75628f0b5ef42ea0a1caed89296af194b771c6b71706ea8a55d0f310bdc5c3",
+      "text": "Q : L'ombre peut-elle accepter les cartes Turmoil ?"
+    },
+    {
+      "entryId": "faq-q-should-i-roll-the-die-after-every-action",
+      "sourceHeadingSha256": "d1aafe8c9972230c612becbecfcc2cb4a3497da179a6edf5d53cf1d045510f39",
+      "text": "Q : Dois-je lancer le dé après chaque action ?"
+    },
+    {
+      "entryId": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all",
+      "sourceHeadingSha256": "07275d471874116398cc0448f53b6a874d5e6994edc10f9ca9f82ce3d69e2c3c",
+      "text": "Q : Si je suis deuxième dans l'ordre des joueurs et que je réussis ma première action, le joueur fantôme lancera-t-il un jet ?"
+    },
+    {
+      "entryId": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated",
+      "sourceHeadingSha256": "4665415f22bb5fd06b44ab14425b5a76989caca0d36991abde8f24a3c17dd7ac",
+      "text": "Q : Les valeurs de résistance et de stabilité de l’ombre sont-elles accumulées ?"
+    },
+    {
+      "entryId": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again",
+      "sourceHeadingSha256": "9baa370e765422b002b142eb04f9cd810bfaf3abd10d45812ec44129c3df2f7f",
+      "text": "Q : Si une guerre a été achetée ou lancée, que se passe-t-il si je lance à nouveau une colonne avec une guerre ?"
+    },
+    {
+      "entryId": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst",
+      "sourceHeadingSha256": "150b74b4200a7d8e053fc3579f4d5010a475a43f624f4ad1e10dbcbbd153a3f8",
+      "text": "Q : L'effet est-il appliqué à chaque fois que vous obtenez un 5 ou un 6, ou seulement le premier ?"
+    },
+    {
+      "entryId": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well",
+      "sourceHeadingSha256": "c061b31941f88b7ab9d14f4f0b882a9bd68d172e7c130b2efb3ffc94f92dfb71",
+      "text": "Q : Lorsqu'un architecte est retiré par un jet de dé dans le jeu solo, une carte Turmoil est-elle également retirée ?"
+    },
+    {
+      "entryId": "faq-q-what-happens-when-i-take-a-worker",
+      "sourceHeadingSha256": "163c579ec75dd9bcf4a933143d016b68b90bba9cc4c5248ac89c114d1161737a",
+      "text": "Q : Que se passe-t-il lorsque j'accepte un ouvrier ?"
+    },
+    {
+      "entryId": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers",
+      "sourceHeadingSha256": "6a41f42687ebe70b749d4c3d83bb6124febf1cd1b2ef32bf9b1e5cbec175ad44",
+      "text": "Q : Quand le « Scoring » se produit-il, comme sur Statue of Liberty ? (Score : +2 PV si la plupart des ouvriers)"
+    },
+    {
+      "entryId": "faq-q-how-are-used-markers-placed",
+      "sourceHeadingSha256": "eac6c66973ab85c659929e8803e164afe36ea0806921b705d0451f805d468b44",
+      "text": "Q : Comment les marqueurs « Utilisé » sont-ils placés ?"
+    },
+    {
+      "entryId": "faq-q-how-many-rounds-is-the-game",
+      "sourceHeadingSha256": "c37dc0b36639e19c791f3bfe0bcf8d763e44196dc1fdf4dd0ad9307b5b3c1795",
+      "text": "Q : Combien de manches représente le jeu ?"
+    },
+    {
+      "entryId": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2",
+      "sourceHeadingSha256": "280d631f68eae45b2fe59ae9ed3d9471f374990edbfa7c40bd83925cc446fdc6",
+      "text": "Q : Si je déplace un ouvrier d'un Temple (Stabilité 1) vers un Ziggurat (Stabilité 2), ma Stabilité est-elle réduite de 1 avant d'être augmentée de 2 ?"
+    },
+    {
+      "entryId": "faq-q-how-is-player-order-determined-for-nations-in-revolt",
+      "sourceHeadingSha256": "14cbabe7bc604c308c55b7ab175b8f81a1b9ad47f77ada29f5772ebc1f0ccfd8",
+      "text": "Q : Comment l'ordre des joueurs est-il déterminé pour Nations en révolte ?"
+    },
+    {
+      "entryId": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game",
+      "sourceHeadingSha256": "2a5a0d440ea34d7f65faec4c87e1fa0519b109312fec08ccdf711dfbb53ef056",
+      "text": "Q : Comment la stabilité négative est-elle comptabilisée à la fin de la partie ?"
+    },
+    {
+      "entryId": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3",
+      "sourceHeadingSha256": "6ae914acc1d5f21d8d202cc771084ffa9c743e3aac1f43974f182949e1e3366d",
+      "text": "Q : La rangée 1 du tableau de progression est-elle différente des rangées 2 et 3 ?"
+    },
+    {
+      "entryId": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war",
+      "sourceHeadingSha256": "cc66a0e2677981a3fd6d7f738accb071536a779d3c56aaec896171a604e65da6",
+      "text": "Q : Page 15, quel est le o dans « Il est impossible pour une nation de subir des pertes dues à la force de la guerre. » ?"
+    },
+    {
+      "entryId": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom",
+      "sourceHeadingSha256": "c65976c2b89ec0e4ef7f8806cf88b7ffbe45723d2b93d7bbdb1a15e0a06729ca",
+      "text": "Q : Pourquoi le 4ème âge est-il indiqué par « II II » au lieu de « IV » en bas ?"
+    }
+  ],
+  "terminology": {
+    "round": "manche",
+    "turn": "tour"
+  },
+  "spotCheckCorrections": {
+    "reviewer": "Codex",
+    "entries": [
+      "general-most-and-least",
+      "general-5-players",
+      "general-production",
+      "advisor-buddha",
+      "advisor-sun-tzu",
+      "advisor-zhu-xi",
+      "wonder-porcelain-tower",
+      "advisor-isabella",
+      "event-jain-ascetism",
+      "event-industrial-revolution",
+      "event-scramble-for-africa",
+      "advisor-alfred-nobel",
+      "wonder-himeji-castle",
+      "event-weltpolitik"
+    ],
+    "notes": "Checked these passages against the preserved English bullets; corrected rule conditions, round/turn terminology and advisor replacement. Other translations remain machine drafts; no approval implied."
+  }
+}
