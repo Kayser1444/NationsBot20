@@ -6,6 +6,7 @@ export const sourceFiles = ['__init__.py', '__main__.py', 'abbr.py', 'actions.py
   'dynasty_cards.py', 'event_cards.py', 'events.py', 'exceptions.py', 'match.py', 'nations.py',
   'phases.py', 'player.py', 'progress_cards.py', 'resources.py', 'stats.py', 'utils.py', 'LICENSE', 'README.md'];
 export const dayMs = 86400000;
+export const maxSourceReadLines = 100;
 const hash = text => createHash('sha256').update(text).digest('hex');
 export function saveQuestionJson(path, value) {
   writeFileSync(path + '.tmp', JSON.stringify(value), { mode: 0o600 });
@@ -125,7 +126,9 @@ export function createQuestionCorpus(snapshot, faq, rulebooks = [], cards = null
     ...(source.kind === 'rulebook' ? { page: source.page, headings: source.headings } : {}) }));
   const read = ({ id, start = 1, count = 60 }) => {
     const source = sources.get(id);
-    if (!source || !Number.isInteger(start) || start < 1 || !Number.isInteger(count) || count < 1 || count > 100) return { error: 'Unknown source or invalid line range.' };
+    if (!source) return { errorCode: 'unknown_source', error: 'Unknown source ID. Use an exact ID from the catalogue or search results.' };
+    if (!Number.isSafeInteger(start) || start < 1 || !Number.isSafeInteger(count) || count < 1 || count > maxSourceReadLines)
+      return { errorCode: 'invalid_line_range', error: `start must be an integer >= 1; count must be an integer from 1 to ${maxSourceReadLines}. Retry this source with a valid range.`, maxCount: maxSourceReadLines };
     const { text, ...metadata } = source;
     const lines = text.split('\n');
     return { id, ...metadata, totalLines: lines.length,

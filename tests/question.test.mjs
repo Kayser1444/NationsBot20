@@ -126,12 +126,36 @@ test('agent follows local read tools and sends only to Responses using Sol', asy
       assert.equal(body.text.format.type, 'json_schema'); assert.equal(body.text.format.strict, true);
       assert.equal(body.max_output_tokens, 5000);
       assert.deepEqual(body.tools.map(tool => tool.name), ['search_cards', 'search_sources', 'read_source']);
+      const readTool = body.tools.find(tool => tool.name === 'read_source');
+      assert.equal(readTool.parameters.properties.count.maximum, 100);
+      assert.equal(readTool.parameters.properties.count.minimum, 1);
+      assert.equal(readTool.parameters.properties.start.minimum, 1);
       assert.equal(options.body.includes('/data/friends.json'), false);
       return sent.length === 1 ? readCall() : answer();
     } });
   assert.match(text, /filters direct advisors/);
   assert.equal(reservations, 2);
   assert.ok(sent[1].input.some(item => item.type === 'function_call_output' && item.output.includes('card.is_advisor()')));
+});
+
+test('oversized source read gives actionable limits and agent can recover within its budget', async () => {
+  for (const count of [160, 240]) {
+    let requests = 0;
+    const text = await investigateQuestion({ question: 'How many wonders in Age I?', language: 'en-US', corpus: corpus(), apiKey: 'test-only', reserveRequest() {},
+      fetcher: async (_url, options) => {
+        const body = JSON.parse(options.body); requests++;
+        if (requests === 1) return result([call('read_source', { id: 'cards/index', start: 1, count })]);
+        const output = JSON.parse(body.input.filter(item => item.type === 'function_call_output').at(-1).output);
+        if (requests === 2) {
+          assert.equal(output.errorCode, 'invalid_line_range');
+          assert.equal(output.maxCount, 100); assert.match(output.error, /1.*100/);
+          return result([call('read_source', { id: 'cards/index', start: 1, count: output.maxCount }, 'retry')]);
+        }
+        assert.equal(output.error, undefined); assert.match(output.excerpt, /English card library/);
+        return answer();
+      } });
+    assert.ok(text); assert.equal(requests, 3);
+  }
 });
 
 test('unknown external tool requests are denied locally and never followed', async () => {

@@ -73,7 +73,7 @@ test('split events retain independent names, targeting and effects', () => {
   assert.equal(first.excerpt.includes('Lose all [Gold] except 2'), false);
   assert.match(second.excerpt, /Least \[Stability\]: Lose all \[Gold\] except 2/);
   assert.match(second.excerpt, /Famine: -2/);
-  assert.equal(c.read({ id: '../Reference/Feudal_dues.jpg' }).error, 'Unknown source or invalid line range.');
+  assert.equal(c.read({ id: '../Reference/Feudal_dues.jpg' }).errorCode, 'unknown_source');
 });
 
 test('description search recognizes English paraphrases and distinguishes keeping two from losing two', () => {
