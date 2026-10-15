@@ -7,7 +7,7 @@ import { createQuestionLog } from '../question-log.mjs';
 import { parseQuestionAnswer, questionReplyParts } from '../question-answer.mjs';
 import { deliverQuestion } from '../question-delivery.mjs';
 import { startDashboard } from '../dashboard.mjs';
-import { questionSearchHint } from '../question-acknowledgement.mjs';
+import { questionSearchHint, questionReceipt } from '../question-acknowledgement.mjs';
 
 const answer = overrides => JSON.stringify({ question_language: 'fr', answer_language: 'fr', english_question: 'Which card?',
   parts: [{ text: 'La carte.', english_text: 'The card.' }], ...overrides });
@@ -41,6 +41,18 @@ test('accepted question immediately acknowledges then sends two private answer f
   assert.equal(record.acknowledgement.delivery, 'sent'); assert.equal(record.acknowledgement.text, sends[0].content);
   assert.equal(record.acknowledgementMs, 10); assert.equal(record.firstResponseMs, 1030); assert.equal(record.modelDurationMs, 1000);
   assert.equal(record.parts.length, 2); assert.equal(record.deliveryStatus, 'sent');
+  assert.equal(sends[0].embeds[0].title, 'Din fråga');
+  assert.equal(sends[0].embeds[0].description, 'Rules and Tabony card?');
+  assert.equal(sends[0].flags, undefined, 'Do not suppress the explicit question embed');
+  assert.deepEqual(record.acknowledgement.embeds, sends[0].embeds);
+});
+
+test('question receipt keeps long Markdown questions visible and fits Discord without embed permission', () => {
+  const question = '*'.repeat(1200), ack = questionSearchHint('card rules FAQ Tabony', 'sv-SE').text;
+  const embedded = questionReceipt(question, 'sv-SE', ack);
+  assert.equal(embedded.embeds[0].description, '\\*'.repeat(1200)); assert.ok(embedded.embeds[0].description.length <= 4096);
+  const plain = questionReceipt(question, 'sv-SE', ack, false);
+  assert.ok(plain.content.includes(question)); assert.ok(plain.content.length <= 2000); assert.equal(plain.embeds, undefined);
 });
 
 test('uncertain acknowledgement delivery stops investigation and is not overwritten or retried', async () => {

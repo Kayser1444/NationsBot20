@@ -97,6 +97,9 @@ language templates and keyword routing, with no extra API request; it does not
 promise which source will actually settle the question. Access/quota rejections
 receive just the rejection. The acknowledgement is retained as its own message
 with delivery status, timing and a local English rendering for administrator review.
+The receipt includes the original question in a labeled Discord embed, which
+remains visible when answer follow-ups arrive. Channels without Embed Links
+permission receive the question in the acknowledgement's plain text instead.
 
 The actual answer uses one or two follow-ups: at most three messages including
 the acknowledgement. When both perspectives matter, the prompt prefers official

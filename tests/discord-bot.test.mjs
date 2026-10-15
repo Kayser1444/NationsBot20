@@ -17,6 +17,9 @@ test('help covers every registered command, fits one Discord message and needs n
   assert.equal(content, helpMessage);
   assert.ok(content.length <= 2000);
   for (const command of commands) assert.ok(content.includes('/' + command.name));
+  assert.ok(content.includes('`/question question:…`'));
+  const prose = content.split('`').filter((_, index) => index % 2 === 0).join('');
+  assert.equal(/\/(?:notifications|reminders|smtable|card|nation|question)\b/.test(prose), false, 'Command mentions in help prose must retain inline code formatting');
 });
 function fixture(names = ['Kayser', 'Suddoman']) {
   let subscriptions = {};

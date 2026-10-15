@@ -1,5 +1,5 @@
 import { questionReplyParts } from './question-answer.mjs';
-import { questionSearchHint } from './question-acknowledgement.mjs';
+import { questionSearchHint, questionReceipt } from './question-acknowledgement.mjs';
 
 export async function deliverQuestion({ interaction, questions, log, language, flags, now = Date.now, cancelled = () => false }) {
   let id, parts = [], sent = 0, details = {}, acknowledgement = null;
@@ -13,8 +13,11 @@ export async function deliverQuestion({ interaction, questions, log, language, f
       async onAccepted() {
         if (cancelled()) throw new Error('Question cancelled.');
         acknowledgement = { ...questionSearchHint(interaction.options.getString('question'), language), delivery: 'unconfirmed' };
+        const receipt = questionReceipt(interaction.options.getString('question'), language, acknowledgement.text, interaction.appPermissions?.has('EmbedLinks') !== false);
+        acknowledgement.text = receipt.content;
+        if (receipt.embeds) acknowledgement.embeds = receipt.embeds;
         log.update(id, { acknowledgement });
-        await interaction.editReply({ content: acknowledgement.text, allowedMentions: { parse: [] }, flags: flags.SuppressEmbeds });
+        await interaction.editReply({ ...receipt, allowedMentions: { parse: [] }, ...(receipt.embeds ? {} : { flags: flags.SuppressEmbeds }) });
         acknowledgement.delivery = 'sent'; acknowledgement.sentAt = new Date(now()).toISOString();
         log.update(id, { acknowledgement, acknowledgementMs: Math.max(0, now() - (interaction.createdTimestamp ?? started)) });
         investigationStarted = now();

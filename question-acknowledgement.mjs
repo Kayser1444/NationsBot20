@@ -1,4 +1,12 @@
 // A tentative local routing hint, never a ruling or an extra model request.
+export function questionReceipt(question, language, acknowledgement, canEmbed = true) {
+  const titles = { sv: 'Din fråga', en: 'Your question', de: 'Deine Frage', fr: 'Votre question', es: 'Tu pregunta', zh: '你的问题' };
+  const title = titles[language.split('-')[0]] ?? titles.en;
+  if (!canEmbed) return { content: `${title}:\n${question}\n\n${acknowledgement}` };
+  // Render the submitted text literally, including user-written Markdown.
+  return { content: acknowledgement, embeds: [{ title, description: question.replace(/([\\`*_{}\[\]()<>#+\-.!|~])/g, '\\$1'), color: 0x234f86 }] };
+}
+
 export function questionSearchHint(question, language = 'en-US') {
   const text = String(question).toLowerCase();
   const routes = [];
