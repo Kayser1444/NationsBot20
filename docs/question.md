@@ -58,6 +58,13 @@ Use `search_cards` for remembered effects and forgotten names, then read the
 candidate source. The initial prompt lists a compact card index rather than all
 575 card/effect records, reducing repeated context cost.
 
+Card lookup accepts `card_type=event` (or `all`); event wording also narrows the
+lookup to events. Gain/take/give and lose/return synonyms are normalized. Ranking
+prefers an action tied to its resource, so taking Workers ranks ahead of gaining
+Stone for undeploying them. Scores remain relevance, not proof or completeness.
+The investigator is instructed to retry empty card lookups with shorter English
+terms and read candidate cards before concluding that their effects are missing.
+
 ## Limits and isolation
 
 Only `search_cards`, `search_sources` and `read_source` are exposed to the model. They resolve

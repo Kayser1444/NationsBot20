@@ -5,12 +5,20 @@ const checksum = value => createHash('sha256').update(value).digest('hex');
 const fold = value => String(value).normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'");
 const stop = new Set('a an and are as at be by can card cards does event events for from has have i in is it me of on or please that the their them there these this to was what when which who will with would'.split(' '));
 const aliases = { lowest: 'least', lower: 'least', highest: 'most', money: 'gold', coin: 'gold', coins: 'gold',
+  give: 'gain', gives: 'gain', add: 'gain', adds: 'gain', recruit: 'gain', receive: 'gain', take: 'gain', takes: 'gain',
+  return: 'lose', returns: 'lose',
   military: 'military', strength: 'military', stable: 'stability', books: 'book', workers: 'worker', advisors: 'advisor',
   architects: 'architect', wonders: 'wonder', points: 'vp', point: 'vp', keep: 'keep', keeps: 'keep', retain: 'keep', retaining: 'keep',
   except: 'only', losses: 'lose', loses: 'lose', lost: 'lose', discard: 'lose',
   zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10' };
 export const cardSearchTokens = value => [...new Set((fold(value).replace(/-\s*(\d+)/g, ' lose $1 ').replace(/\+\s*(\d+)/g, ' gain $1 ').match(/[a-z0-9]+/g) ?? [])
   .filter(word => !stop.has(word)).map(word => aliases[word] ?? word))];
+
+// Keep the action tied to its resource: gaining Stone for undeploying a Worker
+// must not rank as highly as actually taking a new Worker.
+const effectRelations = value => new Set([...fold(value).replace(/-\s*(\d+)/g, ' lose $1 ').replace(/\+\s*(\d+)/g, ' gain $1 ')
+  .matchAll(/\b(gain|take|receive|recruit|add|lose|return|discard)\s+(?:up to\s+)?(?:\d+\s*)?\[?(workers?|gold|food|stone|books?|architects?|vp|stability|military)\b/g)]
+  .map(([, action, resource]) => `${aliases[action] ?? action}:${aliases[resource] ?? resource}`));
 
 export function loadQuestionCards() {
   const root = new URL('./data/cards/library/', import.meta.url);
@@ -62,14 +70,17 @@ export function createCardLibrary(library) {
     }
   }
   const index = documents.map(doc => ({ doc, body: new Set(cardSearchTokens(doc.searchText)), names: new Set(cardSearchTokens(doc.title)),
-    aliases: new Set(cardSearchTokens(doc.searchNames)) }));
+    aliases: new Set(cardSearchTokens(doc.searchNames)), relations: effectRelations(doc.searchText) }));
   const frequencies = new Map();
   for (const item of index) for (const word of new Set([...item.body, ...item.names, ...item.aliases])) frequencies.set(word, (frequencies.get(word) ?? 0) + 1);
-  const search = ({ query }) => {
+  const types = new Set(documents.map(doc => doc.type));
+  const search = ({ query, card_type = 'all' }) => {
     if (typeof query !== 'string' || query.length > 240 || !query.trim()) return { error: 'Use a short English card name or effect description.' };
+    if (card_type !== 'all' && !types.has(card_type)) return { error: 'Unknown card type.' };
+    const type = card_type === 'all' && /\bevents?\b/i.test(query) ? 'event' : card_type;
     const terms = cardSearchTokens(query);
     if (!terms.length) return [];
-    return index.map(item => {
+    return index.filter(item => type === 'all' || item.doc.type === type).map(item => {
       let score = 0; const matched = [];
       for (const term of terms) {
         const weight = 1 + Math.log(1 + index.length / (1 + (frequencies.get(term) ?? 0)));
@@ -79,7 +90,10 @@ export function createCardLibrary(library) {
       }
       const coverage = matched.length / terms.length;
       if (coverage < 0.4) score = 0;
-      else score *= coverage * coverage;
+      else {
+        for (const relation of item.relations) if (relation.split(':').every(term => terms.includes(term))) score += 15;
+        score *= coverage * coverage;
+      }
       return { item, score, matched };
     }).filter(hit => hit.score > 0).sort((a, b) => b.score - a.score || a.item.doc.id.localeCompare(b.item.doc.id))
       .slice(0, 8).map(({ item: { doc }, score, matched }) => ({ id: doc.id, name: doc.title, cardId: doc.cardId,

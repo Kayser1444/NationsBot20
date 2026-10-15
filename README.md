@@ -90,9 +90,11 @@ Settings: Dockerfile builder, Wait for CI enabled, one replica, Serverless off,
 On Failure restart policy (10 retries), and its own volume mounted at `/data`.
 Use `NATIONS_DATA_DIR=/data`, the test server/channel IDs and the test bot token
 as `NATIONS_DISCORD_BOT_TOKEN`. Do not copy production variables or migration
-bundles. The web admin console is initially disabled (`NATIONS_ADMIN_ENABLED=0`);
-Discord commands and Railway logs provide the first deployment smoke test.
-Testing HTTPS/OAuth requires a separate staging domain and test-app OAuth setup.
+bundles. The [staging owner panel](https://nationsbot20-staging-admin.up.railway.app/)
+uses port `8080`, Discord test-app OAuth and the configured owner ID. Its callback
+is `/auth/callback`; its client secret stays in staging's Railway variables.
+The existing `nationsbot20-staging-staging.up.railway.app` domain continues to
+serve card images on port `8081`. The question log is on staging's own volume.
 
 Stop the local testbot with Ctrl+C before starting staging: both use the same
 Discord application. Stop staging before returning to local Discord testing.

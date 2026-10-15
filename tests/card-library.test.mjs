@@ -14,6 +14,38 @@ const corpus = () => createQuestionCorpus(snapshot, faq, loadQuestionRulebooks()
 const response = output => new Response(JSON.stringify({ status: 'completed', output: output.map(item => item.type !== 'message' ? item : ({ ...item, content: item.content.map(part => part.type !== 'output_text' ? part : ({ ...part, text: JSON.stringify({ question_language: 'en', answer_language: 'en', english_question: null, parts: [{ text: part.text, english_text: null }] }) })) })) }));
 const call = (name, args, id) => ({ type: 'function_call', name, arguments: JSON.stringify(args), call_id: id });
 
+test('worker event lookup reproduces the staging phrase and ranks actual population gains first', () => {
+  const expected = ['Han dynasty', 'Janissaries', 'Pilgrims'];
+  for (const query of ['Events that give workers, add workers to supply or player board, recruit worker', 'events gain workers', 'event take worker']) {
+    const hits = library.search({ query });
+    assert.deepEqual(hits.slice(0, 3).map(hit => hit.name).sort(), expected, query);
+    assert.ok(hits.every(hit => hit.type === 'event'), 'explicit event intent must exclude other card types');
+    assert.ok(hits.slice(0, 3).every(hit => hit.evidenceKind === 'printed-card'));
+  }
+  assert.ok(library.search({ query: 'worker', card_type: 'event' }).every(hit => hit.type === 'event'));
+  assert.equal(library.search({ query: 'worker', card_type: '../secrets' }).error, 'Unknown card type.');
+});
+
+test('agent tool loop can retrieve and read worker-granting events from the logged failed query', async () => {
+  let round = 0; const c = corpus();
+  const text = await investigateQuestion({ question: 'vilka events kan ge gubbar?', language: 'sv-SE', corpus: c, apiKey: 'test-only', reserveRequest() {},
+    fetcher: async (_url, options) => {
+      round++; const body = JSON.parse(options.body);
+      const schema = body.tools.find(tool => tool.name === 'search_cards').parameters;
+      assert.ok(schema.properties.card_type.enum.includes('event'));
+      if (round === 1) return response([call('search_cards', { query: 'Events that give workers, add workers to supply or player board, recruit worker', card_type: 'event' }, 'events')]);
+      if (round === 2) {
+        const hits = JSON.parse(body.input.find(item => item.call_id === 'events' && item.type === 'function_call_output').output);
+        assert.deepEqual(hits.slice(0, 3).map(hit => hit.name).sort(), ['Han dynasty', 'Janissaries', 'Pilgrims']);
+        return response(hits.slice(0, 3).map((hit, i) => call('read_source', { id: hit.id, start: 1, count: 30 }, 'read' + i)));
+      }
+      const reads = body.input.filter(item => item.type === 'function_call_output' && item.call_id.startsWith('read')).map(item => JSON.parse(item.output));
+      assert.equal(reads.length, 3); assert.ok(reads.every(source => source.evidenceKind === 'printed-card' && /[Tt]ake [12] \[Worker\]/.test(source.excerpt)));
+      return response([{ type: 'message', content: [{ type: 'output_text', text: reads.map(source => source.title).join(', ') }] }]);
+    } });
+  assert.match(text, /Janissaries/); assert.match(text, /Han dynasty/); assert.match(text, /Pilgrims/); assert.equal(round, 3);
+});
+
 test('English library covers the card registry and separates printed image evidence from implementation descriptions', () => {
   const catalog = read('../data/cards/catalog.json').cards;
   assert.equal(raw.language, 'en');
