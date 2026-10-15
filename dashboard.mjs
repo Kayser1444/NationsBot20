@@ -1,9 +1,10 @@
 import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { dashboardTheme } from './dashboard-theme.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, auth = null }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -33,7 +34,7 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
         if (req.method === 'GET' && url.pathname === '/') {
           res.writeHead(200, { 'content-type': 'text/html; charset=utf-8',
             'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'self' https://discord.com" });
-          res.end('<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NationsBot · Ägarpanel</title><style>body{font:16px system-ui;background:#f3f5f8;color:#203044;margin:0;padding:24px}main{max-width:440px;margin:12vh auto;background:white;border:1px solid #e0e5ec;border-radius:14px;padding:32px}h1{margin:0 0 8px}p{line-height:1.6}button{font:inherit;border:0;cursor:pointer;display:inline-block;background:#234f86;color:white;text-decoration:none;border-radius:8px;padding:12px 18px}.muted{font-size:13px;color:#64748b}</style><main><h1>NationsBot 2.0</h1><p>Hantera prenumerationer och se aktuell bevakning.</p><form action="/auth/login" method="get"><p><label><input type="checkbox" name="remember" value="1" checked> Kom ihåg mig i 30 dagar</label></p><p><button type="submit">Logga in med Discord</button></p></form><p class="muted">Endast botägaren har tillgång till ägarpanelen.</p></main></html>'); return;
+          res.end(dashboardTheme('<!doctype html><html lang="sv"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NationsBot · Ägarpanel</title><style>body{font:16px system-ui;background:#f3f5f8;color:#203044;margin:0;padding:24px}main{max-width:440px;margin:12vh auto;background:white;border:1px solid #e0e5ec;border-radius:14px;padding:32px}h1{margin:0 0 8px}p{line-height:1.6}button{font:inherit;border:0;cursor:pointer;display:inline-block;background:#234f86;color:white;text-decoration:none;border-radius:8px;padding:12px 18px}.muted{font-size:13px;color:#64748b}</style><main><h1>NationsBot 2.0</h1><p>Hantera prenumerationer och se aktuell bevakning.</p><form action="/auth/login" method="get"><p><label><input type="checkbox" name="remember" value="1" checked> Kom ihåg mig i 30 dagar</label></p><p><button type="submit">Logga in med Discord</button></p></form><p class="muted">Endast botägaren har tillgång till ägarpanelen.</p></main></html>', environmentName)); return;
         }
         json(401, { error: 'Logga in med Discord.' }); return;
       }
@@ -45,10 +46,10 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
         'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff',
         'content-security-policy': "default-src 'self'; script-src 'self' 'nonce-" + csrf + "'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
       });
-      res.end(page.replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
+      res.end(dashboardTheme(page.replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
         .replaceAll('__ADMIN_OWNER__', /^\d{17,20}$/.test(activeSession?.userId) ? activeSession.userId : '')
         .replaceAll('__STOP_HINT__', auth ? 'Bevakningen körs på Railway.' : 'Stoppa tjänsten med Ctrl+C i terminalen.')
-        .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : '')); return;
+        .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : ''), environmentName)); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
     if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
