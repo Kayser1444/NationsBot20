@@ -107,5 +107,5 @@ export default {
   "remindersOff": "每日提醒已关闭，/notifications 不受影响。",
   "remindersInvalid": "请使用 time:HH:mm 和有效的 IANA 时区，例如 Europe/Stockholm。默认 GMT。",
   "remindersStatus": "每日提醒：{value}。",
-  "help": "**Nations Bot 2.0 — 帮助**\n`/notifications on [nationsname] [dm:on|off]` 开启回合通知；`/notifications off` 关闭通知。默认私信，仅可在指定 SM 频道选择频道发送。`/reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname]` 独立开启每日提醒；不填 time 则从轮到你起每 24 小时提醒，不填 timezone 则使用 GMT。`/reminders off` 关闭每日提醒。`/language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto` 选择语言。`/status` 显示设置与对局。`/smtable [div:1A|2A|2B]` 显示 SM 排名。`/card name` 与 `/nation name` 显示图片和 FAQ。`/help` 显示帮助。新对局在五分钟内被发现。服务器成员也可通过私信使用命令。请允许机器人发送私信。FAQ 正文支持机器人的全部六种语言，卡牌印刷名称保留英语。\n`/question question:…` — 询问 Nations 规则或 Tabony 实现（测试）。"
+  "help": "**Nations Bot 2.0 — 帮助**\n`/notifications on [nationsname] [dm:on|off]` 开启回合通知；`/notifications off` 关闭通知。默认私信，仅可在指定 SM 频道选择频道发送。`/reminders on [time:HH:mm] [timezone:Europe/Stockholm] [nationsname]` 独立开启每日提醒；不填 time 则从轮到你起每 24 小时提醒，不填 timezone 则使用 GMT。`/reminders off` 关闭每日提醒。`/language locale:sv-SE|en-US|de|fr|es-ES|zh-CN|auto` 选择语言。`/status` 显示设置与对局。`/smtable [div:1A|2A|2B]` 显示 SM 排名。`/card name` 与 `/nation name` 显示图片和 FAQ。`/help` 显示帮助。新对局在五分钟内被发现。服务器成员也可通过私信使用命令。请允许机器人发送私信。FAQ 正文支持机器人的全部六种语言，卡牌印刷名称保留英语。\n`/question question:…` — 询问 Nations 规则或 Tabony 实现（实验性功能）。"
 };
