@@ -11,6 +11,7 @@ const owner = '229311536827465728';
 const settings = { origin: 'https://admin.example.test', clientId: '1558936899446374570', clientSecret: 'synthetic-client-secret', ownerId: owner };
 async function fixture(t) {
   let clock = 0, identity = owner, calls = 0, snapshots = 0, edits = 0;
+  const resets = [];
   const auth = createDiscordAuth(settings, { now: () => clock, fetcher: async (url, options) => {
     calls++;
     if (url.endsWith('/oauth2/token')) {
@@ -23,6 +24,8 @@ async function fixture(t) {
     return Response.json({ id: identity, username: 'Owner' });
   } });
   const dashboard = await startDashboard({ port: 0, auth, snapshot: () => { snapshots++; return { private: 'owner-only' }; },
+    questionQuota: userId => ({ userId, used: 5, remaining: 0 }),
+    resetQuestionQuota: (userId, actorId) => { resets.push({ userId, actorId }); return { userId, used: 0, remaining: 5 }; },
     subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
   t.after(() => dashboard.close());
   // Emulate the TLS proxy with an explicit Host header (fetch derives Host from URL).
@@ -51,8 +54,31 @@ async function fixture(t) {
     return { cookie, callback };
   }
   return { request, login, setIdentity: value => { identity = value; }, setClock: value => { clock = value; },
+    resets: () => resets,
     counts: () => ({ calls, snapshots, edits }) };
 }
+
+test('question quota reset requires owner authentication, matching origin and CSRF and records the actor', async t => {
+  const f = await fixture(t), path = '/api/question-quotas/' + owner;
+  assert.equal((await f.request(path)).status, 401);
+  assert.equal((await f.request(path, { method: 'POST' })).status, 401);
+  const attempt = await f.login(), callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
+  const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
+  const html = await (await f.request('/', { headers: { cookie } })).text();
+  assert.ok(html.includes('value="' + owner + '"'), 'Owner can inspect their own quota without copying an ID');
+  const csrf = html.match(/const token='([a-f0-9]+)'/)[1];
+  assert.equal((await f.request(path, { headers: { cookie } })).status, 200);
+  const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf };
+  assert.equal((await f.request(path, { method: 'POST', headers: { cookie } })).status, 403);
+  assert.equal((await f.request(path, { method: 'POST', headers: { ...headers, origin: 'https://evil.test' } })).status, 403);
+  assert.equal((await f.request(path, { method: 'POST', headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
+  assert.equal(f.resets().length, 0);
+  assert.equal((await f.request('/api/question-quotas/not-an-id', { method: 'POST', headers })).status, 400);
+  const response = await f.request(path, { method: 'POST', headers });
+  assert.equal(response.status, 200); assert.equal((await response.json()).remaining, 5);
+  assert.deepEqual(f.resets(), [{ userId: owner, actorId: owner }]);
+  assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
+});
 
 test('public admin pages disclose no state; APIs require authentication and HTTPS', async t => {
   const f = await fixture(t);

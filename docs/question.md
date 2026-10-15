@@ -129,6 +129,15 @@ questions; expired records are immediately excluded from reads. Interrupted work
 is marked after restart. An unreadable or unwritable log blocks new investigations
 without stopping reminders. Keep one replica.
 
+The owner panel can inspect and reset a user's question quota by Discord ID,
+including the signed-in owner (prefilled). A conversation detail also links to
+that user's quota. Reset clears the user's five-per-day count and minute cooldown
+atomically on disk, and records the target and administrator in the event log.
+It does not change the global 20-question/120-request counts, allowlist, bans or
+conversation history. Resets are rejected while an investigation is in progress.
+Both quota reads and resets require the owner session on Railway; POST resets
+also require the existing same-origin and CSRF checks.
+
 Structured model output includes detected question/answer languages and English
 translations for text in languages other than Swedish or English. These are
 generated in the same completion (extra output tokens, no separate API request),

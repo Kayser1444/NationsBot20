@@ -345,6 +345,14 @@ if (!args.includes('--no-dashboard')) {
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
     dashboard = await startDashboard({ port, snapshot, questionLog,
+      questionQuota: userId => {
+        if (!bot) throw new Error('Discord-boten har inte startat.');
+        return bot.questionQuota(userId);
+      },
+      resetQuestionQuota: (userId, actorId) => {
+        if (!bot || stopped) throw new Error('Discord-boten är inte igång.');
+        return bot.resetQuestionQuota(userId, actorId);
+      },
       auth: args.includes('--cloud-admin') ? createDiscordAuth(adminSettings(), {
         sessionPath: join(dataDirectory, 'admin-sessions.json'),
         // Cloud admin already trusts Railway's HTTPS ingress. X-Real-IP must

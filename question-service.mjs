@@ -40,6 +40,27 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   let busy = false, closed = false;
   sourceStore.start();
   return {
+    quota(userId) {
+      if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
+      const day = new Date(now()).toISOString().slice(0, 10);
+      const user = ledger.day === day ? ledger.users[userId] : null;
+      return { userId, day, used: user?.count ?? 0, limit: 5, remaining: Math.max(0, 5 - (user?.count ?? 0)),
+        cooldownRemainingMs: user?.count ? Math.max(0, 60000 - (now() - user.last)) : 0,
+        total: ledger.day === day ? ledger.total : 0, totalLimit: 20,
+        requests: ledger.day === day ? ledger.requests : 0, requestLimit: 120 };
+    },
+    resetQuota(userId, actorId) {
+      if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
+      if (closed) throw new Error('Frågefunktionen är stoppad.');
+      if (busy) throw new Error('En fråga undersöks. Vänta tills den är klar innan kvoten nollställs.');
+      const day = new Date(now()).toISOString().slice(0, 10);
+      const next = ledger.day === day ? structuredClone(ledger) : { day, total: 0, requests: 0, users: {} };
+      delete next.users[userId];
+      saveQuestionJson(path, next); // Publish in memory only after the persistent reset succeeds.
+      ledger = next;
+      report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}.`);
+      return this.quota(userId);
+    },
     async ask({ userId, question, language = 'en-US', onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
       if (closed || !allowed.has(userId)) return disabled(language);
       if (typeof question !== 'string' || question.trim().length < 5 || question.length > 1200) return message(language,

@@ -212,6 +212,8 @@ test('global budget blocks a fresh user and broken sources leave the bot availab
     return new Response('', { status: 503 });
   };
   const service = createQuestionService({ directory, env, fetcher });
+  const reset = service.resetQuota(userId, userId);
+  assert.equal(reset.remaining, 5); assert.equal(reset.total, 20); assert.equal(reset.requests, 120);
   assert.match(await service.ask({ userId, question: 'Nations rules?' }), /limit reached/);
   assert.equal(paidCalls, 0); service.close();
   writeFileSync(join(root, 'tabony-snapshot.json'), '{}');
@@ -236,6 +238,31 @@ test('overlapping questions do not spend twice; shutdown aborts the request', { 
   await pending;
   assert.match(await service.ask({ userId, question: 'Nations rules?' }), /already|Another question/);
   assert.equal(calls, 1);
+  assert.throws(() => service.resetQuota(userId), /undersöks/, 'Do not race quota resets against a running investigation');
   service.close();
   assert.match(await first, /could not finish/);
+});
+
+test('owner quota reset persists, clears only one user and preserves global spending limits', async t => {
+  const directory = temp(t), other = '821001820309815368'; let clock = Date.now(), calls = 0; const audit = [];
+  const options = { directory, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId + ',' + other },
+    now: () => clock, report: message => audit.push(message), fetcher: async url => {
+      if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+      calls++; return calls % 2 ? readCall() : answer();
+    } };
+  const service = createQuestionService(options);
+  await service.ask({ userId: other, question: 'Can Poland sell this advisor?' });
+  for (let i = 0; i < 5; i++) { clock += 60001; await service.ask({ userId, question: 'Can Poland sell this advisor?' }); }
+  assert.equal(service.quota(userId).used, 5); assert.ok(service.quota(userId).cooldownRemainingMs > 0);
+  const before = service.quota(userId), otherBefore = service.quota(other);
+  const reset = service.resetQuota(userId, userId);
+  assert.equal(reset.used, 0); assert.equal(reset.remaining, 5); assert.equal(reset.cooldownRemainingMs, 0);
+  assert.equal(reset.total, before.total); assert.equal(reset.requests, before.requests); assert.deepEqual(service.quota(other), otherBefore);
+  assert.equal(audit.filter(message => message.includes('Frågekvot nollställd')).length, 1);
+  service.close(); const restarted = createQuestionService(options);
+  assert.equal(restarted.quota(userId).remaining, 5);
+  assert.match(await restarted.ask({ userId, question: 'Can Poland sell this advisor?' }), /AI interpretation/);
+  assert.equal(restarted.quota(userId).used, 1); assert.equal(restarted.quota(userId).total, before.total + 1);
+  assert.throws(() => restarted.resetQuota('not-an-id'), /Discord-ID/);
+  restarted.close();
 });

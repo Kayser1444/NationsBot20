@@ -214,5 +214,14 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
       fail('Discord-boten kunde inte starta. Kontrollera bot-token och att dess programbibliotek är installerat.');
     }
   })();
-  return { close, ready, resolveDisplayName: async userId => stopped ? null : displayNames?.resolve(userId) ?? null };
+  return { close, ready,
+    questionQuota(userId) {
+      if (stopped || !questions.quota) throw new Error('Frågekvoten är inte tillgänglig.');
+      return questions.quota(userId);
+    },
+    resetQuestionQuota(userId, actorId) {
+      if (stopped || !questions.resetQuota) throw new Error('Frågekvoten är inte tillgänglig.');
+      return questions.resetQuota(userId, actorId);
+    },
+    resolveDisplayName: async userId => stopped ? null : displayNames?.resolve(userId) ?? null };
 }

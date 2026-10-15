@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, auth = null }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, auth = null }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -46,11 +46,18 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
         'content-security-policy': "default-src 'self'; script-src 'self' 'nonce-" + csrf + "'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
       });
       res.end(page.replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
+        .replaceAll('__ADMIN_OWNER__', /^\d{17,20}$/.test(activeSession?.userId) ? activeSession.userId : '')
         .replaceAll('__STOP_HINT__', auth ? 'Bevakningen körs på Railway.' : 'Stoppa tjänsten med Ctrl+C i terminalen.')
         .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : '')); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
     if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
+    const quotaId = url.pathname.match(/^\/api\/question-quotas\/(\d{17,20})$/)?.[1];
+    if (req.method === 'GET' && quotaId) {
+      try { if (!questionQuota) throw new Error('Frågekvoten är inte tillgänglig.'); json(200, await questionQuota(quotaId)); }
+      catch (error) { json(503, { error: error.message }); }
+      return;
+    }
     if (req.method === 'GET' && url.pathname.startsWith('/api/questions/')) {
       const record = questionLog?.read(url.pathname.slice('/api/questions/'.length));
       json(record ? 200 : 404, record ?? { error: 'Frågan finns inte i loggen.' }); return;
@@ -58,6 +65,11 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
     try {
+      if (req.method === 'POST' && url.pathname.startsWith('/api/question-quotas/')) {
+        if (!quotaId) throw new Error('Discord-ID ska vara ett nummer med 17–20 siffror.');
+        if (!resetQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.');
+        json(200, await resetQuestionQuota(quotaId, activeSession?.userId ?? null)); return;
+      }
       if (url.pathname.startsWith('/api/thinking/')) {
         const id = url.pathname.slice('/api/thinking/'.length);
         if (!/^\d+$/.test(id) || !setTracking) throw new Error('Ogiltigt parti-ID.');
