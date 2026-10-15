@@ -15,8 +15,7 @@ export function createQuestionService(options = {}) {
 }
 
 function buildQuestionService({ env = process.env, directory, fetcher = fetch, now = Date.now, report = () => {} } = {}) {
-  const allowed = new Set((env.NATIONS_QUESTION_USER_IDS || env.NATIONS_ADMIN_OWNER_ID || '').split(',').map(id => id.trim()).filter(id => /^\d{17,20}$/.test(id)));
-  const enabled = env.NATIONS_QUESTION_ENABLED === '1' && !!env.OPENAI_API_KEY && allowed.size && directory;
+  const enabled = env.NATIONS_QUESTION_ENABLED === '1' && !!env.OPENAI_API_KEY && directory;
   const message = (language, sv, en) => language === 'sv-SE' ? sv : en;
   const disabled = language => message(language, 'Frågefunktionen är inte aktiverad för ditt konto.', 'Questions are not enabled for your account.');
   if (!enabled) return { ask: async ({ language }) => disabled(language), close() {} };
@@ -62,7 +61,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       return this.quota(userId);
     },
     async ask({ userId, question, language = 'en-US', onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
-      if (closed || !allowed.has(userId)) return disabled(language);
+      if (closed || !/^\d{17,20}$/.test(userId)) return disabled(language);
       if (typeof question !== 'string' || question.trim().length < 5 || question.length > 1200) return message(language,
         'Skriv en fråga på 5–1200 tecken om Nations regler eller Tabony-implementationen.', 'Enter a 5–1200 character question about Nations rules or the Tabony implementation.');
       if (busy) return message(language, 'En fråga undersöks redan. Försök igen strax.', 'Another question is being investigated. Please try again shortly.');

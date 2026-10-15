@@ -206,7 +206,26 @@ test('failed API call does not switch models or retry; tool loop and context are
   await assert.rejects(investigateQuestion({ question: 'Nations?', language: 'en-US', corpus: oversized, apiKey: 'test-only', reserveRequest() { assert.fail(); }, fetcher() { assert.fail(); } }), /context limit/);
 });
 
-test('service enforces allowlist, cooldown and persistent daily quota without live API calls', async t => {
+test('enabled questions admit all Discord users regardless of legacy allowlist or owner settings', async t => {
+  for (const legacy of [{}, { NATIONS_ADMIN_OWNER_ID: userId, NATIONS_QUESTION_USER_IDS: userId }]) {
+    let apiCalls = 0;
+    const service = createQuestionService({ directory: temp(t), env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', ...legacy },
+      fetcher: async url => {
+        if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+        apiCalls++; return apiCalls % 2 ? readCall() : answer();
+      } });
+    try {
+      for (const id of [userId, '111111111111111111']) {
+        assert.match(await service.ask({ userId: id, question: 'Nations rules?' }), /AI interpretation/);
+        assert.equal(service.quota(id).used, 1);
+        assert.match(await service.ask({ userId: id, question: 'Nations rules?' }), /limit reached/);
+      }
+      assert.equal(apiCalls, 4);
+    } finally { service.close(); }
+  }
+});
+
+test('service enforces cooldown and persistent daily quota without live API calls', async t => {
   const directory = temp(t), env = { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId };
   let clock = Date.now(), apiCalls = 0;
   const fetcher = async url => {

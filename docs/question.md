@@ -1,16 +1,17 @@
 # Local Nations questions
 
 `/question question:…` investigates Nations rules and the Tabony implementation.
-This is an opt-in pilot. The command is registered alongside other commands but
+This is an experimental feature. The command is registered alongside other commands but
 does not perform AI requests until explicitly enabled. These changes are local;
 deployment and a real-model smoke test are separate steps.
 
 ## Railway staging
 
 Keep the `OPENAI_API_KEY` secret. Add `NATIONS_QUESTION_ENABLED=1` and
-`NATIONS_QUESTION_USER_IDS=<your Discord user ID>`. The latter accepts comma-separated
-IDs; if absent, `NATIONS_ADMIN_OWNER_ID` is used. Without an owner/allowlist, questions
-remain disabled. The API key alone never enables the feature.
+an `OPENAI_API_KEY`. When enabled, questions are available to all users who pass
+the bot's existing Discord membership and ban checks. The legacy
+`NATIONS_QUESTION_USER_IDS` setting is ignored; the admin owner ID controls only
+administration, not access to questions. The API key alone never enables the feature.
 
 Use the existing single replica and persistent `/data` volume. Cloud startup
 prepares `NATIONS_CONFIG_DIR`; the question service stores its data in a `questions`
@@ -136,7 +137,7 @@ The owner panel can inspect and reset a user's question quota by Discord ID,
 including the signed-in owner (prefilled). A conversation detail also links to
 that user's quota. Reset clears the user's five-per-day count and minute cooldown
 atomically on disk, and records the target and administrator in the event log.
-It does not change the global 20-question/120-request counts, allowlist, bans or
+It does not change the global 20-question/120-request counts, bans or
 conversation history. Resets are rejected while an investigation is in progress.
 Both quota reads and resets require the owner session on Railway; POST resets
 also require the existing same-origin and CSRF checks.
@@ -160,7 +161,7 @@ context bounds and Discord handling. No paid API request is made by these tests.
 Local automated checks currently pass (171 tests). The feature has not been
 deployed or tested against the real model. The next steps are:
 
-1. Deploy this feature to staging with the owner allowlist and a persistent data
+1. Deploy this feature to staging with questions enabled and a persistent data
    volume. Keep the key in Railway variables.
 2. Ask the question below. Check that the acknowledgement arrives before the
    investigation finishes, names a tentative search path, and is followed by at
