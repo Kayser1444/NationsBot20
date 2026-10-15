@@ -1,4 +1,5 @@
 import { questionAnswerFormat, parseQuestionAnswer } from './question-answer.mjs';
+import { questionApiDiagnostics } from './question-api-diagnostics.mjs';
 export const questionModel = 'gpt-6.1-sol';
 export const maxQuestionRequests = 6;
 const tools = [
@@ -44,7 +45,11 @@ Available sources: ${JSON.stringify(corpus.catalogue())}`;
       method: 'POST', redirect: 'error', signal: requestSignal,
       headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' }, body: serialized,
     });
-    if (!response.ok) { onTelemetry({ type: 'api', round: round + 1, status: response.status, durationMs: now() - started }); throw new Error('Question API unavailable.'); }
+    if (!response.ok) {
+      const diagnostics = await questionApiDiagnostics(response, apiKey);
+      onTelemetry({ type: 'api', model: questionModel, round: round + 1, status: response.status, durationMs: now() - started, ...diagnostics });
+      throw new Error('Question API unavailable.');
+    }
     const result = await response.json();
     onTelemetry({ type: 'api', round: round + 1, model: questionModel, status: response.status, durationMs: now() - started,
       inputTokens: result.usage?.input_tokens, outputTokens: result.usage?.output_tokens });

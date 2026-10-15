@@ -79,9 +79,14 @@ test('persistent log handles restarts, retention, pagination, DM, metrics and sa
   const directory = temp(t); let clock = Date.now(); const options = { directory, now: () => clock, maxRecords: 2 };
   let log = createQuestionLog(options); const id = log.start(input);
   log.telemetry(id, { type: 'api', inputTokens: 25, outputTokens: 12, authorization: 'secret', error: 'secret', model: 'gpt-6-luna' });
+  log.telemetry(id, { type: 'api', status: 403, errorCode: 'permission_denied', errorType: 'permission_error', errorParam: 'service_tier', requestId: 'req_example', errorMessage: 'Denied Bearer privatevalue sk-proj-privatevalue' });
   clock += 1500; log = createQuestionLog(options);
   assert.equal(log.read(id).status, 'interrupted'); assert.equal(log.read(id).deliveryStatus, 'unknown');
   assert.deepEqual(log.read(id).usage, { inputTokens: 25, outputTokens: 12, reportedRequests: 1 });
+  const diagnostic = log.read(id).telemetry.at(-1);
+  assert.equal(diagnostic.errorCode, 'permission_denied'); assert.equal(diagnostic.requestId, 'req_example');
+  assert.equal(diagnostic.errorParam, 'service_tier'); assert.equal(diagnostic.errorType, 'permission_error');
+  assert.equal(diagnostic.errorMessage.includes('privatevalue'), false);
   assert.equal(readFileSync(join(directory, 'questions/conversations.json'), 'utf8').includes('secret'), false);
   const second = log.start({ ...input, guildId: 'server', guildName: 'Guild', channelName: 'rules' }); log.finish(second, { status: 'answered' });
   assert.equal(log.list({ search: 'Guild' }).total, 1); assert.equal(log.list({ limit: 1, offset: 1 }).records[0].id, id);

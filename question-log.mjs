@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { saveQuestionJson } from './question-sources.mjs';
+import { safeDiagnostic } from './question-api-diagnostics.mjs';
 
 const cut = (value, max = 200) => typeof value === 'string' ? value.slice(0, max) : null;
 export function createQuestionLog({ directory, now = Date.now, maxRecords = 500, maxAgeMs = 30 * 86400000, report = () => {} } = {}) {
@@ -53,6 +54,7 @@ export function createQuestionLog({ directory, now = Date.now, maxRecords = 500,
       // Explicit fields only: never persist headers, API keys, interaction tokens or raw provider errors.
       const safe = {};
       for (const key of ['type', 'phase', 'name', 'sourceId', 'query', 'errorCode', 'responseId', 'model']) if (typeof event[key] === 'string') safe[key] = cut(event[key], key === 'query' ? 240 : 160);
+      for (const key of ['errorCode', 'errorType', 'errorParam', 'errorMessage', 'requestId']) if (typeof event[key] === 'string') safe[key] = safeDiagnostic(event[key], key === 'errorMessage' ? 1000 : 160);
       for (const key of ['round', 'durationMs', 'status', 'inputTokens', 'outputTokens', 'resultCount', 'start', 'count']) if (Number.isFinite(event[key])) safe[key] = event[key];
       const usage = { ...record.usage };
       if (safe.type === 'api' && Number.isFinite(safe.inputTokens) && Number.isFinite(safe.outputTokens)) {

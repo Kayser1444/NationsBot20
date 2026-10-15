@@ -146,6 +146,29 @@ test('unknown external tool requests are denied locally and never followed', asy
   assert.equal(requests, 2);
 });
 
+test('provider rejection records bounded diagnostics without credentials or raw payload', async () => {
+  const events = [], apiKey = 'test-private-key';
+  await assert.rejects(investigateQuestion({ question: 'Nations?', language: 'en-US', corpus: corpus(), apiKey, reserveRequest() {}, onTelemetry: event => events.push(event),
+    fetcher: async () => new Response(JSON.stringify({ error: { code: 'permission_denied', type: 'permission_error', param: 'service_tier', message: `Denied Bearer ${apiKey}; sk-proj-othersecret. ${'x'.repeat(2000)}`, private: 'do-not-store' } }), { status: 403, headers: { 'x-request-id': 'req_example' } }) }), /API unavailable/);
+  const event = events.at(-1);
+  assert.equal(event.errorCode, 'permission_denied'); assert.equal(event.errorType, 'permission_error');
+  assert.equal(event.errorParam, 'service_tier'); assert.equal(event.requestId, 'req_example');
+  assert.ok(event.errorMessage.length <= 1000);
+  assert.equal(JSON.stringify(events).includes(apiKey), false);
+  assert.equal(JSON.stringify(events).includes('othersecret'), false);
+  assert.equal(JSON.stringify(events).includes('do-not-store'), false);
+});
+
+test('unexpected provider error bodies preserve status without storing raw content', async () => {
+  for (const body of ['<html>private proxy error</html>', JSON.stringify({ error: { message: 'x'.repeat(17000) } })]) {
+    const events = [];
+    await assert.rejects(investigateQuestion({ question: 'Nations?', language: 'en-US', corpus: corpus(), apiKey: 'test-only', reserveRequest() {}, onTelemetry: event => events.push(event),
+      fetcher: async () => new Response(body, { status: 403, headers: { 'x-request-id': 'req_proxy' } }) }), /API unavailable/);
+    assert.equal(events.at(-1).status, 403); assert.equal(events.at(-1).requestId, 'req_proxy');
+    assert.equal(events.at(-1).errorMessage, undefined);
+  }
+});
+
 test('failed API call does not switch models or retry; tool loop and context are bounded', async () => {
   let requests = 0;
   await assert.rejects(investigateQuestion({ question: 'Nations?', language: 'en-US', corpus: corpus(), apiKey: 'test-only', reserveRequest() {},

@@ -117,8 +117,11 @@ The existing owner panel exposes a searchable, paginated question log, protected
 by its existing Discord owner session on Railway. It stores user ID/name,
 server/channel IDs/names or DM, original question, original answer parts, delivery
 status, total/acknowledgement/first-answer/investigation times, safe local tool
-diagnostics, model,
-API attempt count and reported token usage. Token totals cover only responses
+diagnostics, model, API attempt count and reported token usage. It also stores
+bounded provider rejection diagnostics (HTTP status, request ID, error code,
+type, parameter and a credential-redacted message). Raw error bodies and headers
+are discarded; non-JSON or oversized errors retain only status and request ID.
+Token totals cover only responses
 that supplied usage, so failed calls may still cost money. No keys, authorization
 headers or interaction tokens are logged. Conversation details are fetched
 separately and are not included in the frequently polled status response.
