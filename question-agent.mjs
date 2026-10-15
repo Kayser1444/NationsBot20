@@ -27,7 +27,7 @@ Rulebook transcriptions preserve PDF pages and mark editor notes separately from
 Use only rulebooks actually listed in Available sources. Say when evidence is insufficient.
 Cite source IDs with line numbers, or rulebook/FAQ title and PDF page. Give a concise answer, supporting evidence and relevant uncertainty.
 Do not output URLs. Normally write one concise part; only if necessary use two parts, each at most 1800 characters. Return the required JSON structure. Detect the actual question_language and answer_language using ISO language codes. For each language other than Swedish or English supply an accurate English translation: english_question for the question and english_text for every answer part. Otherwise use null. Translations are for private administrator review, never part of the Discord answer. You have at most ${maxQuestionRequests} API rounds; use multiple local tool calls per round when useful.
-Implementation snapshot: ${corpus.commit}, fetched ${corpus.fetchedAt}. This does not establish the deployed Tabony version.
+Implementation snapshot: ${corpus.commit}, fetched ${corpus.fetchedAt}. The application appends the source update timestamp and commit automatically. Do not repeat them or append a routine caveat comparing the reviewed snapshot with the deployed Tabony version. If explicitly asked about the deployed version, be clear that the local sources cannot verify it.
 Available sources: ${JSON.stringify(corpus.catalogue())}`;
   const requestSignal = signal ? AbortSignal.any([signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000);
   for (let round = 0; round < maxQuestionRequests; round++) {

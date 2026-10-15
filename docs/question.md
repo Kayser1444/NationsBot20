@@ -38,8 +38,10 @@ allowed. Downloads have time and size limits.
 Only a complete, validated snapshot is atomically published to
 `questions/tabony-snapshot.json`. Failure retains the previous version or bundled
 seed. Each question holds one immutable in-memory snapshot throughout. Answers
-show commit ID and last successful fetch date; these do not establish the version
-deployed on the Tabony website.
+end with the last successful fetch date and time in Europe/Stockholm and the
+12-character commit, e.g. `AI-tolkning · Tabony-kod uppdaterad: 2026-10-15 22:00
+(9c344205b180)`. This is the source-copy refresh time, not the upstream commit date
+or the answer generation time. No routine deployed-version disclaimer is appended.
 
 The corpus includes Python code, original English FAQ++ 1.11 entries, and the
 English base-game and Dynasties rulebooks in [page-addressable Markdown](../data/rules/README.md).

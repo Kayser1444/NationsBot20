@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { createSourceStore, createQuestionCorpus, saveQuestionJson, loadQuestionRulebooks } from './question-sources.mjs';
 import { investigateQuestion, maxQuestionRequests } from './question-agent.mjs';
 import { loadQuestionCards } from './card-library.mjs';
-import { questionReplyParts } from './question-answer.mjs';
+import { questionReplyParts, questionSourceFooter } from './question-answer.mjs';
 
 export function createQuestionService(options = {}) {
   try { return buildQuestionService(options); }
@@ -62,8 +62,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
             if (ledger.requests >= 120) throw new Error('Daily request limit.');
             ledger.requests++; saveQuestionJson(path, ledger);
           } });
-        const footer = message(language, 'AI-tolkning · lokal Tabony-kod', 'AI interpretation · local Tabony code');
-        const parts = questionReplyParts(details.parts, `${footer}: ${corpus.commit.slice(0, 12)} · ${corpus.fetchedAt.slice(0, 10)}`);
+        const parts = questionReplyParts(details.parts, questionSourceFooter(corpus, language));
         onAnswer({ ...details, parts, status: 'answered' });
         return parts.join('\n\n');
       } catch (error) {
