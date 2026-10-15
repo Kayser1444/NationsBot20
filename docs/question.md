@@ -110,8 +110,9 @@ rulebook/FAQ/verified card evidence first, then the Tabony implementation and an
 differences. This is guidance, not a required two-part answer.
 Each original part is limited to 1,800 UTF-16 code units and the complete Discord
 payload (numbering and source footer included) to 2,000. Overlong or malformed
-answers fail validation rather than being silently truncated. Guild replies and
-follow-ups are private. Discord.js handles REST rate limits; failed or uncertain
+answers fail validation rather than being silently truncated. Channel questions,
+receipts and answer follow-ups are public in that channel; questions asked in DM
+are answered only in that DM. Discord.js handles REST rate limits; failed or uncertain
 deliveries are not retried and a delivered first part is never overwritten.
 
 The existing owner panel exposes a searchable, paginated question log, protected

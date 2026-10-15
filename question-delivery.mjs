@@ -32,7 +32,7 @@ export async function deliverQuestion({ interaction, questions, log, language, f
     for (let index = 0; index < parts.length; index++) {
       parts[index].delivery = 'unconfirmed'; log.update(id, { parts });
       const followup = !!acknowledgement || index > 0;
-      const payload = { content: parts[index].text, allowedMentions: { parse: [] }, flags: flags.SuppressEmbeds | (followup && interaction.guildId ? flags.Ephemeral : 0) };
+      const payload = { content: parts[index].text, allowedMentions: { parse: [] }, flags: flags.SuppressEmbeds };
       if (!followup) await interaction.editReply(payload); else await interaction.followUp(payload);
       sent++; parts[index].delivery = 'sent'; parts[index].sentAt = new Date(now()).toISOString();
       log.update(id, { parts, ...(index === 0 ? { firstResponseMs: Math.max(0, now() - (interaction.createdTimestamp ?? started)) } : {}) });

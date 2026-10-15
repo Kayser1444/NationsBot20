@@ -25,7 +25,7 @@ test('local acknowledgement hints identify likely sources without claiming a rul
   assert.deepEqual(questionSearchHint('Can I do this?').routes, ['rules', 'faq']);
 });
 
-test('accepted question immediately acknowledges then sends two private answer followups, logging all three messages', async () => {
+test('accepted channel question publicly acknowledges then sends two public answer followups, logging all three messages', async () => {
   let clock = Date.now(), sends = []; const log = createQuestionLog({ now: () => clock });
   const interaction = { user: { id: input.userId }, guildId: 'guild', createdTimestamp: clock, options: { getString: () => 'Rules and Tabony card?' },
     async editReply(payload) { sends.push({ ...payload, method: 'edit' }); clock += 10; },
@@ -36,7 +36,7 @@ test('accepted question immediately acknowledges then sends two private answer f
   } };
   await deliverQuestion({ interaction, questions, log, language: 'sv-SE', flags: { SuppressEmbeds: 4, Ephemeral: 64 }, now: () => clock });
   assert.deepEqual(sends.map(p => p.method), ['edit', 'followup', 'followup']);
-  assert.equal(sends[1].flags, 68); assert.equal(sends[2].flags, 68); assert.ok(sends.every(p => p.content.length <= 2000));
+  assert.equal(sends[1].flags, 4); assert.equal(sends[2].flags, 4); assert.ok(sends.every(p => p.content.length <= 2000));
   const record = log.read(log.list().records[0].id);
   assert.equal(record.acknowledgement.delivery, 'sent'); assert.equal(record.acknowledgement.text, sends[0].content);
   assert.equal(record.acknowledgementMs, 10); assert.equal(record.firstResponseMs, 1030); assert.equal(record.modelDurationMs, 1000);
@@ -45,6 +45,18 @@ test('accepted question immediately acknowledges then sends two private answer f
   assert.equal(sends[0].embeds[0].description, 'Rules and Tabony card?');
   assert.equal(sends[0].flags, undefined, 'Do not suppress the explicit question embed');
   assert.deepEqual(record.acknowledgement.embeds, sends[0].embeds);
+});
+
+test('DM question receipt and answers stay on the original DM interaction', async () => {
+  const sends = [], log = createQuestionLog();
+  const interaction = { user: { id: input.userId }, channelId: 'dm-channel', options: { getString: () => input.question },
+    async editReply(payload) { sends.push({ method: 'edit', ...payload }); },
+    async followUp(payload) { sends.push({ method: 'followup', ...payload }); } };
+  await deliverQuestion({ interaction, log, language: 'en-US', flags: { SuppressEmbeds: 4, Ephemeral: 64 },
+    questions: { async ask({ onAccepted, onAnswer }) { await onAccepted(); onAnswer({ status: 'answered', parts: ['Private DM answer.'] }); } } });
+  assert.deepEqual(sends.map(p => p.method), ['edit', 'followup']);
+  assert.equal(sends[1].content, 'Private DM answer.'); assert.equal(sends[1].flags, 4);
+  assert.equal(log.read(log.list().records[0].id).location, 'dm');
 });
 
 test('question receipt keeps long Markdown questions visible and fits Discord without embed permission', () => {
@@ -100,7 +112,7 @@ test('corrupt conversation log fails closed without replacing the evidence', t =
   assert.equal(log.available, false); assert.throws(() => log.start(input)); assert.equal(readFileSync(path, 'utf8'), '{broken');
 });
 
-test('delivery records exact parts and partial failures without overwriting the first answer or leaking a guild followup', async () => {
+test('delivery records exact parts and partial failures without overwriting the first public answer', async () => {
   let clock = Date.now(), sends = []; const log = createQuestionLog({ now: () => clock });
   const interaction = { user: { id: input.userId, username: 'Example' }, guildId: 'guild', channelId: 'channel', createdTimestamp: clock,
     options: { getString: () => input.question }, async editReply(payload) { sends.push(payload); clock += 50; },
@@ -109,7 +121,7 @@ test('delivery records exact parts and partial failures without overwriting the 
     onAnswer({ ...parseQuestionAnswer(answer()), parts: ['(1/2)\nLa carte.', '(2/2)\nDétails.'], status: 'answered' }); return 'unused'; } };
   await deliverQuestion({ interaction, questions, log, language: 'fr', now: () => clock, flags: { SuppressEmbeds: 4, Ephemeral: 64 } });
   const record = log.read(log.list().records[0].id);
-  assert.equal(sends.length, 2); assert.equal(sends[1].flags, 68); assert.deepEqual(sends[0].allowedMentions, { parse: [] });
+  assert.equal(sends.length, 2); assert.equal(sends[1].flags, 4); assert.deepEqual(sends[0].allowedMentions, { parse: [] });
   assert.equal(record.deliveryStatus, 'partial'); assert.equal(record.parts[0].delivery, 'sent'); assert.equal(record.parts[1].delivery, 'unconfirmed');
   assert.equal(record.firstResponseMs, 1050); assert.equal(record.durationMs, 1050); assert.equal(record.modelDurationMs, 1000);
   assert.equal(record.translation.question, 'Which card?'); assert.equal(record.parts[0].text, sends[0].content);

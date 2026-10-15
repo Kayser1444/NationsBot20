@@ -168,7 +168,7 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   assert.deepEqual(interaction.replies[1].allowedMentions, { parse: [] });
   const question = makeInteraction({ commandName: 'question', options: { getString: () => 'Poland and Porcelain Tower?' } });
   await instance.listeners(Events.InteractionCreate)[0](question);
-  assert.equal(question.replies[0].flags, MessageFlags.Ephemeral);
+  assert.deepEqual(question.replies[0], {});
   assert.match(question.replies[1].content, /Poland and Porcelain Tower/);
   assert.deepEqual(question.replies[1].allowedMentions, { parse: [] });
   const help = makeInteraction({ commandName: 'help' });

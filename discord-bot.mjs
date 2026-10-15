@@ -108,7 +108,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           }
           const cardReply = cardCommand && allowed && !service.isBanned?.(interaction.user.id)
             ? (nationCommand ? cardBank.renderNation : cardBank.render)(interaction.options.getString('name'), language()) : null;
-          if (!interaction.deferred) await interaction.deferReply(inDm || ((smTable || cardReply?.ok) && allowed && !service.isBanned?.(interaction.user.id)) ? {} : { flags: MessageFlags.Ephemeral });
+          if (!interaction.deferred) await interaction.deferReply(inDm || ((smTable || cardReply?.ok || interaction.commandName === 'question') && allowed && !service.isBanned?.(interaction.user.id)) ? {} : { flags: MessageFlags.Ephemeral });
           if (stopped) return;
           if (interaction.commandName === 'question') {
             service.captureLocale?.(interaction.user.id, interaction.locale);
