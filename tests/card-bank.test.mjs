@@ -232,7 +232,7 @@ test('button IDs retain language and support open, close and fresh bank instance
   const closeId = opened.messages[0].components[0].components[0].custom_id;
   assert.deepEqual(cardBank.renderButton(closeId).messages, closed.messages);
   assert.deepEqual(cardBank.renderButton(openId).messages, opened.messages, 'repeated open clicks are idempotent');
-  for (const id of ['cardfaq:2:PcTw:en-US:0', 'cardfaq:1:PcTw:fr:0', 'cardfaq:1:PcTw:en-US:-1', 'other:1:PcTw:en-US:0']) {
+  for (const id of ['cardfaq:2:PcTw:en-US:0', 'cardfaq:1:PcTw:unsupported:0', 'cardfaq:1:PcTw:en-US:-1', 'other:1:PcTw:en-US:0']) {
     assert.equal(cardBank.renderButton(id), null);
   }
   assert.equal(cardBank.renderButton('cardfaq:1:PcTw:en-US:9999').ok, false);

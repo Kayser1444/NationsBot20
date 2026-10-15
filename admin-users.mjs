@@ -5,16 +5,18 @@ import { normalizeLanguage, resolveLanguage } from './language.mjs';
 export function adminUsers(config, subscriptions, matches, jobs = []) {
   const entries = subscriptionEntries(subscriptions);
   const ids = new Set([...entries.map(([, id]) => id), ...Object.keys(config.bannedUsers ?? {}),
-    ...Object.keys(config.lastNationsNames ?? {})]);
+    ...Object.keys(config.reminderPreferences ?? {}), ...Object.keys(config.lastNationsNames ?? {})]);
   return [...ids].map(userId => {
     const username = entries.find(([, id]) => id === userId)?.[0] ?? null;
     const languageOverride = normalizeLanguage(config.languagePreferences?.[userId]);
     const override = languageOverride && languageOverride !== 'auto' ? languageOverride : null;
-    const watched = matches.filter(match => !match.finished && username && match.players?.includes(username));
+    const reminder = config.reminderPreferences?.[userId];
+    const watched = matches.filter(match => !match.finished && match.players?.some(name => name === username || (reminder?.enabled && name === reminder.name)));
     const pending = jobs.filter(job => job.userId === userId);
     return {
       userId, username, previousName: config.lastNationsNames?.[userId] ?? null,
       banned: Object.hasOwn(config.bannedUsers ?? {}, userId), bannedAt: config.bannedUsers?.[userId]?.bannedAt ?? null,
+      reminders: reminder ? { enabled: reminder.enabled, name: reminder.name, time: reminder.time, timezone: reminder.timezone } : null,
       dm: config.dmPreferences?.[userId] !== false,
       language: resolveLanguage(config.userLocales?.[userId], override),
       languageOverride: override, discordLocale: config.userLocales?.[userId] ?? null,

@@ -1,3 +1,5 @@
+import { TurnJournal } from './turn-journal.mjs';
+import { readReminderPreferences, saveReminderPreference } from './subscriptions.mjs';
 // Public spectator observer with optional Discord turn alerts. No game mutations.
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -53,6 +55,9 @@ const transport = profile === 'friends.json'
 let delivery = transport ? 'enabled' : 'not configured';
 const deliveryAbort = new AbortController();
 const dataDirectory = process.env.NATIONS_DATA_DIR || fileURLToPath(new URL('./.data/', import.meta.url));
+const journal = new TurnJournal(join(dataDirectory, profile.replace('.json', '-turn-journal.json')));
+const reminderNames = () => Object.values(readReminderPreferences(configPath)).filter(p => p.enabled).map(p => p.name);
+const watches = name => Object.hasOwn(subscriptions, name) || reminderNames().includes(name);
 const log = new EventLog(join(dataDirectory, profile.replace('.json', '.log')));
 const sm = profile === 'friends.json' ? new SmTableCache(JSON.parse(readFileSync(new URL('./sm-season.json', import.meta.url), 'utf8')), {
   path: join(dataDirectory, 'sm-table-cache.json'), report: (message, level) => log.add(message, level),
@@ -64,6 +69,7 @@ if (sm) {
     Object.assign(match, pinned, { smLocked: true });
   }
 }
+for (const id of Object.keys(journal.data.tracking)) if (!matches.some(m => m.id === id)) matches.push({ id, state: null, status: 'connecting', backoff: 1000 });
 const playerCache = new PlayerCache(join(dataDirectory, 'player-names.json'), (message, level) => log.add(message, level));
 let outbox = null, outboxTimer;
 try {
@@ -75,6 +81,7 @@ try {
   console.error('Could not open the saved outbox. Check its file and destination; no alerts were sent.');
   process.exit(1);
 }
+let reminderTimer;
 let stopped = false, deadline, dashboard = null, subscriptionTimer, lastDelivery = null, bot = null;
 let botState = process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' ? 'Ansluter' : 'Inte konfigurerad';
 const serviceStatus = transport ? new ServiceStatus(async (payload, signal) => {
@@ -108,6 +115,7 @@ function show() {
 }
 function snapshot() {
   return {
+    thinking: journal.data,
     now: new Date().toISOString(), stopped, discordEnabled: Boolean(transport),
     pending: outbox?.data.jobs.length ?? 0, blocked: outbox?.data.jobs.filter(job => job.blocked).length ?? 0,
     lastDelivery, lastDiscovery,
@@ -129,7 +137,7 @@ function applySubscriptions(selected) {
   for (const name of Object.keys(previous)) if (!Object.hasOwn(selected, name)) log.add(`Prenumeration avslutad: ${name}`);
   for (const [name, id] of Object.entries(selected)) if (previous[name] !== id) log.add(`Prenumeration sparad: ${name}`);
   for (const m of [...matches]) {
-    if (!m.smLocked && m.players && !m.players.some(name => Object.hasOwn(selected, name))) {
+    if (!m.smLocked && !journal.data.tracking[m.id] && m.players && !m.players.some(name => Object.hasOwn(selected, name) || reminderNames().includes(name))) {
       m.removed = true; const socket = m.socket; m.socket = null;
       clearTimeout(m.retry); clearInterval(m.heartbeat); socket?.close();
       matches.splice(matches.indexOf(m), 1); shown.delete(m.id);
@@ -144,12 +152,13 @@ function applySubscriptions(selected) {
 function stop() {
   if (stopped) return serviceStatus?.stopPromise;
   stopped = true; clearTimeout(deadline);
-  clearInterval(subscriptionTimer); dashboard?.close();
+  clearInterval(reminderTimer); clearInterval(subscriptionTimer); dashboard?.close();
   bot?.close();
   log.add('Bevakningen stängs av.');
   clearTimeout(outboxTimer); deliveryAbort.abort();
   clearTimeout(discoveryTimer); discoveryAbort.abort();
   for (const m of matches) {
+    try { journal.suspend(m.id); } catch { log.add('Betänketidsloggen kunde inte sparas vid stopp.', 'error'); }
     clearTimeout(m.retry); clearInterval(m.heartbeat); m.socket?.close();
   }
   return serviceStatus?.stop();
@@ -193,6 +202,39 @@ async function flushOutbox() {
   }
   if (!stopped) outboxTimer = setTimeout(flushOutbox, 1000);
 }
+
+let remindersBusy = false;
+const reminderRetries = new Map();
+async function flushReminders() {
+  if (remindersBusy || stopped || !transport || profile !== 'friends.json') return;
+  remindersBusy = true;
+  try {
+    for (const [userId, preference] of Object.entries(readReminderPreferences(configPath))) {
+      if (!preference.enabled || isUserBanned(configPath, userId)) continue;
+      for (const match of matches) {
+        if (stopped) return;
+        if (match.status !== 'connected' || match.state?.over || match.state?.player !== preference.name) continue;
+        const job = journal.due(match.id, userId, preference); if (!job || (reminderRetries.get(job.key) ?? 0) > Date.now()) continue;
+        try {
+          const fresh = await liveSnapshot(match.id, { signal: deliveryAbort.signal });
+          try { journal.observe(match.id, fresh); } catch { stop(); throw new Error('Betänketidsloggen kunde inte sparas.'); }
+          const valid = () => {
+            const current = readReminderPreferences(configPath)[userId];
+            return !stopped && !isUserBanned(configPath, userId) && current?.enabled && current.name === preference.name &&
+              current.time === preference.time && current.timezone === preference.timezone &&
+              journal.data.turns[match.id]?.generation === job.generation && !journal.data.turns[match.id]?.over;
+          };
+          if (fresh.player !== preference.name || !valid()) continue;
+          const payload = turnMessage(preference.name, match, userId, readBotLanguage(configPath, userId));
+          await transport.sendReminder(payload, userId, id => readDmPreference(configPath, id), deliveryAbort.signal, valid);
+          try { journal.receipt(job); } catch { stop(); throw new Error('Påminnelsekvittot kunde inte sparas. Bevakningen stoppad.'); }
+          reminderRetries.delete(job.key);
+        } catch (error) { reminderRetries.set(job.key, Date.now() + Math.max(error.retryAfterMs ?? 0, 15 * 60000)); log.add(`Daglig påminnelse för parti ${match.id} misslyckades: ${error.message}`, 'error'); }
+      }
+    }
+  } finally { remindersBusy = false; }
+}
+
 async function refreshMatches() {
   if (stopped) return;
   clearTimeout(discoveryTimer);
@@ -202,7 +244,7 @@ async function refreshMatches() {
     const publicMatches = await discoverPublicMatches({ signal: discoveryAbort.signal });
     if (stopped) return;
     playerCache.update(publicMatches);
-    const discovered = publicMatches.filter(m => !sm?.has(m.id) && m.players.some(name => Object.hasOwn(subscriptions, name)));
+    const discovered = publicMatches.filter(m => !sm?.has(m.id) && (journal.data.tracking[m.id] || m.players.some(watches)));
     const added = addDiscoveredMatches(matches, discovered);
     lastDiscovery = new Date().toISOString();
     discoveryStatus = `${new Date().toISOString()} | ${discovered.length} matching games | ${added.length} added`;
@@ -224,6 +266,7 @@ async function refreshMatches() {
 }
 function connect(m) {
   if (stopped || m.finished || m.removed) return;
+  try { journal.suspend(m.id); } catch { stop(); return; }
   clearTimeout(m.retry); clearInterval(m.heartbeat); m.socket?.close();
   if (m.smLocked) sm.connection(m.id, false);
   m.status = 'connecting'; show();
@@ -241,6 +284,7 @@ function connect(m) {
     if (m.smLocked) sm.update(m.id, message);
     const result = observe(m.state, message, config.username);
     if (result.state === m.state) return;
+    try { journal.observe(m.id, result.state); } catch (error) { log.add('Betänketidsloggen kunde inte sparas.', 'error'); stop(); return; }
     const previous = m.state;
     m.state = result.state; m.status = 'connected'; m.backoff = 1000;
     if (m.state.over) {
@@ -274,12 +318,14 @@ function connect(m) {
   socket.addEventListener('error', () => {
     if (stopped || m.socket !== socket) return;
     if (m.smLocked) sm.connection(m.id, false);
+    try { journal.suspend(m.id); } catch { stop(); return; }
     m.status = 'connection error'; show(); socket.close();
   });
   socket.addEventListener('close', () => {
     if (stopped || m.socket !== socket) return;
     if (m.smLocked) sm.connection(m.id, false);
     clearInterval(m.heartbeat);
+    try { journal.suspend(m.id); } catch { stop(); return; }
     m.status = `disconnected, retry in ${m.backoff / 1000}s`; show();
     m.retry = setTimeout(() => connect(m), m.backoff);
     m.backoff = Math.min(m.backoff * 2, 30000);
@@ -303,6 +349,12 @@ if (!args.includes('--no-dashboard')) {
         // be replaced by that ingress; never expose this port via a TCP proxy.
         clientAddress: req => isIP(req.headers['x-real-ip'] ?? '') ? req.headers['x-real-ip'] : req.socket.remoteAddress,
       }) : null,
+      setTracking: async (id, enabled) => {
+        if (stopped) throw new Error('Bevakningen är stoppad.');
+        journal.track(id, enabled);
+        if (enabled && !matches.some(m => m.id === id)) { const match = { id, state: null, status: 'connecting', backoff: 1000 }; matches.push(match); connect(match); }
+        await refreshMatches();
+      },
       subscribe: async (username, userId) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         const next = addSubscriber(subscriptions, username, userId);
@@ -333,6 +385,7 @@ if (!args.includes('--no-dashboard')) {
 if (!stopped) {
 log.add(`Bevakningen startar för ${Object.keys(subscriptions).join(', ') || 'inga prenumeranter'}.`);
 if (profile === 'friends.json' && !transport) log.add('Bot-token saknas. Partier bevakas men inga Discord-meddelanden kan skickas.', 'error');
+reminderTimer = setInterval(() => { void flushReminders().catch(error => { log.add(error.message, 'error'); stop(); }); }, 30000);
 subscriptionTimer = setInterval(() => {
   try { applySubscriptions(readSubscriptions(configPath)); }
   catch (error) { log.add(error.message, 'error'); }
@@ -349,10 +402,16 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       getSmTable: (div, userId, language) => sm.reply(div, userId, readSubscriptions(configPath), language ?? readBotLanguage(configPath, userId)),
       isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),
+      getReminders: userId => readReminderPreferences(configPath)[userId],
       getPreviousName: userId => readPreviousNationsName(configPath, userId),
       getDm: userId => readDmPreference(configPath, userId),
       getLocale: userId => readUserLocale(configPath, userId),
       getLanguageOverride: userId => readLanguageOverride(configPath, userId),
+      setReminders: (userId, preference) => {
+        if (stopped) throw new Error('Bevakningen är stoppad.');
+        saveReminderPreference(configPath, userId, preference);
+        void refreshMatches();
+      },
       setLanguage: (userId, language) => saveLanguagePreference(configPath, userId, language),
       captureLocale: (userId, locale) => saveUserLocale(configPath, userId, locale),
       checkDm: userId => transport.sendReminder({
@@ -372,7 +431,8 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
         applySubscriptions(saveSubscriptions(configPath, selected));
       },
       getStatus: (username, userId) => {
-        const monitored = matches.filter(m => !m.finished && m.players?.includes(username));
+        const reminderName = readReminderPreferences(configPath)[userId]?.enabled ? readReminderPreferences(configPath)[userId].name : null;
+        const monitored = matches.filter(m => !m.finished && m.players?.some(name => name === username || name === reminderName));
         return { discordEnabled: Boolean(transport), blocked: outbox?.data.jobs.some(job => job.userId === userId && job.blocked),
           matches: monitored.length, matchList: monitored.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, connected: m.status === 'connected' })) };
       },

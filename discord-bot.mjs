@@ -99,7 +99,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             const choices = !allowed || service.isBanned?.(interaction.user.id) ? []
               : interaction.commandName === 'language' && focused.name === 'locale' ? autocompleteLanguages(focused.value)
               : cardCommand && focused.name === 'name' ? (nationCommand ? cardBank.autocompleteNations : cardBank.autocomplete)(focused.value, language())
-              : interaction.commandName === 'notifications' && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : [];
+              : ['notifications', 'reminders'].includes(interaction.commandName) && focused.name === 'nationsname' ? autocompleteNames(service.getNames(), String(focused.value)) : [];
             await interaction.respond(choices);
             return;
           }
@@ -120,7 +120,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
             }
             return;
           }
-          if (['notifications', 'dm', 'language'].includes(interaction.commandName) && !edits.allow(interaction.user.id)) {
+          if (['notifications', 'reminders', 'dm', 'language'].includes(interaction.commandName) && !edits.allow(interaction.user.id)) {
             await interaction.editReply({ content: text(language(), 'commandCooldown'), allowedMentions: { parse: [] } }); return;
           }
           if (smTable) {
@@ -134,7 +134,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           const commandService = interaction.commandName === 'status'
             ? await statusServiceWithNames(service, interaction.user.id, id => displayNames.resolve(id)) : service;
           if (stopped) return;
-          const action = ['notifications', 'dm'].includes(interaction.commandName) ? interaction.options.getSubcommand() : null;
+          const action = ['notifications', 'reminders', 'dm'].includes(interaction.commandName) ? interaction.options.getSubcommand() : null;
           const channelDeliveryAllowed = interaction.guildId === guildId && interaction.channelId === channelId;
           const requestedDm = interaction.commandName === 'notifications' && action === 'on' ? interaction.options.getString('dm') : undefined;
           if (!channelDeliveryAllowed && (requestedDm === 'off' || (interaction.commandName === 'dm' && action === 'off'))) {
@@ -144,6 +144,8 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           let content = handleSubscriptionCommand({
             command: interaction.commandName, userId: interaction.user.id,
             action,
+            time: interaction.commandName === 'reminders' ? interaction.options.getString('time') : undefined,
+            timezone: interaction.commandName === 'reminders' ? interaction.options.getString('timezone') : undefined,
             displayName: interaction.member?.displayName || interaction.member?.nick || dmMember?.nick || interaction.user.globalName || interaction.user.username,
             nationsName: interaction.options.getString('nationsname'),
             dm: interaction.commandName === 'notifications' && action === 'on'

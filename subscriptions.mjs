@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
+import { reminderOptions } from './turn-journal.mjs';
 import { normalizeLanguage, resolveLanguage } from './language.mjs';
 
 export const recipients = (subscriptions, name) => {
@@ -76,6 +77,7 @@ export function setUserBan(path, userId, enabled) {
     selected = removeSubscriber(selected, userId);
     // Do not silently restore a potentially stolen name after an unban.
     config.lastNationsNames = rememberedNames(config); delete config.lastNationsNames[userId];
+    if (config.reminderPreferences) delete config.reminderPreferences[userId];
   } else delete bans[userId];
   config.bannedUsers = bans; config.subscriptions = selected;
   const temp = path + '.tmp';
@@ -167,4 +169,15 @@ export function saveSubscriptions(path, subscriptions) {
   writeFileSync(temp, JSON.stringify(config, null, 2) + '\n');
   renameSync(temp, path);
   return selected;
+}
+export function readReminderPreferences(path) {
+  return JSON.parse(readFileSync(path, 'utf8')).reminderPreferences ?? {};
+}
+export function saveReminderPreference(path, userId, preference) {
+  if (!/^\d{17,20}$/.test(userId)) throw new Error('Invalid Discord ID.');
+  if (typeof preference?.enabled !== 'boolean') throw new Error('Invalid reminder preference.');
+  if (preference.enabled) { reminderOptions(preference.time, preference.timezone); validateSubscriptions({ [preference.name]: userId }); }
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  config.reminderPreferences = { ...config.reminderPreferences, [userId]: { ...config.reminderPreferences?.[userId], ...preference } };
+  writeFileSync(path + '.tmp', JSON.stringify(config, null, 2) + '\n'); renameSync(path + '.tmp', path);
 }

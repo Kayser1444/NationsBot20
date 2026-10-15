@@ -99,3 +99,18 @@ test('DM preferences survive subscription edits and restart without enabling uns
   writeFileSync(path, JSON.stringify(invalid));
   assert.throws(() => readDmPreference(path, userId), /Ogiltig sparad DM/);
 });
+
+test('thinking measurement routes enforce CSRF and preserve match selection on stop', async t => {
+  const selected = new Map();
+  const server = await startDashboard({ port: 0, snapshot: () => ({}), setTracking: async (id, enabled) => { selected.set(id, enabled); } });
+  t.after(() => server.close());
+  const html = await (await fetch(server.url)).text();
+  const token = html.match(/const token='([a-f0-9]+)'/)[1];
+  const headers = { origin: server.url, 'x-nations-token': token };
+  assert.equal((await fetch(server.url + '/api/thinking/123', { method: 'POST' })).status, 403);
+  assert.equal((await fetch(server.url + '/api/thinking/bad', { method: 'POST', headers })).status, 400);
+  assert.equal((await fetch(server.url + '/api/thinking/123', { method: 'POST', headers })).status, 200);
+  assert.equal(selected.get('123'), true);
+  assert.equal((await fetch(server.url + '/api/thinking/123', { method: 'DELETE', headers })).status, 200);
+  assert.equal(selected.get('123'), false);
+});

@@ -139,8 +139,8 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
-  assert.deepEqual(registered[1].body.options.map(option => option.name), ['on', 'off']);
+  assert.deepEqual(registered.map(item => item.body.name), ['reminders', 'smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
+  assert.deepEqual(registered.find(item => item.body.name === 'notifications').body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
   const makeInteraction = (overrides = {}) => {

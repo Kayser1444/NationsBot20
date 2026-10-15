@@ -16,7 +16,7 @@ test('both translations cover the same messages, placeholders and commands', () 
     assert.ok(text('sv-SE', key).length);
     assert.ok(text('en-US', key).length);
   }
-  for (const language of ['sv-SE', 'en-US']) {
+  for (const language of Object.keys(translations)) {
     const help = text(language, 'help');
     assert.ok(help.length <= 2000);
     for (const command of commands) assert.ok(help.includes('/' + command.name));
@@ -26,7 +26,7 @@ test('both translations cover the same messages, placeholders and commands', () 
 test('automatic language follows Swedish or English variants, with English fallback', () => {
   assert.equal(resolveLanguage('sv-SE'), 'sv-SE');
   assert.equal(resolveLanguage('en-GB'), 'en-US');
-  assert.equal(resolveLanguage('fr'), 'en-US');
+  assert.equal(resolveLanguage('fr'), 'fr');
   assert.equal(resolveLanguage(null), 'en-US');
   assert.equal(resolveLanguage('en-US', 'sv-SE'), 'sv-SE');
   assert.equal(resolveLanguage('sv-SE', 'en-US'), 'en-US');
@@ -34,7 +34,7 @@ test('automatic language follows Swedish or English variants, with English fallb
   assert.deepEqual(autocompleteLanguages('swe').map(option => option.value), ['sv-SE']);
   assert.deepEqual(autocompleteLanguages('engelska').map(option => option.value), ['en-US']);
   assert.deepEqual(autocompleteLanguages('auto').map(option => option.value), ['auto']);
-  assert.deepEqual(autocompleteLanguages('fr'), []);
+  assert.deepEqual(autocompleteLanguages('fr').map(option => option.value), ['fr']);
 });
 
 test('language overrides survive restart, locale changes and subscription/DM edits', t => {
@@ -50,7 +50,7 @@ test('language overrides survive restart, locale changes and subscription/DM edi
   assert.equal(readBotLanguage(path, second), 'sv-SE');
   assert.equal(readLanguageOverride(path, first), 'sv-SE');
   const before = readFileSync(path, 'utf8');
-  assert.throws(() => saveLanguagePreference(path, first, 'fr'));
+  assert.throws(() => saveLanguagePreference(path, first, 'unsupported'));
   assert.equal(readFileSync(path, 'utf8'), before);
   saveLanguagePreference(path, first, 'auto');
   assert.equal(readLanguageOverride(path, first), null);
@@ -66,7 +66,7 @@ test('language command immediately replies in the selected language, without req
   const execute = args => handleSubscriptionCommand({ command: 'language', userId: '111111111111111111', ...args }, service);
   assert.match(execute({ locale: 'sv-SE' }), /Botens språk är nu svenska/);
   assert.match(execute({ command: 'help' }), /— hjälp/);
-  assert.match(execute({ locale: 'fr' }), /Välj sv-SE/);
+  assert.match(execute({ locale: 'unsupported' }), /Välj sv-SE/);
   assert.equal(override, 'sv-SE');
   assert.match(execute({ locale: 'en-US' }), /Your bot language is now English/);
   assert.match(execute({ command: 'help' }), /— help/);

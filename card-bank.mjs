@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { text } from './language.mjs';
+import { text, translations } from './language.mjs';
 import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './card-images.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
@@ -48,7 +48,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       .map(card => ({ name: `${card.name}${card.variant ? ' (' + card.variant + ')' : ''} · ${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}`.slice(0, 100), value: card.id }));
   }
   function render(query, language = 'en-US', { faqPage = null } = {}) {
-    if (!['sv-SE', 'en-US'].includes(language)) language = 'en-US';
+    if (!Object.hasOwn(translations, language)) language = 'en-US';
     const card = resolve(query);
     if (!card) return { ok: false, messages: [{ content: text(language, 'cardUnavailable'), allowed_mentions: silent }] };
     const applicable = entry => visible(entry) && !(card.type === 'nation' && entry.category === 'dynasty');
@@ -67,7 +67,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     }
     matched.sort((a, b) => Number(!a.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) -
       Number(!b.cardLinks.some(link => link.cardId === card.id && link.relation === 'own_entry' && visible(link))) || a.sourcePages[0] - b.sourcePages[0]);
-    const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === language)
+    const points = matched.flatMap(entry => entry.bullets.filter(bullet => visible(bullet) && bullet.language === (['sv-SE', 'en-US'].includes(language) ? language : 'en-US'))
       .map(bullet => ({ entry, bullet })));
     const source = matched.length ? sourceById.get(matched[0].sourceId) : sources.sources[0];
     const metadata = `**${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + text(language, 'cardAge') + ' ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}${card.variant ? ' · ' + card.variant : ''}${card.boardSide ? ' · ' + text(language, 'cardBoardSide', { side: card.boardSide }) : ''}**`;
@@ -144,7 +144,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       pointCount: points.length, faqPageCount: pages.length, faqPage };
   }
   function renderButton(customId) {
-    const match = /^cardfaq:1:([A-Za-z0-9_-]+):(sv-SE|en-US):(closed|0|[1-9]\d{0,3})$/.exec(String(customId));
+    const match = /^cardfaq:1:([A-Za-z0-9_-]+):(sv-SE|en-US|de|fr|es-ES|zh-CN):(closed|0|[1-9]\d{0,3})$/.exec(String(customId));
     if (!match || customId.length > 100) return null;
     return render(match[1], match[2], { faqPage: match[3] === 'closed' ? null : Number(match[3]) });
   }

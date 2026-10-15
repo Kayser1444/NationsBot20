@@ -1,7 +1,16 @@
+import { reminderOptions } from './turn-journal.mjs';
 import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
+  { name: 'reminders', description: 'Daily reminders, independent of notifications', type: 1, options: [
+    { name: 'on', description: 'Enable daily reminders', type: 1, options: [
+      { name: 'time', description: 'Daily time HH:mm; omit for every 24 hours since your turn began', type: 3 },
+      { name: 'timezone', description: 'IANA timezone, e.g. Europe/Stockholm; default GMT', type: 3 },
+      { name: 'nationsname', description: 'Nations name; omit to reuse your name', type: 3, autocomplete: true },
+    ] },
+    { name: 'off', description: 'Disable daily reminders', type: 1 },
+  ] },
   { name: 'smtable', description: 'Visa aktuell SM-tabell', type: 1, options: [
     { name: 'div', description: 'SM-grupp; utan val används din prenumerations Nations-namn', type: 3, required: false,
       choices: ['1A', '2A', '2B'].map(value => ({ name: value, value })) },
@@ -16,7 +25,7 @@ export const commands = [
   { name: 'status', description: 'Show your Nations subscription and monitored games', type: 1 },
   { name: 'help', description: 'Show commands and what NationsBot can do', type: 1 },
   { name: 'language', description: 'Choose your bot language or follow Discord automatically', type: 1, options: [
-    { name: 'locale', description: 'Swedish (sv-SE), English (en-US), or automatic (auto)', type: 3, required: true, autocomplete: true, max_length: 35 },
+    { name: 'locale', description: 'sv-SE, en-US, de, fr, es-ES, zh-CN, or auto', type: 3, required: true, autocomplete: true, max_length: 35 },
   ] },
   { name: 'card', description: 'Visa kortbild och FAQ-punkter', type: 1, options: [
     { name: 'name', description: 'Kortnamn – välj bland namnförslagen', type: 3, required: true, autocomplete: true, max_length: 100 },
@@ -42,7 +51,7 @@ export function autocompleteNames(names, query) {
 
 // Called synchronously after Discord acknowledges the interaction. Check and save
 // have no await between them, so simultaneous claims cannot replace each other.
-export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale, dm }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getDm = () => true, getLocale = () => null, getLanguageOverride = () => null, isBanned = () => false, setLanguage, setDm, onNotificationsEnabled = () => {} }) {
+export function handleSubscriptionCommand({ command, action, userId, displayName, nationsName, locale, dm, time, timezone }, { getSubscriptions, getNames, commit, getStatus, getPreviousName = () => null, getReminders = () => null, getDm = () => true, getLocale = () => null, getLanguageOverride = () => null, isBanned = () => false, setLanguage, setDm, setReminders, onNotificationsEnabled = () => {} }) {
   const language = resolveLanguage(getLocale(userId), getLanguageOverride(userId));
   const t = (key, values) => text(language, key, values);
   if (isBanned(userId)) return t('userBanned');
@@ -61,13 +70,25 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
   }
   const current = getSubscriptions();
   const own = subscriptionEntries(current).find(([, id]) => id === userId)?.[0];
+  if (command === 'reminders') {
+    if (action === 'off') { setReminders(userId, { enabled: false }); return t('remindersOff'); }
+    if (action !== 'on') return t('unknown');
+    let options; try { options = reminderOptions(time, timezone ?? 'Etc/GMT'); } catch { return t('remindersInvalid'); }
+    const name = nationsName?.trim() || own || getReminders(userId)?.name || getPreviousName(userId) || getNames().find(name => folded(name) === folded(playerAlias(displayName)));
+    if (!name) return t('noName');
+    try { validateSubscriptions({ [name]: userId }); } catch { return t('invalidName'); }
+    setReminders(userId, { enabled: true, name, ...options });
+    return t('remindersOn', { time: options.time ?? '24h', timezone: options.timezone });
+  }
   if (command === 'status') {
     const state = getStatus(own, userId);
     const mode = t(getDm(userId) ? 'modeDm' : 'modeChannel');
     const blocked = state.blocked ? t('blocked') : '';
     const selectedLanguage = t('botLanguage', { name: t('languageName'), locale: quote(language), source: t(getLanguageOverride(userId) ? 'override' : 'automatic') });
-    const summary = (own ? t('subscribedStatus', { name: quote(own), count: state.matches, delivery: t(state.discordEnabled ? 'enabled' : 'disabled') }) : t('noSubscription')) + ' ' + mode + blocked + '\n' + selectedLanguage;
-    if (!own || !state.matchList?.length) return summary;
+    const reminder = getReminders(userId);
+    const reminderSummary = t('remindersStatus', { value: reminder?.enabled ? `${reminder.name} · ${reminder.time ?? '24h'} (${reminder.timezone})` : t('disabled') });
+    const summary = (own ? t('subscribedStatus', { name: quote(own), count: state.matches, delivery: t(state.discordEnabled ? 'enabled' : 'disabled') }) : t('noSubscription')) + ' ' + mode + blocked + '\n' + selectedLanguage + '\n' + reminderSummary;
+    if ((!own && !reminder?.enabled) || !state.matchList?.length) return summary;
     const rows = state.matchList.map(match => {
       const title = (match.title || `${t('game')} ${match.id}`).replace(/[\r\n\t]+/g, ' ').replace(/[\\`*_[\]<>@]/g, '').slice(0, 100);
       const player = match.player ? plainName(match.player) || t('unknownTurn') : t('unknownTurn');
@@ -75,7 +96,7 @@ export function handleSubscriptionCommand({ command, action, userId, displayName
       const discordName = match.player && Object.hasOwn(current, match.player) && name ? ` [${name}]` : '';
       const turn = `${t(match.player && !match.connected ? 'lastKnownTurn' : 'turnLabel')}: ${player}${discordName}`;
       const link = `[${title}](<https://games.tabony.net/nations/${encodeURIComponent(match.id)}/>)`;
-      const game = match.connected && match.player === own ? `**${link}**` : link;
+      const game = match.connected && match.player === (own || reminder?.name) ? `**${link}**` : link;
       return `• ${game} · ID ${match.id} · ${t(match.connected ? 'connected' : 'disconnected')} · ${turn}`;
     });
     return summary + '\n\n' + t('gamesHeading') + '\n' + rows.join('\n');
