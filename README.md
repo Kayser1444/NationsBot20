@@ -359,8 +359,8 @@ to run independently until the deliberate cloud cutover.
 
 `/card name:Porcelain Tower` shows the card image, a compact type/age row and
 the linked FAQ++ 1.11 points, including imports pending review. All 216 FAQ entries
-have Swedish text as well as the preserved English version. FAQ starts
-collapsed; **Show FAQ / Hide FAQ** updates the same card message. Each point
+have Swedish text as well as the preserved English version. FAQ is expanded
+in the initial reply; **Show FAQ / Hide FAQ** updates the same card message. Each point
 identifies its original heading and page. Long answers have previous/next page
 buttons, and closing the FAQ leaves no extra messages behind. Swedish and English follow
 the caller's language preference. Successful server replies are public in the
@@ -386,6 +386,13 @@ the resource board and both of that nation's dynasty cards. Its FAQ contains the
 rules; dynasty FAQ remains available by looking up the dynasty itself with `/card`.
 Nation suggestions live in `/nation`, with Swedish aliases such as `Kina`. Existing
 `/card` nation lookups and FAQ buttons remain compatible.
+Relevant owner-documented Tabony rules differences also appear immediately, in
+their original English with attribution and a link to the owner's forum post.
+Nation lookups include notes for their starting cards and dynasties. Named card
+references and explicit private-architect abilities determine relevance; historical
+MaBiWeb comparisons remain labelled separately from differences with official rules.
+The daily local snapshot is shared with `/question` and refreshes even when paid
+questions are disabled. Long FAQ/notes use the existing page buttons.
 Search aliases include `Tom's Cabin` for `Uncle Tom's Cabin`. Suggestions distinguish
 cards sharing a name by type, age and starting nation. All 34 dynasty entries identify their nation.
 The first reply uploads the image as a Discord attachment; FAQ edits retain it,

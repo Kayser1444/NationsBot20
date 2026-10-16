@@ -204,7 +204,8 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   assert.deepEqual(card.replies[0], {});
   assert.equal(card.replies[1].embeds[0].title, 'Porcelain Tower');
   assert.equal(card.replies.length, 2, 'collapsed card needs no follow-up messages');
-  assert.match(card.replies[1].components[0].components[0].label, /Visa FAQ \(13\)/);
+  assert.match(card.replies[1].embeds.at(-1).description, /FAQ\+\+/);
+  assert.match(card.replies[1].components[0].components[0].label, /Dölj FAQ/);
   assert.ok(card.replies.slice(1).every(reply => !reply.flags && reply.allowedMentions.parse.length === 0));
   const unknownCard = makeInteraction({ commandName: 'card', options: { getString: () => 'unknown' } });
   await instance.listeners(Events.InteractionCreate)[0](unknownCard);

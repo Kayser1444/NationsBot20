@@ -57,8 +57,8 @@ test('card replies in DM use the FAQ bank, membership check and bans without rea
   const reply = await f.run('card', { name: 'PcTw' });
   assert.deepEqual(reply[0], {});
   assert.equal(reply[1].embeds[0].title, 'Porcelain Tower');
-  assert.equal(reply.length, 2, 'FAQ starts collapsed in the same DM message');
-  assert.match(reply[1].components[0].components[0].label, /Visa FAQ \(13\)/);
+  assert.equal(reply.length, 2, 'FAQ is shown in the same DM message');
+  assert.match(reply[1].components[0].components[0].label, /Dölj FAQ/);
   assert.ok(reply.every(part => !part.flags));
   assert.equal(f.counts().reads, 0);
   f.deny();

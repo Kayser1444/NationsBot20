@@ -74,9 +74,9 @@ test('Porcelain Tower shows its own rules and every named cross-reference with s
     assert.ok(reply.entryIds.includes('wonder-wonder'));
     for (const id of expected) assert.ok(reply.entryIds.includes(id), 'missing named reference: ' + id);
     assert.equal(reply.pointCount, 13);
-    assert.equal(reply.messages[0].embeds.length, 2, 'FAQ starts collapsed');
-    assert.ok(!content(reply).includes('French Revolution'));
-    assert.match(reply.messages[0].components[0].components[0].label, /13/);
+    assert.equal(reply.messages[0].embeds.length, 3, 'FAQ is shown immediately');
+    assert.match(content(reply), /French Revolution/);
+    assert.equal(reply.faqPage, 0);
     const pages = allPages(cardBank, language);
     const text = pages.map(content).join('\n');
     assert.match(text, language === 'sv-SE' ? /Polen: Polish-Lithuanian Commonwealth/ : /Poland: Polish-Lithuanian Commonwealth/);
@@ -225,7 +225,7 @@ test('long FAQ points survive pagination with repeated source labels and no empt
 });
 
 test('button IDs retain language and support open, close and fresh bank instances', () => {
-  const closed = cardBank.render('PcTw', 'en-US');
+  const closed = cardBank.render('PcTw', 'en-US', {faqPage:null});
   const openId = closed.messages[0].components[0].components[0].custom_id;
   const opened = createCardBank(fixtures()).renderButton(openId);
   assert.match(content(opened), /FAQ\+\+ 1.11.*points/);
@@ -237,4 +237,42 @@ test('button IDs retain language and support open, close and fresh bank instance
   }
   assert.equal(cardBank.renderButton('cardfaq:1:PcTw:en-US:9999').ok, false);
   assert.equal(cardBank.renderButton('cardfaq:1:missing-card:en-US:0').ok, false);
+});
+
+test('card and nation replies show FAQ and relevant owner differences immediately, without mixing historical rules', () => {
+  const cases = [
+    ['Old Uppsala', /effects removed when replaced/, /Known differences from the official rules/],
+    ['Vikings', /effects removed when replaced/, /Known differences from the official rules/],
+    ['Ethiopia', /markers now get removed/, /MaBiWeb/],
+    ['Archimedes', /Private architects are tied/, /MaBiWeb/],
+    ['China', /Unused private architects on replaced cards are lost/, /MaBiWeb/],
+  ];
+  for (const [name, note, comparison] of cases) {
+    const reply = cardBank.render(name, 'sv-SE');
+    assert.equal(reply.faqPage, 0);
+    assert.match(content(reply), note, name);
+    assert.match(content(reply), comparison, name);
+    assert.match(content(reply), /https:\/\/games.tabony.net\/forum\/viewtopic.php\?p=4#p4/);
+    assert.match(content(reply), /English original/);
+    assert.match(content(reply), /FAQ\+\+/);
+    assertMessageLimits(reply);
+  }
+  assert.doesNotMatch(content(cardBank.render('Porcelain Tower')), /Private architects are tied|effects removed when replaced/);
+  assert.doesNotMatch(content(cardBank.render('China')), /effects removed when replaced/, 'Pagoda must not match Shwedagon Pagoda');
+});
+
+test('owner notes read the latest shared snapshot and paginate long source text within Discord limits', () => {
+  let snapshot = read('question/tabony-rules-differences.json');
+  const bank = createCardBank({...fixtures(), rulesDifferences: () => snapshot});
+  assert.doesNotMatch(content(bank.render('Porcelain Tower')), /owner-note-token/);
+  snapshot = structuredClone(snapshot);
+  const body = 'Porcelain Tower ' + 'owner-note-token '.repeat(345);
+  snapshot.sections[0].entries.push(body);
+  snapshot.sha256 = createHash('sha256').update(JSON.stringify(snapshot.sections)).digest('hex');
+  const first = bank.render('Porcelain Tower');
+  const pages = Array.from({length:first.faqPageCount}, (_,faqPage) => bank.render('Porcelain Tower','en-US',{faqPage}));
+  assert.match(content(first), /owner-note-token/);
+  assert.ok(pages.length > 2);
+  assert.equal(pages.map(content).join('\n').match(/owner-note-token/g).length,345);
+  for (const page of pages) assertMessageLimits(page);
 });

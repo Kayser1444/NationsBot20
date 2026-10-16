@@ -89,7 +89,7 @@ test('every card and nation renders all translated FAQ points with citations wit
 test('FAQ buttons retain each new language and render translated text rather than English fallback', () => {
   const expected = { de: /Berater/, fr: /conseiller/i, 'es-ES': /consejero/i, 'zh-CN': /顾问/ };
   for (const language of Object.values(languages)) {
-    const closed = cardBank.render('PcTw', language);
+    const closed = cardBank.render('PcTw', language, {faqPage:null});
     const opened = cardBank.renderButton(closed.messages[0].components[0].components[0].custom_id);
     assert.ok(opened.ok);
     assert.match(output(opened), expected[language]);

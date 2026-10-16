@@ -2,7 +2,9 @@ import { commands, autocompleteNames, handleSubscriptionCommand } from './discor
 import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
 import { createDisplayNameCache, statusServiceWithNames } from './status-turns.mjs';
 import { rateLimit } from './rate-limit.mjs';
-import { cardBank } from './card-bank.mjs';
+import { cardBank as seedCardBank, loadCardBank } from './card-bank.mjs';
+import { createRulesDifferencesStore } from './question-errata.mjs';
+import { join } from 'node:path';
 import { prepareCardImage } from './card-image-delivery.mjs';
 import { createQuestionService } from './question-service.mjs';
 import { createQuestionLog } from './question-log.mjs';
@@ -13,13 +15,17 @@ const interactionPayload = message => {
   return { ...body, allowedMentions: allowed_mentions };
 };
 
-export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now, prepareImage = prepareCardImage, questionLog = createQuestionLog({ directory: process.env.NATIONS_CONFIG_DIR, report, now }), questions = createQuestionService({ directory: process.env.NATIONS_CONFIG_DIR, report }) }) {
+export function startDiscordBot({ token, guildId, channelId, service, report = () => {}, onState = () => {}, loadLibrary = () => import('discord.js'), now = Date.now, prepareImage = prepareCardImage, questionLog = createQuestionLog({ directory: process.env.NATIONS_CONFIG_DIR, report, now }), questions }) {
+  const differencesStore = process.env.NATIONS_CONFIG_DIR ? createRulesDifferencesStore({ directory: join(process.env.NATIONS_CONFIG_DIR, 'questions'), report, now }) : null;
+  const cardBank = differencesStore ? loadCardBank({ rulesDifferences: differencesStore.snapshot }) : seedCardBank;
+  questions ??= createQuestionService({ directory: process.env.NATIONS_CONFIG_DIR, report, rulesDifferencesStore: differencesStore });
+  differencesStore?.start();
   const edits = rateLimit({ limit: 5, windowMs: 10000, now });
   const dmControls = rateLimit({ limit: 1, windowMs: 60000, now });
   let client, displayNames, stopped = false, readyTimer;
   const state = value => { if (!stopped) onState(value); };
   const fail = message => { if (!stopped) { state('Fel · behöver åtgärdas'); report(message, 'error'); } };
-  const close = () => { stopped = true; questions.close(); clearTimeout(readyTimer); edits.clear(); dmControls.clear(); client?.destroy(); onState('Avstängd'); };
+  const close = () => { stopped = true; questions.close(); differencesStore?.close(); clearTimeout(readyTimer); edits.clear(); dmControls.clear(); client?.destroy(); onState('Avstängd'); };
   state('Ansluter');
   const ready = (async () => {
     try {

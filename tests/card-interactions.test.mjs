@@ -72,7 +72,7 @@ async function fixture(t, prepareImage = async reply => reply.messages[0]) {
   }
   return { click, slashCard, autocomplete, requests, errors, ban: () => { banned = true; }, deny: () => { member = false; } };
 }
-const openId = () => cardBank.render('PcTw', 'en-US').messages[0].components[0].components[0].custom_id;
+const openId = () => cardBank.render('PcTw', 'en-US', {faqPage:null}).messages[0].components[0].components[0].custom_id;
 
 test('slash nation supports public and DM replies, nation-only suggestions and FAQ edits retaining all three images',async t=>{
   const cards=JSON.parse(readFileSync(new URL('../data/cards/catalog.json',import.meta.url),'utf8')).cards;
@@ -86,11 +86,11 @@ test('slash nation supports public and DM replies, nation-only suggestions and F
     assert.deepEqual(calls.map(call=>call.type),['ack','update']);
     const message=calls[1].payload;
     assert.equal(message.embeds[0].title,'China');assert.equal(message.files.length,3);
-    assert.deepEqual(message.embeds.slice(2).map(embed=>embed.title),['Ming Dynasty','Qin Dynasty']);
+    assert.deepEqual(message.embeds.slice(2,4).map(embed=>embed.title),['Ming Dynasty','Qin Dynasty']);
     const embeds=message.embeds.map(embed=>({...embed,...(embed.image?{image:{url:'https://cdn.discordapp.com/attachments/123/'+(1000+message.files.findIndex(file=>embed.image.url==='attachment://'+file.name))+'/'+embed.image.url.slice(13)}}:{})}));
-    const opened=await f.click(message.components[0].components[0].custom_id,{message:{author:{id:'app'},embeds,attachments:new Map()}});
+    const opened=await f.click('cardfaq:1:nation-China:sv-SE:0',{message:{author:{id:'app'},embeds,attachments:new Map()}});
     assert.equal(opened[1].payload.files,undefined);assert.equal(opened[1].payload.attachments.length,3);
-    assert.deepEqual(opened[1].payload.embeds.slice(0,4).map(embed=>embed.image?.url),message.embeds.map(embed=>embed.image?.url));
+    assert.deepEqual(opened[1].payload.embeds.slice(0,4).map(embed=>embed.image?.url),message.embeds.slice(0,4).map(embed=>embed.image?.url));
     assert.match(opened[1].payload.embeds.at(-1).description,/FAQ\+\+/);
     assert.ok(!/Kina: Qin Dynasty|Kina: Ming Dynasty/.test(opened[1].payload.embeds.at(-1).description));
   }

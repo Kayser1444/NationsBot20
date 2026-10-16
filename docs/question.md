@@ -59,6 +59,9 @@ by Logitude and validates the two comparison sections before publishing. The
 Failed downloads or parsing retain the last complete copy, with the bundled seed
 as fallback. Questions read an immutable local snapshot, never the live forum.
 The cache is `questions/tabony-rules-differences.json` with a separate sync marker.
+The Discord bot shares one daily updater between `/question`, `/card` and `/nation`;
+card/nation replies show the relevant notes immediately alongside expanded FAQ,
+including when paid questions are disabled. Notes retain their original English.
 
 Notes have `tabony-rules-differences/official-N` or `mabiweb-N` IDs, owner attribution,
 capture time and the exact post URL. If the investigator reads a note, the

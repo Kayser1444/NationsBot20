@@ -59,7 +59,7 @@ test('every nation has its resource board, exactly its two dynasties and only ap
     assert.ok(reply.entryIds.every(id=>entries.find(entry=>entry.id===id).category!=='dynasty'));
     const dynasties=catalog.cards.filter(card=>card.type==='dynasty'&&card.nation===nation.name);
     assert.equal(dynasties.length,2,nation.name);
-    assert.deepEqual(reply.messages[0].embeds.slice(2).map(embed=>embed.title),dynasties.map(card=>card.name));
+    assert.deepEqual(reply.messages[0].embeds.slice(2,4).map(embed=>embed.title),dynasties.map(card=>card.name));
     assert.deepEqual(reply.imageTargets.map(target=>target.cardId),[nation.id,...dynasties.map(card=>card.id)]);
     for(const [index,dynasty] of dynasties.entries()) assert.equal(reply.messages[0].embeds[index+2].image.url,dynasty.imageCheck.url);
   }

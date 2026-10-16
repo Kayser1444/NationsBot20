@@ -15,7 +15,7 @@ export function createQuestionService(options = {}) {
   }
 }
 
-function buildQuestionService({ env = process.env, directory, fetcher = fetch, now = Date.now, report = () => {} } = {}) {
+function buildQuestionService({ env = process.env, directory, fetcher = fetch, now = Date.now, report = () => {}, rulesDifferencesStore } = {}) {
   const enabled = env.NATIONS_QUESTION_ENABLED === '1' && !!env.OPENAI_API_KEY && directory;
   const message = (language, sv, en) => language === 'sv-SE' ? sv : en;
   const disabled = language => message(language, 'Frågefunktionen är inte aktiverad för ditt konto.', 'Questions are not enabled for your account.');
@@ -36,11 +36,11 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const faq = JSON.parse(readFileSync(new URL('./data/faq/entries.json', import.meta.url), 'utf8'));
   const rulebooks = loadQuestionRulebooks();
   const cards = loadQuestionCards();
-  const differencesStore = createRulesDifferencesStore({ directory: root, fetcher, now, report });
+  const differencesStore = rulesDifferencesStore ?? createRulesDifferencesStore({ directory: root, fetcher, now, report });
   const controller = new AbortController();
   let busy = false, closed = false;
   sourceStore.start();
-  differencesStore.start();
+  if (!rulesDifferencesStore) differencesStore.start();
   return {
     quota(userId) {
       if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
@@ -96,6 +96,6 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
           'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
     },
-    close() { closed = true; controller.abort(); sourceStore.close(); differencesStore.close(); },
+    close() { closed = true; controller.abort(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },
   };
 }

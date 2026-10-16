@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { text, translations } from './language.mjs';
 import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './card-images.mjs';
+import { validateRulesDifferences } from './question-errata.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const normalize = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim();
@@ -13,9 +14,24 @@ const silent = { parse: [], users: [], roles: [] };
 const embedLength = embed => [embed.title, embed.description, embed.footer?.text, embed.author?.name,
   ...(embed.fields ?? []).flatMap(field => [field.name, field.value])].reduce((sum, value) => sum + (value?.length ?? 0), 0);
 
-export function createCardBank({ catalog, sources, entries, assetOrigin = null }) {
+export function createCardBank({ catalog, sources, entries, assetOrigin = null, rulesDifferences = () => read('./data/question/tabony-rules-differences.json'), library = read('./data/cards/library/entries.json') }) {
   if (assetOrigin) assetOrigin = cardAssetOrigin({ NATIONS_CARD_ASSET_ORIGIN: assetOrigin });
   const cards = catalog.cards.filter(card => card.enabled);
+  const names = cards.map(card => ({id:card.id, name:normalize(card.name)})).filter(card => card.name.length > 3);
+  let indexedNotes, indexedHash;
+  function indexNotes(snapshot) {
+    if (indexedHash === snapshot.sha256) return indexedNotes;
+    indexedNotes = snapshot.sections.flatMap(section => section.entries.map(note => {
+      const normalized = ' ' + normalize(note) + ' ';
+      const named = names.filter(card => normalized.includes(' ' + card.name + ' '));
+      // Pagoda is not China's starting card when the post says Shwedagon Pagoda.
+      const cardIds = named.filter(card => !named.some(other => other.name.length > card.name.length &&
+        (' ' + other.name + ' ').includes(' ' + card.name + ' '))).map(card => card.id);
+      return {section,note,cardIds};
+    }));
+    indexedHash = snapshot.sha256;
+    return indexedNotes;
+  }
   const sourceById = new Map(sources.sources.map(source => [source.id, source]));
   const allCards = new Set(catalog.cards.map(card => card.id));
   const entryIds = new Set(entries.entries.map(entry => entry.id));
@@ -47,7 +63,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       .sort((a, b) => rank(a) - rank(b) || Number(Boolean(a.variant)) - Number(Boolean(b.variant)) || a.name.localeCompare(b.name) || a.id.localeCompare(b.id)).slice(0, 25)
       .map(card => ({ name: `${card.name}${card.variant ? ' (' + card.variant + ')' : ''} · ${text(language, 'cardType_' + card.type)}${card.nation ? ' · ' + card.nation : ''}${card.age ? ' · ' + ['I', 'II', 'III', 'IIII'][card.age - 1] : card.age === 0 ? ' · ' + text(language, 'cardStarting') : ''}`.slice(0, 100), value: card.id }));
   }
-  function render(query, language = 'en-US', { faqPage = null } = {}) {
+  function render(query, language = 'en-US', { faqPage = 0 } = {}) {
     if (!Object.hasOwn(translations, language)) language = 'en-US';
     const card = resolve(query);
     if (!card) return { ok: false, messages: [{ content: text(language, 'cardUnavailable'), allowed_mentions: silent }] };
@@ -78,6 +94,8 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       { description: metadata + (description ? '\n' + description : '') + (card.promo ? '\n' + text(language, 'cardPromoNote') : ''), color: 12092983 },
     ] };
     const imageTargets = [{cardId:card.id,embedIndex:0}];
+    const relatedCards = [card, ...(card.type === 'nation' ? cards.filter(candidate =>
+      (candidate.nation === card.name || candidate.boardSource?.nation === card.name) && (candidate.type === 'dynasty' || candidate.age === 0)) : [])];
     if (card.type === 'nation') {
       for (const dynasty of cards.filter(candidate => candidate.type === 'dynasty' && candidate.nation === card.name)) {
         const url = cardImageUrl(dynasty, assetOrigin);
@@ -87,6 +105,18 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       }
     }
     if (!imageUrl && !card.imageAsset) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
+    // Exact named references are supplemented only by explicit implementation facts.
+    // Keep the owner's English wording, attribution and historical comparison intact.
+    const differences = validateRulesDifferences(rulesDifferences());
+    const privateArchitects = relatedCards.some(candidate => {
+      const implementation = library.cards.find(item => item.id === candidate.id)?.implementation;
+      return implementation?.facts.some(fact => fact.field === 'private_architects' && Number(fact.value) > 0) ||
+        /private \[Architects?\]/i.test(implementation?.description ?? '');
+    });
+    const notes = indexNotes(differences).filter(({note,cardIds}) =>
+      relatedCards.some(candidate => cardIds.includes(candidate.id)) ||
+      privateArchitects && note.startsWith('Private architects are tied to') ||
+      card.name === 'Turmoil' && note.startsWith('Discarding turmoil'));
     const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
@@ -96,12 +126,16 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
       header.length - footer.length - pageLabelReserve - 4);
     if (capacity < 100) throw new Error('Card metadata leaves no space for FAQ pages.');
     const lines = [];
+    const paragraphs = notes.map(({ section, note }) => ({ label: `- **[Tabony · Logitude](<${differences.url}>) · ${escape(section.title)} (English original):** `, body: note }));
     for (const { entry, bullet } of points) {
       const heading = language === 'sv-SE' ? entry.headingSv ?? entry.heading : entry.headingTranslations?.[language] ?? entry.heading;
       const label = `- **${escape(heading)} · ${text(language, 'cardPage')} ${entry.sourcePages.join(', ')}:** `;
-      let remaining = escape(bullet.text.replace(/\s+/g, ' ').trim());
+      paragraphs.push({label, body: bullet.text});
+    }
+    for (const { label, body } of paragraphs) {
+      let remaining = escape(body.replace(/\s+/g, ' ').trim());
       const pointCapacity = capacity - label.length;
-      if (pointCapacity < 100) throw new Error('FAQ heading is too long: ' + entry.id);
+      if (pointCapacity < 100) throw new Error('FAQ or rules-difference heading is too long.');
       // Keep each point together where possible; repeat its source on continuation.
       while (remaining) {
         let end = remaining.length <= pointCapacity ? remaining.length : remaining.lastIndexOf(' ', pointCapacity);
@@ -115,7 +149,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
         remaining = remaining.slice(end).trim();
       }
     }
-    if (!lines.length) lines.push(text(language, 'cardFaqPending'));
+    if (!points.length) lines.push(text(language, 'cardFaqPending'));
     const pages = [''];
     for (const line of lines) {
       if (pages.at(-1) && (pages.at(-1) + '\n' + line).length > capacity) pages.push('');
@@ -128,7 +162,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     const button = (label, target, disabled = false) => ({ type: 2, style: 2, label,
       custom_id: `cardfaq:1:${card.id}:${language}:${target}`, disabled });
     const buttons = expanded ? [button(text(language, 'cardFaqHide'), 'closed')]
-      : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length)];
+      : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length && !notes.length)];
     if (expanded) {
       const pageLabel = text(language, 'cardFaqPage', { current: faqPage + 1, total: pages.length });
       message.embeds.push({ description: header + '\n' + pageLabel + '\n\n' + pages[faqPage] + footer, color: 12092983 });
@@ -156,4 +190,5 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null }
     autocompleteNations:(query,language) => autocomplete(query,language,{nations:true}) };
 }
 
-export const cardBank = createCardBank({ catalog: read('./data/cards/catalog.json'), sources: read('./data/faq/sources.json'), entries: read('./data/faq/entries.json'), assetOrigin: cardAssetOrigin() });
+export const loadCardBank = (options = {}) => createCardBank({ catalog: read('./data/cards/catalog.json'), sources: read('./data/faq/sources.json'), entries: read('./data/faq/entries.json'), assetOrigin: cardAssetOrigin(), ...options });
+export const cardBank = loadCardBank();

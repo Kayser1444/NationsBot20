@@ -62,7 +62,7 @@ const dataDir = mkdtempSync(join(tmpdir(), 'nations-runtime-'));
 const configDir = mkdtempSync(join(tmpdir(), 'nations-persistent-config-'));
 const root = fileURLToPath(new URL('../', import.meta.url));
 for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dataDir, name));
-for (const name of ['cards', 'faq']) cpSync(join(root, 'data', name), join(dataDir, 'data', name), { recursive: true });
+for (const name of ['cards', 'faq', 'question']) cpSync(join(root, 'data', name), join(dataDir, 'data', name), { recursive: true });
 writeFileSync(join(dataDir, 'sm-season.json'), JSON.stringify({ season: 11, divisions: {} }));
 const config = { subscriptions: { Kayser: '229311536827465728' }, matches: [],
   userLocales: { '229311536827465728': 'en-US' },
