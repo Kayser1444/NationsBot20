@@ -164,8 +164,8 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
     const buttons = expanded ? [button(text(language, 'cardFaqHide'), 'closed')]
       : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length && !notes.length)];
     if (expanded) {
-      const pageLabel = text(language, 'cardFaqPage', { current: faqPage + 1, total: pages.length });
-      message.embeds.push({ description: header + '\n' + pageLabel + '\n\n' + pages[faqPage] + footer, color: 12092983 });
+      const pageLabel = pages.length > 1 ? '\n' + text(language, 'cardFaqPage', { current: faqPage + 1, total: pages.length }) : '';
+      message.embeds.push({ description: header + pageLabel + '\n\n' + pages[faqPage] + footer, color: 12092983 });
       if (pages.length > 1) buttons.push(
         button(text(language, 'cardFaqPrevious'), Math.max(0, faqPage - 1), faqPage === 0),
         button(text(language, 'cardFaqNext'), Math.min(pages.length - 1, faqPage + 1), faqPage === pages.length - 1),
