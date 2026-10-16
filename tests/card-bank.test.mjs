@@ -241,19 +241,19 @@ test('button IDs retain language and support open, close and fresh bank instance
 
 test('card and nation replies show FAQ and relevant owner differences immediately, without mixing historical rules', () => {
   const cases = [
-    ['Old Uppsala', /effects removed when replaced/, /Known differences from the official rules/],
-    ['Vikings', /effects removed when replaced/, /Known differences from the official rules/],
+    ['Old Uppsala', /effects removed when replaced/, /Difference from official rules/],
+    ['Vikings', /effects removed when replaced/, /Difference from official rules/],
     ['Ethiopia', /markers now get removed/, /MaBiWeb/],
     ['Archimedes', /Private architects are tied/, /MaBiWeb/],
     ['China', /Unused private architects on replaced cards are lost/, /MaBiWeb/],
   ];
   for (const [name, note, comparison] of cases) {
-    const reply = cardBank.render(name, 'sv-SE');
+    const reply = cardBank.render(name, 'en-US');
     assert.equal(reply.faqPage, 0);
     assert.match(content(reply), note, name);
     assert.match(content(reply), comparison, name);
     assert.match(content(reply), /https:\/\/games.tabony.net\/forum\/viewtopic.php\?p=4#p4/);
-    assert.match(content(reply), /English original/);
+    assert.doesNotMatch(content(reply), /English original/);
     assert.match(content(reply), /FAQ\+\+/);
     assertMessageLimits(reply);
   }
@@ -271,8 +271,47 @@ test('owner notes read the latest shared snapshot and paginate long source text 
   snapshot.sha256 = createHash('sha256').update(JSON.stringify(snapshot.sections)).digest('hex');
   const first = bank.render('Porcelain Tower');
   const pages = Array.from({length:first.faqPageCount}, (_,faqPage) => bank.render('Porcelain Tower','en-US',{faqPage}));
-  assert.match(content(first), /owner-note-token/);
+  assert.match(pages.map(content).join('\n'), /owner-note-token/);
   assert.ok(pages.length > 2);
   assert.equal(pages.map(content).join('\n').match(/owner-note-token/g).length,345);
   for (const page of pages) assertMessageLimits(page);
+});
+
+test('FAQ precedes separately counted translated Tabony errata in all six languages', () => {
+  const expected = {'sv-SE':/Effekter som gäller/, 'en-US':/Cards with effects/, de:/Effekte, die/, fr:/Les effets valables/, 'es-ES':/Los efectos que duran/, 'zh-CN':/持续/};
+  for (const [language, translated] of Object.entries(expected)) {
+    const reply=cardBank.renderNation('Ethiopia',language), body=content(reply);
+    assert.match(body,translated,language);
+    assert.doesNotMatch(body,/English original|Engelskt original/);
+    assert.ok(body.indexOf('FAQ++') < body.indexOf('Old Uppsala'));
+    assert.match(body,/MaBiWeb/);
+    assert.match(body,/https:\/\/games.tabony.net\/forum\/viewtopic.php\?p=4#p4/);
+    assertMessageLimits(reply);
+  }
+  const swedish=content(cardBank.renderNation('Ethiopia','sv-SE'));
+  assert.match(swedish,/\*\*FAQ\+\+ 1\.11 · 1 punkt\*\*/);
+  assert.match(swedish,/\*\*Tabony-errata · 2 punkter\*\*/);
+  assert.ok(swedish.indexOf('När den nya spelarordningen') < swedish.indexOf('Tabony-errata'));
+  assert.doesNotMatch(swedish,/Sida 1 av 1/);
+});
+
+test('every captured owner note has source-bound translations; changed text falls back to labelled English', () => {
+  const bundle=read('question/tabony-rules-differences-translations.json');
+  const snapshot=read('question/tabony-rules-differences.json');
+  assert.equal(bundle.schemaVersion,1);
+  assert.equal(new Set(bundle.entries.map(entry=>entry.sourceText)).size,bundle.entries.length);
+  for(const original of snapshot.sections.flatMap(section=>section.entries)){
+    const entry=bundle.entries.find(entry=>entry.sourceText===original);
+    assert.ok(entry);
+    for(const lang of ['sv-SE','de','fr','es-ES','zh-CN']) assert.ok(entry.translations[lang]?.trim(),lang);
+    for(const name of ['Old Uppsala','Shwedagon Pagoda','Versailles','Sheba','Roman Republic','Axumite Kingdom']){
+      if(original.includes(name)) for(const translated of Object.values(entry.translations)) assert.ok(translated.includes(name),name);
+    }
+  }
+  snapshot.sections[0].entries[1]+=' Newly changed source text.';
+  snapshot.sha256=createHash('sha256').update(JSON.stringify(snapshot.sections)).digest('hex');
+  const reply=createCardBank({...fixtures(),rulesDifferences:()=>snapshot}).render('Old Uppsala','sv-SE');
+  assert.match(content(reply),/Engelskt original/);
+  assert.match(content(reply),/Newly changed source text/);
+  assert.doesNotMatch(content(reply),/Effekter som gäller/);
 });

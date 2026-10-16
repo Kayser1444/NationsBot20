@@ -1,4 +1,10 @@
 export default {
+  cardFaqHeadingOne: "**FAQ++ {version} · {count} Punkt**",
+  cardErrataHeading: "**Tabony-Errata · {count} Punkte**",
+  cardErrataHeadingOne: "**Tabony-Errata · {count} Punkt**",
+  cardErrataOfficial: "Abweichung von den offiziellen Regeln",
+  cardErrataLegacy: "Vergleich mit dem früheren MaBiWeb",
+  cardErrataOriginal: "Englisches Original",
   "cardUnavailable": "Der Kartenname ist unbekannt oder mehrdeutig. Wähle einen Vorschlag.",
   "cardHeading": "Nations · Karte",
   "nationHeading": "Nations · Nation und Dynastien",

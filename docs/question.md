@@ -61,7 +61,12 @@ as fallback. Questions read an immutable local snapshot, never the live forum.
 The cache is `questions/tabony-rules-differences.json` with a separate sync marker.
 The Discord bot shares one daily updater between `/question`, `/card` and `/nation`;
 card/nation replies show the relevant notes immediately alongside expanded FAQ,
-including when paid questions are disabled. Notes retain their original English.
+including when paid questions are disabled. Card replies show FAQ first and a
+separately counted Tabony errata section second. The reviewed translation bundle
+`data/question/tabony-rules-differences-translations.json` covers all captured notes
+in the five non-English bot languages. Each translation matches exact English
+source text: newly changed notes temporarily show labelled English until their
+translations are updated. Original English evidence remains unchanged for `/question`.
 
 Notes have `tabony-rules-differences/official-N` or `mabiweb-N` IDs, owner attribution,
 capture time and the exact post URL. If the investigator reads a note, the

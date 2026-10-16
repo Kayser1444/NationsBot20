@@ -386,8 +386,9 @@ the resource board and both of that nation's dynasty cards. Its FAQ contains the
 rules; dynasty FAQ remains available by looking up the dynasty itself with `/card`.
 Nation suggestions live in `/nation`, with Swedish aliases such as `Kina`. Existing
 `/card` nation lookups and FAQ buttons remain compatible.
-Relevant owner-documented Tabony rules differences also appear immediately, in
-their original English with attribution and a link to the owner's forum post.
+Relevant owner-documented Tabony rules differences also appear immediately in a
+separate Tabony errata section after the FAQ. Each section has its own point count
+and source link. Owner notes are translated into all six supported languages.
 Nation lookups include notes for their starting cards and dynasties. Named card
 references and explicit private-architect abilities determine relevance; historical
 MaBiWeb comparisons remain labelled separately from differences with official rules.

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "sourceText": "Discarding turmoil and end-of-round effects are resolved simultaneously. (The rules as written would have you check for most/least stability/military after every change in game state, but when discarding turmoil and resolving end-of-round effects, the rules don't specify an order. This implementation resolves all of those effects simultaneously. In other words, this implementation does not check for stability and military requirements during those phases. This only matters for a few cards that would have you remove them under certain conditions.)",
+      "translations": {
+        "sv-SE": "Att kasta oroskort och att genomföra effekter vid rundans slut sker samtidigt. Enligt reglernas ordalydelse skulle högst/lägst stabilitet eller militär styrka kontrolleras efter varje förändring av spelläget, men reglerna anger ingen ordning för dessa moment. Tabony genomför därför alla dessa effekter samtidigt och kontrollerar inte kraven på stabilitet eller militär styrka under dessa faser. Detta har bara betydelse för några få kort som ska tas bort under vissa villkor.",
+        "de": "Das Abwerfen von Turmoil-Karten und Effekte am Rundenende werden gleichzeitig abgehandelt. Nach dem Wortlaut der Regeln müsste nach jeder Änderung des Spielzustands geprüft werden, wer die höchste/niedrigste Stabilität oder Militärstärke hat. Für diese Schritte legen die Regeln jedoch keine Reihenfolge fest. Tabony handelt alle diese Effekte gleichzeitig ab und prüft während dieser Phasen keine Stabilitäts- oder Militäranforderungen. Dies betrifft nur einige Karten, die unter bestimmten Bedingungen entfernt werden müssen.",
+        "fr": "La défausse des cartes Turmoil et les effets de fin de manche sont résolus simultanément. Selon la lettre des règles, il faudrait vérifier la stabilité ou la force militaire la plus élevée/faible après chaque changement de situation, mais les règles ne précisent pas l’ordre de ces étapes. Tabony résout donc tous ces effets simultanément, sans vérifier les conditions de stabilité ou de force militaire pendant ces phases. Cela ne concerne que quelques cartes devant être retirées sous certaines conditions.",
+        "es-ES": "El descarte de cartas Turmoil y los efectos de final de ronda se resuelven simultáneamente. Según el texto de las reglas, habría que comprobar la mayor/menor estabilidad o fuerza militar tras cada cambio del estado de la partida, pero no se especifica un orden para estos pasos. Tabony resuelve todos estos efectos a la vez, sin comprobar los requisitos de estabilidad o fuerza militar durante esas fases. Esto solo afecta a unas pocas cartas que deben retirarse bajo ciertas condiciones.",
+        "zh-CN": "弃置动乱牌与结算回合结束效果同时进行。按规则字面意思，每次游戏状态变化后都应检查谁的稳定度或军力最高／最低，但规则没有规定这些步骤的先后顺序。因此，Tabony同时结算所有这些效果，在这些阶段不检查稳定度和军力要求。这只影响少数在特定条件下必须移除的卡牌。"
+      }
+    },
+    {
+      "sourceText": "Cards with effects that last \"this round\" or \"until end of round\" have their effects removed when replaced. Officially, the card text overrides the rules, and these effects should continue. The specific cards with this property are: Old Uppsala Shwedagon Pagoda Versailles Sheba Roman Republic",
+      "translations": {
+        "sv-SE": "Effekter som gäller ”denna runda” eller ”till rundans slut” upphör i Tabony när kortet ersätts. Enligt de officiella reglerna har korttexten företräde och effekterna ska fortsätta att gälla. Detta berör Old Uppsala, Shwedagon Pagoda, Versailles, Sheba och Roman Republic.",
+        "de": "Effekte, die „diese Runde“ oder „bis zum Rundenende“ gelten, enden in Tabony, wenn die Karte ersetzt wird. Nach den offiziellen Regeln hat der Kartentext Vorrang und die Effekte müssten weiter gelten. Betroffen sind Old Uppsala, Shwedagon Pagoda, Versailles, Sheba und Roman Republic.",
+        "fr": "Les effets valables « cette manche » ou « jusqu’à la fin de la manche » cessent dans Tabony lorsque la carte est remplacée. Selon les règles officielles, le texte de la carte prime et ces effets devraient continuer. Cela concerne Old Uppsala, Shwedagon Pagoda, Versailles, Sheba et Roman Republic.",
+        "es-ES": "Los efectos que duran «esta ronda» o «hasta el final de la ronda» terminan en Tabony cuando se sustituye la carta. Según las reglas oficiales, el texto de la carta tiene prioridad y los efectos deberían continuar. Esto afecta a Old Uppsala, Shwedagon Pagoda, Versailles, Sheba y Roman Republic.",
+        "zh-CN": "在Tabony中，持续“本回合”或“直到回合结束”的效果会在卡牌被替换时消失。按照官方规则，卡牌文字优先，这些效果应继续生效。涉及的卡牌是Old Uppsala、Shwedagon Pagoda、Versailles、Sheba和Roman Republic。"
+      }
+    },
+    {
+      "sourceText": "Private architects are tied to the cards that provide them. They don't go into one pool. You decide where to use them from. Unused private architects on replaced cards are lost.",
+      "translations": {
+        "sv-SE": "Privata arkitekter är knutna till korten som ger dem och samlas inte i en gemensam pool. Du väljer vilket kort du använder dem från. Oanvända privata arkitekter på kort som ersätts går förlorade.",
+        "de": "Private Architekten sind an die Karten gebunden, die sie bereitstellen. Sie bilden keinen gemeinsamen Vorrat. Du wählst, von welcher Karte du sie verwendest. Ungenutzte private Architekten auf ersetzten Karten gehen verloren.",
+        "fr": "Les architectes privés sont liés aux cartes qui les fournissent. Ils ne forment pas une réserve commune. Vous choisissez de quelle carte vous les utilisez. Les architectes privés inutilisés d’une carte remplacée sont perdus.",
+        "es-ES": "Los arquitectos privados están vinculados a las cartas que los proporcionan. No forman una reserva común. Tú eliges de qué carta los utilizas. Los arquitectos privados sin usar de las cartas sustituidas se pierden.",
+        "zh-CN": "私人建筑师与提供他们的卡牌绑定，不会汇入一个公共储备。你决定使用哪张卡牌提供的建筑师。卡牌被替换时，其尚未使用的私人建筑师会失去。"
+      }
+    },
+    {
+      "sourceText": "MaBiWeb had a bug in the production phase, where one type of resource would be produced or consumed at a time, such that positive production of one type of resource might not be available to cover consumption of another. This site implements the correct rule, which is that all positive production happens before all negative production.",
+      "translations": {
+        "sv-SE": "MaBiWeb hade ett fel i produktionsfasen: en resurstyp producerades eller förbrukades i taget. Positiv produktion av en resurs kunde därför vara otillgänglig för att täcka förbrukning av en annan. Tabony följer den korrekta regeln: all positiv produktion sker före all negativ produktion.",
+        "de": "MaBiWeb hatte einen Fehler in der Produktionsphase: Ressourcen wurden jeweils nach Art produziert oder verbraucht. Dadurch konnte positive Produktion einer Ressource zum Decken des Verbrauchs einer anderen noch nicht verfügbar sein. Tabony setzt die korrekte Regel um: sämtliche positive Produktion erfolgt vor sämtlicher negativer Produktion.",
+        "fr": "MaBiWeb présentait un bug pendant la production : chaque type de ressource était produit ou consommé séparément. La production positive d’une ressource pouvait donc être indisponible pour couvrir la consommation d’une autre. Tabony applique la règle correcte : toute la production positive a lieu avant toute la production négative.",
+        "es-ES": "MaBiWeb tenía un error en la fase de producción: cada tipo de recurso se producía o consumía por separado. Así, la producción positiva de un recurso podía no estar disponible para cubrir el consumo de otro. Tabony aplica la regla correcta: toda la producción positiva ocurre antes de toda la producción negativa.",
+        "zh-CN": "MaBiWeb的生产阶段曾有一个错误：每次只生产或消耗一种资源，导致一种资源的正向产出可能尚不可用于支付另一种资源的消耗。Tabony采用正确规则：所有正向产出先于所有负向产出结算。"
+      }
+    },
+    {
+      "sourceText": "Massimo (the author of MaBiWeb) and I both misunderstood the FAQ entry on Axumite Kingdom. On MaBiWeb, the markers would persist even after Axumite Kingdom was replaced. That was a bug, which has now been fixed on this site. The markers now get removed if you replace Axumite Kingdom.",
+      "translations": {
+        "sv-SE": "Massimo, som skapade MaBiWeb, och jag missförstod båda FAQ-punkten om Axumite Kingdom. I MaBiWeb låg markörerna kvar även efter att Axumite Kingdom ersatts. Detta var ett fel som nu har rättats i Tabony. Markörerna tas bort när du ersätter Axumite Kingdom.",
+        "de": "Massimo, der Entwickler von MaBiWeb, und ich hatten beide den FAQ-Eintrag zu Axumite Kingdom missverstanden. Bei MaBiWeb blieben die Marker auch nach dem Ersetzen von Axumite Kingdom liegen. Dieser Fehler wurde in Tabony behoben. Die Marker werden entfernt, wenn du Axumite Kingdom ersetzt.",
+        "fr": "Massimo, le créateur de MaBiWeb, et moi avions tous deux mal compris l’entrée de FAQ sur Axumite Kingdom. Dans MaBiWeb, les marqueurs restaient même après le remplacement d’Axumite Kingdom. Ce bug a été corrigé dans Tabony. Les marqueurs sont retirés lorsque vous remplacez Axumite Kingdom.",
+        "es-ES": "Massimo, el creador de MaBiWeb, y yo habíamos interpretado mal la entrada de la FAQ sobre Axumite Kingdom. En MaBiWeb, los marcadores permanecían incluso después de sustituir Axumite Kingdom. Ese error se ha corregido en Tabony. Los marcadores se retiran cuando sustituyes Axumite Kingdom.",
+        "zh-CN": "Massimo（MaBiWeb的作者）和我都曾误解有关Axumite Kingdom的FAQ条目。在MaBiWeb中，即使Axumite Kingdom被替换，标记仍会保留。这个错误已在Tabony中修复。替换Axumite Kingdom时，标记会被移除。"
+      }
+    },
+    {
+      "sourceText": "No separation of decks, like advanced, expert, and dynasties.",
+      "translations": {
+        "sv-SE": "Kortlekarna delas inte upp i exempelvis Advanced, Expert och Dynasties.",
+        "de": "Keine Trennung der Kartendecks, etwa in Advanced, Expert und Dynasties.",
+        "fr": "Les paquets ne sont pas séparés, par exemple en Advanced, Expert et Dynasties.",
+        "es-ES": "Los mazos no se separan, por ejemplo en Advanced, Expert y Dynasties.",
+        "zh-CN": "不按Advanced、Expert、Dynasties等类别分开牌库。"
+      }
+    },
+    {
+      "sourceText": "No base game. Always Dynasties, all the time.",
+      "translations": {
+        "sv-SE": "Grundspelet används inte separat. Tabony använder alltid Dynasties.",
+        "de": "Kein separates Grundspiel. Tabony verwendet immer Dynasties.",
+        "fr": "Pas de jeu de base séparé. Tabony utilise toujours Dynasties.",
+        "es-ES": "No hay juego básico separado. Tabony utiliza siempre Dynasties.",
+        "zh-CN": "不单独使用基础游戏。Tabony始终使用Dynasties。"
+      }
+    },
+    {
+      "sourceText": "No A-sides. \"It's time to play B-sides.\"",
+      "translations": {
+        "sv-SE": "Inga A-sidor används. ”Det är dags att spela B-sidor.”",
+        "de": "Keine A-Seiten. „Es ist Zeit, B-Seiten zu spielen.“",
+        "fr": "Pas de faces A. « Il est temps de jouer les faces B. »",
+        "es-ES": "No se usan caras A. «Es hora de jugar las caras B».",
+        "zh-CN": "不使用A面。“是时候玩B面了。”"
+      }
+    }
+  ]
+}

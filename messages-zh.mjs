@@ -1,4 +1,10 @@
 export default {
+  cardFaqHeadingOne: "**FAQ++ {version} · {count} 条**",
+  cardErrataHeading: "**Tabony 勘误 · {count} 条**",
+  cardErrataHeadingOne: "**Tabony 勘误 · {count} 条**",
+  cardErrataOfficial: "与官方规则的差异",
+  cardErrataLegacy: "与旧版 MaBiWeb 的比较",
+  cardErrataOriginal: "英文原文",
   "cardUnavailable": "卡牌名称未知或有歧义，请选择建议项。",
   "cardHeading": "Nations · 卡牌",
   "nationHeading": "Nations · 国家与王朝",

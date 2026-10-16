@@ -1,4 +1,10 @@
 export default {
+  cardFaqHeadingOne: "**FAQ++ {version} · {count} punkt**",
+  cardErrataHeading: "**Tabony-errata · {count} punkter**",
+  cardErrataHeadingOne: "**Tabony-errata · {count} punkt**",
+  cardErrataOfficial: "Skillnad mot officiella regler",
+  cardErrataLegacy: "Jämförelse med historiska MaBiWeb",
+  cardErrataOriginal: "Engelskt original",
   cardMachineTranslated: "Maskinöversatt",
   remindersOn: "Dagliga påminnelser på: {time} ({timezone}), oberoende av /notifications.",
   remindersOff: "Dagliga påminnelser av. /notifications påverkas inte.",

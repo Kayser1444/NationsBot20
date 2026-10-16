@@ -1,4 +1,10 @@
 export default {
+  cardFaqHeadingOne: "**FAQ++ {version} · {count} point**",
+  cardErrataHeading: "**Tabony errata · {count} points**",
+  cardErrataHeadingOne: "**Tabony errata · {count} point**",
+  cardErrataOfficial: "Difference from official rules",
+  cardErrataLegacy: "Comparison with historical MaBiWeb",
+  cardErrataOriginal: "English original",
   cardMachineTranslated: "Machine-translated",
   remindersOn: "Daily reminders enabled: {time} ({timezone}), independently of /notifications.",
   remindersOff: "Daily reminders disabled. /notifications is unchanged.",

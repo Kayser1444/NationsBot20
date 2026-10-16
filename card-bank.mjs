@@ -4,6 +4,7 @@ import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './car
 import { validateRulesDifferences } from './question-errata.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
+const noteTranslations = new Map(read('./data/question/tabony-rules-differences-translations.json').entries.map(entry => [entry.sourceText, entry.translations]));
 const normalize = value => String(value ?? '').normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[’‘]/g, "'").replace(/[^a-z0-9]+/g, ' ').trim();
 const escape = value => String(value).replace(/[\\`*_\[\]<>~|]/g, '\\$&');
 // Review decisions are independent of publication; rejected or unknown states stay hidden.
@@ -106,7 +107,7 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
     }
     if (!imageUrl && !card.imageAsset) message.embeds[1].description += '\n' + text(language, 'cardImagePending');
     // Exact named references are supplemented only by explicit implementation facts.
-    // Keep the owner's English wording, attribution and historical comparison intact.
+    // Translations are bound to exact source text; changed notes fall back to labelled English.
     const differences = validateRulesDifferences(rulesDifferences());
     const privateArchitects = relatedCards.some(candidate => {
       const implementation = library.cards.find(item => item.id === candidate.id)?.implementation;
@@ -117,22 +118,32 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
       relatedCards.some(candidate => cardIds.includes(candidate.id)) ||
       privateArchitects && note.startsWith('Private architects are tied to') ||
       card.name === 'Turmoil' && note.startsWith('Discarding turmoil'));
-    const header = text(language, 'cardFaqHeading', { version: source.version, count: points.length });
+    const header = text(language, points.length === 1 ? 'cardFaqHeadingOne' : 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
+    const errataHeader = text(language, notes.length === 1 ? 'cardErrataHeadingOne' : 'cardErrataHeading', {count:notes.length});
+    const errataFooter = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
+      `${text(language, 'cardSource')}: [Tabony · Logitude](<${differences.url}>)`;
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;
     const capacity = Math.min(3000, Math.min(4096, 6000 - message.embeds.reduce((sum, embed) => sum + embedLength(embed), 0)) -
-      header.length - footer.length - pageLabelReserve - 4);
+      header.length - footer.length - (notes.length ? errataHeader.length + errataFooter.length + 4 : 0) - pageLabelReserve - 4);
     if (capacity < 100) throw new Error('Card metadata leaves no space for FAQ pages.');
     const lines = [];
-    const paragraphs = notes.map(({ section, note }) => ({ label: `- **[Tabony · Logitude](<${differences.url}>) · ${escape(section.title)} (English original):** `, body: note }));
+    const paragraphs = [];
     for (const { entry, bullet } of points) {
       const heading = language === 'sv-SE' ? entry.headingSv ?? entry.heading : entry.headingTranslations?.[language] ?? entry.heading;
       const label = `- **${escape(heading)} · ${text(language, 'cardPage')} ${entry.sourcePages.join(', ')}:** `;
-      paragraphs.push({label, body: bullet.text});
+      paragraphs.push({label, body: bullet.text, section:'faq'});
     }
-    for (const { label, body } of paragraphs) {
+    if (!points.length) paragraphs.push({label:'',body:text(language,'cardFaqPending'),section:'faq'});
+    for (const {section,note} of notes) {
+      const translated = language === 'en-US' ? note : noteTranslations.get(note)?.[language];
+      const comparison = text(language, section.id === 'official' ? 'cardErrataOfficial' : 'cardErrataLegacy');
+      paragraphs.push({label:`- **${escape(comparison)}${!translated ? ' · ' + text(language,'cardErrataOriginal') : ''}:** `,
+        body:translated ?? note,section:'errata'});
+    }
+    for (const { label, body, section } of paragraphs) {
       let remaining = escape(body.replace(/\s+/g, ' ').trim());
       const pointCapacity = capacity - label.length;
       if (pointCapacity < 100) throw new Error('FAQ or rules-difference heading is too long.');
@@ -145,15 +156,14 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
         let backslashes = 0;
         for (let i = end - 1; i >= 0 && remaining[i] === '\\'; i--) backslashes++;
         if (backslashes % 2) end--;
-        lines.push(label + remaining.slice(0, end).trim());
+        lines.push({section, text:label + remaining.slice(0, end).trim()});
         remaining = remaining.slice(end).trim();
       }
     }
-    if (!points.length) lines.push(text(language, 'cardFaqPending'));
-    const pages = [''];
+    const pages = [[]];
     for (const line of lines) {
-      if (pages.at(-1) && (pages.at(-1) + '\n' + line).length > capacity) pages.push('');
-      pages[pages.length - 1] += (pages.at(-1) ? '\n' : '') + line;
+      if (pages.at(-1).length && [...pages.at(-1),line].map(item=>item.text).join('\n').length > capacity) pages.push([]);
+      pages.at(-1).push(line);
     }
     const expanded = faqPage !== null;
     if (expanded && (!Number.isSafeInteger(faqPage) || faqPage < 0 || faqPage >= pages.length)) {
@@ -165,7 +175,13 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
       : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length && !notes.length)];
     if (expanded) {
       const pageLabel = pages.length > 1 ? '\n' + text(language, 'cardFaqPage', { current: faqPage + 1, total: pages.length }) : '';
-      message.embeds.push({ description: header + pageLabel + '\n\n' + pages[faqPage] + footer, color: 12092983 });
+      const blocks = ['faq','errata'].flatMap(section => {
+        const selected = pages[faqPage].filter(line=>line.section===section);
+        if (!selected.length) return [];
+        return [(section === 'faq' ? header : errataHeader) + '\n\n' + selected.map(line=>line.text).join('\n') +
+          (section === 'faq' ? footer : errataFooter)];
+      });
+      message.embeds.push({ description: (pageLabel ? pageLabel.trim() + '\n\n' : '') + blocks.join('\n\n'), color: 12092983 });
       if (pages.length > 1) buttons.push(
         button(text(language, 'cardFaqPrevious'), Math.max(0, faqPage - 1), faqPage === 0),
         button(text(language, 'cardFaqNext'), Math.min(pages.length - 1, faqPage + 1), faqPage === pages.length - 1),
