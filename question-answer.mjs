@@ -43,6 +43,6 @@ export function questionReplyParts(parts, footer = '') {
 export function questionSourceFooter({ commit, fetchedAt }, language) {
   const timestamp = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Stockholm',
     year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date(fetchedAt));
-  const label = language === 'sv-SE' ? 'AI-tolkning · Tabony-kod uppdaterad' : 'AI interpretation · Tabony code updated';
+  const label = language === 'sv-SE' ? 'AI-tolkning · Tabony-kod hämtad' : 'AI interpretation · Tabony code captured';
   return `${label}: ${timestamp} (${commit.slice(0, 12)})`;
 }

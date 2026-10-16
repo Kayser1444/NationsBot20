@@ -103,8 +103,19 @@ export function loadQuestionRulebooks() {
   }).flat();
 }
 
-export function createQuestionCorpus(snapshot, faq, rulebooks = [], cards = null) {
+export function createQuestionCorpus(snapshot, faq, rulebooks = [], cards = null, rulesDifferences = null) {
   const sources = new Map();
+  if (rulesDifferences) {
+    for (const section of rulesDifferences.sections) section.entries.forEach((text, index) => {
+      const id = `tabony-rules-differences/${section.id}-${index + 1}`;
+      sources.set(id, { kind: 'implementation-note', title: `${section.title}: ${text.slice(0, 100)}`,
+        url: rulesDifferences.url, author: rulesDifferences.author, capturedAt: rulesDifferences.capturedAt,
+        comparison: section.id === 'official' ? 'Tabony versus official rules' : 'Tabony versus historical MaBiWeb implementation',
+        text: `# ${section.title}\nSource: ${rulesDifferences.url}\nAuthor: ${rulesDifferences.author} (Tabony site owner)\nCaptured: ${rulesDifferences.capturedAt}\n\n${text}` });
+    });
+    sources.set('context/mabiweb', { kind: 'historical-context', title: 'MaBiWeb historical implementation context',
+      text: 'Context supplied by the bot owner: MaBiWeb was an earlier Nations implementation by another creator and no longer exists. The Tabony owner names its author as Massimo. MaBiWeb comparisons describe historical software behavior, not differences from the official board-game rules. Mention this context only when relevant to the question.' });
+  }
   if (cards) {
     sources.set('cards/index', { kind: 'card-index', title: 'English card names and effects',
       text: '# English card library\n' + JSON.stringify(cards.summary) + '\nUse search_cards for name/effect lookup, then read_source on the returned IDs. Score is relevance, not confidence. Image-reviewed text and implementation descriptions are separate evidence.' });

@@ -40,9 +40,31 @@ Only a complete, validated snapshot is atomically published to
 `questions/tabony-snapshot.json`. Failure retains the previous version or bundled
 seed. Each question holds one immutable in-memory snapshot throughout. Answers
 end with the last successful fetch date and time in Europe/Stockholm and the
-12-character commit, e.g. `AI-tolkning · Tabony-kod uppdaterad: 2026-10-15 22:00
+12-character commit, e.g. `AI-tolkning · Tabony-kod hämtad: 2026-10-15 22:00
 (9c344205b180)`. This is the source-copy refresh time, not the upstream commit date
 or the answer generation time. No routine deployed-version disclaimer is appended.
+
+The Tabony owner's [Rules Differences post](https://games.tabony.net/forum/viewtopic.php?p=4#p4)
+is also captured locally. The bundled seed and [readable review copy](../data/question/tabony-rules-differences.md)
+retain eight separate snippets: two comparing Tabony with official rules and six
+comparing Tabony with historical MaBiWeb behavior. These are implementation notes,
+not official board-game errata. Context supplied by the bot owner identifies
+MaBiWeb as a discontinued earlier implementation by another creator; only mention
+it when relevant.
+
+A separate updater downloads only that fixed public post URL, anonymously, with
+redirects refused, a 15-second timeout and a 250 KB bound. It extracts post `p4`
+by Logitude and validates the two comparison sections before publishing. The
+24-hour attempt marker survives restarts; an hourly check refreshes when due.
+Failed downloads or parsing retain the last complete copy, with the bundled seed
+as fallback. Questions read an immutable local snapshot, never the live forum.
+The cache is `questions/tabony-rules-differences.json` with a separate sync marker.
+
+Notes have `tabony-rules-differences/official-N` or `mabiweb-N` IDs, owner attribution,
+capture time and the exact post URL. If the investigator reads a note, the
+application appends the fixed URL to its answer, before the final code-capture
+stamp. Model-generated external links are still stripped. No forum credentials,
+other posts, house-rule links or live games are fetched by this updater.
 
 The corpus includes Python code, original English FAQ++ 1.11 entries, and the
 English base-game and Dynasties rulebooks in [page-addressable Markdown](../data/rules/README.md).

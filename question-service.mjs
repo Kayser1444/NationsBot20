@@ -5,6 +5,7 @@ import { createSourceStore, createQuestionCorpus, saveQuestionJson, loadQuestion
 import { investigateQuestion, maxQuestionRequests } from './question-agent.mjs';
 import { loadQuestionCards } from './card-library.mjs';
 import { questionReplyParts, questionSourceFooter } from './question-answer.mjs';
+import { createRulesDifferencesStore } from './question-errata.mjs';
 
 export function createQuestionService(options = {}) {
   try { return buildQuestionService(options); }
@@ -35,9 +36,11 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const faq = JSON.parse(readFileSync(new URL('./data/faq/entries.json', import.meta.url), 'utf8'));
   const rulebooks = loadQuestionRulebooks();
   const cards = loadQuestionCards();
+  const differencesStore = createRulesDifferencesStore({ directory: root, fetcher, now, report });
   const controller = new AbortController();
   let busy = false, closed = false;
   sourceStore.start();
+  differencesStore.start();
   return {
     quota(userId) {
       if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
@@ -75,14 +78,15 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         await onAccepted(); // Acknowledge after access/quota checks and before any paid request.
         ledger.total++; ledger.users[userId] = { count: user.count + 1, last: now() };
         saveQuestionJson(path, ledger);
-        const corpus = createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards);
+        const corpus = createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards, differencesStore.snapshot());
         let details;
         await investigateQuestion({ question: question.trim(), language, corpus, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
           signal: controller.signal, reserveRequest() {
             if (ledger.requests >= 120) throw new Error('Daily request limit.');
             ledger.requests++; saveQuestionJson(path, ledger);
           } });
-        const parts = questionReplyParts(details.parts, questionSourceFooter(corpus, language));
+        const footer = [...(details.sourceUrls ?? []), questionSourceFooter(corpus, language)].join('\n');
+        const parts = questionReplyParts(details.parts, footer);
         onAnswer({ ...details, parts, status: 'answered' });
         return parts.join('\n\n');
       } catch (error) {
@@ -92,6 +96,6 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
           'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
     },
-    close() { closed = true; controller.abort(); sourceStore.close(); },
+    close() { closed = true; controller.abort(); sourceStore.close(); differencesStore.close(); },
   };
 }

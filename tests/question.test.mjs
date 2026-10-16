@@ -211,7 +211,7 @@ test('enabled questions admit all Discord users regardless of legacy allowlist o
     let apiCalls = 0;
     const service = createQuestionService({ directory: temp(t), env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', ...legacy },
       fetcher: async url => {
-        if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+        if ((url.startsWith('https://api.github.com/') || url.startsWith('https://games.tabony.net/forum/'))) return new Response('', { status: 503 });
         apiCalls++; return apiCalls % 2 ? readCall() : answer();
       } });
     try {
@@ -229,7 +229,7 @@ test('service enforces cooldown and persistent daily quota without live API call
   const directory = temp(t), env = { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId };
   let clock = Date.now(), apiCalls = 0;
   const fetcher = async url => {
-    if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+    if ((url.startsWith('https://api.github.com/') || url.startsWith('https://games.tabony.net/forum/'))) return new Response('', { status: 503 });
     assert.equal(url, 'https://api.openai.com/v1/responses');
     apiCalls++; return apiCalls % 2 ? readCall() : answer();
   };
@@ -296,7 +296,7 @@ test('overlapping questions do not spend twice; shutdown aborts the request', { 
   const service = createQuestionService({ directory,
     env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId },
     fetcher: async (url, options) => {
-      if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+      if ((url.startsWith('https://api.github.com/') || url.startsWith('https://games.tabony.net/forum/'))) return new Response('', { status: 503 });
       calls++; started();
       return new Promise((resolve, reject) => options.signal.addEventListener('abort', () => reject(new Error('aborted')), { once: true }));
     } });
@@ -313,7 +313,7 @@ test('owner quota reset persists, clears only one user and preserves global spen
   const directory = temp(t), other = '821001820309815368'; let clock = Date.now(), calls = 0; const audit = [];
   const options = { directory, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId + ',' + other },
     now: () => clock, report: message => audit.push(message), fetcher: async url => {
-      if (url.startsWith('https://api.github.com/')) return new Response('', { status: 503 });
+      if ((url.startsWith('https://api.github.com/') || url.startsWith('https://games.tabony.net/forum/'))) return new Response('', { status: 503 });
       calls++; return calls % 2 ? readCall() : answer();
     } };
   const service = createQuestionService(options);

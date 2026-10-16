@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "url": "https://games.tabony.net/forum/viewtopic.php?p=4#p4",
+  "author": "Logitude",
+  "capturedAt": "2026-10-16T05:55:44.702Z",
+  "sections": [
+    {
+      "id": "official",
+      "title": "Known differences from the official rules",
+      "entries": [
+        "Discarding turmoil and end-of-round effects are resolved simultaneously. (The rules as written would have you check for most/least stability/military after every change in game state, but when discarding turmoil and resolving end-of-round effects, the rules don't specify an order. This implementation resolves all of those effects simultaneously. In other words, this implementation does not check for stability and military requirements during those phases. This only matters for a few cards that would have you remove them under certain conditions.)",
+        "Cards with effects that last \"this round\" or \"until end of round\" have their effects removed when replaced. Officially, the card text overrides the rules, and these effects should continue. The specific cards with this property are: Old Uppsala Shwedagon Pagoda Versailles Sheba Roman Republic"
+      ]
+    },
+    {
+      "id": "mabiweb",
+      "title": "Known differences from MaBiWeb's rules implementation",
+      "entries": [
+        "Private architects are tied to the cards that provide them. They don't go into one pool. You decide where to use them from. Unused private architects on replaced cards are lost.",
+        "MaBiWeb had a bug in the production phase, where one type of resource would be produced or consumed at a time, such that positive production of one type of resource might not be available to cover consumption of another. This site implements the correct rule, which is that all positive production happens before all negative production.",
+        "Massimo (the author of MaBiWeb) and I both misunderstood the FAQ entry on Axumite Kingdom. On MaBiWeb, the markers would persist even after Axumite Kingdom was replaced. That was a bug, which has now been fixed on this site. The markers now get removed if you replace Axumite Kingdom.",
+        "No separation of decks, like advanced, expert, and dynasties.",
+        "No base game. Always Dynasties, all the time.",
+        "No A-sides. \"It's time to play B-sides.\""
+      ]
+    }
+  ],
+  "sha256": "e22bf2e92fc86ac532a52d38d1a574f909bcd3d7c1a577b7e38ef9cd8400e7ec"
+}

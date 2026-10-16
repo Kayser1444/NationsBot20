@@ -1,6 +1,14 @@
 import { subscriptionEntries } from './subscriptions.mjs';
 import { normalizeLanguage, resolveLanguage } from './language.mjs';
 
+export function adminSubscribers(config, subscriptions, matches) {
+  return adminUsers(config, subscriptions, matches)
+    .filter(user => !user.banned && (user.username || user.reminders?.enabled))
+    .map(user => ({ userId: user.userId, username: user.username || user.reminders.name,
+      notifications: Boolean(user.username), reminders: Boolean(user.reminders?.enabled),
+      reminderName: user.reminders?.enabled ? user.reminders.name : null, matches: user.matches.length }));
+}
+
 // Explicitly select debug fields; never expose the configuration or credentials.
 export function adminUsers(config, subscriptions, matches, jobs = []) {
   const entries = subscriptionEntries(subscriptions);

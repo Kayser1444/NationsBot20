@@ -84,6 +84,24 @@ try {
   const remaining = await (await fetch(origin + '/api/status')).json();
   assert.equal(remaining.subscribers.length, 1); assert.equal(remaining.matches.length, 1);
   assert.equal(remaining.subscribers[0].userId, '821001820309815368');
+  const configFile = join(dir, 'friends.json'), withReminders = JSON.parse(readFileSync(configFile, 'utf8'));
+  withReminders.reminderPreferences = {
+    [userId]: { enabled: true, name: 'Tester', time: null, timezone: 'GMT' },
+    '821001820309815368': { enabled: true, name: 'Tester', time: null, timezone: 'GMT' },
+  };
+  writeFileSync(configFile, JSON.stringify(withReminders));
+  const combined = await (await fetch(origin + '/api/status')).json();
+  assert.equal(combined.subscribers.length, 2, 'count both services once per Discord user');
+  assert.equal(combined.subscribers.find(user => user.userId === userId).notifications, false);
+  assert.equal(combined.subscribers.find(user => user.userId === userId).reminders, true);
+  assert.equal((await fetch(origin + '/api/subscriptions/Tester?userId=' + userId, { method: 'DELETE', headers })).status, 200);
+  const afterReminder = await (await fetch(origin + '/api/status')).json();
+  assert.equal(afterReminder.subscribers.length, 1); assert.equal(afterReminder.matches.length, 1);
+  assert.equal(JSON.parse(readFileSync(configFile, 'utf8')).reminderPreferences[userId].enabled, false);
+  assert.equal((await fetch(origin + '/api/subscriptions/Tester?userId=821001820309815368', { method: 'DELETE', headers })).status, 200);
+  const afterBoth = await (await fetch(origin + '/api/status')).json();
+  assert.equal(afterBoth.subscribers.length, 0); assert.equal(afterBoth.matches.length, 0);
+  assert.equal(JSON.parse(readFileSync(configFile, 'utf8')).reminderPreferences['821001820309815368'].enabled, false);
 } finally {
   process.emit('SIGTERM'); console.log = originalLog;
   rmSync(dir, { recursive: true, force: true });

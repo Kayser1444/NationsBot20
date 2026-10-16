@@ -1,6 +1,20 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { adminUsers } from '../admin-users.mjs';
+import { adminUsers, adminSubscribers } from '../admin-users.mjs';
+
+test('subscriber list includes reminder-only users, labels both modes and counts shared games once per person', () => {
+  const config = { reminderPreferences: {
+    a: { enabled: true, name: 'Other' }, b: { enabled: true, name: 'Player' },
+    c: { enabled: false, name: 'Player' }, d: { enabled: true, name: 'Player' },
+  }, bannedUsers: { d: {} }, lastNationsNames: { e: 'Old' } };
+  const games = [{ id: '1', players: ['Player', 'Other'] }, { id: '2', players: ['Other'] }, { id: '3', players: ['Player'], finished: true }];
+  const result = adminSubscribers(config, { Player: ['a', 'c'] }, games);
+  assert.equal(result.length, 3);
+  assert.deepEqual(result.find(user => user.userId === 'a'), { userId: 'a', username: 'Player', notifications: true, reminders: true, reminderName: 'Other', matches: 2 });
+  assert.equal(result.find(user => user.userId === 'b').notifications, false);
+  assert.equal(result.find(user => user.userId === 'b').username, 'Player');
+  assert.equal(result.find(user => user.userId === 'c').reminders, false);
+});
 
 test('admin user status isolates shared subscribers, preferences, current games and delivery failures', () => {
   const config = { discord: { token: 'do-not-expose' }, lastNationsNames: { a: 'Player', b: 'Player', c: 'Old' },

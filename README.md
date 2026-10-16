@@ -172,6 +172,13 @@ against the same reminder channel.
 
 ## Owner console with Discord authentication
 
+The admin subscriber table counts each Discord user once across turn notifications
+and enabled daily reminders. It includes reminder-only users, labels each delivery
+subscription type, and shows the union of their watched games. **Avsluta alla**
+ends both types for the selected user; other users following the same player keep
+their subscriptions. Disabled reminder preferences and historical accounts do not
+count as active subscribers.
+
 The cloud console reuses the local subscription-management page, protected by
 Discord OAuth authorization-code sign-in with only the `identify` scope. Access
 is restricted to one configured Discord owner ID, checked by the backend on every

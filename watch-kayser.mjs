@@ -22,7 +22,7 @@ import { startDiscordBot } from './discord-bot.mjs';
 import { botDelivery } from './bot-delivery.mjs';
 import { SmTableCache } from './sm-table.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
-import { adminUsers } from './admin-users.mjs';
+import { adminUsers, adminSubscribers } from './admin-users.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
@@ -116,22 +116,23 @@ function show() {
   }
 }
 function snapshot() {
+  const currentConfig = JSON.parse(readFileSync(configPath, 'utf8'));
   return {
     thinking: journal.data,
     now: new Date().toISOString(), stopped, discordEnabled: Boolean(transport),
     pending: outbox?.data.jobs.length ?? 0, blocked: outbox?.data.jobs.filter(job => job.blocked).length ?? 0,
     lastDelivery, lastDiscovery,
     botState,
-    users: adminUsers(JSON.parse(readFileSync(configPath, 'utf8')), subscriptions, matches, outbox?.data.jobs),
+    users: adminUsers(currentConfig, subscriptions, matches, outbox?.data.jobs),
     bannedUsers: Object.entries(readBannedUsers(configPath)).map(([userId, ban]) => ({ userId, ...ban })),
     playerNames: playerCache.names, playerNamesUpdatedAt: playerCache.updatedAt,
-    subscribers: subscriptionEntries(subscriptions).map(([username, userId]) => ({ username, userId, matches: matches.filter(m => !m.finished && m.players?.includes(username)).length })),
+    subscribers: adminSubscribers(currentConfig, subscriptions, matches),
     matches: matches.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, over: Boolean(m.finished), connected: m.status === 'connected' })),
     events: log.error ? [...log.entries, { time: new Date().toISOString(), level: 'error', message: log.error }] : log.entries,
   };
 }
-function applySubscriptions(selected) {
-  if (JSON.stringify(subscriptions) === JSON.stringify(selected)) return;
+function applySubscriptions(selected, force = false) {
+  if (!force && JSON.stringify(subscriptions) === JSON.stringify(selected)) return;
   const previous = subscriptions;
   try { outbox?.updateSubscriptions(previous, selected); }
   catch { delivery = 'STOPPED: could not update the outbox'; show(); stop(); throw new Error('Utkorgen kunde inte sparas. Bevakningen har stoppats.'); }
@@ -374,7 +375,10 @@ if (!args.includes('--no-dashboard')) {
         if (stopped) throw new Error('Bevakningen är stoppad.');
         if (!userId && recipients(subscriptions, username).length > 1) throw new Error('Ange Discord-ID för prenumerationen som ska avslutas.');
         const next = removeSubscriber(subscriptions, userId || recipients(subscriptions, username)[0]);
-        applySubscriptions(saveSubscriptions(configPath, next));
+        const targetId = userId || recipients(subscriptions, username)[0];
+        if (targetId && readReminderPreferences(configPath)[targetId]?.enabled) saveReminderPreference(configPath, targetId, { enabled: false });
+        applySubscriptions(saveSubscriptions(configPath, next), true);
+        await refreshMatches();
       },
       setBan: async (userId, enabled) => {
         if (stopped) throw new Error('Bevakningen är stoppad.');
