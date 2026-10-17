@@ -458,6 +458,12 @@ Språkval: svenska (`sv-SE`), engelska (`en-US`), tyska (`de`), franska (`fr`), 
 
 ### Flerspråkig FAQ
 
+`/question`, `/card` och `/nation` använder även **Inofficial FAQ amendments**: 28 separat
+källhänvisade engelska sammanfattningar av Logitudes återgivna designerbesked i
+[Nations FAQ += 2](https://boardgamegeek.com/thread/3605801/article/46844956#46844956).
+Dessa hålls isär från FAQ++ 1.11 och Tabony-errata. Kort- och nationsvyer märker de nya
+sammanfattningarna som engelska när ett annat språk har valts. Se [källdokumentationen](docs/question.md).
+
 Samtliga 216 FAQ-poster (219 engelska svarspunkter) har översättningar till tyska, franska, spanska och förenklad kinesiska, utöver de befintliga svenska texterna. `/language` styr även FAQ-text och allmänna frågerubriker i `/card` och `/nation`. Tryckta kort- och nationsnamn, versionsreferenser, källsidor och källänkar bevaras. Knappar och sidindelning behåller det valda språket.
 
 De fyra nya språken är maskinöversättningar från Google Translate med en gemensam spelordlista och stickprovskontroll av regeltolkningar. De är `pending` i granskningsunderlaget och är inte officiella eller fullständigt innehållsgranskade översättningar. Visningen följer samma befintliga regler för `pending` och `rejected` som övrig FAQ. Ingen översättning godkänns automatiskt.

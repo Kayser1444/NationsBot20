@@ -24,6 +24,27 @@ turn monitoring and image delivery keep their existing network connections.
 
 ## Source copies
 
+### Inofficial FAQ amendments
+
+`data/question/inofficial-faq-amendments.json` contains 28 English editorial summaries of
+[Logitude's Nations FAQ += 2 post](https://boardgamegeek.com/thread/3605801/article/46844956#46844956),
+published November 5, 2025 and read in Chrome on October 17, 2026. Logitude reports answers
+from Rustan and Robert, rewritten in his own words as proposed additions to the official FAQ.
+The canonical source label is **Inofficial FAQ amendments**. This is separate from published
+FAQ++ 1.11 and the Tabony owner's implementation-difference notes.
+
+All entries are available to `/question` through bounded local search/read tools under
+`faq-amendments/…`; reading one appends the fixed BGG thread link to the answer.
+Relevant named cards, their nations and private-architect providers also show these summaries
+in a separately cited section of `/card` and `/nation`, with existing pagination and language
+selection retained. Summaries are currently English; other language views explicitly label
+them as English summaries. `/question` can explain the source in the requested language.
+General clarifications without specific card links remain searchable in `/question`.
+
+This is a bundled, manually maintained snapshot: no BGG requests or CAPTCHA interaction happen
+at bot runtime. To update it, reread the post, revise the summaries and capture date, check
+named card references, and run `tests/question-amendments.test.mjs` and the full test suite.
+
 The packaged seed in `data/question/tabony-snapshot.json` preserves the Python
 source, LICENSE, copyright notice, commit ID and per-file SHA-256 hashes from the
 unmodified local `Logitude/nations` clone at

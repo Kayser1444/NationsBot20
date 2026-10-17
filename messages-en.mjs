@@ -5,6 +5,8 @@ export default {
   cardErrataOfficial: "Difference from official rules",
   cardErrataLegacy: "Comparison with historical MaBiWeb",
   cardErrataOriginal: "English original",
+  cardAmendmentsSummary: "English summary",
+  cardAmendmentsProvenance: "Summary of Logitude's reported designer clarifications",
   cardMachineTranslated: "Machine-translated",
   remindersOn: "Daily reminders enabled: {time} ({timezone}), independently of /notifications.",
   remindersOff: "Daily reminders disabled. /notifications is unchanged.",

@@ -2,6 +2,7 @@ import { questionAnswerFormat, parseQuestionAnswer } from './question-answer.mjs
 import { questionApiDiagnostics } from './question-api-diagnostics.mjs';
 import { maxSourceReadLines } from './question-sources.mjs';
 import { rulesDifferencesUrl } from './question-errata.mjs';
+import { faqAmendmentsUrl } from './question-amendments.mjs';
 export const questionModel = 'gpt-6.1-sol';
 export const maxQuestionRequests = 6;
 const tools = [
@@ -25,6 +26,7 @@ For forgotten card names or described effects, use search_cards with an English 
 Card-effect identification questions must be answered from the card library, not just a rulebook's general explanation. Translate colloquial resource words (for example Swedish "gubbar" means Workers). For "which events give workers", search_cards with query="gain worker" and card_type="event", then read each plausible candidate. Distinguish gaining new Workers from returning, deploying or undeploying existing Workers and from scoring for Workers. If a card search is empty, retry a shorter query in search_cards before leaving the library or claiming its text is unavailable. For broader lists, use several focused searches as needed; the top eight results do not prove completeness. Explain remaining source coverage limits instead of pretending the library has no card text. Batch relevant candidate reads to conserve API rounds.
 Image-verified card text has normalized icon labels. Historical dates/artwork/set symbols are outside this transcription. Editorial search paraphrases are not printed rules. Implementation-description entries are NOT verified printed text: disclose their source, and inspect the current code for behavior. Their pinned commit can differ from the current daily code snapshot. Metadata-only cards have no effect evidence; never infer their ability.
 Clearly distinguish official rules/FAQ from implementation behavior. Pending FAQ extraction is unreviewed; disclose when relying on it.
+For rules questions, consult relevant faq-amendments sources alongside the rulebooks and FAQ. "Inofficial FAQ amendments" contains editorial summaries of Logitude's reported answers from designers Rustan and Robert, rewritten by Logitude as proposed FAQ additions. Treat these as supplemental designer-reported clarifications, separately attributed from published official FAQ++ 1.11 and Tabony implementation notes. Explain material conflicts rather than silently merging the sources. Cite the exact source ID; the application appends its fixed BGG link when read.
 For Tabony behavior, differences, replacement of round-long effects (including Old Uppsala), private architects, or a comparison with MaBiWeb, consult the relevant tabony-rules-differences source as well as rules/code when available. These are the Tabony owner's published implementation notes, not official board-game errata. The official section compares Tabony with the board-game rules; the MaBiWeb section compares Tabony with an older implementation by a different creator. MaBiWeb is no longer available (bot-owner context); mention it only when relevant. Cite the exact source ID when using these notes. The application appends the fixed forum-post URL when you read them; do not generate a URL yourself.
 When both official and implementation perspectives are relevant, prefer two answer parts: first the rulebook, FAQ and verified printed card evidence, then how Tabony implements it and any differences. This is a flexible pattern: do not invent a second perspective or fill a second part unnecessarily. The application already sends a receipt/search hint; do not repeat that acknowledgement in the answer.
 For rules questions consult the rulebooks and relevant FAQ before implementation. Follow page/section cross-references when relevant.
@@ -66,6 +68,7 @@ Available sources: ${JSON.stringify(corpus.catalogue())}`;
       // Strip model-generated links: users receive local source references, never suggested external lookups.
       const parsed = parseQuestionAnswer(answer);
       if ([...evidence].some(id => id.startsWith('tabony-rules-differences/'))) parsed.sourceUrls = [rulesDifferencesUrl];
+      if ([...evidence].some(id => id.startsWith('faq-amendments/'))) parsed.sourceUrls = [...(parsed.sourceUrls ?? []), faqAmendmentsUrl];
       onAnswer(parsed); return parsed.parts.join('\n\n');
     }
     if (calls.length > 8) throw new Error('Too many question tools.');

@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, renameSync, mkdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
+import { faqAmendments } from './question-amendments.mjs';
 
 export const sourceFiles = ['__init__.py', '__main__.py', 'abbr.py', 'actions.py', 'cards.py', 'cli.py',
   'dynasty_cards.py', 'event_cards.py', 'events.py', 'exceptions.py', 'match.py', 'nations.py',
@@ -105,6 +106,12 @@ export function loadQuestionRulebooks() {
 
 export function createQuestionCorpus(snapshot, faq, rulebooks = [], cards = null, rulesDifferences = null) {
   const sources = new Map();
+  for (const entry of faqAmendments.entries) sources.set(`faq-amendments/${entry.id}`, {
+    kind: 'faq-amendment', title: `${faqAmendments.title}: ${entry.heading}`,
+    url: faqAmendments.url, author: faqAmendments.author, publishedAt: faqAmendments.publishedAt,
+    capturedAt: faqAmendments.capturedAt, provenance: faqAmendments.provenance,
+    text: `# ${entry.heading}\n${faqAmendments.provenance}\n${entry.text}`,
+  });
   if (rulesDifferences) {
     for (const section of rulesDifferences.sections) section.entries.forEach((text, index) => {
       const id = `tabony-rules-differences/${section.id}-${index + 1}`;

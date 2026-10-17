@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { text, translations } from './language.mjs';
 import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './card-images.mjs';
 import { validateRulesDifferences } from './question-errata.mjs';
+import { faqAmendments } from './question-amendments.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const noteTranslations = new Map(read('./data/question/tabony-rules-differences-translations.json').entries.map(entry => [entry.sourceText, entry.translations]));
@@ -118,6 +119,12 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
       relatedCards.some(candidate => cardIds.includes(candidate.id)) ||
       privateArchitects && note.startsWith('Private architects are tied to') ||
       card.name === 'Turmoil' && note.startsWith('Discarding turmoil'));
+    const amendments = faqAmendments.entries.filter(entry =>
+      relatedCards.some(candidate => [candidate.name, ...candidate.aliases].some(name =>
+        entry.names.some(reference => normalize(reference) === normalize(name)))) ||
+      entry.scope === 'private-architects' && privateArchitects);
+    const amendmentsHeader = '**Inofficial FAQ amendments**';
+    const amendmentsFooter = `\n\n${text(language, 'cardAmendmentsProvenance')}. ${text(language, 'cardSource')}: [Inofficial FAQ amendments](<${faqAmendments.url}>)`;
     const header = text(language, points.length === 1 ? 'cardFaqHeadingOne' : 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
@@ -127,7 +134,8 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
     // Reserve room for the complete header, source and page label in every page.
     const pageLabelReserve = text(language, 'cardFaqPage', { current: 99999, total: 99999 }).length;
     const capacity = Math.min(3000, Math.min(4096, 6000 - message.embeds.reduce((sum, embed) => sum + embedLength(embed), 0)) -
-      header.length - footer.length - (notes.length ? errataHeader.length + errataFooter.length + 4 : 0) - pageLabelReserve - 4);
+      header.length - footer.length - (notes.length ? errataHeader.length + errataFooter.length + 4 : 0) -
+      (amendments.length ? amendmentsHeader.length + amendmentsFooter.length + 4 : 0) - pageLabelReserve - 4);
     if (capacity < 100) throw new Error('Card metadata leaves no space for FAQ pages.');
     const lines = [];
     const paragraphs = [];
@@ -137,6 +145,10 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
       paragraphs.push({label, body: bullet.text, section:'faq'});
     }
     if (!points.length) paragraphs.push({label:'',body:text(language,'cardFaqPending'),section:'faq'});
+    for (const entry of amendments) paragraphs.push({
+      label:`- **${escape(entry.heading)}${language !== 'en-US' ? ' · ' + text(language,'cardAmendmentsSummary') : ''}:** `,
+      body:entry.text, section:'amendments',
+    });
     for (const {section,note} of notes) {
       const translated = language === 'en-US' ? note : noteTranslations.get(note)?.[language];
       const comparison = text(language, section.id === 'official' ? 'cardErrataOfficial' : 'cardErrataLegacy');
@@ -172,14 +184,14 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
     const button = (label, target, disabled = false) => ({ type: 2, style: 2, label,
       custom_id: `cardfaq:1:${card.id}:${language}:${target}`, disabled });
     const buttons = expanded ? [button(text(language, 'cardFaqHide'), 'closed')]
-      : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length && !notes.length)];
+      : [button(text(language, 'cardFaqShow', { count: points.length }), 0, !points.length && !notes.length && !amendments.length)];
     if (expanded) {
       const pageLabel = pages.length > 1 ? '\n' + text(language, 'cardFaqPage', { current: faqPage + 1, total: pages.length }) : '';
-      const blocks = ['faq','errata'].flatMap(section => {
+      const blocks = ['faq','amendments','errata'].flatMap(section => {
         const selected = pages[faqPage].filter(line=>line.section===section);
         if (!selected.length) return [];
-        return [(section === 'faq' ? header : errataHeader) + '\n\n' + selected.map(line=>line.text).join('\n') +
-          (section === 'faq' ? footer : errataFooter)];
+        return [({faq:header,amendments:amendmentsHeader,errata:errataHeader}[section]) + '\n\n' + selected.map(line=>line.text).join('\n') +
+          ({faq:footer,amendments:amendmentsFooter,errata:errataFooter}[section])];
       });
       message.embeds.push({ description: (pageLabel ? pageLabel.trim() + '\n\n' : '') + blocks.join('\n\n'), color: 12092983 });
       if (pages.length > 1) buttons.push(

@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "title": "Inofficial FAQ amendments",
+  "url": "https://boardgamegeek.com/thread/3605801/article/46844956#46844956",
+  "threadUrl": "https://boardgamegeek.com/thread/3605801/nations-faq-plus-equal-2",
+  "originalTitle": "Nations FAQ += 2",
+  "author": "Charles (Lodge-i-tood), Logitude",
+  "publishedAt": "2025-11-05",
+  "capturedAt": "2026-10-17",
+  "provenance": "Logitude reports clarifications from Rustan and Robert, rewritten in his own words as proposed additions to the official FAQ. These local entries are editorial summaries of that post, not published official FAQ errata or verified printed card text.",
+  "entries": [
+    {
+      "id": "private-architects",
+      "heading": "Private Architects",
+      "names": [
+        "Archimedes"
+      ],
+      "scope": "private-architects",
+      "text": "Each private architect belongs to the card providing it. Place it at the start of the round or when acquiring that card; choose between a private source and the public supply. An unused private architect is lost when its providing card, such as Archimedes, is removed."
+    },
+    {
+      "id": "returning-workers",
+      "heading": "Returning Workers",
+      "names": [],
+      "text": "When returning a deployed worker to the population track, update stability and military only after it has returned. Do not apply an intermediate state in which the worker is undeployed but has not yet returned."
+    },
+    {
+      "id": "removing-cards",
+      "heading": "Removing cards",
+      "names": [],
+      "text": "A card may be bought even when its effect immediately removes itself. It replaces the previous card first, so the slot ends empty."
+    },
+    {
+      "id": "vikings-athens",
+      "heading": "Vikings Special and Athens",
+      "names": [
+        "Vikings",
+        "Athens"
+      ],
+      "text": "Resolve the Vikings starting special and Athens in player order. An earlier player therefore has the advantage."
+    },
+    {
+      "id": "arabs-assassin",
+      "heading": "Arabs Special and Assassin",
+      "names": [
+        "Arabs",
+        "Assassin"
+      ],
+      "text": "The Arabs starting special grants its worker before the other players choose their Assassin consequences. Those players choose in reverse player order."
+    },
+    {
+      "id": "mansa-musa",
+      "heading": "Mansa Musa",
+      "names": [
+        "Mansa Musa",
+        "Fourth Crusade",
+        "Joseon Kingdom",
+        "Mali Empire",
+        "Jagellonian Dynasty",
+        "Piazza San Marco",
+        "Axumite Kingdom",
+        "Abbasid Caliphate",
+        "New Kingdom",
+        "Galileo Galilei"
+      ],
+      "text": "Mansa Musa can trigger from paying gold for Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty or Piazza San Marco; buying from the Progress Board or another player, including an Axumite surcharge; or paying for Golden Age VP, including Abbasid Caliphate. A positive amount of gold must be spent: paying zero because of New Kingdom or Galileo does not trigger him."
+    },
+    {
+      "id": "zhu-xi",
+      "heading": "Zhu Xi",
+      "names": [
+        "Zhu Xi",
+        "Mali Empire",
+        "Old Kingdom",
+        "Polish-Lithuanian Commonwealth",
+        "Japan"
+      ],
+      "text": "An advisor stacked with Zhu Xi forms a single combined advisor. Mali Empire and Old Kingdom remove both cards but grant the benefit for only one advisor. Poland sells the combination in one action for 3 gold. If Japan buys it, discard both cards and gain 1 military."
+    },
+    {
+      "id": "hawaii",
+      "heading": "Hawaii",
+      "names": [
+        "Hawaii"
+      ],
+      "text": "If extra workers remain on the population track, Hawaii must take an upkeep-bearing worker instead of an extra worker; mark that upkeep space. Hawaii cannot be bought when the population track has no workers."
+    },
+    {
+      "id": "first-last",
+      "heading": "First and Last",
+      "names": [],
+      "text": "With five or six players, the second player to pass also counts as first to pass, and the penultimate passer also counts as last, following the most/least convention."
+    },
+    {
+      "id": "ordering-events",
+      "heading": "Ordering Events",
+      "names": [],
+      "text": "For events moving the most/least stable players in player order, order them by stability, breaking stability ties using existing player order. If the two least stable players have different values, the lower goes last and the other second-last."
+    },
+    {
+      "id": "japan-great-plains",
+      "heading": "Japan and Great Plains",
+      "names": [
+        "Japan",
+        "Great Plains"
+      ],
+      "text": "Japan may not place a dynasty card on Great Plains."
+    },
+    {
+      "id": "versailles",
+      "heading": "Versailles",
+      "names": [
+        "Versailles"
+      ],
+      "text": "A player who completes Versailles this round counts as tied for least stability as though their value were negative, and is excluded when finding most stability. Another player may be the sole most stable among the remaining players even with lower numerical stability."
+    },
+    {
+      "id": "tonghak",
+      "heading": "Tonghak Movement",
+      "names": [
+        "Tonghak Movement"
+      ],
+      "text": "Resolve losing 8 books before gaining 2 stone. The later stone cannot pay a book deficit caused by the first effect."
+    },
+    {
+      "id": "sheba",
+      "heading": "Sheba",
+      "names": [
+        "Sheba",
+        "Anna Komnene"
+      ],
+      "text": "Sheba, like Anna Komnene, ignores all negative values on military cards, including negative stability."
+    },
+    {
+      "id": "janissaries",
+      "heading": "Janissaries",
+      "names": [
+        "Janissaries"
+      ],
+      "text": "Janissaries cannot be accepted with zero or one worker remaining on the population track."
+    },
+    {
+      "id": "yuan",
+      "heading": "Yuan Dynasty",
+      "names": [
+        "Yuan Dynasty"
+      ],
+      "text": "If fewer than 3 workers remain on the population track, Yuan Dynasty takes all remaining workers."
+    },
+    {
+      "id": "great-exhibition",
+      "heading": "Great Exhibition",
+      "names": [
+        "Great Exhibition"
+      ],
+      "text": "When hiring architects through Great Exhibition, you may choose to hire just one architect."
+    },
+    {
+      "id": "wardenclyffe",
+      "heading": "Wardenclyffe Tower and Great Exhibition",
+      "names": [
+        "Wardenclyffe Tower",
+        "Great Exhibition"
+      ],
+      "text": "When Wardenclyffe Tower is completed during Great Exhibition, a natural wonder bought with one of its 3 actions remains undiscovered if discovery is not finished by the end of those actions. If another round follows, exploration must continue then."
+    },
+    {
+      "id": "sun-tzu-buddha",
+      "heading": "Sun Tzu and Buddha",
+      "names": [
+        "Sun Tzu",
+        "Buddha"
+      ],
+      "text": "With both Sun Tzu and Buddha, skip the first turn and receive no Sun Tzu benefit."
+    },
+    {
+      "id": "leon",
+      "heading": "Kingdom of Leon",
+      "names": [
+        "Kingdom of Leon",
+        "Rigveda",
+        "Pactum Warmundi"
+      ],
+      "text": "Buying a war through Kingdom of Leon grants only 1 book during Rigveda, and triggers Pactum Warmundi."
+    },
+    {
+      "id": "axumite",
+      "heading": "Axumite Kingdom",
+      "names": [
+        "Axumite Kingdom",
+        "New Kingdom",
+        "Galileo Galilei"
+      ],
+      "text": "New Kingdom and Galileo do not discount the Axumite Kingdom surcharge."
+    },
+    {
+      "id": "emperor",
+      "heading": "Emperor",
+      "names": [
+        "Emperor",
+        "Japan",
+        "Imperial Examination",
+        "Absolute Monarchy"
+      ],
+      "text": "The Emperor is an ageless advisor. Japan neither gains VP from Imperial Examination nor loses books from Absolute Monarchy."
+    },
+    {
+      "id": "himeji",
+      "heading": "Himeji Castle",
+      "names": [
+        "Himeji Castle"
+      ],
+      "text": "Replacing a printed building with an Age I building grants stone from Himeji Castle."
+    },
+    {
+      "id": "coffee-house",
+      "heading": "Coffee House",
+      "names": [
+        "Coffee House",
+        "Frederic Chopin"
+      ],
+      "text": "Coffee House books are production rather than an immediate gain when passing. Chopin doubles them."
+    },
+    {
+      "id": "poland",
+      "heading": "Polish-Lithuanian Commonwealth",
+      "names": [
+        "Polish-Lithuanian Commonwealth",
+        "Genghis Khan"
+      ],
+      "text": "Advisors bought through Polish-Lithuanian Commonwealth reset their limited uses and private architects for the new owner, even in the same round. Buying Genghis Khan raises everyone's stability before lowering it again."
+    },
+    {
+      "id": "genghis-qin",
+      "heading": "Genghis Khan and Qin Shi Huang",
+      "names": [
+        "Genghis Khan",
+        "Qin Shi Huang"
+      ],
+      "text": "Check least stability for Qin Shi Huang only after the new card has been placed and the replaced card removed."
+    },
+    {
+      "id": "replacing-cards",
+      "heading": "Replacing Cards",
+      "names": [],
+      "text": "When replacing a card, remove the old card's stability and military benefits before adding those of the new card."
+    },
+    {
+      "id": "end-round",
+      "heading": "Discarding Turmoil and End of Round Effects",
+      "names": [
+        "Turmoil"
+      ],
+      "text": "Although the rules call for checking most/least after each change, they do not specify an order for these effects. The reported practical ruling resolves turmoil discards and end-of-round effects simultaneously within their respective steps, without checks during those steps. Sequence: Production; Player Order; War; Top Event; CHECK most/least; Bottom Event; CHECK; Famine; Discard Turmoil; Score Books if end of age; End-of-Round Effects; CHECK; End-of-Age Effects if end of age; CHECK."
+    }
+  ]
+}

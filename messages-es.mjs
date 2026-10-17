@@ -5,6 +5,8 @@ export default {
   cardErrataOfficial: "Diferencia con las reglas oficiales",
   cardErrataLegacy: "Comparación con el antiguo MaBiWeb",
   cardErrataOriginal: "Original en inglés",
+  cardAmendmentsSummary: "Resumen en inglés",
+  cardAmendmentsProvenance: "Resumen de las aclaraciones de los diseñadores recogidas por Logitude",
   "cardUnavailable": "El nombre de carta es desconocido o ambiguo. Elige una sugerencia.",
   "cardHeading": "Nations · carta",
   "nationHeading": "Nations · nación y dinastías",
