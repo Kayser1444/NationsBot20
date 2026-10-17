@@ -2,9 +2,10 @@ import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dashboardTheme } from './dashboard-theme.mjs';
+import { bulletinCredentialMatches } from './bulletins.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME }) {
+export async function startDashboard({ port = 24680, snapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -22,6 +23,26 @@ export async function startDashboard({ port = 24680, snapshot, subscribe, unsubs
     if (req.headers.host !== new URL(origin).host) { json(403, { error: 'Fel lokal adress.' }); return; }
     let url;
     try { url = new URL(req.url, origin); } catch { json(400, { error: 'Ogiltig adress.' }); return; }
+    if (url.pathname === '/api/bulletins' || url.pathname.startsWith('/api/bulletins/')) {
+      if (!auth || req.headers['x-forwarded-proto'] !== 'https') { json(403, { error: 'HTTPS krävs.' }); return; }
+      if (!bulletins || !bulletinCredentialMatches(req.headers.authorization, bulletinKeyHash)) { json(401, { error: 'Bulletinbehörighet krävs.' }); return; }
+      if (req.headers.origin && req.headers.origin !== origin) { json(403, { error: 'Ogiltigt ursprung.' }); return; }
+      try {
+        if (req.method === 'GET' && /^\/api\/bulletins\/[a-zA-Z0-9_-]{8,80}$/.test(url.pathname)) {
+          const receipt = bulletins.receipt(url.pathname.slice('/api/bulletins/'.length));
+          json(receipt ? 200 : 404, receipt ?? { error: 'Kvittot finns inte.' }); return;
+        }
+        if (req.method !== 'POST' || !['/api/bulletins', '/api/bulletins/preview'].includes(url.pathname)) { json(404, { error: 'Sidan finns inte.' }); return; }
+        if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON krävs.' }); return; }
+        const chunks = []; let size = 0;
+        for await (const chunk of req) { size += chunk.length; if (size > 16384) throw Object.assign(new Error('För stor förfrågan.'), { status: 413 }); chunks.push(chunk); }
+        const input = JSON.parse(Buffer.concat(chunks).toString('utf8'));
+        if (url.pathname.endsWith('/preview')) { json(200, bulletins.preview(input)); return; }
+        const receipt = await bulletins.publish(input, req.headers['idempotency-key']);
+        json(receipt.status === 'verified' ? 200 : receipt.status === 'failed' ? 502 : 202, receipt); return;
+      } catch (error) { json(error.status ?? (error instanceof SyntaxError ? 400 : 503), { error: error.status ? error.message : 'Bulletinanropet kunde inte slutföras. Kontrollera kvittot innan nytt försök.' }); }
+      return;
+    }
     let activeSession = null;
     if (auth) {
       // Railway terminates TLS and forwards HTTPS requests to this private port.

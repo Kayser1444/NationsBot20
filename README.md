@@ -9,6 +9,8 @@ logging into the game, submitting moves or posting game chat.
 
 ## Quick links
 
+Bulletins can be drafted here and published through the limited [bulletin API and local CLI](docs/bulletins.md), with separate staging/production credentials and persistent duplicate protection.
+
 - [NationsBot administration console](https://nationsbot20-production.up.railway.app/) — subscriptions, monitoring status and logs; sign in with the configured Discord owner account.
 - [Railway production service](https://railway.com/project/54e5d506-6518-484c-bbd6-2e5dd7449c80/service/5f489d1a-3442-45c3-b8cb-4b07cd4d4ce3?environmentId=4ae89d35-d82d-42e1-b5cd-2132cc248db0) — deployments, service logs, variables and volume settings; Railway access required.
 - [Nations on Tabony Games](https://games.tabony.net/nations/) — the online game, ongoing games and match pages.

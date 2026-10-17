@@ -23,6 +23,7 @@ import { botDelivery } from './bot-delivery.mjs';
 import { SmTableCache } from './sm-table.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 import { adminUsers, adminSubscribers } from './admin-users.mjs';
+import { createBulletinService } from './bulletins.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
@@ -345,7 +346,17 @@ if (!args.includes('--no-dashboard')) {
   const port = args.includes('--port') ? Number(args[args.indexOf('--port') + 1]) : profile === 'friends.json' ? 24680 : 24681;
   if (!Number.isInteger(port) || port < 0 || port > 65535) throw new Error('Invalid dashboard port.');
   try {
+    let bulletins = null;
+    if (process.env.NATIONS_BULLETIN_API_KEY_SHA256) {
+      try {
+        if (!/^[a-f0-9]{64}$/.test(process.env.NATIONS_BULLETIN_API_KEY_SHA256)) throw new Error();
+        bulletins = createBulletinService({ directory: dataDirectory, environment: process.env.RAILWAY_ENVIRONMENT_NAME,
+          guildId: config.discord?.guildId, channelId: config.discord?.channelId,
+          botId: process.env.NATIONS_DISCORD_CLIENT_ID, token: process.env.NATIONS_DISCORD_BOT_TOKEN });
+      } catch { log.add('Bulletin-API är avstängt: kontrollera miljö, målkanal och API-nyckelns hash.', 'error'); }
+    }
     dashboard = await startDashboard({ port, snapshot, questionLog,
+      bulletins, bulletinKeyHash: process.env.NATIONS_BULLETIN_API_KEY_SHA256,
       questionQuota: userId => {
         if (!bot) throw new Error('Discord-boten har inte startat.');
         return bot.questionQuota(userId);
