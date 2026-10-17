@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { faqAmendments, faqAmendmentsUrl } from '../question-amendments.mjs';
+import { faqAmendments, faqAmendmentsUrl, faqAmendmentTranslations, amendmentTranslation } from '../question-amendments.mjs';
+import { text } from '../language.mjs';
 import { createQuestionCorpus } from '../question-sources.mjs';
 import { investigateQuestion } from '../question-agent.mjs';
 import { rulesDifferencesUrl } from '../question-errata.mjs';
@@ -38,11 +39,11 @@ test('cards and nations retain separate amendment citations through pagination a
   for (const language of ['en-US','sv-SE','de','fr','es-ES','zh-CN']) {
     const poland = body(pages('Poland',language,true));
     assert.match(poland,/Inofficial FAQ amendments/);
-    assert.match(poland,/reset their limited uses and private architects/);
+    assert.ok(poland.includes(amendmentTranslation(faqAmendments.entries.find(entry=>entry.id==='poland'),language).text));
     assert.ok(poland.includes(faqAmendments.url));
-    assert.match(body(pages('Galileo Galilei',language)),/Axumite Kingdom surcharge/);
+    assert.ok(body(pages('Galileo Galilei',language)).includes(amendmentTranslation(faqAmendments.entries.find(entry=>entry.id==='axumite'),language).text));
     assert.match(body(pages('Frederic Chopin',language)),/Coffee House/);
-    assert.match(body(pages('Archimedes',language)),/Each private architect belongs/);
+    assert.ok(body(pages('Archimedes',language)).includes(amendmentTranslation(faqAmendments.entries[0],language).text));
     assert.doesNotMatch(body(pages('Porcelain Tower',language)),/Inofficial FAQ amendments/);
     for (const reply of pages('Poland',language,true)) {
       const message = reply.messages[0];
@@ -53,6 +54,28 @@ test('cards and nations retain separate amendment citations through pagination a
       const id = message.components[0].components[0].custom_id;
       assert.equal(cardBank.renderButton(id).ok,true);
     }
+  }
+});
+
+test('all amendments have source-bound translations with preserved numbers and short notices', () => {
+  assert.equal(faqAmendmentTranslations.entries.length,faqAmendments.entries.length);
+  assert.equal(new Set(faqAmendmentTranslations.entries.map(entry=>entry.id)).size,28);
+  for (const entry of faqAmendments.entries) for (const language of ['sv-SE','de','fr','es-ES','zh-CN']) {
+    const translated = amendmentTranslation(entry,language);
+    assert.ok(translated?.text && translated.heading,entry.id+' '+language);
+    assert.notEqual(translated.text,entry.text);
+    assert.deepEqual(translated.text.match(/\d+/g)??[],entry.text.match(/\d+/g)??[],entry.id+' '+language);
+    assert.equal(amendmentTranslation({...entry,text:entry.text+' Edited.'},language),null);
+    assert.equal(amendmentTranslation({...entry,heading:entry.heading+' Edited'},language),null);
+  }
+  for (const language of ['en-US','sv-SE','de','fr','es-ES','zh-CN']) {
+    const arab=body(pages('Arabs',language,true));
+    const viking=body(pages('Vikings',language,true));
+    assert.ok(arab.includes(amendmentTranslation(faqAmendments.entries.find(entry=>entry.id==='arabs-assassin'),language).text));
+    assert.ok(viking.includes(amendmentTranslation(faqAmendments.entries.find(entry=>entry.id==='vikings-athens'),language).text));
+    assert.ok(!arab.includes(text(language,'cardAmendmentsSummary')));
+    assert.doesNotMatch(arab,/reported designer clarifications|Rustan|Robert/);
+    if(language!=='en-US') assert.ok(arab.includes('• '+text(language,'cardMachineTranslated')+'. '+text(language,'cardSource')+':'));
   }
 });
 

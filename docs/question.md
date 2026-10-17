@@ -37,13 +37,20 @@ All entries are available to `/question` through bounded local search/read tools
 `faq-amendments/…`; reading one appends the fixed BGG thread link to the answer.
 Relevant named cards, their nations and private-architect providers also show these summaries
 in a separately cited section of `/card` and `/nation`, with existing pagination and language
-selection retained. Summaries are currently English; other language views explicitly label
-them as English summaries. `/question` can explain the source in the requested language.
+selection retained. All 28 summaries and their general headings have AI translations into
+Swedish, German, French, Spanish and simplified Chinese in
+`data/question/inofficial-faq-amendments-translations.json`. Printed card and nation names remain
+English. Translated sections use one short “Machine translated. Source: …” footer and the
+original BGG post link. English sections show just the source link. `/question` continues to
+read the English source and explain it in the requested language.
 General clarifications without specific card links remain searchable in `/question`.
 
 This is a bundled, manually maintained snapshot: no BGG requests or CAPTCHA interaction happen
 at bot runtime. To update it, reread the post, revise the summaries and capture date, check
-named card references, and run `tests/question-amendments.test.mjs` and the full test suite.
+named card references, update the source-bound translations, and run
+`tests/question-amendments.test.mjs` and the full test suite. Translations must match both the
+exact English heading and text; changed or missing translations fall back to a labelled
+English summary instead of displaying outdated text.
 
 The packaged seed in `data/question/tabony-snapshot.json` preserves the Python
 source, LICENSE, copyright notice, commit ID and per-file SHA-256 hashes from the

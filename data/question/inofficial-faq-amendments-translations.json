@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "method": "AI translation of the bundled English editorial summaries; card and nation names retained in English.",
+  "entries": [
+    {
+      "id": "private-architects",
+      "sourceText": "Each private architect belongs to the card providing it. Place it at the start of the round or when acquiring that card; choose between a private source and the public supply. An unused private architect is lost when its providing card, such as Archimedes, is removed.",
+      "sourceHeading": "Private Architects",
+      "translations": {
+        "sv-SE": {
+          "heading": "Privata arkitekter",
+          "text": "Varje privat arkitekt tillhör kortet som ger den. Placera den vid rundans början eller när kortet förvärvas. Välj mellan en privat källa och det allmänna förrådet. En oanvänd privat arkitekt försvinner om kortet som ger den, till exempel Archimedes, tas bort."
+        },
+        "de": {
+          "heading": "Private Architekten",
+          "text": "Jeder private Architekt gehört zu der Karte, die ihn bereitstellt. Lege ihn zu Rundenbeginn oder beim Erwerb der Karte darauf. Du wählst zwischen einer privaten Quelle und dem allgemeinen Vorrat. Wird die bereitstellende Karte, etwa Archimedes, entfernt, geht ihr ungenutzter privater Architekt verloren."
+        },
+        "fr": {
+          "heading": "Architectes privés",
+          "text": "Chaque architecte privé appartient à la carte qui le fournit. Placez-le au début de la manche ou lors de l’acquisition de cette carte. Choisissez entre une source privée et la réserve commune. Un architecte privé inutilisé est perdu si sa carte, par exemple Archimedes, est retirée."
+        },
+        "es-ES": {
+          "heading": "Arquitectos privados",
+          "text": "Cada arquitecto privado pertenece a la carta que lo proporciona. Colócalo al inicio de la ronda o al adquirir esa carta. Elige entre una fuente privada y la reserva común. Si se retira la carta que lo proporciona, como Archimedes, se pierde su arquitecto privado sin usar."
+        },
+        "zh-CN": {
+          "heading": "私人建筑师",
+          "text": "每名私人建筑师都属于提供他的卡牌。在每轮开始或获得该卡时，将建筑师放在该卡上。你可以选择私人建筑师的来源，或使用公共供应。若提供建筑师的卡牌（如 Archimedes）被移除，其尚未使用的私人建筑师也会失去。"
+        }
+      }
+    },
+    {
+      "id": "returning-workers",
+      "sourceText": "When returning a deployed worker to the population track, update stability and military only after it has returned. Do not apply an intermediate state in which the worker is undeployed but has not yet returned.",
+      "sourceHeading": "Returning Workers",
+      "translations": {
+        "sv-SE": {
+          "heading": "Återföra arbetare",
+          "text": "När en utplacerad arbetare återförs till befolkningsspåret uppdateras stabilitet och militär styrka först efter återförandet. Tillämpa inget mellanläge där arbetaren har tagits bort från kortet men ännu inte återförts."
+        },
+        "de": {
+          "heading": "Arbeiter zurückgeben",
+          "text": "Wird ein eingesetzter Arbeiter auf die Bevölkerungsleiste zurückgegeben, werden Stabilität und militärische Stärke erst danach angepasst. Es gibt keinen Zwischenzustand, in dem der Arbeiter nicht mehr eingesetzt, aber noch nicht zurückgegeben ist."
+        },
+        "fr": {
+          "heading": "Retour des ouvriers",
+          "text": "Lorsqu’un ouvrier déployé retourne sur la piste de population, ajustez la stabilité et la force militaire seulement après son retour. N’appliquez pas d’état intermédiaire où il ne serait plus déployé sans être encore revenu."
+        },
+        "es-ES": {
+          "heading": "Devolver trabajadores",
+          "text": "Al devolver un trabajador desplegado a la pista de población, ajusta la estabilidad y la fuerza militar solo después de devolverlo. No apliques un estado intermedio en el que ya no esté desplegado pero aún no haya regresado."
+        },
+        "zh-CN": {
+          "heading": "送回工人",
+          "text": "将已部署的工人送回人口轨道时，须等工人返回后才调整稳定度和军力。不要处理“已撤下但尚未返回人口轨道”的中间状态。"
+        }
+      }
+    },
+    {
+      "id": "removing-cards",
+      "sourceText": "A card may be bought even when its effect immediately removes itself. It replaces the previous card first, so the slot ends empty.",
+      "sourceHeading": "Removing cards",
+      "translations": {
+        "sv-SE": {
+          "heading": "Ta bort kort",
+          "text": "Du får köpa ett kort även om dess effekt omedelbart tar bort det. Det ersätter först det tidigare kortet, så platsen blir tom."
+        },
+        "de": {
+          "heading": "Karten entfernen",
+          "text": "Du darfst eine Karte kaufen, auch wenn ihr Effekt sie sofort wieder entfernt. Zuerst ersetzt sie die bisherige Karte; der Platz bleibt daher leer."
+        },
+        "fr": {
+          "heading": "Retrait des cartes",
+          "text": "Vous pouvez acheter une carte même si son effet la retire immédiatement. Elle remplace d’abord l’ancienne carte, laissant donc l’emplacement vide."
+        },
+        "es-ES": {
+          "heading": "Retirar cartas",
+          "text": "Puedes comprar una carta aunque su efecto la retire inmediatamente. Primero sustituye a la carta anterior, por lo que el espacio queda vacío."
+        },
+        "zh-CN": {
+          "heading": "移除卡牌",
+          "text": "即使卡牌的效果会立即移除自身，你仍可购买它。先用它替换原有卡牌，因此该位置最终为空。"
+        }
+      }
+    },
+    {
+      "id": "vikings-athens",
+      "sourceText": "Resolve the Vikings starting special and Athens in player order. An earlier player therefore has the advantage.",
+      "sourceHeading": "Vikings Special and Athens",
+      "translations": {
+        "sv-SE": {
+          "heading": "Vikings startförmåga och Athens",
+          "text": "Avgör Vikings startförmåga och Athens i spelarordning. Spelaren som kommer tidigare har därför en fördel."
+        },
+        "de": {
+          "heading": "Startfähigkeit der Vikings und Athens",
+          "text": "Handle die Startfähigkeit der Vikings und Athens in Spielerreihenfolge ab. Wer früher an der Reihe ist, hat dadurch einen Vorteil."
+        },
+        "fr": {
+          "heading": "Capacité initiale des Vikings et Athens",
+          "text": "Résolvez la capacité initiale des Vikings et Athens dans l’ordre des joueurs. Le joueur placé plus tôt a donc l’avantage."
+        },
+        "es-ES": {
+          "heading": "Habilidad inicial de Vikings y Athens",
+          "text": "Resuelve la habilidad inicial de Vikings y Athens en orden de turno. El jugador que va antes tiene, por tanto, ventaja."
+        },
+        "zh-CN": {
+          "heading": "Vikings 初始能力与 Athens",
+          "text": "按玩家顺序结算 Vikings 的初始特殊能力和 Athens。因此，顺序靠前的玩家有优势。"
+        }
+      }
+    },
+    {
+      "id": "arabs-assassin",
+      "sourceText": "The Arabs starting special grants its worker before the other players choose their Assassin consequences. Those players choose in reverse player order.",
+      "sourceHeading": "Arabs Special and Assassin",
+      "translations": {
+        "sv-SE": {
+          "heading": "Arabs startförmåga och Assassin",
+          "text": "Arabs startförmåga ger sin arbetare innan övriga spelare väljer konsekvens av Assassin. Dessa spelare väljer i omvänd spelarordning."
+        },
+        "de": {
+          "heading": "Startfähigkeit der Arabs und Assassin",
+          "text": "Die Startfähigkeit der Arabs gewährt ihren Arbeiter, bevor die anderen Spieler ihre Folgen von Assassin wählen. Diese Spieler wählen in umgekehrter Spielerreihenfolge."
+        },
+        "fr": {
+          "heading": "Capacité initiale des Arabs et Assassin",
+          "text": "La capacité initiale des Arabs donne son ouvrier avant que les autres joueurs choisissent les conséquences d’Assassin. Ces joueurs choisissent dans l’ordre inverse des joueurs."
+        },
+        "es-ES": {
+          "heading": "Habilidad inicial de Arabs y Assassin",
+          "text": "La habilidad inicial de Arabs concede su trabajador antes de que los demás jugadores elijan las consecuencias de Assassin. Esos jugadores eligen en orden inverso de turno."
+        },
+        "zh-CN": {
+          "heading": "Arabs 初始能力与 Assassin",
+          "text": "Arabs 的初始特殊能力先给予其工人，然后其他玩家才选择 Assassin 的后果。其他玩家按玩家顺序的逆序选择。"
+        }
+      }
+    },
+    {
+      "id": "mansa-musa",
+      "sourceText": "Mansa Musa can trigger from paying gold for Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty or Piazza San Marco; buying from the Progress Board or another player, including an Axumite surcharge; or paying for Golden Age VP, including Abbasid Caliphate. A positive amount of gold must be spent: paying zero because of New Kingdom or Galileo does not trigger him.",
+      "sourceHeading": "Mansa Musa",
+      "translations": {
+        "sv-SE": {
+          "heading": "Mansa Musa",
+          "text": "Mansa Musa kan utlösas när du betalar guld för Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty eller Piazza San Marco; köper från framstegstavlan eller en annan spelare, inklusive tillägget för Axumite Kingdom; eller betalar för segerpoäng från en guldålder, även via Abbasid Caliphate. Du måste faktiskt betala guld: noll guld tack vare New Kingdom eller Galileo utlöser inte förmågan."
+        },
+        "de": {
+          "heading": "Mansa Musa",
+          "text": "Mansa Musa kann durch Goldzahlungen für Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty oder Piazza San Marco ausgelöst werden; ebenso beim Kauf vom Fortschrittsplan oder von einem Mitspieler, einschließlich des Aufpreises für Axumite Kingdom, sowie beim Bezahlen von Siegpunkten eines Goldenen Zeitalters, auch über Abbasid Caliphate. Es muss tatsächlich Gold ausgegeben werden: Eine Zahlung von null Gold dank New Kingdom oder Galileo löst ihn nicht aus."
+        },
+        "fr": {
+          "heading": "Mansa Musa",
+          "text": "Mansa Musa peut être déclenché en payant de l’or pour Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty ou Piazza San Marco ; en achetant sur le plateau de progrès ou à un autre joueur, y compris le supplément d’Axumite Kingdom ; ou en payant des points de victoire d’un âge d’or, y compris via Abbasid Caliphate. Il faut dépenser une quantité d’or strictement positive : payer zéro grâce à New Kingdom ou Galileo ne le déclenche pas."
+        },
+        "es-ES": {
+          "heading": "Mansa Musa",
+          "text": "Mansa Musa puede activarse al pagar oro por Fourth Crusade, Joseon Kingdom, Mali Empire, Jagellonian Dynasty o Piazza San Marco; al comprar del tablero de progreso o a otro jugador, incluido el recargo de Axumite Kingdom; o al pagar puntos de victoria de una edad de oro, también mediante Abbasid Caliphate. Debe gastarse una cantidad positiva de oro: pagar cero gracias a New Kingdom o Galileo no lo activa."
+        },
+        "zh-CN": {
+          "heading": "Mansa Musa",
+          "text": "支付金币用于 Fourth Crusade、Joseon Kingdom、Mali Empire、Jagellonian Dynasty 或 Piazza San Marco；从发展牌板或其他玩家处购牌（包括 Axumite Kingdom 的附加费用）；或支付黄金时代胜利点费用（包括通过 Abbasid Caliphate），均可触发 Mansa Musa。必须实际支付正数金币；因 New Kingdom 或 Galileo 而支付零金币不会触发他。"
+        }
+      }
+    },
+    {
+      "id": "zhu-xi",
+      "sourceText": "An advisor stacked with Zhu Xi forms a single combined advisor. Mali Empire and Old Kingdom remove both cards but grant the benefit for only one advisor. Poland sells the combination in one action for 3 gold. If Japan buys it, discard both cards and gain 1 military.",
+      "sourceHeading": "Zhu Xi",
+      "translations": {
+        "sv-SE": {
+          "heading": "Zhu Xi",
+          "text": "En rådgivare ovanpå Zhu Xi bildar en enda kombinerad rådgivare. Mali Empire och Old Kingdom tar bort båda korten men ger fördelen för endast en rådgivare. Poland säljer kombinationen i en handling för 3 guld. Om Japan köper den kastas båda korten och Japan får 1 militär styrka."
+        },
+        "de": {
+          "heading": "Zhu Xi",
+          "text": "Ein auf Zhu Xi gelegter Berater bildet mit ihm einen einzigen kombinierten Berater. Mali Empire und Old Kingdom entfernen beide Karten, gewähren aber nur den Vorteil für einen Berater. Poland verkauft die Kombination mit einer Aktion für 3 Gold. Kauft Japan sie, werden beide Karten abgelegt und Japan erhält 1 militärische Stärke."
+        },
+        "fr": {
+          "heading": "Zhu Xi",
+          "text": "Un conseiller placé sur Zhu Xi forme avec lui un seul conseiller combiné. Mali Empire et Old Kingdom retirent les deux cartes mais accordent le bénéfice d’un seul conseiller. Poland vend l’ensemble en une action pour 3 pièces d’or. Si Japan l’achète, défaussez les deux cartes et gagnez 1 en force militaire."
+        },
+        "es-ES": {
+          "heading": "Zhu Xi",
+          "text": "Un consejero colocado sobre Zhu Xi forma con él un único consejero combinado. Mali Empire y Old Kingdom retiran ambas cartas, pero conceden el beneficio de un solo consejero. Poland vende el conjunto en una acción por 3 de oro. Si Japan lo compra, descarta ambas cartas y gana 1 de fuerza militar."
+        },
+        "zh-CN": {
+          "heading": "Zhu Xi",
+          "text": "叠放在 Zhu Xi 上的顾问与其视为一名组合顾问。Mali Empire 和 Old Kingdom 会移除两张牌，但只给予移除一名顾问的收益。Poland 以一次行动、3 金币出售整个组合。若 Japan 购买，则弃掉两张牌并获得 1 军力。"
+        }
+      }
+    },
+    {
+      "id": "hawaii",
+      "sourceText": "If extra workers remain on the population track, Hawaii must take an upkeep-bearing worker instead of an extra worker; mark that upkeep space. Hawaii cannot be bought when the population track has no workers.",
+      "sourceHeading": "Hawaii",
+      "translations": {
+        "sv-SE": {
+          "heading": "Hawaii",
+          "text": "Om extra arbetare finns kvar på befolkningsspåret måste Hawaii ta en arbetare med underhåll i stället för en extra arbetare. Markera den underhållsplatsen. Hawaii får inte köpas om befolkningsspåret saknar arbetare."
+        },
+        "de": {
+          "heading": "Hawaii",
+          "text": "Liegen zusätzliche Arbeiter auf der Bevölkerungsleiste, muss Hawaii einen Arbeiter mit Unterhalt statt eines zusätzlichen Arbeiters nehmen. Markiere dessen Unterhaltsfeld. Hawaii darf nicht gekauft werden, wenn keine Arbeiter mehr auf der Bevölkerungsleiste liegen."
+        },
+        "fr": {
+          "heading": "Hawaii",
+          "text": "S’il reste des ouvriers supplémentaires sur la piste de population, Hawaii doit prendre un ouvrier avec entretien plutôt qu’un ouvrier supplémentaire. Marquez cette case d’entretien. Hawaii ne peut pas être acheté si la piste de population ne contient aucun ouvrier."
+        },
+        "es-ES": {
+          "heading": "Hawaii",
+          "text": "Si quedan trabajadores adicionales en la pista de población, Hawaii debe tomar un trabajador con mantenimiento en vez de uno adicional. Marca esa casilla de mantenimiento. No se puede comprar Hawaii si no quedan trabajadores en la pista de población."
+        },
+        "zh-CN": {
+          "heading": "Hawaii",
+          "text": "如果人口轨道上还有额外工人，Hawaii 必须拿取一名有维护费用的工人，而非额外工人，并标记该维护费用格。人口轨道上没有工人时，不得购买 Hawaii。"
+        }
+      }
+    },
+    {
+      "id": "first-last",
+      "sourceText": "With five or six players, the second player to pass also counts as first to pass, and the penultimate passer also counts as last, following the most/least convention.",
+      "sourceHeading": "First and Last",
+      "translations": {
+        "sv-SE": {
+          "heading": "Först och sist",
+          "text": "Med fem eller sex spelare räknas även den andra spelaren som passar som först, och den näst sista som sist, enligt samma princip som mest/minst."
+        },
+        "de": {
+          "heading": "Erster und Letzter",
+          "text": "Bei fünf oder sechs Spielern gilt auch der zweite passende Spieler als Erster und der vorletzte als Letzter, entsprechend der Regel für die meisten/wenigsten."
+        },
+        "fr": {
+          "heading": "Premier et dernier",
+          "text": "À cinq ou six joueurs, le deuxième joueur à passer compte aussi comme premier, et l’avant-dernier comme dernier, selon la convention du plus/moins."
+        },
+        "es-ES": {
+          "heading": "Primero y último",
+          "text": "Con cinco o seis jugadores, el segundo jugador en pasar también cuenta como primero y el penúltimo como último, siguiendo la convención de más/menos."
+        },
+        "zh-CN": {
+          "heading": "最先与最后",
+          "text": "五人或六人游戏中，第二个放弃行动的玩家也算最先放弃，倒数第二个也算最后放弃，与最多／最少的处理方式相同。"
+        }
+      }
+    },
+    {
+      "id": "ordering-events",
+      "sourceText": "For events moving the most/least stable players in player order, order them by stability, breaking stability ties using existing player order. If the two least stable players have different values, the lower goes last and the other second-last.",
+      "sourceHeading": "Ordering Events",
+      "translations": {
+        "sv-SE": {
+          "heading": "Händelsernas ordning",
+          "text": "När en händelse flyttar spelarna med mest eller minst stabilitet i spelarordningen ordnas de efter stabilitetsvärde. Lika värden avgörs med nuvarande spelarordning. Om de två minst stabila har olika värden hamnar den med lägst värde sist och den andra näst sist."
+        },
+        "de": {
+          "heading": "Reihenfolge bei Ereignissen",
+          "text": "Wenn Ereignisse Spieler mit der höchsten oder niedrigsten Stabilität in der Spielerreihenfolge versetzen, werden sie nach Stabilitätswert geordnet. Gleichstände entscheidet die bisherige Spielerreihenfolge. Haben die beiden instabilsten Spieler unterschiedliche Werte, kommt der niedrigere auf den letzten und der andere auf den vorletzten Platz."
+        },
+        "fr": {
+          "heading": "Ordre des événements",
+          "text": "Pour les événements déplaçant les joueurs les plus ou les moins stables dans l’ordre des joueurs, classez-les par stabilité et départagez les égalités selon l’ordre actuel. Si les deux joueurs les moins stables ont des valeurs différentes, le plus faible va en dernière position et l’autre en avant-dernière."
+        },
+        "es-ES": {
+          "heading": "Orden de los eventos",
+          "text": "En los eventos que desplazan en el orden de turno a los jugadores con más o menos estabilidad, ordénalos por estabilidad y resuelve los empates según el orden actual. Si los dos menos estables tienen valores distintos, el de menor valor va último y el otro penúltimo."
+        },
+        "zh-CN": {
+          "heading": "事件中的顺序",
+          "text": "事件将稳定度最高或最低的玩家调整到指定玩家顺序位置时，按稳定度数值排序；数值相同则按当前玩家顺序。若稳定度最低的两名玩家数值不同，较低者排最后，另一人排倒数第二。"
+        }
+      }
+    },
+    {
+      "id": "japan-great-plains",
+      "sourceText": "Japan may not place a dynasty card on Great Plains.",
+      "sourceHeading": "Japan and Great Plains",
+      "translations": {
+        "sv-SE": {
+          "heading": "Japan och Great Plains",
+          "text": "Japan får inte placera ett dynastikort på Great Plains."
+        },
+        "de": {
+          "heading": "Japan und Great Plains",
+          "text": "Japan darf keine Dynastiekarte auf Great Plains legen."
+        },
+        "fr": {
+          "heading": "Japan et Great Plains",
+          "text": "Japan ne peut pas placer de carte dynastie sur Great Plains."
+        },
+        "es-ES": {
+          "heading": "Japan y Great Plains",
+          "text": "Japan no puede colocar una carta de dinastía en Great Plains."
+        },
+        "zh-CN": {
+          "heading": "Japan 与 Great Plains",
+          "text": "Japan 不得在 Great Plains 上放置王朝牌。"
+        }
+      }
+    },
+    {
+      "id": "versailles",
+      "sourceText": "A player who completes Versailles this round counts as tied for least stability as though their value were negative, and is excluded when finding most stability. Another player may be the sole most stable among the remaining players even with lower numerical stability.",
+      "sourceHeading": "Versailles",
+      "translations": {
+        "sv-SE": {
+          "heading": "Versailles",
+          "text": "Den som färdigställer Versailles denna runda räknas som delat minst stabil, som om stabiliteten vore negativ, och räknas inte med när mest stabilitet avgörs. En annan spelare kan därför ensam ha mest stabilitet bland de återstående trots ett lägre numeriskt värde."
+        },
+        "de": {
+          "heading": "Versailles",
+          "text": "Wer Versailles in dieser Runde fertigstellt, gilt als gleichauf bei der niedrigsten Stabilität, als wäre der eigene Wert negativ, und wird bei der höchsten Stabilität nicht berücksichtigt. Ein anderer Spieler kann unter den übrigen allein die höchste Stabilität haben, selbst bei einem niedrigeren Zahlenwert."
+        },
+        "fr": {
+          "heading": "Versailles",
+          "text": "Un joueur qui termine Versailles cette manche est considéré comme à égalité pour la stabilité la plus faible, comme si sa valeur était négative, et est exclu de la recherche de la stabilité la plus élevée. Un autre joueur peut donc être seul le plus stable parmi les autres, même avec une valeur numérique inférieure."
+        },
+        "es-ES": {
+          "heading": "Versailles",
+          "text": "Quien complete Versailles esta ronda cuenta como empatado en la menor estabilidad, como si su valor fuera negativo, y se excluye al determinar la mayor estabilidad. Otro jugador puede tener en solitario la mayor estabilidad entre los restantes aunque su valor numérico sea inferior."
+        },
+        "zh-CN": {
+          "heading": "Versailles",
+          "text": "本轮完成 Versailles 的玩家视为并列稳定度最低，如同其数值为负数，并在判断稳定度最高者时被排除。即使另一名玩家的数值更低，他仍可能在其余玩家中独自拥有最高稳定度。"
+        }
+      }
+    },
+    {
+      "id": "tonghak",
+      "sourceText": "Resolve losing 8 books before gaining 2 stone. The later stone cannot pay a book deficit caused by the first effect.",
+      "sourceHeading": "Tonghak Movement",
+      "translations": {
+        "sv-SE": {
+          "heading": "Tonghak Movement",
+          "text": "Förlora först 8 böcker och få därefter 2 sten. Stenen som kommer senare får inte användas för att betala ett bokunderskott från den första effekten."
+        },
+        "de": {
+          "heading": "Tonghak Movement",
+          "text": "Verliere zuerst 8 Bücher und erhalte danach 2 Stein. Der später erhaltene Stein darf kein Bücherdefizit aus dem ersten Effekt bezahlen."
+        },
+        "fr": {
+          "heading": "Tonghak Movement",
+          "text": "Perdez d’abord 8 livres, puis gagnez 2 pierres. Les pierres reçues ensuite ne peuvent pas couvrir un déficit de livres causé par le premier effet."
+        },
+        "es-ES": {
+          "heading": "Tonghak Movement",
+          "text": "Primero pierde 8 libros y después gana 2 piedras. Las piedras recibidas después no pueden pagar un déficit de libros causado por el primer efecto."
+        },
+        "zh-CN": {
+          "heading": "Tonghak Movement",
+          "text": "先失去 8 书本，再获得 2 石料。不能用后来获得的石料支付第一个效果造成的书本短缺。"
+        }
+      }
+    },
+    {
+      "id": "sheba",
+      "sourceText": "Sheba, like Anna Komnene, ignores all negative values on military cards, including negative stability.",
+      "sourceHeading": "Sheba",
+      "translations": {
+        "sv-SE": {
+          "heading": "Sheba",
+          "text": "Sheba ignorerar, liksom Anna Komnene, alla negativa värden på militärkort, inklusive negativ stabilitet."
+        },
+        "de": {
+          "heading": "Sheba",
+          "text": "Sheba ignoriert wie Anna Komnene alle negativen Werte auf Militärkarten, einschließlich negativer Stabilität."
+        },
+        "fr": {
+          "heading": "Sheba",
+          "text": "Comme Anna Komnene, Sheba ignore toutes les valeurs négatives des cartes militaires, y compris la stabilité négative."
+        },
+        "es-ES": {
+          "heading": "Sheba",
+          "text": "Al igual que Anna Komnene, Sheba ignora todos los valores negativos de las cartas militares, incluida la estabilidad negativa."
+        },
+        "zh-CN": {
+          "heading": "Sheba",
+          "text": "Sheba 与 Anna Komnene 一样，忽略军事牌上的所有负数值，包括负稳定度。"
+        }
+      }
+    },
+    {
+      "id": "janissaries",
+      "sourceText": "Janissaries cannot be accepted with zero or one worker remaining on the population track.",
+      "sourceHeading": "Janissaries",
+      "translations": {
+        "sv-SE": {
+          "heading": "Janissaries",
+          "text": "Du får inte acceptera Janissaries om noll eller en arbetare finns kvar på befolkningsspåret."
+        },
+        "de": {
+          "heading": "Janissaries",
+          "text": "Janissaries darf nicht angenommen werden, wenn nur noch null oder ein Arbeiter auf der Bevölkerungsleiste liegt."
+        },
+        "fr": {
+          "heading": "Janissaries",
+          "text": "Vous ne pouvez pas accepter Janissaries s’il reste zéro ou un ouvrier sur la piste de population."
+        },
+        "es-ES": {
+          "heading": "Janissaries",
+          "text": "No puedes aceptar Janissaries si quedan cero o un trabajador en la pista de población."
+        },
+        "zh-CN": {
+          "heading": "Janissaries",
+          "text": "人口轨道上只剩零名或一名工人时，不得接受 Janissaries 的效果。"
+        }
+      }
+    },
+    {
+      "id": "yuan",
+      "sourceText": "If fewer than 3 workers remain on the population track, Yuan Dynasty takes all remaining workers.",
+      "sourceHeading": "Yuan Dynasty",
+      "translations": {
+        "sv-SE": {
+          "heading": "Yuan Dynasty",
+          "text": "Om färre än 3 arbetare finns kvar på befolkningsspåret tar Yuan Dynasty alla återstående arbetare."
+        },
+        "de": {
+          "heading": "Yuan Dynasty",
+          "text": "Liegen weniger als 3 Arbeiter auf der Bevölkerungsleiste, nimmt Yuan Dynasty alle verbleibenden Arbeiter."
+        },
+        "fr": {
+          "heading": "Yuan Dynasty",
+          "text": "S’il reste moins de 3 ouvriers sur la piste de population, Yuan Dynasty prend tous les ouvriers restants."
+        },
+        "es-ES": {
+          "heading": "Yuan Dynasty",
+          "text": "Si quedan menos de 3 trabajadores en la pista de población, Yuan Dynasty toma todos los restantes."
+        },
+        "zh-CN": {
+          "heading": "Yuan Dynasty",
+          "text": "人口轨道上剩余工人不足 3 名时，Yuan Dynasty 拿取所有剩余工人。"
+        }
+      }
+    },
+    {
+      "id": "great-exhibition",
+      "sourceText": "When hiring architects through Great Exhibition, you may choose to hire just one architect.",
+      "sourceHeading": "Great Exhibition",
+      "translations": {
+        "sv-SE": {
+          "heading": "Great Exhibition",
+          "text": "När du anlitar arkitekter genom Great Exhibition får du välja att bara anlita en arkitekt."
+        },
+        "de": {
+          "heading": "Great Exhibition",
+          "text": "Beim Anwerben von Architekten durch Great Exhibition darfst du dich dafür entscheiden, nur einen Architekten anzuwerben."
+        },
+        "fr": {
+          "heading": "Great Exhibition",
+          "text": "Lorsque vous recrutez des architectes grâce à Great Exhibition, vous pouvez choisir de n’en recruter qu’un seul."
+        },
+        "es-ES": {
+          "heading": "Great Exhibition",
+          "text": "Al contratar arquitectos mediante Great Exhibition, puedes elegir contratar solo uno."
+        },
+        "zh-CN": {
+          "heading": "Great Exhibition",
+          "text": "通过 Great Exhibition 雇用建筑师时，可以选择只雇用一名。"
+        }
+      }
+    },
+    {
+      "id": "wardenclyffe",
+      "sourceText": "When Wardenclyffe Tower is completed during Great Exhibition, a natural wonder bought with one of its 3 actions remains undiscovered if discovery is not finished by the end of those actions. If another round follows, exploration must continue then.",
+      "sourceHeading": "Wardenclyffe Tower and Great Exhibition",
+      "translations": {
+        "sv-SE": {
+          "heading": "Wardenclyffe Tower och Great Exhibition",
+          "text": "Om Wardenclyffe Tower färdigställs under Great Exhibition och du köper ett naturunder med en av dess 3 handlingar, förblir det oupptäckt om upptäckten inte slutförs innan handlingarna är slut. Om ännu en runda följer måste utforskningen fortsätta då."
+        },
+        "de": {
+          "heading": "Wardenclyffe Tower und Great Exhibition",
+          "text": "Wird Wardenclyffe Tower während Great Exhibition fertiggestellt und mit einer seiner 3 Aktionen ein Naturwunder gekauft, bleibt dieses unentdeckt, falls seine Entdeckung bis zum Ende der Aktionen nicht abgeschlossen ist. Folgt eine weitere Runde, muss die Erkundung dann fortgesetzt werden."
+        },
+        "fr": {
+          "heading": "Wardenclyffe Tower et Great Exhibition",
+          "text": "Si Wardenclyffe Tower est terminé pendant Great Exhibition et qu’une de ses 3 actions sert à acheter une merveille naturelle, celle-ci reste non découverte si sa découverte n’est pas achevée avant la fin de ces actions. S’il y a une manche suivante, son exploration doit alors continuer."
+        },
+        "es-ES": {
+          "heading": "Wardenclyffe Tower y Great Exhibition",
+          "text": "Si Wardenclyffe Tower se completa durante Great Exhibition y se compra una maravilla natural con una de sus 3 acciones, esta permanece sin descubrir si no se termina su descubrimiento antes de acabar esas acciones. Si hay otra ronda, la exploración debe continuar entonces."
+        },
+        "zh-CN": {
+          "heading": "Wardenclyffe Tower 与 Great Exhibition",
+          "text": "若在 Great Exhibition 期间完成 Wardenclyffe Tower，并用其 3 次行动中的一次购买自然奇观，但在这些行动结束前未完成发现，该奇观仍处于未发现状态。若还有下一轮，届时必须继续探索。"
+        }
+      }
+    },
+    {
+      "id": "sun-tzu-buddha",
+      "sourceText": "With both Sun Tzu and Buddha, skip the first turn and receive no Sun Tzu benefit.",
+      "sourceHeading": "Sun Tzu and Buddha",
+      "translations": {
+        "sv-SE": {
+          "heading": "Sun Tzu och Buddha",
+          "text": "Med både Sun Tzu och Buddha hoppar du över din första tur och får ingen fördel från Sun Tzu."
+        },
+        "de": {
+          "heading": "Sun Tzu und Buddha",
+          "text": "Mit Sun Tzu und Buddha überspringst du deinen ersten Zug und erhältst keinen Vorteil durch Sun Tzu."
+        },
+        "fr": {
+          "heading": "Sun Tzu et Buddha",
+          "text": "Avec Sun Tzu et Buddha, sautez votre premier tour sans bénéficier de Sun Tzu."
+        },
+        "es-ES": {
+          "heading": "Sun Tzu y Buddha",
+          "text": "Con Sun Tzu y Buddha, omite tu primer turno y no recibas el beneficio de Sun Tzu."
+        },
+        "zh-CN": {
+          "heading": "Sun Tzu 与 Buddha",
+          "text": "同时拥有 Sun Tzu 和 Buddha 时，跳过自己的第一个回合，且不会获得 Sun Tzu 的收益。"
+        }
+      }
+    },
+    {
+      "id": "leon",
+      "sourceText": "Buying a war through Kingdom of Leon grants only 1 book during Rigveda, and triggers Pactum Warmundi.",
+      "sourceHeading": "Kingdom of Leon",
+      "translations": {
+        "sv-SE": {
+          "heading": "Kingdom of Leon",
+          "text": "Att köpa ett krig genom Kingdom of Leon ger bara 1 bok under Rigveda och utlöser Pactum Warmundi."
+        },
+        "de": {
+          "heading": "Kingdom of Leon",
+          "text": "Der Kauf eines Krieges durch Kingdom of Leon gewährt während Rigveda nur 1 Buch und löst Pactum Warmundi aus."
+        },
+        "fr": {
+          "heading": "Kingdom of Leon",
+          "text": "Acheter une guerre grâce à Kingdom of Leon ne donne que 1 livre pendant Rigveda et déclenche Pactum Warmundi."
+        },
+        "es-ES": {
+          "heading": "Kingdom of Leon",
+          "text": "Comprar una guerra mediante Kingdom of Leon solo concede 1 libro durante Rigveda y activa Pactum Warmundi."
+        },
+        "zh-CN": {
+          "heading": "Kingdom of Leon",
+          "text": "通过 Kingdom of Leon 购买战争在 Rigveda 期间只给予 1 书本，并会触发 Pactum Warmundi。"
+        }
+      }
+    },
+    {
+      "id": "axumite",
+      "sourceText": "New Kingdom and Galileo do not discount the Axumite Kingdom surcharge.",
+      "sourceHeading": "Axumite Kingdom",
+      "translations": {
+        "sv-SE": {
+          "heading": "Axumite Kingdom",
+          "text": "New Kingdom och Galileo ger ingen rabatt på tillägget för Axumite Kingdom."
+        },
+        "de": {
+          "heading": "Axumite Kingdom",
+          "text": "New Kingdom und Galileo gewähren keinen Rabatt auf den Aufpreis für Axumite Kingdom."
+        },
+        "fr": {
+          "heading": "Axumite Kingdom",
+          "text": "New Kingdom et Galileo ne réduisent pas le supplément d’Axumite Kingdom."
+        },
+        "es-ES": {
+          "heading": "Axumite Kingdom",
+          "text": "New Kingdom y Galileo no descuentan el recargo de Axumite Kingdom."
+        },
+        "zh-CN": {
+          "heading": "Axumite Kingdom",
+          "text": "New Kingdom 和 Galileo 不减免 Axumite Kingdom 的附加费用。"
+        }
+      }
+    },
+    {
+      "id": "emperor",
+      "sourceText": "The Emperor is an ageless advisor. Japan neither gains VP from Imperial Examination nor loses books from Absolute Monarchy.",
+      "sourceHeading": "Emperor",
+      "translations": {
+        "sv-SE": {
+          "heading": "Emperor",
+          "text": "Emperor är en rådgivare utan tidsålder. Japan får varken segerpoäng från Imperial Examination eller förlorar böcker genom Absolute Monarchy."
+        },
+        "de": {
+          "heading": "Emperor",
+          "text": "Emperor ist ein Berater ohne Zeitalter. Japan erhält durch Imperial Examination keine Siegpunkte und verliert durch Absolute Monarchy keine Bücher."
+        },
+        "fr": {
+          "heading": "Emperor",
+          "text": "Emperor est un conseiller sans âge. Japan ne gagne pas de points de victoire grâce à Imperial Examination et ne perd pas de livres à cause d’Absolute Monarchy."
+        },
+        "es-ES": {
+          "heading": "Emperor",
+          "text": "Emperor es un consejero sin edad. Japan no gana puntos de victoria por Imperial Examination ni pierde libros por Absolute Monarchy."
+        },
+        "zh-CN": {
+          "heading": "Emperor",
+          "text": "Emperor 是没有特定时代的顾问。Japan 不会因 Imperial Examination 获得胜利点，也不会因 Absolute Monarchy 失去书本。"
+        }
+      }
+    },
+    {
+      "id": "himeji",
+      "sourceText": "Replacing a printed building with an Age I building grants stone from Himeji Castle.",
+      "sourceHeading": "Himeji Castle",
+      "translations": {
+        "sv-SE": {
+          "heading": "Himeji Castle",
+          "text": "När en byggnad tryckt på spelbrädet ersätts med en byggnad från tidsålder I ger Himeji Castle sten."
+        },
+        "de": {
+          "heading": "Himeji Castle",
+          "text": "Wird ein auf dem Spielplan aufgedrucktes Gebäude durch ein Gebäude aus Zeitalter I ersetzt, gewährt Himeji Castle Stein."
+        },
+        "fr": {
+          "heading": "Himeji Castle",
+          "text": "Remplacer un bâtiment imprimé sur le plateau par un bâtiment de l’âge I rapporte des pierres grâce à Himeji Castle."
+        },
+        "es-ES": {
+          "heading": "Himeji Castle",
+          "text": "Sustituir un edificio impreso en el tablero por uno de la edad I concede piedras por Himeji Castle."
+        },
+        "zh-CN": {
+          "heading": "Himeji Castle",
+          "text": "用时代 I 的建筑替换玩家板上印刷的建筑时，会获得 Himeji Castle 提供的石料。"
+        }
+      }
+    },
+    {
+      "id": "coffee-house",
+      "sourceText": "Coffee House books are production rather than an immediate gain when passing. Chopin doubles them.",
+      "sourceHeading": "Coffee House",
+      "translations": {
+        "sv-SE": {
+          "heading": "Coffee House",
+          "text": "Böckerna från Coffee House ingår i produktionen och erhålls inte omedelbart när du passar. Chopin fördubblar dem."
+        },
+        "de": {
+          "heading": "Coffee House",
+          "text": "Die Bücher von Coffee House gehören zur Produktion und werden nicht sofort beim Passen erhalten. Chopin verdoppelt sie."
+        },
+        "fr": {
+          "heading": "Coffee House",
+          "text": "Les livres de Coffee House font partie de la production et ne sont pas gagnés immédiatement en passant. Chopin les double."
+        },
+        "es-ES": {
+          "heading": "Coffee House",
+          "text": "Los libros de Coffee House forman parte de la producción y no se ganan inmediatamente al pasar. Chopin los duplica."
+        },
+        "zh-CN": {
+          "heading": "Coffee House",
+          "text": "Coffee House 的书本属于生产，而非放弃行动时立即获得的收益。Chopin 会将其翻倍。"
+        }
+      }
+    },
+    {
+      "id": "poland",
+      "sourceText": "Advisors bought through Polish-Lithuanian Commonwealth reset their limited uses and private architects for the new owner, even in the same round. Buying Genghis Khan raises everyone's stability before lowering it again.",
+      "sourceHeading": "Polish-Lithuanian Commonwealth",
+      "translations": {
+        "sv-SE": {
+          "heading": "Polish-Lithuanian Commonwealth",
+          "text": "Rådgivare köpta genom Polish-Lithuanian Commonwealth får sina begränsade användningar och privata arkitekter återställda för den nya ägaren, även under samma runda. När Genghis Khan köps höjs allas stabilitet innan den sänks igen."
+        },
+        "de": {
+          "heading": "Polish-Lithuanian Commonwealth",
+          "text": "Durch Polish-Lithuanian Commonwealth gekaufte Berater erhalten für den neuen Besitzer ihre begrenzten Nutzungen und privaten Architekten zurück, auch in derselben Runde. Beim Kauf von Genghis Khan steigt die Stabilität aller Spieler, bevor sie wieder sinkt."
+        },
+        "fr": {
+          "heading": "Polish-Lithuanian Commonwealth",
+          "text": "Les conseillers achetés grâce à Polish-Lithuanian Commonwealth retrouvent leurs utilisations limitées et leurs architectes privés pour le nouveau propriétaire, même pendant la même manche. Acheter Genghis Khan augmente la stabilité de tous avant de la réduire à nouveau."
+        },
+        "es-ES": {
+          "heading": "Polish-Lithuanian Commonwealth",
+          "text": "Los consejeros comprados mediante Polish-Lithuanian Commonwealth recuperan sus usos limitados y sus arquitectos privados para el nuevo propietario, incluso en la misma ronda. Comprar Genghis Khan aumenta la estabilidad de todos antes de reducirla de nuevo."
+        },
+        "zh-CN": {
+          "heading": "Polish-Lithuanian Commonwealth",
+          "text": "通过 Polish-Lithuanian Commonwealth 购买的顾问，其有限使用次数及私人建筑师会为新主人重置，即使仍在同一轮内也可再次使用。购买 Genghis Khan 时，所有人的稳定度先上升，再下降。"
+        }
+      }
+    },
+    {
+      "id": "genghis-qin",
+      "sourceText": "Check least stability for Qin Shi Huang only after the new card has been placed and the replaced card removed.",
+      "sourceHeading": "Genghis Khan and Qin Shi Huang",
+      "translations": {
+        "sv-SE": {
+          "heading": "Genghis Khan och Qin Shi Huang",
+          "text": "Kontrollera minst stabilitet för Qin Shi Huang först när det nya kortet har placerats och det ersatta kortet tagits bort."
+        },
+        "de": {
+          "heading": "Genghis Khan und Qin Shi Huang",
+          "text": "Prüfe die niedrigste Stabilität für Qin Shi Huang erst, nachdem die neue Karte ausgelegt und die ersetzte Karte entfernt wurde."
+        },
+        "fr": {
+          "heading": "Genghis Khan et Qin Shi Huang",
+          "text": "Vérifiez la stabilité la plus faible pour Qin Shi Huang seulement après la pose de la nouvelle carte et le retrait de la carte remplacée."
+        },
+        "es-ES": {
+          "heading": "Genghis Khan y Qin Shi Huang",
+          "text": "Comprueba la menor estabilidad para Qin Shi Huang solo después de colocar la nueva carta y retirar la sustituida."
+        },
+        "zh-CN": {
+          "heading": "Genghis Khan 与 Qin Shi Huang",
+          "text": "仅在新卡已放置、被替换的卡已移除后，才为 Qin Shi Huang 检查最低稳定度。"
+        }
+      }
+    },
+    {
+      "id": "replacing-cards",
+      "sourceText": "When replacing a card, remove the old card's stability and military benefits before adding those of the new card.",
+      "sourceHeading": "Replacing Cards",
+      "translations": {
+        "sv-SE": {
+          "heading": "Ersätta kort",
+          "text": "När ett kort ersätts tas det gamla kortets fördelar för stabilitet och militär styrka bort innan det nya kortets fördelar läggs till."
+        },
+        "de": {
+          "heading": "Karten ersetzen",
+          "text": "Entferne beim Ersetzen einer Karte zuerst die Stabilitäts- und Militärvorteile der alten Karte, bevor du die der neuen Karte hinzufügst."
+        },
+        "fr": {
+          "heading": "Remplacement des cartes",
+          "text": "Lors du remplacement d’une carte, retirez ses bénéfices de stabilité et de force militaire avant d’ajouter ceux de la nouvelle carte."
+        },
+        "es-ES": {
+          "heading": "Sustituir cartas",
+          "text": "Al sustituir una carta, retira los beneficios de estabilidad y fuerza militar de la anterior antes de añadir los de la nueva."
+        },
+        "zh-CN": {
+          "heading": "替换卡牌",
+          "text": "替换卡牌时，先移除旧卡的稳定度和军力收益，再加上新卡的收益。"
+        }
+      }
+    },
+    {
+      "id": "end-round",
+      "sourceText": "Although the rules call for checking most/least after each change, they do not specify an order for these effects. The reported practical ruling resolves turmoil discards and end-of-round effects simultaneously within their respective steps, without checks during those steps. Sequence: Production; Player Order; War; Top Event; CHECK most/least; Bottom Event; CHECK; Famine; Discard Turmoil; Score Books if end of age; End-of-Round Effects; CHECK; End-of-Age Effects if end of age; CHECK.",
+      "sourceHeading": "Discarding Turmoil and End of Round Effects",
+      "translations": {
+        "sv-SE": {
+          "heading": "Kasta orolighetskort och rundslutseffekter",
+          "text": "Reglerna kräver kontroll av mest/minst efter varje förändring men anger ingen ordning för dessa effekter. Det återgivna praktiska beskedet är att kasta orolighetskort och hantera rundslutseffekter samtidigt inom respektive steg, utan kontroller under steget. Ordning: Produktion; Spelarordning; Krig; Övre händelse; KONTROLL av mest/minst; Nedre händelse; KONTROLL; Svält; Kasta orolighetskort; Poäng för böcker vid tidsålderns slut; Rundslutseffekter; KONTROLL; Tidsåldersslutseffekter vid tidsålderns slut; KONTROLL."
+        },
+        "de": {
+          "heading": "Unruhekarten ablegen und Effekte zum Rundenende",
+          "text": "Die Regeln verlangen eine Prüfung der höchsten/niedrigsten Werte nach jeder Änderung, geben für diese Effekte aber keine Reihenfolge vor. Die berichtete praktische Entscheidung behandelt das Ablegen von Unruhekarten und die Effekte zum Rundenende innerhalb des jeweiligen Schritts gleichzeitig, ohne Prüfungen währenddessen. Reihenfolge: Produktion; Spielerreihenfolge; Krieg; Oberes Ereignis; PRÜFUNG der höchsten/niedrigsten Werte; Unteres Ereignis; PRÜFUNG; Hungersnot; Unruhekarten ablegen; Bücherwertung am Zeitalterende; Effekte zum Rundenende; PRÜFUNG; Effekte zum Zeitalterende, falls zutreffend; PRÜFUNG."
+        },
+        "fr": {
+          "heading": "Défausse des cartes agitation et effets de fin de manche",
+          "text": "Les règles demandent de vérifier les valeurs les plus/moins élevées après chaque changement, mais ne précisent pas l’ordre de ces effets. La décision pratique rapportée résout simultanément les défausses d’agitation et les effets de fin de manche au sein de leurs étapes respectives, sans vérifications pendant ces étapes. Séquence : Production ; Ordre des joueurs ; Guerre ; Événement supérieur ; VÉRIFICATION des valeurs les plus/moins élevées ; Événement inférieur ; VÉRIFICATION ; Famine ; Défausse des cartes agitation ; Décompte des livres si fin d’âge ; Effets de fin de manche ; VÉRIFICATION ; Effets de fin d’âge si applicable ; VÉRIFICATION."
+        },
+        "es-ES": {
+          "heading": "Descartar cartas de agitación y efectos de fin de ronda",
+          "text": "Las reglas exigen comprobar los valores más/menos altos después de cada cambio, pero no especifican el orden de estos efectos. La resolución práctica recogida resuelve simultáneamente los descartes de agitación y los efectos de fin de ronda dentro de sus respectivos pasos, sin comprobaciones durante ellos. Secuencia: Producción; Orden de turno; Guerra; Evento superior; COMPROBACIÓN de más/menos; Evento inferior; COMPROBACIÓN; Hambruna; Descartar cartas de agitación; Puntuar libros si termina la edad; Efectos de fin de ronda; COMPROBACIÓN; Efectos de fin de edad, si corresponde; COMPROBACIÓN."
+        },
+        "zh-CN": {
+          "heading": "弃置动乱牌与轮末效果",
+          "text": "规则要求每次状态变化后检查最高／最低值，但未规定这些效果的先后顺序。文中转述的实用裁定是在各自步骤内同时处理动乱牌弃置和轮末效果，步骤进行期间不作检查。顺序：生产；玩家顺序；战争；上方事件；检查最高／最低；下方事件；检查；饥荒；弃置动乱牌；若时代结束则进行书本计分；轮末效果；检查；若时代结束则处理时代末效果；检查。"
+        }
+      }
+    }
+  ]
+}

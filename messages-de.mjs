@@ -6,7 +6,6 @@ export default {
   cardErrataLegacy: "Vergleich mit dem früheren MaBiWeb",
   cardErrataOriginal: "Englisches Original",
   cardAmendmentsSummary: "Englische Zusammenfassung",
-  cardAmendmentsProvenance: "Zusammenfassung der von Logitude wiedergegebenen Klarstellungen der Spieleautoren",
   "cardUnavailable": "Der Kartenname ist unbekannt oder mehrdeutig. Wähle einen Vorschlag.",
   "cardHeading": "Nations · Karte",
   "nationHeading": "Nations · Nation und Dynastien",

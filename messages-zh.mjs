@@ -6,7 +6,6 @@ export default {
   cardErrataLegacy: "与旧版 MaBiWeb 的比较",
   cardErrataOriginal: "英文原文",
   cardAmendmentsSummary: "英文摘要",
-  cardAmendmentsProvenance: "Logitude 转述的游戏设计师说明之摘要",
   "cardUnavailable": "卡牌名称未知或有歧义，请选择建议项。",
   "cardHeading": "Nations · 卡牌",
   "nationHeading": "Nations · 国家与王朝",

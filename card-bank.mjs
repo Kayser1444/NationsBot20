@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { text, translations } from './language.mjs';
 import { cardAssetOrigin, cardAssetName, cardImageUrl, tabonyImage } from './card-images.mjs';
 import { validateRulesDifferences } from './question-errata.mjs';
-import { faqAmendments } from './question-amendments.mjs';
+import { faqAmendments, amendmentTranslation } from './question-amendments.mjs';
 
 const read = path => JSON.parse(readFileSync(new URL(path, import.meta.url), 'utf8'));
 const noteTranslations = new Map(read('./data/question/tabony-rules-differences-translations.json').entries.map(entry => [entry.sourceText, entry.translations]));
@@ -124,7 +124,8 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
         entry.names.some(reference => normalize(reference) === normalize(name)))) ||
       entry.scope === 'private-architects' && privateArchitects);
     const amendmentsHeader = '**Inofficial FAQ amendments**';
-    const amendmentsFooter = `\n\n${text(language, 'cardAmendmentsProvenance')}. ${text(language, 'cardSource')}: [Inofficial FAQ amendments](<${faqAmendments.url}>)`;
+    const amendmentsFooter = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
+      `${text(language, 'cardSource')}: [Inofficial FAQ amendments](<${faqAmendments.url}>)`;
     const header = text(language, points.length === 1 ? 'cardFaqHeadingOne' : 'cardFaqHeading', { version: source.version, count: points.length });
     const footer = '\n\n' + (language !== 'en-US' ? `• ${text(language, 'cardMachineTranslated')}. ` : '') +
       `${text(language, 'cardSource')}: [FAQ++ ${source.version}](<${source.officialUrl}>)`;
@@ -145,10 +146,11 @@ export function createCardBank({ catalog, sources, entries, assetOrigin = null, 
       paragraphs.push({label, body: bullet.text, section:'faq'});
     }
     if (!points.length) paragraphs.push({label:'',body:text(language,'cardFaqPending'),section:'faq'});
-    for (const entry of amendments) paragraphs.push({
-      label:`- **${escape(entry.heading)}${language !== 'en-US' ? ' · ' + text(language,'cardAmendmentsSummary') : ''}:** `,
-      body:entry.text, section:'amendments',
-    });
+    for (const entry of amendments) {
+      const translated = amendmentTranslation(entry,language);
+      paragraphs.push({label:`- **${escape(translated?.heading ?? entry.heading)}${!translated ? ' · ' + text(language,'cardAmendmentsSummary') : ''}:** `,
+        body:translated?.text ?? entry.text, section:'amendments'});
+    }
     for (const {section,note} of notes) {
       const translated = language === 'en-US' ? note : noteTranslations.get(note)?.[language];
       const comparison = text(language, section.id === 'official' ? 'cardErrataOfficial' : 'cardErrataLegacy');

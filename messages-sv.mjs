@@ -6,7 +6,6 @@ export default {
   cardErrataLegacy: "Jämförelse med historiska MaBiWeb",
   cardErrataOriginal: "Engelskt original",
   cardAmendmentsSummary: "Engelsk sammanfattning",
-  cardAmendmentsProvenance: "Sammanfattning av Logitudes återgivna besked från speldesignerna",
   cardMachineTranslated: "Maskinöversatt",
   remindersOn: "Dagliga påminnelser på: {time} ({timezone}), oberoende av /notifications.",
   remindersOff: "Dagliga påminnelser av. /notifications påverkas inte.",
