@@ -46,10 +46,16 @@ export class TurnJournal {
       delete turn.trackedAt;
     }
   }
-  suspend(id) {
+  contact(id) {
     const turn = this.data.turns[id];
     if (!turn || turn.suspended || turn.over) return;
-    this.close(id, Math.max(turn.trackedAt ?? 0, turn.lastSeenAt ?? turn.startedAt), 'disconnected');
+    turn.lastSeenAt = this.now();
+    this.save();
+  }
+  suspend(id, observedUntil = null) {
+    const turn = this.data.turns[id];
+    if (!turn || turn.suspended || turn.over) return;
+    this.close(id, Math.max(turn.trackedAt ?? 0, observedUntil ?? turn.lastSeenAt ?? turn.startedAt), 'disconnected');
     turn.suspended = true;
     this.save();
   }

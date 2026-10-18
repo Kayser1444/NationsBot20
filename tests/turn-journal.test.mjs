@@ -90,3 +90,14 @@ test('connection gaps and restarts preserve records without attributing unseen t
   assert.equal(journal.data.records[2].durationMs, 3000);
   assert.equal(journal.data.records[2].partial, true);
 });
+
+test('quiet intervals close at a confirmed graceful stop and validated heartbeats bound unobserved disconnections', t => {
+  const f = fixture(t), journal = new TurnJournal(f.path, f.now);
+  journal.track('1', true); journal.observe('1', state('A', 1));
+  f.advance(4 * 60 * 60 * 1000); journal.suspend('1', f.now());
+  assert.equal(journal.data.records[0].durationMs, 4 * 60 * 60 * 1000);
+  journal.observe('1', state('A', 1)); f.advance(60000); journal.contact('1');
+  f.advance(60000); journal.suspend('1');
+  assert.equal(journal.data.records[1].durationMs, 60000);
+  journal.contact('1'); assert.equal(journal.data.turns['1'].suspended, true);
+});

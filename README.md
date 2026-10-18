@@ -288,6 +288,23 @@ The estimate depends on reported costs and recorded top-ups; reporting delays,
 expired credits or billing adjustments can make it differ from the actual
 balance. It is labelled as an estimate, not an authoritative credit balance.
 
+### Thinking-time continuity at restarts
+
+A clean shutdown of a connected observer closes its current thinking interval at
+shutdown time. Valid `{turns: 0}` replies also persist the last confirmed contact,
+so quiet turns survive restarts; connection gaps are still excluded. The journal
+format remains version 1 and saved intervals, tracking and reminder receipts
+remain on the existing volume.
+
+For a one-time repair of intervals truncated by older shutdown handling, an owner
+can supply `<journal path>.recovery.json` with `version: 1` and `observations` of
+`matchId`, `player`, `startedAt` (Unix milliseconds) and `durationMs`. Startup
+matches the already-saved interval to the observed starting second, only extends
+it, and caps it at the next saved move. Validation is atomic; a backup is retained
+before saving and the checkpoint is renamed as applied. Restored intervals remain
+marked incomplete. A missing or ambiguous interval stops the repair rather than
+inventing history. This administrative recovery file is never committed to Git.
+
 To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
 redeploy. Local runs retain the original loopback-only administration page.
 

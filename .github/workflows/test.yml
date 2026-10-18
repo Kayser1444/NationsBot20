@@ -22,3 +22,6 @@ jobs:
           NATIONS_TEST_SHARED: '1'
       - run: node tests/subscriptions-runtime.mjs
       - run: node tests/sm-runtime.mjs
+      - run: node tests/sm-runtime.mjs
+        env:
+          NATIONS_TEST_THINKING_HEARTBEAT: '1'

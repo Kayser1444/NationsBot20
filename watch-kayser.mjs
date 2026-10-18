@@ -1,4 +1,5 @@
 import { TurnJournal } from './turn-journal.mjs';
+import { recoverTurnJournal } from './turn-recovery.mjs';
 import { readReminderPreferences, saveReminderPreference } from './subscriptions.mjs';
 // Public spectator observer with optional Discord turn alerts. No game mutations.
 import { readFileSync } from 'node:fs';
@@ -58,6 +59,7 @@ let delivery = transport ? 'enabled' : 'not configured';
 const deliveryAbort = new AbortController();
 const dataDirectory = process.env.NATIONS_DATA_DIR || fileURLToPath(new URL('./.data/', import.meta.url));
 const journal = new TurnJournal(join(dataDirectory, profile.replace('.json', '-turn-journal.json')));
+recoverTurnJournal(journal);
 const reminderNames = () => Object.values(readReminderPreferences(configPath)).filter(p => p.enabled).map(p => p.name);
 const watches = name => Object.hasOwn(subscriptions, name) || reminderNames().includes(name);
 const log = new EventLog(join(dataDirectory, profile.replace('.json', '.log')));
@@ -162,7 +164,7 @@ function stop() {
   clearTimeout(outboxTimer); deliveryAbort.abort();
   clearTimeout(discoveryTimer); discoveryAbort.abort();
   for (const m of matches) {
-    try { journal.suspend(m.id); } catch { log.add('Betänketidsloggen kunde inte sparas vid stopp.', 'error'); }
+    try { journal.suspend(m.id, m.status === 'connected' && m.socket?.readyState === WebSocket.OPEN ? Date.now() : null); } catch { log.add('Betänketidsloggen kunde inte sparas vid stopp.', 'error'); }
     clearTimeout(m.retry); clearInterval(m.heartbeat); m.socket?.close();
   }
   return serviceStatus?.stop();
@@ -286,6 +288,10 @@ function connect(m) {
     let message;
     try { message = JSON.parse(data); } catch { return; }
     if (m.smLocked) sm.update(m.id, message);
+    if (m.state && message && typeof message === 'object' && message.turns === 0 && Object.keys(message).length === 1) {
+      try { journal.contact(m.id); } catch { log.add('Betänketidsloggen kunde inte sparas.', 'error'); stop(); }
+      return;
+    }
     const result = observe(m.state, message, config.username);
     if (result.state === m.state) return;
     try { journal.observe(m.id, result.state); } catch (error) { log.add('Betänketidsloggen kunde inte sparas.', 'error'); stop(); return; }
