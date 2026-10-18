@@ -119,7 +119,7 @@ function show() {
 function snapshot() {
   const currentConfig = JSON.parse(readFileSync(configPath, 'utf8'));
   return {
-    thinking: journal.data,
+    thinking: { tracking: journal.data.tracking },
     now: new Date().toISOString(), stopped, discordEnabled: Boolean(transport),
     pending: outbox?.data.jobs.length ?? 0, blocked: outbox?.data.jobs.filter(job => job.blocked).length ?? 0,
     lastDelivery, lastDiscovery,
@@ -355,7 +355,7 @@ if (!args.includes('--no-dashboard')) {
           botId: process.env.NATIONS_DISCORD_CLIENT_ID, token: process.env.NATIONS_DISCORD_BOT_TOKEN });
       } catch { log.add('Bulletin-API är avstängt: kontrollera miljö, målkanal och API-nyckelns hash.', 'error'); }
     }
-    dashboard = await startDashboard({ port, snapshot, questionLog,
+    dashboard = await startDashboard({ port, snapshot, questionLog, thinkingSnapshot: () => journal.data,
       bulletins, bulletinKeyHash: process.env.NATIONS_BULLETIN_API_KEY_SHA256,
       questionQuota: userId => {
         if (!bot) throw new Error('Discord-boten har inte startat.');

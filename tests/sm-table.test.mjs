@@ -9,6 +9,24 @@ const fixture = { season: 11, divisions: { '1A': { players: ['A', 'B', 'C', 'D']
 const message = (over = false) => ({ replaying: false, state: { game_over: over, player_order: ['B', 'A', 'C', 'D'], players: {
   A: { score: 10, resource_remainder: 7 }, B: { score: 10, resource_remainder: 7 }, C: { score: 10, resource_remainder: 6 }, D: { score: 9, resource_remainder: 9 },
 } } });
+for (const disconnected of [false, true]) test(`SM warning waits more than five minutes after last contact (${disconnected ? 'disconnected' : 'connected'})`, () => {
+  let now = 100000;
+  const cache = new SmTableCache(fixture, { now: () => now });
+  cache.update('1', message());
+  now += 60001;
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
+  cache.update('1', { turns: 0 });
+  if (disconnected) cache.connection('1', false);
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
+  now += 300000;
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/, 'exactly five minutes is still current');
+  now += 1;
+  assert.match(cache.reply('1A'), /⚠️/);
+  cache.connection('1', true);
+  assert.match(cache.reply('1A'), /⚠️/, 'opening a connection alone does not confirm standings');
+  cache.update('1', { turns: 0 });
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
+});
 test('season lock contains exactly 21 unique verified matches; spoofed 2B candidates are excluded', () => {
   validateSeason(config);
   const cache = new SmTableCache(config);
@@ -25,20 +43,21 @@ test('VP, resource remainder and current turn order award 5/3/2/1; unknown IDs a
   assert.deepEqual(cache.tables.get('1A').map(r => [r.name, r.points]), [['B', 5], ['A', 3], ['C', 2], ['D', 1]]);
   const bad = message(); bad.state.player_order = ['A', 'A', 'C', 'D'];
   assert.equal(cache.update('1', bad), false);
-  assert.match(cache.reply('1A'), /saknar aktuell/);
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
   assert.equal(cache.update('1', { ...message(), replaying: true }), false);
 });
-test('auto division requires active subscription; cached data is stale after disconnect or age', () => {
+test('auto division requires active subscription; ongoing data expires after five minutes; final results stay current', () => {
   let now = 100000;
   const cache = new SmTableCache(fixture, { now: () => now });
   cache.update('1', message());
   assert.match(cache.reply(null, 'user', { A: 'user' }), /Division 1A/);
   assert.match(cache.reply(null, 'user', {}), /aktiv prenumeration/);
   assert.match(cache.reply(null, 'user', { Outsider: 'user' }), /inte i SM/);
-  assert.doesNotMatch(cache.reply('1A'), /saknar aktuell/);
-  now += 60001; assert.match(cache.reply('1A'), /saknar aktuell/);
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
+  now += 300001; assert.match(cache.reply('1A'), /⚠️/);
   cache.update('1', message(true)); cache.connection('1', false);
-  assert.doesNotMatch(cache.reply('1A'), /saknar aktuell/);
+  now += 300001;
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
 });
 test('drafting snapshots are valid but do not award points before play starts', () => {
   const cache = new SmTableCache(fixture);
@@ -51,11 +70,16 @@ test('drafting snapshots are valid but do not award points before play starts', 
   assert.equal(cache.tables.get('1A')[0].points, 5);
   assert.doesNotMatch(cache.reply('1A'), /Väntar på spelstart/);
 });
-test('saved snapshots survive restart but ongoing games wait for fresh connection; season changes invalidate disk cache', t => {
+test('saved snapshots retain the five-minute grace period after restart; season changes invalidate disk cache', t => {
   const dir = mkdtempSync(join(tmpdir(), 'sm-cache-')); t.after(() => rmSync(dir, { recursive: true, force: true }));
   const path = join(dir, 'cache.json');
-  new SmTableCache(fixture, { path }).update('1', message());
-  assert.match(new SmTableCache(fixture, { path }).reply('1A'), /saknar aktuell/);
+  let now = 100000;
+  new SmTableCache(fixture, { path, now: () => now }).update('1', message());
+  now += 300000;
+  const restarted = new SmTableCache(fixture, { path, now: () => now });
+  assert.doesNotMatch(restarted.reply('1A'), /⚠️/);
+  now += 1;
+  assert.match(restarted.reply('1A'), /⚠️/);
   const changed = structuredClone(fixture); changed.divisions['1A'].matches[0].id = '2';
   assert.match(new SmTableCache(changed, { path }).reply('1A'), /väntar/);
 });
@@ -77,15 +101,17 @@ test('heartbeat-only replies keep a quiet game current without changing its last
   cache.update('1', message());
   const snapshotTime = cache.snapshots.get('1').updatedAt;
   for (let i = 0; i < 5; i++) { now += 20000; cache.update('1', { turns: 0 }); }
-  assert.doesNotMatch(cache.reply('1A'), /saknar aktuell/);
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
   assert.equal(cache.snapshots.get('1').updatedAt, snapshotTime);
   cache.connection('1', false);
+  now += 300001;
   cache.update('1', { turns: 0 });
-  assert.match(cache.reply('1A'), /saknar aktuell/);
+  assert.match(cache.reply('1A'), /⚠️/);
   cache.update('1', message());
-  now += 60001;
+  assert.doesNotMatch(cache.reply('1A'), /⚠️/);
+  now += 300001;
   cache.update('1', { chat_log: [] });
-  assert.match(cache.reply('1A'), /saknar aktuell/);
+  assert.match(cache.reply('1A'), /⚠️/);
 });
 
 test('automatic division includes subscription explanation while explicit selection does not', () => {
@@ -95,7 +121,8 @@ test('automatic division includes subscription explanation while explicit select
 });
 
 test('English SM rendering covers titles, auto selection, tiebreakers, unavailable games and stale connections without changing rankings', () => {
-  const cache = new SmTableCache(config);
+  let now = 100000;
+  const cache = new SmTableCache(config, { now: () => now });
   assert.match(cache.reply(null, 'u', {}, 'en-US'), /active subscription/);
   assert.match(cache.reply(null, 'u', { Outside: 'u' }, 'en-US'), /not in SM/);
   assert.match(cache.reply('9Z', 'u', {}, 'en-US'), /Unknown SM group/);
@@ -111,7 +138,9 @@ test('English SM rendering covers titles, auto selection, tiebreakers, unavailab
   assert.ok(english.length < 2000); assert.match(english, /─/);
   assert.match(cache.reply('1A', 'u', {}, 'sv-SE'), /Svenska mästerskapet/);
   assert.deepEqual(cache.tables.get('1A').map(r => [r.name, r.points]), ranking);
-  cache.connection('3032', false); assert.match(cache.reply('1A', 'u', {}, 'en-US'), /Last known standings/);
+  cache.connection('3032', false);
+  now += 300001;
+  assert.match(cache.reply('1A', 'u', {}, 'en-US'), /Last known standings/);
   const draftCache = new SmTableCache(fixture);
   const draft = message(); draft.state.round = 0; draft.state.phase = 'Drafting Phase'; draftCache.update('1', draft);
   assert.match(draftCache.reply('1A', 'u', {}, 'en-US'), /Waiting for play to start/);

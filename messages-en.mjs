@@ -39,7 +39,7 @@ export default {
   smTitle: "**Swedish Championship · S{season} · Division {div}{auto}**",
   smAuto: " (Automatically selected from your subscription)",
   smChecked: "Monitoring checked: {time}",
-  smStale: "⚠️ {count} game(s) lack a current connection or recent check. Last known standings are shown.",
+  smStale: "⚠️ {count} game(s) have not responded for more than 5 minutes. Last known standings are shown.",
   smOngoing: "{ongoing}/{total} games unfinished. Group points: 5/3/2/1. Ranking follows §7.",
   smDrafting: "Waiting for play to start: {matches}. These games award no group points yet.",
   smLegend: "H2H = shared games. Wins/seconds = current placements.",

@@ -114,3 +114,24 @@ test('thinking measurement routes enforce CSRF and preserve match selection on s
   assert.equal((await fetch(server.url + '/api/thinking/123', { method: 'DELETE', headers })).status, 200);
   assert.equal(selected.get('123'), false);
 });
+
+test('thinking summaries are fetched on demand without sending interval history through status', async t => {
+  let reads = 0;
+  const journal = { tracking: {}, turns: { '123': { over: true } }, records: [{ matchId: '123', player: 'A', durationMs: 90000, partial: true }] };
+  const server = await startDashboard({ port: 0, snapshot: () => ({ thinking: { tracking: journal.tracking } }),
+    thinkingSnapshot: () => { reads++; return journal; } });
+  t.after(() => server.close());
+  for (let i = 0; i < 3; i++) {
+    const status = await (await fetch(server.url + '/api/status')).json();
+    assert.deepEqual(status.thinking, { tracking: {} });
+  }
+  assert.equal(reads, 0);
+  const response = await fetch(server.url + '/api/thinking');
+  assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store');
+  const summary = await response.json();
+  assert.ok(Number.isFinite(Date.parse(summary.now)));
+  assert.equal(summary.games[0].players[0].duration, '1 min');
+  assert.equal(summary.games[0].players[0].partial, true);
+  assert.equal(summary.games[0].over, true);
+  assert.equal(reads, 1);
+});

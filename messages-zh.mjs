@@ -49,7 +49,7 @@ export default {
   "smTitle": "**瑞典锦标赛 · 第 {season} 赛季 · {div} 组{auto}**",
   "smAuto": "（根据订阅自动选择）",
   "smChecked": "监测检查时间：{time}",
-  "smStale": "⚠️ {count} 场缺少当前连接或近期检查，显示最后已知排名。",
+  "smStale": "⚠️ {count} 场对局已超过 5 分钟未响应，显示最后已知排名。",
   "smOngoing": "{total} 场中有 {ongoing} 场未结束。小组积分：5/3/2/1，按 §7 排名。",
   "smDrafting": "等待开始：{matches}。这些对局暂不计入小组积分。",
   "smLegend": "H2H = 共同对局。胜场/第二名次数 = 当前名次统计。",

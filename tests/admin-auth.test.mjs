@@ -12,6 +12,7 @@ const settings = { origin: 'https://admin.example.test', clientId: '155893689944
 async function fixture(t) {
   let clock = 0, identity = owner, calls = 0, snapshots = 0, edits = 0;
   const resets = [];
+  let billingReads = 0;
   const auth = createDiscordAuth(settings, { now: () => clock, fetcher: async (url, options) => {
     calls++;
     if (url.endsWith('/oauth2/token')) {
@@ -24,6 +25,7 @@ async function fixture(t) {
     return Response.json({ id: identity, username: 'Owner' });
   } });
   const dashboard = await startDashboard({ port: 0, auth, snapshot: () => { snapshots++; return { private: 'owner-only' }; },
+    railwayBilling: async () => { billingReads++; return { available: true, remainingCreditUsd: 4.66 }; },
     questionQuota: userId => ({ userId, used: 5, remaining: 0 }),
     resetQuestionQuota: (userId, actorId) => { resets.push({ userId, actorId }); return { userId, used: 0, remaining: 5 }; },
     subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
@@ -54,7 +56,7 @@ async function fixture(t) {
     return { cookie, callback };
   }
   return { request, login, setIdentity: value => { identity = value; }, setClock: value => { clock = value; },
-    resets: () => resets,
+    resets: () => resets, billingReads: () => billingReads,
     counts: () => ({ calls, snapshots, edits }) };
 }
 
@@ -87,11 +89,28 @@ test('public admin pages disclose no state; APIs require authentication and HTTP
   assert.ok(html.includes('Logga in med Discord'));
   assert.equal(html.includes('owner-only'), false);
   assert.equal((await f.request('/api/status')).status, 401);
+  assert.equal((await f.request('/api/thinking')).status, 401);
+  assert.equal((await f.request('/api/railway-billing')).status, 401);
   assert.equal((await f.request('/api/subscriptions', { method: 'POST' })).status, 401);
   for (const method of ['POST', 'DELETE']) assert.equal((await f.request('/api/bans/' + owner, { method })).status, 401);
   assert.equal((await f.request('/api/status', { headers: { host: 'evil.test' } })).status, 403);
   assert.equal((await f.request('/', { headers: { 'x-forwarded-proto': 'http' } })).status, 403);
   assert.deepEqual(f.counts(), { calls: 0, snapshots: 0, edits: 0 });
+  assert.equal(f.billingReads(), 0);
+});
+
+test('Railway billing requires an owner session and returns no-store data independently of normal status', async t => {
+  const f = await fixture(t), attempt = await f.login();
+  const callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
+  const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
+  assert.equal((await f.request('/api/status', { headers: { cookie } })).status, 200);
+  assert.equal(f.billingReads(), 0);
+  assert.equal((await f.request('/api/railway-billing', { headers: { cookie, 'x-forwarded-proto': 'http' } })).status, 403);
+  assert.equal(f.billingReads(), 0);
+  const response = await f.request('/api/railway-billing', { headers: { cookie } });
+  assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.equal((await response.json()).remainingCreditUsd, 4.66);
+  assert.equal(f.billingReads(), 1);
 });
 
 test('OAuth state is browser-bound, expires, is single-use and cannot authorize another user', async t => {

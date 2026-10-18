@@ -15,6 +15,12 @@
 <div class="card"><div class="muted">PRENUMERANTER</div><div id="subscriber-count" class="number">–</div><p class="muted">Notifieringar och dagliga påminnelser</p></div>
 <div class="card"><div class="muted">DISCORD</div><div id="pending-count" class="number">–</div><p id="discord" class="muted">Hämtar status</p><p id="last-delivery" class="muted"></p><p id="bot-state" class="muted"></p></div>
 </section>
+<section class="panel" style="margin-bottom:22px" aria-labelledby="railway-title">
+<h2 id="railway-title">Railway <span id="railway-state" class="muted">Hämtar uppgifter…</span></h2>
+<p id="railway-balance" style="font-size:20px;font-weight:600" role="status">–</p>
+<p id="railway-note" class="muted">Gäller hela Railway-arbetsytan, inklusive staging och produktion.</p>
+<p id="railway-updated" class="muted"></p>
+</section>
 <section class="grid">
 <div class="panel"><h2>Prenumeranter</h2><div class="scroll"><table><thead><tr><th>Spelare</th><th>Prenumeration</th><th>Partier</th><th></th></tr></thead><tbody id="subscribers"></tbody></table></div>
 <form id="subscribe"><h2>Lägg till prenumerant</h2><div class="form-grid"><div><label for="username">Nations-namn</label><div class="name-field"><input id="username" required maxlength="150" placeholder="Börja skriva ett spelarnamn" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="name-suggestions" aria-describedby="name-hint"><ul id="name-suggestions" class="suggestions" role="listbox" aria-label="Spelarnamn" hidden></ul></div><p id="name-hint" class="muted">Hämtar spelarnamn från pågående partier…</p></div><div><label for="user-id">Discord-ID</label><input id="user-id" required pattern="[0-9]{17,20}" inputmode="numeric" placeholder="17–20 siffror" autocomplete="off"></div></div><button id="save" type="submit">Lägg till / uppdatera</button><p class="muted">En väntande tur kan ge en påminnelse direkt.</p><p id="feedback" role="status"></p></form></div>
@@ -23,7 +29,7 @@
 <section class="panel" style="margin-bottom:20px"><h2>Spärrade Discord-användare</h2><p class="muted">Spärren gäller bara NationsBot. Den stänger inte av användaren från Discord-servern. Hävning återställer ingen prenumeration.</p><div class="scroll"><table><thead><tr><th>Discord-ID</th><th>Tidigare Nations-namn</th><th>Spärrad sedan</th><th></th></tr></thead><tbody id="bans"></tbody></table></div><form id="ban-user"><label for="ban-id">Spärra ett Discord-ID även utan aktiv prenumeration</label><input id="ban-id" required pattern="[0-9]{17,20}" inputmode="numeric" placeholder="17–20 siffror" autocomplete="off"><button id="ban-save" type="submit" style="margin-top:12px">Avsluta och spärra</button></form></section>
 <section class="panel"><h2>Frågor och svar</h2><p class="muted">Originalkonversationer sparas i högst 30 dagar, högst 500 frågor. Engelska maskinöversättningar visas separat.</p><form id="question-quota"><h3>Frågekvot per användare</h3><p class="muted">Nollställ dygnets fem frågor och minutspärren. Gemensamma gränser (20 frågor / 120 API-anrop per UTC-dygn), behörigheter och frågelogg påverkas inte.</p><label for="question-quota-id">Discord-ID</label><input id="question-quota-id" required pattern="[0-9]{17,20}" inputmode="numeric" value="__ADMIN_OWNER__" autocomplete="off"><button id="question-quota-show" type="submit" style="margin-top:12px">Visa kvot</button> <button id="question-quota-reset" type="button" disabled>Nollställ användarens frågekvot</button><p id="question-quota-feedback" role="status"></p></form><form id="question-search"><label for="question-term">Sök fråga, användare eller kanal</label><input id="question-term"><label for="question-status">Status</label><select id="question-status"><option value="">Alla</option><option value="processing">Pågår</option><option value="answered">Besvarad</option><option value="failed">Fel</option><option value="denied">Avvisad</option><option value="interrupted">Avbruten</option></select><button>Sök</button></form><p id="question-count" role="status"></p><div class="scroll"><table><thead><tr><th>Tid</th><th>Användare</th><th>Plats</th><th>Fråga</th><th>Status / tid</th></tr></thead><tbody id="question-list"></tbody></table></div><button id="question-prev" type="button">Föregående</button> <button id="question-next" type="button">Nästa</button><article id="question-detail" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere"></article></section>
 <section class="panel"><h2>Partier</h2><p id="discovery" class="muted"></p><div class="scroll"><table><thead><tr><th>Parti</th><th>Tur</th><th>Anslutning</th><th>Betänketid</th></tr></thead><tbody id="matches"></tbody></table></div></section>
-<section class="panel"><h2>Betänketid</h2><p class="muted">Loggen börjar vid aktivering. Första intervallet är ofullständigt. Tider mäts när turbyten observeras; avbrott kan påverka noggrannheten.</p><form id="track-game"><label for="tracking-id">Parti-ID</label><input id="tracking-id" required pattern="[0-9]+"><button>Aktivera mätning</button></form><div id="thinking-games"></div><div class="scroll"><table><thead><tr><th>Parti</th><th>Spelare</th><th>Start</th><th>Slut</th><th>Sekunder</th><th>Anmärkning</th></tr></thead><tbody id="thinking-log"></tbody></table></div></section>
+<section class="panel" id="thinking-panel"><h2>Betänketid per spelare och parti</h2><p class="muted">Sammanlagd betänketid i dagar, timmar och hela minuter, med längst tid överst i varje parti. Pågående tur ingår fram till hämtningen. Tiderna uppdateras när sidan öppnas eller när du trycker på knappen.</p><p class="muted">Mätningen börjar vid aktivering. Första intervallet och intervall med anslutningsavbrott är ofullständiga. Tid utan anslutning räknas inte med.</p><p style="margin-top:16px"><button id="thinking-refresh" type="button">Uppdatera tider</button></p><p id="thinking-updated" class="muted" role="status"></p><form id="track-game"><label for="tracking-id">Parti-ID</label><input id="tracking-id" required pattern="[0-9]+"><button>Aktivera mätning</button></form><div id="thinking-games" style="margin-top:16px"></div><div id="thinking-summary"></div></section>
 <footer>Du kan stänga fönstret utan att stoppa bevakningen. __STOP_HINT__ <span id="updated"></span></footer>
 </main>
 <dialog id="user-details" aria-labelledby="user-details-title"><div class="detail-header"><h2 id="user-details-title">Användarstatus</h2><button id="close-details" type="button">Stäng</button></div><div id="user-details-body"></div><p id="user-details-updated" class="muted"></p></dialog>
@@ -34,6 +40,17 @@ document.getElementById('logout')?.addEventListener('click',async()=>{const resp
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');
+async function refreshRailway(){
+ try{
+  const response=await fetch('/api/railway-billing',{cache:'no-store'});if(response.status===401){location.assign('/');return}if(!response.ok)throw new Error();const billing=await response.json();
+  if(!billing.available){text('railway-state',billing.configured?'Ej tillgängligt':'Inte aktiverat');text('railway-balance',billing.error||'Railway-informationen kunde inte hämtas.');text('railway-updated','');return}
+  const credit='$'+billing.remainingCreditUsd.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2});
+  text('railway-state',billing.stale?'Tidigare uppgifter':billing.isTrialing?'Provperiod':'Användningskredit');
+  text('railway-balance',billing.isTrialing?billing.trialDaysRemaining+' '+(billing.trialDaysRemaining===1?'dag':'dagar')+' eller '+credit+' kvar':credit+' kvar');
+  text('railway-note','Gäller hela Railway-arbetsytan, inklusive staging och produktion.'+(billing.isTrialing?' Provperioden upphör när tiden eller krediten tar slut.':''));
+  text('railway-updated',(billing.stale?billing.error+' Visar senast hämtade uppgifter. ':'')+'Uppdaterat '+new Date(billing.updatedAt).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'})+' · hämtas högst var 15:e minut.');
+ }catch{text('railway-state','Ej tillgängligt');text('railway-updated','Railway-informationen kunde inte hämtas. Eventuella tidigare uppgifter visas ovan.')}
+}
 let currentStatus=null, selectedUserId=null;
 let playerNames=[], namesVersion='', suggestions=[], activeSuggestion=-1;
 function closeSuggestions(){el('name-suggestions').hidden=true;el('username').setAttribute('aria-expanded','false');el('username').removeAttribute('aria-activedescendant');activeSuggestion=-1}
@@ -60,7 +77,7 @@ function feedback(message,error=false){text('feedback',message);el('feedback').c
 async function change(method,path,body){
  const response=await fetch(path,{method,headers:{'content-type':'application/json','x-nations-token':token},body:body?JSON.stringify(body):undefined});
  if(response.status===401){location.assign('/');throw new Error('Logga in med Discord igen.');}
- const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();
+ const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();if(path.startsWith('/api/thinking/'))await refreshThinking();
 }
 async function refresh(){try{
  const response=await fetch('/api/status',{cache:'no-store'});if(response.status===401){location.assign('/');return;}if(!response.ok)throw new Error();const s=await response.json();currentStatus=s;if(selectedUserId)renderUserDetails();
@@ -77,7 +94,6 @@ async function refresh(){try{
  if(!s.bannedUsers?.length){const tr=document.createElement('tr');const td=cell(tr,'Inga spärrade användare.');td.colSpan=4;el('bans').append(tr)}
  el('matches').replaceChildren();for(const m of s.matches){const tr=document.createElement('tr');const title=cell(tr,'');const link=document.createElement('a');link.textContent=m.title||'Parti '+m.id;link.href='https://games.tabony.net/nations/'+m.id+'/';link.target='_blank';link.rel='noopener';title.append(link);cell(tr,m.over?'Avslutat':m.player||'Hämtar tur…');cell(tr,m.over?'Bevakning avslutad':m.connected?'Ansluten':'Återansluter / hämtar status');const timing=cell(tr,'');const toggle=document.createElement('button');const enabled=Boolean(s.thinking?.tracking?.[m.id]);toggle.textContent=enabled?'Stoppa mätning':'Mät betänketid';toggle.onclick=async()=>{toggle.disabled=true;try{await change(enabled?'DELETE':'POST','/api/thinking/'+encodeURIComponent(m.id))}catch(e){feedback(e.message,true);toggle.disabled=false}};timing.append(toggle);el('matches').append(tr)}
  el('thinking-games').replaceChildren();for(const id of Object.keys(s.thinking?.tracking||{})){const button=document.createElement('button');button.textContent='Stoppa mätning: '+id;button.onclick=async()=>{try{await change('DELETE','/api/thinking/'+encodeURIComponent(id))}catch(e){feedback(e.message,true)}};el('thinking-games').append(button)}
- el('thinking-log').replaceChildren();for(const entry of [...(s.thinking?.records||[]), ...Object.entries(s.thinking?.turns||{}).filter(([,turn])=>turn.trackedAt!=null).map(([matchId,turn])=>({matchId,player:turn.player,startedAt:turn.trackedAt,endedAt:s.now,durationMs:Date.parse(s.now)-turn.trackedAt,partial:turn.partial,ongoing:true}))].reverse()){const row=document.createElement('tr');for(const value of [entry.matchId,entry.player,new Date(entry.startedAt).toLocaleString('sv-SE'),entry.ongoing?'Pågår':new Date(entry.endedAt).toLocaleString('sv-SE'),(entry.durationMs/1000).toFixed(1),entry.partial?'Ofullständigt intervall':''])cell(row,value);el('thinking-log').append(row)}
  el('activity').replaceChildren();for(const entry of [...s.events].reverse()){const row=document.createElement('div');row.className='event'+(entry.level==='error'?' error':'');const timestamp=document.createElement('time');timestamp.textContent=time(entry.time);const message=document.createElement('span');message.textContent=entry.message;row.append(timestamp,message);el('activity').append(row)}
  if(!s.events.length)text('activity','Inga händelser ännu.');text('updated','Uppdaterat '+time(s.now)+'.');
 }catch{text('health','Ingen kontakt med tjänsten');el('health').className='badge warn';text('updated','Visar senast hämtade status.')}}
@@ -112,6 +128,27 @@ async function banUser(userId,name,button){
 }
 el('ban-user').onsubmit=async event=>{event.preventDefault();await banUser(el('ban-id').value.trim(),null,el('ban-save'))};
 el('track-game').onsubmit=async event=>{event.preventDefault();try{await change('POST','/api/thinking/'+encodeURIComponent(el('tracking-id').value));feedback('Mätning aktiverad.')}catch(e){feedback(e.message,true)}};
+
+async function refreshThinking(){
+ const button=el('thinking-refresh');if(button.disabled)return;button.disabled=true;
+ try{
+  const response=await fetch('/api/thinking',{cache:'no-store'});if(response.status===401){location.assign('/');return}const data=await response.json();if(!response.ok)throw new Error(data.error||'Betänketiderna kunde inte hämtas.');
+  const container=el('thinking-summary');container.replaceChildren();
+  for(const game of data.games){
+   const heading=document.createElement('h3'),link=document.createElement('a');const match=currentStatus?.matches.find(m=>m.id===game.matchId);
+   link.textContent=match?.title||'Parti '+game.matchId;link.href='https://games.tabony.net/nations/'+encodeURIComponent(game.matchId)+'/';link.target='_blank';link.rel='noopener';heading.append(link);container.append(heading);
+   const status=document.createElement('p');status.className='muted';status.textContent=game.over?'Avslutat parti':!game.tracking?'Mätning stoppad':game.suspended?'Mätning aktiverad · väntar på anslutning':'Mätning aktiverad';container.append(status);
+   if(!game.players.length){const empty=document.createElement('p');empty.className='empty';empty.textContent='Väntar på den första spelställningen.';container.append(empty);continue}
+   const scroll=document.createElement('div');scroll.className='scroll';const table=document.createElement('table'),head=document.createElement('thead'),header=document.createElement('tr');
+   for(const label of ['Spelare','Sammanlagd betänketid','Anmärkning']){const th=document.createElement('th');th.textContent=label;header.append(th)}head.append(header);table.append(head);const body=document.createElement('tbody');
+   for(const player of game.players){const row=document.createElement('tr');cell(row,player.player);cell(row,player.duration);cell(row,[player.ongoing?'Pågående tur ingår':null,player.partial?'Ofullständig mätning':null].filter(Boolean).join(' · '));body.append(row)}
+   table.append(body);scroll.append(table);container.append(scroll);
+  }
+  if(!data.games.length){const empty=document.createElement('p');empty.className='empty';empty.textContent='Ingen betänketid har registrerats. Aktivera mätning för ett parti ovan.';container.append(empty)}
+  text('thinking-updated','Tider hämtade '+new Date(data.now).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'})+'.');
+ }catch(error){text('thinking-updated',error.message+' Tidigare hämtade tider behålls.')}finally{button.disabled=false}
+}
+el('thinking-refresh').onclick=()=>void refreshThinking();
 
 
 let quotaBusy=false;
@@ -160,6 +197,7 @@ el('question-prev').onclick=()=>{questionGeneration++;questionOffset=Math.max(0,
 el('question-next').onclick=()=>{questionGeneration++;questionOffset+=20;void refreshQuestions()};
 void refreshQuestions();setInterval(refreshQuestions,5000);
 
-void refresh();setInterval(refresh,2000);
+void refreshRailway();setInterval(refreshRailway,60000);
+void refresh().then(()=>refreshThinking());setInterval(refresh,2000);
 </script>
 </html>

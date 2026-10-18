@@ -1,0 +1,18 @@
+{
+  "id": "faq-amendments-20261017",
+  "environment": "production",
+  "destination": {
+    "guildId": "706912380067643473",
+    "channelId": "1558878151646388264",
+    "botId": "1558936899446374570"
+  },
+  "content": "**Mer regelhjälp i NationsBot!** 📚\n\n• **`/card` och `/nation` visar nu FAQ direkt** tillsammans med kortet eller nationen. Längre svar delas upp i bläddringsbara sidor.\n\n• **28 kompletterande regelförtydliganden från Logitude** har lagts till, baserade på hans diskussioner med Rustan. De visas under **Inofficial FAQ amendments**, separat från den officiella FAQ:n och Tabonys dokumenterade regelavvikelser. Allt finns på botens sex språk, med länkar till originalkällorna.\n\n• **`/question` har fått samma utökade underlag**, inklusive Tabonys dokumenterade regelavvikelser, som hämtas dagligen. Det hjälper botten att skilja mellan brädspelets regler och hur Tabony fungerar.\n\nFrågefunktionen är fortfarande experimentell – kontrollera gärna källorna och säg till om något verkar fel!",
+  "length": 787,
+  "sha256": "18aa6255044076a953886f74fa9c8eb0c044a405a8162b7d2f493b0db948c099",
+  "nonce": "e9450755594477b36823f182",
+  "status": "verified",
+  "createdAt": "2026-10-17T13:00:32.045Z",
+  "messageId": "1561000967795638307",
+  "verifiedAt": "2026-10-17T13:00:33.247Z",
+  "url": "https://discord.com/channels/706912380067643473/1558878151646388264/1561000967795638307"
+}

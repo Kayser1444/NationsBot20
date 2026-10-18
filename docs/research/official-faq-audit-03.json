@@ -1,0 +1,1146 @@
+[
+  {
+    "id": "event-kangxi-era",
+    "index": 144,
+    "heading": "Kangxi Era",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Kangxi Era – This reordering comes after the new player order has been determined.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L645",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1158-L1186"
+    ],
+    "notes": "Player-order phase precedes events; Kangxi then moves eligible players first and retains ordering rules for multiple eligible players."
+  },
+  {
+    "id": "event-little-ice-age",
+    "index": 145,
+    "heading": "Little Ice Age",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Little Ice Age – This is a choice, done in reverse player order.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L996-L1028"
+    ],
+    "notes": "Choices resolve over players[::-1], with food/books alternatives and ordinary resource loss resolution."
+  },
+  {
+    "id": "event-magellan-s-expedition",
+    "index": 146,
+    "heading": "Magellan's expedition",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Magellan's expedition – This is for every Colony bought this round, so you can get it multiple times. Note that you only get the gold when the event happens.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1038-L1059"
+    ],
+    "notes": "Per-round Counter increments on each bought colony; five gold times count is credited only in happen_a, not at purchase."
+  },
+  {
+    "id": "event-mercantilism",
+    "index": 147,
+    "heading": "Mercantilism",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Mercantilism – This is a choice, done in reverse player order. You can undeploy multiple workers. The workers go to your available workers area.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L934-L967",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L603-L609"
+    ],
+    "notes": "Reverse order; optional loop permits multiple building undeployments; each undeploy increases available workers, not population."
+  },
+  {
+    "id": "event-muntzer-revolt",
+    "index": 148,
+    "heading": "Muntzer Revolt",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Muntzer Revolt – This reordering comes after the new player order has been determined.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L645",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1143-L1156",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L90-L108"
+    ],
+    "notes": "Reordering helper executes within event after player-order phase."
+  },
+  {
+    "id": "event-papal-indulgence",
+    "index": 149,
+    "heading": "Papal Indulgence",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Papal Indulgence - The free architect comes from the supply, must be used immediately or be lost and does not cost any stone to use. If most Stability is shared all pay 2 gold.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1061-L1079",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629-L642",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314-L331"
+    ],
+    "notes": "Free architect immediately advances construction without decrementing shared architect supply or charging stone. In ordinary player counts a tied highest value leaves no most, so everyone pays2. General five-player top-two rule applies."
+  },
+  {
+    "id": "event-peace-of-westphalia",
+    "index": 150,
+    "heading": "Peace of Westphalia",
+    "status": "uncertain",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Peace of Westphalia – This reordering comes after the new player order has been determined.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L645",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1102-L1141"
+    ],
+    "notes": "Source-text ambiguity: the FAQ calls this reordering, while the implemented Peace of Westphalia effect is least military loses food. The effect runs after normal player order, but this does not establish a reordering rule to audit. Resolve the apparent FAQ/card mismatch before claiming either compliance or an implementation defect."
+  },
+  {
+    "id": "event-pilgrims",
+    "index": 151,
+    "heading": "Pilgrims",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Pilgrims – Most Food must take the worker, there is no choice. If shared most then nothing happens.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1081-L1100",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314-L331"
+    ],
+    "notes": "take_worker is compulsory if available; no yes/no. Most-food tie excludes recipients at ordinary counts; general five-player exception applies."
+  },
+  {
+    "id": "event-salem-witch-trials",
+    "index": 152,
+    "heading": "Salem Witch Trials",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Salem Witch Trials – Remove both advisors if you have Porcelain Tower.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L837-L861",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L126-L131",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L868-L905"
+    ],
+    "notes": "Remove-advisors branch calls remove_all_advisors over all removable advisors, including Porcelain Tower occupant."
+  },
+  {
+    "id": "event-sinking-of-the-vasa",
+    "index": 153,
+    "heading": "Sinking of the Vasa",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Sinking of the Vasa – This is a choice between gold loss and temporary reduction in Strength [1.5]. If several share least Stability the choice is done in reverse player order. You may not choose Strength reduction if it would make your Sterength less than 0. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1112-L1141"
+    ],
+    "notes": "Accepted designer clarification, reported by the user on 2026-10-17: Logitude discussed this with Rustan Håkansson, whose interpretation agrees with the current implementation. The gold<3 branch may use the temporary military reduction even below zero. Closed as an issue; no gameplay change requested. This is a user-reported clarification, not an independently inspected quotation from Rustan."
+  },
+  {
+    "id": "event-american-revolution",
+    "index": 154,
+    "heading": "American Revolution",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "American Revolution – This is not a choice, if you have a Colony you must remove it.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1200-L1218"
+    ],
+    "notes": "If colony exists selects one and removes it without decline option; otherwise loses point."
+  },
+  {
+    "id": "event-anarchism",
+    "index": 155,
+    "heading": "Anarchism",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Anarchism - Remove both advisors if you have Porcelain Tower.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1241-L1246",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904-L905"
+    ],
+    "notes": "Anarchism invokes remove_all_advisors, including second advisor on Porcelain Tower."
+  },
+  {
+    "id": "event-emigration",
+    "index": 156,
+    "heading": "Emigration",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Emigration – Errata: ”Remove” should be ”Return”. Worker is placed into the Population track, you choose where. If no worker has been taken you place it on top of either side and take it frst when you grow.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1499-L1503",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L832-L865",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L219-L250"
+    ],
+    "notes": "Emigration uses return_worker. When normal pool has grown workers, chooses eligible food/stability pool. If neither pool has been grown, worker goes to extra_worker_pool; future growth takes that worker first with no cost, mechanically representing placement above either track. Track-side visual choice is abstracted. Initial board workers count in grown_workers, so no-population-growth is not zero-grown-workers."
+  },
+  {
+    "id": "event-entente-cordiale",
+    "index": 157,
+    "heading": "Entente Cordiale",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Entente Cordiale – The workers may be deployed to diferent military cards. You may undeploy workers to be able to deploy them. Workers may be undeployed from one military card and be deployed to another military card.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1281-L1332"
+    ],
+    "notes": "Separate loop for each of two military deployments permits different cards. If no free workers, any undeploy action is offered, including from military, then chosen deployment. Capacity respects max_workers."
+  },
+  {
+    "id": "event-french-revolution",
+    "index": 158,
+    "heading": "French Revolution",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "French Revolution – This is not a choice, if you have an Advisor you must remove it. If you have Porcelain Tower and two advisors you must remove both.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1220-L1230",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904-L905"
+    ],
+    "notes": "Any removable advisor forces remove_all_advisors; Porcelain Tower advisors included; no decline."
+  },
+  {
+    "id": "event-great-exhibition",
+    "index": 159,
+    "heading": "Great Exhibition",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Great Exhibition - The free architects come from the supply, must be used immediately or be lost and does not cost any stone to use. If fnishing Wardenclyfe Tower, the actions may be taken immediately, but war is still limited to 1/round and discarded at end of round. [1.11]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1248-L1264",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629-L642",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2056-L2079",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L279-L281",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L528-L529"
+    ],
+    "notes": "Two immediate free architects consume no shared supply/stone; Wardenclyffe placed during events immediately executes three actions. can_buy_card rejects further war when war exists; war resets next maintenance. Completing tower after war resolution cannot change the already-resolved war of current round."
+  },
+  {
+    "id": "event-industrial-revolution",
+    "index": 160,
+    "heading": "Industrial Revolution",
+    "status": "uncertain",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Industrial Revolution – To win this you must have more workers deployed in Industrial (age 4) buildings than all others, if shared nothing happens.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1389-L1399",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314-L331"
+    ],
+    "notes": "Counts deployed workers only on age4 building cards. Ordinary-count ties award none. Generic most calculation implements general top-two rule at five players; interpret this FAQ shorthand with that rule. Unresolved five-player interpretation: this entry explicitly says more than all others, shared none, whereas general most rule allows two. Ordinary2–4 player behavior matches; author clarification needed before claiming conflict at5."
+  },
+  {
+    "id": "event-march-to-moscow",
+    "index": 161,
+    "heading": "March to Moscow",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "March to Moscow – This is not a choice, if you have a Colony you must remove it.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1359-L1376"
+    ],
+    "notes": "Existing colony must be selected and removed, no decline; absence causes point loss."
+  },
+  {
+    "id": "event-scramble-for-africa",
+    "index": 162,
+    "heading": "Scramble for Africa",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Scramble for Africa – You only get 1 VP if you have at least 1 Industrial (age 4) Colony, not more if you have more than 1 and nothing if you only have older colonies.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1411-L1424"
+    ],
+    "notes": "Loops colonies, adds one point for first age4 colony then breaks; older colonies ignored."
+  },
+  {
+    "id": "event-sepoy-mutiny",
+    "index": 163,
+    "heading": "Sepoy Mutiny",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Sepoy Mutiny – This reordering comes after the new player order has been determined.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L645",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1456-L1472",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L90-L108"
+    ],
+    "notes": "Sepoy helper reorders after regular player order."
+  },
+  {
+    "id": "event-sokoto-caliphate",
+    "index": 164,
+    "heading": "Sokoto Caliphate",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Sokoto Caliphate – This is a choice, done in reverse player order.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1441-L1454",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L77-L88"
+    ],
+    "notes": "Optional payment/gain helper iterates reverse player order and permits declining."
+  },
+  {
+    "id": "event-taiping-rebellion",
+    "index": 165,
+    "heading": "Taiping Rebellion",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Taiping Rebellion – This reordering comes after the new player order has been determined.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L645",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1350-L1376"
+    ],
+    "notes": "Taiping reorder helper executes during events after player-order phase."
+  },
+  {
+    "id": "event-tonghak-movement",
+    "index": 166,
+    "heading": "Tonghak movement",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Tonghak movement – You both lose the books and gain the stone.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1464-L1469"
+    ],
+    "notes": "Books loss and stone gain execute consecutively; stone gain is unconditional even if books loss exhausts holdings."
+  },
+  {
+    "id": "event-weltpolitik",
+    "index": 167,
+    "heading": "Weltpolitik",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Weltpolitik – You get both 5 gold and 5 stone per Industrial (age 4) Colony, nothing for older colonies.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1483-L1497"
+    ],
+    "notes": "Each age4 colony contributes5gold+5stone to reward; older colonies contribute neither."
+  },
+  {
+    "id": "dynasties-dynasties",
+    "index": 168,
+    "heading": "Dynasties",
+    "status": "not-applicable",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "Dynasties Note that most of these notes are in the Dynasties rulebook, and repeated here for ease of access.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [],
+    "notes": "Section introduction only; no independent executable rule."
+  },
+  {
+    "id": "dynasties-america-democratic-republicans",
+    "index": 169,
+    "heading": "America: Democratic Republicans",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "ⅅ America: Democratic Republicans - This action is available if at least one of the players with least Strength (note several can have equal and least, and 2 players in 5-player games) has at least one Dynasty card remaining, and for each such player there is one Turmoil card available. If several players have least Strength, but some have no Dynasty, those players are not afected. Each afected player selects which Dynasty to play if they have more than one, takes a Turmoil card and plays a Dynasty card. For each player that played a Dynasty the America player gets 3 Books. In solo you get nothing (the shadow has no dynasties so nothing is actually changed) [1.8] This action cannot be taken if America is among the players with least strength. [1.9]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L12-L58"
+    ],
+    "notes": "Action unavailable if owner among least military; filters least players with unplayed dynasties, requires enough turmoil for all, forces each to choose available dynasty and awards3books each. Uses global least logic including five-player rule. Solo clause outside supported multiplayer mode."
+  },
+  {
+    "id": "dynasties-arabs-abbasid-caliphate",
+    "index": 170,
+    "heading": "Arabs: Abbasid Caliphate",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "ⅅ Arabs: Abbasid Caliphate - When another player buys a Golden Age card, you may buy VP as though you had bought that card regardless of what the other player chooses. Golden Age bonuses apply when you buy VP this way (i.e., you can get a discount on the VP as though you had bought the Golden Age.). In Solo, if the shadow removes a golden age you may buy VP. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L75-L100",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L444-L475"
+    ],
+    "notes": "Other player buying any golden age activates optional VP regardless of their selection; own golden_age_bonus reduces affordability and payment. Solo shadow clause outside supported mode."
+  },
+  {
+    "id": "dynasties-china-qin-dynasty",
+    "index": 171,
+    "heading": "China: Qin Dynasty",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "ⅅ China: Qin Dynasty - The architect is from the supply. Pay no stone. Use it immediately. An undeployed worker can be returned to the population track. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L127-L140",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629-L642",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L832-L865"
+    ],
+    "notes": "Returns available worker directly if one exists, otherwise undeploys; immediately hires free architect without supply decrement or stone."
+  },
+  {
+    "id": "dynasties-egypt-old-kingdom",
+    "index": 172,
+    "heading": "Egypt: Old Kingdom",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "sourceText": "ⅅ Egypt: Old Kingdom – “Replace or Remove [Architect]” is wrong, should be “Action: Remove Advisor”. [1.8] Only remove one advisor with this action, even if you have multiple. [1.10]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L142-L182"
+    ],
+    "notes": "Correct Remove Advisor action; selects one removable non-covered advisor and calls remove(card) once, not remove_all_advisors."
+  },
+  {
+    "id": "dynasties-ethiopia-axumite-kingdom",
+    "index": 173,
+    "heading": "Ethiopia: Axumite Kingdom",
+    "status": "partial",
+    "sourcePages": [
+      8,
+      9
+    ],
+    "sourceText": "ⅅ Ethiopia: Axumite Kingdom - The token remains until the card has been bought or discarded. The token does not afect you. For others the cost is the normal price (paid to the bank) plus 3 gold (paid to you). In Solo, if the shadow removes the card you get the bonus. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L200-L249",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L258-L267",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L530-L555"
+    ],
+    "notes": "Marks persist across rounds in marked_cards; owner exempt and normal purchase pays bank price plus owner3gold. Galileo free=True skips extra-payment hooks: known confirmed surcharge conflict. Discarded cards leave harmless stale entries (not on board/no later purchase). Solo clause outside supported mode."
+  },
+  {
+    "id": "dynasties-india-mauryan-empire",
+    "index": 174,
+    "heading": "India: Mauryan Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ India: Mauryan Empire - When you take a Worker in the Growth phase you can choose to take 2 extra (3 in total growth). You can only take 1 extra if you just have 1 remaining Worker to take (for a total of 2). You cannot choose to take just 1 extra if you have more available. [1.7]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L329-L349"
+    ],
+    "notes": "Only growth-triggered taking worker offers extras: two if two available, otherwise one; no option for one when two remain."
+  },
+  {
+    "id": "dynasties-india-mughal-empire",
+    "index": 175,
+    "heading": "India: Mughal Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ India: Mughal Empire - When you have this Dynasty you get 1 VP each time one of your Wonders is ready and you move it to a Wonder space. Note: this does not efect Natural Wonders which are discovered.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L351-L361",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629-L642",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L661-L674"
+    ],
+    "notes": "VP subscribes wonder ready, called only completed construction; natural discovery uses discover event instead."
+  },
+  {
+    "id": "dynasties-japan-heian-period",
+    "index": 176,
+    "heading": "Japan: Heian Period",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Japan: Heian Period - Only get the books for choosing the normal Books efect on golden ages, not special efects that gives books in some other way like Arabian Nights. [1.9]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L393-L403",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L477-L497"
+    ],
+    "notes": "Only ordinary book resource benefit fires golden age choose books; special actions activate directly and do not fire it."
+  },
+  {
+    "id": "dynasties-japan-edo-period",
+    "index": 177,
+    "heading": "Japan: Edo Period",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Japan: Edo Period - You are protected from any efects that trigger when you are defeated, for example Solomon's Temple is not removed. [1.11]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L363-L391",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061-L1067"
+    ],
+    "notes": "no defeated effect hook wraps defeated event and losses, so removal conditions subscribed defeated (including Solomon Temple) never run."
+  },
+  {
+    "id": "dynasties-korea-joseon-kingdom",
+    "index": 178,
+    "heading": "Korea: Joseon Kingdom",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Korea: Joseon Kingdom - Only one type of resource may be placed on the card each round. In the last round you get the resources back before end of game scoring. After the resolution phase you double the resources and take them back. So 3 Gold placed here means you will add 3 more from the supply and take a total of 6 Gold back. If Joseon Kingdom is removed for any reason before you get the resources back they are lost.[1.9]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L405-L449",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L659",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L868-L898"
+    ],
+    "notes": "Placement options are one resource type1..3 and stored balance blocks reuse. End-of-round returns twice stored quantity before final scoring. Removal unregisters return event, losing resources permanently; stored3gold returns6gold."
+  },
+  {
+    "id": "dynasties-mali-mali-empire",
+    "index": 179,
+    "heading": "Mali: Mali Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Mali: Mali Empire - “Remove [Architect]” is wrong, should be “Remove Advisor”. [1.8] Only remove one advisor with this action, even if you have multiple. [1.10]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L464-L486"
+    ],
+    "notes": "Correct remove-advisor action chooses exactly one uncovered advisor; costs2gold, gives3books+1VP, and removes chosen card only."
+  },
+  {
+    "id": "dynasties-mongolia-golden-horde",
+    "index": 180,
+    "heading": "Mongolia: Golden Horde",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Mongolia: Golden Horde - In Solo, for each War the shadow removes you get what it would cost to buy it. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L504-L518"
+    ],
+    "notes": "This specific FAQ ruling is solo only, outside supported modes; multiplayer Golden Horde receives actual paid war price through buy card for gold."
+  },
+  {
+    "id": "dynasties-mongolia-yuan-dynasty",
+    "index": 181,
+    "heading": "Mongolia: Yuan Dynasty",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Mongolia: Yuan Dynasty - These are taken from your normal workers, same as if you take them in the Growth Phase.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L520-L531",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L803-L830"
+    ],
+    "notes": "Up to three ordinary take_worker calls draw regular population workers, with common extra pool handling same as growth."
+  },
+  {
+    "id": "dynasties-persia-achaemenid-empire",
+    "index": 182,
+    "heading": "Persia: Achaemenid Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Persia: Achaemenid Empire - You can do a deployment for free as your full frst action. If you do you may not do anything else this action.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L533-L563",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L591-L601",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L751-L777"
+    ],
+    "notes": "Growth worker flags discount available only action_number1; deploy is a main action and increments action counter, consuming first action. Undeployment remains permitted free preparation; no repeated free deployment."
+  },
+  {
+    "id": "dynasties-persia-sassanid-empire",
+    "index": 183,
+    "heading": "Persia: Sassanid Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Persia: Sassanid Empire - If you take a Turmoil card and choose to take 2 Gold, then the efect is activated. Take the Gold and discard the Turmoil card, which means that you do not get the normal -2 Stability for the round for having taken a Turmoil card. If you change to another Dynasty you get the normal -2 Stability for the round.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L565-L576",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L680-L722"
+    ],
+    "notes": "Defers taking turmoil. Gold benefit discards via hook without personal turmoil/-2stability. Choosing a new dynasty passes deferred flag, adds turmoil and subtracts2stability before replacement."
+  },
+  {
+    "id": "dynasties-poland-jagellonian-dynasty",
+    "index": 184,
+    "heading": "Poland: Jagellonian Dynasty",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Poland: Jagellonian Dynasty - If you use this and are frst you may take two turns after each other. [1.7]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L578-L624",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L548-L554"
+    ],
+    "notes": "Paid extra turn runs before normal action loop, which then starts at first player; first-position Poland therefore takes consecutive turns."
+  },
+  {
+    "id": "dynasties-poland-polish-lithuanian-commonwealth",
+    "index": 185,
+    "heading": "Poland: Polish-Lithuanian Commonwealth",
+    "status": "uncertain",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Poland: Polish-Lithuanian Commonwealth - Discard any Advisors on your Wonder spaces when you play a new Dynasty. Does not afect Advisor on Porcelain Tower. If you lose your advisor through any efect and you have two or more advisors, you lose all. [1.11]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L626-L642",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904-L905",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L126-L131",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2211-L2225"
+    ],
+    "notes": "Dynasty removal discards advisors only in wonder slots, leaving Porcelain Tower occupant outside wonder slots intact. Effects asking lose advisors call remove_all_advisors across every removable advisor. Does not treat voluntary dynasty remove-one-advisor actions as lose-all; FAQ expressly permits single removal there. Unresolved scope: conditional self-removal (e.g. existing Qin reaches least stability) calls remove(self), leaving other advisors. A component probe confirms this. If FAQ any effect includes self-removal, it conflicts; if only opponent/event remove-advisor instruction, generic all-advisor calls comply. No implicit remove-with rule registered by Poland."
+  },
+  {
+    "id": "dynasties-portugal-portugese-empire",
+    "index": 186,
+    "heading": "Portugal: Portugese Empire",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Portugal: Portugese Empire - Discard any Colonies on your Wonder spaces when you play a new Dynasty. You may replace normal Wonders with Colonies. Colonies in Wonder spaces can be replaced with Wonders and Natural Wonders. Natural Wonders may not be replaced. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L701-L717",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L160-L161",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L367-L415",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L611-L626"
+    ],
+    "notes": "Removal discards colonies on wonder slots. Placement supports colonies there and replacement by colony/wonder/natural wonder, while all replacement slots exclude natural wonders/extensions."
+  },
+  {
+    "id": "dynasties-portugal-kingdom-of-leon",
+    "index": 187,
+    "heading": "Portugal: Kingdom of Leon",
+    "status": "uncertain",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Portugal: Kingdom of Leon - After resolving the purchase of the war, resolve as if you also had bought a battle card for free. [1.11] If you have Montezuma you only get 3 extra books when buying war, not 3 from war and 3 from battle. Rigveda, Abu Bakr and other bonuses for buying battles work as if you had bought a battle. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L668-L699",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2535-L2554",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2255-L2270",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L554-L583"
+    ],
+    "notes": "Battle effects and buying/bought/after-bought hooks replay by temporarily treating war as battle; Montezuma prev_card avoids duplicate3books. Abu Bakr and other battle hooks participate. Ordering caveat: do_battle plus buying-battle triggers occur in buying card before actual war card buy/set-war; FAQ explicitly places battle after resolving purchase. No resulting gameplay difference demonstrated; timing discrepancy only, not confirmed gameplay bug. Overall verdict uncertain only for strict ordering clause; named reward/dedup behavior is supported."
+  },
+  {
+    "id": "dynasties-rome-roman-republic",
+    "index": 188,
+    "heading": "Rome: Roman Republic",
+    "status": "documented-exception",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Rome: Roman Republic - Take an architect from those available this round, discard it, and increase your Stability by 1 for this round.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L736-L763"
+    ],
+    "notes": "Uses shared architects and decrements1, gains1stability, removes round bonus at end. Known documented exception: removing dynasty also clears the bonus before round ends."
+  },
+  {
+    "id": "dynasties-venice-domains-of-the-sea",
+    "index": 189,
+    "heading": "Venice: Domains of the Sea",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Venice: Domains of the Sea - Discard the colony, not this card. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L765-L781"
+    ],
+    "notes": "discard immediately targets bought colony and returns true; dynasty stays installed."
+  },
+  {
+    "id": "dynasties-venice-pactum-warmundi",
+    "index": 190,
+    "heading": "Venice: Pactum Warmundi",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Venice: Pactum Warmundi - When another player buys a battle or a colony, you get 1 gold from the bank. In Solo, for each battle and colony the shadow removes you get 1 gold. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L783-L797"
+    ],
+    "notes": "Other player buying battle/colony directly adds1gold from bank, no deduction from buyer. Solo shadow clause outside supported mode."
+  },
+  {
+    "id": "dynasties-vikings-normans",
+    "index": 191,
+    "heading": "Vikings: Normans",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "ⅅ Vikings: Normans - Your normal Raid value is increased by 3.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L799-L808",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L192-L199"
+    ],
+    "notes": "Extra raid-value hook adds3 to normal maximum deployed military raid value."
+  },
+  {
+    "id": "faq-q-can-you-build-the-same-building-military-card-several-times",
+    "index": 192,
+    "heading": "Q: Can you build the same building/military card several times?",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Can you build the same building/military card several times? A: Yes. All buildings and military are unique, but when playing with the B-sides you can have 2 of the same card.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L367-L415",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/nations.py#L42-L55",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L248-L280"
+    ],
+    "notes": "Placement has no same-name uniqueness restriction; nation starting cards instantiate separately from progress cards. Thus same building/military may coexist including B-side starting copies."
+  },
+  {
+    "id": "faq-q-can-you-place-many-workers-on-a-building-military",
+    "index": 193,
+    "heading": "Q: Can you place many workers on a building/military?",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Can you place many workers on a building/military? A: Yes, but only one per action. [1.3]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L299-L316",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L585-L601",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L751-L777"
+    ],
+    "notes": "Normal deployment adds one worker per main action; non-max-workers buildings/militaries permit further workers. Specific card capacity restrictions retained."
+  },
+  {
+    "id": "faq-q-do-you-get-vp-for-placing-a-worker-on-a-building-military",
+    "index": 194,
+    "heading": "Q: Do you get VP for placing a worker on a building/military?",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Do you get VP for placing a worker on a building/military? A: No. VP for workers and military are only scored at the end of the game.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L585-L601",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123-L1138"
+    ],
+    "notes": "Deployment updates production/most-least without VP. score sums deployed workers worker_points only at scoring; projected score display is not awarded VP."
+  },
+  {
+    "id": "faq-q-in-a-5-player-game-with-2-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+    "index": 195,
+    "heading": "Q: In a 5-player game with 2 Nations having the most Strength, who gets the bonus from a strongest Nation event?",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: In a 5-player game with 2 Nations having the most Strength, who gets the bonus from a strongest Nation event? A: Both.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314-L331"
+    ],
+    "notes": "Five-player most selects up to top2 unless threshold tied with third; exactly two tied highest are both above third and both qualify."
+  },
+  {
+    "id": "faq-q-in-a-5-player-game-with-3-nations-having-the-most-strength-who-gets-the-bonus-from-a-strongest-nation-event",
+    "index": 196,
+    "heading": "Q: In a 5-player game with 3 Nations having the most Strength, who gets the bonus from a strongest Nation event?",
+    "status": "supported",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: In a 5-player game with 3 Nations having the most Strength, who gets the bonus from a strongest Nation event? A: None.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314-L331"
+    ],
+    "notes": "Three tied highest makes threshold increase above their value, leaving no most recipients."
+  },
+  {
+    "id": "faq-q-what-does-the-books-on-the-solo-tiles-mean",
+    "index": 197,
+    "heading": "Q: What does the Books on the solo tiles mean?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: What does the Books on the solo tiles mean? A: That is how many books the shadow opponent gains at the start of this round. Depending on the actions shown on a roll of 5 or 6 there might be further changes to the total amount of Books the shadow opponent has this round.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-is-the-shadow-opponent-afected-by-war",
+    "index": 198,
+    "heading": "Q: Is the shadow opponent afected by war?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Is the shadow opponent afected by war? A: No, it does not even lose books. [1.2]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-can-the-shadow-take-turmoil-cards",
+    "index": 199,
+    "heading": "Q: Can the shadow take Turmoil cards?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Can the shadow take Turmoil cards? A: No, but it will roll when you do. [1.8]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-should-i-roll-the-die-after-every-action",
+    "index": 200,
+    "heading": "Q: Should I roll the die after every action?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Should I roll the die after every action? A: Yes, except after deploying a worker to a building. Passing is not an action and does not cause the die to be rolled. [1.6]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-if-i-am-second-in-player-order-and-pass-as-my-frst-action-will-the-shadow-player-roll-at-all",
+    "index": 201,
+    "heading": "Q: If I am second in player order and pass as my frst action, will the shadow player roll at all?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: If I am second in player order and pass as my frst action, will the shadow player roll at all? A: Yes, the shadow player rolls the die before you take an action. It does not matter for that roll if you pass or deploy a worker on a building (actions that are not followed by a roll) as your frst action. [1.3]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-are-the-strength-and-stability-values-for-the-shadow-accumulated",
+    "index": 202,
+    "heading": "Q: Are the strength and stability values for the shadow accumulated?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9
+    ],
+    "sourceText": "Q: Are the strength and stability values for the shadow accumulated? A: No, they are reset every time you draw a new solo event tile. [1.3]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-if-a-war-has-been-bought-or-rolled-what-happens-if-i-roll-a-column-with-a-war-again",
+    "index": 203,
+    "heading": "Q: If a war has been bought or rolled, what happens if I roll a column with a war again?",
+    "status": "not-applicable",
+    "sourcePages": [
+      9,
+      10
+    ],
+    "sourceText": "Q: If a war has been bought or rolled, what happens if I roll a column with a war again? A: It is discarded, like in the normal game only 1 war can be bought each round. The die roll of the shadow represents it buying cards. [1.4]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-is-the-efect-applied-each-time-you-roll-a-5-or-6-or-only-the-frst",
+    "index": 204,
+    "heading": "Q: Is the efect applied each time you roll a 5 or 6, or only the frst?",
+    "status": "not-applicable",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: Is the efect applied each time you roll a 5 or 6, or only the frst? A: Every time. [1.4]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-when-an-architect-is-removed-by-a-die-roll-in-the-solo-game-is-a-turmoil-card-removed-as-well",
+    "index": 205,
+    "heading": "Q: When an architect is removed by a die roll in the solo game, is a Turmoil card removed as well?",
+    "status": "not-applicable",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: When an architect is removed by a die roll in the solo game, is a Turmoil card removed as well? A: Yes. [1.9]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L16-L74"
+    ],
+    "notes": "Solo shadow/tile/die rule. No shadow opponent, solo tile or die-roll engine is present in this multiplayer implementation; card-draw tables cover2+ players. Not a multiplayer gameplay defect."
+  },
+  {
+    "id": "faq-q-what-happens-when-i-take-a-worker",
+    "index": 206,
+    "heading": "Q: What happens when I take a worker?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: What happens when I take a worker? A: You either have to pay 3 food in every production phase or your stability decreases by 3. There is no other type of payment for taking a worker, except the lost opportunity to take your bonus.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/nations.py#L11-L31",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L219-L250",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L803-L830",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1022-L1036"
+    ],
+    "notes": "Growth normal worker uses3food upkeep or immediate-3stability worker pool; worker taking has no separate resource payment. Growth resource bonus is foregone by selecting worker. Special extra pool/other nation exceptions are separate explicit effects."
+  },
+  {
+    "id": "faq-q-when-does-scoring-happen-like-on-statue-of-liberty-scoring-2-vp-if-most-workers",
+    "index": 207,
+    "heading": "Q: When does \"Scoring\" happen, like on Statue of Liberty? (Scoring: +2 VP if most workers)",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: When does \"Scoring\" happen, like on Statue of Liberty? (Scoring: +2 VP if most workers) A: It is the end of game scoring. Any other scoring is listed diferently, like \"End of each age: +1 VP\" on Solomon's Temple.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123-L1138",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L669"
+    ],
+    "notes": "bonus_points evaluated during final score (also non-mutating projected score); end-age hooks execute separately every even round."
+  },
+  {
+    "id": "faq-q-how-are-used-markers-placed",
+    "index": 208,
+    "heading": "Q: How are \"Used\" markers placed?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: How are \"Used\" markers placed? A: Only place \"Used\" markers on a card if the action has a limit on the number of turns it can be used in a round, for example \"Action, 1 per round\". If a card has \"Action\", but no limit, you can use it several times in a round.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/cards.py#L125-L139",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L127-L134",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/dynasty_cards.py#L142-L163",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L353-L359"
+    ],
+    "notes": "Limited actions check markers/resources against limit and reset each round; unlimited action availability lacks per-round count. Digital marker state substitutes physical used markers; Old Kingdom persistent markers track its separate production effect."
+  },
+  {
+    "id": "faq-q-how-many-rounds-is-the-game",
+    "index": 209,
+    "heading": "Q: How many rounds is the game?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: How many rounds is the game? A: 8. 4 ages and each age is 2 rounds. At the end of each age is a small scoring for Books, with a reminder in the form of a VP marker on the score board.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640-L659",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L700-L706"
+    ],
+    "notes": "Rounds increment1 at a time; game finishes at8. Even rounds score books, giving four two-round ages. Physical reminder marker is presentation only."
+  },
+  {
+    "id": "faq-q-if-i-move-a-worker-from-a-temple-stability-1-to-a-ziggurat-stability-2-is-my-stability-reduced-by-1-before-being-increased-by-2",
+    "index": 210,
+    "heading": "Q: If I move a worker from a Temple (Stability 1) to a Ziggurat (Stability 2), is my Stability reduced by 1 before being increased by 2?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: If I move a worker from a Temple (Stability 1) to a Ziggurat (Stability 2), is my Stability reduced by 1 before being increased by 2? A: Yes, as the worker is frst undeployed (not an action) and then deployed. You might risk losing an advisor that depends on not having the lowest Stability (for example Qin Shi Huang).",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L603-L609",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L591-L601"
+    ],
+    "notes": "Undeployment immediately updates most/least; subsequent deployment independently updates. Thus temple-to-ziggurat temporary dip can remove conditional advisor, as FAQ requires."
+  },
+  {
+    "id": "faq-q-how-is-player-order-determined-for-nations-in-revolt",
+    "index": 211,
+    "heading": "Q: How is player order determined for Nations in revolt?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: How is player order determined for Nations in revolt? A: All players in revolt count as lowest and equal, so no change in turn order for those with equal strength that are also in revolt. This is true for a player that just completed Versailles as well. [1.1]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L576-L590",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1834-L1852"
+    ],
+    "notes": "Player-order sort clamps all negative stability to-1, preserving old order when military and clamped stability tie; force least stability hook similarly sets Versailles to-1. Distinct military still orders normally."
+  },
+  {
+    "id": "faq-q-how-is-negative-stability-counted-at-the-end-of-the-game",
+    "index": 212,
+    "heading": "Q: How is negative Stability counted at the end of the game?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: How is negative Stability counted at the end of the game? A: It is summed up as normal, so negative Stability reduces your total for resources. [1.1]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/resources.py#L93-L94",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1135-L1138"
+    ],
+    "notes": "total includes signed stability with upper cap15 but no lower floor, reducing resources used for final scoring."
+  },
+  {
+    "id": "faq-q-is-row-1-on-the-progress-board-diferent-from-row-2-and-3",
+    "index": 213,
+    "heading": "Q: Is row 1 on the progress board diferent from row 2 and 3?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: Is row 1 on the progress board diferent from row 2 and 3? A: No, you use the number of columns indicated depending on the number of players, same number of cards on all rows. [1.3]",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L279-L280",
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L446-L448"
+    ],
+    "notes": "Progress board initialized as3equal rows of playercount+2 columns; no shorter first row."
+  },
+  {
+    "id": "faq-q-page-15-what-is-the-o-in-it-is-impossible-for-any-nation-to-sufer-any-losses-due-to-strength-o-war",
+    "index": 214,
+    "heading": "Q: Page 15, what is the o in \"It is impossible for any nation to sufer any losses due to strength o war.\"?",
+    "status": "supported",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: Page 15, what is the o in \"It is impossible for any nation to sufer any losses due to strength o war.\"? A: That o is a 0.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [
+      "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061-L1098"
+    ],
+    "notes": "War value0 defeats only military below0; no positive/zero strength player loses due to zero-strength war, consistent with corrected typographic zero. Negative-strength special cases remain per rules."
+  },
+  {
+    "id": "faq-q-why-is-the-4-th-age-indicated-by-ii-ii-instead-of-iv-at-the-bottom",
+    "index": 215,
+    "heading": "Q: Why is the 4:th age indicated by \"II II\" instead of \"IV\" at the bottom?",
+    "status": "not-applicable",
+    "sourcePages": [
+      10
+    ],
+    "sourceText": "Q: Why is the 4:th age indicated by \"II II\" instead of \"IV\" at the bottom? A: IV was indeed the logical choice, and that's what we had there originally. However, we changed it frst to IIII because the printer told us that a slight miscutting of the cards would either take out the bottom of the V away, or the V would be too high. Later, IIII was sometimes mixed with III, so we decided to make them II II.",
+    "faq": "https://boardgamegeek.com/filepage/96855/faq-official",
+    "evidence": [],
+    "notes": "Physical card printing explanation (IIII vs IV), no gameplay logic to implement."
+  }
+]

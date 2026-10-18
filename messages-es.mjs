@@ -49,7 +49,7 @@ export default {
   "smTitle": "**Campeonato de Suecia · T{season} · División {div}{auto}**",
   "smAuto": " (selección automática según tu suscripción)",
   "smChecked": "Seguimiento comprobado: {time}",
-  "smStale": "⚠️ {count} partida(s) sin conexión o comprobación reciente. Se muestra la última clasificación conocida.",
+  "smStale": "⚠️ {count} partida(s) llevan más de 5 minutos sin responder. Se muestra la última clasificación conocida.",
   "smOngoing": "{ongoing}/{total} partidas pendientes. Puntos: 5/3/2/1. Clasificación según §7.",
   "smDrafting": "Pendientes de inicio: {matches}. Aún no otorgan puntos de grupo.",
   "smLegend": "H2H = partidas compartidas. Victorias/segundos = puestos actuales.",

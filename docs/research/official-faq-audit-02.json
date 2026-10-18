@@ -1,0 +1,1954 @@
+[
+  {
+    "id": "battle-battle",
+    "index": 65,
+    "heading": "Battle",
+    "status": "supported",
+    "sourcePages": [
+      4
+    ],
+    "evidence": [
+      {
+        "file": "player.py",
+        "symbol": "raid_value",
+        "line": 192,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L192"
+      },
+      {
+        "file": "player.py",
+        "symbol": "do_battle",
+        "line": 431,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L431"
+      }
+    ],
+    "notes": "Only deployed military enter maximum raid calculation; worker count is not multiplied. Battle grants one chosen resource benefit."
+  },
+  {
+    "id": "building-coffffee-house",
+    "index": 66,
+    "heading": "Coffffee House",
+    "status": "supported",
+    "sourcePages": [
+      4
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "CoffeeHouse",
+        "line": 321,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L321"
+      }
+    ],
+    "notes": "Multiplayer passed-last production is implemented. The solo clause is outside the implemented multiplayer model; no shadow opponent machinery was found."
+  },
+  {
+    "id": "colony-grand-duchy-of-finland",
+    "index": 67,
+    "heading": "Grand Duchy of Finland",
+    "status": "not-applicable",
+    "sourcePages": [
+      4
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "all_progress_cards",
+        "line": 3387,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3387"
+      }
+    ],
+    "notes": "Grand Duchy of Finland is absent from the available card class roster; this promo cannot be played in this snapshot."
+  },
+  {
+    "id": "golden-age-bonus",
+    "index": 68,
+    "heading": "Bonus",
+    "status": "supported",
+    "sourcePages": [
+      4,
+      5
+    ],
+    "evidence": [
+      {
+        "file": "player.py",
+        "symbol": "golden_age_bonus",
+        "line": 202,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L202"
+      },
+      {
+        "file": "player.py",
+        "symbol": "have_golden_age",
+        "line": 479,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L479"
+      },
+      {
+        "file": "player.py",
+        "symbol": "pay_for_golden_age_point",
+        "line": 443,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L443"
+      }
+    ],
+    "notes": "Bonus sums all completed-card bonuses, increases the chosen standard resource, and reduces VP resource payment with a zero floor; cannot gain resources from over-discounting."
+  },
+  {
+    "id": "golden-age-antikythera-mechanism",
+    "index": 69,
+    "heading": "Antikythera Mechanism",
+    "status": "not-applicable",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "all_progress_cards",
+        "line": 3387,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3387"
+      }
+    ],
+    "notes": "Antikythera Mechanism is absent; draw-until-building/wonder, mandatory placement and natural-wonder stopping clauses cannot arise."
+  },
+  {
+    "id": "golden-age-arabian-nights",
+    "index": 70,
+    "heading": "Arabian Nights",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "ArabianNights",
+        "line": 2870,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2870"
+      },
+      {
+        "file": "player.py",
+        "symbol": "have_golden_age",
+        "line": 479,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L479"
+      }
+    ],
+    "notes": "Passed-over hook grants exactly two books, special branch ignores Golden Age bonus and end-round removes its extra card and hooks. Solo clause outside supported mode."
+  },
+  {
+    "id": "golden-age-le-vite",
+    "index": 71,
+    "heading": "Le Vite",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "LeVite",
+        "line": 2950,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2950"
+      },
+      {
+        "file": "player.py",
+        "symbol": "have_golden_age",
+        "line": 479,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L479"
+      }
+    ],
+    "notes": "Special option directly adds three public architects and its discount hook; Golden Age bonus never enters this branch."
+  },
+  {
+    "id": "golden-age-uncle-tom-s-cabin",
+    "index": 72,
+    "heading": "Uncle Tom's Cabin",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "UncleTomsCabin",
+        "line": 3034,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3034"
+      },
+      {
+        "file": "player.py",
+        "symbol": "remove_cards",
+        "line": 868,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L868"
+      },
+      {
+        "file": "player.py",
+        "symbol": "have_golden_age",
+        "line": 479,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L479"
+      }
+    ],
+    "notes": "All players including purchaser lose building cards with printed deployment_cost -1. Removal undeploys workers and leaves a vacant replaceable slot, the digital equivalent of a flipped card. Special option ignores Golden Age bonus."
+  },
+  {
+    "id": "military-assassin",
+    "index": 73,
+    "heading": "Assassin",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Assassin",
+        "line": 562,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L562"
+      },
+      {
+        "file": "progress_cards.py",
+        "symbol": "ZhuXi",
+        "line": 2434,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2434"
+      },
+      {
+        "file": "player.py",
+        "symbol": "buy_action",
+        "line": 508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L508"
+      },
+      {
+        "file": "player.py",
+        "symbol": "remove_all_advisors",
+        "line": 904,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904"
+      }
+    ],
+    "notes": "Requires a deployed Assassin worker; after-bought-card effect follows ordinary battle gain; each other player chooses legal food payment or advisor removal. Zhu Xi special remove-with behavior discards him whether or not he carries a replacement."
+  },
+  {
+    "id": "wonder-wonder",
+    "index": 74,
+    "heading": "Wonder",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "player.py",
+        "symbol": "place_wonder_or_natural_wonder",
+        "line": 611,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L611"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_free_architect",
+        "line": 629,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629"
+      }
+    ],
+    "notes": "Placement permits any replaceable completed wonder slot even when a slot is empty. wonder-ready hooks execute before old wonder removal, so its ready-trigger reward still occurs on replacing it. Mechanical Turk exception outside scope: card absent."
+  },
+  {
+    "id": "wonder-colosseum",
+    "index": 75,
+    "heading": "Colosseum",
+    "status": "supported",
+    "sourcePages": [
+      5
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Colosseum",
+        "line": 1342,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1342"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Ready effect invokes mandatory resource loss, not affordability gating; missing food incurs books and resource-deficit VP through ordinary lose_resources."
+  },
+  {
+    "id": "wonder-great-lighthouse",
+    "index": 76,
+    "heading": "Great Lighthouse",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "GreatLighthouse",
+        "line": 1370,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1370"
+      },
+      {
+        "file": "progress_cards.py",
+        "symbol": "Hannibal",
+        "line": 2147,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L2147"
+      },
+      {
+        "file": "player.py",
+        "symbol": "buy_action",
+        "line": 508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L508"
+      }
+    ],
+    "notes": "Actual card-price event tests gold==3, independent of printed row; Hannibal surcharge contributes to card price so row-two battles qualify. Separate Axumite transfer is not part of card price."
+  },
+  {
+    "id": "wonder-sphinx",
+    "index": 77,
+    "heading": "Sphinx",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Sphinx",
+        "line": 1439,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1439"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_free_architect",
+        "line": 629,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629"
+      }
+    ],
+    "notes": "Sphinx registers only on ready, so does not award itself five stone; later wonder-ready hooks fire before replacement removes it."
+  },
+  {
+    "id": "wonder-solomon-s-temple",
+    "index": 78,
+    "heading": "Solomon's Temple",
+    "status": "partial",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "SolomonsTemple",
+        "line": 1420,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1420"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "Awards once at each end-of-age and removes on defeat, yielding at most four VP. Strict timing wording says same time as Books, but hook actually executes after end-of-round hooks following Books. No demonstrated outcome difference for this entry; record timing qualification."
+  },
+  {
+    "id": "wonder-terracotta-army",
+    "index": 79,
+    "heading": "Terracotta Army",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "TerracottaArmy",
+        "line": 1466,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1466"
+      }
+    ],
+    "notes": "Placed effect snapshots least stability and applies mandatory four-gold loss to every qualifying player including owner."
+  },
+  {
+    "id": "wonder-petra",
+    "index": 80,
+    "heading": "Petra",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Petra",
+        "line": 1395,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1395"
+      }
+    ],
+    "notes": "Once-per-round affordable special action pays one food and directly grants chosen three books/gold/stone from supply; no other player involved."
+  },
+  {
+    "id": "wonder-great-library",
+    "index": 81,
+    "heading": "Great Library",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "GreatLibrary",
+        "line": 1354,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1354"
+      },
+      {
+        "file": "player.py",
+        "symbol": "golden_age_bonus",
+        "line": 202,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L202"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least_of_resource",
+        "line": 333,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L333"
+      }
+    ],
+    "notes": "Golden Age bonus uses common summed mechanism. Least-stability hook registered on placement removes card on ordinary least checks, including ties."
+  },
+  {
+    "id": "wonder-alhambra",
+    "index": 82,
+    "heading": "Alhambra",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Alhambra",
+        "line": 1508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1508"
+      },
+      {
+        "file": "cards.py",
+        "symbol": "new_round",
+        "line": 134,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/cards.py#L134"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_actions",
+        "line": 326,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L326"
+      }
+    ],
+    "notes": "One private architect is replenished per round and available through ordinary hire actions and costs, rather than a repeatable special action."
+  },
+  {
+    "id": "wonder-notre-dame",
+    "index": 83,
+    "heading": "Notre Dame",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "NotreDame",
+        "line": 1592,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1592"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least",
+        "line": 314,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314"
+      }
+    ],
+    "notes": "Cross-reference Most and least: produce checks owner.most_stability and grants extra books only for qualifying most set; ties follow shared common most/least algorithm."
+  },
+  {
+    "id": "wonder-porcelain-tower",
+    "index": 84,
+    "heading": "Porcelain Tower",
+    "status": "uncertain",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "PorcelainTower",
+        "line": 1628,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1628"
+      },
+      {
+        "file": "player.py",
+        "symbol": "place_card",
+        "line": 360,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L360"
+      },
+      {
+        "file": "player.py",
+        "symbol": "remove_cards",
+        "line": 868,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L868"
+      },
+      {
+        "file": "player.py",
+        "symbol": "remove_all_advisors",
+        "line": 904,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904"
+      }
+    ],
+    "notes": "Tower cover hooks allow advisor on Tower and replacement of that covering advisor. Global advisor loss collects both completed advisors. Removing just covering advisor reveals Tower; placing ready wonder removes Tower and its covered advisor stack. Self-removing Qin or Hypatia calls remove(self), retaining the other advisor: no Tower remove-with hook propagates this. Whether official any-effect wording includes self-removal needs clarification; ordinary lose-advisor effects remove both as required."
+  },
+  {
+    "id": "wonder-angkor-wat",
+    "index": 85,
+    "heading": "Angkor Wat",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "AngkorWat",
+        "line": 1522,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1522"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least",
+        "line": 314,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314"
+      }
+    ],
+    "notes": "Cross-reference Most and least: production tests owner.least_military; tied least share penalty under common algorithm."
+  },
+  {
+    "id": "wonder-chichen-itza",
+    "index": 86,
+    "heading": "Chichen Itza",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "ChichenItza",
+        "line": 1538,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1538"
+      },
+      {
+        "file": "player.py",
+        "symbol": "buy_action",
+        "line": 508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L508"
+      }
+    ],
+    "notes": "Buying-war hook immediately adds one VP with no military, war outcome or defeated-player requirement."
+  },
+  {
+    "id": "wonder-great-wall",
+    "index": 87,
+    "heading": "Great Wall",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "GreatWall",
+        "line": 1555,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1555"
+      },
+      {
+        "file": "player.py",
+        "symbol": "war",
+        "line": 1061,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Spared-war-point hook protects only direct defeat VP. War resources and their separate deficit VP remain ordinary losses."
+  },
+  {
+    "id": "wonder-piazza-san-marco",
+    "index": 88,
+    "heading": "Piazza San Marco",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "PiazzaSanMarco",
+        "line": 1608,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1608"
+      }
+    ],
+    "notes": "Pays two gold to supply and grants chosen five books/food/stone; requires affordability and one action per round."
+  },
+  {
+    "id": "wonder-hagia-sophia",
+    "index": 89,
+    "heading": "Hagia Sophia",
+    "status": "not-applicable",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "all_progress_cards",
+        "line": 3387,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3387"
+      }
+    ],
+    "notes": "Hagia Sophia absent from playable card roster; cross-referenced most/least behavior cannot be evaluated for this promo."
+  },
+  {
+    "id": "wonder-shwedagon-pagoda",
+    "index": 90,
+    "heading": "Shwedagon Pagoda",
+    "status": "documented-exception",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "ShwedagonPagoda",
+        "line": 1659,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1659"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "Markers and added stability clear at end of round before final scoring. Additionally clears immediately when removed, ending round-long benefit early; previously documented author replacement exception."
+  },
+  {
+    "id": "wonder-sistine-chapel",
+    "index": 91,
+    "heading": "Sistine Chapel",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "SistineChapel",
+        "line": 1800,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1800"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_actions",
+        "line": 326,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L326"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_free_architect",
+        "line": 629,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L629"
+      }
+    ],
+    "notes": "Books are attached to hire-architect event. Normal hire actions require an incomplete wonder, so player cannot hire solely to generate books. Free architect completion path also emits the hook; FAQ entry does not explicitly settle free-hire distinction."
+  },
+  {
+    "id": "wonder-versailles",
+    "index": 92,
+    "heading": "Versailles",
+    "status": "documented-exception",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Versailles",
+        "line": 1834,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1834"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least_of_resource",
+        "line": 333,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L333"
+      },
+      {
+        "file": "player.py",
+        "symbol": "war",
+        "line": 1061,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061"
+      }
+    ],
+    "notes": "Force-least effect alters comparison rather than resource marker, preserving actual stability for war mitigation. Effect clears at round end, but removal unregisters it early: previously documented replacement exception."
+  },
+  {
+    "id": "wonder-potala-palace",
+    "index": 93,
+    "heading": "Potala Palace",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "PotalaPalace",
+        "line": 1750,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1750"
+      },
+      {
+        "file": "player.py",
+        "symbol": "score",
+        "line": 1123,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123"
+      },
+      {
+        "file": "player.py",
+        "symbol": "advisor_cards",
+        "line": 119,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L119"
+      }
+    ],
+    "notes": "bonus_points called by final score and counts owned completed advisors including advisor covering Porcelain Tower; two advisors yield two bonus VP."
+  },
+  {
+    "id": "wonder-royal-society",
+    "index": 94,
+    "heading": "Royal Society",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "RoyalSociety",
+        "line": 1780,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1780"
+      },
+      {
+        "file": "player.py",
+        "symbol": "deploy_for_free",
+        "line": 585,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L585"
+      },
+      {
+        "file": "progress_cards.py",
+        "symbol": "Military",
+        "line": 46,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L46"
+      }
+    ],
+    "notes": "Free deployment bypasses only stone payment, calls normal military.deploy and production, retaining immediate and production upkeep."
+  },
+  {
+    "id": "wonder-uraniborg",
+    "index": 95,
+    "heading": "Uraniborg",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Uraniborg",
+        "line": 1826,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1826"
+      },
+      {
+        "file": "player.py",
+        "symbol": "golden_age_bonus",
+        "line": 202,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L202"
+      },
+      {
+        "file": "player.py",
+        "symbol": "have_golden_age",
+        "line": 479,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L479"
+      }
+    ],
+    "notes": "Golden Age/Bonus cross-reference: printed bonus2 is summed through common routine, applying only ordinary resource benefit or zero-floored VP price."
+  },
+  {
+    "id": "wonder-himeji-castle",
+    "index": 96,
+    "heading": "Himeji Castle",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "HimejiCastle",
+        "line": 1709,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1709"
+      },
+      {
+        "file": "player.py",
+        "symbol": "place_card",
+        "line": 360,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L360"
+      }
+    ],
+    "notes": "Replaced-card hook requires both old and new building types and strictly newer new_card.age, then grants four stone at placement. Does not reward same age, military, or empty slot."
+  },
+  {
+    "id": "wonder-red-fort",
+    "index": 97,
+    "heading": "Red Fort",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "RedFort",
+        "line": 1763,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1763"
+      },
+      {
+        "file": "player.py",
+        "symbol": "buy_action",
+        "line": 508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L508"
+      }
+    ],
+    "notes": "buy-card-for-gold event compares actual price==1, not row; grants two food immediately."
+  },
+  {
+    "id": "wonder-kremlin",
+    "index": 98,
+    "heading": "Kremlin",
+    "status": "not-applicable",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "all_progress_cards",
+        "line": 3387,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3387"
+      }
+    ],
+    "notes": "Kremlin absent from implemented card roster; ongoing strongest bonus clause cannot arise."
+  },
+  {
+    "id": "wonder-mechanical-turk",
+    "index": 99,
+    "heading": "Mechanical Turk",
+    "status": "not-applicable",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "all_progress_cards",
+        "line": 3387,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3387"
+      }
+    ],
+    "notes": "Mechanical Turk absent. VP ownership, transfer placement choice, nonreplacement and reserved natural-wonder-space restrictions cannot arise in this source."
+  },
+  {
+    "id": "wonder-oresund-dues",
+    "index": 100,
+    "heading": "Öresund Dues",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "OresundDues",
+        "line": 1735,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1735"
+      },
+      {
+        "file": "match.py",
+        "symbol": "action_phase",
+        "line": 546,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L546"
+      }
+    ],
+    "notes": "Passed-over hook grants two stone per skipped turn. Solo zero-gain clause outside supported multiplayer model."
+  },
+  {
+    "id": "wonder-south-pole-expedition",
+    "index": 101,
+    "heading": "South Pole Expedition",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "SouthPoleExpedition",
+        "line": 1965,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1965"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Mandatory five-food loss on ready uses ordinary deficit payment, allowing completion without five food and charging books/VP as appropriate."
+  },
+  {
+    "id": "wonder-big-ben",
+    "index": 102,
+    "heading": "Big Ben",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "BigBen",
+        "line": 1854,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1854"
+      },
+      {
+        "file": "player.py",
+        "symbol": "score",
+        "line": 1123,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123"
+      }
+    ],
+    "notes": "Final bonus counts only self.owner.colony_cards filtered age4; does not count other nations colonies."
+  },
+  {
+    "id": "wonder-brandenburg-gate",
+    "index": 103,
+    "heading": "Brandenburg Gate",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "BrandenburgGate",
+        "line": 1868,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1868"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_military",
+        "line": 376,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L376"
+      }
+    ],
+    "notes": "Ready effect grants both six gold and six stone to entire eligible most-military set, including builder."
+  },
+  {
+    "id": "wonder-british-museum",
+    "index": 104,
+    "heading": "British Museum",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "BritishMuseum",
+        "line": 1889,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1889"
+      },
+      {
+        "file": "match.py",
+        "symbol": "least_military",
+        "line": 383,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L383"
+      }
+    ],
+    "notes": "Placed effect imposes ten-book loss on all qualifying least military including owner."
+  },
+  {
+    "id": "wonder-mit",
+    "index": 105,
+    "heading": "MIT",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "MIT",
+        "line": 1938,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1938"
+      },
+      {
+        "file": "player.py",
+        "symbol": "buy_action",
+        "line": 508,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L508"
+      },
+      {
+        "file": "player.py",
+        "symbol": "deploy_for_free",
+        "line": 585,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L585"
+      }
+    ],
+    "notes": "Bought-building hook follows placement and optionally deploys one worker on that exact card for no stone. If none undeployed it first asks for undeployment; normal deployment effects then apply."
+  },
+  {
+    "id": "wonder-statue-of-liberty",
+    "index": 106,
+    "heading": "Statue of Liberty",
+    "status": "uncertain",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "StatueOfLiberty",
+        "line": 1976,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1976"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least",
+        "line": 314,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314"
+      },
+      {
+        "file": "player.py",
+        "symbol": "score",
+        "line": 1123,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123"
+      }
+    ],
+    "notes": "Final scoring correctly delays bonus. Five-player generic most_least can award two players, or tied first when exactly two, rather than strict singleton most workers. Individual wording says more than all others, but general official five-player rule says two most of anything, so priority needs rules clarification; observed code behavior is certain, discrepancy interpretation uncertain."
+  },
+  {
+    "id": "wonder-titanic",
+    "index": 107,
+    "heading": "Titanic",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Titanic",
+        "line": 1999,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L1999"
+      },
+      {
+        "file": "player.py",
+        "symbol": "remove_all_advisors",
+        "line": 904,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L904"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Iterates reverse player order. Removes both advisors on removal option; no advisors forces mandatory four-gold loss with ordinary deficit books/VP. An unaffordable gold option is not offered when advisors provide a payable alternative."
+  },
+  {
+    "id": "natural-wonders-natural-wonders",
+    "index": 108,
+    "heading": "Natural Wonders",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "player.py",
+        "symbol": "replaceable_wonder_spaces",
+        "line": 160,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L160"
+      },
+      {
+        "file": "player.py",
+        "symbol": "can_buy_card",
+        "line": 260,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L260"
+      },
+      {
+        "file": "player.py",
+        "symbol": "place_wonder_or_natural_wonder",
+        "line": 611,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L611"
+      },
+      {
+        "file": "player.py",
+        "symbol": "hire_actions",
+        "line": 326,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L326"
+      }
+    ],
+    "notes": "Natural-wonder and extension spaces are excluded from replacement; purchase gates sufficient replaceable space, completion actions require replaceable space, and ordinary wonders remain replaceable by natural wonders."
+  },
+  {
+    "id": "natural-wonders-vesuvius",
+    "index": 109,
+    "heading": "Vesuvius",
+    "status": "supported",
+    "sourcePages": [
+      6
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Vesuvius",
+        "line": 3124,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3124"
+      },
+      {
+        "file": "player.py",
+        "symbol": "return_worker",
+        "line": 832,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L832"
+      }
+    ],
+    "notes": "End-of-age hook returns one worker; existing undeployed worker used if available, otherwise asks to undeploy. Undeploy check suppressed until restored population-track stability. Extra check within end-age hook is not a conflict with this specific mandatory-return entry."
+  },
+  {
+    "id": "natural-wonders-siberia",
+    "index": 110,
+    "heading": "Siberia",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Siberia",
+        "line": 3198,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3198"
+      },
+      {
+        "file": "progress_cards.py",
+        "symbol": "Siberia2",
+        "line": 3222,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3222"
+      },
+      {
+        "file": "player.py",
+        "symbol": "can_buy_card",
+        "line": 260,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L260"
+      },
+      {
+        "file": "player.py",
+        "symbol": "place_wonder_or_natural_wonder",
+        "line": 611,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L611"
+      }
+    ],
+    "notes": "Extra-space hook reserves two replaceable spaces at purchase. Discovery places ordinary Siberia then creates and places its extension in another replaceable slot; both are nonreplaceable natural-wonder types."
+  },
+  {
+    "id": "natural-wonders-sahara",
+    "index": 111,
+    "heading": "Sahara",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Sahara",
+        "line": 3184,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3184"
+      },
+      {
+        "file": "player.py",
+        "symbol": "war",
+        "line": 1061,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061"
+      }
+    ],
+    "notes": "Four extra military emitted exclusively to war-defeat calculation; resources military and ordinary most/least/order/colony checks unchanged."
+  },
+  {
+    "id": "natural-wonders-hawaii",
+    "index": 112,
+    "heading": "Hawaii",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Hawaii",
+        "line": 3160,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3160"
+      },
+      {
+        "file": "nations.py",
+        "symbol": "WorkerPool",
+        "line": 11,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/nations.py#L11"
+      }
+    ],
+    "notes": "On placed Hawaii records selected population pool, takes worker without immediate upkeep then marks pool; permanent marker subtracts resource cost and prevents returning that waived slot. Worker identity abstracted by pool bookkeeping."
+  },
+  {
+    "id": "natural-wonders-spice-islands",
+    "index": 113,
+    "heading": "Spice Islands",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "SpiceIslands",
+        "line": 3295,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3295"
+      },
+      {
+        "file": "player.py",
+        "symbol": "growth",
+        "line": 217,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L217"
+      }
+    ],
+    "notes": "Extra-growth-resource hook returns four only in resource-choice branch, applied to selected same resource. Worker-growth branch does not use it."
+  },
+  {
+    "id": "natural-wonders-titusville",
+    "index": 114,
+    "heading": "Titusville",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Titusville",
+        "line": 3337,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3337"
+      },
+      {
+        "file": "player.py",
+        "symbol": "score",
+        "line": 1123,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1123"
+      }
+    ],
+    "notes": "Extra scoring stone inserted only immediately around resource-total division, after card bonus VP; no doubling of ordinary production, military or stability."
+  },
+  {
+    "id": "natural-wonders-victoria-falls",
+    "index": 115,
+    "heading": "Victoria Falls",
+    "status": "partial",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "VictoriaFalls",
+        "line": 3365,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3365"
+      },
+      {
+        "file": "match.py",
+        "symbol": "progress_phase",
+        "line": 441,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L441"
+      }
+    ],
+    "notes": "Row-four colonies created on discovery and never carried into next progress board; progress phase reconstructs three rows. FAQ says discard at end of round whereas source retains board until next progress phase. No established intervening gameplay effect, but literal timing differs."
+  },
+  {
+    "id": "natural-wonders-uluru",
+    "index": 116,
+    "heading": "Uluru",
+    "status": "not-applicable",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "progress_cards.py",
+        "symbol": "Uluru",
+        "line": 3353,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/progress_cards.py#L3353"
+      }
+    ],
+    "notes": "Entry solely specifies solo zero reward. Uluru counts passed players normally, but shadow solo game is not implemented; solo-specific clause cannot arise in supported mode."
+  },
+  {
+    "id": "event-event",
+    "index": 117,
+    "heading": "Event",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Common most/least supports positive exclusion on ties and all negative least; five-player maximum two positive vs all negative cutoff ties. Mandatory choices generally reverse order. Event loss uses raw lose_resources without war stability mitigation. Per-effect single execution and explicit multi-worker loops. Return-worker effects distinct from undeploy effects."
+  },
+  {
+    "id": "event-ashokas-conversion",
+    "index": 118,
+    "heading": "Ashokas conversion",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "HellenismAshokasConversion",
+        "line": 223,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L223"
+      },
+      {
+        "file": "player.py",
+        "symbol": "undeploy_action",
+        "line": 603,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L603"
+      }
+    ],
+    "notes": "Reverse-order loop permits repeated military undeployment until Done; workers move to undeployed supply rather than population, and are available next round."
+  },
+  {
+    "id": "event-bronze-age-collapse",
+    "index": 119,
+    "heading": "Bronze Age Collapse",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "SeaPeoplesBronzeAgeCollapse",
+        "line": 363,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L363"
+      }
+    ],
+    "notes": "Safe set is union of most military and most stability, so strongest, most stable and player who is both avoid VP loss."
+  },
+  {
+    "id": "event-christianity",
+    "index": 120,
+    "heading": "Christianity",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "BreadAndGamesChristianity",
+        "line": 208,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L208"
+      },
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      }
+    ],
+    "notes": "Shared may_pay_to_gain asks Yes/No once per affordable player in reverse order; no mandatory conversion."
+  },
+  {
+    "id": "event-han-dynasty",
+    "index": 121,
+    "heading": "Han dynasty",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "PaxRomanaHandynasty",
+        "line": 263,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L263"
+      }
+    ],
+    "notes": "Yes/No wraps both worker and three food; requires worker availability, grants both or neither."
+  },
+  {
+    "id": "event-hellenism",
+    "index": 122,
+    "heading": "Hellenism",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "HellenismAshokasConversion",
+        "line": 223,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L223"
+      },
+      {
+        "file": "match.py",
+        "symbol": "most_least",
+        "line": 314,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L314"
+      }
+    ],
+    "notes": "If strongest shared in 2-4, most set empty and others loop makes everyone lose two food; ordinary five-player cutoff rule inherited."
+  },
+  {
+    "id": "event-jain-ascetism",
+    "index": 123,
+    "heading": "Jain Ascetism",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "AssyrianDeportationsJainAscetism",
+        "line": 135,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L135"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      },
+      {
+        "file": "player.py",
+        "symbol": "war",
+        "line": 1061,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061"
+      }
+    ],
+    "notes": "Lost-to-war event accumulates direct and deficit VP per player. Most stable regains only own accumulated lost VP, never others. Resource-loss routine pays available resources before deficits."
+  },
+  {
+    "id": "event-olympic-games",
+    "index": 124,
+    "heading": "Olympic games",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "QinUnificationOlympicGames",
+        "line": 289,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L289"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      },
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      }
+    ],
+    "notes": "Events occur after normal player-order phase. In five-player two most stable are sorted by stability then existing player order and prepended strongest first."
+  },
+  {
+    "id": "event-qin-unifcation",
+    "index": 125,
+    "heading": "Qin Unifcation",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "QinUnificationOlympicGames",
+        "line": 289,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L289"
+      }
+    ],
+    "notes": "No war means no effect. Otherwise every player with raw military strictly greater than war_value gains one VP."
+  },
+  {
+    "id": "event-spartacus-revolt",
+    "index": 126,
+    "heading": "Spartacus revolt",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "YellowTurbanRebellionSpartacusRevolt",
+        "line": 436,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L436"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "Event reordering resolves after normal military/stability player-order phase."
+  },
+  {
+    "id": "event-rigveda",
+    "index": 127,
+    "heading": "Rigveda",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "RigvedaExodus",
+        "line": 324,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L324"
+      }
+    ],
+    "notes": "Counters record purchases of wars/battles and award one book each at event resolution. FAQ immediate-book suggestion is optional physical tracking convenience, not a required immediate payout."
+  },
+  {
+    "id": "event-sea-peoples",
+    "index": 128,
+    "heading": "Sea Peoples",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "SeaPeoplesBronzeAgeCollapse",
+        "line": 363,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L363"
+      }
+    ],
+    "notes": "Removal offered only when first wonder under construction has positive completed_stages, then decrements that. Private available architect count is never touched."
+  },
+  {
+    "id": "event-zoroastrian-revival",
+    "index": 129,
+    "heading": "Zoroastrian revival",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "AttilaZoroastrianRevival",
+        "line": 172,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L172"
+      },
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      }
+    ],
+    "notes": "Choice offered to unique most stable (none on shared-most in 2-4). Five-player most stable set sorted by value/current order, top makes shared reward-versus-others-loss choice."
+  },
+  {
+    "id": "event-black-death",
+    "index": 130,
+    "heading": "Black Death",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "BlackDeathHuntForPresterJohn",
+        "line": 469,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L469"
+      },
+      {
+        "file": "player.py",
+        "symbol": "return_worker",
+        "line": 832,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L832"
+      },
+      {
+        "file": "nations.py",
+        "symbol": "WorkerPool",
+        "line": 11,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/nations.py#L11"
+      }
+    ],
+    "notes": "Normal case returns worker to chosen population pool and restores upkeep. When no population worker has been taken, source uses extra_worker_pool for the worker placed atop a full track; take_worker consumes that free extra worker first, preserving game-state effect. Track-choice identity is unnecessary digital bookkeeping."
+  },
+  {
+    "id": "event-ecological-collapse",
+    "index": 131,
+    "heading": "Ecological Collapse",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "EcologicalCollapseCasteSystem",
+        "line": 504,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L504"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "All decisions gathered in reverse order before order mutation; food<2 forces nonpayment. Result keeps paying subgroup in order followed by nonpaying subgroup in order. Event resolves after normal order."
+  },
+  {
+    "id": "event-feudal-dues",
+    "index": 132,
+    "heading": "Feudal dues",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "FeudalDuesHajjFromMali",
+        "line": 539,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L539"
+      },
+      {
+        "file": "match.py",
+        "symbol": "player_order_phase",
+        "line": 576,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L576"
+      }
+    ],
+    "notes": "On reveal skip-player-order hook causes normal order phase to return unchanged; event A intentionally no-op."
+  },
+  {
+    "id": "event-fourth-crusade",
+    "index": 133,
+    "heading": "Fourth Crusade",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "FourthCrusadeSongResistance",
+        "line": 562,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L562"
+      },
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      }
+    ],
+    "notes": "Top most-military chooser sorted by value and current order gates all least-military losses. Only when top pays can second most optionally pay for own VP. Generic least set supplies both weakest in five-player and cutoff ties. Affordability and declining properly suppress losses."
+  },
+  {
+    "id": "event-hajj-from-mali",
+    "index": 134,
+    "heading": "Hajj from Mali",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "FeudalDuesHajjFromMali",
+        "line": 539,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L539"
+      }
+    ],
+    "notes": "At two or fewer gold does nothing; only gold>2 is reduced to exactly two."
+  },
+  {
+    "id": "event-iconoclasm",
+    "index": 135,
+    "heading": "Iconoclasm",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "RaidOnLindisfarneIconoclasm",
+        "line": 748,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L748"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      }
+    ],
+    "notes": "Single Resources loss includes food -2 and gold -2 simultaneously; both components paid, with normal deficit handling."
+  },
+  {
+    "id": "event-peace-of-god",
+    "index": 136,
+    "heading": "Peace of God",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "PeaceOfGodCouncilOfClermont",
+        "line": 698,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L698"
+      }
+    ],
+    "notes": "Explicit no-war guard exits without granting books."
+  },
+  {
+    "id": "event-song-resistance",
+    "index": 137,
+    "heading": "Song Resistance",
+    "status": "supported",
+    "sourcePages": [
+      7
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "FourthCrusadeSongResistance",
+        "line": 562,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L562"
+      },
+      {
+        "file": "player.py",
+        "symbol": "lose_resources",
+        "line": 937,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L937"
+      },
+      {
+        "file": "player.py",
+        "symbol": "war",
+        "line": 1061,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L1061"
+      }
+    ],
+    "notes": "Lost-to-war counters record own actual resource and point changes including shortfall penalties, then restore both to most-stable eligible owner."
+  },
+  {
+    "id": "event-stupor-mundi",
+    "index": 138,
+    "heading": "Stupor Mundi",
+    "status": "supported",
+    "sourcePages": [
+      7,
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "StuporMundiGreatSchism",
+        "line": 778,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L778"
+      }
+    ],
+    "notes": "Counts all bought Golden Ages this round and chooses most at resolution. Keeping physical cards beside board is represented by counter; no physical retention necessary."
+  },
+  {
+    "id": "event-zanj-revolt",
+    "index": 139,
+    "heading": "Zanj Revolt",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "ChansonDeRolandZanjRevolt",
+        "line": 488,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L488"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "Reorders during event after normal player-order phase."
+  },
+  {
+    "id": "event-absolute-monarchy",
+    "index": 140,
+    "heading": "Absolute Monarchy",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "AbsoluteMonarchySalemWitchTrials",
+        "line": 818,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L818"
+      },
+      {
+        "file": "player.py",
+        "symbol": "take_one_action",
+        "line": 756,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L756"
+      },
+      {
+        "file": "player.py",
+        "symbol": "place_card",
+        "line": 360,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/player.py#L360"
+      }
+    ],
+    "notes": "No standalone discard-advisor main action exists; replacing advisor is via buying and placing new advisor. Event itself penalizes antiquity/medieval advisor without offering discard escape."
+  },
+  {
+    "id": "event-dutch-revolt",
+    "index": 141,
+    "heading": "Dutch Revolt",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "PilgrimsDutchRevolt",
+        "line": 1081,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L1081"
+      },
+      {
+        "file": "match.py",
+        "symbol": "resolution_phase",
+        "line": 640,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/match.py#L640"
+      }
+    ],
+    "notes": "Event moves least stable to back after normal player-order phase."
+  },
+  {
+    "id": "event-glorious-revolution",
+    "index": 142,
+    "heading": "Glorious revolution",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "AfricanSlaveTradeGloriousRevolution",
+        "line": 863,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L863"
+      },
+      {
+        "file": "event_cards.py",
+        "symbol": "EventCard",
+        "line": 8,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L8"
+      }
+    ],
+    "notes": "Optional Yes/No wraps six gold plus going last. Five-player sorted top-two queried in reverse (secondmost first); accepted players inserted in most/secondmost order at tail, leaving secondmost last when both accept."
+  },
+  {
+    "id": "event-janissaries",
+    "index": 143,
+    "heading": "Janissaries",
+    "status": "supported",
+    "sourcePages": [
+      8
+    ],
+    "evidence": [
+      {
+        "file": "event_cards.py",
+        "symbol": "JanissariesCouncilOfTrent",
+        "line": 969,
+        "url": "https://github.com/Logitude/nations/blob/9c344205b1802c9583d20c749b89a4cfa52516f7/event_cards.py#L969"
+      }
+    ],
+    "notes": "Affordability requires two available workers; one Yes/No wraps two take-worker calls plus four stone, so cannot take partial bundle."
+  }
+]

@@ -232,6 +232,28 @@ while preserving the remember choice. A damaged session file disables only the
 admin console; reminder monitoring continues. Deleting `admin-sessions.json`
 and restarting revokes all remembered sessions.
 
+### Railway credit and trial status
+
+The owner home page shows remaining trial days and usage credit for the entire
+Railway workspace (shared by staging and production). Configure these private
+service variables to enable it:
+
+| Variable | Value |
+|---|---|
+| `NATIONS_RAILWAY_API_TOKEN` | Railway account or workspace API token with access to the workspace's billing data; an environment-scoped project token is insufficient |
+| `NATIONS_RAILWAY_WORKSPACE_ID` | `2c3c184d-ea30-4dde-b5e6-eb2a0b16e163` for kayser1444's Projects |
+
+Create the token in Railway's account/workspace settings and store it only as a
+private service variable, never in the repository or browser. The backend reads
+`workspace.customer` through the [Railway GraphQL API](https://docs.railway.com/integrations/api).
+The page checks once per minute; successful responses and failed attempts are
+cached for 15 minutes per process. Requests time out after eight seconds. A failed
+refresh retains the last successful values with their timestamp and a stale-data
+notice. Missing configuration is shown as inactive and does not call Railway.
+The endpoint uses the same authentication as the rest of the console, and runs
+independently of the bot's normal status updates. This is usage credit, not an
+estimate of the next invoice or the runtime remaining at current consumption.
+
 To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
 redeploy. Local runs retain the original loopback-only administration page.
 
@@ -429,7 +451,7 @@ MIT. This repository contains the notifier, not the Nations game engine or asset
 
 `sm-season.json` är den manuellt granskade säsongslåsningen: säsong, deltagare och exakt parti-ID för varje grupp. Säsong 11 har 21 låsta partier. SM-tabeller tar aldrig in nya parti-ID:n från matchsökningen. Vid nästa säsong uppdateras och kontrolleras låsningen manuellt, sedan startas bevakningen om. Ett ändrat säsongslås gör den gamla diskcachen ogiltig.
 
-Vänprofilen bevakar samtliga låsta partier även utan prenumeranter, med samma anslutningar som turbevakningen. Aktuella snapshots räknar om tabellen i minnet. `.data/sm-table-cache.json` sparar senaste ställning och slutresultat över omstarter. Pågående partier visas som inaktuella tills en färsk snapshot kommit; avbrott eller mer än 60 sekunder sedan senaste livstecken eller spelställning markeras i svaret. Saknas något parti helt visas ett väntemeddelande i stället för en ofullständig tabell. Slutresultat behålls när ett parti avslutas.
+Vänprofilen bevakar samtliga låsta partier även utan prenumeranter, med samma anslutningar som turbevakningen. Aktuella snapshots räknar om tabellen i minnet. `.data/sm-table-cache.json` sparar senaste ställning och slutresultat över omstarter. Pågående partier räknas som aktuella i fem minuter efter senaste giltiga livstecken eller spelställning, även vid korta anslutningsavbrott. Först när mer än fem minuter gått visas en varning. Efter omstart används den sparade spelställningens tidsstämpel tills ett nytt giltigt svar kommit. Saknas något parti helt visas ett väntemeddelande i stället för en ofullständig tabell. Slutresultat behålls när ett parti avslutas.
 
 Matchplacering: total-VP, resursrest och därefter aktuell turordning (tidigare spelare först). Placeringen ger 5/3/2/1 grupppoäng. Tabellens skiljekriterier följer §7: vinster, andraplatser, grupppoäng/vinster/andraplatser/VP i inbördes möten. Vid fler än två lika spelare beräknas inbördes möten för hela den bundna gruppen. Helt olösta lika ställningar visas som delad plats i livetabellen; boten lottar inte en ny ordning vid varje uppdatering.
 
@@ -453,7 +475,7 @@ This code update does not change Developer Portal settings or deploy the service
 
 Schemaläggaren kontrollerar var 30:e sekund och verifierar den aktuella turen före leverans. Leveranskvitton sparas över omstarter. Missade dygn sammanfattas med en aktuell påminnelse; gamla påminnelser skickas inte i klump. En upprepad timme vid övergång till vintertid ger inte dubbla påminnelser; ett klockslag som saknas vid övergång till sommartid hanteras vid nästa kontroll efter tidshoppet. Leveransfel försöks igen efter minst 15 minuter. Ett avbrott precis mellan Discord-leverans och sparat kvitto kan medföra en upprepning.
 
-Ägarpanelen låter dig välja **Mät betänketid** för ett parti eller ange dess ID under **Betänketid**. Alla spelares observerade intervall sparas, även om samma spelare gör flera drag i följd. Pågående intervall visas också. **Stoppa mätning** avslutar intervallet och behåller loggen. Val och logg lagras i `<profil>-turn-journal.json` under tjänstens datakatalog (`NATIONS_DATA_DIR`), separat från händelseloggen. Första intervallet och intervall vid anslutningsavbrott markeras som ofullständiga. Obevakad tid under avbrott tilldelas inte någon spelare. Historiska turbyten före aktivering kan inte återskapas; tiderna bygger på när botten observerar spelstatus, inte serverns historiska dragtider.
+Ägarpanelen låter dig välja **Mät betänketid** för ett parti eller ange dess ID under **Betänketid**. Alla spelares observerade intervall sparas, även om samma spelare gör flera drag i följd. Vyn summerar varje spelares betänketid per parti i dagar, timmar och hela minuter, med längst sammanlagd tid överst i varje parti. Korta intervall summeras innan tiden avrundas. Pågående tur räknas med fram till hämtningen och markeras i tabellen. Tider hämtas när sidan öppnas, när du trycker på **Uppdatera tider** och när mätning aktiveras eller stoppas; de uppdateras inte i realtid. **Stoppa mätning** avslutar intervallet och behåller historiken, även för avslutade partier. Val och logg lagras i `<profil>-turn-journal.json` under tjänstens datakatalog (`NATIONS_DATA_DIR`), separat från händelseloggen. Första intervallet och intervall vid anslutningsavbrott markeras som ofullständiga i spelarens sammanställning. Obevakad tid under avbrott tilldelas inte någon spelare. Historiska turbyten före aktivering kan inte återskapas; tiderna bygger på när botten observerar spelstatus, inte serverns historiska dragtider.
 
 Språkval: svenska (`sv-SE`), engelska (`en-US`), tyska (`de`), franska (`fr`), spanska (`es-ES`) och förenklad kinesiska (`zh-CN`). `/language locale:auto` följer Discord-språket, med engelska som reserv. FAQ-texten finns på alla sex språk. Kortbilder och tryckta kortnamn behåller sina befintliga språk; källhänvisningar länkar till den engelska FAQ:n.
 

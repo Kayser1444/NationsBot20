@@ -3,6 +3,7 @@ import { dirname } from 'node:path';
 import { text } from './language.mjs';
 
 const awards = [5, 3, 2, 1];
+const freshnessGraceMs = 5 * 60 * 1000;
 const sameNames = (a, b) => a.length === b.length && new Set(a).size === a.length && a.every(name => b.includes(name));
 
 export function validateSeason(config) {
@@ -93,7 +94,7 @@ export class SmTableCache {
   divisionFor(name) { return Object.entries(this.config.divisions).find(([, g]) => g.players.includes(name))?.[0]; }
   connection(id, connected) {
     if (connected) this.connected.add(id);
-    else { this.connected.delete(id); this.lastContact.delete(id); }
+    else this.connected.delete(id);
   }
   update(id, message) {
     const match = this.matches.find(m => m.id === id);
@@ -136,7 +137,7 @@ export class SmTableCache {
     if (!group) return t('smUnknown');
     const missing = group.matches.filter(m => !this.snapshots.has(m.id));
     if (missing.length) return t('smWaiting', { season: this.config.season, div, missing: missing.length, total: group.matches.length });
-    const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && (!this.connected.has(m.id) || this.now() - (this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt) > 60000));
+    const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && this.now() - (this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt) > freshnessGraceMs);
     const oldest = Math.min(...group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).map(m => this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt));
     const stamp = Number.isFinite(oldest) ? oldest : Math.max(...group.matches.map(m => this.snapshots.get(m.id).updatedAt));
     const time = new Intl.DateTimeFormat(language, { timeZone: 'Europe/Stockholm', dateStyle: 'short', timeStyle: 'medium' }).format(stamp);

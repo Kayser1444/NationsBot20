@@ -39,7 +39,7 @@ export default {
   smTitle: "**Svenska mästerskapet · S{season} · Division {div}{auto}**",
   smAuto: " (Automatiskt vald utifrån din prenumeration)",
   smChecked: "Bevakning kontrollerad: {time}",
-  smStale: "⚠️ {count} parti(er) saknar aktuell anslutning eller färsk avläsning. Senast kända ställning visas.",
+  smStale: "⚠️ {count} parti(er) har inte svarat på mer än 5 minuter. Senast kända ställning visas.",
   smOngoing: "{ongoing}/{total} partier ej avslutade. Grupppoäng: 5/3/2/1. Rangordning enligt §7.",
   smDrafting: "Väntar på spelstart: {matches}. Dessa partier ger ännu inga grupppoäng.",
   smLegend: "Inbördes = gemensamma partier. Vinster/tvåor = aktuella placeringar.",

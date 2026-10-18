@@ -49,7 +49,7 @@ export default {
   "smTitle": "**Championnat de Suède · S{season} · Division {div}{auto}**",
   "smAuto": " (sélection automatique selon votre abonnement)",
   "smChecked": "Suivi vérifié : {time}",
-  "smStale": "⚠️ {count} partie(s) sans connexion ou vérification récente. Dernier classement connu.",
+  "smStale": "⚠️ {count} partie(s) n’ont pas répondu depuis plus de 5 minutes. Dernier classement connu.",
   "smOngoing": "{ongoing}/{total} parties en cours. Points : 5/3/2/1. Classement selon §7.",
   "smDrafting": "En attente du début : {matches}. Aucun point de groupe pour le moment.",
   "smLegend": "H2H = parties communes. Victoires/deuxièmes = places actuelles.",

@@ -49,7 +49,7 @@ export default {
   "smTitle": "**Schwedische Meisterschaft · S{season} · Division {div}{auto}**",
   "smAuto": " (automatisch aus deinem Abonnement)",
   "smChecked": "Beobachtung geprüft: {time}",
-  "smStale": "⚠️ {count} Partie(n) ohne aktuelle Verbindung oder Prüfung. Letzter bekannter Stand.",
+  "smStale": "⚠️ {count} Partie(n) haben seit mehr als 5 Minuten nicht geantwortet. Letzter bekannter Stand.",
   "smOngoing": "{ongoing}/{total} Partien laufen. Gruppenpunkte: 5/3/2/1. Rangfolge nach §7.",
   "smDrafting": "Spielbeginn ausstehend: {matches}. Noch keine Gruppenpunkte.",
   "smLegend": "H2H = gemeinsame Partien. Siege/zweite Plätze = aktuelle Platzierungen.",
