@@ -15,12 +15,21 @@
 <div class="card"><div class="muted">PRENUMERANTER</div><div id="subscriber-count" class="number">–</div><p class="muted">Notifieringar och dagliga påminnelser</p></div>
 <div class="card"><div class="muted">DISCORD</div><div id="pending-count" class="number">–</div><p id="discord" class="muted">Hämtar status</p><p id="last-delivery" class="muted"></p><p id="bot-state" class="muted"></p></div>
 </section>
-<section class="panel" style="margin-bottom:22px" aria-labelledby="railway-title">
+<div class="grid">
+<section class="panel" aria-labelledby="railway-title">
 <h2 id="railway-title">Railway <span id="railway-state" class="muted">Hämtar uppgifter…</span></h2>
 <p id="railway-balance" style="font-size:20px;font-weight:600" role="status">–</p>
 <p id="railway-note" class="muted">Gäller hela Railway-arbetsytan, inklusive staging och produktion.</p>
 <p id="railway-updated" class="muted"></p>
 </section>
+<section class="panel" aria-labelledby="openai-title">
+<h2 id="openai-title">OpenAI <span id="openai-state" class="muted">Hämtar uppgifter…</span></h2>
+<p id="openai-balance" style="font-size:20px;font-weight:600" role="status">–</p>
+<p id="openai-details" class="muted"></p>
+<p class="muted">Beräknad återstående kredit för hela OpenAI-organisationen. Rapporteringen kan släpa efter. Nya påfyllningar behöver registreras.</p>
+<p id="openai-updated" class="muted"></p>
+</section>
+</div>
 <section class="grid">
 <div class="panel"><h2>Prenumeranter</h2><div class="scroll"><table><thead><tr><th>Spelare</th><th>Prenumeration</th><th>Partier</th><th></th></tr></thead><tbody id="subscribers"></tbody></table></div>
 <form id="subscribe"><h2>Lägg till prenumerant</h2><div class="form-grid"><div><label for="username">Nations-namn</label><div class="name-field"><input id="username" required maxlength="150" placeholder="Börja skriva ett spelarnamn" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="name-suggestions" aria-describedby="name-hint"><ul id="name-suggestions" class="suggestions" role="listbox" aria-label="Spelarnamn" hidden></ul></div><p id="name-hint" class="muted">Hämtar spelarnamn från pågående partier…</p></div><div><label for="user-id">Discord-ID</label><input id="user-id" required pattern="[0-9]{17,20}" inputmode="numeric" placeholder="17–20 siffror" autocomplete="off"></div></div><button id="save" type="submit">Lägg till / uppdatera</button><p class="muted">En väntande tur kan ge en påminnelse direkt.</p><p id="feedback" role="status"></p></form></div>
@@ -50,6 +59,16 @@ async function refreshRailway(){
   text('railway-note','Gäller hela Railway-arbetsytan, inklusive staging och produktion.'+(billing.isTrialing?' Provperioden upphör när tiden eller krediten tar slut.':''));
   text('railway-updated',(billing.stale?billing.error+' Visar senast hämtade uppgifter. ':'')+'Uppdaterat '+new Date(billing.updatedAt).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'})+' · hämtas högst var 15:e minut.');
  }catch{text('railway-state','Ej tillgängligt');text('railway-updated','Railway-informationen kunde inte hämtas. Eventuella tidigare uppgifter visas ovan.')}
+}
+async function refreshOpenAi(){
+ try{
+  const response=await fetch('/api/openai-credit',{cache:'no-store'});if(response.status===401){location.assign('/');return}if(!response.ok)throw new Error();const credit=await response.json();
+  if(!credit.available){text('openai-state',credit.configured?'Ej tillgängligt':'Inte aktiverat');text('openai-balance',credit.error||'OpenAI-informationen kunde inte hämtas.');text('openai-details','');text('openai-updated','');return}
+  const usd=value=>'$'+value.toLocaleString('sv-SE',{minimumFractionDigits:2,maximumFractionDigits:2});
+  text('openai-state',credit.stale?'Tidigare uppgifter':'Beräknad kredit');text('openai-balance',usd(credit.remainingCreditUsd)+' kvar');
+  text('openai-details','Inbetalt '+usd(credit.fundedUsd)+' − rapporterad förbrukning '+usd(credit.spentUsd)+' sedan '+credit.startDate+'. Ingen månadsnollställning.');
+  text('openai-updated',(credit.stale?credit.error+' Visar senast hämtade uppgifter. ':'')+'Uppdaterat '+new Date(credit.updatedAt).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'})+' · hämtas högst var 15:e minut.');
+ }catch{text('openai-state','Ej tillgängligt');text('openai-updated','OpenAI-informationen kunde inte hämtas. Eventuella tidigare uppgifter visas ovan.')}
 }
 let currentStatus=null, selectedUserId=null;
 let playerNames=[], namesVersion='', suggestions=[], activeSuggestion=-1;
@@ -198,6 +217,7 @@ el('question-next').onclick=()=>{questionGeneration++;questionOffset+=20;void re
 void refreshQuestions();setInterval(refreshQuestions,5000);
 
 void refreshRailway();setInterval(refreshRailway,60000);
+void refreshOpenAi();setInterval(refreshOpenAi,60000);
 void refresh().then(()=>refreshThinking());setInterval(refresh,2000);
 </script>
 </html>

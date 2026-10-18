@@ -5,9 +5,10 @@ import { dashboardTheme } from './dashboard-theme.mjs';
 import { bulletinCredentialMatches } from './bulletins.mjs';
 import { thinkingSummary } from './thinking-summary.mjs';
 import { createRailwayBilling } from './railway-billing.mjs';
+import { createOpenAiCredit } from './openai-credit.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling() }) {
+export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit() }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -76,6 +77,7 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
     if (req.method === 'GET' && url.pathname === '/api/railway-billing') { json(200, await railwayBilling()); return; }
+    if (req.method === 'GET' && url.pathname === '/api/openai-credit') { json(200, await openAiCredit()); return; }
     if (req.method === 'GET' && url.pathname === '/api/thinking') {
       if (!thinkingSnapshot) { json(503, { error: 'Betänketiderna är inte tillgängliga.' }); return; }
       const now = Date.now();

@@ -254,6 +254,40 @@ The endpoint uses the same authentication as the rest of the console, and runs
 independently of the bot's normal status updates. This is usage credit, not an
 estimate of the next invoice or the runtime remaining at current consumption.
 
+### Estimated OpenAI prepaid credit
+
+The owner home page estimates remaining prepaid credit using the configured
+funded amount minus all reported organization costs since a fixed UTC start date.
+It never resets at the start of a new month. Costs cover the whole OpenAI
+organization, including staging and production, so adding another project later
+does not silently leave its consumption out of the estimate.
+
+| Private service variable | Value |
+|---|---|
+| `NATIONS_OPENAI_ADMIN_KEY` | Separate OpenAI Admin API key for the organization holding the prepaid credit |
+| `NATIONS_OPENAI_CREDIT_TOTAL_USD` | Total credit added since the start date, initially `5` |
+| `NATIONS_OPENAI_CREDIT_START_DATE` | `2026-10-15`, the first question deployment and initial top-up date (`YYYY-MM-DD`, UTC) |
+
+Keep the existing `OPENAI_API_KEY` for questions; the administrative key is used
+only by this billing reader and never enters the question agent or browser.
+`NATIONS_OPENAI_MONTHLY_BUDGET_USD` and `NATIONS_OPENAI_PROJECT_ID` are not used
+by the credit estimate and can be removed if previously configured for it.
+
+The backend uses the [OpenAI Costs API](https://developers.openai.com/api/reference/resources/admin/subresources/organization/subresources/usage/methods/costs),
+reads every page for the same time range, and publishes an estimate only after
+the full response has been validated. It caches successful and failed attempts
+for 15 minutes, combines concurrent reads, times out after eight seconds and
+retains timestamped older values after a failed refresh. Missing configuration
+shows an inactive panel. Histories older than 365 days require a new baseline
+before the estimate can refresh, to avoid counting only a truncated history.
+
+For another $5 top-up, change `NATIONS_OPENAI_CREDIT_TOTAL_USD` from `5` to `10`
+and keep the original start date, then redeploy. This registers the top-up only
+for this display; it does not purchase credits or change an OpenAI spending limit.
+The estimate depends on reported costs and recorded top-ups; reporting delays,
+expired credits or billing adjustments can make it differ from the actual
+balance. It is labelled as an estimate, not an authoritative credit balance.
+
 To disable the cloud console, remove `NATIONS_ADMIN_ENABLED` or set it to `0` and
 redeploy. Local runs retain the original loopback-only administration page.
 
