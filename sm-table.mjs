@@ -124,6 +124,18 @@ export class SmTableCache {
     const group = this.config.divisions[div];
     if (group.matches.every(m => this.snapshots.has(m.id))) this.tables.set(div, rankTable(group, this.snapshots));
   }
+  matchStatus(group, language) {
+    const t = (key, values) => text(language, key, values);
+    const lines = group.matches.map(match => {
+      const snapshot = this.snapshots.get(match.id), state = snapshot?.state;
+      const status = !state ? t('smMatchMissing') : state.game_over ? t('smMatchFinished')
+        : state.round === 0 && state.phase === 'Drafting Phase' ? t('smMatchDrafting')
+        : Number.isInteger(state.round) && state.round >= 1 && state.round <= 8 ? t('smMatchRound', { round: state.round }) : t('smMatchOngoing');
+      const stale = state && !state.game_over && this.now() - (this.lastContact.get(match.id) ?? snapshot.updatedAt) > freshnessGraceMs;
+      return `> [${match.title.split('-').at(-1)} · ID ${match.id}](<https://games.tabony.net/nations/${match.id}/>) — ${status}${stale ? ' · ' + t('smMatchStale') : ''}`;
+    });
+    return [`> **${t('smMatchStatus')}**`, ...lines].join('\n');
+  }
   reply(div, userId, subscriptions, language = 'sv-SE') {
     const t = (key, values) => text(language, key, values);
     const automaticallySelected = !div;
@@ -136,7 +148,7 @@ export class SmTableCache {
     const group = this.config.divisions[div];
     if (!group) return t('smUnknown');
     const missing = group.matches.filter(m => !this.snapshots.has(m.id));
-    if (missing.length) return t('smWaiting', { season: this.config.season, div, missing: missing.length, total: group.matches.length });
+    if (missing.length) return t('smWaiting', { season: this.config.season, div, missing: missing.length, total: group.matches.length }) + '\n\n' + this.matchStatus(group, language);
     const stale = group.matches.filter(m => !this.snapshots.get(m.id).state.game_over && this.now() - (this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt) > freshnessGraceMs);
     const oldest = Math.min(...group.matches.filter(m => !this.snapshots.get(m.id).state.game_over).map(m => this.lastContact.get(m.id) ?? this.snapshots.get(m.id).updatedAt));
     const stamp = Number.isFinite(oldest) ? oldest : Math.max(...group.matches.map(m => this.snapshots.get(m.id).updatedAt));
@@ -156,6 +168,6 @@ export class SmTableCache {
     const drafting = group.matches.filter(m => this.snapshots.get(m.id).state.phase === 'Drafting Phase' && this.snapshots.get(m.id).state.round === 0);
     return [t('smTitle', { season: this.config.season, div, auto: automaticallySelected ? t('smAuto') : '' }),
       t('smChecked', { time }), stale.length ? t('smStale', { count: stale.length }) : '', '```text', header, ...lines, '```',
-      t('smOngoing', { ongoing, total: group.matches.length }), drafting.length ? t('smDrafting', { matches: drafting.map(m => m.title).join(', ') }) : '', t('smLegend')].filter(Boolean).join('\n');
+      t('smOngoing', { ongoing, total: group.matches.length }), drafting.length ? t('smDrafting', { matches: drafting.map(m => m.title).join(', ') }) : '', t('smLegend'), '\n' + this.matchStatus(group, language)].filter(Boolean).join('\n');
   }
 }

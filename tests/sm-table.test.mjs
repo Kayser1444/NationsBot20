@@ -4,6 +4,7 @@ import { readFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { SmTableCache, validateSeason } from '../sm-table.mjs';
+import { translations } from '../language.mjs';
 const config = JSON.parse(readFileSync(new URL('../sm-season.json', import.meta.url), 'utf8'));
 const fixture = { season: 11, divisions: { '1A': { players: ['A', 'B', 'C', 'D'], matches: [{ id: '1', title: 'S11-1A-P1', players: ['A', 'B', 'C', 'D'] }] } } };
 const message = (over = false) => ({ replaying: false, state: { game_over: over, player_order: ['B', 'A', 'C', 'D'], players: {
@@ -35,6 +36,29 @@ test('season lock contains exactly 21 unique verified matches; spoofed 2B candid
   const bad = structuredClone(config); bad.divisions['2B'].matches[0].id = config.divisions['1A'].matches[0].id;
   assert.throws(() => validateSeason(bad));
 });
+
+test('season 11 gives every player four games and every pair two meetings', () => {
+  for (const [division, group] of Object.entries(config.divisions)) {
+    assert.equal(group.matches.length, 7, division);
+    for (const [index, name] of group.players.entries()) {
+      assert.equal(group.matches.filter(match => match.players.includes(name)).length, 4, division + ': ' + name);
+      for (const opponent of group.players.slice(index + 1)) {
+        assert.equal(group.matches.filter(match => match.players.includes(name) && match.players.includes(opponent)).length, 2, division + ': ' + name + ' / ' + opponent);
+      }
+    }
+  }
+});
+
+test('2B P5 accepts the restarted game and excludes the abandoned duplicate of P1', () => {
+  const cache = new SmTableCache(config);
+  const names = ['Whippis', 'Ergus8', 'swedviking', 'Suddoman'];
+  const snapshot = { replaying: false, state: { game_over: false, round: 1, phase: 'Action Phase', player_order: names,
+    players: Object.fromEntries(names.map(name => [name, { score: 10, resource_remainder: 0 }])) } };
+  assert.equal(cache.has('3062'), false);
+  assert.equal(cache.update('3062', snapshot), false);
+  assert.equal(cache.update('3101', snapshot), true);
+});
+
 test('VP, resource remainder and current turn order award 5/3/2/1; unknown IDs and wrong participants cannot enter cache', () => {
   const cache = new SmTableCache(fixture);
   assert.equal(cache.update('99', message()), false);
@@ -118,6 +142,57 @@ test('automatic division includes subscription explanation while explicit select
   const cache = new SmTableCache(fixture); cache.update('1', message());
   assert.match(cache.reply(null, 'user', { A: 'user' }), /Division 1A \(Automatiskt vald utifrån din prenumeration\)/);
   assert.doesNotMatch(cache.reply('1A', 'user', { A: 'user' }), /Automatiskt vald/);
+});
+
+test('game status shows linked IDs, missing data, rounds, drafting, completion and stale snapshots', () => {
+  let now = 100000;
+  const cache = new SmTableCache(fixture, { now: () => now });
+  assert.match(cache.reply('1A'), /> \[P1 · ID 1\]\(<https:\/\/games.tabony.net\/nations\/1\/>\) — Väntar på speldata/);
+  const live = message(); live.state.round = 3; live.state.phase = 'Action Phase';
+  cache.update('1', live);
+  assert.match(cache.reply('1A'), /— Runda 3\/8/);
+  cache.connection('1', false);
+  now += 300000;
+  assert.doesNotMatch(cache.reply('1A'), /Äldre speldata/);
+  now++;
+  assert.match(cache.reply('1A'), /Runda 3\/8 · ⚠️ Äldre speldata/);
+  const done = structuredClone(live); done.state.game_over = true;
+  cache.update('1', done); now += 300001;
+  assert.match(cache.reply('1A'), /— Avslutat/);
+  assert.doesNotMatch(cache.reply('1A'), /Äldre speldata/);
+  const draft = structuredClone(live); draft.state.round = 0; draft.state.phase = 'Drafting Phase';
+  cache.update('1', draft);
+  assert.match(cache.reply('1A'), /— Draft pågår/);
+  delete live.state.round;
+  cache.update('1', live);
+  assert.match(cache.reply('1A'), /— Pågår/);
+  assert.doesNotMatch(cache.reply('1A'), /Runda undefined/);
+});
+
+test('saved game progress survives cache reload for the status box', t => {
+  const dir = mkdtempSync(join(tmpdir(), 'sm-progress-')); t.after(() => rmSync(dir, { recursive: true, force: true }));
+  const path = join(dir, 'cache.json');
+  const cache = new SmTableCache(fixture, { path });
+  const live = message(); live.state.round = 6; live.state.phase = 'Action Phase';
+  cache.update('1', live);
+  assert.match(new SmTableCache(fixture, { path }).reply('1A', null, {}, 'en-US'), /Round 6\/8/);
+});
+
+test('seven linked game statuses fit Discord replies for every division and language', () => {
+  for (const language of Object.keys(translations)) for (const [division, group] of Object.entries(config.divisions)) {
+    for (const status of ['missing', 'ongoing', 'draft', 'finished', 'stale']) {
+      let now = 100000;
+      const cache = new SmTableCache(config, { now: () => now });
+      if (status !== 'missing') for (const match of group.matches) cache.update(match.id, { replaying: false, state: {
+        game_over: status === 'finished', round: status === 'draft' ? 0 : 8, phase: status === 'draft' ? 'Drafting Phase' : 'Action Phase',
+        player_order: match.players, players: Object.fromEntries(match.players.map(name => [name, { score: 10, resource_remainder: 0 }])) } });
+      if (status === 'stale') now += 300001;
+      const reply = cache.reply(null, 'u', { [group.players[0]]: 'u' }, language);
+      assert.equal((reply.match(/https:\/\/games.tabony.net\/nations\//g) ?? []).length, 7);
+      assert.ok(reply.length <= 2000, `${division} ${language} ${status}: ${reply.length}`);
+      assert.doesNotMatch(reply, /undefined|\{round\}/);
+    }
+  }
 });
 
 test('English SM rendering covers titles, auto selection, tiebreakers, unavailable games and stale connections without changing rankings', () => {
