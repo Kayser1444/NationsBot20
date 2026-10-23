@@ -12,7 +12,7 @@ const settings = { origin: 'https://admin.example.test', clientId: '155893689944
 async function fixture(t) {
   let clock = 0, identity = owner, calls = 0, snapshots = 0, edits = 0;
   const resets = [];
-  let billingReads = 0, creditReads = 0;
+  let billingReads = 0, creditReads = 0, connectionTests = 0;
   const auth = createDiscordAuth(settings, { now: () => clock, fetcher: async (url, options) => {
     calls++;
     if (url.endsWith('/oauth2/token')) {
@@ -27,6 +27,7 @@ async function fixture(t) {
   const dashboard = await startDashboard({ port: 0, auth, snapshot: () => { snapshots++; return { private: 'owner-only' }; },
     railwayBilling: async () => { billingReads++; return { available: true, remainingCreditUsd: 4.66 }; },
     openAiCredit: async () => { creditReads++; return { configured: true, available: true, remainingCreditUsd: 4.7 }; },
+    openAiTest: async () => { connectionTests++; return { ok: true, model: 'gpt-6.1-sol' }; },
     questionQuota: userId => ({ userId, used: 5, remaining: 0 }),
     resetQuestionQuota: (userId, actorId) => { resets.push({ userId, actorId }); return { userId, used: 0, remaining: 5 }; },
     subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
@@ -57,7 +58,7 @@ async function fixture(t) {
     return { cookie, callback };
   }
   return { request, login, setIdentity: value => { identity = value; }, setClock: value => { clock = value; },
-    resets: () => resets, billingReads: () => billingReads, creditReads: () => creditReads,
+    resets: () => resets, billingReads: () => billingReads, creditReads: () => creditReads, connectionTests: () => connectionTests,
     counts: () => ({ calls, snapshots, edits }) };
 }
 
@@ -81,6 +82,29 @@ test('question quota reset requires owner authentication, matching origin and CS
   assert.equal(response.status, 200); assert.equal((await response.json()).remaining, 5);
   assert.deepEqual(f.resets(), [{ userId: owner, actorId: owner }]);
   assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
+});
+
+test('OpenAI connection test requires owner HTTPS, POST, exact origin and CSRF; reads never invoke it', async t => {
+  const f = await fixture(t), path = '/api/openai-test';
+  assert.equal((await f.request(path, { method: 'POST' })).status, 401);
+  const attempt = await f.login(), callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
+  const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
+  const html = await (await f.request('/', { headers: { cookie } })).text();
+  const csrf = html.match(/const token='([a-f0-9]+)'/)[1];
+  const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf };
+  assert.equal((await f.request(path, { headers })).status, 404);
+  await f.request('/api/status', { headers });
+  await f.request('/api/openai-credit', { headers });
+  assert.equal((await f.request(path, { method: 'POST', headers: { cookie } })).status, 403);
+  assert.equal((await f.request(path, { method: 'POST', headers: { ...headers, origin: 'https://evil.test' } })).status, 403);
+  assert.equal((await f.request(path, { method: 'POST', headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
+  assert.equal((await f.request(path, { method: 'POST', headers: { ...headers, 'x-forwarded-proto': 'http' } })).status, 403);
+  assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
+  assert.equal(f.connectionTests(), 0);
+  const result = await f.request(path, { method: 'POST', headers });
+  assert.equal(result.status, 200); assert.equal(result.headers.get('cache-control'), 'no-store');
+  assert.equal((await result.json()).ok, true);
+  assert.equal(f.connectionTests(), 1);
 });
 
 test('public admin pages disclose no state; APIs require authentication and HTTPS', async t => {

@@ -288,6 +288,13 @@ The estimate depends on reported costs and recorded top-ups; reporting delays,
 expired credits or billing adjustments can make it differ from the actual
 balance. It is labelled as an estimate, not an authoritative credit balance.
 
+The OpenAI panel also has **Testa OpenAI-anslutning** for a manual, small request
+with the same API key and model as `/question`. It shows the result, latency and
+sanitized error diagnostics. There is a small API cost; at most one new request
+per minute per process, with a 20-second timeout and no automatic retry. It never
+runs on page load or deployment and does not use subscriber question quotas.
+See [connection-test scope](docs/question.md#owner-connection-test).
+
 ### Thinking-time continuity at restarts
 
 A clean shutdown of a connected observer closes its current thinking interval at

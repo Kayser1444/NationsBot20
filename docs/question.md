@@ -22,6 +22,27 @@ The question and selected source excerpts are sent to OpenAI. The investigation
 has no web search, MCP, shell, code execution or ongoing-match tools. Existing
 turn monitoring and image delivery keep their existing network connections.
 
+## Owner connection test
+
+The OpenAI panel has a **Testa OpenAI-anslutning** button. It makes one small
+Responses request using the same `OPENAI_API_KEY` and model as `/question`, asks
+for `OK`, uses low reasoning effort and caps output (including reasoning) at 512
+tokens. There is a small API cost. It never runs automatically on page load,
+refresh or deployment. It requires the owner session, HTTPS in cloud mode, exact
+Origin and CSRF token, through `POST /api/openai-test`.
+
+Concurrent tests share one request, and results (including failures) are reused
+for one minute per process. Each request times out after 20 seconds, with no
+automatic retry or alternative model. The result shows time, model, HTTP status,
+sanitized provider diagnostics and request ID when available. Credentials and
+raw response bodies are not returned. No game data or user question is sent.
+
+The test works independently of question sources, Discord delivery and subscriber
+quotas; it does not count as a subscriber question. It also reports whether
+`NATIONS_QUESTION_ENABLED` is set. A passing test confirms only the small model
+request, not the full `/question` investigation. The separate
+`NATIONS_OPENAI_ADMIN_KEY` still serves only the credit estimate.
+
 ## Source copies
 
 ### Inofficial FAQ amendments

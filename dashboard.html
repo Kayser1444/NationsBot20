@@ -29,6 +29,9 @@
 <p id="openai-details" class="muted"></p>
 <p class="muted">Beräknad återstående kredit för hela OpenAI-organisationen. Rapporteringen kan släpa efter. Nya påfyllningar behöver registreras.</p>
 <p id="openai-updated" class="muted"></p>
+<p style="margin-top:16px"><button id="openai-test" type="button">Testa OpenAI-anslutning</button></p>
+<p class="muted">Ett kort test med samma modell och API-nyckel som /question. En liten API-kostnad tillkommer. Högst ett nytt test per minut.</p>
+<p id="openai-test-result" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere">Inget anslutningstest har körts här ännu.</p>
 </section>
 </div>
 <section class="grid">
@@ -50,6 +53,21 @@ document.getElementById('logout')?.addEventListener('click',async()=>{const resp
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');
+el('openai-test').onclick=async()=>{
+ const button=el('openai-test');if(button.disabled)return;button.disabled=true;text('openai-test-result','Testar anslutningen…');
+ try{
+  const response=await fetch('/api/openai-test',{method:'POST',headers:{'x-nations-token':token},cache:'no-store'});if(response.status===401){location.assign('/');return}
+  const result=await response.json();if(!response.ok)throw new Error(result.error||'Testet kunde inte slutföras.');
+  const lines=[result.message,'Modell: '+result.model];
+  if(result.httpStatus)lines.push('HTTP '+result.httpStatus);
+  if(result.durationMs!=null)lines.push('Svarstid: '+result.durationMs+' ms');
+  if(result.checkedAt)lines.push('Testat '+new Date(result.checkedAt).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'}));
+  if(result.errorCode)lines.push('Felkod: '+result.errorCode);if(result.errorMessage)lines.push(result.errorMessage);if(result.requestId)lines.push('Request-ID: '+result.requestId);
+  if(!result.questionEnabled)lines.push('/question är avstängd i den här miljön.');
+  if(result.cached)lines.push('Visar föregående test. Nytt anrop kan göras om '+result.retryAfterSeconds+' sekunder.');
+  text('openai-test-result',lines.join('\n'));el('openai-test-result').className=result.ok?'':'error';
+ }catch(error){text('openai-test-result',error.message);el('openai-test-result').className='error'}finally{button.disabled=false}
+};
 async function refreshRailway(){
  try{
   const response=await fetch('/api/railway-billing',{cache:'no-store'});if(response.status===401){location.assign('/');return}if(!response.ok)throw new Error();const billing=await response.json();

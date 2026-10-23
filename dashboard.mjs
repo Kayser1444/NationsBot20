@@ -6,9 +6,10 @@ import { bulletinCredentialMatches } from './bulletins.mjs';
 import { thinkingSummary } from './thinking-summary.mjs';
 import { createRailwayBilling } from './railway-billing.mjs';
 import { createOpenAiCredit } from './openai-credit.mjs';
+import { createOpenAiConnectionTest } from './openai-connection-test.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit() }) {
+export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = createOpenAiConnectionTest() }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -96,6 +97,11 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     }
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
+    if (req.method === 'POST' && url.pathname === '/api/openai-test') {
+      try { json(200, await openAiTest()); }
+      catch { json(503, { error: 'OpenAI-testet kunde inte slutföras.' }); }
+      return;
+    }
     try {
       if (req.method === 'POST' && url.pathname.startsWith('/api/question-quotas/')) {
         if (!quotaId) throw new Error('Discord-ID ska vara ett nummer med 17–20 siffror.');
