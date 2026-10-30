@@ -221,6 +221,14 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
     }
   })();
   return { close, ready,
+    globalQuestionQuota() {
+      if (stopped || !questions.globalQuota) throw new Error('Frågekvoten är inte tillgänglig.');
+      return questions.globalQuota();
+    },
+    resetGlobalQuestionQuota(actorId) {
+      if (stopped || !questions.resetGlobalQuota) throw new Error('Frågekvoten är inte tillgänglig.');
+      return questions.resetGlobalQuota(actorId);
+    },
     questionQuota(userId) {
       if (stopped || !questions.quota) throw new Error('Frågekvoten är inte tillgänglig.');
       return questions.quota(userId);

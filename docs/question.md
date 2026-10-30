@@ -280,10 +280,13 @@ without stopping reminders. Keep one replica.
 
 The owner panel can inspect and reset a user's question quota by Discord ID,
 including the signed-in owner (prefilled). A conversation detail also links to
-that user's quota. Reset clears the user's five-per-day count and minute cooldown
-atomically on disk, and records the target and administrator in the event log.
-It does not change the global 20-question/120-request counts, bans or
-conversation history. Resets are rejected while an investigation is in progress.
+that user's quota. The user-reset button clears the user's five-per-day count
+and minute cooldown **and the shared 120-request API counter**, atomically on disk.
+It preserves the global 20-question count and other users' personal quotas.
+A separate button resets the global 20-question count, preserving the API counter
+and every user's personal quota/cooldown. Both actions record the administrator
+and the cleared counter in the event log, persist across restarts, and leave bans
+and conversation history intact. Resets are rejected during an investigation.
 Both quota reads and resets require the owner session on Railway; POST resets
 also require the existing same-origin and CSRF checks.
 

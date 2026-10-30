@@ -296,7 +296,7 @@ test('global budget blocks a fresh user and broken sources leave the bot availab
   };
   const service = createQuestionService({ directory, env, fetcher });
   const reset = service.resetQuota(userId, userId);
-  assert.equal(reset.remaining, 5); assert.equal(reset.total, 20); assert.equal(reset.requests, 120);
+  assert.equal(reset.remaining, 5); assert.equal(reset.total, 20); assert.equal(reset.requests, 0);
   assert.match(await service.ask({ userId, question: 'Nations rules?' }), /limit reached/);
   assert.equal(paidCalls, 0); service.close();
   writeFileSync(join(root, 'tabony-snapshot.json'), '{}');
@@ -322,11 +322,41 @@ test('overlapping questions do not spend twice; shutdown aborts the request', { 
   assert.match(await service.ask({ userId, question: 'Nations rules?' }), /already|Another question/);
   assert.equal(calls, 1);
   assert.throws(() => service.resetQuota(userId), /undersöks/, 'Do not race quota resets against a running investigation');
+  assert.throws(() => service.resetGlobalQuota(userId), /undersöks/);
   service.close();
+  assert.throws(() => service.resetGlobalQuota(userId), /stoppad/);
   assert.match(await first, /could not finish/);
 });
 
-test('owner quota reset persists, clears only one user and preserves global spending limits', async t => {
+test('global question reset persists and only clears the current UTC day question counter', async t => {
+  const directory = temp(t), root = join(directory, 'questions'), other = '821001820309815368';
+  const { mkdirSync } = await import('node:fs'); mkdirSync(root);
+  let clock = Date.now(), paidCalls = 0; const audit = [];
+  const day = new Date(clock).toISOString().slice(0, 10);
+  const users = { [userId]: { count: 5, last: clock }, [other]: { count: 3, last: clock - 1000 } };
+  writeFileSync(join(root, 'usage.json'), JSON.stringify({ day, total: 20, requests: 120, users }));
+  const options = { directory, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only' }, now: () => clock,
+    report: message => audit.push(message), fetcher: async url => { if (url === 'https://api.openai.com/v1/responses') paidCalls++; return new Response('', { status: 503 }); } };
+  let service = createQuestionService(options); t.after(() => service.close());
+  assert.deepEqual(service.globalQuota(), { day, total: 20, totalLimit: 20, requests: 120, requestLimit: 120 });
+  const reset = service.resetGlobalQuota(userId);
+  assert.equal(reset.total, 0); assert.equal(reset.requests, 120);
+  assert.deepEqual(JSON.parse(readFileSync(join(root, 'usage.json'), 'utf8')).users, users);
+  assert.ok(audit.some(message => message.includes('Gemensam frågekvot nollställd från 20') && message.includes(userId)));
+  service.close(); service = createQuestionService(options);
+  assert.equal(service.globalQuota().total, 0); assert.equal(service.globalQuota().requests, 120);
+  assert.match(await service.ask({ userId: '123456789012345678', question: 'Can I buy this advisor?' }), /limit reached/);
+  assert.equal(paidCalls, 0, 'the API limit still applies after resetting only the global question counter');
+  service.resetQuota(userId, userId);
+  assert.equal(service.quota(userId).remaining, 5); assert.equal(service.globalQuota().requests, 0);
+  assert.equal(service.quota(other).used, 3);
+  await service.ask({ userId, question: 'Can I buy this advisor?' }); assert.equal(paidCalls, 1);
+  clock += dayMs;
+  const nextDay = service.resetGlobalQuota(userId);
+  assert.equal(nextDay.total, 0); assert.equal(nextDay.requests, 0); assert.equal(service.quota(other).used, 0);
+});
+
+test('owner user reset persists, clears the API counter and preserves the global question count and other users', async t => {
   const directory = temp(t), other = '821001820309815368'; let clock = Date.now(), calls = 0; const audit = [];
   const options = { directory, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId + ',' + other },
     now: () => clock, report: message => audit.push(message), fetcher: async url => {
@@ -340,7 +370,8 @@ test('owner quota reset persists, clears only one user and preserves global spen
   const before = service.quota(userId), otherBefore = service.quota(other);
   const reset = service.resetQuota(userId, userId);
   assert.equal(reset.used, 0); assert.equal(reset.remaining, 5); assert.equal(reset.cooldownRemainingMs, 0);
-  assert.equal(reset.total, before.total); assert.equal(reset.requests, before.requests); assert.deepEqual(service.quota(other), otherBefore);
+  assert.equal(reset.total, before.total); assert.ok(before.requests > 0); assert.equal(reset.requests, 0);
+  assert.deepEqual(service.quota(other), { ...otherBefore, requests: 0 });
   assert.equal(audit.filter(message => message.includes('Frågekvot nollställd')).length, 1);
   service.close(); const restarted = createQuestionService(options);
   assert.equal(restarted.quota(userId).remaining, 5);

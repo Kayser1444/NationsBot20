@@ -11,7 +11,7 @@ const owner = '229311536827465728';
 const settings = { origin: 'https://admin.example.test', clientId: '1558936899446374570', clientSecret: 'synthetic-client-secret', ownerId: owner };
 async function fixture(t) {
   let clock = 0, identity = owner, calls = 0, snapshots = 0, edits = 0;
-  const resets = [];
+  const resets = [], globalResets = [];
   let billingReads = 0, creditReads = 0, connectionTests = 0;
   const auth = createDiscordAuth(settings, { now: () => clock, fetcher: async (url, options) => {
     calls++;
@@ -30,6 +30,8 @@ async function fixture(t) {
     openAiTest: async () => { connectionTests++; return { ok: true, model: 'gpt-6.1-sol' }; },
     questionQuota: userId => ({ userId, used: 5, remaining: 0 }),
     resetQuestionQuota: (userId, actorId) => { resets.push({ userId, actorId }); return { userId, used: 0, remaining: 5 }; },
+    globalQuestionQuota: () => ({ total: 20, totalLimit: 20, requests: 120, requestLimit: 120 }),
+    resetGlobalQuestionQuota: actorId => { globalResets.push(actorId); return { total: 0, totalLimit: 20, requests: 120, requestLimit: 120 }; },
     subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
   t.after(() => dashboard.close());
   // Emulate the TLS proxy with an explicit Host header (fetch derives Host from URL).
@@ -58,7 +60,7 @@ async function fixture(t) {
     return { cookie, callback };
   }
   return { request, login, setIdentity: value => { identity = value; }, setClock: value => { clock = value; },
-    resets: () => resets, billingReads: () => billingReads, creditReads: () => creditReads, connectionTests: () => connectionTests,
+    resets: () => resets, globalResets: () => globalResets, billingReads: () => billingReads, creditReads: () => creditReads, connectionTests: () => connectionTests,
     counts: () => ({ calls, snapshots, edits }) };
 }
 
@@ -82,6 +84,27 @@ test('question quota reset requires owner authentication, matching origin and CS
   assert.equal(response.status, 200); assert.equal((await response.json()).remaining, 5);
   assert.deepEqual(f.resets(), [{ userId: owner, actorId: owner }]);
   assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
+});
+
+test('global question quota reset requires owner HTTPS, POST, matching origin and CSRF and records the actor', async t => {
+  const f = await fixture(t), path = '/api/question-quotas/global';
+  assert.equal((await f.request(path)).status, 401);
+  assert.equal((await f.request(path, { method: 'POST' })).status, 401);
+  const attempt = await f.login(), callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
+  const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
+  const html = await (await f.request('/', { headers: { cookie } })).text();
+  const csrf = html.match(/const token='([a-f0-9]+)'/)[1];
+  assert.equal((await (await f.request(path, { headers: { cookie } })).json()).total, 20);
+  const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf };
+  for (const rejected of [{ cookie }, { ...headers, origin: 'https://evil.test' }, { ...headers, 'x-nations-token': 'forged' }, { ...headers, 'x-forwarded-proto': 'http' }]) {
+    assert.equal((await f.request(path, { method: 'POST', headers: rejected })).status, 403);
+  }
+  assert.deepEqual(f.globalResets(), []);
+  assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
+  const response = await f.request(path, { method: 'POST', headers });
+  assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store');
+  assert.deepEqual(await response.json(), { total: 0, totalLimit: 20, requests: 120, requestLimit: 120 });
+  assert.deepEqual(f.globalResets(), [owner]); assert.deepEqual(f.resets(), []);
 });
 
 test('OpenAI connection test requires owner HTTPS, POST, exact origin and CSRF; reads never invoke it', async t => {

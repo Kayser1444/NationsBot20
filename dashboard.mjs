@@ -9,7 +9,7 @@ import { createOpenAiCredit } from './openai-credit.mjs';
 import { createOpenAiConnectionTest } from './openai-connection-test.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = createOpenAiConnectionTest() }) {
+export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, globalQuestionQuota, resetGlobalQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = createOpenAiConnectionTest() }) {
   const token = randomBytes(24).toString('hex');
   let origin;
   const server = createServer(async (req, res) => {
@@ -86,6 +86,11 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     }
     if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
     const quotaId = url.pathname.match(/^\/api\/question-quotas\/(\d{17,20})$/)?.[1];
+    if (req.method === 'GET' && url.pathname === '/api/question-quotas/global') {
+      try { if (!globalQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.'); json(200, await globalQuestionQuota()); }
+      catch (error) { json(503, { error: error.message }); }
+      return;
+    }
     if (req.method === 'GET' && quotaId) {
       try { if (!questionQuota) throw new Error('Frågekvoten är inte tillgänglig.'); json(200, await questionQuota(quotaId)); }
       catch (error) { json(503, { error: error.message }); }
@@ -103,6 +108,10 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
       return;
     }
     try {
+      if (req.method === 'POST' && url.pathname === '/api/question-quotas/global') {
+        if (!resetGlobalQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.');
+        json(200, await resetGlobalQuestionQuota(activeSession?.userId ?? null)); return;
+      }
       if (req.method === 'POST' && url.pathname.startsWith('/api/question-quotas/')) {
         if (!quotaId) throw new Error('Discord-ID ska vara ett nummer med 17–20 siffror.');
         if (!resetQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.');

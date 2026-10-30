@@ -44,19 +44,36 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const createCorpus = () => createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards, differencesStore.snapshot());
   const controller = new AbortController();
   let busy = false, closed = false;
+  const globalQuota = () => {
+    const day = new Date(now()).toISOString().slice(0, 10);
+    return { day, total: ledger.day === day ? ledger.total : 0, totalLimit: 20,
+      requests: ledger.day === day ? ledger.requests : 0, requestLimit: 120 };
+  };
   sourceStore.start();
   if (!rulesDifferencesStore) differencesStore.start();
   if (retrieval) void retrieval.prepare(createCorpus());
   return {
     retrievalStatus: () => retrieval?.status() ?? { mode: 'literal' },
+    globalQuota,
     quota(userId) {
       if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
-      const day = new Date(now()).toISOString().slice(0, 10);
-      const user = ledger.day === day ? ledger.users[userId] : null;
-      return { userId, day, used: user?.count ?? 0, limit: 5, remaining: Math.max(0, 5 - (user?.count ?? 0)),
+      const global = globalQuota();
+      const user = ledger.day === global.day ? ledger.users[userId] : null;
+      return { userId, used: user?.count ?? 0, limit: 5, remaining: Math.max(0, 5 - (user?.count ?? 0)),
         cooldownRemainingMs: user?.count ? Math.max(0, 60000 - (now() - user.last)) : 0,
-        total: ledger.day === day ? ledger.total : 0, totalLimit: 20,
-        requests: ledger.day === day ? ledger.requests : 0, requestLimit: 120 };
+        ...global };
+    },
+    resetGlobalQuota(actorId) {
+      if (closed) throw new Error('Frågefunktionen är stoppad.');
+      if (busy) throw new Error('En fråga undersöks. Vänta tills den är klar innan kvoten nollställs.');
+      const day = new Date(now()).toISOString().slice(0, 10);
+      const next = ledger.day === day ? structuredClone(ledger) : { day, total: 0, requests: 0, users: {} };
+      const previous = next.total;
+      next.total = 0;
+      saveQuestionJson(path, next);
+      ledger = next;
+      report(`Gemensam frågekvot nollställd från ${previous} frågor av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. API-räknare och personliga kvoter behålls.`);
+      return globalQuota();
     },
     resetQuota(userId, actorId) {
       if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
@@ -64,10 +81,12 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       if (busy) throw new Error('En fråga undersöks. Vänta tills den är klar innan kvoten nollställs.');
       const day = new Date(now()).toISOString().slice(0, 10);
       const next = ledger.day === day ? structuredClone(ledger) : { day, total: 0, requests: 0, users: {} };
+      const previousRequests = next.requests;
       delete next.users[userId];
+      next.requests = 0;
       saveQuestionJson(path, next); // Publish in memory only after the persistent reset succeeds.
       ledger = next;
-      report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}.`);
+      report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. Gemensam API-räknare nollställd från ${previousRequests} anrop.`);
       return this.quota(userId);
     },
     async ask({ userId, question, language = 'en-US', onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
