@@ -1,0 +1,20 @@
+[
+  { "name": "Exact Python symbol", "query": "wonderful_advisors", "expected": [{ "id": "code/dynasty_cards.py", "symbol": "PolishLithuanianCommonwealth.wonderful_advisors", "line": 646 }] },
+  { "name": "Advisor filtering implementation", "query": "Polish Lithuanian Commonwealth advisors on wonder spaces code", "expected": [{ "id": "code/dynasty_cards.py", "symbol": "PolishLithuanianCommonwealth.wonderful_advisors", "line": 646 }] },
+  { "name": "War mitigation implementation", "query": "How does the Python implementation use stability to reduce resource losses after defeat in war?", "expected": [{ "id": "code/player.py", "symbol": "Player.war", "line": 1061 }] },
+  { "name": "Exact war handler", "query": "def war(self, penalty)", "expected": [{ "id": "code/player.py", "symbol": "Player.war", "line": 1061 }] },
+  { "name": "Famine implementation", "query": "Python function that subtracts food for famine at the end of a round", "expected": [{ "id": "code/player.py", "symbol": "Player.famine", "line": 1113 }] },
+  { "name": "Turn order implementation", "query": "Where does the code sort players for the new turn order?", "expected": [{ "id": "code/match.py", "symbol": "Match.player_order_phase", "line": 576 }] },
+  { "name": "Resource shortfall implementation", "query": "Python handling when a player cannot afford the resources they must lose", "expected": [{ "id": "code/player.py", "symbol": "Player.lose_resources", "line": 937 }] },
+  { "name": "Replacing discovered wonders", "query": "Can I replace a discovered Natural Wonder?", "expected": [{ "id": "rules/dynasties/page-2" }] },
+  { "name": "Point loss cap", "query": "Is there a maximum victory point loss per resource in one round?", "expected": [{ "id": "rules/base/page-10" }] },
+  { "name": "Architect supply by player count", "query": "How many architects are available with three players?", "expected": [{ "id": "rules/base/page-13" }] },
+  { "name": "Dynasty advisor exception", "query": "Does Polish-Lithuanian Commonwealth affect the advisor on Porcelain Tower?", "expected": [{ "id": "rules/dynasties/page-3" }] },
+  { "name": "Private architect clarification", "query": "Can I use a private architect while the common supply is empty?", "expected": [{ "id": "faq-amendments/private-architects" }] },
+  { "name": "Exact code class", "query": "class MartinLuther", "expected": [{ "id": "code/progress_cards.py", "symbol": "MartinLuther", "line": 2521 }] },
+  { "name": "Keep gold rather than lose two", "query": "event where the least stable nation keeps only two coins", "scope": "cards", "cardType": "event", "expected": [{ "id": "cards/FD_HM/b" }] },
+  { "name": "Passing order event", "query": "event that sets next round player order by the order people stopped taking actions", "scope": "cards", "cardType": "event", "expected": [{ "id": "cards/promo-solar-eclipse-spring-and-autumn-period/a" }] },
+  { "name": "Gain new workers", "query": "gain worker", "scope": "cards", "cardType": "event", "expected": [{ "id": "cards/Ja_CT/a" }, { "id": "cards/Pi_DR/a" }, { "id": "cards/PR_HD/b" }] },
+  { "name": "Existing staging worker query", "query": "Events that give workers, add workers to supply or player board, recruit worker", "scope": "cards", "cardType": "event", "allExpected": true, "expected": [{ "id": "cards/Ja_CT/a" }, { "id": "cards/Pi_DR/a" }, { "id": "cards/PR_HD/b" }] },
+  { "name": "Existing staging turn-order query", "query": "first player order", "scope": "cards", "cardType": "event", "allExpected": true, "expected": [{ "id": "cards/promo-solar-eclipse-spring-and-autumn-period/a" }, { "id": "cards/QU_OG/b" }, { "id": "cards/TM_KE/b" }] }
+]

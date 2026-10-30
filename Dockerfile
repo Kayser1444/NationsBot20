@@ -2,6 +2,9 @@ FROM node:24-bookworm-slim
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
+COPY question-embeddings.mjs ./
+COPY scripts/prepare-question-model.mjs ./scripts/
+RUN node scripts/prepare-question-model.mjs --directory=/app/models
 COPY *.mjs dashboard.html ./
 COPY sm-season.json ./
 COPY data/cards/catalog.json ./data/cards/
@@ -14,4 +17,5 @@ COPY data/question/inofficial-faq-amendments-translations.json ./data/question/
 COPY data/rules/ ./data/rules/
 COPY data/cards/library/entries.json data/cards/library/manifest.json ./data/cards/library/
 ENV NODE_ENV=production
+ENV NATIONS_QUESTION_MODEL_DIR=/app/models
 CMD ["node", "start-cloud.mjs"]

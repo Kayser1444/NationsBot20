@@ -149,6 +149,66 @@ terms and read candidate cards before concluding that their effects are missing.
 
 ## Limits and isolation
 
+### Optional local hybrid retrieval experiment
+
+Set `NATIONS_QUESTION_RETRIEVAL=hybrid` to augment the existing literal search with
+local semantic retrieval. Omit it (the default) to retain the existing behavior.
+This does not change the answer model, access checks, question quotas, evidence-read
+requirement, or Discord delivery. No vector database service or embedding API is used.
+
+The Docker image includes a pinned, quantized `Xenova/bge-small-en-v1.5` embedding
+model. For local development, run `npm run question:model` once; it downloads the
+fixed model revision into ignored `.data/question-models`. `NATIONS_QUESTION_MODEL_DIR`
+can point to another prepared model-cache directory (Docker uses `/app/models`).
+Only the explicit setup/build command downloads model files. Runtime embedding and
+search are offline, including embedding the user's query. The English search-query
+requirement still applies. This small general retrieval model is an experimental
+CPU baseline, not a model specifically trained on the Nations implementation.
+
+Python is parsed with Lezer, never executed. Functions, methods, nested definitions
+and class-level declarations are indexed separately with enclosing signatures and
+identifier words. Passages retain original source IDs, lines, commit, and evidence
+metadata. Long passages split within the embedding token window. Rulebooks, FAQ,
+amendments, implementation notes and card effects are also indexed; their existing
+review/authority distinctions remain attached. Generated summaries are not used.
+There is no resolved call graph: the investigator still follows definitions and
+called functions using the original search/read tools.
+
+A background worker performs CPU embedding, BM25 keyword ranking and cosine vector
+search. Hybrid results combine BM25 and vector rankings using reciprocal rank
+fusion, while reserving the first four existing source hits (three for card lookup).
+Card-type filters and the existing eight-card/fourteen-source result limits remain.
+Scores identify candidates, not proof or complete lists. Original source reads are
+still required. For this bounded corpus, vectors are scanned directly in memory;
+there is no approximate index or database daemon.
+
+The first index builds in the background; questions use ordinary retrieval while it
+warms. The disposable `questions/vector-index/vectors.json` cache reuses embeddings
+by enriched passage content and pinned model/chunk version. Changed/deleted sources
+are reflected in a newly published complete index; mismatched snapshots use literal
+search while rebuilding. Index/model failures and search timeouts fall back to the
+original retrieval. Reminder work runs outside the embedding worker. This still
+adds CPU and memory consumption, which must be measured on staging before enabling
+production. Removing the environment variable rolls back the experiment.
+
+Existing question telemetry records `retrieval` events with phases `hybrid`,
+`warming` or `fallback`, plus search timing/result counts when available.
+No question text or query vectors are persisted in the vector cache.
+
+Run `npm run question:evaluate` after model setup for an offline comparison of
+existing literal search, BM25 alone, vectors alone and the actual hybrid wrapper.
+Results and timings are saved under ignored `.data/question-retrieval-evaluation/`.
+Use `-- --directory=... --model-directory=...` for alternate cache locations.
+The curated smoke cases require the expected source and, for code, a relevant
+function or line range. They measure evidence retrieval, not final answer accuracy
+or total model-response latency. They make no Discord or paid API calls.
+See the [initial measurements and limitations](research/local-question-retrieval-experiment.md).
+
+The normal tests use synthetic vectors and exercise fallback and async-tool handling.
+To additionally test real offline embeddings, cache reuse and snapshot invalidation,
+set `NATIONS_VECTOR_TEST_MODEL_DIR` to the prepared model directory when running
+`tests/question-retrieval.test.mjs`.
+
 Only `search_cards`, `search_sources` and `read_source` are exposed to the model. They resolve
 in-memory source IDs; they cannot read arbitrary paths, credentials, subscriptions
 or game state. The AI transport calls only the fixed OpenAI Responses endpoint,

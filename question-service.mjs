@@ -6,6 +6,7 @@ import { investigateQuestion, maxQuestionRequests } from './question-agent.mjs';
 import { loadQuestionCards } from './card-library.mjs';
 import { questionReplyParts, questionSourceFooter } from './question-answer.mjs';
 import { createRulesDifferencesStore } from './question-errata.mjs';
+import { createLocalRetrieval } from './question-retrieval.mjs';
 
 export function createQuestionService(options = {}) {
   try { return buildQuestionService(options); }
@@ -15,7 +16,8 @@ export function createQuestionService(options = {}) {
   }
 }
 
-function buildQuestionService({ env = process.env, directory, fetcher = fetch, now = Date.now, report = () => {}, rulesDifferencesStore } = {}) {
+function buildQuestionService({ env = process.env, directory, fetcher = fetch, now = Date.now, report = () => {}, rulesDifferencesStore,
+  retrievalFactory = createLocalRetrieval } = {}) {
   const enabled = env.NATIONS_QUESTION_ENABLED === '1' && !!env.OPENAI_API_KEY && directory;
   const message = (language, sv, en) => language === 'sv-SE' ? sv : en;
   const disabled = language => message(language, 'Frågefunktionen är inte aktiverad för ditt konto.', 'Questions are not enabled for your account.');
@@ -37,11 +39,16 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const rulebooks = loadQuestionRulebooks();
   const cards = loadQuestionCards();
   const differencesStore = rulesDifferencesStore ?? createRulesDifferencesStore({ directory: root, fetcher, now, report });
+  const retrieval = env.NATIONS_QUESTION_RETRIEVAL === 'hybrid' ? retrievalFactory({ directory: join(root, 'vector-index'),
+    modelDirectory: env.NATIONS_QUESTION_MODEL_DIR, report }) : null;
+  const createCorpus = () => createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards, differencesStore.snapshot());
   const controller = new AbortController();
   let busy = false, closed = false;
   sourceStore.start();
   if (!rulesDifferencesStore) differencesStore.start();
+  if (retrieval) void retrieval.prepare(createCorpus());
   return {
+    retrievalStatus: () => retrieval?.status() ?? { mode: 'literal' },
     quota(userId) {
       if (!/^\d{17,20}$/.test(userId)) throw new Error('Ogiltigt Discord-ID.');
       const day = new Date(now()).toISOString().slice(0, 10);
@@ -78,7 +85,8 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         await onAccepted(); // Acknowledge after access/quota checks and before any paid request.
         ledger.total++; ledger.users[userId] = { count: user.count + 1, last: now() };
         saveQuestionJson(path, ledger);
-        const corpus = createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards, differencesStore.snapshot());
+        const originalCorpus = createCorpus();
+        const corpus = retrieval ? retrieval.forCorpus(originalCorpus, onTelemetry) : originalCorpus;
         let details;
         await investigateQuestion({ question: question.trim(), language, corpus, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
           signal: controller.signal, reserveRequest() {
@@ -96,6 +104,6 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
           'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
     },
-    close() { closed = true; controller.abort(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },
+    close() { closed = true; controller.abort(); retrieval?.close(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },
   };
 }

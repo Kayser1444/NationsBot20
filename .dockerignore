@@ -3,6 +3,8 @@
 !package.json
 !package-lock.json
 !*.mjs
+!scripts/
+!scripts/prepare-question-model.mjs
 !dashboard.html
 !sm-season.json
 !data/
