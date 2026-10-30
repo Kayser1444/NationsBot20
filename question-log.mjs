@@ -53,9 +53,9 @@ export function createQuestionLog({ directory, now = Date.now, maxRecords = 500,
       const record = records.find(item => item.id === id); if (!record) return;
       // Explicit fields only: never persist headers, API keys, interaction tokens or raw provider errors.
       const safe = {};
-      for (const key of ['type', 'phase', 'name', 'sourceId', 'query', 'errorCode', 'responseId', 'model']) if (typeof event[key] === 'string') safe[key] = cut(event[key], key === 'query' ? 240 : 160);
+      for (const key of ['type', 'phase', 'name', 'sourceId', 'query', 'errorCode', 'responseId', 'model', 'corpusHash']) if (typeof event[key] === 'string') safe[key] = cut(event[key], key === 'query' ? 240 : 160);
       for (const key of ['errorCode', 'errorType', 'errorParam', 'errorMessage', 'requestId']) if (typeof event[key] === 'string') safe[key] = safeDiagnostic(event[key], key === 'errorMessage' ? 1000 : 160);
-      for (const key of ['round', 'durationMs', 'status', 'inputTokens', 'outputTokens', 'resultCount', 'start', 'count']) if (Number.isFinite(event[key])) safe[key] = event[key];
+      for (const key of ['round', 'durationMs', 'status', 'inputTokens', 'outputTokens', 'resultCount', 'start', 'count', 'beforeBytes', 'afterBytes']) if (Number.isFinite(event[key])) safe[key] = event[key];
       const usage = { ...record.usage };
       if (safe.type === 'api' && Number.isFinite(safe.inputTokens) && Number.isFinite(safe.outputTokens)) {
         usage.inputTokens += safe.inputTokens; usage.outputTokens += safe.outputTokens; usage.reportedRequests++;

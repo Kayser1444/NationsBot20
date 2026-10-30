@@ -174,5 +174,6 @@ export function createQuestionCorpus(snapshot, faq, rulebooks = [], cards = null
     return hits.slice(0, 14);
   };
   const documents = () => [...sources].map(([id, source]) => ({ id, ...source }));
-  return { catalogue, documents, read, search, searchCards: args => cards?.search(args) ?? [], commit: snapshot.commit, fetchedAt: snapshot.fetchedAt };
+  const fingerprint = hash(JSON.stringify(documents()));
+  return { catalogue, documents, fingerprint, read, search, searchCards: args => cards?.search(args) ?? [], commit: snapshot.commit, fetchedAt: snapshot.fetchedAt };
 }

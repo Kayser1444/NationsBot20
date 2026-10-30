@@ -87,6 +87,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         saveQuestionJson(path, ledger);
         const originalCorpus = createCorpus();
         const corpus = retrieval ? retrieval.forCorpus(originalCorpus, onTelemetry) : originalCorpus;
+        onTelemetry({ type: 'retrieval', phase: 'selected', name: corpus.retrieval ?? 'literal', corpusHash: originalCorpus.fingerprint });
         let details;
         await investigateQuestion({ question: question.trim(), language, corpus, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
           signal: controller.signal, reserveRequest() {
@@ -98,8 +99,11 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         onAnswer({ ...details, parts, status: 'answered' });
         return parts.join('\n\n');
       } catch (error) {
-        onAnswer({ status: 'failed', failure: ['invalid_answer', 'answer_too_long'].includes(error.code) ? error.code : 'investigation_failed' });
+        onAnswer({ status: 'failed', failure: ['invalid_answer', 'answer_too_long', 'context_limit'].includes(error.code) ? error.code : 'investigation_failed' });
         report('En regelfråga kunde inte slutföras. Ingen alternativ modell används.', 'error');
+        if (error.code === 'context_limit') return message(language,
+          'Undersökningen behövde mer källtext än vad som ryms i en fråga. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
+          'The investigation needed more source text than fits in one question. This attempt counts toward your quota. Try a narrower question.');
         return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller GPT-6.1 Sol är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
           'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }

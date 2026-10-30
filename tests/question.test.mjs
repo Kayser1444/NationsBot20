@@ -206,6 +206,23 @@ test('failed API call does not switch models or retry; tool loop and context are
   await assert.rejects(investigateQuestion({ question: 'Nations?', language: 'en-US', corpus: oversized, apiKey: 'test-only', reserveRequest() { assert.fail(); }, fetcher() { assert.fail(); } }), /context limit/);
 });
 
+test('service records the selected corpus and distinguishes source-context exhaustion from API failure', async t => {
+  const events = []; let details, requests = 0;
+  const service = createQuestionService({ directory: temp(t), env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only' },
+    fetcher: async url => {
+      if (url !== 'https://api.openai.com/v1/responses') return new Response('', { status: 503 });
+      requests++;
+      return result(Array.from({ length: 8 }, (_, i) => call('read_source', { id: 'code/player.py', start: 1, count: 100 }, `${requests}-${i}`)));
+    } });
+  t.after(() => service.close());
+  const text = await service.ask({ userId, question: 'How does this advisor work?', language: 'en-US', onAnswer: value => { details = value; }, onTelemetry: event => events.push(event) });
+  assert.equal(details.failure, 'context_limit'); assert.match(text, /more source text/); assert.doesNotMatch(text, /unavailable/);
+  assert.ok(requests > 0 && requests < 6);
+  const selected = events.find(event => event.phase === 'selected');
+  assert.equal(selected.name, 'literal'); assert.match(selected.corpusHash, /^[a-f0-9]{64}$/);
+  assert.equal(service.quota(userId).requests, requests); assert.equal(service.quota(userId).total, 1);
+});
+
 test('enabled questions admit all Discord users regardless of legacy allowlist or owner settings', async t => {
   for (const legacy of [{}, { NATIONS_ADMIN_OWNER_ID: userId, NATIONS_QUESTION_USER_IDS: userId }]) {
     let apiCalls = 0;

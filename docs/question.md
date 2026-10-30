@@ -220,7 +220,12 @@ compliance still require evaluation even though tool access is restricted.
 - One question/user/minute, five/user/UTC day, 20 overall/UTC day.
 - Six API requests/question, 120 overall/UTC day.
 - 5,000 output tokens/request, including reasoning and administrator translations.
-- 90,000 bytes maximum serialized context/request.
+- 90,000 bytes maximum serialized context/request. Both search modes send compact
+  candidate previews; under context pressure, older previews are removed while
+  retaining candidate IDs, locations and every original `read_source` result.
+  An unavoidable overflow is logged as `context_limit` before another paid request.
+  The selected search mode and a SHA-256 fingerprint of the full source corpus
+  are logged per question, allowing matched-source staging comparisons.
 - Eight local tools/API response, 100 lines or 10,000 characters/read, 14 hits/search.
 - Card lookup returns at most eight ranked candidates per search.
 

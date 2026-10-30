@@ -99,6 +99,10 @@ test('persistent log handles restarts, retention, pagination, DM, metrics and sa
   assert.equal(diagnostic.errorCode, 'permission_denied'); assert.equal(diagnostic.requestId, 'req_example');
   assert.equal(diagnostic.errorParam, 'service_tier'); assert.equal(diagnostic.errorType, 'permission_error');
   assert.equal(diagnostic.errorMessage.includes('privatevalue'), false);
+  log.telemetry(id, { type: 'retrieval', phase: 'selected', name: 'literal', corpusHash: 'a'.repeat(64) });
+  assert.equal(log.read(id).telemetry.at(-1).corpusHash, 'a'.repeat(64));
+  log.telemetry(id, { type: 'context', phase: 'compact', beforeBytes: 95000, afterBytes: 85000 });
+  assert.equal(log.read(id).telemetry.at(-1).afterBytes, 85000);
   assert.equal(readFileSync(join(directory, 'questions/conversations.json'), 'utf8').includes('secret'), false);
   const second = log.start({ ...input, guildId: 'server', guildName: 'Guild', channelName: 'rules' }); log.finish(second, { status: 'answered' });
   assert.equal(log.list({ search: 'Guild' }).total, 1); assert.equal(log.list({ limit: 1, offset: 1 }).records[0].id, id);
