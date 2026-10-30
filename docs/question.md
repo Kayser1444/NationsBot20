@@ -219,6 +219,10 @@ compliance still require evaluation even though tool access is restricted.
 - One investigation at a time; a 120-second API deadline.
 - One question/user/minute, five/user/UTC day, 20 overall/UTC day.
 - Six API requests/question, 120 overall/UTC day.
+- Quota rejections list every blocking limit: remaining minute cooldown,
+  personal daily count, shared daily question count and/or shared API count.
+  A new investigation needs room for up to six API requests; if fewer remain,
+  the rejection explains that reservation even before 120 requests are used.
 - 5,000 output tokens/request, including reasoning and administrator translations.
 - 90,000 bytes maximum serialized context/request. Both search modes send compact
   candidate previews; under context pressure, older previews are removed while
@@ -280,12 +284,12 @@ without stopping reminders. Keep one replica.
 
 The owner panel can inspect and reset a user's question quota by Discord ID,
 including the signed-in owner (prefilled). A conversation detail also links to
-that user's quota. The user-reset button clears the user's five-per-day count
-and minute cooldown **and the shared 120-request API counter**, atomically on disk.
-It preserves the global 20-question count and other users' personal quotas.
-A separate button resets the global 20-question count, preserving the API counter
-and every user's personal quota/cooldown. Both actions record the administrator
-and the cleared counter in the event log, persist across restarts, and leave bans
+that user's quota. The user-reset button clears only the user's five-per-day
+count and minute cooldown, preserving both shared counters and other users' quotas.
+A separate button resets **both the global 20-question count and the shared
+120-request API counter** atomically, preserving every user's personal quota
+and cooldown. Both actions record the administrator and cleared counters in
+the event log, persist across restarts, and leave bans
 and conversation history intact. Resets are rejected during an investigation.
 Both quota reads and resets require the owner session on Railway; POST resets
 also require the existing same-origin and CSRF checks.

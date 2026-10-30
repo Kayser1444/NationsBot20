@@ -31,7 +31,7 @@ async function fixture(t) {
     questionQuota: userId => ({ userId, used: 5, remaining: 0 }),
     resetQuestionQuota: (userId, actorId) => { resets.push({ userId, actorId }); return { userId, used: 0, remaining: 5 }; },
     globalQuestionQuota: () => ({ total: 20, totalLimit: 20, requests: 120, requestLimit: 120 }),
-    resetGlobalQuestionQuota: actorId => { globalResets.push(actorId); return { total: 0, totalLimit: 20, requests: 120, requestLimit: 120 }; },
+    resetGlobalQuestionQuota: actorId => { globalResets.push(actorId); return { total: 0, totalLimit: 20, requests: 0, requestLimit: 120 }; },
     subscribe: async () => { edits++; }, unsubscribe: async () => { edits++; }, setBan: async () => { edits++; } });
   t.after(() => dashboard.close());
   // Emulate the TLS proxy with an explicit Host header (fetch derives Host from URL).
@@ -103,7 +103,7 @@ test('global question quota reset requires owner HTTPS, POST, matching origin an
   assert.equal((await f.request(path, { method: 'DELETE', headers })).status, 404);
   const response = await f.request(path, { method: 'POST', headers });
   assert.equal(response.status, 200); assert.equal(response.headers.get('cache-control'), 'no-store');
-  assert.deepEqual(await response.json(), { total: 0, totalLimit: 20, requests: 120, requestLimit: 120 });
+  assert.deepEqual(await response.json(), { total: 0, totalLimit: 20, requests: 0, requestLimit: 120 });
   assert.deepEqual(f.globalResets(), [owner]); assert.deepEqual(f.resets(), []);
 });
 

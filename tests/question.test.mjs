@@ -296,7 +296,7 @@ test('global budget blocks a fresh user and broken sources leave the bot availab
   };
   const service = createQuestionService({ directory, env, fetcher });
   const reset = service.resetQuota(userId, userId);
-  assert.equal(reset.remaining, 5); assert.equal(reset.total, 20); assert.equal(reset.requests, 0);
+  assert.equal(reset.remaining, 5); assert.equal(reset.total, 20); assert.equal(reset.requests, 120);
   assert.match(await service.ask({ userId, question: 'Nations rules?' }), /limit reached/);
   assert.equal(paidCalls, 0); service.close();
   writeFileSync(join(root, 'tabony-snapshot.json'), '{}');
@@ -328,7 +328,7 @@ test('overlapping questions do not spend twice; shutdown aborts the request', { 
   assert.match(await first, /could not finish/);
 });
 
-test('global question reset persists and only clears the current UTC day question counter', async t => {
+test('global reset persists and clears both shared UTC day counters while preserving personal quotas', async t => {
   const directory = temp(t), root = join(directory, 'questions'), other = '821001820309815368';
   const { mkdirSync } = await import('node:fs'); mkdirSync(root);
   let clock = Date.now(), paidCalls = 0; const audit = [];
@@ -340,23 +340,23 @@ test('global question reset persists and only clears the current UTC day questio
   let service = createQuestionService(options); t.after(() => service.close());
   assert.deepEqual(service.globalQuota(), { day, total: 20, totalLimit: 20, requests: 120, requestLimit: 120 });
   const reset = service.resetGlobalQuota(userId);
-  assert.equal(reset.total, 0); assert.equal(reset.requests, 120);
+  assert.equal(reset.total, 0); assert.equal(reset.requests, 0);
   assert.deepEqual(JSON.parse(readFileSync(join(root, 'usage.json'), 'utf8')).users, users);
-  assert.ok(audit.some(message => message.includes('Gemensam frågekvot nollställd från 20') && message.includes(userId)));
+  assert.ok(audit.some(message => message.includes('från 20 frågor och 120 API-anrop') && message.includes(userId)));
   service.close(); service = createQuestionService(options);
-  assert.equal(service.globalQuota().total, 0); assert.equal(service.globalQuota().requests, 120);
-  assert.match(await service.ask({ userId: '123456789012345678', question: 'Can I buy this advisor?' }), /limit reached/);
-  assert.equal(paidCalls, 0, 'the API limit still applies after resetting only the global question counter');
+  assert.equal(service.globalQuota().total, 0); assert.equal(service.globalQuota().requests, 0);
+  await service.ask({ userId: '123456789012345678', question: 'Can I buy this advisor?' });
+  assert.equal(paidCalls, 1, 'a fresh user can investigate after the shared question and API budgets are reset');
   service.resetQuota(userId, userId);
-  assert.equal(service.quota(userId).remaining, 5); assert.equal(service.globalQuota().requests, 0);
+  assert.equal(service.quota(userId).remaining, 5); assert.equal(service.globalQuota().requests, 1);
   assert.equal(service.quota(other).used, 3);
-  await service.ask({ userId, question: 'Can I buy this advisor?' }); assert.equal(paidCalls, 1);
+  await service.ask({ userId, question: 'Can I buy this advisor?' }); assert.equal(paidCalls, 2);
   clock += dayMs;
   const nextDay = service.resetGlobalQuota(userId);
   assert.equal(nextDay.total, 0); assert.equal(nextDay.requests, 0); assert.equal(service.quota(other).used, 0);
 });
 
-test('owner user reset persists, clears the API counter and preserves the global question count and other users', async t => {
+test('owner user reset persists, clears only that user and preserves both shared counters and other users', async t => {
   const directory = temp(t), other = '821001820309815368'; let clock = Date.now(), calls = 0; const audit = [];
   const options = { directory, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only', NATIONS_QUESTION_USER_IDS: userId + ',' + other },
     now: () => clock, report: message => audit.push(message), fetcher: async url => {
@@ -370,11 +370,12 @@ test('owner user reset persists, clears the API counter and preserves the global
   const before = service.quota(userId), otherBefore = service.quota(other);
   const reset = service.resetQuota(userId, userId);
   assert.equal(reset.used, 0); assert.equal(reset.remaining, 5); assert.equal(reset.cooldownRemainingMs, 0);
-  assert.equal(reset.total, before.total); assert.ok(before.requests > 0); assert.equal(reset.requests, 0);
-  assert.deepEqual(service.quota(other), { ...otherBefore, requests: 0 });
+  assert.equal(reset.total, before.total); assert.ok(before.requests > 0); assert.equal(reset.requests, before.requests);
+  assert.deepEqual(service.quota(other), otherBefore);
   assert.equal(audit.filter(message => message.includes('Frågekvot nollställd')).length, 1);
   service.close(); const restarted = createQuestionService(options);
   assert.equal(restarted.quota(userId).remaining, 5);
+  assert.equal(restarted.globalQuota().requests, before.requests);
   assert.match(await restarted.ask({ userId, question: 'Can Poland sell this advisor?' }), /AI interpretation/);
   assert.equal(restarted.quota(userId).used, 1); assert.equal(restarted.quota(userId).total, before.total + 1);
   assert.throws(() => restarted.resetQuota('not-an-id'), /Discord-ID/);

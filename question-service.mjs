@@ -69,10 +69,12 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       const day = new Date(now()).toISOString().slice(0, 10);
       const next = ledger.day === day ? structuredClone(ledger) : { day, total: 0, requests: 0, users: {} };
       const previous = next.total;
+      const previousRequests = next.requests;
       next.total = 0;
+      next.requests = 0;
       saveQuestionJson(path, next);
       ledger = next;
-      report(`Gemensam frågekvot nollställd från ${previous} frågor av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. API-räknare och personliga kvoter behålls.`);
+      report(`Gemensam frågekvot nollställd från ${previous} frågor och ${previousRequests} API-anrop av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. Personliga kvoter behålls.`);
       return globalQuota();
     },
     resetQuota(userId, actorId) {
@@ -81,12 +83,10 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       if (busy) throw new Error('En fråga undersöks. Vänta tills den är klar innan kvoten nollställs.');
       const day = new Date(now()).toISOString().slice(0, 10);
       const next = ledger.day === day ? structuredClone(ledger) : { day, total: 0, requests: 0, users: {} };
-      const previousRequests = next.requests;
       delete next.users[userId];
-      next.requests = 0;
       saveQuestionJson(path, next); // Publish in memory only after the persistent reset succeeds.
       ledger = next;
-      report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. Gemensam API-räknare nollställd från ${previousRequests} anrop.`);
+      report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. Gemensamma fråge- och API-kvoter behålls.`);
       return this.quota(userId);
     },
     async ask({ userId, question, language = 'en-US', onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
@@ -94,11 +94,25 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       if (typeof question !== 'string' || question.trim().length < 5 || question.length > 1200) return message(language,
         'Skriv en fråga på 5–1200 tecken om Nations regler eller Tabony-implementationen.', 'Enter a 5–1200 character question about Nations rules or the Tabony implementation.');
       if (busy) return message(language, 'En fråga undersöks redan. Försök igen strax.', 'Another question is being investigated. Please try again shortly.');
-      const day = new Date(now()).toISOString().slice(0, 10);
+      const checkedAt = now();
+      const day = new Date(checkedAt).toISOString().slice(0, 10);
       if (ledger.day !== day) ledger = { day, total: 0, requests: 0, users: {} };
       const user = ledger.users[userId] ?? { count: 0, last: 0 };
-      if (user.count >= 5 || (user.count && now() - user.last < 60000) || ledger.total >= 20 || ledger.requests + maxQuestionRequests > 120) return message(language,
-        'Frågegränsen är nådd: en per minut, fem per dygn och högst 20 totalt per dygn (UTC).', 'Question limit reached: one per minute, five per day and at most 20 overall per day (UTC).');
+      const cooldownSeconds = user.count ? Math.max(0, Math.ceil((60000 - (checkedAt - user.last)) / 1000)) : 0;
+      const limits = [];
+      if (cooldownSeconds > 0) limits.push(message(language,
+        `Minutgränsen: vänta ${cooldownSeconds} s innan du ställer nästa fråga.`, `Minute limit: wait ${cooldownSeconds} s before asking another question.`));
+      if (user.count >= 5) limits.push(message(language, `Din dygnskvot: ${user.count}/5 frågor använda.`, `Your daily quota: ${user.count}/5 questions used.`));
+      if (ledger.total >= 20) limits.push(message(language, `Gemensam dygnskvot: ${ledger.total}/20 frågor använda.`, `Shared daily question quota: ${ledger.total}/20 questions used.`));
+      const apiBlocked = ledger.requests + maxQuestionRequests > 120;
+      if (apiBlocked) {
+        const remaining = Math.max(0, 120 - ledger.requests);
+        limits.push(message(language, `Gemensam API-kvot: ${ledger.requests}/120 anrop använda.`, `Shared daily API quota: ${ledger.requests}/120 requests used.`) +
+          (remaining ? message(language, ` ${remaining} anrop återstår, men det behövs plats för upp till ${maxQuestionRequests} anrop för att starta en fråga.`,
+            ` ${remaining} requests remain, but starting a question requires room for up to ${maxQuestionRequests} requests.`) : ''));
+      }
+      if (limits.length) return message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
+        (user.count >= 5 || ledger.total >= 20 || apiBlocked ? message(language, '\nDygnskvoterna återställs kl. 00:00 UTC.', '\nDaily quotas reset at 00:00 UTC.') : '');
       busy = true;
       try {
         await onAccepted(); // Acknowledge after access/quota checks and before any paid request.
