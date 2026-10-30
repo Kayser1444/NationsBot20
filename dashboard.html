@@ -277,6 +277,7 @@ let comparisonGeneration=0,comparisonRecords=[],comparisonQuestion='';
 async function loadQuestionComparison(id){
  const generation=++comparisonGeneration;
  const section=el('question-comparison');section.hidden=false;text('question-comparison-status','Hämtar körningar…');
+ comparisonRecords=[];for(const control of ['question-comparison-a','question-comparison-b','question-comparison-list','question-comparison-answers'])el(control).replaceChildren();
  try{const response=await fetch('/api/questions/'+encodeURIComponent(id)+'/comparisons',{cache:'no-store'});if(generation!==comparisonGeneration)return;if(response.status===401){location.assign('/');return}const data=await response.json();if(!response.ok)throw new Error(data.error||'Jämförelsen kunde inte hämtas.');
  comparisonRecords=data.records;comparisonQuestion=data.question;
  for(const selector of ['question-comparison-a','question-comparison-b']){const select=el(selector);select.replaceChildren();for(const row of comparisonRecords){const option=document.createElement('option');option.value=row.id;option.textContent=(row.metrics?.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE')+' · '+row.status;select.append(option)}}
@@ -291,9 +292,10 @@ function renderQuestionComparison(){
  const warnings=[];if(rows.length<2)warnings.push('Kör samma fråga med en annan modell för att skapa ett jämförelsepar.');
  if(!same('corpusHash'))warnings.push('Källorna skiljer sig eller saknar fingeravtryck.');if(!same('promptHash')||!same('reasoningEffort')||!same('retrieval'))warnings.push('Instruktioner eller sökinställningar skiljer sig eller saknar jämförelsedata.');
  if(rows.some(row=>row.requestedLanguage!==rows[0]?.requestedLanguage))warnings.push('Olika språkval användes.');
+ if(rows.some(row=>row.metrics?.serviceTiers?.length!==1)||new Set(rows.flatMap(row=>row.metrics?.serviceTiers||[])).size!==1)warnings.push('Servicenivån skiljer sig eller är okänd.');
  text('question-comparison-status',comparisonQuestion+'\n'+(warnings.join(' ')||'Samma källor, instruktioner, språkval och sökinställningar. Tider varierar mellan enskilda körningar.'));
  const table=el('question-comparison-list'),answers=el('question-comparison-answers');table.replaceChildren();answers.replaceChildren();
- for(const row of rows){const m=row.metrics||{},tr=document.createElement('tr');cell(tr,(m.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE'));cell(tr,row.status+' / '+row.deliveryStatus);cell(tr,questionSeconds(row.durationMs)+' / '+questionSeconds(m.apiDurationMs));cell(tr,m.apiCalls??'–');cell(tr,row.usage.inputTokens+' / '+row.usage.outputTokens);cell(tr,(m.cachedInputTokens??'–')+' / '+(m.reasoningTokens??'–'));cell(tr,questionCost(m.estimatedCostUsd));table.append(tr);
+ for(const row of rows){const m=row.metrics||{},tr=document.createElement('tr');cell(tr,(m.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE'));cell(tr,row.status+' / '+row.deliveryStatus);cell(tr,questionSeconds(row.durationMs)+' / '+questionSeconds(m.apiDurationMs));cell(tr,m.apiCalls??'–');cell(tr,row.usage.reportedRequests?row.usage.inputTokens+' / '+row.usage.outputTokens+' ('+row.usage.reportedRequests+'/'+m.apiCalls+' anrop)':'Ej rapporterat');cell(tr,(m.cachedInputTokens??'–')+' / '+(m.reasoningTokens??'–'));cell(tr,questionCost(m.estimatedCostUsd));table.append(tr);
  const card=document.createElement('article'),heading=document.createElement('h3');heading.textContent=(m.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE');card.append(heading);for(const part of row.parts){const p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.style.overflowWrap='anywhere';p.textContent=part.text;card.append(p)}answers.append(card)}
 }
 el('question-comparison-a').onchange=renderQuestionComparison;el('question-comparison-b').onchange=renderQuestionComparison;

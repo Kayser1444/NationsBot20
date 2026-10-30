@@ -31,6 +31,8 @@ shared across models, and a cached result for one model cannot pass another mode
 Corrupt selection disables investigations until the owner saves a valid choice;
 it never silently falls back to Sol. Model changes require the owner session,
 same-origin POST and CSRF token, and are audited without exposing credentials.
+Model administration and the connection test also work while questions are
+disabled, without starting investigations or changing their quota ledger.
 
 ### Comparing models
 

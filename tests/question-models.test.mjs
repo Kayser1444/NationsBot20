@@ -79,6 +79,21 @@ test('one question keeps its chosen model during admin changes; the next questio
   assert.equal(service.quota(owner).used,2); assert.equal(service.quota(owner).requests,4);
 });
 
+test('model administration and connection testing remain available while questions are disabled', async t => {
+  const directory=temp(t);let calls=0;
+  const options={directory,env:{...env,NATIONS_QUESTION_ENABLED:'0'},fetcher:async url=>{
+    calls++;assert.equal(url,'https://api.openai.com/v1/models');return listed();
+  }};
+  const service=createQuestionService(options);t.after(()=>service.close());
+  assert.match(await service.ask({userId:owner,question:'Can I buy this advisor?'}),/not enabled/);assert.equal(calls,0);
+  await service.selectModel('gpt-6.1-terra',owner);assert.equal(service.currentModel(),'gpt-6.1-terra');assert.equal(calls,1);
+  assert.equal(existsSync(join(directory,'questions/usage.json')),false);
+  const probe=await createOpenAiConnectionTest({env:options.env,getModel:()=>service.currentModel(),fetcher:async(_url,options)=>{
+    assert.equal(JSON.parse(options.body).model,'gpt-6.1-terra');return Response.json({status:'completed',output:[{type:'message',content:[{type:'output_text',text:'OK'}]}]});
+  }})();assert.equal(probe.ok,true);assert.equal(probe.questionEnabled,false);
+  service.close();assert.throws(()=>service.selectModel('gpt-6-luna',owner),/stoppad/);
+});
+
 test('comparison records retain model, pricing and source context; missing usage never becomes a zero-cost run', () => {
   const log=createQuestionLog();
   const ids=[];

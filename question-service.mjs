@@ -22,11 +22,16 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const enabled = env.NATIONS_QUESTION_ENABLED === '1' && !!env.OPENAI_API_KEY && directory;
   const message = (language, sv, en) => language === 'sv-SE' ? sv : en;
   const disabled = language => message(language, 'Frågefunktionen är inte aktiverad för ditt konto.', 'Questions are not enabled for your account.');
-  if (!enabled) return { ask: async ({ language }) => disabled(language), close() {} };
-  const root = join(directory, 'questions');
+  let closed = false;
+  const root = directory ? join(directory, 'questions') : null;
+  const models = root ? createQuestionModels({ directory: root, env, fetcher, now, report }) : null;
+  const modelControls = models ? {
+    modelSettings: () => models.catalogue(), currentModel: () => models.current(),
+    selectModel(model, actorId) { if (closed) throw new Error('Frågefunktionen är stoppad.'); return models.select(model, actorId); },
+  } : {};
+  if (!enabled) return { ...modelControls, ask: async ({ language }) => disabled(language), close() { closed = true; } };
   mkdirSync(root, { recursive: true });
   const path = join(root, 'usage.json');
-  const models = createQuestionModels({ directory: root, env, fetcher, now, report });
   // Corrupt accounting must disable questions rather than reset the limits.
   let ledger;
   try {
@@ -34,7 +39,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
     if (typeof ledger.day !== 'string' || !Number.isInteger(ledger.total) || ledger.total < 0 ||
         !Number.isInteger(ledger.requests) || ledger.requests < 0 || !ledger.users || Array.isArray(ledger.users) || typeof ledger.users !== 'object' ||
         Object.values(ledger.users).some(user => !Number.isInteger(user.count) || user.count < 0 || !Number.isFinite(user.last))) throw new Error();
-  } catch { report('Frågefunktionen är avstängd: sparad förbrukning kunde inte läsas.', 'error'); return { ask: async ({ language }) => disabled(language), close() {} }; }
+  } catch { report('Frågefunktionen är avstängd: sparad förbrukning kunde inte läsas.', 'error'); return { ...modelControls, ask: async ({ language }) => disabled(language), close() { closed = true; } }; }
   const sourceStore = createSourceStore({ directory: root,
     seed: fileURLToPath(new URL('./data/question/tabony-snapshot.json', import.meta.url)), fetcher, now, report });
   const faq = JSON.parse(readFileSync(new URL('./data/faq/entries.json', import.meta.url), 'utf8'));
@@ -45,7 +50,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
     modelDirectory: env.NATIONS_QUESTION_MODEL_DIR, report }) : null;
   const createCorpus = () => createQuestionCorpus(sourceStore.snapshot(), faq, rulebooks, cards, differencesStore.snapshot());
   const controller = new AbortController();
-  let busy = false, closed = false;
+  let busy = false;
   const globalQuota = () => {
     const day = new Date(now()).toISOString().slice(0, 10);
     return { day, total: ledger.day === day ? ledger.total : 0, totalLimit: 20,
@@ -55,9 +60,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   if (!rulesDifferencesStore) differencesStore.start();
   if (retrieval) void retrieval.prepare(createCorpus());
   return {
-    modelSettings: () => models.catalogue(),
-    currentModel: () => models.current(),
-    selectModel(model, actorId) { if (closed) throw new Error('Frågefunktionen är stoppad.'); return models.select(model, actorId); },
+    ...modelControls,
     retrievalStatus: () => retrieval?.status() ?? { mode: 'literal' },
     globalQuota,
     quota(userId) {

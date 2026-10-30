@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { saveQuestionJson } from './question-sources.mjs';
 import { questionApiDiagnostics } from './question-api-diagnostics.mjs';
@@ -68,6 +68,7 @@ export function createQuestionModels({ directory, env = process.env, fetcher = f
       const listed = await catalogue();
       if (!listed.available || !listed.models.some(item => item.id === model)) throw new Error('Modellen är inte tillgänglig i OpenAI:s senaste modellista för denna API-nyckel.');
       const next = { schemaVersion: 1, model, updatedAt: new Date(now()).toISOString(), updatedBy: /^\d{17,20}$/.test(actorId) ? actorId : null };
+      mkdirSync(directory, { recursive: true });
       saveQuestionJson(path, next); selection = { model: next.model, updatedAt: next.updatedAt, updatedBy: next.updatedBy }; selectionError = null;
       report(`Frågemodell ändrad till ${model} av ${next.updatedBy ?? 'lokal administratör'}. Gäller nya frågor.`);
       return catalogue();
