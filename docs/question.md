@@ -17,7 +17,54 @@ Use the existing single replica and persistent `/data` volume. Cloud startup
 prepares `NATIONS_CONFIG_DIR`; the question service stores its data in a `questions`
 subdirectory. Local development uses its own configuration directory.
 
-Model: **`gpt-6.1-sol`**, fixed, with no fallback or automatic API retry.
+Default model: **`gpt-6.1-sol`**, with no fallback or automatic API retry.
+The owner can choose `gpt-6.1-terra` or `gpt-6-luna` in the administration panel.
+The compatible-model list is intersected with OpenAI's `GET /v1/models` response,
+using this service's question API key. Discovery is cached for one minute and
+never invokes a paid response. Listing does not prove permission to generate;
+the separate connection-test button checks the currently selected model.
+
+The selection is saved atomically in `questions/model.json`, independently in
+each environment. Changes apply to new investigations; all rounds of an accepted
+question keep the model selected at admission. The connection-test cooldown is
+shared across models, and a cached result for one model cannot pass another model.
+Corrupt selection disables investigations until the owner saves a valid choice;
+it never silently falls back to Sol. Model changes require the owner session,
+same-origin POST and CSRF token, and are audited without exposing credentials.
+
+### Comparing models
+
+Select a model, ask a question, select another model and repeat the same question.
+Open either conversation and choose **Jämför körningar av samma fråga**. Select
+runs A and B from up to twelve recent investigations with that exact question.
+The view shows total/API time, API attempts, input/output/cached/reasoning tokens,
+estimated USD cost, delivery/status and both complete answers. Quality is judged
+by the owner; delivery success is not an accuracy score. It warns when sources,
+prompts, reasoning/retrieval settings or requested languages differ or are unknown.
+Comparisons only read saved conversations; they never run or charge new questions.
+
+All three models use the same local tools, strict answer format, `low` reasoning,
+Standard service tier and existing request/token/context limits. Logs retain the
+requested model, provider-reported model, source and prompt fingerprints, actual
+service tier and granular usage. New telemetry has room for all six rounds.
+
+Cost is an estimate from published Standard short-context prices verified
+2026-10-30: Sol $2/$0.10/$10, Terra $1/$0.05/$5 and Luna $0.10/$0.01/$0.50 per
+million input/cached-input/output tokens. Reported 30-minute/12-hour cache writes
+are charged at 1.25x/2.5x the input rate; they are not also counted as ordinary
+input. Reasoning is already included in output tokens. Missing cache details,
+unknown tiers, incomplete call histories or unsupported pricing produce an
+unavailable estimate, never zero. Estimates and their pricing date are stored per
+request, so later price changes do not rewrite historical costs. Invoice rates,
+discounts and unreported attempts can differ. Historical records lacking these
+details remain explicitly unknown.
+
+References: [model discovery](https://developers.openai.com/api/reference/resources/models/methods/list),
+[Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol),
+[Terra](https://developers.openai.com/api/docs/models/gpt-6.1-terra),
+[Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
+[pricing](https://developers.openai.com/api/docs/pricing),
+[cache accounting](https://developers.openai.com/api/docs/guides/prompt-caching).
 The question and selected source excerpts are sent to OpenAI. The investigation
 has no web search, MCP, shell, code execution or ongoing-match tools. Existing
 turn monitoring and image delivery keep their existing network connections.

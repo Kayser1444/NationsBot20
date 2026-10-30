@@ -4,7 +4,7 @@
 <title>Nations · Bevakning</title>
 <style>
 :root{font-family:system-ui,sans-serif;color:#203044;background:#f3f5f8;font-size:15px}*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:32px 24px}header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:24px}h1{font-size:30px;margin:0 0 5px;letter-spacing:-1px}h2{font-size:18px;margin:0 0 18px}.muted{color:#64748b;font-size:13px}p{margin:5px 0}.badge{border-radius:20px;padding:8px 14px;background:#dff4e8;color:#17663c;font-weight:600}.badge.warn{background:#fff0d6;color:#86571b}.badge.off{background:#e6e9ee;color:#526075}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}.card,.panel{background:white;border:1px solid #e0e5ec;border-radius:14px;padding:22px}.number{font-size:32px;font-weight:650;margin:8px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}table{width:100%;border-collapse:collapse;text-align:left}td,th{padding:12px 8px;border-bottom:1px solid #edf0f4;font-size:14px}th{font-size:12px;color:#64748b;font-weight:600}td:first-child,th:first-child{padding-left:0}a{color:#2256a5;text-decoration:none}button{border:0;border-radius:8px;padding:10px 14px;font:inherit;cursor:pointer;background:#234f86;color:white}button.remove{background:#f3f5f8;color:#964243;font-size:12px;padding:7px 10px}button:disabled{opacity:.5;cursor:wait}form{border-top:1px solid #edf0f4;margin-top:20px;padding-top:20px}label{display:block;font-size:12px;font-weight:600;margin-bottom:5px}input{width:100%;border:1px solid #cdd5df;border-radius:8px;padding:10px;font:inherit;background:white}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}#feedback{min-height:20px;font-size:13px;margin-top:10px}.activity{max-height:350px;overflow:auto}.event{padding:11px 0;border-bottom:1px solid #edf0f4;display:grid;grid-template-columns:64px 1fr;gap:12px;font-size:13px}.event time{color:#64748b}.error{color:#a33c37}.scroll{overflow:auto}.empty{color:#64748b;padding:20px 0}footer{color:#64748b;font-size:12px;margin-top:22px}@media(max-width:750px){.grid,.cards{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}main{padding:20px 16px}header{align-items:flex-start;flex-direction:column}}
-.thinking-heading{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:24px 0 12px}.thinking-heading h3{margin:0}
+.thinking-heading{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:24px 0 12px}.thinking-heading h3{margin:0}#question-comparison{scroll-margin-top:70px}
 </style>
 <style>
 .name-field{position:relative}.suggestions{position:absolute;z-index:5;top:100%;left:0;right:0;list-style:none;margin:4px 0 0;padding:4px;background:white;border:1px solid #cdd5df;border-radius:8px;box-shadow:0 8px 20px #20304420;max-height:240px;overflow:auto}.suggestions[hidden]{display:none}.suggestions li{padding:9px 10px;border-radius:5px;cursor:pointer}.suggestions li:hover,.suggestions li[aria-selected=true]{background:#eaf0fa;color:#234f86}#name-hint{margin-top:7px;font-size:11px}
@@ -29,6 +29,7 @@
 <p id="openai-details" class="muted"></p>
 <p class="muted">Beräknad återstående kredit för hela OpenAI-organisationen. Rapporteringen kan släpa efter. Nya påfyllningar behöver registreras.</p>
 <p id="openai-updated" class="muted"></p>
+<form id="question-model-form"><h3>Modell för frågor</h3><label for="question-model">OpenAI-modell</label><select id="question-model" disabled><option>Hämtar modeller…</option></select><p style="margin-top:12px"><button id="question-model-save" type="submit" disabled>Spara modell</button> <button id="question-model-refresh" type="button">Uppdatera modellista</button></p><p class="muted">Valet gäller nya frågor och sparas över omstarter. Pågående frågor behåller sin modell. Listan visar kompatibla modeller från OpenAI och hämtas högst en gång per minut.</p><p id="question-model-feedback" role="status">Hämtar modellinställningen…</p></form>
 <p style="margin-top:16px"><button id="openai-test" type="button">Testa OpenAI-anslutning</button></p>
 <p class="muted">Ett kort test med samma modell och API-nyckel som /question. En liten API-kostnad tillkommer. Högst ett nytt test per minut.</p>
 <p id="openai-test-result" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere">Inget anslutningstest har körts här ännu.</p>
@@ -41,6 +42,7 @@
 </section>
 <section class="panel" style="margin-bottom:20px"><h2>Spärrade Discord-användare</h2><p class="muted">Spärren gäller bara NationsBot. Den stänger inte av användaren från Discord-servern. Hävning återställer ingen prenumeration.</p><div class="scroll"><table><thead><tr><th>Discord-ID</th><th>Tidigare Nations-namn</th><th>Spärrad sedan</th><th></th></tr></thead><tbody id="bans"></tbody></table></div><form id="ban-user"><label for="ban-id">Spärra ett Discord-ID även utan aktiv prenumeration</label><input id="ban-id" required pattern="[0-9]{17,20}" inputmode="numeric" placeholder="17–20 siffror" autocomplete="off"><button id="ban-save" type="submit" style="margin-top:12px">Avsluta och spärra</button></form></section>
 <section class="panel"><h2>Frågor och svar</h2><p class="muted">Originalkonversationer sparas i högst 30 dagar, högst 500 frågor. Engelska maskinöversättningar visas separat.</p><form id="question-global-quota"><h3>Gemensam frågekvot</h3><p class="muted">Nollställ dygnets gemensamma räknare för 20 frågor och 120 API-anrop. Användarnas personliga kvoter behålls.</p><button id="question-global-quota-show" type="submit">Visa gemensam kvot</button> <button id="question-global-quota-reset" type="button" disabled>Nollställ 20 frågor och API-kvoten</button><p id="question-global-quota-feedback" role="status"></p></form><form id="question-quota"><h3>Frågekvot per användare</h3><p class="muted">Nollställ användarens fem frågor och minutspärren. Gemensamma fråge- och API-kvoter samt andra användares personliga kvoter behålls.</p><label for="question-quota-id">Discord-ID</label><input id="question-quota-id" required pattern="[0-9]{17,20}" inputmode="numeric" value="__ADMIN_OWNER__" autocomplete="off"><button id="question-quota-show" type="submit" style="margin-top:12px">Visa kvot</button> <button id="question-quota-reset" type="button" disabled>Nollställ användarens 5 frågor</button><p id="question-quota-feedback" role="status"></p></form><form id="question-search"><label for="question-term">Sök fråga, användare eller kanal</label><input id="question-term"><label for="question-status">Status</label><select id="question-status"><option value="">Alla</option><option value="processing">Pågår</option><option value="answered">Besvarad</option><option value="failed">Fel</option><option value="denied">Avvisad</option><option value="interrupted">Avbruten</option></select><button>Sök</button></form><p id="question-count" role="status"></p><div class="scroll"><table><thead><tr><th>Tid</th><th>Användare</th><th>Plats</th><th>Fråga</th><th>Status / tid</th></tr></thead><tbody id="question-list"></tbody></table></div><button id="question-prev" type="button">Föregående</button> <button id="question-next" type="button">Nästa</button><article id="question-detail" aria-live="polite" style="white-space:pre-wrap;overflow-wrap:anywhere"></article></section>
+<section class="panel" id="question-comparison" hidden><h2>A/B · samma fråga</h2><div class="form-grid"><div><label for="question-comparison-a">Körning A</label><select id="question-comparison-a"></select></div><div><label for="question-comparison-b">Körning B</label><select id="question-comparison-b"></select></div></div><p id="question-comparison-status" role="status" style="white-space:pre-wrap"></p><div class="scroll"><table><thead><tr><th>Modell / tidpunkt</th><th>Status</th><th>Total / API-tid</th><th>Anrop</th><th>Token in / ut</th><th>Cache / resonemang</th><th>Uppskattad USD</th></tr></thead><tbody id="question-comparison-list"></tbody></table></div><p class="muted">Kostnaden uppskattas med Standard-priser kontrollerade 2026-10-30, inklusive rapporterade cacheläsningar och cacheskrivningar. Saknade uppgifter visas som ej tillgängliga. OpenAI:s fakturering kan skilja sig. Bedöm svarens korrekthet och fullständighet nedan; en lyckad körning är inte ett kvalitetsbetyg.</p><div class="grid" id="question-comparison-answers"></div></section>
 <section class="panel"><h2>Partier</h2><p id="discovery" class="muted"></p><div class="scroll"><table><thead><tr><th>Parti</th><th>Tur</th><th>Anslutning</th><th>Betänketid</th></tr></thead><tbody id="matches"></tbody></table></div></section>
 <section class="panel" id="thinking-panel"><h2>Betänketid per spelare och parti</h2><p class="muted">Sammanlagd betänketid i dagar, timmar och hela minuter, med längst tid överst i varje parti. Pågående tur ingår fram till hämtningen. Tiderna uppdateras när sidan öppnas eller när du trycker på knappen.</p><p class="muted">Mätningen börjar vid aktivering. Första intervallet och intervall med anslutningsavbrott är ofullständiga. Tid utan anslutning räknas inte med.</p><p style="margin-top:16px"><button id="thinking-refresh" type="button">Uppdatera tider</button></p><p id="thinking-updated" class="muted" role="status"></p><form id="track-game"><label for="tracking-id">Parti-ID</label><input id="tracking-id" required pattern="[0-9]+"><button>Aktivera mätning</button></form><div id="thinking-summary"></div></section>
 <footer>Du kan stänga fönstret utan att stoppa bevakningen. __STOP_HINT__ <span id="updated"></span></footer>
@@ -53,18 +55,40 @@ document.getElementById('logout')?.addEventListener('click',async()=>{const resp
 const el=id=>document.getElementById(id);
 const text=(id,value)=>{el(id).textContent=value};
 const time=value=>new Date(value).toLocaleTimeString('sv-SE');
+let modelBusy=false,modelChoices=[];
+function renderQuestionModel(settings){
+ const select=el('question-model');select.replaceChildren();
+ for(const model of settings.models||[]){const option=document.createElement('option');option.value=model.id;option.textContent=model.name+' ('+model.id+')';select.append(option)}
+ if(settings.model&&!settings.models?.some(model=>model.id===settings.model)){const option=document.createElement('option');option.value=settings.model;option.textContent=settings.model+' · senast vald, inte i modellistan';option.disabled=true;select.append(option)}
+ modelChoices=settings.available?(settings.models||[]).map(model=>model.id):[];
+ select.value=settings.model||'';select.disabled=!modelChoices.length||modelBusy;el('question-model-save').disabled=!modelChoices.includes(select.value)||modelBusy;
+ text('question-model-feedback',settings.selectionError||settings.error||('Vald modell: '+(settings.model||'ingen')+'. Listad av OpenAI '+new Date(settings.checkedAt).toLocaleString('sv-SE')+'. Testa anslutningen för att kontrollera att vald modell kan svara.'));
+}
+async function loadQuestionModel(){
+ if(modelBusy)return;modelBusy=true;el('question-model-refresh').disabled=true;el('question-model-save').disabled=true;
+ try{const response=await fetch('/api/question-model',{cache:'no-store'});if(response.status===401){location.assign('/');return}const settings=await response.json();if(!response.ok)throw new Error(settings.error||'Modellistan kunde inte hämtas.');modelBusy=false;renderQuestionModel(settings)}
+ catch(error){text('question-model-feedback',error.message)}finally{modelBusy=false;el('question-model-refresh').disabled=false}
+}
+el('question-model-refresh').onclick=()=>void loadQuestionModel();
+el('question-model').onchange=()=>{el('question-model-save').disabled=modelBusy||!modelChoices.includes(el('question-model').value)};
+el('question-model-form').onsubmit=async event=>{
+ event.preventDefault();if(modelBusy)return;modelBusy=true;el('question-model-save').disabled=true;el('question-model-refresh').disabled=true;el('question-model').disabled=true;
+ try{const settings=await change('POST','/api/question-model',{model:el('question-model').value});modelBusy=false;renderQuestionModel(settings);text('question-model-feedback','Sparat: '+settings.model+'. Gäller nya frågor. Pågående frågor behåller sin modell.');text('openai-test-result','Modellvalet har sparats. Kör anslutningstestet om du vill verifiera den valda modellen.')}
+ catch(error){text('question-model-feedback',error.message);el('question-model').disabled=false;el('question-model-save').disabled=false}finally{modelBusy=false;el('question-model-refresh').disabled=false}
+};
+void loadQuestionModel();
 el('openai-test').onclick=async()=>{
  const button=el('openai-test');if(button.disabled)return;button.disabled=true;text('openai-test-result','Testar anslutningen…');
  try{
   const response=await fetch('/api/openai-test',{method:'POST',headers:{'x-nations-token':token},cache:'no-store'});if(response.status===401){location.assign('/');return}
   const result=await response.json();if(!response.ok)throw new Error(result.error||'Testet kunde inte slutföras.');
-  const lines=[result.message,'Modell: '+result.model];
+  const lines=[result.message,'Modell: '+(result.model||'ingen')];
   if(result.httpStatus)lines.push('HTTP '+result.httpStatus);
   if(result.durationMs!=null)lines.push('Svarstid: '+result.durationMs+' ms');
   if(result.checkedAt)lines.push('Testat '+new Date(result.checkedAt).toLocaleString('sv-SE',{dateStyle:'short',timeStyle:'short'}));
   if(result.errorCode)lines.push('Felkod: '+result.errorCode);if(result.errorMessage)lines.push(result.errorMessage);if(result.requestId)lines.push('Request-ID: '+result.requestId);
   if(!result.questionEnabled)lines.push('/question är avstängd i den här miljön.');
-  if(result.cached)lines.push('Visar föregående test. Nytt anrop kan göras om '+result.retryAfterSeconds+' sekunder.');
+  if(result.cached)lines.push('Visar föregående test för '+result.model+'.');if(result.retryAfterSeconds)lines.push('Nytt anrop kan göras om '+result.retryAfterSeconds+' sekunder.');
   text('openai-test-result',lines.join('\n'));el('openai-test-result').className=result.ok?'':'error';
  }catch(error){text('openai-test-result',error.message);el('openai-test-result').className='error'}finally{button.disabled=false}
 };
@@ -115,7 +139,7 @@ function feedback(message,error=false){text('feedback',message);el('feedback').c
 async function change(method,path,body){
  const response=await fetch(path,{method,headers:{'content-type':'application/json','x-nations-token':token},body:body?JSON.stringify(body):undefined});
  if(response.status===401){location.assign('/');throw new Error('Logga in med Discord igen.');}
- const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();if(path.startsWith('/api/thinking/'))await refreshThinking();
+ const data=await response.json();if(!response.ok)throw new Error(data.error||'Ändringen misslyckades.');await refresh();if(path.startsWith('/api/thinking/'))await refreshThinking();return data;
 }
 async function refresh(){try{
  const response=await fetch('/api/status',{cache:'no-store'});if(response.status===401){location.assign('/');return;}if(!response.ok)throw new Error();const s=await response.json();currentStatus=s;if(selectedUserId)renderUserDetails();
@@ -239,13 +263,40 @@ async function refreshQuestionDetail(){
  const body=el('question-detail');body.replaceChildren();const add=(tag,value)=>{const node=document.createElement(tag);node.textContent=value;body.append(node)};
  add('h3','Originalkonversation');add('p',(r.userName||'Okänd')+' · '+r.userId+'\n'+(r.location==='dm'?'DM':(r.guildName||'Server')+' / '+(r.channelName||'Kanal'))+' · kanal-ID '+(r.channelId||'–'));
  const quotaButton=document.createElement('button');quotaButton.type='button';quotaButton.textContent='Visa användarens frågekvot';quotaButton.onclick=()=>{el('question-quota-id').value=r.userId;el('question-quota').scrollIntoView({behavior:'smooth',block:'center'});void loadQuestionQuota()};body.append(quotaButton);
+ const compareButton=document.createElement('button');compareButton.type='button';compareButton.textContent='Jämför körningar av samma fråga';compareButton.style.marginLeft='8px';compareButton.onclick=()=>void loadQuestionComparison(r.id);body.append(compareButton);
  add('p','Fråga ['+(r.questionLanguage||r.requestedLanguage||'?')+']:\n'+r.question);
  if(r.acknowledgement){add('p','Kvittens · '+r.acknowledgement.delivery+'\n'+r.acknowledgement.text);if(!['sv','en'].includes((r.requestedLanguage||'en').split('-')[0]))add('p','Engelsk översättning av kvittensen (lokal språktext):\n'+r.acknowledgement.englishText)}
  for(const [i,part] of r.parts.entries())add('p','Svar '+(i+1)+'/'+r.parts.length+' ['+(r.answerLanguage||'?')+'] · '+part.delivery+'\n'+part.text);
  if(r.translation&&r.translation.status!=='not-needed'){add('h3','Engelsk maskinöversättning · '+(r.translation.status==='complete'?'komplett':'ofullständig'));add('p','Översatt från originalkonversationen ovan. Detta är inte texten som skickades till Discord.');if(r.translation.question)add('p','Question (translated):\n'+r.translation.question);for(const [i,part] of r.translation.parts.entries())if(part)add('p','Answer '+(i+1)+' (translated):\n'+part)}
- add('h3','Diagnostik');const requests=r.telemetry.filter(e=>e.type==='request');add('p','Status: '+r.status+' · leverans: '+r.deliveryStatus+'\nTotal tid: '+(r.durationMs==null?'pågår':r.durationMs+' ms')+' · kvittens: '+(r.acknowledgementMs??'–')+' ms · första riktiga svar: '+(r.firstResponseMs??'–')+' ms · undersökning: '+(r.modelDurationMs??'–')+' ms\nAPI-anrop: '+requests.length+' · rapporterade token: '+r.usage.inputTokens+' in / '+r.usage.outputTokens+' ut ('+r.usage.reportedRequests+' anrop med förbrukningsdata)'+(r.failure?'\nFel: '+r.failure:''));for(const event of r.telemetry)add('p',JSON.stringify(event));
+ add('h3','Diagnostik');const requests=r.telemetry.filter(e=>e.type==='request');add('p','Modell: '+(r.metrics?.model||'ej registrerad')+' · resonemang: '+(r.metrics?.reasoningEffort||'ej registrerat')+'\nUppskattad kostnad: '+questionCost(r.metrics?.estimatedCostUsd)+' ('+(r.metrics?.pricedRequests??0)+'/'+(r.metrics?.apiCalls??requests.length)+' prissatta anrop)');add('p','Status: '+r.status+' · leverans: '+r.deliveryStatus+'\nTotal tid: '+(r.durationMs==null?'pågår':r.durationMs+' ms')+' · kvittens: '+(r.acknowledgementMs??'–')+' ms · första riktiga svar: '+(r.firstResponseMs??'–')+' ms · undersökning: '+(r.modelDurationMs??'–')+' ms\nAPI-anrop: '+requests.length+' · rapporterade token: '+r.usage.inputTokens+' in / '+r.usage.outputTokens+' ut ('+r.usage.reportedRequests+' anrop med förbrukningsdata)'+(r.failure?'\nFel: '+r.failure:''));for(const event of r.telemetry)add('p',JSON.stringify(event));
  }catch{text('question-detail','Detaljer kunde inte hämtas.')}
 }
+const questionCost=value=>Number.isFinite(value)?'$'+value.toFixed(6):'Ej tillgänglig';
+const questionSeconds=value=>Number.isFinite(value)?(value/1000).toFixed(2)+' s':'–';
+let comparisonGeneration=0,comparisonRecords=[],comparisonQuestion='';
+async function loadQuestionComparison(id){
+ const generation=++comparisonGeneration;
+ const section=el('question-comparison');section.hidden=false;text('question-comparison-status','Hämtar körningar…');
+ try{const response=await fetch('/api/questions/'+encodeURIComponent(id)+'/comparisons',{cache:'no-store'});if(generation!==comparisonGeneration)return;if(response.status===401){location.assign('/');return}const data=await response.json();if(!response.ok)throw new Error(data.error||'Jämförelsen kunde inte hämtas.');
+ comparisonRecords=data.records;comparisonQuestion=data.question;
+ for(const selector of ['question-comparison-a','question-comparison-b']){const select=el(selector);select.replaceChildren();for(const row of comparisonRecords){const option=document.createElement('option');option.value=row.id;option.textContent=(row.metrics?.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE')+' · '+row.status;select.append(option)}}
+ const a=comparisonRecords.find(row=>row.id===id)||comparisonRecords[0];el('question-comparison-a').value=a?.id||'';
+ const candidates=comparisonRecords.filter(row=>row.id!==a?.id);const b=candidates.find(row=>row.metrics?.model!==a?.metrics?.model&&row.metrics?.promptHash&&row.metrics.promptHash===a?.metrics?.promptHash&&row.metrics.corpusHash===a?.metrics?.corpusHash&&row.requestedLanguage===a?.requestedLanguage)||candidates.find(row=>row.metrics?.model!==a?.metrics?.model)||candidates[0];el('question-comparison-b').value=b?.id||'';
+ renderQuestionComparison();section.scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(error){text('question-comparison-status',error.message)}
+}
+function renderQuestionComparison(){
+ const selected=[...new Set([el('question-comparison-a').value,el('question-comparison-b').value])];
+ const rows=selected.map(id=>comparisonRecords.find(row=>row.id===id)).filter(Boolean);const same=key=>rows.length>0&&rows[0].metrics?.[key]!=null&&rows.every(row=>row.metrics?.[key]===rows[0].metrics[key]);
+ const warnings=[];if(rows.length<2)warnings.push('Kör samma fråga med en annan modell för att skapa ett jämförelsepar.');
+ if(!same('corpusHash'))warnings.push('Källorna skiljer sig eller saknar fingeravtryck.');if(!same('promptHash')||!same('reasoningEffort')||!same('retrieval'))warnings.push('Instruktioner eller sökinställningar skiljer sig eller saknar jämförelsedata.');
+ if(rows.some(row=>row.requestedLanguage!==rows[0]?.requestedLanguage))warnings.push('Olika språkval användes.');
+ text('question-comparison-status',comparisonQuestion+'\n'+(warnings.join(' ')||'Samma källor, instruktioner, språkval och sökinställningar. Tider varierar mellan enskilda körningar.'));
+ const table=el('question-comparison-list'),answers=el('question-comparison-answers');table.replaceChildren();answers.replaceChildren();
+ for(const row of rows){const m=row.metrics||{},tr=document.createElement('tr');cell(tr,(m.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE'));cell(tr,row.status+' / '+row.deliveryStatus);cell(tr,questionSeconds(row.durationMs)+' / '+questionSeconds(m.apiDurationMs));cell(tr,m.apiCalls??'–');cell(tr,row.usage.inputTokens+' / '+row.usage.outputTokens);cell(tr,(m.cachedInputTokens??'–')+' / '+(m.reasoningTokens??'–'));cell(tr,questionCost(m.estimatedCostUsd));table.append(tr);
+ const card=document.createElement('article'),heading=document.createElement('h3');heading.textContent=(m.model||'Okänd modell')+' · '+new Date(row.startedAt).toLocaleString('sv-SE');card.append(heading);for(const part of row.parts){const p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.style.overflowWrap='anywhere';p.textContent=part.text;card.append(p)}answers.append(card)}
+}
+el('question-comparison-a').onchange=renderQuestionComparison;el('question-comparison-b').onchange=renderQuestionComparison;
 el('question-search').onsubmit=event=>{event.preventDefault();questionGeneration++;questionOffset=0;void refreshQuestions()};
 el('question-prev').onclick=()=>{questionGeneration++;questionOffset=Math.max(0,questionOffset-20);void refreshQuestions()};
 el('question-next').onclick=()=>{questionGeneration++;questionOffset+=20;void refreshQuestions()};

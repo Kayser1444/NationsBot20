@@ -3,7 +3,10 @@ import { questionApiDiagnostics } from './question-api-diagnostics.mjs';
 import { maxSourceReadLines } from './question-sources.mjs';
 import { rulesDifferencesUrl } from './question-errata.mjs';
 import { faqAmendmentsUrl } from './question-amendments.mjs';
-export const questionModel = 'gpt-6.1-sol';
+import { createHash } from 'node:crypto';
+import { defaultQuestionModel, supportedQuestionModel, questionUsage } from './question-models.mjs';
+import { safeDiagnostic } from './question-api-diagnostics.mjs';
+export const questionModel = defaultQuestionModel;
 export const maxQuestionRequests = 6;
 const contextLimitBytes = 90000;
 // Search previews locate evidence. Full source/provenance stays available through read_source.
@@ -27,7 +30,8 @@ const tools = [
     parameters: { type: 'object', properties: { id: { type: 'string' }, start: { type: 'integer', minimum: 1 }, count: { type: 'integer', minimum: 1, maximum: maxSourceReadLines } }, required: ['id', 'start', 'count'], additionalProperties: false } },
 ];
 
-export async function investigateQuestion({ question, language, corpus, apiKey, fetcher = fetch, reserveRequest, signal, onAnswer = () => {}, onTelemetry = () => {}, now = Date.now }) {
+export async function investigateQuestion({ question, language, corpus, apiKey, model = questionModel, fetcher = fetch, reserveRequest, signal, onAnswer = () => {}, onTelemetry = () => {}, now = Date.now }) {
+  if (!supportedQuestionModel(model)) throw new Error('Unsupported question model.');
   const input = [{ role: 'user', content: question }];
   const evidence = new Set();
   const searchOutputs = [];
@@ -55,8 +59,10 @@ Do not output URLs. Normally write one concise part; only if necessary use two p
 Implementation snapshot: ${corpus.commit}, fetched ${corpus.fetchedAt}. The application appends the source update timestamp and commit automatically. Do not repeat them or append a routine caveat comparing the reviewed snapshot with the deployed Tabony version. If explicitly asked about the deployed version, be clear that the local sources cannot verify it.
 Available sources: ${JSON.stringify(corpus.catalogue())}`;
   const requestSignal = signal ? AbortSignal.any([signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000);
+  onTelemetry({ type: 'configuration', model, reasoningEffort: 'low', serviceTier: 'default',
+    promptHash: createHash('sha256').update(JSON.stringify({ instructions, tools: localTools, reasoning: 'low', maxOutputTokens: 5000, maxRounds: maxQuestionRequests, serviceTier: 'default' })).digest('hex') });
   for (let round = 0; round < maxQuestionRequests; round++) {
-    const body = { model: questionModel, store: false, instructions, input, tools: localTools,
+    const body = { model, service_tier: 'default', store: false, instructions, input, tools: localTools,
       tool_choice: round === maxQuestionRequests - 1 ? 'none' : 'auto',
       parallel_tool_calls: true, reasoning: { effort: 'low' }, max_output_tokens: 5000, text: { format: questionAnswerFormat } };
     // Bound the whole serialized context on every round, not just each search result.
@@ -77,19 +83,19 @@ Available sources: ${JSON.stringify(corpus.catalogue())}`;
     }
     reserveRequest(); // Persist before sending; timeouts/errors are conservatively charged as attempts.
     const started = now();
-    onTelemetry({ type: 'request', round: round + 1, model: questionModel });
+    onTelemetry({ type: 'request', round: round + 1, model });
     const response = await fetcher('https://api.openai.com/v1/responses', {
       method: 'POST', redirect: 'error', signal: requestSignal,
       headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' }, body: serialized,
     });
     if (!response.ok) {
       const diagnostics = await questionApiDiagnostics(response, apiKey);
-      onTelemetry({ type: 'api', model: questionModel, round: round + 1, status: response.status, durationMs: now() - started, ...diagnostics });
+      onTelemetry({ type: 'api', model, round: round + 1, status: response.status, durationMs: now() - started, ...diagnostics });
       throw new Error('Question API unavailable.');
     }
     const result = await response.json();
-    onTelemetry({ type: 'api', round: round + 1, model: questionModel, status: response.status, durationMs: now() - started,
-      inputTokens: result.usage?.input_tokens, outputTokens: result.usage?.output_tokens });
+    onTelemetry({ type: 'api', round: round + 1, model, responseModel: safeDiagnostic(result.model, 160, apiKey), status: response.status, durationMs: now() - started,
+      ...questionUsage(result, model) });
     if (result.status !== 'completed' || !Array.isArray(result.output)) throw new Error('Question response incomplete.');
     const calls = result.output.filter(item => item.type === 'function_call');
     if (!calls.length) {

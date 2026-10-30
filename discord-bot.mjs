@@ -221,6 +221,18 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
     }
   })();
   return { close, ready,
+    questionModelSettings() {
+      if (stopped || !questions.modelSettings) throw new Error('Modellinställningen är inte tillgänglig.');
+      return questions.modelSettings();
+    },
+    currentQuestionModel() {
+      if (stopped || !questions.currentModel) throw new Error('Modellinställningen är inte tillgänglig.');
+      return questions.currentModel();
+    },
+    setQuestionModel(model, actorId) {
+      if (stopped || !questions.selectModel) throw new Error('Modellinställningen är inte tillgänglig.');
+      return questions.selectModel(model, actorId);
+    },
     globalQuestionQuota() {
       if (stopped || !questions.globalQuota) throw new Error('Frågekvoten är inte tillgänglig.');
       return questions.globalQuota();

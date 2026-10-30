@@ -7,6 +7,7 @@ import { loadQuestionCards } from './card-library.mjs';
 import { questionReplyParts, questionSourceFooter } from './question-answer.mjs';
 import { createRulesDifferencesStore } from './question-errata.mjs';
 import { createLocalRetrieval } from './question-retrieval.mjs';
+import { createQuestionModels } from './question-models.mjs';
 
 export function createQuestionService(options = {}) {
   try { return buildQuestionService(options); }
@@ -25,6 +26,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   const root = join(directory, 'questions');
   mkdirSync(root, { recursive: true });
   const path = join(root, 'usage.json');
+  const models = createQuestionModels({ directory: root, env, fetcher, now, report });
   // Corrupt accounting must disable questions rather than reset the limits.
   let ledger;
   try {
@@ -53,6 +55,9 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
   if (!rulesDifferencesStore) differencesStore.start();
   if (retrieval) void retrieval.prepare(createCorpus());
   return {
+    modelSettings: () => models.catalogue(),
+    currentModel: () => models.current(),
+    selectModel(model, actorId) { if (closed) throw new Error('Frågefunktionen är stoppad.'); return models.select(model, actorId); },
     retrievalStatus: () => retrieval?.status() ?? { mode: 'literal' },
     globalQuota,
     quota(userId) {
@@ -113,6 +118,9 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       }
       if (limits.length) return message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
         (user.count >= 5 || ledger.total >= 20 || apiBlocked ? message(language, '\nDygnskvoterna återställs kl. 00:00 UTC.', '\nDaily quotas reset at 00:00 UTC.') : '');
+      let model;
+      try { model = models.current(); }
+      catch { return message(language, 'Frågefunktionen är inte tillgänglig: administratören behöver välja en giltig modell.', 'Questions are unavailable: the administrator needs to select a valid model.'); }
       busy = true;
       try {
         await onAccepted(); // Acknowledge after access/quota checks and before any paid request.
@@ -122,7 +130,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         const corpus = retrieval ? retrieval.forCorpus(originalCorpus, onTelemetry) : originalCorpus;
         onTelemetry({ type: 'retrieval', phase: 'selected', name: corpus.retrieval ?? 'literal', corpusHash: originalCorpus.fingerprint });
         let details;
-        await investigateQuestion({ question: question.trim(), language, corpus, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
+        await investigateQuestion({ question: question.trim(), language, corpus, model, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
           signal: controller.signal, reserveRequest() {
             if (ledger.requests >= 120) throw new Error('Daily request limit.');
             ledger.requests++; saveQuestionJson(path, ledger);
@@ -133,12 +141,12 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
         return parts.join('\n\n');
       } catch (error) {
         onAnswer({ status: 'failed', failure: ['invalid_answer', 'answer_too_long', 'context_limit'].includes(error.code) ? error.code : 'investigation_failed' });
-        report('En regelfråga kunde inte slutföras. Ingen alternativ modell används.', 'error');
+        report(`En regelfråga kunde inte slutföras med ${model}. Ingen alternativ modell används.`, 'error');
         if (error.code === 'context_limit') return message(language,
           'Undersökningen behövde mer källtext än vad som ryms i en fråga. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
           'The investigation needed more source text than fits in one question. This attempt counts toward your quota. Try a narrower question.');
-        return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller GPT-6.1 Sol är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
-          'The investigation could not finish within its limits, or GPT-6.1 Sol is unavailable. This attempt counts toward your quota. Try a narrower question.');
+        return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller den valda OpenAI-modellen är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
+          'The investigation could not finish within its limits, or the selected OpenAI model is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
     },
     close() { closed = true; controller.abort(); retrieval?.close(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },

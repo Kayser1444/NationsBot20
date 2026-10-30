@@ -14,7 +14,7 @@ test('connection test uses the question key and model for one tiny Responses req
     assert.equal(options.method, 'POST'); assert.equal(options.redirect, 'error');
     assert.equal(options.headers.authorization, 'Bearer ' + env.OPENAI_API_KEY);
     assert.ok(options.signal instanceof AbortSignal);
-    assert.deepEqual(JSON.parse(options.body), { model: 'gpt-6.1-sol', store: false, input: 'Reply with exactly OK.',
+    assert.deepEqual(JSON.parse(options.body), { model: 'gpt-6.1-sol', service_tier: 'default', store: false, input: 'Reply with exactly OK.',
       reasoning: { effort: 'low' }, max_output_tokens: 512 });
     clock += 75;
     return completed();

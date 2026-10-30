@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { saveQuestionJson } from './question-sources.mjs';
 import { safeDiagnostic } from './question-api-diagnostics.mjs';
+import { questionMetrics } from './question-metrics.mjs';
 
 const cut = (value, max = 200) => typeof value === 'string' ? value.slice(0, max) : null;
 export function createQuestionLog({ directory, now = Date.now, maxRecords = 500, maxAgeMs = 30 * 86400000, report = () => {} } = {}) {
@@ -53,14 +54,14 @@ export function createQuestionLog({ directory, now = Date.now, maxRecords = 500,
       const record = records.find(item => item.id === id); if (!record) return;
       // Explicit fields only: never persist headers, API keys, interaction tokens or raw provider errors.
       const safe = {};
-      for (const key of ['type', 'phase', 'name', 'sourceId', 'query', 'errorCode', 'responseId', 'model', 'corpusHash']) if (typeof event[key] === 'string') safe[key] = cut(event[key], key === 'query' ? 240 : 160);
+      for (const key of ['type', 'phase', 'name', 'sourceId', 'query', 'errorCode', 'responseId', 'model', 'responseModel', 'corpusHash', 'promptHash', 'reasoningEffort', 'serviceTier', 'pricingDate']) if (typeof event[key] === 'string') safe[key] = cut(event[key], key === 'query' ? 240 : 160);
       for (const key of ['errorCode', 'errorType', 'errorParam', 'errorMessage', 'requestId']) if (typeof event[key] === 'string') safe[key] = safeDiagnostic(event[key], key === 'errorMessage' ? 1000 : 160);
-      for (const key of ['round', 'durationMs', 'status', 'inputTokens', 'outputTokens', 'resultCount', 'start', 'count', 'beforeBytes', 'afterBytes']) if (Number.isFinite(event[key])) safe[key] = event[key];
+      for (const key of ['round', 'durationMs', 'status', 'inputTokens', 'outputTokens', 'cachedInputTokens', 'cacheWriteTokens', 'cacheWrite30mTokens', 'cacheWrite12hTokens', 'reasoningTokens', 'estimatedCostUsd', 'resultCount', 'start', 'count', 'beforeBytes', 'afterBytes']) if (Number.isFinite(event[key])) safe[key] = event[key];
       const usage = { ...record.usage };
       if (safe.type === 'api' && Number.isFinite(safe.inputTokens) && Number.isFinite(safe.outputTokens)) {
         usage.inputTokens += safe.inputTokens; usage.outputTokens += safe.outputTokens; usage.reportedRequests++;
       }
-      update(id, { telemetry: [...record.telemetry, safe].slice(-64), usage });
+      update(id, { telemetry: [...record.telemetry, safe].slice(-128), usage });
     },
     finish(id, values = {}) {
       const record = records.find(item => item.id === id); if (!record) return;
@@ -72,10 +73,15 @@ export function createQuestionLog({ directory, now = Date.now, maxRecords = 500,
         (!term || [record.question, record.userId, record.userName, record.channelName, record.channelId, record.guildName].some(value => value?.toLowerCase().includes(term)))).slice().reverse();
       const start = Math.max(0, Math.floor(Number(offset) || 0)), size = Math.min(50, Math.max(1, Math.floor(Number(limit) || 20)));
       return { available, total: selected.length, offset: start, limit: size, retentionDays: maxAgeMs / 86400000, maxRecords,
-        records: selected.slice(start, start + size).map(({ id, startedAt, userId, userName, location, channelName, guildName, status, durationMs, parts, translation, question }) =>
-          ({ id, startedAt, userId, userName, location, channelName, guildName, status, durationMs, partCount: parts.length, translationStatus: translation?.status ?? 'pending',
-            question: question.slice(0, 160) })) };
+        records: selected.slice(start, start + size).map(record => { const { id, startedAt, userId, userName, location, channelName, guildName, status, durationMs, parts, translation, question } = record;
+          return { id, startedAt, userId, userName, location, channelName, guildName, status, durationMs, partCount: parts.length, translationStatus: translation?.status ?? 'pending',
+            question: question.slice(0, 160), metrics: questionMetrics(record) }; }) };
     },
-    read(id) { const record = records.find(item => item.id === id && Date.parse(item.startedAt) >= now() - maxAgeMs); return record ? structuredClone(record) : null; },
+    read(id) { const record = records.find(item => item.id === id && Date.parse(item.startedAt) >= now() - maxAgeMs); return record ? structuredClone({ ...record, metrics: questionMetrics(record) }) : null; },
+    comparisons(id) {
+      const target = this.read(id); if (!target) return null;
+      return { question: target.question, records: records.filter(record => Date.parse(record.startedAt) >= now() - maxAgeMs && record.question.trim() === target.question.trim() && record.telemetry.some(event => event.type === 'request'))
+        .slice(-12).reverse().map(record => structuredClone({ ...record, metrics: questionMetrics(record) })) };
+    },
   };
 }

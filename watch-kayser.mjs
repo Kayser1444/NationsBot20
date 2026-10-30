@@ -363,6 +363,18 @@ if (!args.includes('--no-dashboard')) {
     }
     dashboard = await startDashboard({ port, snapshot, questionLog, thinkingSnapshot: () => journal.data,
       bulletins, bulletinKeyHash: process.env.NATIONS_BULLETIN_API_KEY_SHA256,
+      questionModelSettings: () => {
+        if (!bot) throw new Error('Discord-boten har inte startat.');
+        return bot.questionModelSettings();
+      },
+      currentQuestionModel: () => {
+        if (!bot || stopped) throw new Error('Discord-boten är inte igång.');
+        return bot.currentQuestionModel();
+      },
+      setQuestionModel: (model, actorId) => {
+        if (!bot || stopped) throw new Error('Discord-boten är inte igång.');
+        return bot.setQuestionModel(model, actorId);
+      },
       globalQuestionQuota: () => {
         if (!bot) throw new Error('Discord-boten har inte startat.');
         return bot.globalQuestionQuota();

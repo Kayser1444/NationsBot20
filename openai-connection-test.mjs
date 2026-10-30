@@ -21,20 +21,20 @@ async function readResult(response) {
 }
 
 // Independent of question sources and subscriber quotas. Nothing runs on startup or GET.
-export function createOpenAiConnectionTest({ env = process.env, fetcher = fetch, now = Date.now } = {}) {
+export function createOpenAiConnectionTest({ env = process.env, fetcher = fetch, now = Date.now, getModel = () => questionModel } = {}) {
   const apiKey = env.OPENAI_API_KEY?.trim();
-  let inFlight = null, lastResult = null, retryAt = 0;
-  async function run() {
+  let inFlight = null, inFlightModel = null, lastResult = null, retryAt = 0;
+  async function run(model) {
     const started = now(), signal = AbortSignal.timeout(timeoutMs);
     const finish = result => ({ configured: true, questionEnabled: env.NATIONS_QUESTION_ENABLED === '1',
-      model: questionModel, checkedAt: new Date(started).toISOString(), durationMs: Math.max(0, now() - started),
+      model, checkedAt: new Date(started).toISOString(), durationMs: Math.max(0, now() - started),
       cached: false, ...result });
     let httpStatus, requestId;
     try {
       const response = await fetcher('https://api.openai.com/v1/responses', {
         method: 'POST', redirect: 'error', signal,
         headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
-        body: JSON.stringify({ model: questionModel, store: false, input: 'Reply with exactly OK.',
+        body: JSON.stringify({ model, service_tier: 'default', store: false, input: 'Reply with exactly OK.',
           reasoning: { effort: 'low' }, max_output_tokens: 512 }),
       });
       httpStatus = response.status;
@@ -65,13 +65,17 @@ export function createOpenAiConnectionTest({ env = process.env, fetcher = fetch,
     }
   }
   return async () => {
+    let model;
+    try { model = getModel(); } catch { return { configured: !!apiKey, ok: false, code: 'invalid_model', message: 'Välj och spara en giltig frågemodell före anslutningstestet.' }; }
     if (!apiKey) return { configured: false, questionEnabled: env.NATIONS_QUESTION_ENABLED === '1',
-      model: questionModel, ok: false, code: 'missing_key', message: 'OPENAI_API_KEY saknas. Administratörsnyckeln används inte för detta test.' };
-    if (inFlight) return inFlight;
+      model, ok: false, code: 'missing_key', message: 'OPENAI_API_KEY saknas. Administratörsnyckeln används inte för detta test.' };
+    if (inFlight && model === inFlightModel) return inFlight;
+    if (inFlight || (now() < retryAt && lastResult?.model !== model)) return { configured: true, model, ok: false, code: 'cooldown',
+      message: 'Vänta tills minutspärren för anslutningstestet har gått ut. Föregående test gäller en annan modell.', retryAfterSeconds: Math.max(1, Math.ceil((retryAt - now()) / 1000)) };
     if (now() < retryAt) return { ...lastResult, cached: true, retryAfterSeconds: Math.ceil((retryAt - now()) / 1000) };
     retryAt = now() + cooldownMs;
-    inFlight = run();
+    inFlightModel = model; inFlight = run(model);
     try { lastResult = await inFlight; return lastResult; }
-    finally { inFlight = null; }
+    finally { inFlight = null; inFlightModel = null; }
   };
 }

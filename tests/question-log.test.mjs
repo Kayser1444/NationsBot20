@@ -150,8 +150,12 @@ test('question log endpoints follow dashboard authentication and keep details ou
   const headers = { 'x-forwarded-proto': 'https' };
   assert.equal((await fetch(dashboard.url + '/api/questions', { headers })).status, 401);
   assert.equal((await fetch(dashboard.url + '/api/questions/' + id, { headers })).status, 401);
+  assert.equal((await fetch(dashboard.url + '/api/questions/' + id + '/comparisons', { headers })).status, 401);
   authorized = true;
   const list = await (await fetch(dashboard.url + '/api/questions', { headers })).json(); assert.equal(list.total, 1); assert.equal(JSON.stringify(list).includes('private answer'), false);
   assert.equal((await (await fetch(dashboard.url + '/api/questions/' + id, { headers })).json()).parts[0].text, 'private answer');
+  log.telemetry(id,{type:'request',model:'gpt-6.1-sol'});
+  const comparison=await(await fetch(dashboard.url+'/api/questions/'+id+'/comparisons',{headers})).json();
+  assert.equal(comparison.records[0].parts[0].text,'private answer');assert.equal(comparison.records[0].metrics.model,'gpt-6.1-sol');
   assert.equal(JSON.stringify(await (await fetch(dashboard.url + '/api/status', { headers })).json()).includes('Quelle'), false);
 });

@@ -9,8 +9,9 @@ import { createOpenAiCredit } from './openai-credit.mjs';
 import { createOpenAiConnectionTest } from './openai-connection-test.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, globalQuestionQuota, resetGlobalQuestionQuota, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = createOpenAiConnectionTest() }) {
+export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, globalQuestionQuota, resetGlobalQuestionQuota, questionModelSettings, currentQuestionModel, setQuestionModel, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = null }) {
   const token = randomBytes(24).toString('hex');
+  const runOpenAiTest = openAiTest ?? createOpenAiConnectionTest({ getModel: currentQuestionModel });
   let origin;
   const server = createServer(async (req, res) => {
     res.setHeader('x-frame-options', 'DENY');
@@ -85,6 +86,11 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
       json(200, { now: new Date(now).toISOString(), games: thinkingSummary(thinkingSnapshot(), now) }); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
+    if (req.method === 'GET' && url.pathname === '/api/question-model') {
+      try { if (!questionModelSettings) throw new Error('Modellinställningen är inte tillgänglig.'); json(200, await questionModelSettings()); }
+      catch (error) { json(503, { error: error.message }); }
+      return;
+    }
     const quotaId = url.pathname.match(/^\/api\/question-quotas\/(\d{17,20})$/)?.[1];
     if (req.method === 'GET' && url.pathname === '/api/question-quotas/global') {
       try { if (!globalQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.'); json(200, await globalQuestionQuota()); }
@@ -96,6 +102,11 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
       catch (error) { json(503, { error: error.message }); }
       return;
     }
+    const comparisonId = url.pathname.match(/^\/api\/questions\/([^/]+)\/comparisons$/)?.[1];
+    if (req.method === 'GET' && comparisonId) {
+      const comparison = questionLog?.comparisons(comparisonId);
+      json(comparison ? 200 : 404, comparison ?? { error: 'Frågan finns inte i loggen.' }); return;
+    }
     if (req.method === 'GET' && url.pathname.startsWith('/api/questions/')) {
       const record = questionLog?.read(url.pathname.slice('/api/questions/'.length));
       json(record ? 200 : 404, record ?? { error: 'Frågan finns inte i loggen.' }); return;
@@ -103,11 +114,20 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
     if (req.method === 'POST' && url.pathname === '/api/openai-test') {
-      try { json(200, await openAiTest()); }
+      try { json(200, await runOpenAiTest()); }
       catch { json(503, { error: 'OpenAI-testet kunde inte slutföras.' }); }
       return;
     }
     try {
+      if (req.method === 'POST' && url.pathname === '/api/question-model') {
+        if (!setQuestionModel) throw new Error('Modellinställningen är inte tillgänglig.');
+        if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON krävs.' }); return; }
+        let body = '';
+        for await (const chunk of req) { body += chunk.toString('utf8'); if (Buffer.byteLength(body) > 4096) throw new Error('För stor förfrågan.'); }
+        const input = JSON.parse(body);
+        if (typeof input?.model !== 'string') throw new Error('Välj en modell.');
+        json(200, await setQuestionModel(input.model, activeSession?.userId ?? null)); return;
+      }
       if (req.method === 'POST' && url.pathname === '/api/question-quotas/global') {
         if (!resetGlobalQuestionQuota) throw new Error('Frågekvoten är inte tillgänglig.');
         json(200, await resetGlobalQuestionQuota(activeSession?.userId ?? null)); return;
