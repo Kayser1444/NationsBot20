@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { dashboardTheme } from './dashboard-theme.mjs';
 import { bulletinCredentialMatches } from './bulletins.mjs';
-import { thinkingSummary } from './thinking-summary.mjs';
+import { thinkingSummary, playerThinkingSummary } from './thinking-summary.mjs';
 import { createRailwayBilling } from './railway-billing.mjs';
 import { createOpenAiCredit } from './openai-credit.mjs';
 import { createOpenAiConnectionTest } from './openai-connection-test.mjs';
@@ -83,7 +83,9 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     if (req.method === 'GET' && url.pathname === '/api/thinking') {
       if (!thinkingSnapshot) { json(503, { error: 'Betänketiderna är inte tillgängliga.' }); return; }
       const now = Date.now();
-      json(200, { now: new Date(now).toISOString(), games: thinkingSummary(thinkingSnapshot(), now) }); return;
+      const journal = thinkingSnapshot();
+      json(200, { now: new Date(now).toISOString(), games: thinkingSummary(journal, now),
+        players: playerThinkingSummary(journal, snapshot().matches ?? []) }); return;
     }
     if (req.method === 'GET' && url.pathname === '/api/questions') { json(200, questionLog?.list(Object.fromEntries(url.searchParams)) ?? { available: false, records: [], total: 0 }); return; }
     if (req.method === 'GET' && url.pathname === '/api/question-model') {

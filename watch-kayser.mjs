@@ -130,7 +130,7 @@ function snapshot() {
     bannedUsers: Object.entries(readBannedUsers(configPath)).map(([userId, ban]) => ({ userId, ...ban })),
     playerNames: playerCache.names, playerNamesUpdatedAt: playerCache.updatedAt,
     subscribers: adminSubscribers(currentConfig, subscriptions, matches),
-    matches: matches.map(m => ({ id: m.id, title: m.title, player: m.state?.player ?? null, over: Boolean(m.finished), connected: m.status === 'connected' })),
+    matches: matches.map(m => ({ id: m.id, title: m.title, players: m.players ?? [], player: m.state?.player ?? null, over: Boolean(m.finished), connected: m.status === 'connected' })),
     events: log.error ? [...log.entries, { time: new Date().toISOString(), level: 'error', message: log.error }] : log.entries,
   };
 }
@@ -294,6 +294,7 @@ function connect(m) {
     }
     const result = observe(m.state, message, config.username);
     if (result.state === m.state) return;
+    if (Array.isArray(message.state.player_order) && message.state.player_order.every(name => typeof name === 'string' && name)) m.players = [...message.state.player_order];
     try { journal.observe(m.id, result.state); } catch (error) { log.add('Betänketidsloggen kunde inte sparas.', 'error'); stop(); return; }
     const previous = m.state;
     m.state = result.state; m.status = 'connected'; m.backoff = 1000;
