@@ -2,6 +2,8 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, renameSync, openSyn
 import { dirname } from 'node:path';
 import { recipients } from './subscriptions.mjs';
 
+const moveGraceMs = 120_000;
+
 // One persisted turn record per match; jobs never contain webhook credentials.
 export class Outbox {
   constructor(path, destination, { now = Date.now } = {}) {
@@ -27,7 +29,12 @@ export class Outbox {
       throw error;
     }
   }
-  observe(match, state, userId) {
+  observe(match, state, userId, movedPlayer = null) {
+    const now = this.now();
+    if (movedPlayer) {
+      const activeWindows = Object.entries(this.data.quietUntil ?? {}).filter(([, until]) => until > now);
+      this.data.quietUntil = Object.fromEntries([...activeWindows, [movedPlayer, now + moveGraceMs]]);
+    }
     const ids = userId == null ? [] : Array.isArray(userId) ? userId : [userId];
     const prior = this.data.turns[match.id];
     const changed = !prior || prior.player !== state.player || prior.over !== state.over;
@@ -41,11 +48,14 @@ export class Outbox {
     this.data.jobs = this.data.jobs.filter(job => job.matchId !== match.id || (job.key === key && ids.includes(job.userId)));
     let added = false;
     for (const userId of new Set(ids)) if (!state.over && !turn.sentUsers.includes(userId) && !this.data.jobs.some(job => job.key === key && job.userId === userId)) {
-      this.data.jobs.push({ key, matchId: match.id, title: match.title, player: state.player, userId, attempts: 0, nextAt: this.now(), blocked: false });
+      this.data.jobs.push({ key, matchId: match.id, title: match.title, player: state.player, userId, attempts: 0, nextAt: now, blocked: false });
       added = true;
     }
-    if (changed || migrated || added || oldLength !== this.data.jobs.length) this.save();
+    if (movedPlayer || changed || migrated || added || oldLength !== this.data.jobs.length) this.save();
     return added;
+  }
+  inMoveGrace(player) {
+    return this.data.quietUntil?.[player] > this.now();
   }
   current(job) {
     const turn = this.data.turns[job.matchId];
@@ -71,7 +81,7 @@ export class Outbox {
     try {
       for (const job of [...this.data.jobs]) {
         if (signal?.aborted) break;
-        if (job.blocked || job.nextAt > this.now() || !this.current(job)) continue;
+        if (job.blocked || job.nextAt > this.now() || !this.current(job) || this.inMoveGrace(job.player)) continue;
         try {
           const valid = await validate(job);
           if (signal?.aborted) break;
@@ -82,8 +92,9 @@ export class Outbox {
             this.data.jobs = this.data.jobs.filter(item => item !== job);
             this.save(); report(`discarded expired turn for ${job.matchId}`, job); continue;
           }
+          if (this.inMoveGrace(job.player)) continue;
           report(`sending turn alert for ${job.matchId}`, job);
-          await send(job);
+          if (await send(job) === false) continue;
         } catch (error) {
           if (error.outboxPersistence) throw error;
           if (signal?.aborted) break;

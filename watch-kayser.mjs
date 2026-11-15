@@ -188,9 +188,11 @@ async function flushOutbox() {
         if (stopped || !recipients(subscriptions, job.player).includes(job.userId) || isUserBanned(configPath, job.userId) || !outbox.current(job)) throw new Error('Subscription changed before delivery.');
         const payload = turnMessage(job.player, { id: job.matchId, title: job.title }, job.userId,
           profile === 'friends.json' ? readBotLanguage(configPath, job.userId) : 'sv-SE');
-        return profile === 'friends.json'
-          ? transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id), deliveryAbort.signal, () => !stopped && recipients(subscriptions, job.player).includes(job.userId) && !isUserBanned(configPath, job.userId) && outbox.current(job))
-          : transport.send(payload, deliveryAbort.signal);
+        if (profile !== 'friends.json') return transport.send(payload, deliveryAbort.signal);
+        const isCurrent = () => !stopped && recipients(subscriptions, job.player).includes(job.userId) &&
+          !isUserBanned(configPath, job.userId) && outbox.current(job);
+        return transport.sendReminder(payload, job.userId, id => readDmPreference(configPath, id),
+          deliveryAbort.signal, isCurrent, () => outbox.inMoveGrace(job.player));
       },
       report: async (status, job) => {
         delivery = job ? status.replace(`for ${job.matchId}`, `för ${gameLabel(job)}`) : status; show();
@@ -297,6 +299,10 @@ function connect(m) {
     if (Array.isArray(message.state.player_order) && message.state.player_order.every(name => typeof name === 'string' && name)) m.players = [...message.state.player_order];
     try { journal.observe(m.id, result.state); } catch (error) { log.add('Betänketidsloggen kunde inte sparas.', 'error'); stop(); return; }
     const previous = m.state;
+    // Only attribute a single advance observed on the same live connection.
+    // Startup, reconnect snapshots and gaps can include older moves by other players.
+    const movedPlayer = m.status === 'connected' && Number.isInteger(previous?.move) &&
+      result.state.move === previous.move + 1 && !message.state.invalid_move ? previous.player : null;
     m.state = result.state; m.status = 'connected'; m.backoff = 1000;
     if (m.state.over) {
       m.finished = true;
@@ -309,7 +315,7 @@ function connect(m) {
     const player = m.state.player;
     const subscribed = Object.hasOwn(subscriptions, player);
     if (outbox) {
-      try { outbox.observe(m, m.state, recipients(subscriptions, player)); }
+      try { outbox.observe(m, m.state, recipients(subscriptions, player), movedPlayer); }
       catch {
         delivery = 'STOPPED: could not save the outbox; no new alert sent';
         show(); stop(); process.exitCode = 1; return;

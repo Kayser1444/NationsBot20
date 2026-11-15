@@ -4,6 +4,7 @@ import { mkdtempSync, rmSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { Outbox } from '../outbox.mjs';
+import { botDelivery } from '../bot-delivery.mjs';
 import { sendDiscord, verifyDiscordDestination } from '../discord.mjs';
 
 const destination = { guildId: 'guild', channelId: 'channel' };
@@ -81,6 +82,69 @@ function fixture(t) {
   const now = () => time;
   return { path, now, advance: ms => { time += ms; }, open: () => new Outbox(path, destination, { now }) };
 }
+
+test('moves in another game reset a player’s alert window across restarts', async t => {
+  const f = fixture(t);
+  let box = f.open();
+  const played = { id: '2', title: 'Live game' };
+  const unrelated = { id: '3', title: 'Unrelated game' };
+  const delivered = [];
+  const flush = () => box.flush({ validate: async () => true, send: async job => delivered.push(job.userId) });
+
+  box.observe(match, turn('Kayser'), 'first');
+  box.observe(played, turn('Other'), 'second', 'Kayser');
+  await flush();
+  assert.deepEqual(delivered, ['second']);
+
+  f.advance(90_000);
+  box.observe(played, turn('Kayser'), 'first', 'Other');
+  box.observe(played, turn('Other'), 'second', 'Kayser');
+  box.observe(unrelated, turn('Kayser'), 'first');
+  box.observe(unrelated, turn('Waiting'), null, 'Kayser');
+  box = f.open();
+  f.advance(119_999);
+  await flush();
+  assert.deepEqual(delivered, ['second']);
+  f.advance(1);
+  await flush();
+  assert.deepEqual(delivered, ['second', 'first', 'second']);
+  await flush();
+  assert.deepEqual(delivered, ['second', 'first', 'second']);
+});
+
+test('a move during a DM channel lookup defers delivery without recording a receipt or a retry', async t => {
+  const f = fixture(t);
+  const box = f.open();
+  const userId = '229311536827465728';
+  const channelId = '1559000000000000001';
+  const played = { id: '2', title: 'Live game' };
+  let opened = false;
+  let posts = 0;
+  const transport = botDelivery('test', { guildId: userId, channelId }, { fetcher: async url => {
+    if (url.endsWith('/users/@me/channels')) {
+      if (!opened) box.observe(played, turn('Other'), null, 'Kayser');
+      opened = true;
+      return Response.json({ id: channelId, type: 1, recipients: [{ id: userId }] });
+    }
+    posts++;
+    return Response.json({ id: 'message', channel_id: channelId });
+  } });
+  const flush = () => box.flush({
+    validate: async () => true,
+    send: job => transport.sendReminder({ content: 'Your turn' }, job.userId, () => true,
+      undefined, () => box.current(job), () => box.inMoveGrace(job.player)),
+  });
+
+  box.observe(match, turn('Kayser'), userId);
+  await flush();
+  assert.equal(posts, 0);
+  assert.equal(box.data.jobs.length, 1);
+  assert.equal(box.data.jobs[0].attempts, 0);
+  f.advance(120_000);
+  await flush();
+  assert.equal(posts, 1);
+  assert.equal(box.data.jobs.length, 0);
+});
 
 test('failed delivery survives restart, backs off, then records success without startup duplicates', async t => {
   const f = fixture(t); let box = f.open(); let sends = 0, validations = 0;

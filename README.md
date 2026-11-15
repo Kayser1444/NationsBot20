@@ -77,6 +77,10 @@ fresh state check validates pending reminders before delivery. Outages are retri
 subscriptions, preferences, queued reminders and confirmed turns are persisted.
 Ambiguous Discord acknowledgements can still cause duplicate messages.
 
+After the bot sees a player make a move, it holds that player's turn alerts
+across all monitored games for two minutes. Another move resets the window.
+When it expires, the bot alerts only for turns still waiting on that player.
+
 The [draft server-feed PR](https://github.com/Logitude/TabonyGames/pull/2) proposes
 a single metadata/turn feed to replace scraping. This notifier does not yet use
 that feed; it can be hosted independently of that PR's deployment.

@@ -44,7 +44,7 @@ export function botDelivery(token, expected, { fetcher = fetch } = {}) {
       // Webhook-only sender names are deliberately excluded: the bot is the author.
       return sendToChannel(expected.channelId, payload, signal);
     },
-    async sendReminder(payload, userId, getDm, signal, isCurrent = () => true) {
+    async sendReminder(payload, userId, getDm, signal, isCurrent = () => true, shouldDefer = () => false) {
       const dm = getDm(userId);
       let channelId = expected.channelId;
       if (dm) {
@@ -55,6 +55,7 @@ export function botDelivery(token, expected, { fetcher = fetch } = {}) {
         channelId = channel.id;
       }
       if (getDm(userId) !== dm || !isCurrent() || signal?.aborted) throw new DiscordDeliveryError('Inställningen eller turen ändrades före leverans.');
+      if (shouldDefer()) return false;
       const prefix = `<@${userId}> — `;
       const messagePayload = dm ? {
         ...payload,
