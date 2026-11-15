@@ -12,12 +12,16 @@ growth for invitations with variable difficulty. Pausing discovery does not
 pause connected games. Pausing playing prevents new moves and invitation joins.
 An already submitted move remains submitted.
 
-Two-player and multiplayer checkpoint selectors are independent. Defaults are
-the twenty-minute two-player weights and full-hour four-player weights for
-three, four and five players. The initial shared scorer is also available.
+Two-player and multiplayer checkpoint selectors are independent. Both default
+to **Human baseline v1**, the replay-trained policy with shared tactical checks.
+The twenty-minute, full-hour and initial heuristic checkpoints remain available.
+On first upgrade to v0.5, existing installations select the new baseline once;
+authorization, polling, play/pause and other settings are preserved. Later model
+selections persist normally.
 Advanced JSON overrides can edit named coefficients in profiles `2` and `4`;
 three and five players use profile `4`. Effective weights are visible below the
-selectors. Settings take effect at the next decision and survive restarts in
+selectors. These overrides apply to the older heuristic checkpoints; the human
+baseline uses its bundled learned coefficients. Settings take effect at the next decision and survive restarts in
 the player volume's `/data/player-settings.json`.
 
 The page shows the worker version, account socket, last/next discovery time,
@@ -60,7 +64,9 @@ are logged in again. Background errors are shown on the page and retried at the
 next scheduled poll.
 
 Training scripts continue to use `default-weights.json` as their fixed baseline.
-The managed player loads named checkpoints from `live-player/models.json`.
+The managed player loads older checkpoints from `live-player/models.json` and
+the baseline from `live-player/human-baseline.json`. See
+[training and release evaluation](human-policy.md).
 The standalone worker still supports `NATIONS_PLAYER_WEIGHTS`.
 
 Run `npm test` and `node --test --test-isolation=none live-player/*.test.mjs`

@@ -6,6 +6,7 @@ import { settingsStore, modelForSettings, modelChoices } from './settings.mjs';
 import { discoverAccountMatches, isAuthorized, acceptInvitation } from './discovery.mjs';
 import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
+import baseline from './baseline-info.json' with { type: 'json' };
 
 export function createPlayerController({ config, store, connect, discover, accept, now = Date.now }) {
   const games = new Map(), events = [];
@@ -158,6 +159,8 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
   connectAccount();
   if (store.read().settings.pollingEnabled) ignore(controller.poll('startup'));
   console.log(`Nations player v${metadata.version}: control service ready; authenticated as ${config.username}.`);
+  console.log(`Nations player model: ${store.read().settings.twoPlayerModel} (2p), ${store.read().settings.multiplayerModel} (3–5p).`);
+  console.log(`Nations baseline SHA256 ${baseline.baseline_sha256}; human policy SHA256 ${baseline.human_policy_sha256}.`);
   const stop = () => { stopped = true; clearInterval(timer); clearInterval(keepAlive); clearTimeout(reconnect); socket?.terminate(); controller.close(); server.close(); };
   process.once('SIGTERM', stop); process.once('SIGINT', stop);
   return { controller, server, close: stop };

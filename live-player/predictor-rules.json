@@ -1,0 +1,1307 @@
+{
+  "source": "Tabony public engine rules: building/military worker_points, max_workers, nation slot counts",
+  "cards": {
+    "Am_Adb": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Am_BfHd": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": true
+    },
+    "Am_Brv": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Am_Tpe": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Aqd": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ar_Axm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ar_Bzr": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ar_Kba": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": true
+    },
+    "Ar_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Arc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ass": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": false
+    },
+    "BlCt": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Bnk": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Brw": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Bxr": {
+      "workerPoints": [
+        1,
+        1,
+        2,
+        2,
+        3
+      ],
+      "maxWorkers": false
+    },
+    "CKN": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "C_Axm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "C_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "C_Pgd": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "C_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Cas": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Cat": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "CfAc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "CfHs": {
+      "workerPoints": [
+        2,
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Cht": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "ClMn": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "ClTr": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "CmAr": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Cns": {
+      "workerPoints": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Cqd": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Crs": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Crt": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Csk": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "CtWl": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Cth": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ctp": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Cvr": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Dik": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "DpSr": {
+      "workerPoints": [
+        4
+      ],
+      "maxWorkers": true
+    },
+    "Drn": {
+      "workerPoints": [
+        1,
+        2,
+        3
+      ],
+      "maxWorkers": false
+    },
+    "EgSl": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Eg_Brw": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Eg_Crv": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Eg_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Eg_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Elp": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Et_Axm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Et_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Et_Stl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Et_qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Fct": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Fgt": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Frg": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Frm": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "GFG": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "G_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "G_Hpl": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "G_Lyc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "G_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "GdHl": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Grn": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Han": {
+      "workerPoints": [
+        2,
+        2
+      ],
+      "maxWorkers": true
+    },
+    "HdPl": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Hip": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Hkp": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Hmm": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Hpl": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "HsAr": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Hsp": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "I_Crt": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": false
+    },
+    "I_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "I_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "I_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Imt": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "J_Axm ": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "J_Hkd": {
+      "workerPoints": [],
+      "maxWorkers": true
+    },
+    "J_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "J_RcFd": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "J_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "JgWr": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "K_Arc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "K_CfAc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "K_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "K_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "KnTp": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": true
+    },
+    "Knt": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Lbm": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Lgn": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Lib": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Lsp": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Lth": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Lyc": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "McGn": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Mcn": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Mdr": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Mg_Crv": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Mg_HsAr": {
+      "workerPoints": [
+        1,
+        1,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Mg_Stp": {
+      "workerPoints": [],
+      "maxWorkers": true
+    },
+    "Mg_Yrt": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Min": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Mkt": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ml_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ml_GdMn": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": true
+    },
+    "Ml_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ml_StCv": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Mnt": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Mon": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Msq": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "NtPk": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Obs": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "OcFs": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pg_Crv": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pg_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pg_Lth": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pg_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pgd": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pl_Axm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pl_Frg": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pl_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Pl_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Plm": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Plx": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "PnCl": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "PrPr": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ps_Axm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ps_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ps_Tpl": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Ps_Zgr": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "PtGd": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": true
+    },
+    "Pts": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": true
+    },
+    "Pvt": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "R_Aqd": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "R_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "R_Lgn": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "R_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Rad": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Rdc": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Rfm": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Rlr": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Rng": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "ScAl": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Shp": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "SkEx": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "SkRd": {
+      "workerPoints": [
+        3
+      ],
+      "maxWorkers": true
+    },
+    "Smr": {
+      "workerPoints": [
+        1,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "Sng": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Stt": {
+      "workerPoints": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Sub": {
+      "workerPoints": [
+        1,
+        2,
+        2,
+        2
+      ],
+      "maxWorkers": false
+    },
+    "SwSt": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Swm": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Thr": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "TrFm": {
+      "workerPoints": [
+        2,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Trm": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "UbCt": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Uni": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vk_Bsk": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vk_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vk_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vk_StCh": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vn_Frm": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vn_GlBw": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vn_Qry": {
+      "workerPoints": [
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vn_Trm": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Vtc": {
+      "workerPoints": [
+        2
+      ],
+      "maxWorkers": true
+    },
+    "Vtk": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Wdm": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Wtm": {
+      "workerPoints": [
+        1,
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Zgr": {
+      "workerPoints": [
+        1,
+        1
+      ],
+      "maxWorkers": false
+    },
+    "Zpl": {
+      "workerPoints": [
+        2,
+        2,
+        1
+      ],
+      "maxWorkers": false
+    }
+  },
+  "nations": {
+    "America": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Arabs": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "China": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 1,
+      "wonders": 6
+    },
+    "Egypt": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Ethiopia": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Greece": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "India": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Japan": {
+      "buildings_military": 5,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Korea": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Mali": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Mongolia": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Persia": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 3,
+      "wonders": 5
+    },
+    "Poland": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 1,
+      "wonders": 6
+    },
+    "Portugal": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Rome": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Venice": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    },
+    "Vikings": {
+      "buildings_military": 4,
+      "advisors": 1,
+      "colonies": 2,
+      "wonders": 5
+    }
+  }
+}

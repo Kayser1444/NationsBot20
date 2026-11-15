@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { parseArgs } from 'node:util';
 import defaults from '../live-player/default-weights.json' with { type: 'json' };
 import { rankMoves, validateModel } from '../live-player/scorer.mjs';
+import { readPositionPlans } from '../live-player/position-reader.mjs';
 
 const { values } = parseArgs({
   options: {
@@ -19,5 +20,5 @@ if (!values.state) {
   const player = values.player ?? state.next_move_player;
   const model = values.weights ? validateModel(JSON.parse(await readFile(values.weights, 'utf8'))) : defaults;
   console.log(JSON.stringify({ model: model.name, player, round: state.round,
-    decision: state.move_number, moves: rankMoves(state, player, model, true) }, null, 2));
+    decision: state.move_number, moves: rankMoves(state, player, model, true), reading: readPositionPlans(state, player) }, null, 2));
 }

@@ -61,6 +61,7 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
       maxPayload: 4 * 1024 * 1024,
     });
     let chain = Promise.resolve();
+    const policyContext = {};
     let lastValid = Date.now();
     let hasPosition = false;
     let lastLog;
@@ -121,7 +122,7 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         const delay = config.delay?.() ?? 0;
         if (delay) await sleep(delay, undefined, { signal: config.signal });
         if (!enabled() || socket.readyState !== WebSocket.OPEN) return;
-        const move = chooseMove(state, config.username, config.opponent, config.getModel?.() ?? config.model);
+        const move = chooseMove(state, config.username, config.opponent, config.getModel?.() ?? config.model, policyContext);
         if (!safeOption(state, move)) throw new StopPlayer('No safe legal option was selected.');
         // Save first. A reconnect at the same position cannot send a duplicate.
         await moves.save(number);

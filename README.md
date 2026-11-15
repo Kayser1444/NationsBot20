@@ -12,6 +12,8 @@ logging into the game, submitting moves or posting game chat.
 The separate AI player has a **Player Bot** sub-page in the owner console.
 See [access, game discovery and model settings](docs/player-bot.md). Its Tabony
 login stays on the dedicated player service; reminder monitoring remains public.
+For browser play and position review on localhost, see
+[native local Nations evaluation](docs/local-evaluation.md).
 
 Bulletins can be drafted here and published through the limited [bulletin API and local CLI](docs/bulletins.md), with separate staging/production credentials and persistent duplicate protection.
 

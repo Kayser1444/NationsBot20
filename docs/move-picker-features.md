@@ -1,10 +1,62 @@
 # Nations move picker: first feature set
 
+## Match 3272: position reading before another scoring revision
+
+Kayser's next live review identified three weak opening decisions: drafting
+Poland over Vikings, taking Food at first growth without an evident need, and
+starting a military opening but deploying to Forge before resolving the colony
+race. The captured public positions are in
+`live-player/fixtures/match-3272-opening.json`.
+
+The deployed two-player coefficients reproduce the observations. At draft,
+Poland scores 263.47 versus Vikings' 191.65. Starting building output dominates
+that difference; the learned `draftEconomy` coefficient is 18. At growth,
+Food scores 1.15, Gold 0.67 and Stone 0.36. At decision 13, Forge scores 9.63
+versus 7.75 for a second Axeman. These scores describe individual moves and
+do not evaluate the consequences of an opening sequence.
+
+The local `position-reader.mjs` prototype searches affordable ordinary military
+deployments, military purchases/replacements and colony purchases. It counts
+whole actions, including placement and confirmation, and compares arrival times
+using the actual turn order. `scripts/explain-nations.mjs` includes its readings.
+This reader is not yet used by the live move selector.
+
+For this visible draft, Vikings can deploy one Berserker and buy Nubia in two
+actions, retaining four workers and four Stone. Poland needs two Axemen and a
+purchase: three actions, retaining three workers and three Stone. This measures
+a tempo and labor difference; it does not prove a universal nation ordering.
+Dynasties and special effects still need evaluation.
+
+At decision 13 Poland has one Axeman deployed and Ethiopia has bought Legionary.
+Both can deploy and then buy Nubia. Poland acts first. A second Axeman followed
+by the purchase arrives before Ethiopia's corresponding line. If Poland deploys
+to Forge first, Ethiopia can deploy Legionary and buy Nubia before Poland's
+delayed purchase. This is the only colony on this opening board; the substitute
+colonies from the earlier match 3270 discussion are absent.
+
+The growth reader can construct a feasible two-Axeman, Nubia, three-Forge line
+with either Food, Stone or Gold growth. With Gold growth it projects 4 Food
+before famine, 6 Gold and 6 Stone after ordinary production. With Food growth
+the same line projects 6 Food and only 4 Gold. The event was not revealed at
+growth, so the reading does not use its later famine value. These are reachable
+allocations, not a full-round optimum or protection against all event/war effects.
+
+Six regression checks cover those routes, passed rivals, resource and worker
+limits, military replacement and growth visibility. The next scorer revision
+should compare complete plans and resulting positions, including rival replies,
+resource deficits and competitive acquisitions. It needs a position-value
+function; summing the current move rewards would retain their existing biases.
+
 These features come from Kayser's review of a real decision and his approach to
 assessing a round. They describe what to measure. The replay ranker and
 simulations can learn when each factor matters.
 
 ## Local two-player prototype
+
+The local server now defaults to Tabony's native canvas renderer and assets.
+See [native local evaluation](local-evaluation.md) for replay review, branching,
+position explanations, asset caching and the Easy/Medium/Hard roadmap. The
+earlier custom board is available at `/legacy`.
 
 To play in a browser, run this from NationsBot20 and open
 [the local board](http://127.0.0.1:8765/).

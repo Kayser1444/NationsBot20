@@ -1,14 +1,17 @@
 import { existsSync, readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
 import defaults from './default-weights.json' with { type: 'json' };
-import catalog from './models.json' with { type: 'json' };
+import checkpoints from './models.json' with { type: 'json' };
+import deployed from './trained-weights.json' with { type: 'json' };
 import { validateModel, weightsFor } from './scorer.mjs';
+
+const catalog = { ...checkpoints, 'human-baseline-v1': { label: 'Human baseline v1', model: deployed } };
 
 export const initialSettings = {
   pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
   authorizedPlayers: ['Kayser'], playerCounts: [2, 3, 4, 5], maxConcurrentGames: 1,
   moveDelayMs: 500, growthResources: 2,
-  twoPlayerModel: 'twenty-minute', multiplayerModel: 'full-hour',
+  twoPlayerModel: 'human-baseline-v1', multiplayerModel: 'human-baseline-v1',
   weightOverrides: { '2': {}, '4': {} },
 };
 
@@ -43,6 +46,7 @@ export function modelForSettings(settings) {
     '2': { ...weightsFor(catalog[settings.twoPlayerModel].model, 2), ...settings.weightOverrides['2'] },
     '4': { ...weightsFor(catalog[settings.multiplayerModel].model, 4), ...settings.weightOverrides['4'] },
   };
+  model.playerPolicies = { '2': settings.twoPlayerModel, '4': settings.multiplayerModel };
   return validateModel(model);
 }
 
@@ -53,12 +57,20 @@ export function settingsStore(directory) {
     saved = JSON.parse(readFileSync(path, 'utf8'));
     saved.settings = validateSettings(saved.settings);
     if (!Number.isSafeInteger(saved.revision) || saved.revision < 0) throw new Error('Invalid saved settings revision.');
+    if (!saved.baselineVersion) {
+      // Promote existing installations once; preserve account and polling settings.
+      saved = { ...saved, baselineVersion: 1, revision: saved.revision + 1,
+        settings: { ...saved.settings, twoPlayerModel: 'human-baseline-v1', multiplayerModel: 'human-baseline-v1' },
+        updatedAt: new Date().toISOString(), updatedBy: 'human-baseline-v1 migration' };
+      writeFileSync(path + '.tmp', JSON.stringify(saved, null, 2) + '\n', { mode: 0o600 });
+      renameSync(path + '.tmp', path);
+    }
   }
   return {
     read: () => structuredClone(saved),
     save(input, revision, actor) {
       if (revision !== saved.revision) throw Object.assign(new Error('Settings changed. Refresh before saving.'), { status: 409 });
-      const next = { settings: validateSettings(input), revision: saved.revision + 1,
+      const next = { baselineVersion: 1, settings: validateSettings(input), revision: saved.revision + 1,
         updatedAt: new Date().toISOString(), updatedBy: actor ?? null };
       writeFileSync(path + '.tmp', JSON.stringify(next, null, 2) + '\n', { mode: 0o600 });
       renameSync(path + '.tmp', path);

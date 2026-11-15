@@ -1,0 +1,662 @@
+{
+  "2": {
+    "first_round_player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "players": {
+      "NationsBot20": {
+        "nation": null
+      },
+      "Kayser": {
+        "nation": "Ethiopia",
+        "resources": {
+          "[Food]": 4,
+          "[Stone]": 7,
+          "[Gold]": 5,
+          "[Books]": 2
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 5,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Et_Stl",
+          "BM2": "Et_qry",
+          "BM3": "Et_Axm",
+          "BM4": "Et_Frm",
+          "S1": "Et_S"
+        },
+        "dynasties": [
+          "Et_AK",
+          "Et_Sb"
+        ],
+        "cards": {
+          "Et_AK": {},
+          "Et_Sb": {},
+          "Et_Stl": {},
+          "Et_qry": {},
+          "Et_Axm": {},
+          "Et_Frm": {},
+          "Et_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 6,
+        "resource_remainder": 8
+      }
+    },
+    "available_nations": [
+      "Vikings",
+      "Poland"
+    ],
+    "nations": {
+      "Vikings": {
+        "dynasties": [
+          "Vk_Nm",
+          "Vk_Vr"
+        ],
+        "resources": {
+          "[Food]": 2,
+          "[Stone]": 5,
+          "[Gold]": 6
+        },
+        "points": 3,
+        "workers": 5,
+        "slots": {
+          "BM1": "Vk_StCh",
+          "BM2": "Vk_Qry",
+          "BM3": "Vk_Bsk",
+          "BM4": "Vk_Frm",
+          "S1": "Vk_S",
+          "W1": "Vk_OlUp"
+        }
+      },
+      "Poland": {
+        "dynasties": [
+          "Pl_JD",
+          "Pl_PLC"
+        ],
+        "resources": {
+          "[Food]": 3,
+          "[Stone]": 5,
+          "[Gold]": 5
+        },
+        "points": 3,
+        "workers": 5,
+        "slots": {
+          "BM1": "Pl_Tpl",
+          "BM2": "Pl_Frg",
+          "BM3": "Pl_Axm",
+          "BM4": "Pl_Qry",
+          "S1": "Pl_S"
+        }
+      }
+    },
+    "progress_board": {
+      "P11": "MpMk",
+      "P12": "Acm",
+      "P13": "Lgn",
+      "P14": "Aqd",
+      "P21": "MtKl",
+      "P22": "Grn",
+      "P23": "QSH",
+      "P24": "Sng",
+      "P31": "SAls",
+      "P32": "Nub",
+      "P33": "Lyc",
+      "P34": "GrLh"
+    },
+    "round": 0,
+    "move_number": 2,
+    "round_starts": {
+      "0": 0,
+      "1": 4
+    },
+    "phase": "Drafting Phase",
+    "architects": 0,
+    "turmoil": 0,
+    "event": null,
+    "war": null,
+    "war_value": null,
+    "next_move_player": "NationsBot20",
+    "next_move_choice": "Draft which nation?",
+    "next_move_options": [
+      "Vikings",
+      "Poland"
+    ],
+    "game_over": 0,
+    "undo_allowed": 0,
+    "invalid_move": null
+  },
+  "6": {
+    "first_round_player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "players": {
+      "NationsBot20": {
+        "nation": "Poland",
+        "resources": {
+          "[Food]": 3,
+          "[Stone]": 5,
+          "[Gold]": 5,
+          "[Books]": 1
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 3,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Pl_Tpl",
+          "BM2": "Pl_Frg",
+          "BM3": "Pl_Axm",
+          "BM4": "Pl_Qry",
+          "S1": "Pl_S"
+        },
+        "dynasties": [
+          "Pl_JD",
+          "Pl_PLC"
+        ],
+        "cards": {
+          "Pl_JD": {},
+          "Pl_PLC": {},
+          "Pl_Tpl": {},
+          "Pl_Frg": {},
+          "Pl_Axm": {},
+          "Pl_Qry": {},
+          "Pl_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 4,
+        "resource_remainder": 4
+      },
+      "Kayser": {
+        "nation": "Ethiopia",
+        "resources": {
+          "[Food]": 4,
+          "[Stone]": 7,
+          "[Gold]": 7,
+          "[Books]": 2
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 5,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Et_Stl",
+          "BM2": "Et_qry",
+          "BM3": "Et_Axm",
+          "BM4": "Et_Frm",
+          "S1": "Et_S"
+        },
+        "dynasties": [
+          "Et_AK",
+          "Et_Sb"
+        ],
+        "cards": {
+          "Et_AK": {},
+          "Et_Sb": {},
+          "Et_Stl": {},
+          "Et_qry": {},
+          "Et_Axm": {},
+          "Et_Frm": {},
+          "Et_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 7,
+        "resource_remainder": 0
+      }
+    },
+    "available_nations": [],
+    "nations": {},
+    "progress_board": {
+      "P11": "MpMk",
+      "P12": "Acm",
+      "P13": "Lgn",
+      "P14": "Aqd",
+      "P21": "MtKl",
+      "P22": "Grn",
+      "P23": "QSH",
+      "P24": "Sng",
+      "P31": "SAls",
+      "P32": "Nub",
+      "P33": "Lyc",
+      "P34": "GrLh"
+    },
+    "round": 1,
+    "move_number": 6,
+    "round_starts": {
+      "0": 0,
+      "1": 4
+    },
+    "phase": "Growth Phase",
+    "architects": 0,
+    "turmoil": 0,
+    "event": null,
+    "war": null,
+    "war_value": null,
+    "next_move_player": "NationsBot20",
+    "next_move_choice": "Take what for growth?",
+    "next_move_options": [
+      "-3 [Food] [Worker]",
+      "-3 [Stability] [Worker]",
+      "2 [Food]",
+      "2 [Stone]",
+      "2 [Gold]"
+    ],
+    "game_over": 0,
+    "undo_allowed": 0,
+    "invalid_move": null
+  },
+  "8": {
+    "first_round_player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "players": {
+      "NationsBot20": {
+        "nation": "Poland",
+        "resources": {
+          "[Food]": 5,
+          "[Stone]": 5,
+          "[Gold]": 5,
+          "[Books]": 1
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 3,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Pl_Tpl",
+          "BM2": "Pl_Frg",
+          "BM3": "Pl_Axm",
+          "BM4": "Pl_Qry",
+          "S1": "Pl_S"
+        },
+        "dynasties": [
+          "Pl_JD",
+          "Pl_PLC"
+        ],
+        "cards": {
+          "Pl_JD": {},
+          "Pl_PLC": {},
+          "Pl_Tpl": {},
+          "Pl_Frg": {},
+          "Pl_Axm": {},
+          "Pl_Qry": {},
+          "Pl_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 4,
+        "resource_remainder": 6
+      },
+      "Kayser": {
+        "nation": "Ethiopia",
+        "resources": {
+          "[Food]": 4,
+          "[Stone]": 7,
+          "[Gold]": 7,
+          "[Books]": 2
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 5,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Et_Stl",
+          "BM2": "Et_qry",
+          "BM3": "Et_Axm",
+          "BM4": "Et_Frm",
+          "S1": "Et_S"
+        },
+        "dynasties": [
+          "Et_AK",
+          "Et_Sb"
+        ],
+        "cards": {
+          "Et_AK": {},
+          "Et_Sb": {},
+          "Et_Stl": {},
+          "Et_qry": {},
+          "Et_Axm": {},
+          "Et_Frm": {},
+          "Et_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 7,
+        "resource_remainder": 0
+      }
+    },
+    "available_nations": [],
+    "nations": {},
+    "progress_board": {
+      "P11": "MpMk",
+      "P12": "Acm",
+      "P13": "Lgn",
+      "P14": "Aqd",
+      "P21": "MtKl",
+      "P22": "Grn",
+      "P23": "QSH",
+      "P24": "Sng",
+      "P31": "SAls",
+      "P32": "Nub",
+      "P33": "Lyc",
+      "P34": "GrLh"
+    },
+    "round": 1,
+    "move_number": 8,
+    "round_starts": {
+      "0": 0,
+      "1": 4
+    },
+    "phase": "Action Phase",
+    "architects": 2,
+    "turmoil": 2,
+    "event": "AD_JA",
+    "war": null,
+    "war_value": null,
+    "next_move_player": "NationsBot20",
+    "next_move_choice": "Which action?",
+    "next_move_options": [
+      "Buy P11",
+      "Buy P12",
+      "Buy P13",
+      "Buy P14",
+      "Buy P21",
+      "Buy P22",
+      "Buy P23",
+      "Buy P24",
+      "Buy P33",
+      "Buy P34",
+      "Deploy to BM1",
+      "Deploy to BM2",
+      "Deploy to BM3",
+      "Deploy to BM4",
+      "Turmoil",
+      "Pass",
+      "Resign"
+    ],
+    "game_over": 0,
+    "undo_allowed": 0,
+    "invalid_move": null
+  },
+  "13": {
+    "first_round_player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "player_order": [
+      "NationsBot20",
+      "Kayser"
+    ],
+    "players": {
+      "NationsBot20": {
+        "nation": "Poland",
+        "resources": {
+          "[Food]": 5,
+          "[Stone]": 4,
+          "[Gold]": 5,
+          "[Books]": 1,
+          "[Military]": 2
+        },
+        "production": {
+          "[Food]": -1
+        },
+        "workers": 4,
+        "grown_workers": 5,
+        "points": 3,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Pl_Tpl",
+          "BM2": "Pl_Frg",
+          "BM3": "Pl_Axm",
+          "BM4": "Pl_Qry",
+          "S1": "Pl_S"
+        },
+        "dynasties": [
+          "Pl_JD",
+          "Pl_PLC"
+        ],
+        "cards": {
+          "Pl_JD": {},
+          "Pl_PLC": {},
+          "Pl_Tpl": {},
+          "Pl_Frg": {},
+          "Pl_Axm": {
+            "deployed": 1
+          },
+          "Pl_Qry": {},
+          "Pl_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 1,
+        "least_military": 0,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 5,
+        "resource_remainder": 7
+      },
+      "Kayser": {
+        "nation": "Ethiopia",
+        "resources": {
+          "[Food]": 4,
+          "[Stone]": 7,
+          "[Gold]": 6,
+          "[Books]": 2
+        },
+        "production": {},
+        "workers": 5,
+        "grown_workers": 5,
+        "points": 5,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "Et_Stl",
+          "BM2": "Et_qry",
+          "BM3": "Lgn",
+          "BM4": "Et_Frm",
+          "S1": "Et_S"
+        },
+        "dynasties": [
+          "Et_AK",
+          "Et_Sb"
+        ],
+        "cards": {
+          "Et_AK": {},
+          "Et_Sb": {},
+          "Et_Stl": {},
+          "Et_qry": {},
+          "Lgn": {},
+          "Et_Frm": {},
+          "Et_S": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 6,
+        "resource_remainder": 9
+      }
+    },
+    "available_nations": [],
+    "nations": {},
+    "progress_board": {
+      "P11": "MpMk",
+      "P12": "Acm",
+      "P14": "Aqd",
+      "P21": "MtKl",
+      "P22": "Grn",
+      "P23": "QSH",
+      "P24": "Sng",
+      "P31": "SAls",
+      "P32": "Nub",
+      "P33": "Lyc",
+      "P34": "GrLh"
+    },
+    "round": 1,
+    "move_number": 13,
+    "round_starts": {
+      "0": 0,
+      "1": 4
+    },
+    "phase": "Action Phase",
+    "architects": 2,
+    "turmoil": 2,
+    "event": "AD_JA",
+    "war": null,
+    "war_value": null,
+    "next_move_player": "NationsBot20",
+    "next_move_choice": "Which action?",
+    "next_move_options": [
+      "Buy P11",
+      "Buy P12",
+      "Buy P14",
+      "Buy P21",
+      "Buy P22",
+      "Buy P23",
+      "Buy P24",
+      "Buy P31",
+      "Buy P33",
+      "Buy P34",
+      "Deploy to BM1",
+      "Deploy to BM2",
+      "Deploy to BM3",
+      "Deploy to BM4",
+      "Undeploy from BM3",
+      "Turmoil",
+      "Pass",
+      "Resign"
+    ],
+    "game_over": 0,
+    "undo_allowed": 0,
+    "invalid_move": null
+  }
+}
