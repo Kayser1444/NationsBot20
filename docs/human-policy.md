@@ -2,8 +2,9 @@
 
 The pilot learns which legal move a player selected from a public position.
 It covers nation drafts, growth and ordinary action prompts in two- and
-four-player games. The baseline uses Easy for unsupported prompts, including
-five-player policy decisions. Local and hosted play share `live-player/baseline.mjs`,
+four-player games. The baseline uses Easy for unsupported prompts. Three- and
+five-player decisions use the shared learned features; coefficients specific to
+those player counts were not trained. Local and hosted play share `live-player/baseline.mjs`,
 which compares card placements using the public position.
 That check values current production and workers as well as the options that
 an undeployed card gives you, such as opening a war with Horse Archer.
