@@ -1,0 +1,102 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { EventEmitter } from 'node:events';
+import { setImmediate } from 'node:timers/promises';
+import { settingsStore, initialSettings, validateSettings, modelForSettings } from './settings.mjs';
+import { parseMyMatches, isAuthorized, acceptInvitation } from './discovery.mjs';
+import { createPlayerController, startControlServer } from './service.mjs';
+import deployed from './trained-weights.json' with { type: 'json' };
+
+function storeFixture(t) {
+  const directory = mkdtempSync(join(tmpdir(), 'nations-player-'));
+  t.after(() => rmSync(directory, { force: true, recursive: true }));
+  return { directory, store: settingsStore(directory) };
+}
+const game = { id: '4000', title: 'Test', playerCount: 2, players: ['Kayser', 'NationsBot20'], invitation: true };
+const config = { username: 'NationsBot20', play: true };
+
+test('settings persist, reject stale writes and select the approved model profiles', t => {
+  const { directory, store } = storeFixture(t);
+  assert.deepEqual(modelForSettings(initialSettings).profiles['2'], deployed.profiles['2']);
+  assert.deepEqual(modelForSettings(initialSettings).profiles['4'], deployed.profiles['4']);
+  const next = { ...initialSettings, pollIntervalSeconds: 90, weightOverrides: { '2': { food: 9 }, '4': {} } };
+  store.save(next, 0, '229311536827465728');
+  assert.equal(settingsStore(directory).read().settings.pollIntervalSeconds, 90);
+  assert.equal(modelForSettings(store.read().settings).profiles['2'].food, 9);
+  assert.throws(() => store.save(initialSettings, 0), /Refresh/);
+  for (const bad of [{ pollIntervalSeconds: 1 }, { pollingEnabled: 'false' }, { twoPlayerModel: 'constructor' }, { authorizedPlayers: ['<script>'] }, { weightOverrides: { 2: { constructor: 1 } } }]) {
+    assert.throws(() => validateSettings({ ...initialSettings, ...bad }));
+  }
+});
+
+test('account listing identifies invitations, ignores completed matches and verifies the account', () => {
+  const card = `<div class="card my-2"><div>Title: <span>A &amp; B</span></div><div>Type: <span>2-Player, King</span></div><div>Players: <span>Kayser</span>, <span>NationsBot20 (invited)</span></div><a href="/nations/4000/"></a></div>`;
+  const html = `<span class="navbar-text py-0 me-3">Welcome, NationsBot20!</span><h1>Your Nations Matches</h1><h2>Invitations:</h2>${card}<h2>Completed:</h2>${card}`;
+  assert.deepEqual(parseMyMatches(html, config.username), [{ ...game, title: 'A & B', section: 'Invitations:' }]);
+  assert.throws(() => parseMyMatches(html, 'AnotherBot'));
+  assert.equal(isAuthorized(game, initialSettings, config.username), true);
+  assert.equal(isAuthorized({ ...game, players: ['SomeoneElse', config.username] }, initialSettings, config.username), false);
+  assert.equal(isAuthorized({ ...game, playerCount: 3, players: ['Kayser', 'SomeoneElse', config.username] }, initialSettings, config.username), false);
+});
+
+test('manual polling works while disabled, coalesces requests and revocation closes a game', async t => {
+  const { store } = storeFixture(t);
+  store.save({ ...initialSettings, pollingEnabled: false }, 0, '229311536827465728');
+  let discovered = 0, accepted = 0, resolveDiscovery, connected;
+  const controller = createPlayerController({ config, store,
+    discover: () => { discovered++; return new Promise(resolve => { resolveDiscovery = resolve; }); },
+    accept: async () => { accepted++; },
+    connect: async controls => { connected = controls; await new Promise(resolve => controls.signal.addEventListener('abort', resolve, { once: true })); return false; },
+  });
+  t.after(() => controller.close());
+  await controller.tick(); assert.equal(discovered, 0);
+  const first = controller.poll(), second = controller.poll();
+  assert.equal(first, second); assert.equal(discovered, 1);
+  resolveDiscovery([game, { ...game, id: '3999' }]); await first;
+  assert.equal(accepted, 1); assert.equal(controller.status().games.filter(g => g.active).length, 1);
+  assert.equal(connected.canPlay(), true);
+  controller.save({ ...store.read().settings, playEnabled: false }, 1, '229311536827465728');
+  assert.equal(connected.canPlay(), false);
+  controller.save({ ...store.read().settings, authorizedPlayers: [] }, 2, '229311536827465728');
+  assert.equal(connected.signal.aborted, true);
+  assert.equal(controller.status().games.filter(g => g.active).length, 0);
+});
+
+test('invitation acceptance verifies participants, sends once and waits for confirmation', async () => {
+  let socket;
+  class FakeSocket extends EventEmitter {
+    sent = [];
+    constructor() { super(); socket = this; }
+    send(data) { this.sent.push(JSON.parse(data)); }
+    close() {}
+  }
+  const controls = { ...config, settings: () => initialSettings };
+  const done = acceptInvitation(game, controls, 'synthetic-session', FakeSocket);
+  const update = { replaying: false, players: game.players, accepted: ['Kayser'] };
+  socket.emit('message', JSON.stringify(update)); socket.emit('message', JSON.stringify(update));
+  assert.deepEqual(socket.sent, [{ join: 2 }]);
+  socket.emit('message', JSON.stringify({ ...update, accepted: game.players })); await done;
+  const wrong = acceptInvitation(game, controls, 'synthetic-session', FakeSocket);
+  socket.emit('message', JSON.stringify({ ...update, players: ['AnotherPlayer', config.username] }));
+  await assert.rejects(wrong, /participants changed/); assert.deepEqual(socket.sent, []);
+});
+
+test('private control API requires its credential and checks settings revisions', async t => {
+  const { store } = storeFixture(t);
+  const controller = createPlayerController({ config, store, discover: async () => [], accept: async () => {}, connect: async () => true });
+  const token = 'a'.repeat(64);
+  const server = await startControlServer(controller, { token, port: 0, host: '127.0.0.1' });
+  t.after(() => { controller.close(); server.close(); server.closeAllConnections(); });
+  const url = `http://127.0.0.1:${server.address().port}`;
+  assert.equal((await fetch(url + '/status')).status, 401);
+  const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+  assert.equal((await fetch(url + '/status', { headers })).status, 200);
+  const body = JSON.stringify({ settings: initialSettings, revision: 0, actor: '229311536827465728' });
+  assert.equal((await fetch(url + '/settings', { headers, method: 'POST', body })).status, 200);
+  assert.equal((await fetch(url + '/settings', { headers, method: 'POST', body })).status, 409);
+  assert.equal((await fetch(url + '/poll', { headers, method: 'POST' })).status, 200);
+  await setImmediate();
+});

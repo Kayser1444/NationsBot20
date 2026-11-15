@@ -6,6 +6,7 @@
 !scripts/
 !scripts/prepare-question-model.mjs
 !dashboard.html
+!player-dashboard.html
 !sm-season.json
 !data/
 !data/cards/

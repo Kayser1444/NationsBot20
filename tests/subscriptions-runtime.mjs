@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const dir = mkdtempSync(join(tmpdir(), 'nations-subscriptions-'));
-for (const name of readdirSync(root)) if (name.endsWith('.mjs') || name === 'dashboard.html') copyFileSync(join(root, name), join(dir, name));
+for (const name of readdirSync(root)) if (name.endsWith('.mjs') || ['dashboard.html', 'player-dashboard.html'].includes(name)) copyFileSync(join(root, name), join(dir, name));
 for (const name of ['cards', 'faq', 'question']) cpSync(join(root, 'data', name), join(dir, 'data', name), { recursive: true });
 writeFileSync(join(dir, 'sm-season.json'), JSON.stringify({ season: 11, divisions: {} }));
 writeFileSync(join(dir, 'friends.json'), JSON.stringify({ subscriptions: {}, matches: [], discord: {} }));

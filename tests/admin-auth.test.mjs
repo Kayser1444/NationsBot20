@@ -11,7 +11,7 @@ const owner = '229311536827465728';
 const settings = { origin: 'https://admin.example.test', clientId: '1558936899446374570', clientSecret: 'synthetic-client-secret', ownerId: owner };
 async function fixture(t) {
   let clock = 0, identity = owner, calls = 0, snapshots = 0, edits = 0;
-  const resets = [], globalResets = [], modelChanges = [];
+  const resets = [], globalResets = [], modelChanges = [], playerActions = [];
   let billingReads = 0, creditReads = 0, connectionTests = 0;
   const auth = createDiscordAuth(settings, { now: () => clock, fetcher: async (url, options) => {
     calls++;
@@ -25,6 +25,7 @@ async function fixture(t) {
     return Response.json({ id: identity, username: 'Owner' });
   } });
   const dashboard = await startDashboard({ port: 0, auth, snapshot: () => { snapshots++; return { private: 'owner-only' }; },
+    playerAdmin: async (action, input, actor) => { playerActions.push({ action, input, actor }); return { ok: true }; },
     railwayBilling: async () => { billingReads++; return { available: true, remainingCreditUsd: 4.66 }; },
     openAiCredit: async () => { creditReads++; return { configured: true, available: true, remainingCreditUsd: 4.7 }; },
     openAiTest: async () => { connectionTests++; return { ok: true, model: 'gpt-6.1-sol' }; },
@@ -62,9 +63,31 @@ async function fixture(t) {
     return { cookie, callback };
   }
   return { request, login, setIdentity: value => { identity = value; }, setClock: value => { clock = value; },
+    playerActions: () => playerActions,
     resets: () => resets, globalResets: () => globalResets, modelChanges: () => modelChanges, billingReads: () => billingReads, creditReads: () => creditReads, connectionTests: () => connectionTests,
     counts: () => ({ calls, snapshots, edits }) };
 }
+
+test('Player Bot sub-page and controls share owner OAuth and CSRF protection', async t => {
+  const f = await fixture(t);
+  assert.equal((await f.request('/api/player/status')).status, 401);
+  assert.equal((await f.request('/api/player/poll', { method: 'POST' })).status, 401);
+  const attempt = await f.login();
+  const callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
+  const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
+  const page = await f.request('/player', { headers: { cookie } });
+  assert.equal(page.status, 200);
+  const csrf = (await page.text()).match(/const token='([a-f0-9]+)'/)[1];
+  assert.equal((await f.request('/api/player/status', { headers: { cookie } })).status, 200);
+  const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf, 'content-type': 'application/json' };
+  for (const route of ['/api/player/settings', '/api/player/poll']) {
+    assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
+    assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, origin: 'https://evil.test' } })).status, 403);
+  }
+  assert.equal((await f.request('/api/player/poll', { method: 'POST', headers })).status, 200);
+  assert.equal((await f.request('/api/player/settings', { method: 'POST', headers, body: JSON.stringify({ settings: {}, revision: 0, actor: 'forged' }) })).status, 200);
+  assert.equal(f.playerActions().at(-1).actor, owner);
+});
 
 test('question quota reset requires owner authentication, matching origin and CSRF and records the actor', async t => {
   const f = await fixture(t), path = '/api/question-quotas/' + owner;

@@ -13,6 +13,8 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm test
+      - run: npm ci --prefix live-player --ignore-scripts
+      - run: node --test --test-isolation=none live-player/*.test.mjs
       - run: node tests/discovery-runtime.mjs
       - run: node tests/discovery-runtime.mjs
         env:

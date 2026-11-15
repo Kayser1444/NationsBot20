@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nations · Local game</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/board.css">
+  <script src="/board.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">N</span><span>Nations</span></div>
+      <p class="local-status"><span></span> Offline game</p>
+      <div class="toolbar">
+        <a class="secondary" href="/api/replay">Save replay</a>
+        <button class="secondary" id="new-game" type="button">New game</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="match-header">
+      <div><p class="eyebrow">You vs. NationsBot</p><h1 id="match-title">Nations</h1></div>
+      <div id="rounds" class="rounds" aria-label="Round"></div>
+    </div>
+    <p id="error" class="error" role="alert" hidden></p>
+    <div class="game-grid">
+      <div>
+        <section id="draft" class="panel" aria-labelledby="draft-title" hidden>
+          <h2 id="draft-title">Choose a nation</h2>
+          <div id="nations"></div>
+        </section>
+        <section class="panel" aria-labelledby="market-title">
+          <div class="section-heading"><h2 id="market-title">Progress board</h2><div id="supplies"></div></div>
+          <div id="market"></div>
+        </section>
+        <section id="boards" aria-label="Player boards"></section>
+      </div>
+      <aside>
+        <section class="panel turn" aria-labelledby="turn-title">
+          <p class="eyebrow" id="phase">Local match</p>
+          <h2 id="turn-title" tabindex="-1">Loading board…</h2>
+          <div id="choices"></div>
+        </section>
+        <section id="events" class="panel" aria-label="Events and war" hidden></section>
+        <section class="panel" aria-labelledby="log-title">
+          <h2 id="log-title">Game log</h2>
+          <ol id="log" class="log"></ol>
+        </section>
+      </aside>
+    </div>
+  </main>
+  <dialog id="inspector" aria-labelledby="card-name">
+    <div id="card-detail"></div>
+    <form method="dialog"><button class="secondary" type="submit">Close</button></form>
+  </dialog>
+</body>
+</html>

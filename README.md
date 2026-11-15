@@ -9,6 +9,10 @@ logging into the game, submitting moves or posting game chat.
 
 ## Quick links
 
+The separate AI player has a **Player Bot** sub-page in the owner console.
+See [access, game discovery and model settings](docs/player-bot.md). Its Tabony
+login stays on the dedicated player service; reminder monitoring remains public.
+
 Bulletins can be drafted here and published through the limited [bulletin API and local CLI](docs/bulletins.md), with separate staging/production credentials and persistent duplicate protection.
 
 - [NationsBot administration console](https://nationsbot20-production.up.railway.app/) — subscriptions, monitoring status and logs; sign in with the configured Discord owner account.

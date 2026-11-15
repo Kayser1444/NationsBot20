@@ -7,9 +7,11 @@ import { thinkingSummary, playerThinkingSummary } from './thinking-summary.mjs';
 import { createRailwayBilling } from './railway-billing.mjs';
 import { createOpenAiCredit } from './openai-credit.mjs';
 import { createOpenAiConnectionTest } from './openai-connection-test.mjs';
+import { createPlayerAdmin } from './player-admin.mjs';
 
 const page = readFileSync(new URL('./dashboard.html', import.meta.url), 'utf8');
-export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, globalQuestionQuota, resetGlobalQuestionQuota, questionModelSettings, currentQuestionModel, setQuestionModel, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = null }) {
+const playerPage = readFileSync(new URL('./player-dashboard.html', import.meta.url), 'utf8');
+export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot, subscribe, unsubscribe, setBan, setTracking, questionLog, questionQuota, resetQuestionQuota, globalQuestionQuota, resetGlobalQuestionQuota, questionModelSettings, currentQuestionModel, setQuestionModel, bulletins = null, bulletinKeyHash = null, auth = null, environmentName = process.env.RAILWAY_ENVIRONMENT_NAME, railwayBilling = createRailwayBilling(), openAiCredit = createOpenAiCredit(), openAiTest = null, playerAdmin = createPlayerAdmin() }) {
   const token = randomBytes(24).toString('hex');
   const runOpenAiTest = openAiTest ?? createOpenAiConnectionTest({ getModel: currentQuestionModel });
   let origin;
@@ -57,6 +59,7 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
         activeSession = auth.session(req);
       } catch { json(500, { error: 'Inloggningen kunde inte verifieras.' }); return; }
       if (!activeSession) {
+        if (req.method === 'GET' && url.pathname === '/player') { res.writeHead(303, { location: '/' }); res.end(); return; }
         if (req.method === 'GET' && url.pathname === '/') {
           res.writeHead(200, { 'content-type': 'text/html; charset=utf-8',
             'content-security-policy': "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'; form-action 'self' https://discord.com" });
@@ -66,16 +69,21 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
       }
     }
     const csrf = activeSession?.csrf ?? token;
-    if (req.method === 'GET' && url.pathname === '/') {
+    if (req.method === 'GET' && ['/', '/player'].includes(url.pathname)) {
       res.writeHead(200, {
         'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store',
         'x-frame-options': 'DENY', 'x-content-type-options': 'nosniff',
         'content-security-policy': "default-src 'self'; script-src 'self' 'nonce-" + csrf + "'; style-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'",
       });
-      res.end(dashboardTheme(page.replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
+      res.end(dashboardTheme((url.pathname === '/player' ? playerPage : page).replaceAll('__TOKEN__', csrf).replaceAll('__LOCATION__', auth ? 'ägarpanel' : 'på den här datorn')
         .replaceAll('__ADMIN_OWNER__', /^\d{17,20}$/.test(activeSession?.userId) ? activeSession.userId : '')
         .replaceAll('__STOP_HINT__', auth ? 'Bevakningen körs på Railway.' : 'Stoppa tjänsten med Ctrl+C i terminalen.')
         .replaceAll('__ADMIN_CONTROLS__', auth ? '<button id="logout" type="button">Logga ut</button>' : ''), environmentName)); return;
+    }
+    if (req.method === 'GET' && url.pathname === '/api/player/status') {
+      try { if (!playerAdmin) throw new Error('Player Bot is not connected to this admin environment.'); json(200, await playerAdmin('status')); }
+      catch (error) { json(error.status ?? 503, { error: error.message }); }
+      return;
     }
     if (req.method === 'GET' && url.pathname === '/api/status') { json(200, snapshot()); return; }
     if (req.method === 'GET' && url.pathname === '/api/railway-billing') { json(200, await railwayBilling()); return; }
@@ -115,6 +123,20 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     }
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
+    if (req.method === 'POST' && ['/api/player/settings', '/api/player/poll'].includes(url.pathname)) {
+      try {
+        if (!playerAdmin) throw Object.assign(new Error('Player Bot is not connected to this admin environment.'), { status: 503 });
+        let input = {};
+        if (url.pathname.endsWith('/settings')) {
+          if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON required.' }); return; }
+          let body = '';
+          for await (const chunk of req) { body += chunk.toString('utf8'); if (Buffer.byteLength(body) > 32768) throw Object.assign(new Error('Request too large.'), { status: 413 }); }
+          input = JSON.parse(body);
+        }
+        json(200, await playerAdmin(url.pathname.endsWith('/settings') ? 'settings' : 'poll', input, activeSession?.userId ?? null));
+      } catch (error) { json(error.status ?? 400, { error: error instanceof SyntaxError ? 'Invalid JSON.' : error.message }); }
+      return;
+    }
     if (req.method === 'POST' && url.pathname === '/api/openai-test') {
       try { json(200, await runOpenAiTest()); }
       catch { json(503, { error: 'OpenAI-testet kunde inte slutföras.' }); }

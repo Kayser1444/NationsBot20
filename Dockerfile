@@ -5,7 +5,7 @@ RUN npm ci --omit=dev
 COPY question-embeddings.mjs ./
 COPY scripts/prepare-question-model.mjs ./scripts/
 RUN node scripts/prepare-question-model.mjs --directory=/app/models
-COPY *.mjs dashboard.html ./
+COPY *.mjs dashboard.html player-dashboard.html ./
 COPY sm-season.json ./
 COPY data/cards/catalog.json ./data/cards/
 COPY data/cards/asset-manifest.json ./data/cards/
