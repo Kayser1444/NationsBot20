@@ -18,6 +18,11 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
       accountEnabled: () => entry.account.enabled,
       defaultModel: count => count === 2 || !isExperimentalModel(entry.account.defaultModel) ? entry.account.defaultModel : null,
       hideUnauthorized: () => Boolean(entry.account.matchIds),
+      onLobbyStarted(match) {
+        for (const { account, runtime } of entries.values()) {
+          if (match.players.includes(account.username)) background(runtime.controller.lobbyStarted());
+        }
+      },
       authorize(game, settings) {
         if (entry.account.matchIds) {
           return entry.account.matchIds.includes(game.id) && !game.invitation &&

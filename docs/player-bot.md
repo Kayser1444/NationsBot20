@@ -123,7 +123,9 @@ participants, and opens one worker per controlled seat in an eligible full game.
 through five players. Open lobbies are revisited on later polls. All move
 submissions retain the persistent journal and offered-option checks.
 
-One WebSocket per signed-in account requests discovery after notifications. A timer covers
+When Tabony confirms that the last invitation accepted by a bot filled the
+lobby, automatic discovery refreshes the participating bot accounts. One
+WebSocket per signed-in account requests discovery after notifications. A timer covers
 new invitations that do not emit a notification. Notifications are coalesced
 and briefly throttled; manual and scheduled polls share one in-flight operation.
 Account WebSockets reconnect after disconnection, and expired listing sessions

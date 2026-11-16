@@ -47,13 +47,13 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
       origin, headers: { Cookie: session }, handshakeTimeout: 12000, maxPayload: 4 * 1024 * 1024,
     });
     let sent = false, settled = false;
-    const finish = error => {
+    const finish = (error, result) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
       config.signal?.removeEventListener('abort', abort);
       socket.close();
-      error ? reject(error) : resolve();
+      error ? reject(error) : resolve(result);
     };
     const abort = () => finish(new Error('Invitation acceptance was stopped.'));
     const timer = setTimeout(() => finish(new Error('Invitation acceptance could not be confirmed.')), 15000);
@@ -69,7 +69,12 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
             !message.players.every(name => match.players.includes(name)) ||
             !(config.authorize?.(match) ?? isAuthorized(match, config.settings(), config.username))) throw new Error('Invitation participants changed. Poll again.');
         if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
-        if (message.accepted.includes(config.username)) { finish(); return; }
+        if (message.accepted.includes(config.username)) {
+          const lobbyStarted = sent && match.players.length === match.playerCount &&
+            match.players.every(name => message.accepted.includes(name));
+          finish(null, { lobbyStarted });
+          return;
+        }
         const settings = config.settings();
         if (!settings.playEnabled || !settings.autoAccept || config.canPlay?.() === false) throw new Error('Invitation acceptance is paused.');
         if (!sent) { sent = true; socket.send(JSON.stringify({ join: settings.growthResources })); }

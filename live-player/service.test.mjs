@@ -78,7 +78,12 @@ test('invitation acceptance verifies participants, sends once and waits for conf
   const update = { replaying: false, players: game.players, accepted: ['Kayser'] };
   socket.emit('message', JSON.stringify(update)); socket.emit('message', JSON.stringify(update));
   assert.deepEqual(socket.sent, [{ join: 2 }]);
-  socket.emit('message', JSON.stringify({ ...update, accepted: game.players })); await done;
+  socket.emit('message', JSON.stringify({ ...update, accepted: game.players }));
+  assert.deepEqual(await done, { lobbyStarted: true });
+  const open = acceptInvitation({ ...game, playerCount: 4 }, controls, 'synthetic-session', FakeSocket);
+  socket.emit('message', JSON.stringify(update));
+  socket.emit('message', JSON.stringify({ ...update, accepted: game.players }));
+  assert.deepEqual(await open, { lobbyStarted: false });
   const wrong = acceptInvitation(game, controls, 'synthetic-session', FakeSocket);
   socket.emit('message', JSON.stringify({ ...update, players: ['AnotherPlayer', config.username] }));
   await assert.rejects(wrong, /participants changed/); assert.deepEqual(socket.sent, []);

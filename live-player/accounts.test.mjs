@@ -137,3 +137,40 @@ test('takeover discovery includes old games and accepts only approved ongoing se
     assert.deepEqual(manager.status().games.map(game => game.id), ['4000']);
   } finally { await manager.close(); }
 });
+
+test('the last confirmed invitation connects every managed seat without another scheduled poll', async t => {
+  const directory = directoryFixture(t);
+  const store = settingsStore(directory);
+  const bots = ['NationsBot20', 'NationsBot20_2', 'NationsBot_3'];
+  const match = { id: '3278', playerCount: 4, players: ['Kayser', ...bots] };
+  const accepted = new Set();
+  const connected = new Set();
+  const experiments = { scan: () => [] };
+  const manager = createAccountManager({
+    accounts: accountStore(directory, key), experiments,
+    base: createPlayerController({ config: {}, store, experiments }),
+    createRuntime(config) {
+      const controller = createPlayerController({
+        config: { ...config, dataDir: directory }, store, experiments,
+        discover: async () => [{
+          ...match, invitation: !accepted.has(config.username),
+          section: accepted.size < bots.length ? 'Open:' :
+            config.username === bots[0] ? 'Your turn:' : 'Not your turn:',
+        }],
+        accept: async () => {
+          accepted.add(config.username);
+          return { lobbyStarted: accepted.size === bots.length };
+        },
+        connect: async () => { connected.add(config.username); return true; },
+      });
+      return { controller, close: () => controller.close() };
+    },
+  });
+  try {
+    for (const username of bots) manager.changeAccount({ action: 'add', username, password: 'fixture' });
+    for (const { id } of manager.status().accounts) manager.changeAccount({ action: 'start', accountId: id });
+    await manager.poll();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.deepEqual([...connected].sort(), [...bots].sort());
+  } finally { await manager.close(); }
+});

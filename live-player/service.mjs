@@ -158,6 +158,7 @@ export function createPlayerController({ config, store, connect, discover, accep
           log(`Match ${info.id}: invitation accepted.`);
           if (config.accountId) {
             games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));
+            if (joined?.lobbyStarted) config.onLobbyStarted?.(info);
             continue;
           }
         }
@@ -221,6 +222,10 @@ export function createPlayerController({ config, store, connect, discover, accep
     },
     async tick() { if (running && settings().pollingEnabled && !busy && (nextPollAt === null || now() >= nextPollAt)) await this.poll('scheduled'); },
     async notified() { if (running && settings().pollingEnabled && (!lastPollAt || now() - lastPollAt >= 5000)) await this.poll('account notification'); },
+    async lobbyStarted() {
+      await Promise.allSettled([busy]);
+      if (running && accountEnabled() && settings().pollingEnabled) await this.poll('lobby started');
+    },
     async resume() {
       await Promise.allSettled([busy, ...[...connections].filter(([, signal]) => signal.aborted).map(([task]) => task)]);
       if (running && accountEnabled()) await this.poll('account started');
