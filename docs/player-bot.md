@@ -3,7 +3,8 @@
 The existing owner console has a `/player` sub-page, reached from the Player Bot
 link on its home page. It reuses Discord owner sign-in, HTTPS, the owner session
 and CSRF checks. Game access is a separate list of exact Tabony account names,
-initially `Kayser`. Every human participant must be on that list.
+initially `Kayser`. Regular bot accounts can play together. Other participants
+in their games must be on the authorized list.
 
 Controls include automatic discovery on/off, a poll interval from 15 seconds to
 one day, manual **Poll now**, automatic invitation acceptance, a separate pause
@@ -28,18 +29,57 @@ the player volume's `/data/player-settings.json`.
 
 **Experimental RL** is available in the two-player selector when the player has
 a compatible checkpoint. Choose a specific version for newly connected matches.
-Each running match has its own **Model** selector in the **Games** table. Choose
-a checkpoint there to change that match immediately. The next move the bot sends
-uses the new model, and the match keeps its selection across reconnects and
-restarts. A move already sent still waits for confirmation. The advanced
-coefficient overrides do not change the neural model.
+In multi-account mode, each account has a **Default model for new games**.
+**Use service default** follows the two selectors under AI model. A two-player
+experimental default falls back to the service's multiplayer model in larger
+matches. A seat saves its model when it first connects. The **Games** table
+shows a row for each controlled seat and lets you choose its model before or
+during play after discovery. A change applies to the next move the seat sends.
+Seat selections survive reconnects and restarts. A move already sent still
+waits for confirmation. The advanced coefficient overrides apply to heuristic
+checkpoints.
 
 The page shows the worker version, account socket, last/next discovery time,
 game participants, current turn, pending move confirmation, selected model and
 recent activity. A stale form revision is rejected instead of overwriting a
 newer save. Removing an authorized player closes their game connections.
-Lowering the concurrency limit affects new connections. Games whose journal or
+The concurrency limit applies per account and affects new connections. Games whose journal or
 server response is ambiguous stop and retain their receipt for inspection.
+
+## One human and three bots
+
+1. Register `NationsBot20`, `NationsBot20_2` and `NationsBot_3` under **Tabony
+   accounts** using their existing Tabony credentials. New accounts start stopped.
+   Select each account's default model, or keep the service default.
+2. Add the human's exact username under **Authorized Tabony players** and allow
+   four-player games. In Tabony, create a four-player match and invite the three
+   bot usernames.
+3. Use **Poll now** to discover the invitations and set any seat-specific models
+   in **Games**. Use **Start play** on all three accounts. Enable service-wide
+   playing and automatic invitation acceptance, or accept each invitation in
+   Tabony. Keep automatic discovery enabled so the bots connect after the
+   lobby starts. With discovery paused, use **Poll now** again once all
+   invitations are accepted.
+
+**Stop play** disconnects the selected account's game workers. The account can
+still discover matches and check its login. **Delete** also removes the stored
+credentials. Existing per-seat model selections and move receipts are retained
+so re-adding an account can safely resume a match.
+
+## Finish a tournament player's games
+
+Confirm the organizer's approved match IDs and obtain authorized access to the
+Tabony account that holds the seats. Add that account with **Tournament takeover**
+scope and enter those IDs. Review the discovered seats, choose the models and
+start the account. Discovery checks both current and archived matches, since
+Tabony archives games after seven days without a turn update. Only the listed
+ongoing games in which that account holds a seat are eligible. The match-ID
+approval covers the other players in those games. Stop play when the player
+returns, or delete the account after the handoff or after the games finish.
+
+A workflow for formally reassigning a seat to a different Tabony account would
+need support from Tabony and the tournament organizer. Creating and inviting
+players to a game from the owner console would also be a separate integration.
 
 ## Service connection
 
@@ -52,26 +92,43 @@ the following in the same Railway environment:
 | Admin | `NATIONS_PLAYER_CONTROL_URL` | `http://nationsbot20-player.railway.internal:8080` |
 | Both | `NATIONS_PLAYER_CONTROL_TOKEN` | The same randomly generated 32-byte hex credential |
 | Player | `NATIONS_PLAYER_CONTROL_PORT` | `8080` (default) |
+| Player | `NATIONS_PLAYER_CREDENTIAL_ENCRYPTION_KEY` | A separate, random 32-byte hex key, sealed in Railway |
 
 Keep that credential in hosting variables and out of source and browser code.
 The player control service has no public domain. Its status and mutation routes
-require the credential. The admin forwards the authenticated Discord owner ID
-as the actor when saving settings or changing a match model. The existing `TABONY_PASSWORD` remains sealed
-on the player service.
+require the control credential. The admin forwards the authenticated Discord
+owner ID with mutations. When adding an account, the owner console forwards its
+credentials to the player over the private network. Status responses omit
+passwords and session cookies.
+
+The account key enables multi-account mode. Generate a separate key per
+environment, seal it in the player service as described in the
+[Railway variables documentation](https://docs.railway.com/variables#sealed-variables)
+and retain a secure backup of the key with access separate from the volume
+backup. The player stores authenticated AES-256-GCM encrypted names and
+passwords in `/data/player-accounts.sqlite`. The service needs the original
+key to reopen the vault.
+
+If the managed worker already uses `TABONY_USERNAME` and `TABONY_PASSWORD`,
+the first startup with the vault imports that account with its prior
+`TABONY_PLAY` setting and reuses its saved match models and journals. After
+confirming the imported account in the owner console, remove legacy Tabony
+variables from that managed worker. In multi-account mode, the global
+**Pause playing** control and each account's start/stop setting govern moves.
 
 Setting the control credential starts the managed player runtime. Without it,
 the previous fixed-match mode remains available. Managed mode discovers the
-signed-in account's current matches and invitations, verifies the account and
-all participants, and opens one worker per eligible full game. It supports two
+signed-in accounts' matches and invitations, verifies each account and all
+participants, and opens one worker per controlled seat in an eligible full game. It supports two
 through five players. Open lobbies are revisited on later polls. All move
 submissions retain the persistent journal and offered-option checks.
 
-An account WebSocket requests discovery after notifications; a timer covers
+One WebSocket per signed-in account requests discovery after notifications. A timer covers
 new invitations that do not emit a notification. Notifications are coalesced
 and briefly throttled; manual and scheduled polls share one in-flight operation.
 Account WebSockets reconnect after disconnection, and expired listing sessions
-are logged in again. Background errors are shown on the page and retried at the
-next scheduled poll.
+are logged in again. The page reports discovery and login errors per account.
+The next scheduled poll retries the affected accounts.
 
 Training scripts continue to use `default-weights.json` as their fixed baseline.
 The managed player loads older checkpoints from `live-player/models.json` and

@@ -15,6 +15,7 @@ function request(url, init = {}) {
 }
 
 export async function login({ username, password, matchId }) {
+  const next = matchId ? `/nations/${matchId}/` : '/nations/matches/mine/';
   const formPage = await request(loginUrl);
   if (!formPage.ok) throw new StopPlayer(`Tabony login page returned HTTP ${formPage.status}.`);
   const csrfCookie = sessionPair(formPage, 'csrftoken');
@@ -23,11 +24,12 @@ export async function login({ username, password, matchId }) {
   const response = await request(loginUrl, {
     method: 'POST',
     headers: { Cookie: csrfCookie, Origin: origin, Referer: loginUrl },
-    body: new URLSearchParams({ username, password, csrfmiddlewaretoken: token, next: `/nations/${matchId}/` }),
+    body: new URLSearchParams({ username, password, csrfmiddlewaretoken: token, next }),
   });
   const session = sessionPair(response, 'sessionid');
   await response.body?.cancel();
-  if (response.status !== 302 || !session) throw new StopPlayer('Tabony did not accept the bot login. Check its Railway password variable.');
+  if (response.status !== 302 || !session) throw new StopPlayer('Tabony did not accept the account login. Check its credentials.');
+  if (!matchId) return session; // The managed worker verifies identity against the signed-in listing on each poll.
 
   const matchPage = await request(`${origin}/nations/${matchId}/`, { headers: { Cookie: session } });
   const identity = (await matchPage.text()).match(/<script id="username" type="application\/json">([^<]+)<\/script>/)?.[1];

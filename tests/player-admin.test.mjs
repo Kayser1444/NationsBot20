@@ -14,6 +14,9 @@ test('admin proxy uses its fixed service URL and server credential and forwards 
   await proxy('match-model', { matchId: '4000', modelId: 'initial', previousModel: 'full-hour', actor: 'forged', url: 'https://evil.test/' }, '229311536827465728');
   assert.equal(calls[1].url, 'http://player.railway.internal:8080/match-model');
   assert.deepEqual(JSON.parse(calls[1].options.body), { matchId: '4000', modelId: 'initial', previousModel: 'full-hour', actor: '229311536827465728' });
+  await proxy('account', { action: 'add', username: 'NationsBot_3', password: 'fixture', actor: 'forged' }, '229311536827465728');
+  assert.equal(calls[2].url, 'http://player.railway.internal:8080/account');
+  assert.deepEqual(JSON.parse(calls[2].options.body), { action: 'add', username: 'NationsBot_3', password: 'fixture', actor: '229311536827465728' });
   assert.equal(createPlayerAdmin({ env: {} }), null);
   await assert.rejects(() => proxy('https://another.example/'), /Invalid/);
 });

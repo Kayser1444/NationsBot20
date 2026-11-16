@@ -73,6 +73,7 @@ test('Player Bot sub-page and controls share owner OAuth and CSRF protection', a
   assert.equal((await f.request('/api/player/status')).status, 401);
   assert.equal((await f.request('/api/player/poll', { method: 'POST' })).status, 401);
   assert.equal((await f.request('/api/player/match-model', { method: 'POST' })).status, 401);
+  assert.equal((await f.request('/api/player/account', { method: 'POST' })).status, 401);
   const attempt = await f.login();
   const callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
   const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
@@ -81,7 +82,7 @@ test('Player Bot sub-page and controls share owner OAuth and CSRF protection', a
   const csrf = (await page.text()).match(/const token='([a-f0-9]+)'/)[1];
   assert.equal((await f.request('/api/player/status', { headers: { cookie } })).status, 200);
   const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf, 'content-type': 'application/json' };
-  for (const route of ['/api/player/settings', '/api/player/poll', '/api/player/match-model']) {
+  for (const route of ['/api/player/settings', '/api/player/poll', '/api/player/match-model', '/api/player/account']) {
     assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
     assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, origin: 'https://evil.test' } })).status, 403);
   }

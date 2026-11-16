@@ -9,7 +9,7 @@ import { origin, login, readPosition, safeOption, StopPlayer } from './tabony.mj
 import { chooseMove } from './policy.mjs';
 import { validateModel } from './scorer.mjs';
 
-function configuration(env) {
+function configuration(env, managed) {
   const config = {
     matchId: env.TABONY_MATCH_ID,
     username: env.TABONY_USERNAME,
@@ -17,7 +17,9 @@ function configuration(env) {
     password: env.TABONY_PASSWORD,
     dataDir: env.NATIONS_PLAYER_DATA_DIR ?? '/data',
     play: env.TABONY_PLAY === '1' && Boolean(env.TABONY_PASSWORD),
+    encryptionKey: managed ? env.NATIONS_PLAYER_CREDENTIAL_ENCRYPTION_KEY : undefined,
   };
+  if (managed && config.encryptionKey) return config;
   if (!/^\d{1,10}$/.test(config.matchId ?? '') ||
       ![config.username, config.opponent].every(name => /^[a-zA-Z0-9_]{1,20}$/.test(name ?? '')) ||
       config.opponent === config.username) {
@@ -27,7 +29,8 @@ function configuration(env) {
 }
 
 export async function journal(config) {
-  const path = join(config.dataDir, `match-${config.matchId}.json`);
+  const namespace = config.storageId ? `${config.storageId}-` : '';
+  const path = join(config.dataDir, `match-${namespace}${config.matchId}.json`);
   let pending = null;
   if (!config.play) return { pending, async save() {} };
   try {
@@ -117,7 +120,8 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         }
         const status = `${number}:${state.next_move_player}`;
         if (status !== lastLog) {
-          console.log(`Match ${config.matchId}: decision ${number}, waiting for ${state.next_move_player}.`);
+          const turn = config.accountId ? (state.next_move_player === config.username ? 'this account' : 'another seat') : state.next_move_player;
+          console.log(`Match ${config.matchId}: decision ${number}, waiting for ${turn}.`);
           lastLog = status;
         }
         config.onState?.(state, moves.pending);
@@ -154,8 +158,9 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
 }
 
 async function run() {
-  const config = configuration(process.env);
-  if (process.env.NATIONS_PLAYER_CONTROL_TOKEN) {
+  const managed = Boolean(process.env.NATIONS_PLAYER_CONTROL_TOKEN);
+  const config = configuration(process.env, managed);
+  if (managed) {
     const { startPlayerService } = await import('./service.mjs');
     await startPlayerService({ config, subscribe, journal, login });
     return;

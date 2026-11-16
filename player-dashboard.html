@@ -5,6 +5,9 @@
 <style>
 :root{font:15px system-ui,sans-serif;color:#203044;background:#f3f5f8}*{box-sizing:border-box}body{margin:0}main{max-width:1180px;margin:auto;padding:32px 24px}header{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:18px 0 24px}h1{font-size:32px;margin:0 0 6px;letter-spacing:-1px}h2{font-size:18px;margin:0 0 18px}h3{font-size:15px}p{line-height:1.55}.muted,small{color:#64748b;font-size:13px}a{color:#2256a5;text-decoration:none}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0}.card,.panel{background:white;border:1px solid #e0e5ec;border-radius:14px;padding:22px}.number{font-size:23px;font-weight:650;margin:8px 0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center}button{border:0;border-radius:8px;padding:10px 14px;font:inherit;cursor:pointer;background:#234f86;color:white}button.secondary{background:#e8edf4;color:#203044}[data-environment=staging] button.secondary{color:white}button:disabled{opacity:.5;cursor:wait}label{display:block;font-size:13px;font-weight:600;margin:16px 0 6px}input,select,textarea{width:100%;border:1px solid #cdd5df;border-radius:8px;padding:10px;font:inherit;background:white;color:inherit}textarea{resize:vertical}label.check{display:flex;align-items:center;gap:8px;font-weight:400}input[type=checkbox]{width:18px;height:18px}.counts{display:flex;gap:16px;flex-wrap:wrap}.counts label{margin:8px 0}.feedback{min-height:25px;margin:15px 0;font-size:14px}.error{color:#a33c37}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left}td,th{padding:12px 8px;border-bottom:1px solid #edf0f4;font-size:13px;vertical-align:top}th{color:#64748b}td:first-child,th:first-child{padding-left:0}.event{border-bottom:1px solid #edf0f4;padding:10px 0;font-size:13px}.event time{color:#64748b;margin-right:12px}pre{white-space:pre-wrap;font-size:12px;overflow-wrap:anywhere;max-height:320px;overflow:auto}.hint{padding:12px 16px;border-left:3px solid #c5d3e5;background:#edf2f9;font-size:13px}details{margin:20px 0}summary{cursor:pointer;font-weight:600}.events{max-height:300px;overflow:auto}footer{margin-top:24px}.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:750px){.grid,.cards,.split{grid-template-columns:1fr}main{padding:20px 16px}header{align-items:flex-start;flex-direction:column}}
 </style>
+<style>
+.accounts-panel{margin-bottom:20px}.accounts-panel .toolbar button{font-size:13px;padding:7px 10px}.accounts-panel fieldset{border:0;padding:0;margin:0}.accounts-panel form button{margin-top:14px}.account-message{display:block;margin-top:4px}.seat-name{display:block;margin-top:4px;font-weight:600}
+</style>
 <main>
 <nav><a href="/">← NationsBot administration</a></nav>
 <header><div><h1>Player Bot</h1><div class="muted">Invitations, games and AI settings · __LOCATION__</div></div>__ADMIN_CONTROLS__</header>
@@ -12,18 +15,30 @@
 <section class="cards">
 <div class="card"><small>PLAYER SERVICE</small><div class="number" id="connection">Connecting…</div><div class="muted" id="identity">Checking worker</div></div>
 <div class="card"><small>GAME DISCOVERY</small><div class="number" id="poll-state">—</div><div class="muted" id="poll-time">—</div></div>
-<div class="card"><small>CONNECTED GAMES</small><div class="number" id="game-count">—</div><div class="muted" id="playing-state">—</div></div>
+<div class="card"><small id="game-count-label">CONNECTED GAMES</small><div class="number" id="game-count">—</div><div class="muted" id="playing-state">—</div></div>
 </section>
 <div class="toolbar"><button id="poll-now" disabled>Poll now</button><button id="poll-toggle" class="secondary" disabled>Pause polling</button><button id="play-toggle" class="secondary" disabled>Pause playing</button><button id="refresh" class="secondary">Reload saved settings</button></div>
 <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+<section id="accounts-panel" class="panel accounts-panel" hidden>
+<h2>Tabony accounts</h2>
+<div class="scroll"><table><thead><tr><th>Account</th><th>Play status</th><th>Default model for new games</th><th>Actions</th></tr></thead><tbody id="accounts"></tbody></table></div>
+<details id="add-account"><summary>Add account</summary>
+<form id="account-form" autocomplete="off"><fieldset id="account-fields">
+<div class="split"><div><label for="account-name">Tabony username</label><input id="account-name" required maxlength="20" pattern="[A-Za-z0-9_]+" autocomplete="off" autocapitalize="none" spellcheck="false"></div>
+<div><label for="account-password">Tabony password</label><input id="account-password" type="password" required maxlength="1024" autocomplete="new-password"></div></div>
+<label for="account-kind">Play scope</label><select id="account-kind"><option value="bot">Bot account · authorized games</option><option value="takeover">Tournament takeover · specific matches</option></select>
+<div id="takeover-fields" hidden><label for="takeover-matches">Match IDs</label><input id="takeover-matches" placeholder="4000, 4001" aria-describedby="takeover-help"><p class="muted" id="takeover-help">Use the authorized account that already holds the seat. Enter the unfinished tournament matches approved for takeover.</p></div>
+<button type="submit">Add account</button>
+</fieldset></form></details>
+</section>
 <form id="settings"><fieldset id="fields" disabled style="border:0;padding:0;margin:0">
 <div class="grid">
 <section class="panel"><h2>Access and discovery</h2>
-<label for="authorized">Authorized Tabony players</label><textarea id="authorized" rows="5" spellcheck="false" placeholder="Kayser"></textarea><p class="muted">One exact account name per line. Every human player in a game must be authorized.</p>
+<label for="authorized">Authorized Tabony players</label><textarea id="authorized" rows="5" spellcheck="false" placeholder="Kayser"></textarea><p class="muted">One exact account name per line. Registered bot accounts can play together. Takeover accounts use their approved match IDs.</p>
 <label for="interval">New-game poll interval (seconds)</label><input id="interval" type="number" min="15" max="86400" required><p class="muted">Fallback discovery interval. Account notifications can trigger an earlier check. Poll now also works when automatic polling is off.</p>
 <label class="check"><input id="auto-accept" type="checkbox">Automatically accept authorized invitations</label>
 <label>Allowed player counts</label><div class="counts"><label class="check"><input type="checkbox" value="2" name="count">2</label><label class="check"><input type="checkbox" value="3" name="count">3</label><label class="check"><input type="checkbox" value="4" name="count">4</label><label class="check"><input type="checkbox" value="5" name="count">5</label></div>
-<div class="split"><div><label for="max-games">Maximum connected games</label><input id="max-games" type="number" min="1" max="10" required></div><div><label for="growth">Growth for variable-difficulty invites</label><select id="growth"><option value="1">Emperor · 1</option><option value="2">King · 2</option><option value="3">Prince · 3</option><option value="4">Chieftain · 4</option></select></div></div>
+<div class="split"><div><label for="max-games">Maximum connected games per account</label><input id="max-games" type="number" min="1" max="10" required></div><div><label for="growth">Growth for variable-difficulty invites</label><select id="growth"><option value="1">Emperor · 1</option><option value="2">King · 2</option><option value="3">Prince · 3</option><option value="4">Chieftain · 4</option></select></div></div>
 </section>
 <section class="panel"><h2>AI model</h2>
 <label for="two-model">Two-player checkpoint</label><select id="two-model"></select><p class="muted">To change the model for a running match, use its selector under Games.</p>
@@ -34,7 +49,7 @@
 </section></div>
 <div class="toolbar"><button type="submit" id="save">Save settings</button><span id="saved" class="muted"></span></div>
 </fieldset></form>
-<section class="panel" style="margin-top:24px"><h2>Games</h2><p id="match-feedback" role="status" aria-live="polite" hidden></p><div class="scroll"><table><thead><tr><th>Match / players</th><th>Status</th><th>Turn / last move</th><th>Model</th></tr></thead><tbody id="games"><tr><td colspan="4">No games loaded.</td></tr></tbody></table></div></section>
+<section class="panel" style="margin-top:24px"><h2>Games</h2><p id="match-feedback" role="status" aria-live="polite" hidden></p><div class="scroll"><table><thead><tr><th>Match / players</th><th>Status</th><th>Turn / last move</th><th>Seat model</th></tr></thead><tbody id="games"><tr><td colspan="4">No games loaded.</td></tr></tbody></table></div></section>
 <section class="panel" style="margin-top:20px"><h2>Recent activity</h2><div id="events" class="events">No activity loaded.</div></section>
 <footer class="muted">Settings are saved on the player service and survive restarts. Removing a player stops their game connections. Lowering the game limit affects new connections.</footer>
 </main>
@@ -47,21 +62,87 @@ async function api(path,body){const response=await fetch('/api/player/'+path,{me
 function render(data,fill=false){state=data;el('connection').textContent='Connected';el('identity').textContent=data.username+' · v'+data.version+' · account socket '+data.accountSocket;el('poll-state').textContent=data.polling?'Checking games…':data.settings.pollingEnabled?'Polling on':'Polling off';el('poll-time').textContent='Last: '+time(data.lastPollAt)+(data.nextPollAt?' · Next: '+time(data.nextPollAt):'');el('game-count').textContent=data.games.filter(g=>g.active).length+' / '+data.settings.maxConcurrentGames;el('playing-state').textContent=!data.playAvailable?'Login unavailable; observing only':data.settings.playEnabled?'Playing enabled':'Playing paused';el('poll-toggle').textContent=data.settings.pollingEnabled?'Pause polling':'Enable polling';el('poll-toggle').setAttribute('aria-pressed',String(data.settings.pollingEnabled));el('play-toggle').textContent=data.settings.playEnabled?'Pause playing':'Resume playing';el('play-toggle').setAttribute('aria-pressed',String(data.settings.playEnabled));el('effective').textContent=JSON.stringify(data.effectiveWeights,null,2);el('saved').textContent=data.updatedAt?'Saved '+time(data.updatedAt):'Initial settings';
 for(const id of ['poll-now','poll-toggle','play-toggle'])el(id).disabled=busy||(id==='poll-now'&&data.polling);el('fields').disabled=busy;
 if(fill){formRevision=data.revision;const s=data.settings;el('authorized').value=s.authorizedPlayers.join('\n');el('interval').value=s.pollIntervalSeconds;el('auto-accept').checked=s.autoAccept;for(const box of document.querySelectorAll('[name=count]'))box.checked=s.playerCounts.includes(Number(box.value));el('max-games').value=s.maxConcurrentGames;el('growth').value=s.growthResources;el('delay').value=s.moveDelayMs;el('overrides').value=JSON.stringify(s.weightOverrides,null,2);fillModels(el('two-model'),s.twoPlayerModel,data.models);fillModels(el('multi-model'),s.multiplayerModel,data.models.filter(model=>!model.twoPlayerOnly));dirty=false}
-el('games').replaceChildren();for(const game of data.games){const row=document.createElement('tr');for(let i=0;i<4;i++)row.append(document.createElement('td'));const link=document.createElement('a');link.href='https://games.tabony.net/nations/'+game.id+'/';link.target='_blank';link.rel='noopener';link.textContent='#'+game.id+' '+game.title;row.children[0].append(link,document.createElement('br'),document.createTextNode(game.players.join(', ')));row.children[1].textContent=game.status+(game.error?' · '+game.error:'');row.children[2].textContent=(game.turn||'—')+(game.decision!=null?' · decision '+game.decision:'')+(game.lastMove?' · '+game.lastMove:'')+(game.pending!=null?' · waiting for confirmation':'');renderMatchModel(row.children[3],game,data);el('games').append(row)}if(!data.games.length){const row=el('games').insertRow();const cell=row.insertCell();cell.colSpan=4;cell.textContent='No current games discovered.'}
+if(data.accountsAvailable){
+  el('identity').textContent=data.accounts.length+' registered accounts · v'+data.version;
+  el('game-count-label').textContent='CONNECTED BOT SEATS';
+  el('game-count').textContent=data.games.filter(game=>game.active).length;
+  el('playing-state').textContent=!data.settings.playEnabled?'Service paused':data.playAvailable?'Playing enabled':'All accounts stopped';
+}
+renderAccounts(data);
+el('games').replaceChildren();for(const game of data.games){const row=document.createElement('tr');for(let i=0;i<4;i++)row.append(document.createElement('td'));const link=document.createElement('a');link.href='https://games.tabony.net/nations/'+game.id+'/';link.target='_blank';link.rel='noopener';link.textContent='#'+game.id+' '+game.title;row.children[0].append(link,document.createElement('br'),document.createTextNode(game.players.join(', ')));if(game.accountName){const seat=document.createElement('span');seat.className='seat-name';seat.textContent=game.accountName;row.children[0].append(seat)}row.children[1].textContent=game.status+(game.error?' · '+game.error:'');row.children[2].textContent=(game.turn||'—')+(game.decision!=null?' · decision '+game.decision:'')+(game.lastMove?' · '+game.lastMove:'')+(game.pending!=null?' · waiting for confirmation':'');renderMatchModel(row.children[3],game,data);el('games').append(row)}if(!data.games.length){const row=el('games').insertRow();const cell=row.insertCell();cell.colSpan=4;cell.textContent='No current games discovered.'}
 el('events').replaceChildren();for(const event of data.events){const line=document.createElement('div');line.className='event';const stamp=document.createElement('time');stamp.textContent=time(event.at);line.append(stamp,document.createTextNode(event.message));el('events').append(line)}if(data.lastPollError)feedback(data.lastPollError,true)}
 function fillModels(menu,selected,models){menu.replaceChildren();for(const model of models)menu.add(new Option(model.label,model.id));if(!models.some(model=>model.id===selected))menu.add(new Option('Unavailable checkpoint · '+selected,selected));menu.value=selected}
+function renderAccounts(data) {
+  el('accounts-panel').hidden = !data.accountsAvailable;
+  if (!data.accountsAvailable) return;
+  const table = el('accounts');
+  table.replaceChildren();
+  el('account-fields').disabled = busy;
+  for (const account of data.accounts) {
+    const row = table.insertRow();
+    const name = row.insertCell();
+    name.textContent = account.username;
+    if (account.matchIds) {
+      const scope = document.createElement('small');
+      scope.className = 'account-message';
+      scope.textContent = 'Takeover · #' + account.matchIds.join(', #');
+      name.append(scope);
+    }
+    const status = row.insertCell();
+    status.textContent = (account.enabled ? 'Started' : 'Stopped') + ' · ' + account.socket;
+    if (account.error) {
+      const error = document.createElement('small');
+      error.className = 'account-message error';
+      error.textContent = account.error;
+      status.append(error);
+    }
+    const model = document.createElement('select');
+    model.setAttribute('aria-label', 'Default model for ' + account.username);
+    model.disabled = busy;
+    fillModels(model, account.defaultModel ?? '', [
+      { id: '', label: 'Use service default' },
+      ...data.models.map(choice => ({ ...choice, label: choice.label + (choice.twoPlayerOnly ? ' (2 players)' : '') })),
+    ]);
+    model.onchange = () => void action('account', { action: 'default-model', accountId: account.id, defaultModel: model.value || null });
+    row.insertCell().append(model);
+    const buttons = document.createElement('div');
+    buttons.className = 'toolbar';
+    const toggle = document.createElement('button');
+    toggle.textContent = account.enabled ? 'Stop play' : 'Start play';
+    toggle.disabled = busy;
+    toggle.onclick = () => void action('account', { action: account.enabled ? 'stop' : 'start', accountId: account.id });
+    const remove = document.createElement('button');
+    remove.textContent = 'Delete';
+    remove.className = 'secondary';
+    remove.disabled = busy;
+    remove.onclick = () => {
+      if (confirm('Delete the saved credentials for ' + account.username + '?')) void action('account', { action: 'delete', accountId: account.id });
+    };
+    buttons.append(toggle, remove);
+    row.insertCell().append(buttons);
+  }
+  if (!data.accounts.length) {
+    const cell = table.insertRow().insertCell();
+    cell.colSpan = 4;
+    cell.textContent = 'No Tabony accounts registered yet.';
+  }
+}
 function renderMatchModel(cell, game, data) {
   const models = data.models.filter(model => game.playerCount === 2 || !model.twoPlayerOnly);
-  if (!game.active || !data.matchModelChanges) {
+  if (!(game.modelEditable ?? game.active) || !data.matchModelChanges) {
     cell.textContent = models.find(model => model.id === game.model)?.label ?? game.model;
     return;
   }
   const menu = document.createElement('select');
-  menu.setAttribute('aria-label', 'Model for match #' + game.id);
+  menu.setAttribute('aria-label', matchModelLabel(game));
+  menu.dataset.seat = (game.accountId ?? '') + ':' + game.id;
   menu.disabled = busy;
   fillModels(menu, game.model, models);
   menu.onchange = () => void changeMatchModel(game, menu);
   cell.append(menu);
+}
+function matchModelLabel(game) {
+  return 'Model for match #' + game.id + (game.accountName ? ' · ' + game.accountName : '');
 }
 async function changeMatchModel(game, menu) {
   if (busy) { menu.value = game.model; return; }
@@ -76,18 +157,48 @@ async function changeMatchModel(game, menu) {
   render(state);
   report('Changing model for match #' + game.id + '…');
   try {
-    state = await api('match-model', { matchId: game.id, modelId, previousModel: game.model });
-    report('Model changed for match #' + game.id + '. It applies to the next move the bot sends.');
+    state = await api('match-model', { accountId: game.accountId, matchId: game.id, modelId, previousModel: game.model });
+    report(matchModelLabel(game) + ' changed. It applies to the next move from this seat.');
   } catch (error) {
     report(error.message, true);
   } finally {
     busy = false;
     render(state);
-    el('games').querySelector(`select[aria-label="Model for match #${game.id}"]`)?.focus();
+    el('games').querySelector(`select[data-seat="${menu.dataset.seat}"]`)?.focus();
   }
 }
-async function load(fill=false){try{const data=await api('status');if(!busy&&(fill||!document.activeElement?.matches('#games select')))render(data,fill)}catch(error){if(busy)return;el('connection').textContent='Unavailable';feedback(error.message,true);el('fields').disabled=true;for(const id of ['poll-now','poll-toggle','play-toggle'])el(id).disabled=true}}
-async function action(path,body,fill=false){if(busy)return;busy=true;el('fields').disabled=true;for(const id of ['poll-now','poll-toggle','play-toggle'])el(id).disabled=true;feedback(path==='poll'?'Checking invitations and games…':'Saving…');try{const result=await api(path,body);busy=false;render(result,fill||(!dirty&&path==='settings'));feedback(path==='poll'?'Game check completed.':'Settings saved.')}catch(error){feedback(error.message,true)}finally{busy=false;if(state){el('fields').disabled=false;for(const id of ['poll-now','poll-toggle','play-toggle'])el(id).disabled=false}}}
+async function load(fill=false){try{const data=await api('status');if(!busy&&(fill||!document.activeElement?.matches('#games select, #accounts select, #accounts button')))render(data,fill)}catch(error){if(busy)return;el('connection').textContent='Unavailable';feedback(error.message,true);el('fields').disabled=true;for(const id of ['poll-now','poll-toggle','play-toggle'])el(id).disabled=true}}
+async function action(path,body,fill=false){
+  if(busy)return false;
+  busy=true;
+  render(state);
+  feedback(path==='poll'?'Checking invitations and games…':'Saving…');
+  try{
+    const result=await api(path,body);
+    busy=false;
+    render(result,fill||(!dirty&&path==='settings'));
+    feedback(path==='poll'?'Game check completed.':path==='account'?'Account updated.':'Settings saved.');
+    return true;
+  }catch(error){feedback(error.message,true);return false}
+  finally{if(busy){busy=false;render(state)}}
+}
+el('account-kind').onchange=()=>{
+  const takeover=el('account-kind').value==='takeover';
+  el('takeover-fields').hidden=!takeover;
+  el('takeover-matches').required=takeover;
+};
+el('account-form').onsubmit=async event=>{
+  event.preventDefault();
+  const password=el('account-password').value;
+  el('account-password').value='';
+  const matchIds=el('account-kind').value==='takeover'
+    ? el('takeover-matches').value.split(/[\s,]+/).filter(Boolean) : null;
+  if(await action('account',{action:'add',username:el('account-name').value,password,matchIds})){
+    el('account-form').reset();
+    el('account-kind').onchange();
+    el('add-account').open=false;
+  }
+};
 el('poll-now').onclick=()=>action('poll',{});el('poll-toggle').onclick=()=>state&&action('settings',{revision:state.revision,settings:{...state.settings,pollingEnabled:!state.settings.pollingEnabled}});el('play-toggle').onclick=()=>state&&action('settings',{revision:state.revision,settings:{...state.settings,playEnabled:!state.settings.playEnabled}});el('refresh').onclick=()=>{if(!dirty||confirm('Discard unsaved changes?'))void load(true)};
 el('settings').oninput=()=>{dirty=true};el('settings').onsubmit=event=>{event.preventDefault();if(!state)return;try{const settings={...state.settings,authorizedPlayers:el('authorized').value.split(/\s+/).filter(Boolean),pollIntervalSeconds:Number(el('interval').value),autoAccept:el('auto-accept').checked,playerCounts:[...document.querySelectorAll('[name=count]:checked')].map(box=>Number(box.value)),maxConcurrentGames:Number(el('max-games').value),growthResources:Number(el('growth').value),moveDelayMs:Number(el('delay').value),twoPlayerModel:el('two-model').value,multiplayerModel:el('multi-model').value,weightOverrides:JSON.parse(el('overrides').value)};void action('settings',{revision:formRevision,settings},true)}catch(error){feedback('Invalid weight JSON: '+error.message,true)}};
 el('logout')?.addEventListener('click',async()=>{const response=await fetch('/auth/logout',{method:'POST',headers:{'x-nations-token':token}});if(response.ok)location.assign('/');else feedback('Sign-out failed. Try again.',true)});void load(true);setInterval(()=>{if(!busy&&!document.hidden)void load(false)},5000);

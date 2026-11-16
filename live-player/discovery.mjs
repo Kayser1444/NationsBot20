@@ -24,8 +24,9 @@ export function parseMyMatches(html, username) {
   return matches;
 }
 
-export async function discoverAccountMatches(session, username, fetcher = fetch) {
-  const response = await fetcher(`${origin}/nations/matches/mine/`, {
+export async function discoverAccountMatches(session, username, fetcher = fetch, archived = false) {
+  const path = archived ? '/nations/archive/mine/' : '/nations/matches/mine/';
+  const response = await fetcher(origin + path, {
     headers: { Cookie: session }, redirect: 'manual', signal: AbortSignal.timeout(15000),
   });
   if ([301, 302, 303, 401, 403].includes(response.status)) { await response.body?.cancel(); throw new StopPlayer('The player session needs a new login.'); }
@@ -46,23 +47,35 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
       origin, headers: { Cookie: session }, handshakeTimeout: 12000, maxPayload: 4 * 1024 * 1024,
     });
     let sent = false, settled = false;
-    const finish = error => { if (settled) return; settled = true; clearTimeout(timer); socket.close(); error ? reject(error) : resolve(); };
+    const finish = error => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      config.signal?.removeEventListener('abort', abort);
+      socket.close();
+      error ? reject(error) : resolve();
+    };
+    const abort = () => finish(new Error('Invitation acceptance was stopped.'));
     const timer = setTimeout(() => finish(new Error('Invitation acceptance could not be confirmed.')), 15000);
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => finish(new Error('Invitation connection failed.')));
     socket.on('close', () => { if (!settled) finish(new Error('Invitation connection closed before confirmation.')); });
     socket.on('message', bytes => {
+      if (settled) return;
       try {
         const message = JSON.parse(bytes);
         if (!Array.isArray(message.players) || message.replaying !== false) return;
-        if (message.players.length !== match.players.length || !message.players.every(name => match.players.includes(name)) ||
-            !isAuthorized(match, config.settings(), config.username)) throw new Error('Invitation participants changed. Poll again.');
+        if (message.players.length !== match.players.length || new Set(message.players).size !== match.players.length ||
+            !message.players.every(name => match.players.includes(name)) ||
+            !(config.authorize?.(match) ?? isAuthorized(match, config.settings(), config.username))) throw new Error('Invitation participants changed. Poll again.');
         if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
         if (message.accepted.includes(config.username)) { finish(); return; }
         const settings = config.settings();
-        if (!settings.playEnabled || !settings.autoAccept) throw new Error('Invitation acceptance is paused.');
+        if (!settings.playEnabled || !settings.autoAccept || config.canPlay?.() === false) throw new Error('Invitation acceptance is paused.');
         if (!sent) { sent = true; socket.send(JSON.stringify({ join: settings.growthResources })); }
       } catch (error) { finish(error); }
     });
+    config.signal?.addEventListener('abort', abort, { once: true });
+    if (config.signal?.aborted) abort();
   });
 }
