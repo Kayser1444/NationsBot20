@@ -4,6 +4,7 @@ import defaults from './default-weights.json' with { type: 'json' };
 import checkpoints from './models.json' with { type: 'json' };
 import deployed from './trained-weights.json' with { type: 'json' };
 import { validateModel, weightsFor } from './scorer.mjs';
+import { isExperimentalModel } from './rl-policy.mjs';
 
 const catalog = { ...checkpoints,
   'human-baseline-v1': { label: 'Human baseline (previous settings ID)', model: deployed },
@@ -30,7 +31,8 @@ export function validateSettings(input) {
   s.authorizedPlayers = [...new Set(s.authorizedPlayers)];
   if (!Array.isArray(s.playerCounts) || !s.playerCounts.length || s.playerCounts.some(n => ![2, 3, 4, 5].includes(n))) throw new Error('Choose player counts from two to five.');
   s.playerCounts = [...new Set(s.playerCounts)].sort();
-  for (const key of ['twoPlayerModel', 'multiplayerModel']) if (!Object.hasOwn(catalog, s[key])) throw new Error('Choose an available model checkpoint.');
+  if (!(Object.hasOwn(catalog, s.twoPlayerModel) || isExperimentalModel(s.twoPlayerModel)) ||
+      !Object.hasOwn(catalog, s.multiplayerModel)) throw new Error('Choose an available model checkpoint.');
   if (!s.weightOverrides || typeof s.weightOverrides !== 'object' || Array.isArray(s.weightOverrides) ||
       Object.keys(s.weightOverrides).some(key => !['2', '4'].includes(key))) throw new Error('Weight overrides must use profiles 2 and 4.');
   for (const [count, weights] of Object.entries(s.weightOverrides)) {
@@ -45,7 +47,7 @@ export function modelForSettings(settings) {
   const model = structuredClone(defaults);
   model.name = `${settings.twoPlayerModel} (2p), ${settings.multiplayerModel} (3–5p)`;
   model.profiles = {
-    '2': { ...weightsFor(catalog[settings.twoPlayerModel].model, 2), ...settings.weightOverrides['2'] },
+    '2': { ...weightsFor(catalog[settings.twoPlayerModel]?.model ?? deployed, 2), ...settings.weightOverrides['2'] },
     '4': { ...weightsFor(catalog[settings.multiplayerModel].model, 4), ...settings.weightOverrides['4'] },
   };
   model.playerPolicies = { '2': settings.twoPlayerModel, '4': settings.multiplayerModel };

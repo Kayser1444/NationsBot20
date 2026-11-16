@@ -23,8 +23,15 @@ preserving manually selected heuristic checkpoints. See the
 Advanced JSON overrides can edit named coefficients in profiles `2` and `4`;
 three and five players use profile `4`. Effective weights are visible below the
 selectors. These overrides apply to the older heuristic checkpoints; the human
-baseline uses its bundled learned coefficients. Settings take effect at the next decision and survive restarts in
+baseline uses its bundled learned coefficients. Settings survive restarts in
 the player volume's `/data/player-settings.json`.
+
+**Experimental RL** is available in the two-player selector when the player has
+a compatible checkpoint. Choose a specific version for newly connected matches.
+Each experimental match keeps its checkpoint across reconnects and restarts.
+Switch back to the baseline for future matches, or select an earlier version
+that is still on the volume. The advanced coefficient overrides do not change
+the neural model. Existing selections remain the defaults until you save a change.
 
 The page shows the worker version, account socket, last/next discovery time,
 game participants, current turn, pending move confirmation, selected model and
@@ -70,6 +77,21 @@ The managed player loads older checkpoints from `live-player/models.json` and
 the baseline from `live-player/human-baseline.json`. See
 [training and release evaluation](human-policy.md).
 The standalone worker still supports `NATIONS_PLAYER_WEIGHTS`.
+
+## Install another experimental checkpoint
+
+Export a verified training checkpoint on the training PC with
+`experiments/nations-rl/export.py`. Pass the training run's frozen card index,
+and use `check_export.py` to check the export against the Node player. The
+exporter names the `.nrl` file by its content hash. Upload it to the root of
+the intended player's Railway volume without overwriting any earlier file.
+The player checks the hash, format, tensor dimensions and card catalog before
+listing it. Refresh the Player Bot form to see the new choice. Compatible
+exports need no service deploy. Keep versions referenced by existing games.
+
+On staging, the player service has a private volume mounted at `/data`.
+The first checkpoint uses 10,000 training games and the selector label
+**Experimental RL · 10,000 games · c64187ec**.
 
 Run `npm test` and `node --test --test-isolation=none live-player/*.test.mjs`
 before release. The latter includes persistence, profile selection, discovery,

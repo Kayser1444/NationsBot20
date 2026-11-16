@@ -1,5 +1,7 @@
 import { createServer } from 'node:http';
 import { timingSafeEqual } from 'node:crypto';
+import { readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 import WebSocket from 'ws';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { settingsStore, modelForSettings, modelChoices } from './settings.mjs';
@@ -7,8 +9,25 @@ import { discoverAccountMatches, isAuthorized, acceptInvitation } from './discov
 import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
+import { experimentalModels, isExperimentalModel } from './rl-policy.mjs';
 
-export function createPlayerController({ config, store, connect, discover, accept, now = Date.now }) {
+function pinTwoPlayerModel(directory, matchId, selected) {
+  if (!/^\d{1,10}$/.test(matchId)) throw new Error('Invalid match ID.');
+  const path = join(directory, `player-model-${matchId}.json`);
+  try {
+    const { id } = JSON.parse(readFileSync(path, 'utf8'));
+    if (!(isExperimentalModel(id) || id === 'human-baseline-v1' || modelChoices.some(model => model.id === id))) {
+      throw new Error('Invalid saved checkpoint.');
+    }
+    return id;
+  } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  writeFileSync(`${path}.tmp`, JSON.stringify({ id: selected }), { mode: 0o600 });
+  renameSync(`${path}.tmp`, path);
+  return selected;
+}
+
+export function createPlayerController({ config, store, connect, discover, accept, now = Date.now,
+  experiments = experimentalModels(config.dataDir), pin = pinTwoPlayerModel }) {
   const games = new Map(), events = [];
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
   let accountSocket = 'disconnected', modelRevision = -1, model;
@@ -18,6 +37,12 @@ export function createPlayerController({ config, store, connect, discover, accep
     const saved = store.read();
     if (saved.revision !== modelRevision) { model = modelForSettings(saved.settings); modelRevision = saved.revision; }
     return model;
+  };
+  const gameModelId = game => {
+    if (game.playerCount !== 2) return settings().multiplayerModel;
+    const selected = settings().twoPlayerModel;
+    if (isExperimentalModel(game.pinnedModel) || isExperimentalModel(selected)) return game.pinnedModel ?? selected;
+    return selected;
   };
   function reconcile() {
     const s = settings();
@@ -32,9 +57,30 @@ export function createPlayerController({ config, store, connect, discover, accep
   function startGame(info) {
     const game = { ...info, status: 'connecting', abort: new AbortController(), decision: null, turn: null, pending: null, error: null };
     games.set(info.id, game);
+    let experimental;
+    try {
+      if (info.playerCount === 2) {
+        const selected = settings().twoPlayerModel;
+        game.pinnedModel = config.dataDir ? pin(config.dataDir, info.id, selected) : selected;
+        if (isExperimentalModel(game.pinnedModel)) {
+          experimental = experiments.get(game.pinnedModel);
+          if (!experimental) throw new Error('The pinned experimental checkpoint is unavailable.');
+        }
+      }
+    } catch (error) {
+      game.abort = null; game.status = 'blocked';
+      game.error = isExperimentalModel(game.pinnedModel) ? 'The pinned experimental checkpoint is unavailable.' : 'The player could not read or save this match’s checkpoint.';
+      log(`Match ${info.id}: ${game.error}`);
+      return;
+    }
+    const getGameModel = () => {
+      const id = gameModelId(game);
+      if (game.playerCount !== 2 || id === settings().twoPlayerModel && !experimental) return getModel();
+      return { ...modelForSettings({ ...settings(), twoPlayerModel: id }), experimental };
+    };
     const controls = {
       ...config, matchId: info.id, players: info.players, signal: game.abort.signal,
-      getModel, delay: () => settings().moveDelayMs,
+      getModel: getGameModel, delay: () => settings().moveDelayMs,
       canPlay: () => running && settings().playEnabled && isAuthorized(game, settings(), config.username),
       onState(state, pending) { game.status = 'connected'; game.decision = state.move_number; game.turn = state.next_move_player; game.pending = pending; },
       onMove(number, move) { game.pending = number; game.lastMove = move; log(`Match ${info.id}: decision ${number}: ${move}`); },
@@ -85,11 +131,17 @@ export function createPlayerController({ config, store, connect, discover, accep
   return {
     status() {
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
-        polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, models: modelChoices,
+        polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket,
+        models: [...modelChoices, ...experiments.scan().map(({ id, label }) => ({ id, label, twoPlayerOnly: true }))],
         effectiveWeights: getModel().profiles,
-        games: [...games.values()].map(({ abort, ...game }) => ({ ...game, active: Boolean(abort), model: game.playerCount === 2 ? settings().twoPlayerModel : settings().multiplayerModel })), events };
+        games: [...games.values()].map(({ abort, ...game }) => ({ ...game, active: Boolean(abort), model: gameModelId(game) })), events };
     },
-    save(input, revision, actor) { store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status(); },
+    save(input, revision, actor) {
+      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel && !experiments.get(input.twoPlayerModel)) {
+        throw new Error('That experimental checkpoint is unavailable.');
+      }
+      store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status();
+    },
     poll(reason = 'manual') {
       if (!busy) { busy = performPoll(reason).finally(() => { busy = null; }); }
       return busy;
@@ -128,8 +180,10 @@ export async function startControlServer(controller, { token, port = 8080, host 
 
 export async function startPlayerService({ config, subscribe, journal, login }) {
   const store = settingsStore(config.dataDir);
+  const experiments = experimentalModels(config.dataDir);
+  experiments.scan();
   let session = await login(config);
-  const controller = createPlayerController({ config, store,
+  const controller = createPlayerController({ config, store, experiments,
     discover: async () => {
       try { return await discoverAccountMatches(session, config.username); }
       catch (error) {
