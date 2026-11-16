@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import WebSocket from 'ws';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { settingsStore, modelForSettings, modelChoices } from './settings.mjs';
-import { discoverAccountMatches, isAuthorized, acceptInvitation } from './discovery.mjs';
+import { discoverAccountMatches, hasEligiblePlayer, isAuthorized, acceptInvitation, declineInvitation } from './discovery.mjs';
 import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
@@ -41,7 +41,7 @@ function writeMatchModel(directory, matchId, selection, storageId) {
   renameSync(`${path}.tmp`, path);
 }
 
-export function createPlayerController({ config, store, connect, discover, accept, now = Date.now,
+export function createPlayerController({ config, store, connect, discover, accept, decline, now = Date.now,
   experiments = experimentalModels(config.dataDir) }) {
   const games = new Map(), events = [];
   const lifecycle = new AbortController(), connections = new Map();
@@ -51,6 +51,10 @@ export function createPlayerController({ config, store, connect, discover, accep
   const accountEnabled = () => config.accountEnabled?.() ?? true;
   const authorized = game => config.authorize?.(game, settings()) ?? isAuthorized(game, settings(), config.username);
   const canPlay = game => running && accountEnabled() && settings().playEnabled && authorized(game);
+  const shouldDecline = game => running && config.play && accountEnabled() && settings().playEnabled &&
+    game.invitation && !config.hideUnauthorized?.(game) && game.players.includes(config.username) &&
+    new Set(game.players).size === game.players.length && game.players.length <= game.playerCount &&
+    !hasEligiblePlayer(game, settings(), config.username);
   const log = message => { events.unshift({ at: new Date(now()).toISOString(), message }); events.splice(50); console.log(message); };
   const getModel = () => {
     const saved = store.read();
@@ -148,7 +152,23 @@ export function createPlayerController({ config, store, connect, discover, accep
         if (known?.status === 'completed' || known?.status === 'blocked' || known?.abort) continue;
         const s = settings();
         const show = status => games.set(info.id, loadPin({ ...info, status }));
-        if (!authorized(info)) { if (!config.hideUnauthorized?.(info)) show('not authorized'); continue; }
+        if (!authorized(info)) {
+          if (config.hideUnauthorized?.(info)) continue;
+          show('not authorized');
+          if (decline && shouldDecline(info)) {
+            try {
+              if (await decline(info, { username: config.username, shouldDecline, signal: lifecycle.signal })) {
+                games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
+                log(`Match ${info.id}: invitation declined (no eligible player).`);
+              }
+            } catch {
+              if (!running) return;
+              show('decline unconfirmed');
+              log(`Match ${info.id}: decline unconfirmed. The next poll will check again.`);
+            }
+          }
+          continue;
+        }
         if (!running) break;
         if (!accountEnabled()) { show('stopped'); continue; }
         if (activeCount() >= s.maxConcurrentGames) { show('waiting for capacity'); continue; }
@@ -279,7 +299,8 @@ export async function startControlServer(controller, { token, port = 8080, host 
   return server;
 }
 
-function createAccountRuntime({ config, store, experiments, subscribe, journal, login, invite = acceptInvitation }) {
+function createAccountRuntime({ config, store, experiments, subscribe, journal, login,
+  respond = (action, match, controls, session) => action(match, controls, session) }) {
   let session, stopped = false, socket, reconnect, keepAlive;
   const ignore = promise => void promise.catch(() => {});
   async function listMatches() {
@@ -302,7 +323,8 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
       connectAccount();
       return matches;
     },
-    accept: (match, controls) => invite(match, controls, session),
+    accept: (match, controls) => respond(acceptInvitation, match, controls, session),
+    decline: (match, controls) => respond(declineInvitation, match, controls, session),
     connect: async controls => subscribe(controls, session, await journal(controls)),
   });
   function resetAccountSocket() {
@@ -342,23 +364,25 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
   let runtime;
   if (config.encryptionKey) {
     const accounts = accountStore(config.dataDir, config.encryptionKey);
-    const joining = new Map();
-    async function invite(match, controls, session) {
-      // Let each join finish before another account joins the same Tabony lobby.
-      const task = (joining.get(match.id) ?? Promise.resolve()).catch(() => {}).then(() => {
-        if (!controls.canPlay() || !controls.settings().autoAccept) return false;
-        return acceptInvitation(match, controls, session);
+    const lobbyActions = new Map();
+    async function respond(action, match, controls, session) {
+      // Let each response finish before another account changes the same lobby.
+      const task = (lobbyActions.get(match.id) ?? Promise.resolve()).catch(() => {}).then(() => {
+        const allowed = action === declineInvitation
+          ? controls.shouldDecline(match)
+          : controls.canPlay() && controls.settings().autoAccept;
+        return allowed ? action(match, controls, session) : false;
       });
-      joining.set(match.id, task);
+      lobbyActions.set(match.id, task);
       try { return await task; }
-      finally { if (joining.get(match.id) === task) joining.delete(match.id); }
+      finally { if (lobbyActions.get(match.id) === task) lobbyActions.delete(match.id); }
     }
     try {
       accounts.importLegacy(config);
       const base = createPlayerController({ config: { dataDir: config.dataDir }, store, experiments });
       const controller = createAccountManager({ accounts, base, experiments,
         createRuntime: account => createAccountRuntime({
-          config: { dataDir: config.dataDir, ...account }, store, experiments, subscribe, journal, login, invite,
+          config: { dataDir: config.dataDir, ...account }, store, experiments, subscribe, journal, login, respond,
         }),
       });
       runtime = { controller, close: () => controller.close() };

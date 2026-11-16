@@ -31,8 +31,7 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
             game.players.length === game.playerCount &&
             isAuthorized(game, { ...settings, authorizedPlayers: game.players }, account.username);
         }
-        const managedNames = [...entries.values()].filter(other => !other.account.matchIds).map(other => other.account.username);
-        return isAuthorized(game, { ...settings, authorizedPlayers: [...settings.authorizedPlayers, ...managedNames] }, account.username);
+        return isAuthorized(game, settings, account.username);
       },
     });
     entries.set(account.id, entry);

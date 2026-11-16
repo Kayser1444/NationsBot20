@@ -34,7 +34,7 @@
 <form id="settings"><fieldset id="fields" disabled style="border:0;padding:0;margin:0">
 <div class="grid">
 <section class="panel"><h2>Access and discovery</h2>
-<label for="authorized">Authorized Tabony players</label><textarea id="authorized" rows="5" spellcheck="false" placeholder="Kayser"></textarea><p class="muted">One exact account name per line. Registered bot accounts can play together. Takeover accounts use their approved match IDs.</p>
+<label for="authorized">Authorized Tabony players</label><textarea id="authorized" rows="5" spellcheck="false" placeholder="Kayser"></textarea><p class="muted">One exact account name per line. Regular bots need at least one other player from this list and decline invitations with none when playing is enabled. Takeover accounts use their approved match IDs.</p>
 <label for="interval">New-game poll interval (seconds)</label><input id="interval" type="number" min="15" max="86400" required><p class="muted">Fallback discovery interval. Account notifications can trigger an earlier check. Poll now also works when automatic polling is off.</p>
 <label class="check"><input id="auto-accept" type="checkbox">Automatically accept authorized invitations</label>
 <label>Allowed player counts</label><div class="counts"><label class="check"><input type="checkbox" value="2" name="count">2</label><label class="check"><input type="checkbox" value="3" name="count">3</label><label class="check"><input type="checkbox" value="4" name="count">4</label><label class="check"><input type="checkbox" value="5" name="count">5</label></div>

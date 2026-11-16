@@ -3,8 +3,10 @@
 The existing owner console has a `/player` sub-page, reached from the Player Bot
 link on its home page. It reuses Discord owner sign-in, HTTPS, the owner session
 and CSRF checks. Game access is a separate list of exact Tabony account names,
-initially `Kayser`. Regular bot accounts can play together. Other participants
-in their games must be on the authorized list.
+initially `Kayser`. A regular bot can play when at least one other participant
+is on the list. Other seats can be held by unlisted players or other bots.
+When playing is enabled, regular bots decline invitations with no eligible
+participant, even if automatic acceptance is off or the bot is at capacity.
 
 Controls include automatic discovery on/off, a poll interval from 15 seconds to
 one day, manual **Poll now**, automatic invitation acceptance, a separate pause
@@ -47,7 +49,8 @@ checkpoints.
 The page shows the worker version, account socket, last/next discovery time,
 game participants, current turn, pending move confirmation, selected model and
 recent activity. A stale form revision is rejected instead of overwriting a
-newer save. Removing an authorized player closes their game connections.
+newer save. Removing the last eligible player from a game's access list closes
+the bot's connection.
 The concurrency limit applies per account and affects new connections. Games whose journal or
 server response is ambiguous stop and retain their receipt for inspection.
 

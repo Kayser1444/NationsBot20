@@ -34,14 +34,25 @@ export async function discoverAccountMatches(session, username, fetcher = fetch,
   return parseMyMatches(await response.text(), username);
 }
 
+export function hasEligiblePlayer(match, settings, username) {
+  return match.players.some(name => name !== username && settings.authorizedPlayers.includes(name));
+}
+
 export function isAuthorized(match, settings, username) {
   return settings.playerCounts.includes(match.playerCount) && match.players.includes(username) &&
     new Set(match.players).size === match.players.length && match.players.length <= match.playerCount &&
-    match.players.some(name => name !== username) &&
-    match.players.every(name => name === username || settings.authorizedPlayers.includes(name));
+    hasEligiblePlayer(match, settings, username);
 }
 
 export function acceptInvitation(match, config, session, Socket = WebSocket) {
+  return respondToInvitation(match, config, session, Socket, 'acceptance');
+}
+
+export function declineInvitation(match, config, session, Socket = WebSocket) {
+  return respondToInvitation(match, config, session, Socket, 'decline');
+}
+
+function respondToInvitation(match, config, session, Socket, action) {
   return new Promise((resolve, reject) => {
     const socket = new Socket(`wss://games.tabony.net/ws/nations/${match.id}/`, {
       origin, headers: { Cookie: session }, handshakeTimeout: 12000, maxPayload: 4 * 1024 * 1024,
@@ -55,8 +66,8 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
       socket.close();
       error ? reject(error) : resolve(result);
     };
-    const abort = () => finish(new Error('Invitation acceptance was stopped.'));
-    const timer = setTimeout(() => finish(new Error('Invitation acceptance could not be confirmed.')), 15000);
+    const abort = () => finish(new Error(`Invitation ${action} was stopped.`));
+    const timer = setTimeout(() => finish(new Error(`Invitation ${action} could not be confirmed.`)), 15000);
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => finish(new Error('Invitation connection failed.')));
     socket.on('close', () => { if (!settled) finish(new Error('Invitation connection closed before confirmation.')); });
@@ -65,10 +76,26 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
       try {
         const message = JSON.parse(bytes);
         if (!Array.isArray(message.players) || message.replaying !== false) return;
+        if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
+        if (action === 'decline') {
+          if (!message.players.includes(config.username)) {
+            finish(null, sent);
+            return;
+          }
+          if (sent) return;
+          const liveMatch = { ...match, players: message.players };
+          if (message.state || message.accepted.includes(config.username) ||
+              !config.shouldDecline(liveMatch)) {
+            finish(null, false);
+            return;
+          }
+          sent = true;
+          socket.send(JSON.stringify({ decline: config.username }));
+          return;
+        }
         if (message.players.length !== match.players.length || new Set(message.players).size !== match.players.length ||
             !message.players.every(name => match.players.includes(name)) ||
             !(config.authorize?.(match) ?? isAuthorized(match, config.settings(), config.username))) throw new Error('Invitation participants changed. Poll again.');
-        if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
         if (message.accepted.includes(config.username)) {
           const lobbyStarted = sent && match.players.length === match.playerCount &&
             match.players.every(name => message.accepted.includes(name));
