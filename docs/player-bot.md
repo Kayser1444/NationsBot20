@@ -28,10 +28,11 @@ the player volume's `/data/player-settings.json`.
 
 **Experimental RL** is available in the two-player selector when the player has
 a compatible checkpoint. Choose a specific version for newly connected matches.
-Each experimental match keeps its checkpoint across reconnects and restarts.
-Switch back to the baseline for future matches, or select an earlier version
-that is still on the volume. The advanced coefficient overrides do not change
-the neural model. Existing selections remain the defaults until you save a change.
+Each running match has its own **Model** selector in the **Games** table. Choose
+a checkpoint there to change that match immediately. The next move the bot sends
+uses the new model, and the match keeps its selection across reconnects and
+restarts. A move already sent still waits for confirmation. The advanced
+coefficient overrides do not change the neural model.
 
 The page shows the worker version, account socket, last/next discovery time,
 game participants, current turn, pending move confirmation, selected model and
@@ -55,7 +56,7 @@ the following in the same Railway environment:
 Keep that credential in hosting variables and out of source and browser code.
 The player control service has no public domain. Its status and mutation routes
 require the credential. The admin forwards the authenticated Discord owner ID
-as the actor when saving settings. The existing `TABONY_PASSWORD` remains sealed
+as the actor when saving settings or changing a match model. The existing `TABONY_PASSWORD` remains sealed
 on the player service.
 
 Setting the control credential starts the managed player runtime. Without it,

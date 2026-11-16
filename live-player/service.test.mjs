@@ -92,11 +92,15 @@ test('private control API requires its credential and checks settings revisions'
   t.after(() => { controller.close(); server.close(); server.closeAllConnections(); });
   const url = `http://127.0.0.1:${server.address().port}`;
   assert.equal((await fetch(url + '/status')).status, 401);
+  assert.equal((await fetch(url + '/match-model', { method: 'POST' })).status, 401);
   const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
   assert.equal((await fetch(url + '/status', { headers })).status, 200);
   const body = JSON.stringify({ settings: initialSettings, revision: 0, actor: '229311536827465728' });
   assert.equal((await fetch(url + '/settings', { headers, method: 'POST', body })).status, 200);
   assert.equal((await fetch(url + '/settings', { headers, method: 'POST', body })).status, 409);
   assert.equal((await fetch(url + '/poll', { headers, method: 'POST' })).status, 200);
+  const matchModel = { matchId: '4000', modelId: 'initial', previousModel: 'human-baseline-v2' };
+  assert.equal((await fetch(url + '/match-model', { headers, method: 'POST', body: JSON.stringify(matchModel) })).status, 400);
+  assert.equal((await fetch(url + '/match-model', { headers, method: 'POST', body: JSON.stringify({ ...matchModel, actor: '229311536827465728' }) })).status, 409);
   await setImmediate();
 });

@@ -123,17 +123,18 @@ export async function startDashboard({ port = 24680, snapshot, thinkingSnapshot,
     }
     if (!['POST', 'DELETE'].includes(req.method)) { json(404, { error: 'Sidan finns inte.' }); return; }
     if (req.headers.origin !== origin || req.headers['x-nations-token'] !== csrf) { json(403, { error: 'Ladda om statusfönstret och försök igen.' }); return; }
-    if (req.method === 'POST' && ['/api/player/settings', '/api/player/poll'].includes(url.pathname)) {
+    if (req.method === 'POST' && ['/api/player/settings', '/api/player/poll', '/api/player/match-model'].includes(url.pathname)) {
       try {
         if (!playerAdmin) throw Object.assign(new Error('Player Bot is not connected to this admin environment.'), { status: 503 });
+        const action = url.pathname.slice('/api/player/'.length);
         let input = {};
-        if (url.pathname.endsWith('/settings')) {
+        if (action !== 'poll') {
           if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON required.' }); return; }
           let body = '';
           for await (const chunk of req) { body += chunk.toString('utf8'); if (Buffer.byteLength(body) > 32768) throw Object.assign(new Error('Request too large.'), { status: 413 }); }
           input = JSON.parse(body);
         }
-        json(200, await playerAdmin(url.pathname.endsWith('/settings') ? 'settings' : 'poll', input, activeSession?.userId ?? null));
+        json(200, await playerAdmin(action, input, activeSession?.userId ?? null));
       } catch (error) { json(error.status ?? 400, { error: error instanceof SyntaxError ? 'Invalid JSON.' : error.message }); }
       return;
     }

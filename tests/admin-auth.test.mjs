@@ -72,6 +72,7 @@ test('Player Bot sub-page and controls share owner OAuth and CSRF protection', a
   const f = await fixture(t);
   assert.equal((await f.request('/api/player/status')).status, 401);
   assert.equal((await f.request('/api/player/poll', { method: 'POST' })).status, 401);
+  assert.equal((await f.request('/api/player/match-model', { method: 'POST' })).status, 401);
   const attempt = await f.login();
   const callback = await f.request(attempt.callback, { headers: { cookie: attempt.cookie } });
   const cookie = callback.headers.getSetCookie().find(value => value.startsWith('__Host-nations-admin=')).split(';')[0];
@@ -80,13 +81,16 @@ test('Player Bot sub-page and controls share owner OAuth and CSRF protection', a
   const csrf = (await page.text()).match(/const token='([a-f0-9]+)'/)[1];
   assert.equal((await f.request('/api/player/status', { headers: { cookie } })).status, 200);
   const headers = { cookie, origin: settings.origin, 'x-nations-token': csrf, 'content-type': 'application/json' };
-  for (const route of ['/api/player/settings', '/api/player/poll']) {
+  for (const route of ['/api/player/settings', '/api/player/poll', '/api/player/match-model']) {
     assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, 'x-nations-token': 'forged' } })).status, 403);
     assert.equal((await f.request(route, { method: 'POST', headers: { ...headers, origin: 'https://evil.test' } })).status, 403);
   }
   assert.equal((await f.request('/api/player/poll', { method: 'POST', headers })).status, 200);
   assert.equal((await f.request('/api/player/settings', { method: 'POST', headers, body: JSON.stringify({ settings: {}, revision: 0, actor: 'forged' }) })).status, 200);
   assert.equal(f.playerActions().at(-1).actor, owner);
+  const modelChange = { matchId: '4000', modelId: 'initial', previousModel: 'human-baseline-v2', actor: 'forged' };
+  assert.equal((await f.request('/api/player/match-model', { method: 'POST', headers, body: JSON.stringify(modelChange) })).status, 200);
+  assert.deepEqual(f.playerActions().at(-1), { action: 'match-model', input: modelChange, actor: owner });
 });
 
 test('question quota reset requires owner authentication, matching origin and CSRF and records the actor', async t => {

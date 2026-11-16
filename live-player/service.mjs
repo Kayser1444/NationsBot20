@@ -11,23 +11,36 @@ import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
 import { experimentalModels, isExperimentalModel } from './rl-policy.mjs';
 
-function pinTwoPlayerModel(directory, matchId, selected) {
+function compatibleModel(id, playerCount) {
+  return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
+    || playerCount === 2 && isExperimentalModel(id);
+}
+
+function matchModelPath(directory, matchId) {
   if (!/^\d{1,10}$/.test(matchId)) throw new Error('Invalid match ID.');
-  const path = join(directory, `player-model-${matchId}.json`);
+  return join(directory, `player-model-${matchId}.json`);
+}
+
+function readMatchModel(directory, matchId, playerCount) {
+  if (!directory) return null;
   try {
-    const { id } = JSON.parse(readFileSync(path, 'utf8'));
-    if (!(isExperimentalModel(id) || id === 'human-baseline-v1' || modelChoices.some(model => model.id === id))) {
+    const { id, manual = false } = JSON.parse(readFileSync(matchModelPath(directory, matchId), 'utf8'));
+    if (!compatibleModel(id, playerCount) || typeof manual !== 'boolean') {
       throw new Error('Invalid saved checkpoint.');
     }
-    return id;
-  } catch (error) { if (error.code !== 'ENOENT') throw error; }
-  writeFileSync(`${path}.tmp`, JSON.stringify({ id: selected }), { mode: 0o600 });
+    return { id, manual };
+  } catch (error) { if (error.code === 'ENOENT') return null; throw error; }
+}
+
+function writeMatchModel(directory, matchId, selection) {
+  if (!directory) return;
+  const path = matchModelPath(directory, matchId);
+  writeFileSync(`${path}.tmp`, JSON.stringify(selection), { mode: 0o600 });
   renameSync(`${path}.tmp`, path);
-  return selected;
 }
 
 export function createPlayerController({ config, store, connect, discover, accept, now = Date.now,
-  experiments = experimentalModels(config.dataDir), pin = pinTwoPlayerModel }) {
+  experiments = experimentalModels(config.dataDir) }) {
   const games = new Map(), events = [];
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
   let accountSocket = 'disconnected', modelRevision = -1, model;
@@ -39,9 +52,11 @@ export function createPlayerController({ config, store, connect, discover, accep
     return model;
   };
   const gameModelId = game => {
+    if (game.modelPin?.manual) return game.modelPin.id;
     if (game.playerCount !== 2) return settings().multiplayerModel;
     const selected = settings().twoPlayerModel;
-    if (isExperimentalModel(game.pinnedModel) || isExperimentalModel(selected)) return game.pinnedModel ?? selected;
+    const pinned = game.modelPin?.id;
+    if (isExperimentalModel(pinned) || isExperimentalModel(selected)) return pinned ?? selected;
     return selected;
   };
   function reconcile() {
@@ -57,26 +72,29 @@ export function createPlayerController({ config, store, connect, discover, accep
   function startGame(info) {
     const game = { ...info, status: 'connecting', abort: new AbortController(), decision: null, turn: null, pending: null, error: null };
     games.set(info.id, game);
-    let experimental;
     try {
-      if (info.playerCount === 2) {
-        const selected = settings().twoPlayerModel;
-        game.pinnedModel = config.dataDir ? pin(config.dataDir, info.id, selected) : selected;
-        if (isExperimentalModel(game.pinnedModel)) {
-          experimental = experiments.get(game.pinnedModel);
-          if (!experimental) throw new Error('The pinned experimental checkpoint is unavailable.');
-        }
+      game.modelPin = readMatchModel(config.dataDir, info.id, info.playerCount);
+      if (info.playerCount === 2 && !game.modelPin) {
+        game.modelPin = { id: settings().twoPlayerModel, manual: false };
+        writeMatchModel(config.dataDir, info.id, game.modelPin);
       }
-    } catch (error) {
+      const id = gameModelId(game);
+      if (isExperimentalModel(id)) {
+        game.experimental = experiments.get(id);
+        if (!game.experimental) throw new Error('Missing experimental checkpoint.');
+      }
+    } catch {
       game.abort = null; game.status = 'blocked';
-      game.error = isExperimentalModel(game.pinnedModel) ? 'The pinned experimental checkpoint is unavailable.' : 'The player could not read or save this match’s checkpoint.';
+      game.error = isExperimentalModel(game.modelPin?.id) ? 'The pinned experimental checkpoint is unavailable.' : 'The player could not read or save this match’s checkpoint.';
       log(`Match ${info.id}: ${game.error}`);
       return;
     }
     const getGameModel = () => {
       const id = gameModelId(game);
-      if (game.playerCount !== 2 || id === settings().twoPlayerModel && !experimental) return getModel();
-      return { ...modelForSettings({ ...settings(), twoPlayerModel: id }), experimental };
+      const key = game.playerCount === 2 ? 'twoPlayerModel' : 'multiplayerModel';
+      const current = settings();
+      if (id === current[key] && !game.experimental) return getModel();
+      return { ...modelForSettings({ ...current, [key]: id }), experimental: game.experimental };
     };
     const controls = {
       ...config, matchId: info.id, players: info.players, signal: game.abort.signal,
@@ -131,16 +149,36 @@ export function createPlayerController({ config, store, connect, discover, accep
   return {
     status() {
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
-        polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket,
+        polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
         models: [...modelChoices, ...experiments.scan().map(({ id, label }) => ({ id, label, twoPlayerOnly: true }))],
         effectiveWeights: getModel().profiles,
-        games: [...games.values()].map(({ abort, ...game }) => ({ ...game, active: Boolean(abort), model: gameModelId(game) })), events };
+        games: [...games.values()].map(game => {
+          const { abort, modelPin, experimental, ...publicGame } = game;
+          return { ...publicGame, active: Boolean(abort), model: gameModelId(game) };
+        }), events };
     },
     save(input, revision, actor) {
       if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel && !experiments.get(input.twoPlayerModel)) {
         throw new Error('That experimental checkpoint is unavailable.');
       }
       store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status();
+    },
+    changeMatchModel({ matchId, modelId, previousModel }, actor) {
+      const game = typeof matchId === 'string' && /^\d{1,10}$/.test(matchId) && games.get(matchId);
+      if (!running || !game?.abort || !isAuthorized(game, settings(), config.username)) {
+        throw Object.assign(new Error('This match is no longer connected.'), { status: 409 });
+      }
+      if (gameModelId(game) !== previousModel) throw Object.assign(new Error('The match model changed. Refresh and try again.'), { status: 409 });
+      if (!compatibleModel(modelId, game.playerCount)) throw new Error('Choose a checkpoint available for this player count.');
+      const experimental = isExperimentalModel(modelId) ? experiments.get(modelId) : undefined;
+      if (isExperimentalModel(modelId) && !experimental) throw new Error('That experimental checkpoint is unavailable.');
+      const selection = { id: modelId, manual: true, updatedAt: new Date(now()).toISOString(), updatedBy: actor };
+      try { writeMatchModel(config.dataDir, game.id, selection); }
+      catch { throw new Error('The player could not save the match model.'); }
+      game.modelPin = selection;
+      game.experimental = experimental;
+      log(`Match ${game.id}: model changed to ${experimental?.label ?? modelChoices.find(model => model.id === modelId)?.label ?? modelId}.`);
+      return this.status();
     },
     poll(reason = 'manual') {
       if (!busy) { busy = performPoll(reason).finally(() => { busy = null; }); }
@@ -163,13 +201,16 @@ export async function startControlServer(controller, { token, port = 8080, host 
     try {
       if (req.method === 'GET' && req.url === '/status') { json(200, controller.status()); return; }
       if (req.method === 'POST' && req.url === '/poll') { await controller.poll(); json(200, controller.status()); return; }
-      if (req.method === 'POST' && req.url === '/settings') {
+      if (req.method === 'POST' && ['/settings', '/match-model'].includes(req.url)) {
         if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON required.' }); return; }
         let body = '';
         for await (const chunk of req) { body += chunk.toString('utf8'); if (Buffer.byteLength(body) > 32768) throw Object.assign(new Error('Request too large.'), { status: 413 }); }
         const input = JSON.parse(body);
-        if (!/^\d{17,20}$/.test(input.actor ?? '')) throw new Error('An authenticated admin identity is required.');
-        json(200, controller.save(input.settings, input.revision, input.actor)); return;
+        if (!/^\d{17,20}$/.test(input?.actor ?? '')) throw new Error('An authenticated admin identity is required.');
+        const status = req.url === '/match-model'
+          ? controller.changeMatchModel(input, input.actor)
+          : controller.save(input.settings, input.revision, input.actor);
+        json(200, status); return;
       }
       json(404, { error: 'Not found.' });
     } catch (error) { json(error.status ?? 400, { error: error instanceof SyntaxError ? 'Invalid JSON.' : error.message }); }

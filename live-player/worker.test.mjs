@@ -96,3 +96,40 @@ test('observer, opponent turns, repeated states and an unconfirmed send cannot p
   socket.close();
   await done;
 });
+
+test('switching the model during the journal write changes the unsent move, then waits for confirmation', async () => {
+  let socket;
+  class FakeSocket extends EventEmitter {
+    readyState = 1;
+    sent = [];
+    constructor() { super(); socket = this; }
+    send(data) { this.sent.push(JSON.parse(data)); }
+    close() { this.readyState = 3; this.emit('close'); }
+    terminate() { this.close(); }
+  }
+  const model = (suffix, move) => ({ playerPolicies: { '2': 'rl-' + suffix.repeat(24) },
+    experimental: { rank: () => ({ moves: [{ move }] }) } });
+  let selected = model('a', 'Greece');
+  let finishWrite, beginWrite;
+  const writing = new Promise(resolve => { beginWrite = resolve; });
+  const moves = { pending: null, async save(next) {
+    this.pending = next;
+    if (next === 3) await new Promise(resolve => { finishWrite = resolve; beginWrite(); });
+  } };
+  const done = subscribe({ ...config, getModel: () => selected }, 'sessionid=fake', moves, FakeSocket);
+  const turn = JSON.stringify(snapshot(3, config.username, ['Greece', 'Egypt']));
+  socket.emit('message', turn);
+  await writing;
+  assert.deepEqual(socket.sent, []);
+  selected = model('b', 'Egypt');
+  finishWrite();
+  await setImmediate();
+  assert.deepEqual(socket.sent, [{ move: 'Egypt' }]);
+  selected = model('a', 'Greece');
+  socket.emit('message', turn);
+  await setImmediate();
+  assert.deepEqual(socket.sent, [{ move: 'Egypt' }]);
+  assert.equal(moves.pending, 3);
+  socket.close();
+  await done;
+});

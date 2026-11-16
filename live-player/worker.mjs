@@ -61,7 +61,16 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
       maxPayload: 4 * 1024 * 1024,
     });
     let chain = Promise.resolve();
-    const policyContext = {};
+    let policyContext = {}, lastPolicy;
+    const currentModel = () => config.getModel?.() ?? config.model;
+    const policyId = (state, model) => model?.playerPolicies?.[Object.keys(state.players ?? {}).length === 2 ? '2' : '4'] ?? model?.name;
+    function planMove(state, model) {
+      const id = policyId(state, model);
+      if (id !== lastPolicy) { policyContext = {}; lastPolicy = id; }
+      const move = chooseMove(state, config.username, config.opponent, model, policyContext);
+      if (!safeOption(state, move)) throw new StopPlayer('No safe legal option was selected.');
+      return move;
+    }
     let lastValid = Date.now();
     let hasPosition = false;
     let lastLog;
@@ -122,12 +131,17 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         const delay = config.delay?.() ?? 0;
         if (delay) await sleep(delay, undefined, { signal: config.signal });
         if (!enabled() || socket.readyState !== WebSocket.OPEN) return;
-        const move = chooseMove(state, config.username, config.opponent, config.getModel?.() ?? config.model, policyContext);
-        if (!safeOption(state, move)) throw new StopPlayer('No safe legal option was selected.');
+        const model = currentModel();
+        let move = planMove(state, model);
         // Save first. A reconnect at the same position cannot send a duplicate.
         await moves.save(number);
         if (!enabled()) { await moves.save(null); return; }
         if (socket.readyState !== WebSocket.OPEN) return;
+        const latest = currentModel();
+        if (policyId(state, latest) !== policyId(state, model)) {
+          try { move = planMove(state, latest); }
+          catch (error) { await moves.save(null); throw error; }
+        }
         socket.send(JSON.stringify({ move }));
         config.onMove?.(number, move);
         console.log(`Match ${config.matchId}: submitted bot decision ${number}: ${JSON.stringify(move)}.`);
