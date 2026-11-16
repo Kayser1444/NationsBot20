@@ -46,7 +46,8 @@ def legal_moves(state):
 
 
 class Encoder:
-    def __init__(self, cards):
+    def __init__(self, cards, player_count=2):
+        self.player_count = player_count
         self.cards = cards
 
     def card_numbers(self, card):
@@ -69,9 +70,8 @@ class Encoder:
     def state(self, state):
         players = state.get('players', {})
         who = state['next_move_player']
-        if len(players) != 2 or who not in players:
-            raise ValueError('The experimental model accepts two-player acting-player observations only')
-        rival = next(name for name in players if name != who)
+        if len(players) != self.player_count or who not in players:
+            raise ValueError(f'Expected a {self.player_count}-player acting-player observation')
         order = state.get('player_order', [])
         numbers = [scaled(state.get('round'), 8), scaled(state.get('architects'), 5),
                    scaled(state.get('turmoil'), 5), scaled(state.get('war_value'), 15),
@@ -79,9 +79,15 @@ class Encoder:
                    scaled(len(legal_moves(state)), 20)]
         tokens = [f"prompt/{state.get('next_move_choice')}", f"event/{state.get('event')}",
                   f"war/{state.get('war')}"]
-        for role, name in (('self', who), ('rival', rival)):
+        seats = [name for name in order if name in players]
+        seats.extend(name for name in players if name not in seats)
+        pivot = seats.index(who)
+        seats = seats[pivot:] + seats[:pivot]
+        extra = []
+        for index, name in enumerate(seats):
+            role = 'self' if index == 0 else 'rival'
             player = players[name]
-            numbers.extend(self.player_numbers(player))
+            (numbers if index < 2 else extra).extend(self.player_numbers(player))
             tokens.append(f"{role}/nation/{player.get('nation')}")
             for slot, cid in sorted(player.get('slots', {}).items()):
                 tokens.extend((f'{role}/slot/{slot}/{cid}', f'{role}/card/{cid}'))
@@ -96,7 +102,10 @@ class Encoder:
             tokens.append(f'available/{nation}')
         event = self.cards.get(state.get('event'), {})
         numbers.append(scaled(event.get('famine'), 5))
-        return np.asarray(numbers, dtype=np.float32), ids(tokens, STATE_TOKENS)
+        if self.player_count == 4:
+            numbers.extend(extra)
+            numbers.append(pivot / 3)
+        return np.asarray(numbers, dtype=np.float32), ids(tokens, STATE_TOKENS if self.player_count == 2 else 512)
 
     def action(self, state, move):
         player = state['players'][state['next_move_player']]

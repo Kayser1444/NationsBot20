@@ -1,8 +1,71 @@
-# Two-player policy/value experiment
+# Nations policy/value experiments
 
-This is an offline experiment. Nothing imports it from the Discord bot, hosted
-player, model selectors or browser game. Existing model files and dependencies
-are read only. New runs refuse to overwrite an existing run directory.
+The training code runs offline. Existing model files and dependencies are read
+only. New runs refuse to overwrite an existing run directory. A compatible
+export can be installed separately through the player workflow.
+
+## Four-player pilot
+
+The four-player encoder retains the actor and next rival features and adds
+numeric features for the other two rivals in cyclic turn order. It pools
+visible card tokens from all three rivals. The transfer arm initializes the
+shared embeddings, position and action layers, and policy head from the
+selected two-player checkpoint. The value head learns expected placement
+points in both arms. Targets map first through fourth from 5/3/2/1 to
+1/.5/.25/0 for the sigmoid value head.
+
+Run both pretraining arms against the same four-player replay splits. Supply
+`--archive` to audit the original seed groups. The following example assumes a
+local copy of the archive and the selected 10,000-game checkpoint.
+
+```powershell
+$rlPython = '.data/nations-rl/.venv/Scripts/python.exe'
+$rlArchive = Join-Path $env:USERPROFILE 'Downloads/completed_matches_2730.tar.gz'
+& $rlPython -B experiments/nations-rl/train.py --threads 4 pretrain --players 4 --archive $rlArchive --output .data/nations-rl/four-transfer-v1 --transfer .data/nations-rl/batch-10000-v1/checkpoints/games-010000.pt --epochs 4 --max-train 100000 --max-eval 15000 --batch-size 256 --learning-rate .0005
+& $rlPython -B experiments/nations-rl/train.py --threads 4 pretrain --players 4 --archive $rlArchive --output .data/nations-rl/four-fresh-v1 --epochs 4 --max-train 100000 --max-eval 15000 --batch-size 256 --learning-rate .0005
+foreach ($arm in @('transfer', 'fresh')) {
+  $parent = ".data/nations-rl/four-$arm-v1"
+  & $rlPython -B experiments/nations-rl/batch.py start --run $parent --initial "$parent/pretrained.pt" --output ".data/nations-rl/four-$arm-pilot-v1" --games 512 --games-per-update 32 --monitor-every 256 --monitor-boards 12 --final-boards 48 --workers 6
+}
+```
+
+The batch derives player count from its checkpoint. Four-player training mixes
+self-play, frozen Human Baseline v2, the full-hour heuristic, and policies from
+earlier checkpoints. The report records league points, placements and failures.
+It compares the selected candidate against the baseline taking the same seat on
+the same boards, against both three baselines and a lineup with two baselines
+and one full-hour heuristic. Each board is evaluated with all four candidate
+seats. Confidence intervals resample whole boards. Failed evaluation games
+receive one point and are shown separately from genuine fourth places.
+The four-player export uses the version 2 format. Use `export.py` with the
+training run's frozen card index and validate it with `check_export.py` before
+using it in the player. Four-player exports appear as choices for four-player
+seats and as account defaults. An account default falls back to the service
+default for other player counts.
+
+### Four-player results, 2026-11-16
+
+Both pilots completed 512 training games. On 48 held-out boards per lineup,
+the transferred policy averaged 2.984 league points against three Human
+Baseline v2 bots and 3.729 in the mixed lineup. The fresh model averaged
+2.214 and 2.979 on the same boards. The paired transfer gains were
++0.771 (95% interval +0.495 to +1.052) and +0.750 (+0.479 to +1.031).
+
+The transfer winner continued for 2,048 more games with a new optimizer,
+training seed and board sets. Both pilots and the continuation completed
+without training failures. The final checkpoint led on the monitoring boards
+and was selected before evaluation on 96 fresh boards per lineup.
+
+| Opponents | Reference v2 | Selected policy | Paired gain (95% interval) |
+| --- | ---: | ---: | ---: |
+| Three v2 bots | 2.750 | 3.315 | +0.565 (+0.401 to +0.729) |
+| Two v2 bots and one full-hour heuristic | 3.159 | 3.914 | +0.755 (+0.552 to +0.945) |
+
+The selected policy finished first 148/384 times against three v2 bots and
+210/384 times in the mixed lineup. Against three v2 bots, the pilot start
+scored 2.927 on the continuation's final boards. The final checkpoint gained
++0.388 league points over it (95% interval +0.180 to +0.602).
+Reports and replays are under `.data/nations-rl/four-scale-v1`.
 
 ## First pilot, 2026-11-16
 

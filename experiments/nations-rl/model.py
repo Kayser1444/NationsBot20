@@ -7,9 +7,11 @@ from encoding import BUCKETS, VERSION
 
 
 class PolicyValue(nn.Module):
-    def __init__(self, state_size, action_size):
+    def __init__(self, state_size, action_size, player_count=2):
         super().__init__()
         self.config = {'state_size': state_size, 'action_size': action_size}
+        if player_count != 2:
+            self.config['player_count'] = player_count
         self.state_embedding = nn.Embedding(BUCKETS, 24, padding_idx=0)
         self.action_embedding = nn.Embedding(BUCKETS, 24, padding_idx=0)
         self.context = nn.Sequential(nn.Linear(state_size + 24, 64), nn.Tanh())
@@ -56,3 +58,16 @@ def load_model(path):
     model = PolicyValue(**checkpoint['config'])
     model.load_state_dict(checkpoint['parameters'])
     return model, checkpoint['metadata']
+
+
+@torch.no_grad()
+def initialize_four_player(model, source):
+    if source.config != {'state_size': 60, 'action_size': 67} or model.config.get('player_count') != 4:
+        raise ValueError('Transfer requires the two-player checkpoint and a four-player destination')
+    for name in ('state_embedding', 'action_embedding', 'action', 'policy'):
+        getattr(model, name).load_state_dict(getattr(source, name).state_dict())
+    old, new = source.context[0], model.context[0]
+    new.weight.zero_()
+    new.weight[:, :60] = old.weight[:, :60]
+    new.weight[:, -24:] = old.weight[:, -24:]
+    new.bias.copy_(old.bias)

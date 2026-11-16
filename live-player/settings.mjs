@@ -48,7 +48,7 @@ export function modelForSettings(settings) {
   model.name = `${settings.twoPlayerModel} (2p), ${settings.multiplayerModel} (3–5p)`;
   model.profiles = {
     '2': { ...weightsFor(catalog[settings.twoPlayerModel]?.model ?? deployed, 2), ...settings.weightOverrides['2'] },
-    '4': { ...weightsFor(catalog[settings.multiplayerModel].model, 4), ...settings.weightOverrides['4'] },
+    '4': { ...weightsFor(catalog[settings.multiplayerModel]?.model ?? deployed, 4), ...settings.weightOverrides['4'] },
   };
   model.playerPolicies = { '2': settings.twoPlayerModel, '4': settings.multiplayerModel };
   return validateModel(model);

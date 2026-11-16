@@ -10,8 +10,9 @@ import numpy as np
 import torch
 
 from encoding import Encoder
-from model import PolicyValue, collate, load_model, save_model
-from train import board_seed, ppo_update, read_corpus, seed_all, summarize
+from batch import four_summary, make_training_jobs, paired_points
+from model import PolicyValue, collate, initialize_four_player, load_model, save_model
+from train import board_seed, ppo_update, read_corpus, seed_all, summarize, value_target
 
 
 def position():
@@ -112,6 +113,45 @@ class LearningTests(unittest.TestCase):
         self.assertEqual(result['completed'], 1)
         self.assertEqual(result['win_rate_all_attempts'], .5)
         self.assertNotEqual(board_seed('training', 3, 0), board_seed('evaluation', 3, 0))
+
+    def test_four_player_transfer_copies_shared_features_and_sees_each_rival(self):
+        state = position()
+        state['players'].update({'C': {'score': 7}, 'D': {'score': 8}})
+        state['player_order'].extend(('C', 'D'))
+        encoder = Encoder(self.encoder.cards, 4)
+        features, moves = encoder.encode(state)
+        np.testing.assert_array_equal(features['sn'][:60], self.features['sn'])
+        np.testing.assert_array_equal(features['an'], self.features['an'])
+        self.assertEqual(moves, ['Buy P11', 'Pass'])
+        state['players'] = dict(reversed(list(state['players'].items())))
+        reordered, _ = encoder.encode(state)
+        np.testing.assert_array_equal(features['sn'], reordered['sn'])
+        for rival in ('Bob', 'C', 'D'):
+            changed = deepcopy(state)
+            changed['players'][rival]['score'] = 16
+            self.assertFalse(np.array_equal(features['sn'], encoder.encode(changed)[0]['sn']))
+        source = self.model()
+        model = PolicyValue(len(features['sn']), features['an'].shape[-1], 4)
+        value_weights = model.value[0].weight.detach().clone()
+        initialize_four_player(model, source)
+        torch.testing.assert_close(model.action[0].weight, source.action[0].weight)
+        torch.testing.assert_close(model.value[0].weight, value_weights)
+        self.assertEqual(torch.count_nonzero(model.context[0].weight[:, 60:-24]).item(), 0)
+
+    def test_four_player_rotations_and_paired_league_points(self):
+        jobs = make_training_jobs({'players': 4, 'seed': 5}, {'episode': 0, 'pool': ['older.pt']}, 16,
+                                  random.Random(5), lambda prefix, i: f'{prefix}-{i}')
+        for kind in ('self-play', 'baseline', 'history'):
+            self.assertEqual({job['actor'] for job in jobs if job['kind'] == kind},
+                             {f'Seat{seat}' for seat in range(4)})
+        self.assertTrue(all(len(job['opponents']) == 3 for job in jobs))
+        self.assertEqual([value_target(rank, 4) for rank in range(1, 5)], [1, .5, .25, 0])
+        rows = [{'seed': 'x', 'candidate': f'Seat{seat}', 'ranks': {f'Seat{seat}': seat + 1},
+                 'error': None} for seat in range(4)]
+        self.assertEqual(four_summary(rows)['mean_league_points'], 2.75)
+        failed = [dict(row, error='limit') if row['candidate'] == 'Seat0' else row for row in rows]
+        self.assertEqual(four_summary(failed)['placements'], [0, 1, 1, 1])
+        self.assertEqual(paired_points(rows, failed)['mean_gain'], -1)
 
 
 if __name__ == '__main__':

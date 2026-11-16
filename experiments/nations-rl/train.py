@@ -25,13 +25,18 @@ from torch import nn
 from torch.distributions import Categorical
 
 from encoding import Encoder, SUPPORTED, legal_moves
-from model import PolicyValue, collate, save_model, load_model
+from model import PolicyValue, collate, save_model, load_model, initialize_four_player
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 RULES = dict(growth_resources=2, extra_draft_nations=1, resource_remainder_tiebreaker=True,
              card_draw_limits=True, korea_nerf=True, lincoln_nerf=True)
 CONFIRMATIONS = ('Confirm', 'Confirm and complete the turn now')
+LEAGUE_POINTS = (5, 3, 2, 1)
+
+
+def value_target(rank, count):
+    return float(rank == 1) if count == 2 else (LEAGUE_POINTS[rank - 1] - 1) / 4
 
 
 def digest(path):
@@ -98,10 +103,10 @@ def read_corpus(path, encoder, limit, rng):
         for line in source:
             record = json.loads(line)
             state = record['state']
-            if len(state.get('players', {})) != 2 or state['next_move_choice'] not in SUPPORTED:
+            if len(state.get('players', {})) != encoder.player_count or state['next_move_choice'] not in SUPPORTED:
                 continue
-            if record['rank'] not in (1, 2):
-                raise ValueError('Invalid two-player outcome label')
+            if record['rank'] not in range(1, encoder.player_count + 1):
+                raise ValueError('Invalid placement label')
             games.add(record['match'])
             phases[record['phase']] += 1
             seen += 1
@@ -112,14 +117,14 @@ def read_corpus(path, encoder, limit, rng):
             features, moves = encoder.encode(state)
             if record['chosen'] not in moves:
                 raise ValueError(f'Human choice is not legal in match {record["match"]}')
-            features.update(label=moves.index(record['chosen']), target=float(record['rank'] == 1),
+            features.update(label=moves.index(record['chosen']), target=value_target(record['rank'], encoder.player_count),
                             game=record['match'], phase=record['phase'])
             if index < len(rows):
                 rows[index] = features
             else:
                 rows.append(features)
     if not rows:
-        raise ValueError(f'No usable two-player decisions in {path}')
+        raise ValueError(f'No usable {encoder.player_count}-player decisions in {path}')
     return rows, games, {'available_decisions': seen, 'sampled_decisions': len(rows),
                          'available_games': len(games), 'sampled_games': len({r['game'] for r in rows}),
                          'available_phases': dict(phases), 'sampled_phases': dict(Counter(r['phase'] for r in rows))}
@@ -179,15 +184,18 @@ def evaluate_predictions(model, rows, batch_size=256):
             game_values[row['game']].append((probability - row['target']) ** 2)
     metrics = {key: value / len(rows) for key, value in totals.items()}
     metrics.update(decisions=len(rows), games=len(game_values),
-                   value_brier_game_mean=float(np.mean([np.mean(v) for v in game_values.values()])),
-                   constant_half_brier=.25)
+                   value_brier_game_mean=float(np.mean([np.mean(v) for v in game_values.values()])))
+    if model.config.get('player_count') == 4:
+        metrics['constant_equal_placement_brier'] = float(np.mean([(r['target'] - .4375) ** 2 for r in rows]))
+    else:
+        metrics['constant_half_brier'] = .25
     return metrics
 
 
 def pretrain(args):
     started = time.monotonic()
     manifest = snapshot(args.output, args.engine)
-    encoder = Encoder(json.loads((args.output / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')))
+    encoder = Encoder(json.loads((args.output / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')), args.players)
     source = args.corpus.resolve()
     datasets, identities, statistics = {}, {}, {}
     for split, limit in (('train', args.max_train), ('validation', args.max_eval), ('test', args.max_eval)):
@@ -202,10 +210,14 @@ def pretrain(args):
                     corpus_samples=statistics, split_game_ids={k: sorted(v) for k, v in identities.items()})
     if args.archive:
         manifest['archive_audit'] = audit_archive(args.archive, corpus, identities)
+    if args.transfer:
+        manifest['transfer_sha256'] = digest(args.transfer)
     write_json(args.output / 'manifest.json', manifest)
     train = datasets['train']
     sample = train[0]
-    model = PolicyValue(len(sample['sn']), sample['an'].shape[-1])
+    model = PolicyValue(len(sample['sn']), sample['an'].shape[-1], args.players)
+    if args.transfer:
+        initialize_four_player(model, load_model(args.transfer)[0])
     optimizer = torch.optim.Adam(model.parameters(), lr=args.learning_rate)
     rng = random.Random(args.seed)
     history, best = [], math.inf
@@ -260,12 +272,12 @@ class Baseline:
             text=True, encoding='utf-8', bufsize=1)
         self.plans = {}
 
-    def choose(self, state):
+    def choose(self, state, heuristic=False):
         who = state['next_move_player']
         planned = self.plans.pop(who, None)
         if state['next_move_choice'] == 'Which action?' and planned in state['next_move_options']:
             return planned
-        self.process.stdin.write(json.dumps(state, separators=(',', ':')) + '\n')
+        self.process.stdin.write(json.dumps({'state': state, 'heuristic': True} if heuristic else state, separators=(',', ':')) + '\n')
         self.process.stdin.flush()
         line = self.process.stdout.readline()
         if not line:
@@ -290,12 +302,6 @@ class Baseline:
 
 class GameLimit(RuntimeError):
     pass
-
-
-def outcome(players):
-    """Same stable score/remainder ordering as the existing baseline benchmark."""
-    ordered = sorted(players, key=lambda p: (-p.score(), -p.resource_remainder()))
-    return {p.name: float(i == 0) for i, p in enumerate(ordered)}
 
 
 def play_game(match_type, encoder, baseline, policies, learner_seats, seed, output,
@@ -327,9 +333,9 @@ def play_game(match_type, encoder, baseline, policies, learner_seats, seed, outp
         state = match.get_state()
         who = state['next_move_player']
         model = policies.get(who)
-        if model is None or prompt not in SUPPORTED:
+        if model is None or model == 'heuristic' or prompt not in SUPPORTED:
             counts['baseline' if model is None else 'fallback'] += 1
-            selected = baseline.choose(state)
+            selected = baseline.choose(state, heuristic=model == 'heuristic')
         else:
             features, moves = encoder.encode(state)
             model.eval()
@@ -350,16 +356,20 @@ def play_game(match_type, encoder, baseline, policies, learner_seats, seed, outp
             raise RuntimeError(f'Unavailable move {selected!r} at {prompt}')
         return legal[selected]
 
-    names = ['Seat0', 'Seat1']
+    names = [f'Seat{index}' for index in range(encoder.player_count)]
     match = match_type(player_names=names, seed=seed, move_getter=choose, rules=RULES)
     row = {'seed': seed, 'error': None}
     try:
         match.play()
         if not match.game_over or match.phase.name != 'SCORING' or match.round_number != 8:
             raise RuntimeError('Game did not reach round-eight scoring')
-        rewards = outcome(match.players)
+        ordered = sorted(match.players, key=lambda p: (-p.score(), -p.resource_remainder() if match.resource_remainder_tiebreaker else 0))
+        ranks = {p.name: rank for rank, p in enumerate(ordered, 1)}
+        rewards = {name: value_target(rank, encoder.player_count) for name, rank in ranks.items()}
         row.update(rewards=rewards, scores={p.name: p.score() for p in match.players},
                    remainders={p.name: p.resource_remainder() for p in match.players})
+        if encoder.player_count == 4:
+            row['ranks'] = ranks
         for name, trajectory in trajectories.items():
             for features in trajectory:
                 features['target'] = rewards[name]
@@ -465,13 +475,15 @@ def paired_improvement(before, after):
 def experiment(args):
     run = args.run.resolve()
     manifest = verify_snapshot(run)
+    model, _ = load_model(run / 'pretrained.pt')
+    if model.config.get('player_count') == 4:
+        raise ValueError('Use batch.py start for four-player self-play')
     output = run / args.name
     output.mkdir(exist_ok=False)
     (output / 'replays').mkdir()
     sys.path.insert(0, str(run / 'snapshot/engine'))
     from nations import Match
     encoder = Encoder(json.loads((run / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')))
-    model, _ = load_model(run / 'pretrained.pt')
     anchor = deepcopy(model).eval()
     previous = deepcopy(model).eval()
     baseline = Baseline(run)
@@ -568,9 +580,11 @@ def experiment(args):
 def predict(args):
     run = args.run.resolve()
     verify_snapshot(run, runtime_sources=('model.py', 'encoding.py', 'baseline-bridge.mjs'))
-    encoder = Encoder(json.loads((run / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')))
     state = json.loads(args.state.read_text(encoding='utf-8'))
     model, metadata = load_model(run / args.checkpoint)
+    count = model.config.get('player_count', 2)
+    value_key = 'predicted_win_probability' if count == 2 else 'expected_league_points'
+    encoder = Encoder(json.loads((run / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')), count)
     model.eval()
     moves = legal_moves(state)
     fallback = state['next_move_choice'] not in SUPPORTED
@@ -588,7 +602,7 @@ def predict(args):
         if selected not in state['next_move_options']:
             raise ValueError(f'Unavailable move: {selected!r}')
         emit({'selected': selected, 'baseline_fallback': forced is None, 'metadata': metadata,
-              'predicted_win_probability': None, 'ranking': []})
+              value_key: None, 'ranking': []})
         return
     features, moves = encoder.encode(state)
     with torch.inference_mode():
@@ -596,7 +610,7 @@ def predict(args):
     selected = moves[logits[0].argmax().item()]
     ranking = sorted(zip(moves, logits.softmax(-1)[0].tolist()), key=lambda item: -item[1])
     emit({'selected': selected, 'baseline_fallback': False, 'metadata': metadata,
-          'predicted_win_probability': value.sigmoid().item(),
+          value_key: value.sigmoid().item() if count == 2 else 1 + 4 * value.sigmoid().item(),
           'ranking': [{'move': move, 'probability': probability} for move, probability in ranking]})
 
 
@@ -616,6 +630,8 @@ def main():
     pre.add_argument('--learning-rate', type=float, default=.001)
     pre.add_argument('--value-weight', type=float, default=.5)
     pre.add_argument('--seed', type=int, default=161126)
+    pre.add_argument('--players', type=int, choices=(2, 4), default=2)
+    pre.add_argument('--transfer', type=Path, help='Initialize a four-player model from the two-player checkpoint.')
     exp = subparsers.add_parser('selfplay')
     exp.add_argument('--run', type=Path, required=True)
     exp.add_argument('--name', default='pilot')
@@ -635,6 +651,8 @@ def main():
         parser.error('Threads must be positive')
     if args.command == 'pretrain' and min(args.epochs, args.max_train, args.max_eval, args.batch_size, args.learning_rate, args.value_weight) <= 0:
         parser.error('Pretraining budgets and rates must be positive')
+    if args.command == 'pretrain' and args.transfer and args.players != 4:
+        parser.error('Transfer requires --players 4')
     if args.command == 'selfplay':
         if min(args.games, args.seconds, args.games_per_update, args.game_seconds, args.boards, args.learning_rate) <= 0:
             parser.error('Self-play budgets and rates must be positive')

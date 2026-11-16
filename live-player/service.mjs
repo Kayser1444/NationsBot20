@@ -15,7 +15,7 @@ import { createAccountManager } from './account-manager.mjs';
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
-    || playerCount === 2 && isExperimentalModel(id);
+    || (playerCount === 2 || playerCount === 4) && isExperimentalModel(id);
 }
 
 function matchModelPath(directory, matchId, storageId) {
@@ -97,7 +97,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       const id = gameModelId(game);
       if (isExperimentalModel(id)) {
         game.experimental = experiments.get(id);
-        if (!game.experimental) throw new Error('Missing experimental checkpoint.');
+        if (game.experimental?.playerCount !== game.playerCount) throw new Error('Missing compatible experimental checkpoint.');
       }
     } catch {
       game.abort = null; game.status = 'blocked';
@@ -181,7 +181,9 @@ export function createPlayerController({ config, store, connect, discover, accep
     status() {
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
         polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
-        models: [...modelChoices, ...experiments.scan().map(({ id, label }) => ({ id, label, twoPlayerOnly: true }))],
+        models: [...modelChoices, ...experiments.scan().map(({ id, label, playerCount }) => ({
+          id, label, playerCount, twoPlayerOnly: playerCount === 2,
+        }))],
         effectiveWeights: getModel().profiles,
         games: [...games.values()].map(game => {
           const { abort, modelPin, experimental, ...publicGame } = game;
@@ -191,8 +193,9 @@ export function createPlayerController({ config, store, connect, discover, accep
         }), events };
     },
     save(input, revision, actor) {
-      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel && !experiments.get(input.twoPlayerModel)) {
-        throw new Error('That experimental checkpoint is unavailable.');
+      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel &&
+          experiments.get(input.twoPlayerModel)?.playerCount !== 2) {
+        throw new Error('That experimental checkpoint is unavailable for two-player games.');
       }
       store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status();
     },
@@ -204,7 +207,9 @@ export function createPlayerController({ config, store, connect, discover, accep
       if (gameModelId(game) !== previousModel) throw Object.assign(new Error('The match model changed. Refresh and try again.'), { status: 409 });
       if (!compatibleModel(modelId, game.playerCount)) throw new Error('Choose a checkpoint available for this player count.');
       const experimental = isExperimentalModel(modelId) ? experiments.get(modelId) : undefined;
-      if (isExperimentalModel(modelId) && !experimental) throw new Error('That experimental checkpoint is unavailable.');
+      if (isExperimentalModel(modelId) && experimental?.playerCount !== game.playerCount) {
+        throw new Error('That experimental checkpoint is unavailable for this player count.');
+      }
       const selection = { id: modelId, manual: true, updatedAt: new Date(now()).toISOString(), updatedBy: actor };
       try { writePin(game, selection); }
       catch { throw new Error('The player could not save the match model.'); }

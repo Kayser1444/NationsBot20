@@ -27,12 +27,14 @@ selectors. These overrides apply to the older heuristic checkpoints; the human
 baseline uses its bundled learned coefficients. Settings survive restarts in
 the player volume's `/data/player-settings.json`.
 
-**Experimental RL** is available in the two-player selector when the player has
-a compatible checkpoint. Choose a specific version for newly connected matches.
+**Experimental RL** is available when the player has a compatible checkpoint.
+Two-player checkpoints appear in the two-player selector. Four-player
+checkpoints appear for four-player seats and in the account default selector.
 In multi-account mode, each account has a **Default model for new games**.
-**Use service default** follows the two selectors under AI model. A two-player
-experimental default falls back to the service's multiplayer model in larger
-matches. A seat saves its model when it first connects. The **Games** table
+**Use service default** follows the two selectors under AI model. An
+experimental account default applies to its supported player count. Other
+matches use the applicable service default. A seat saves its model when it
+first connects. The **Games** table
 shows a row for each controlled seat and lets you choose its model before or
 during play after discovery. A change applies to the next move the seat sends.
 Seat selections survive reconnects and restarts. A move already sent still

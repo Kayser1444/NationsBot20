@@ -5,7 +5,10 @@ import { isExperimentalModel } from './rl-policy.mjs';
 
 const usesBaseline = (state, model) => /^human-baseline-v[12]$/.test(model?.playerPolicies?.[Object.keys(state.players ?? {}).length === 2 ? '2' : '4'] ?? '');
 
-const usesExperiment = (state, model) => Object.keys(state.players ?? {}).length === 2 && isExperimentalModel(model?.playerPolicies?.['2']);
+const usesExperiment = (state, model) => {
+  const count = Object.keys(state.players ?? {}).length;
+  return (count === 2 || count === 4) && isExperimentalModel(model?.playerPolicies?.[count]);
+};
 
 export const explainMoves = (state, username, model = defaults) => usesExperiment(state, model)
   ? model.experimental?.rank(state)?.moves ?? rankBaselineMoves(state, username)
