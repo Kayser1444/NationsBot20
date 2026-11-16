@@ -4,6 +4,7 @@ import { colonyRaces } from './position-reader.mjs';
 import { mostLeast } from './ranking.mjs';
 import { militarySpecials } from './predictor-effects.mjs';
 import rules from './predictor-rules.json' with { type: 'json' };
+import { turmoilChoice, applyBenefit } from './dynasty-effects.mjs';
 
 // Public-position surrogate, deliberately independent of the replay seed/decks.
 // Engine legality remains authoritative. Bespoke card hooks are not reproduced;
@@ -130,8 +131,7 @@ export function predictAction(state, who, move) {
   if (move === 'Pass') { const s = initial(); s.players[who].passed = true; return [wrap(s)]; }
   if (move === 'Turmoil') {
     if (!(state.turmoil > 0)) return [];
-    const s = initial(), p = s.players[who]; s.turmoil--; p.turmoil = (p.turmoil ?? 0) + 1;
-    set(p, 'Stability', amount(p, 'Stability') - 2); set(p, 'Gold', amount(p, 'Gold') + 2); return [wrap(s,['2 [Gold]'])];
+    return [wrap(applyBenefit(turmoilChoice(state, who), who, '2 [Gold]'), ['2 [Gold]'])];
   }
   const specialId = Object.values(state.players[who]?.slots??{}).find(id=>move===`Special of "${cards[id]?.name}"`);
   if (militarySpecials[specialId]) {

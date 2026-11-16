@@ -5,13 +5,15 @@ import checkpoints from './models.json' with { type: 'json' };
 import deployed from './trained-weights.json' with { type: 'json' };
 import { validateModel, weightsFor } from './scorer.mjs';
 
-const catalog = { ...checkpoints, 'human-baseline-v1': { label: 'Human baseline v1', model: deployed } };
+const catalog = { ...checkpoints,
+  'human-baseline-v1': { label: 'Human baseline (previous settings ID)', model: deployed },
+  'human-baseline-v2': { label: 'Human baseline v2 — dynasties', model: deployed } };
 
 export const initialSettings = {
   pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
   authorizedPlayers: ['Kayser'], playerCounts: [2, 3, 4, 5], maxConcurrentGames: 1,
   moveDelayMs: 500, growthResources: 2,
-  twoPlayerModel: 'human-baseline-v1', multiplayerModel: 'human-baseline-v1',
+  twoPlayerModel: 'human-baseline-v2', multiplayerModel: 'human-baseline-v2',
   weightOverrides: { '2': {}, '4': {} },
 };
 
@@ -57,11 +59,14 @@ export function settingsStore(directory) {
     saved = JSON.parse(readFileSync(path, 'utf8'));
     saved.settings = validateSettings(saved.settings);
     if (!Number.isSafeInteger(saved.revision) || saved.revision < 0) throw new Error('Invalid saved settings revision.');
-    if (!saved.baselineVersion) {
+    if ((saved.baselineVersion ?? 0) < 2) {
       // Promote existing installations once; preserve account and polling settings.
-      saved = { ...saved, baselineVersion: 1, revision: saved.revision + 1,
-        settings: { ...saved.settings, twoPlayerModel: 'human-baseline-v1', multiplayerModel: 'human-baseline-v1' },
-        updatedAt: new Date().toISOString(), updatedBy: 'human-baseline-v1 migration' };
+      const settings = { ...saved.settings };
+      for (const key of ['twoPlayerModel', 'multiplayerModel']) {
+        if (!saved.baselineVersion || settings[key] === 'human-baseline-v1') settings[key] = 'human-baseline-v2';
+      }
+      saved = { ...saved, baselineVersion: 2, revision: saved.revision + 1, settings,
+        updatedAt: new Date().toISOString(), updatedBy: 'human-baseline-v2 migration' };
       writeFileSync(path + '.tmp', JSON.stringify(saved, null, 2) + '\n', { mode: 0o600 });
       renameSync(path + '.tmp', path);
     }
@@ -70,7 +75,7 @@ export function settingsStore(directory) {
     read: () => structuredClone(saved),
     save(input, revision, actor) {
       if (revision !== saved.revision) throw Object.assign(new Error('Settings changed. Refresh before saving.'), { status: 409 });
-      const next = { baselineVersion: 1, settings: validateSettings(input), revision: saved.revision + 1,
+      const next = { baselineVersion: 2, settings: validateSettings(input), revision: saved.revision + 1,
         updatedAt: new Date().toISOString(), updatedBy: actor ?? null };
       writeFileSync(path + '.tmp', JSON.stringify(next, null, 2) + '\n', { mode: 0o600 });
       renameSync(path + '.tmp', path);
@@ -80,4 +85,4 @@ export function settingsStore(directory) {
   };
 }
 
-export const modelChoices = Object.entries(catalog).map(([id, entry]) => ({ id, label: entry.label }));
+export const modelChoices = Object.entries(catalog).filter(([id]) => id !== 'human-baseline-v1').map(([id, entry]) => ({ id, label: entry.label }));

@@ -10,12 +10,12 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class SharedScorer:
-    def __init__(self):
+    def __init__(self, bridge=None):
         node = shutil.which("node")
         if not node:
             raise RuntimeError("Node.js 24 is required for the shared Nations scorer.")
         self.process = subprocess.Popen(
-            [node, str(ROOT / "live-player/local-bridge.mjs")],
+            [node, str(bridge or ROOT / "live-player/local-bridge.mjs")],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, text=True,
             encoding="utf-8", bufsize=1,
         )

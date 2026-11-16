@@ -1,0 +1,38 @@
+seed 03a87345
+extra_draft_nations 1
+resource_remainder_tiebreaker
+card_draw_limits
+korea_nerf
+lincoln_nerf
+player Player0
+growth_resources 2
+player Player1
+growth_resources 2
+
+Persia
+Confirm
+Arabs
+Confirm
+2 [Gold]
+Confirm
+2 [Food]
+Confirm
+Deploy to BM1
+Confirm
+Buy P14
+BM1
+Confirm
+Deploy to BM2
+Confirm
+Buy P12
+Confirm
+Deploy to BM2
+Confirm
+Turmoil
+Play "Sassanid Empire"
+Confirm
+Deploy to BM2
+Confirm
+Turmoil
+2 [Gold]
+Confirm

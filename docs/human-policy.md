@@ -1,5 +1,9 @@
 # Policy learned from Tabony replays
 
+The current v0.6 baseline also learns Gold-versus-dynasty and forced dynasty
+choices. See [dynasty policy v2](dynasty-policy.md) for human choice frequencies,
+effect coverage, held-out results and the release benchmark.
+
 The pilot learns which legal move a player selected from a public position.
 It covers nation drafts, growth and ordinary action prompts in two- and
 four-player games. The baseline uses Easy for unsupported prompts. Three- and
@@ -43,7 +47,7 @@ shared scorer; a five-player learned policy still needs training and evaluation.
 SHA256 hashes. Full reports and replays remain in `.data/human-policy/release-final/`.
 
 On the [human-policy test board](http://127.0.0.1:8767/), select **Human replay policy**
-from the **Bot** menu. The server loads `.data/human-policy/v1/policy.json`
+from the **Bot** menu. The server loads the bundled `live-player/human-baseline.json`
 when it starts. Use `--human-policy PATH` to try another trained checkpoint,
 or use the following command to keep a separate local game for this model.
 

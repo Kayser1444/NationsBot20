@@ -114,6 +114,24 @@ class NativeLocalTests(unittest.TestCase):
         self.assertEqual([(p['move'],p['military_after_deploy']) for p in (placements[0],placements[-1])],
                          [('BM4',5),('BM3',0)])
 
+    def test_persia_sassanid_first_round_activation_and_followup_gold_in_real_engine(self):
+        replay=(ROOT/'live-player/fixtures/persia-sassanid-opening.replay').read_text(encoding='utf-8')
+        moves=replay.partition('\n\n')[2].splitlines()
+        activation=moves.index('Play "Sassanid Empire"')
+        first=moves.index('Turmoil')
+        second=moves.index('Turmoil',activation)
+        def player_at(number):
+            return self.game.replay_position(replay,number).get_state()['players']['Player0']
+        before=player_at(first)
+        played=player_at(activation+1)
+        self.assertEqual(played['resources'].get('[Stability]',0),before['resources'].get('[Stability]',0)-2)
+        self.assertIn('Ps_SE',played['slots'].values())
+        before=player_at(second)
+        after=player_at(second+2)
+        self.assertEqual(after['resources']['[Gold]'],before['resources']['[Gold]']+2)
+        self.assertEqual(after['resources'].get('[Stability]',0),before['resources'].get('[Stability]',0))
+        self.assertEqual(after['turmoil'],before['turmoil'])
+
     def test_human_actions_prefer_funded_war_and_avoid_unprotected_revolt(self):
         replay=(ROOT/'live-player/fixtures/mongolia-oracle-opening.replay').read_text(encoding='utf-8')
         # Reproduce the two learned preferences without requiring a trained file

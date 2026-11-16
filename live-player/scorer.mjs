@@ -1,6 +1,7 @@
 import cards from './card-index.json' with { type: 'json' };
 import defaults from './default-weights.json' with { type: 'json' };
 import { boundedResource, mostLeast } from './ranking.mjs';
+import { activeDynasty } from './dynasty-effects.mjs';
 
 const resources = ['Food', 'Gold', 'Stone', 'Books'];
 const amount = (fields, name) => Number(fields?.[`[${name}]`] ?? 0);
@@ -221,7 +222,7 @@ function featuresFor(option, ctx) {
   if (option === 'Turmoil') {
     add('turmoil', 1);
     addResources({ Gold: 2 });
-    immediate({ Stability: -2 });
+    if (activeDynasty(player) !== 'Ps_SE') immediate({ Stability: -2 });
     return { features };
   }
   if (option === 'Pass') {

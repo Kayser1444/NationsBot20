@@ -23,13 +23,17 @@ LEAGUE_POINTS = (5, 3, 2, 1)
 RULES = dict(growth_resources=2, extra_draft_nations=1, resource_remainder_tiebreaker=True,
              card_draw_limits=True, korea_nerf=True, lincoln_nerf=True)
 _scorer = None
+_previous = None
 
 
-def initialize(policy_path):
-    global _scorer
+def initialize(policy_path, previous_directory=None):
+    global _scorer, _previous
     sys.path.insert(0, str(ROOT.parent / 'nations-server/Nations'))
     _scorer = SharedScorer()
     _scorer.request({'loadHumanPolicy': json.loads(policy_path.read_text(encoding='utf-8'))})
+    if previous_directory:
+        _previous = SharedScorer(previous_directory/'local-bridge.mjs')
+        _previous.request({'loadHumanPolicy': json.loads((previous_directory/'human-baseline.json').read_text(encoding='utf-8'))})
 
 
 def simulate(task):
@@ -40,6 +44,8 @@ def simulate(task):
     human_policy = names[seat]
     _scorer.configure({name: 'v02' for name in names if name != human_policy} if opponent == 'v02' else {})
     planned_deployments = {}
+    previous_deployments = {}
+    dynasty_events = []
     started = perf_counter()
     decisions = 0
 
@@ -53,6 +59,10 @@ def simulate(task):
         legal = {str(option): option for option in options}
         if match.next_move_player == human_policy:
             selected, _ = choose_human_move(_scorer, match, local_game.replay_position, planned_deployments)
+            if selected.startswith('Play "') or prompt == 'Play which dynasty?':
+                dynasty_events.append({'round': match.round_number, 'choice': selected})
+        elif opponent == 'baseline-v1':
+            selected, _ = choose_human_move(_previous, match, local_game.replay_position, previous_deployments)
         elif len(options) == 1:
             return options[0]
         else:
@@ -80,6 +90,8 @@ def simulate(task):
     replay = f'{count}p-{opponent}-{seed}-{seat}.replay'
     (output/'replays'/replay).write_text(match.get_replay(),encoding='utf-8')
     row.update(replay=replay, decisions=match.move_number, round=match.round_number,
+               nation=next((p.nation.name for p in match.players if p.name == human_policy and p.nation), None),
+               dynasty_events=dynasty_events,
                duration_seconds=round(perf_counter() - started, 2))
     return row
 
@@ -116,6 +128,7 @@ def main():
     parser.add_argument('--four-player-boards',type=int,default=12,help='Boards against three Easy bots. Use 0 to skip.')
     parser.add_argument('--seed',type=int,default=61361000)
     parser.add_argument('--workers',type=int,default=6)
+    parser.add_argument('--previous-directory',type=Path,help='Archived v1 live-player directory for exact old-baseline comparisons.')
     args = parser.parse_args()
     if args.boards < 1 or args.four_player_boards < 0 or args.workers < 1 or args.seed < 1 or args.output.exists():
         parser.error('Choose a new output directory and valid board, worker and seed counts.')
@@ -126,7 +139,10 @@ def main():
               'easy_weights_sha256': sha256(weights.read_bytes()).hexdigest(), 'groups': {}}
     (args.output/'replays').mkdir(parents=True)
     groups = [(2, 'easy', args.boards), (2, 'v02', args.boards), (4, 'easy', args.four_player_boards)]
-    with ProcessPoolExecutor(max_workers=args.workers, initializer=initialize, initargs=(args.policy.resolve(),)) as pool:
+    if args.previous_directory:
+        if not (args.previous_directory/'local-bridge.mjs').is_file(): parser.error('Previous directory must contain the archived bridge.')
+        groups.extend([(2, 'baseline-v1', args.boards), (4, 'baseline-v1', args.four_player_boards)])
+    with ProcessPoolExecutor(max_workers=args.workers, initializer=initialize, initargs=(args.policy.resolve(), args.previous_directory.resolve() if args.previous_directory else None)) as pool:
         for count, opponent, boards in groups:
             if not boards:
                 continue

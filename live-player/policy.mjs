@@ -2,7 +2,7 @@ import defaults from './default-weights.json' with { type: 'json' };
 import { rankMoves, selectMove } from './scorer.mjs';
 import { chooseBaselineMove, rankBaselineMoves } from './baseline.mjs';
 
-const usesBaseline = (state, model) => model?.playerPolicies?.[Object.keys(state.players ?? {}).length === 2 ? '2' : '4'] === 'human-baseline-v1';
+const usesBaseline = (state, model) => /^human-baseline-v[12]$/.test(model?.playerPolicies?.[Object.keys(state.players ?? {}).length === 2 ? '2' : '4'] ?? '');
 
 export const explainMoves = (state, username, model = defaults) => usesBaseline(state, model)
   ? rankBaselineMoves(state, username) : rankMoves(state, username, model, true);

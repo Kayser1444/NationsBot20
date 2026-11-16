@@ -40,8 +40,8 @@ test('existing service upgrades once and preserves authorization, polling and la
       authorizedPlayers: ['Kayser', 'Friend'], pollIntervalSeconds: 120, playEnabled: false } }));
   const store = settingsStore(directory), saved = store.read();
   assert.equal(saved.revision, 10);
-  assert.equal(saved.settings.twoPlayerModel, 'human-baseline-v1');
-  assert.equal(saved.settings.multiplayerModel, 'human-baseline-v1');
+  assert.equal(saved.settings.twoPlayerModel, 'human-baseline-v2');
+  assert.equal(saved.settings.multiplayerModel, 'human-baseline-v2');
   assert.deepEqual(saved.settings.authorizedPlayers, ['Kayser', 'Friend']);
   assert.equal(saved.settings.pollIntervalSeconds, 120);
   assert.equal(saved.settings.playEnabled, false);

@@ -3,16 +3,23 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { createGunzip } from 'node:zlib';
 import { createInterface } from 'node:readline';
+import { createHash } from 'node:crypto';
 import model from '../live-player/trained-weights.json' with { type: 'json' };
 import { humanCandidates, rankHumanMoves } from '../live-player/human-policy.mjs';
 
-const [directory, epochArg = '3'] = process.argv.slice(2);
+const [directory, epochArg = '3', basePolicyPath, dynastyWeightArg = '1'] = process.argv.slice(2);
 const epochs = Number(epochArg);
+const dynastyWeight = Number(dynastyWeightArg);
+if (!Number.isFinite(dynastyWeight) || dynastyWeight < 1 || dynastyWeight > 10) throw new Error('Dynasty label weight must be between one and ten.');
 if (!directory || !Number.isInteger(epochs) || epochs < 1 || epochs > 20) {
-  throw new Error('Usage: node scripts/train-human-nations.mjs CORPUS_DIRECTORY [EPOCHS]');
+  throw new Error('Usage: node scripts/train-human-nations.mjs CORPUS_DIRECTORY [EPOCHS] [BASE_POLICY] [DYNASTY_LABEL_WEIGHT]');
 }
 const corpus = JSON.parse(await readFile(join(directory, 'corpus.json'), 'utf8'));
 const weights = new Map();
+const basePolicy = basePolicyPath ? JSON.parse(await readFile(basePolicyPath, 'utf8')) : null;
+const actionHash = values => createHash('sha256').update(JSON.stringify(Object.fromEntries(Object.entries(values).filter(([key]) => !key.startsWith('benefit/')).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)))).digest('hex');
+if (basePolicy) for (const [key, value] of Object.entries(basePolicy.weights)) weights.set(key, { value, sumSquares: .1 });
+const newChoice = row => ['benefit', 'dynasty'].includes(row.phase);
 
 async function* records(split) {
   const source = createReadStream(join(directory, `${split}.jsonl.gz`));
@@ -33,11 +40,11 @@ function probabilities(scores) {
   return exponents.map(value => value / total);
 }
 
-function update(rows, label) {
+function update(rows, label, importance = 1) {
   const probs = probabilities(logits(rows, key => weights.get(key)?.value ?? 0));
   const gradients = new Map();
   for (const [i, row] of rows.entries()) {
-    const residual = Number(i === label) - probs[i];
+    const residual = (Number(i === label) - probs[i]) * importance;
     for (const [key, value] of row.features) gradients.set(key, (gradients.get(key) ?? 0) + residual * value);
   }
   for (const [key, gradient] of gradients) {
@@ -68,7 +75,9 @@ async function evaluate(split, selectedWeights) {
     const order = scores.map((_, i) => i).sort((a, b) => scores[b] - scores[a] || legalOrder.get(candidates[a].move) - legalOrder.get(candidates[b].move));
     const predictedRank = order.indexOf(label);
     const size = Object.keys(row.state.players).length;
-    const groups = ['all', `${size}p`, `${size}p/${row.phase}`, ...(row.rank === 1 ? [`${size}p/winner`] : [])];
+    const groups = ['all', `${size}p`, `${size}p/${row.phase}`,
+      ...(row.phase === 'benefit' ? [`${size}p/benefit/${row.chosen.startsWith('Play "') ? 'dynasty' : 'gold'}`] : []),
+      ...(row.rank === 1 ? [`${size}p/winner`] : [])];
     for (const group of groups) {
       const sum = countFor(counts, group);
       sum.count++;
@@ -90,22 +99,26 @@ for (let epoch = 1; epoch <= epochs; epoch++) {
   const started = performance.now();
   let count = 0;
   for await (const row of records('train')) {
+    if (basePolicy && !newChoice(row)) continue;
     const candidates = humanCandidates(row.state, model);
     const label = candidates.findIndex(move => move.move === row.chosen);
     if (label < 0) throw new Error(`No legal recorded move in match ${row.match}`);
-    update(candidates, label);
+    update(candidates, label, newChoice(row) && row.chosen.startsWith('Play "') ? dynastyWeight : 1);
     count++;
   }
   const snapshot = Object.fromEntries([...weights].map(([key, state]) => [key, state.value]));
   const validation = await evaluate('validation', snapshot);
-  const loss = validation.groups.all.loss;
+  const newGroups = Object.entries(validation.groups).filter(([name]) => /\/benefit\/(dynasty|gold)$|^\dp\/dynasty$/.test(name)).map(([name, values]) => ({ ...values, importance: name.endsWith('/benefit/dynasty') ? dynastyWeight : 1 }));
+  const loss = basePolicy ? newGroups.reduce((sum, group) => sum + group.loss * group.count * group.importance, 0) / newGroups.reduce((sum, group) => sum + group.count * group.importance, 0) : validation.groups.all.loss;
   validationEpochs.push({ epoch, count, ...validation });
   console.log(JSON.stringify({ epoch, count, features: weights.size, validation: validation.groups.all,
     elapsedSeconds: Math.round((performance.now() - started) / 1000) }));
   if (!best || loss < best.loss) best = { epoch, loss, weights: snapshot };
 }
 
-const policy = { schemaVersion: 1, type: 'human-move-softmax', epoch: best.epoch, weights: best.weights };
+const policy = { schemaVersion: 1, type: 'human-move-softmax', epoch: best.epoch, benefitHead: 1,
+  dynastyLabelWeight: dynastyWeight,
+  ...(basePolicy ? { baseActionWeightsSha256: actionHash(basePolicy.weights) } : {}), weights: best.weights };
 const test = await evaluate('test', policy.weights);
 const sample = JSON.parse(await readFile(new URL('../live-player/fixtures/match-3272-opening.json', import.meta.url)));
 const opening = Object.entries(sample).map(([decision, state]) => ({ decision: Number(decision),

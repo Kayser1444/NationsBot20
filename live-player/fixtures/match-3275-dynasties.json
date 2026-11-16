@@ -1,0 +1,814 @@
+{
+  "persiaOpening": [
+    {
+      "first_round_player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "players": {
+        "NationsBot20": {
+          "nation": "Persia",
+          "resources": {
+            "[Food]": 3,
+            "[Stone]": 5,
+            "[Gold]": 8,
+            "[Books]": 1
+          },
+          "production": {},
+          "workers": 5,
+          "grown_workers": 5,
+          "points": 4,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 4
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "CtWl",
+            "BM2": "Ps_Axm",
+            "BM3": "Ps_Zgr",
+            "BM4": "Ps_Tpl"
+          },
+          "dynasties": [
+            "Ps_AE",
+            "Ps_SE"
+          ],
+          "cards": {
+            "Ps_AE": {},
+            "Ps_SE": {},
+            "CtWl": {},
+            "Ps_Axm": {},
+            "Ps_Zgr": {},
+            "Ps_Tpl": {}
+          },
+          "turmoil": 0,
+          "most_stability": 0,
+          "least_stability": 1,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 5,
+          "resource_remainder": 7
+        },
+        "Suddoman": {
+          "nation": "China",
+          "resources": {
+            "[Food]": 1,
+            "[Stone]": 8,
+            "[Gold]": 3,
+            "[Books]": 2
+          },
+          "production": {},
+          "workers": 6,
+          "grown_workers": 6,
+          "points": 3,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 3
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "C_Frm",
+            "BM2": "C_Qry",
+            "BM3": "C_Axm",
+            "BM4": "C_Pgd",
+            "S1": "C_S",
+            "Hire": "Orc"
+          },
+          "dynasties": [
+            "C_MD",
+            "C_QD"
+          ],
+          "cards": {
+            "C_MD": {},
+            "C_QD": {},
+            "C_Frm": {},
+            "C_Qry": {},
+            "C_Axm": {},
+            "C_Pgd": {},
+            "C_S": {},
+            "Orc": {}
+          },
+          "turmoil": 0,
+          "most_stability": 0,
+          "least_stability": 1,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 4,
+          "resource_remainder": 4
+        }
+      },
+      "available_nations": [],
+      "nations": {},
+      "progress_board": {
+        "P11": "Lgn",
+        "P12": "Bib",
+        "P13": "Hpl",
+        "P14": "Arc",
+        "P21": "Bbl",
+        "P24": "PlHc",
+        "P31": "Cng",
+        "P32": "PncW",
+        "P33": "Elp",
+        "P34": "Hpt"
+      },
+      "round": 1,
+      "move_number": 13,
+      "round_starts": {
+        "0": 0,
+        "1": 4,
+        "2": 56,
+        "3": 109
+      },
+      "phase": "Action Phase",
+      "architects": 2,
+      "turmoil": 2,
+      "event": "SOB_IC",
+      "war": null,
+      "war_value": null,
+      "next_move_player": "NationsBot20",
+      "next_move_choice": "Which action?",
+      "next_move_options": [
+        "Buy P11",
+        "Buy P12",
+        "Buy P13",
+        "Buy P14",
+        "Buy P24",
+        "Buy P31",
+        "Buy P32",
+        "Buy P33",
+        "Buy P34",
+        "Deploy to BM1",
+        "Deploy to BM2",
+        "Deploy to BM3",
+        "Deploy to BM4",
+        "Turmoil",
+        "Pass",
+        "Resign"
+      ],
+      "game_over": 0,
+      "undo_allowed": 0,
+      "invalid_move": null
+    },
+    {
+      "first_round_player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "players": {
+        "NationsBot20": {
+          "nation": "Persia",
+          "resources": {
+            "[Food]": 3,
+            "[Stone]": 5,
+            "[Gold]": 8,
+            "[Books]": 1,
+            "[Stability]": -2
+          },
+          "production": {
+            "[Books]": -2
+          },
+          "workers": 5,
+          "grown_workers": 5,
+          "points": 4,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 4
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "CtWl",
+            "BM2": "Ps_Axm",
+            "BM3": "Ps_Zgr",
+            "BM4": "Ps_Tpl"
+          },
+          "dynasties": [
+            "Ps_AE",
+            "Ps_SE"
+          ],
+          "cards": {
+            "Ps_AE": {},
+            "Ps_SE": {},
+            "CtWl": {},
+            "Ps_Axm": {},
+            "Ps_Zgr": {},
+            "Ps_Tpl": {}
+          },
+          "turmoil": 1,
+          "most_stability": 0,
+          "least_stability": 1,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 5,
+          "resource_remainder": 5
+        },
+        "Suddoman": {
+          "nation": "China",
+          "resources": {
+            "[Food]": 1,
+            "[Stone]": 8,
+            "[Gold]": 3,
+            "[Books]": 2
+          },
+          "production": {},
+          "workers": 6,
+          "grown_workers": 6,
+          "points": 3,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 3
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "C_Frm",
+            "BM2": "C_Qry",
+            "BM3": "C_Axm",
+            "BM4": "C_Pgd",
+            "S1": "C_S",
+            "Hire": "Orc"
+          },
+          "dynasties": [
+            "C_MD",
+            "C_QD"
+          ],
+          "cards": {
+            "C_MD": {},
+            "C_QD": {},
+            "C_Frm": {},
+            "C_Qry": {},
+            "C_Axm": {},
+            "C_Pgd": {},
+            "C_S": {},
+            "Orc": {}
+          },
+          "turmoil": 0,
+          "most_stability": 0,
+          "least_stability": 1,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 4,
+          "resource_remainder": 4
+        }
+      },
+      "available_nations": [],
+      "nations": {},
+      "progress_board": {
+        "P11": "Lgn",
+        "P12": "Bib",
+        "P13": "Hpl",
+        "P14": "Arc",
+        "P21": "Bbl",
+        "P24": "PlHc",
+        "P31": "Cng",
+        "P32": "PncW",
+        "P33": "Elp",
+        "P34": "Hpt"
+      },
+      "round": 1,
+      "move_number": 14,
+      "round_starts": {
+        "0": 0,
+        "1": 4,
+        "2": 56,
+        "3": 109
+      },
+      "phase": "Action Phase",
+      "architects": 2,
+      "turmoil": 1,
+      "event": "SOB_IC",
+      "war": null,
+      "war_value": null,
+      "next_move_player": "NationsBot20",
+      "next_move_choice": "Which benefit?",
+      "next_move_options": [
+        "2 [Gold]",
+        "Play \"Achaemenid Empire\"",
+        "Play \"Sassanid Empire\""
+      ],
+      "game_over": 0,
+      "undo_allowed": 1,
+      "invalid_move": null
+    },
+    {
+      "first_round_player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "player_order": [
+        "NationsBot20",
+        "Suddoman"
+      ],
+      "players": {
+        "NationsBot20": {
+          "nation": "Persia",
+          "resources": {
+            "[Food]": 3,
+            "[Stone]": 4,
+            "[Gold]": 10,
+            "[Books]": 1,
+            "[Stability]": -2
+          },
+          "production": {
+            "[Stone]": 1,
+            "[Books]": -2
+          },
+          "workers": 4,
+          "grown_workers": 5,
+          "points": 4,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 4
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "CtWl",
+            "BM2": "Ps_Axm",
+            "BM3": "Ps_Zgr",
+            "BM4": "Ps_Tpl"
+          },
+          "dynasties": [
+            "Ps_AE",
+            "Ps_SE"
+          ],
+          "cards": {
+            "Ps_AE": {},
+            "Ps_SE": {},
+            "CtWl": {},
+            "Ps_Axm": {},
+            "Ps_Zgr": {
+              "deployed": 1
+            },
+            "Ps_Tpl": {}
+          },
+          "turmoil": 2,
+          "most_stability": 0,
+          "least_stability": 1,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 6,
+          "resource_remainder": 6
+        },
+        "Suddoman": {
+          "nation": "China",
+          "resources": {
+            "[Food]": 1,
+            "[Stone]": 5,
+            "[Gold]": 3,
+            "[Books]": 2,
+            "[Stability]": 2
+          },
+          "production": {},
+          "workers": 6,
+          "grown_workers": 6,
+          "points": 3,
+          "worker_pools": {
+            "-3 [Food]": {
+              "workers": 3
+            },
+            "-3 [Stability]": {
+              "workers": 4
+            }
+          },
+          "extra_workers": 0,
+          "slots": {
+            "BM1": "C_Frm",
+            "BM2": "C_Qry",
+            "BM3": "C_Axm",
+            "BM4": "C_Pgd",
+            "S1": "C_S",
+            "W1": "Orc"
+          },
+          "dynasties": [
+            "C_MD",
+            "C_QD"
+          ],
+          "cards": {
+            "C_MD": {},
+            "C_QD": {},
+            "C_Frm": {},
+            "C_Qry": {},
+            "C_Axm": {},
+            "C_Pgd": {},
+            "C_S": {},
+            "Orc": {}
+          },
+          "turmoil": 0,
+          "most_stability": 1,
+          "least_stability": 0,
+          "most_military": 0,
+          "least_military": 1,
+          "resource_deficit_points": {},
+          "passed": 0,
+          "passed_first": 0,
+          "passed_last": 0,
+          "bought_colony": 0,
+          "score": 5,
+          "resource_remainder": 3
+        }
+      },
+      "available_nations": [],
+      "nations": {},
+      "progress_board": {
+        "P11": "Lgn",
+        "P12": "Bib",
+        "P13": "Hpl",
+        "P14": "Arc",
+        "P21": "Bbl",
+        "P24": "PlHc",
+        "P31": "Cng",
+        "P32": "PncW",
+        "P33": "Elp",
+        "P34": "Hpt"
+      },
+      "round": 1,
+      "move_number": 24,
+      "round_starts": {
+        "0": 0,
+        "1": 4,
+        "2": 56,
+        "3": 109
+      },
+      "phase": "Action Phase",
+      "architects": 0,
+      "turmoil": 0,
+      "event": "SOB_IC",
+      "war": null,
+      "war_value": null,
+      "next_move_player": "NationsBot20",
+      "next_move_choice": "Which benefit?",
+      "next_move_options": [
+        "2 [Gold]",
+        "Play \"Achaemenid Empire\"",
+        "Play \"Sassanid Empire\""
+      ],
+      "game_over": 0,
+      "undo_allowed": 1,
+      "invalid_move": null
+    }
+  ],
+  "persiaSecondRound": {
+    "first_round_player_order": [
+      "NationsBot20",
+      "Suddoman"
+    ],
+    "player_order": [
+      "Suddoman",
+      "NationsBot20"
+    ],
+    "players": {
+      "Suddoman": {
+        "nation": "China",
+        "resources": {
+          "[Stone]": 3,
+          "[Gold]": 4,
+          "[Books]": 3,
+          "[Stability]": 4,
+          "[Military]": 4
+        },
+        "production": {
+          "[Food]": -1,
+          "[Stone]": 3,
+          "[Gold]": 2,
+          "[Books]": 4
+        },
+        "workers": 0,
+        "grown_workers": 6,
+        "points": 3,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 3
+          },
+          "-3 [Stability]": {
+            "workers": 4
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "C_Frm",
+          "BM2": "C_Qry",
+          "BM3": "Elp",
+          "BM4": "C_Pgd",
+          "S1": "C_S",
+          "W1": "Orc"
+        },
+        "dynasties": [
+          "C_MD",
+          "C_QD"
+        ],
+        "cards": {
+          "C_MD": {},
+          "C_QD": {},
+          "C_Frm": {
+            "deployed": 1
+          },
+          "C_Qry": {
+            "deployed": 2
+          },
+          "Elp": {
+            "deployed": 1
+          },
+          "C_Pgd": {
+            "deployed": 2
+          },
+          "C_S": {},
+          "Orc": {}
+        },
+        "turmoil": 0,
+        "most_stability": 0,
+        "least_stability": 1,
+        "most_military": 1,
+        "least_military": 0,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 10,
+        "resource_remainder": 8
+      },
+      "NationsBot20": {
+        "nation": "Persia",
+        "resources": {
+          "[Food]": 2,
+          "[Stone]": 5,
+          "[Gold]": 13,
+          "[Stability]": 3
+        },
+        "production": {
+          "[Stone]": 7
+        },
+        "workers": 1,
+        "grown_workers": 6,
+        "points": 3,
+        "worker_pools": {
+          "-3 [Food]": {
+            "workers": 4
+          },
+          "-3 [Stability]": {
+            "workers": 3
+          }
+        },
+        "extra_workers": 0,
+        "slots": {
+          "BM1": "CtWl",
+          "BM2": "Ps_Axm",
+          "BM3": "Ps_Zgr",
+          "BM4": "Ps_Tpl",
+          "Hire": "Spx"
+        },
+        "dynasties": [
+          "Ps_AE",
+          "Ps_SE"
+        ],
+        "cards": {
+          "Ps_AE": {},
+          "Ps_SE": {},
+          "CtWl": {
+            "deployed": 2
+          },
+          "Ps_Axm": {},
+          "Ps_Zgr": {
+            "deployed": 3
+          },
+          "Ps_Tpl": {},
+          "Spx": {}
+        },
+        "turmoil": 1,
+        "most_stability": 1,
+        "least_stability": 0,
+        "most_military": 0,
+        "least_military": 1,
+        "resource_deficit_points": {},
+        "passed": 0,
+        "passed_first": 0,
+        "passed_last": 0,
+        "bought_colony": 0,
+        "score": 9,
+        "resource_remainder": 3
+      }
+    },
+    "available_nations": [],
+    "nations": {},
+    "progress_board": {
+      "P11": "PncW",
+      "P13": "Hpt",
+      "P14": "Slk",
+      "P21": "Mcd",
+      "P22": "StAg",
+      "P23": "Hsn",
+      "P31": "SkRd",
+      "P32": "TcAm",
+      "P33": "WAlx",
+      "P34": "BKds"
+    },
+    "round": 2,
+    "move_number": 68,
+    "round_starts": {
+      "0": 0,
+      "1": 4,
+      "2": 56,
+      "3": 109
+    },
+    "phase": "Action Phase",
+    "architects": 3,
+    "turmoil": 2,
+    "event": "BG_Ch",
+    "war": null,
+    "war_value": null,
+    "next_move_player": "NationsBot20",
+    "next_move_choice": "Which benefit?",
+    "next_move_options": [
+      "2 [Gold]",
+      "Play \"Achaemenid Empire\"",
+      "Play \"Sassanid Empire\""
+    ],
+    "game_over": 0,
+    "undo_allowed": 1,
+    "invalid_move": null
+  },
+  "romeKeepDefault": {
+    "round": 1,
+    "move_number": 46,
+    "next_move_choice": "Which benefit?",
+    "next_move_player": "Seat0",
+    "next_move_options": [
+      "2 [Gold]",
+      "Play \"Roman Empire\"",
+      "Play \"Roman Republic\""
+    ],
+    "player_order": [
+      "Seat1",
+      "Seat0"
+    ],
+    "first_round_player_order": [
+      "Seat1",
+      "Seat0"
+    ],
+    "players": {
+      "Seat1": {
+        "nation": "Poland",
+        "resources": {
+          "[Food]": 2,
+          "[Stone]": 1,
+          "[Books]": 1,
+          "[Military]": 9
+        },
+        "production": {
+          "[Food]": 1,
+          "[Stone]": 8,
+          "[Gold]": 1
+        },
+        "workers": 1,
+        "grown_workers": 5,
+        "slots": {
+          "BM1": "Pl_Tpl",
+          "BM2": "Pl_Frg",
+          "BM3": "Pl_Axm",
+          "BM4": "Pl_Qry",
+          "S1": "Pl_S",
+          "C1": "HdKs",
+          "W3": "PlHc"
+        },
+        "cards": {
+          "Pl_JD": {},
+          "Pl_PLC": {},
+          "Pl_Tpl": {},
+          "Pl_Frg": {
+            "deployed": 2
+          },
+          "Pl_Axm": {
+            "deployed": 1
+          },
+          "Pl_Qry": {
+            "deployed": 1
+          },
+          "Pl_S": {},
+          "HdKs": {},
+          "PlHc": {
+            "exploration_turns": 1
+          }
+        },
+        "dynasties": [
+          "Pl_JD",
+          "Pl_PLC"
+        ],
+        "points": 4,
+        "passed": 0,
+        "score": 9
+      },
+      "Seat0": {
+        "nation": "Rome",
+        "resources": {
+          "[Food]": 2,
+          "[Stone]": 5,
+          "[Gold]": 2,
+          "[Books]": 2,
+          "[Stability]": 1,
+          "[Military]": 8
+        },
+        "production": {
+          "[Food]": 3,
+          "[Books]": 2
+        },
+        "workers": 1,
+        "grown_workers": 5,
+        "slots": {
+          "BM1": "PtGd",
+          "BM2": "R_Qry",
+          "BM3": "R_Lgn",
+          "BM4": "R_Aqd",
+          "S1": "R_S",
+          "W1": "GrLr"
+        },
+        "cards": {
+          "R_RE": {},
+          "R_RR": {},
+          "PtGd": {
+            "deployed": 1
+          },
+          "R_Qry": {},
+          "R_Lgn": {
+            "deployed": 1
+          },
+          "R_Aqd": {
+            "deployed": 2
+          },
+          "R_S": {},
+          "GrLr": {}
+        },
+        "dynasties": [
+          "R_RE",
+          "R_RR"
+        ],
+        "points": 4,
+        "passed": 0,
+        "score": 11
+      }
+    },
+    "nations": {},
+    "progress_board": {
+      "P21": "TcAm",
+      "P22": "SmTp",
+      "P31": "Orc",
+      "P32": "STry",
+      "P34": "Hpl"
+    },
+    "event": "QU_OG",
+    "war": "WAlx",
+    "war_value": 7,
+    "architects": 1,
+    "turmoil": 1
+  }
+}

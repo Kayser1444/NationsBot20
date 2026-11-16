@@ -13,7 +13,8 @@ import tarfile
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PHASES = {'Draft which nation?': 'draft', 'Take what for growth?': 'growth', 'Which action?': 'action'}
+PHASES = {'Draft which nation?': 'draft', 'Take what for growth?': 'growth', 'Which action?': 'action',
+          'Which benefit?': 'benefit', 'Play which dynasty?': 'dynasty'}
 EXCLUDED = {'UNDO', 'Resign', 'Confirm', 'Confirm and complete the turn now'}
 
 
@@ -55,7 +56,12 @@ def read_decisions(match_type, replay):
     placements = sorted(match.players, key=lambda player: (
         -player.score(), -player.resource_remainder() if match.resource_remainder_tiebreaker else 0))
     ranks = {seats[player.name]: rank for rank, player in enumerate(placements, 1)}
-    return positions, ranks
+    dynasty_games = []
+    log = match.get_log()
+    for player in match.players:
+        plays = re.findall(r'^' + re.escape(player.name) + r' plays "([^"]+)"\.$', log, re.M)
+        dynasty_games.append({'nation': player.nation.name, 'plays': plays})
+    return positions, ranks, dynasty_games
 
 
 def main():
@@ -74,6 +80,7 @@ def main():
     skipped = Counter()
     failures = []
     seen = set()
+    dynasty_stats = {}
     with tarfile.open(args.archive, 'r:gz') as archive, ExitStack() as stack:
         streams = {split: stack.enter_context(gzip.open(args.output / f'{split}.jsonl.gz', 'wt', encoding='utf-8', compresslevel=2))
                    for split in ('train', 'validation', 'test')}
@@ -119,7 +126,14 @@ def main():
             if result is None:
                 skipped['did not reach final scoring'] += 1
                 continue
-            positions, ranks = result
+            positions, ranks, dynasty_games = result
+            for game in dynasty_games:
+                stats = dynasty_stats.setdefault(game['nation'], {'games': 0, 'kept_default': 0, 'first_play': Counter(), 'ever_played': Counter()})
+                stats['games'] += 1
+                stats['kept_default'] += not game['plays']
+                if game['plays']:
+                    stats['first_play'][game['plays'][0]] += 1
+                    stats['ever_played'].update(set(game['plays']))
             games[f'{split}/{len(names)}p'] += 1
             for phase, seat, chosen, state in positions:
                 row = {'match': int(identifier[1]), 'phase': phase, 'rank': ranks[seat], 'chosen': chosen, 'state': state}
@@ -128,6 +142,7 @@ def main():
     report = {'archive': args.archive.name, 'sha256': sha256(args.archive.read_bytes()).hexdigest(),
               'games': dict(games), 'decisions': dict(decisions), 'skipped': dict(skipped), 'failures': failures}
     (args.output / 'corpus.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    (args.output / 'dynasty-statistics.json').write_text(json.dumps(dynasty_stats, indent=2) + '\n', encoding='utf-8')
     print(json.dumps(report), flush=True)
 
 

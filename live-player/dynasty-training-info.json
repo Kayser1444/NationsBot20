@@ -1,0 +1,641 @@
+{
+  "archive_sha256": "bc9a545e6436389b02e7f5b5d67a92a34da37be106c84462493a12c3f9d63f54",
+  "games": {
+    "train/4p": 381,
+    "validation/4p": 49,
+    "train/2p": 1118,
+    "test/2p": 134,
+    "validation/2p": 164,
+    "test/4p": 56
+  },
+  "decisions": {
+    "train/4p/draft": 1490,
+    "train/4p/growth": 12192,
+    "train/4p/action": 114930,
+    "train/4p/benefit": 7632,
+    "validation/4p/draft": 192,
+    "validation/4p/growth": 1568,
+    "validation/4p/action": 14894,
+    "validation/4p/benefit": 1002,
+    "train/2p/draft": 2219,
+    "train/2p/growth": 17888,
+    "train/2p/action": 186187,
+    "train/2p/benefit": 13368,
+    "test/2p/draft": 262,
+    "test/2p/growth": 2144,
+    "test/2p/action": 22286,
+    "test/2p/benefit": 1669,
+    "validation/2p/draft": 323,
+    "validation/2p/growth": 2624,
+    "validation/2p/action": 27142,
+    "validation/2p/benefit": 2009,
+    "test/4p/draft": 220,
+    "test/4p/growth": 1792,
+    "test/4p/action": 17056,
+    "test/4p/benefit": 1125,
+    "train/4p/dynasty": 32,
+    "train/2p/dynasty": 10,
+    "test/4p/dynasty": 6,
+    "validation/4p/dynasty": 5,
+    "test/2p/dynasty": 1
+  },
+  "selected_epoch": 5,
+  "dynasty_label_weight": 3,
+  "frozen_action_weights": 2267,
+  "held_out": {
+    "policySha256": "cf2f29c20f61e04c61367a7928a3606db4d37748628947311217909e12042bb4",
+    "groups": {
+      "all": {
+        "count": 2801,
+        "policyCorrect": 2395,
+        "easyCorrect": 2442,
+        "policyAccuracy": 0.8550517672259907,
+        "easyAccuracy": 0.8718314887540164
+      },
+      "takes-gold": {
+        "count": 2440,
+        "policyCorrect": 2219,
+        "easyCorrect": 2440,
+        "policyAccuracy": 0.9094262295081967,
+        "easyAccuracy": 1
+      },
+      "nation/India": {
+        "count": 147,
+        "policyCorrect": 109,
+        "easyCorrect": 115,
+        "policyAccuracy": 0.7414965986394558,
+        "easyAccuracy": 0.782312925170068
+      },
+      "nation/America": {
+        "count": 133,
+        "policyCorrect": 95,
+        "easyCorrect": 107,
+        "policyAccuracy": 0.7142857142857143,
+        "easyAccuracy": 0.8045112781954887
+      },
+      "plays-dynasty": {
+        "count": 354,
+        "policyCorrect": 176,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.4971751412429379,
+        "easyAccuracy": 0
+      },
+      "chosen/Am_FP": {
+        "count": 20,
+        "policyCorrect": 20,
+        "easyCorrect": 0,
+        "policyAccuracy": 1,
+        "easyAccuracy": 0
+      },
+      "chosen/I_My": {
+        "count": 26,
+        "policyCorrect": 11,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.4230769230769231,
+        "easyAccuracy": 0
+      },
+      "nation/China": {
+        "count": 146,
+        "policyCorrect": 117,
+        "easyCorrect": 119,
+        "policyAccuracy": 0.8013698630136986,
+        "easyAccuracy": 0.815068493150685
+      },
+      "chosen/C_MD": {
+        "count": 24,
+        "policyCorrect": 24,
+        "easyCorrect": 0,
+        "policyAccuracy": 1,
+        "easyAccuracy": 0
+      },
+      "nation/Vikings": {
+        "count": 107,
+        "policyCorrect": 87,
+        "easyCorrect": 86,
+        "policyAccuracy": 0.8130841121495327,
+        "easyAccuracy": 0.8037383177570093
+      },
+      "chosen/Vk_Nm": {
+        "count": 17,
+        "policyCorrect": 13,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.7647058823529411,
+        "easyAccuracy": 0
+      },
+      "chosen/Vk_Vr": {
+        "count": 4,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/C_QD": {
+        "count": 3,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "nation/Rome": {
+        "count": 229,
+        "policyCorrect": 225,
+        "easyCorrect": 225,
+        "policyAccuracy": 0.982532751091703,
+        "easyAccuracy": 0.982532751091703
+      },
+      "nation/Persia": {
+        "count": 460,
+        "policyCorrect": 459,
+        "easyCorrect": 424,
+        "policyAccuracy": 0.9978260869565218,
+        "easyAccuracy": 0.9217391304347826
+      },
+      "chosen/Ps_SE": {
+        "count": 35,
+        "policyCorrect": 35,
+        "easyCorrect": 0,
+        "policyAccuracy": 1,
+        "easyAccuracy": 0
+      },
+      "nation/Korea": {
+        "count": 261,
+        "policyCorrect": 232,
+        "easyCorrect": 234,
+        "policyAccuracy": 0.8888888888888888,
+        "easyAccuracy": 0.896551724137931
+      },
+      "nation/Japan": {
+        "count": 256,
+        "policyCorrect": 249,
+        "easyCorrect": 249,
+        "policyAccuracy": 0.97265625,
+        "easyAccuracy": 0.97265625
+      },
+      "nation/Greece": {
+        "count": 147,
+        "policyCorrect": 113,
+        "easyCorrect": 112,
+        "policyAccuracy": 0.7687074829931972,
+        "easyAccuracy": 0.7619047619047619
+      },
+      "chosen/G_At": {
+        "count": 20,
+        "policyCorrect": 9,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.45,
+        "easyAccuracy": 0
+      },
+      "nation/Mali": {
+        "count": 103,
+        "policyCorrect": 87,
+        "easyCorrect": 87,
+        "policyAccuracy": 0.8446601941747572,
+        "easyAccuracy": 0.8446601941747572
+      },
+      "chosen/Ml_ME": {
+        "count": 11,
+        "policyCorrect": 1,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.09090909090909091,
+        "easyAccuracy": 0
+      },
+      "nation/Portugal": {
+        "count": 108,
+        "policyCorrect": 73,
+        "easyCorrect": 92,
+        "policyAccuracy": 0.6759259259259259,
+        "easyAccuracy": 0.8518518518518519
+      },
+      "chosen/Pg_PE": {
+        "count": 12,
+        "policyCorrect": 5,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.4166666666666667,
+        "easyAccuracy": 0
+      },
+      "nation/Arabs": {
+        "count": 107,
+        "policyCorrect": 99,
+        "easyCorrect": 98,
+        "policyAccuracy": 0.9252336448598131,
+        "easyAccuracy": 0.9158878504672897
+      },
+      "nation/Venice": {
+        "count": 92,
+        "policyCorrect": 75,
+        "easyCorrect": 73,
+        "policyAccuracy": 0.8152173913043478,
+        "easyAccuracy": 0.7934782608695652
+      },
+      "chosen/Vn_PW": {
+        "count": 14,
+        "policyCorrect": 7,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.5,
+        "easyAccuracy": 0
+      },
+      "chosen/Vn_DS": {
+        "count": 5,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "nation/Poland": {
+        "count": 126,
+        "policyCorrect": 94,
+        "easyCorrect": 107,
+        "policyAccuracy": 0.746031746031746,
+        "easyAccuracy": 0.8492063492063492
+      },
+      "chosen/Pl_JD": {
+        "count": 16,
+        "policyCorrect": 8,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.5,
+        "easyAccuracy": 0
+      },
+      "nation/Mongolia": {
+        "count": 103,
+        "policyCorrect": 60,
+        "easyCorrect": 71,
+        "policyAccuracy": 0.5825242718446602,
+        "easyAccuracy": 0.6893203883495146
+      },
+      "nation/Ethiopia": {
+        "count": 203,
+        "policyCorrect": 157,
+        "easyCorrect": 180,
+        "policyAccuracy": 0.7733990147783252,
+        "easyAccuracy": 0.8866995073891626
+      },
+      "chosen/Et_AK": {
+        "count": 20,
+        "policyCorrect": 16,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.8,
+        "easyAccuracy": 0
+      },
+      "chosen/G_St": {
+        "count": 15,
+        "policyCorrect": 7,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.4666666666666667,
+        "easyAccuracy": 0
+      },
+      "chosen/K_JK": {
+        "count": 23,
+        "policyCorrect": 1,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.043478260869565216,
+        "easyAccuracy": 0
+      },
+      "chosen/Pg_KL": {
+        "count": 6,
+        "policyCorrect": 0,
+        "easyCorrect": 2,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0.3333333333333333
+      },
+      "chosen/Ar_UC": {
+        "count": 5,
+        "policyCorrect": 1,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.2,
+        "easyAccuracy": 0
+      },
+      "chosen/K_KK": {
+        "count": 4,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Ar_AC": {
+        "count": 4,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Ml_SE": {
+        "count": 5,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Mg_YD": {
+        "count": 22,
+        "policyCorrect": 14,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.6363636363636364,
+        "easyAccuracy": 0
+      },
+      "chosen/R_RR": {
+        "count": 1,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Mg_GH": {
+        "count": 10,
+        "policyCorrect": 3,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.3,
+        "easyAccuracy": 0
+      },
+      "chosen/Am_DR": {
+        "count": 6,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "forced": {
+        "count": 7,
+        "policyCorrect": 0,
+        "easyCorrect": 2,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0.2857142857142857
+      },
+      "nation/Egypt": {
+        "count": 73,
+        "policyCorrect": 64,
+        "easyCorrect": 63,
+        "policyAccuracy": 0.8767123287671232,
+        "easyAccuracy": 0.863013698630137
+      },
+      "chosen/Eg_NK": {
+        "count": 6,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Et_Sb": {
+        "count": 3,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/I_Mg": {
+        "count": 6,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Eg_OK": {
+        "count": 4,
+        "policyCorrect": 1,
+        "easyCorrect": 0,
+        "policyAccuracy": 0.25,
+        "easyAccuracy": 0
+      },
+      "chosen/J_EP": {
+        "count": 3,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/J_HP": {
+        "count": 4,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/R_RE": {
+        "count": 3,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Pl_PLC": {
+        "count": 3,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      },
+      "chosen/Ps_AE": {
+        "count": 1,
+        "policyCorrect": 0,
+        "easyCorrect": 0,
+        "policyAccuracy": 0,
+        "easyAccuracy": 0
+      }
+    }
+  },
+  "statistics": {
+    "Persia": {
+      "games": 343,
+      "kept_default": 17,
+      "first_play": {
+        "Sassanid Empire": 313,
+        "Achaemenid Empire": 13
+      },
+      "ever_played": {
+        "Sassanid Empire": 324,
+        "Achaemenid Empire": 24
+      }
+    },
+    "Greece": {
+      "games": 344,
+      "kept_default": 100,
+      "first_play": {
+        "Athens": 118,
+        "Sparta": 126
+      },
+      "ever_played": {
+        "Athens": 172,
+        "Sparta": 138
+      }
+    },
+    "China": {
+      "games": 262,
+      "kept_default": 20,
+      "first_play": {
+        "Ming Dynasty": 219,
+        "Qin Dynasty": 23
+      },
+      "ever_played": {
+        "Ming Dynasty": 236,
+        "Qin Dynasty": 48
+      }
+    },
+    "Portugal": {
+      "games": 226,
+      "kept_default": 73,
+      "first_play": {
+        "Kingdom of Leon": 47,
+        "Portugese Empire": 106
+      },
+      "ever_played": {
+        "Kingdom of Leon": 53,
+        "Portugese Empire": 119
+      }
+    },
+    "Poland": {
+      "games": 198,
+      "kept_default": 42,
+      "first_play": {
+        "Jagellonian Dynasty": 118,
+        "Polish-Lithuanian Commonwealth": 38
+      },
+      "ever_played": {
+        "Jagellonian Dynasty": 124,
+        "Polish-Lithuanian Commonwealth": 49
+      }
+    },
+    "Ethiopia": {
+      "games": 296,
+      "kept_default": 101,
+      "first_play": {
+        "Axumite Kingdom": 179,
+        "Sheba": 16
+      },
+      "ever_played": {
+        "Axumite Kingdom": 187,
+        "Sheba": 36
+      }
+    },
+    "Egypt": {
+      "games": 205,
+      "kept_default": 117,
+      "first_play": {
+        "Old Kingdom": 44,
+        "New Kingdom": 44
+      },
+      "ever_played": {
+        "Old Kingdom": 51,
+        "New Kingdom": 48
+      }
+    },
+    "Mali": {
+      "games": 167,
+      "kept_default": 72,
+      "first_play": {
+        "Songhai Empire": 49,
+        "Mali Empire": 46
+      },
+      "ever_played": {
+        "Songhai Empire": 51,
+        "Mali Empire": 62
+      }
+    },
+    "Japan": {
+      "games": 373,
+      "kept_default": 289,
+      "first_play": {
+        "Edo Period": 22,
+        "Heian Period": 62
+      },
+      "ever_played": {
+        "Edo Period": 28,
+        "Heian Period": 74
+      }
+    },
+    "Korea": {
+      "games": 361,
+      "kept_default": 170,
+      "first_play": {
+        "Joseon Kingdom": 174,
+        "Koryo Kingdom": 17
+      },
+      "ever_played": {
+        "Koryo Kingdom": 26,
+        "Joseon Kingdom": 182
+      }
+    },
+    "India": {
+      "games": 359,
+      "kept_default": 79,
+      "first_play": {
+        "Mauryan Empire": 255,
+        "Mughal Empire": 25
+      },
+      "ever_played": {
+        "Mauryan Empire": 268,
+        "Mughal Empire": 69
+      }
+    },
+    "America": {
+      "games": 214,
+      "kept_default": 20,
+      "first_play": {
+        "Federalist Party": 146,
+        "Democratic Republicans": 48
+      },
+      "ever_played": {
+        "Federalist Party": 179,
+        "Democratic Republicans": 63
+      }
+    },
+    "Vikings": {
+      "games": 239,
+      "kept_default": 48,
+      "first_play": {
+        "Normans": 170,
+        "Varangians": 21
+      },
+      "ever_played": {
+        "Normans": 177,
+        "Varangians": 37
+      }
+    },
+    "Rome": {
+      "games": 408,
+      "kept_default": 317,
+      "first_play": {
+        "Roman Empire": 68,
+        "Roman Republic": 23
+      },
+      "ever_played": {
+        "Roman Empire": 72,
+        "Roman Republic": 25
+      }
+    },
+    "Mongolia": {
+      "games": 331,
+      "kept_default": 42,
+      "first_play": {
+        "Yuan Dynasty": 267,
+        "Golden Horde": 22
+      },
+      "ever_played": {
+        "Yuan Dynasty": 285,
+        "Golden Horde": 117
+      }
+    },
+    "Venice": {
+      "games": 223,
+      "kept_default": 85,
+      "first_play": {
+        "Pactum Warmundi": 117,
+        "Domains of the Sea": 21
+      },
+      "ever_played": {
+        "Pactum Warmundi": 126,
+        "Domains of the Sea": 40
+      }
+    },
+    "Arabs": {
+      "games": 227,
+      "kept_default": 144,
+      "first_play": {
+        "Umayyad Caliphate": 52,
+        "Abbasid Caliphate": 31
+      },
+      "ever_played": {
+        "Umayyad Caliphate": 55,
+        "Abbasid Caliphate": 50
+      }
+    }
+  }
+}

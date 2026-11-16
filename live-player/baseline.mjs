@@ -5,6 +5,7 @@ import easy from './trained-weights.json' with { type: 'json' };
 import { rankHumanMoves } from './human-policy.mjs';
 import { rankMoves } from './scorer.mjs';
 import { predictAction as predict } from './medium.mjs';
+import { activeDynasty, dynastyId, turmoilChoice, applyBenefit } from './dynasty-effects.mjs';
 
 const stock = (p, resource) => p.resources?.[`[${resource}]`] ?? 0;
 const production = (p, resource) => p.production?.[`[${resource}]`] ?? 0;
@@ -142,15 +143,13 @@ function recoverStability(state, player) {
     && sources.some(lost => (cards[id].amounts?.Stability ?? 0) - lost >= deficit));
 }
 
-function turmoilPenalty(state, player, username) {
+function turmoilPenalty(state, player, username, policy) {
   if (stock(player, 'Stability') >= 2) return null;
-  const after = predictAction(state, username, 'Turmoil')[0]?.state;
+  if (activeDynasty(player) === 'Ps_SE') return null;
+  const benefits = turmoilChoice(state, username);
+  const benefit = rankHumanMoves(benefits, policy, easy)[0]?.move ?? rankMoves(benefits, username, easy)[0]?.move;
+  const after = benefit ? applyBenefit(benefits, username, benefit) : null;
   if (!after || recoverStability(after, after.players[username])) return null;
-  // A dynasty can change the printed effect of taking Turmoil. Leave these
-  // choices with the learned policy unless the fallback chooses the Gold.
-  const benefits = ['2 [Gold]', ...(player.dynasties ?? []).filter(Boolean).map(id => `Play "${cards[id]?.name}"`)];
-  const benefitState = { ...after, next_move_choice: 'Which benefit?', next_move_options: benefits };
-  if (!rankMoves(benefitState, username, easy)[0]?.move.startsWith('2 [Gold]')) return null;
   const newlyFunded = market(state).filter(item => item.card?.type === 'war' && !state.war && item.price > stock(player, 'Gold') && item.price <= stock(after.players[username], 'Gold'));
   const rivals = Object.entries(state.players).filter(([name]) => name !== username).map(([, rival]) => rival);
   const lead = rivals.some(rival => stock(player, 'Military') > militaryPotential(rival));
@@ -207,16 +206,32 @@ export function rankBaselineMoves(state, username = state.next_move_player, poli
   if (placements.length) return placements;
   const learnedMoves = rankHumanMoves(state, policy, easy);
   if (!learnedMoves.length) return rankMoves(state, username, easy);
+  if (state.next_move_choice === 'Which benefit?' && state.round === 8 && !(state.turmoil > 0)) {
+    const gold = learnedMoves.find(row => row.move === '2 [Gold]');
+    // Sassanid has no activation reward: with no remaining Gold turmoil now
+    // or in a future round, taking the immediate Gold strictly dominates it.
+    if (gold) return learnedMoves.map(row => dynastyId(state.players[username], row.move) === 'Ps_SE'
+      ? { ...row, score: Math.min(row.score, gold.score - .01), reasons: ['No Gold turmoil remains before game end for Sassanid to improve.'] } : row).sort((a, b) => b.score - a.score);
+  }
   if (state.next_move_choice !== 'Which action?') return learnedMoves;
   const player = state.players[username], passScore = learnedMoves.find(row => row.move === 'Pass')?.score;
   const transfers = workerTransfers(state, player, passScore, username);
   const advisors = advisorMoves(state, player, username, learnedMoves, passScore);
-  const turmoil = options.includes('Turmoil') ? turmoilPenalty(state, player, username) : null;
+  const turmoil = options.includes('Turmoil') ? turmoilPenalty(state, player, username, policy) : null;
+  let setup = 0, setupReason;
+  if (options.includes('Turmoil') && (player.dynasties ?? []).some(Boolean)) {
+    const benefits = turmoilChoice(state, username), ranked = rankHumanMoves(benefits, policy, easy);
+    const best = ranked[0], gold = ranked.find(row => row.move === '2 [Gold]');
+    if (best && dynastyId(player, best.move) && gold && best.score > gold.score) {
+      setup = Math.min(.65, .20 * (best.score - gold.score));
+      setupReason = `Opens ${best.move}, preferred to immediate Gold by the learned benefit policy.`;
+    }
+  }
   return learnedMoves.map(row => {
     const transfer = transfers.get(row.move);
     if (transfer && transfer.score > row.score) return { ...row, ...transfer };
     if (advisors.has(row.move)) return { ...row, ...advisors.get(row.move) };
-    if (row.move === 'Turmoil' && turmoil) return { ...row, score: row.score - turmoil.penalty, reasons: turmoil.reasons };
+    if (row.move === 'Turmoil' && (turmoil || setup)) return { ...row, score: row.score + setup - (turmoil?.penalty ?? 0), reasons: [...(turmoil?.reasons ?? []), ...(setupReason ? [setupReason] : [])] };
     const slot = row.move.match(/^Buy (P\d+)$/)?.[1], card = cards[state.progress_board?.[slot]];
     if (card?.type === 'wonder') {
       const needed = card.stages?.length ?? 0, available = (state.architects ?? 0) + privateArchitects(player);

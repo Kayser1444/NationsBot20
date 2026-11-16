@@ -8,7 +8,7 @@
     "lincoln_nerf": true
   },
   "first_seed": 61371000,
-  "human_policy_sha256": "9f5c285ff9137dd40f005b0e1a951c482a5a414a3cca51bb0d21cf6cf7760884",
+  "human_policy_sha256": "cf2f29c20f61e04c61367a7928a3606db4d37748628947311217909e12042bb4",
   "easy_weights_sha256": "87a3a721930f60094c1d01d398d45cf66b9a0d527e0a662537f5bfe78ce21148",
   "groups": {
     "2p/easy": {
@@ -25,48 +25,101 @@
         "1": 60,
         "2": 4
       },
-      "mean_vp_margin": 13,
+      "mean_vp_margin": 13.328125,
       "mean_league_points": null,
       "failures": {}
     },
     "2p/v02": {
       "attempted": 64,
       "completed": 64,
-      "wins": 60,
-      "win_rate_all_games": 0.9375,
-      "win_rate_completed_games": 0.9375,
+      "wins": 58,
+      "win_rate_all_games": 0.90625,
+      "win_rate_completed_games": 0.90625,
       "paired_board_bootstrap_95": [
-        0.859375,
-        1.0
+        0.828125,
+        0.96875
       ],
       "placements": {
-        "1": 60,
-        "2": 4
+        "1": 58,
+        "2": 6
       },
-      "mean_vp_margin": 17.65625,
+      "mean_vp_margin": 17.34375,
       "mean_league_points": null,
       "failures": {}
     },
     "4p/easy": {
       "attempted": 96,
       "completed": 96,
-      "wins": 82,
-      "win_rate_all_games": 0.8541666666666666,
-      "win_rate_completed_games": 0.8541666666666666,
+      "wins": 84,
+      "win_rate_all_games": 0.875,
+      "win_rate_completed_games": 0.875,
       "paired_board_bootstrap_95": [
-        0.78125,
-        0.9270833333333334
+        0.7916666666666666,
+        0.9479166666666666
       ],
       "placements": {
-        "1": 82,
+        "1": 84,
         "3": 3,
-        "2": 11
+        "4": 2,
+        "2": 7
       },
-      "mean_vp_margin": 15.649305555555555,
+      "mean_vp_margin": 16.15625,
       "mean_league_points": 4.677083333333333,
+      "failures": {}
+    },
+    "2p/baseline-v1": {
+      "attempted": 64,
+      "completed": 64,
+      "wins": 30,
+      "win_rate_all_games": 0.46875,
+      "win_rate_completed_games": 0.46875,
+      "paired_board_bootstrap_95": [
+        0.40625,
+        0.53125
+      ],
+      "placements": {
+        "2": 34,
+        "1": 30
+      },
+      "mean_vp_margin": -0.375,
+      "mean_league_points": null,
+      "failures": {}
+    },
+    "4p/baseline-v1": {
+      "attempted": 96,
+      "completed": 96,
+      "wins": 20,
+      "win_rate_all_games": 0.20833333333333334,
+      "win_rate_completed_games": 0.20833333333333334,
+      "paired_board_bootstrap_95": [
+        0.16666666666666666,
+        0.25
+      ],
+      "placements": {
+        "2": 25,
+        "3": 27,
+        "4": 24,
+        "1": 20
+      },
+      "mean_vp_margin": -0.3611111111111112,
+      "mean_league_points": 2.6354166666666665,
       "failures": {}
     }
   },
-  "baseline_sha256": "524eab86f69c5edddfec2c63f046f252b23aec77d432a5408d682a908af715ad",
-  "version": "human-baseline-v1"
+  "baseline_sha256": "6588c28b5246389952678f48a7294cea7d7b4acc9bb0ff30dc01217b23cd6ac6",
+  "version": "human-baseline-v2",
+  "previous_baseline_commit": "29fe9dd4c50574dc099fe1f1c8bf49b73c19fbdd",
+  "sources_sha256": {
+    "dynasty-effects.mjs": "b0a2c15f90fef8887ee22553015944a48a68a2e855180f87a966c522284c3010",
+    "default-specials.json": "76499e4494670ce41fc4113073aa8529f5a9410864f79bd62b4373af019851c5",
+    "human-policy.mjs": "ef456b375440f9ca36471ba153e2a6cbda8a99eba4dfac9fa64ac027c3794905",
+    "scorer.mjs": "fbb18c1d8249b3b2f06dc4d11654cd25914063b5216355056fe3e7c89f7aae36",
+    "medium.mjs": "92a0b302fcbc946b9db3444cd75ce34ff45daf80c0bebb4ce33c468d8e438dd3"
+  },
+  "dynasty_behavior": {
+    "persia_games": 46,
+    "sassanid_first_round": 46,
+    "rome_games": 25,
+    "rome_kept_default": 25
+  }
 }

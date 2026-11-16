@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WEB = ROOT / "scripts" / "nations-browser"
 ENGINE = ROOT.parent / "nations-server" / "Nations"
 SAVE = ROOT / ".data" / "nations-play" / "browser.replay"
-HUMAN_POLICY = ROOT / '.data' / 'human-policy' / 'v1' / 'policy.json'
+HUMAN_POLICY = ROOT / 'live-player' / 'human-baseline.json'
 HUMAN = "You"
 BOT = "NationsBot"
 

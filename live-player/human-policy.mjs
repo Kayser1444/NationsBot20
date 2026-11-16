@@ -1,7 +1,8 @@
 import cards from './card-index.json' with { type: 'json' };
 import { rankMoves } from './scorer.mjs';
+import { currentSpecial, dynastyId, dynastyEffects } from './dynasty-effects.mjs';
 
-export const policyChoices = new Set(['Draft which nation?', 'Take what for growth?', 'Which action?']);
+export const policyChoices = new Set(['Draft which nation?', 'Take what for growth?', 'Which action?', 'Which benefit?', 'Play which dynasty?']);
 const amount = (fields, name) => fields?.[`[${name}]`] ?? 0;
 const clip = (value, scale) => Math.max(-2, Math.min(2, value / scale));
 
@@ -33,6 +34,24 @@ export function humanCandidates(state, easyModel) {
   const rivals = Object.entries(state.players).filter(([name]) => name !== who).map(([, p]) => p);
   const round = state.round || 1;
   const size = rivals.length + 1;
+  if (['Which benefit?', 'Play which dynasty?'].includes(state.next_move_choice)) {
+    return rankMoves(state, who, easyModel, true).map(row => {
+      const id = dynastyId(player, row.move), group = id ? 'dynasty' : 'gold';
+      const features = [];
+      const add = (name, value = 1) => { if (value) features.push([`benefit/${name}`, value]); };
+      add(group); add(`${size}p/${group}`); add(`round${round}/${group}`);
+      add(`${group}/nation/${player.nation}`); add(`${group}/current/${currentSpecial(player)}`);
+      if (id) {
+        add(`card/${id}`);
+        if (state.next_move_choice === 'Play which dynasty?') add(`forced/card/${id}`);
+        for (const [name, value] of Object.entries(dynastyEffects(state, who, id))) add(`${group}/effect/${name}`, clip(value, 3));
+      }
+      for (const resource of ['Gold', 'Food', 'Stone', 'Stability', 'Military']) add(`${group}/${resource}`, clip(amount(player.resources, resource), 5));
+      add(`${group}/remainingTurmoils`, clip(state.turmoil ?? 0, 3));
+      add(`${group}/workers`, clip(player.workers ?? 0, 3));
+      return { move: row.move, features };
+    });
+  }
   const position = state.player_order.indexOf(who);
   const activeRivals = rivals.filter(p => !p.passed);
   const market = Object.entries(state.progress_board).map(([slot, id]) => ({ price: Number(slot[1]), card: cards[id] }));

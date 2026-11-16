@@ -13,11 +13,13 @@ pause connected games. Pausing playing prevents new moves and invitation joins.
 An already submitted move remains submitted.
 
 Two-player and multiplayer checkpoint selectors are independent. Both default
-to **Human baseline v1**, the replay-trained policy with shared tactical checks.
+to **Human baseline v2 — dynasties**, the replay-trained policy with shared tactical checks.
 The twenty-minute, full-hour and initial heuristic checkpoints remain available.
-On first upgrade to v0.5, existing installations select the new baseline once;
+On first upgrade, existing installations select the baseline once;
 authorization, polling, play/pause and other settings are preserved. Later model
-selections persist normally.
+selections persist normally. v0.6 upgrades an existing v1 selection to v2 while
+preserving manually selected heuristic checkpoints. See the
+[dynasty training evidence and benchmark](dynasty-policy.md).
 Advanced JSON overrides can edit named coefficients in profiles `2` and `4`;
 three and five players use profile `4`. Effective weights are visible below the
 selectors. These overrides apply to the older heuristic checkpoints; the human

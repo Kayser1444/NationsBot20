@@ -19,3 +19,7 @@ result={'source':'Tabony public engine rules: building/military worker_points, m
         'cards':dict(sorted(worker_rules.items())),'nations':dict(sorted(nations.items()))}
 (ROOT/'live-player/predictor-rules.json').write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
 print(f'Exported {len(worker_rules)} worker cards and {len(nations)} nation boards.')
+specials={nation.name:[{'id':card.abbr,'name':card.name,'resources':card.production_value.state(),
+    'description':card.__doc__ or '', 'privateArchitects':card.private_architects}
+    for card in nation.specials if card is not None] for nation in match.initial_nation_order}
+(ROOT/'live-player/default-specials.json').write_text(json.dumps(specials,indent=2)+'\n',encoding='utf-8',newline='\n')
