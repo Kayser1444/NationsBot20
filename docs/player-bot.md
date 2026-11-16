@@ -13,8 +13,11 @@ growth for invitations with variable difficulty. Pausing discovery does not
 pause connected games. Pausing playing prevents new moves and invitation joins.
 An already submitted move remains submitted.
 
-Two-player and multiplayer checkpoint selectors are independent. Both default
-to **Human baseline v2 — dynasties**, the replay-trained policy with shared tactical checks.
+The two-player and shared multiplayer checkpoint selectors default to
+**Human baseline v2 — dynasties**, the replay-trained policy with shared
+tactical checks. The **Four-player checkpoint** selector can override the
+shared checkpoint for new four-player seats. Three- and five-player games
+use the shared multiplayer checkpoint.
 The twenty-minute, full-hour and initial heuristic checkpoints remain available.
 On first upgrade, existing installations select the baseline once;
 authorization, polling, play/pause and other settings are preserved. Later model
@@ -28,10 +31,10 @@ baseline uses its bundled learned coefficients. Settings survive restarts in
 the player volume's `/data/player-settings.json`.
 
 **Experimental RL** is available when the player has a compatible checkpoint.
-Two-player checkpoints appear in the two-player selector. Four-player
-checkpoints appear for four-player seats and in the account default selector.
+Experimental checkpoints appear in the selector for their supported player
+count, in compatible seat selectors and in the account default selector.
 In multi-account mode, each account has a **Default model for new games**.
-**Use service default** follows the two selectors under AI model. An
+**Use service default** follows the selectors under AI model. An
 experimental account default applies to its supported player count. Other
 matches use the applicable service default. A seat saves its model when it
 first connects. The **Games** table

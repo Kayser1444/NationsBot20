@@ -61,6 +61,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (game.modelPin?.manual) return game.modelPin.id;
     const accountDefault = config.defaultModel?.(game.playerCount);
     if (!game.modelPin && accountDefault) return accountDefault;
+    if (game.playerCount === 4) return settings().fourPlayerModel ?? settings().multiplayerModel;
     if (game.playerCount !== 2) return settings().multiplayerModel;
     const selected = settings().twoPlayerModel;
     const pinned = game.modelPin?.id;
@@ -90,8 +91,8 @@ export function createPlayerController({ config, store, connect, discover, accep
     games.set(info.id, game);
     try {
       if (game.error) throw new Error(game.error);
-      if (!game.modelPin && (config.accountId || info.playerCount === 2)) {
-        game.modelPin = { id: gameModelId(game), manual: Boolean(config.accountId) };
+      if (!game.modelPin && (config.accountId || info.playerCount === 2 || info.playerCount === 4)) {
+        game.modelPin = { id: gameModelId(game), manual: Boolean(config.accountId) || info.playerCount === 4 };
         writePin(game, game.modelPin);
       }
       const id = gameModelId(game);
@@ -193,9 +194,11 @@ export function createPlayerController({ config, store, connect, discover, accep
         }), events };
     },
     save(input, revision, actor) {
-      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel &&
-          experiments.get(input.twoPlayerModel)?.playerCount !== 2) {
-        throw new Error('That experimental checkpoint is unavailable for two-player games.');
+      for (const [key, count] of [['twoPlayerModel', 2], ['fourPlayerModel', 4]]) {
+        const selected = input?.[key];
+        if (isExperimentalModel(selected) && selected !== settings()[key] && experiments.get(selected)?.playerCount !== count) {
+          throw new Error(`That experimental checkpoint is unavailable for ${count === 2 ? 'two' : 'four'}-player games.`);
+        }
       }
       store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status();
     },

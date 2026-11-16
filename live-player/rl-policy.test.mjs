@@ -99,19 +99,34 @@ test('a four-player checkpoint can play a four-player seat and is rejected by th
   writeFileSync(join(directory, `${model.id}.nrl`), bytes);
   const store = settingsStore(directory);
   const players = ['NationsBot20', 'Kayser', 'Player3', 'Player4'];
-  store.save({ ...initialSettings, authorizedPlayers: players.slice(1) }, 0);
+  store.save({ ...initialSettings, authorizedPlayers: [...players.slice(1), 'Player5'] }, 0);
   let connection;
+  const later = [];
   const controller = createPlayerController({
     config: { dataDir: directory, username: players[0], play: false },
-    store, discover: async () => [{ id: '4100', playerCount: 4, players }],
+    store, discover: async () => [{ id: '4100', playerCount: 4, players }, ...later],
     connect: async options => {
-      connection = options;
+      if (options.matchId === '4100') connection = options;
       return new Promise(resolve => options.signal.addEventListener('abort', resolve, { once: true }));
     },
   });
   t.after(() => controller.close());
   assert.throws(() => controller.save({ ...store.read().settings, twoPlayerModel: model.id }, 1), /two-player/);
   await controller.poll();
+  const settings = { ...store.read().settings, maxConcurrentGames: 4, fourPlayerModel: model.id };
+  const twoPlayer = decodeExperimentalModel(checkpoint(512));
+  writeFileSync(join(directory, `${twoPlayer.id}.nrl`), checkpoint(512));
+  assert.throws(() => controller.save({ ...settings, fourPlayerModel: twoPlayer.id }, 1), /four-player/);
+  controller.save(settings, 1);
+  assert.equal(settingsStore(directory).read().settings.fourPlayerModel, model.id);
+  assert.equal(controller.status().games[0].model, 'human-baseline-v2');
+  later.push({ id: '4101', playerCount: 4, players }, { id: '4102', playerCount: 3, players: players.slice(0, 3) });
+  later.push({ id: '4103', playerCount: 5, players: [...players, 'Player5'] });
+  await controller.poll();
+  const games = Object.fromEntries(controller.status().games.map(game => [game.id, game.model]));
+  assert.equal(games['4101'], model.id);
+  assert.equal(games['4102'], settings.multiplayerModel);
+  assert.equal(games['4103'], settings.multiplayerModel);
   const state = { next_move_player: players[0], next_move_choice: 'Which action?',
     players: Object.fromEntries(players.map(name => [name, {}])), player_order: players,
     next_move_options: ['Pass', 'UNDO'] };

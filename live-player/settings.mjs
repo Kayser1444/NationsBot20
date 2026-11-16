@@ -14,7 +14,7 @@ export const initialSettings = {
   pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
   authorizedPlayers: ['Kayser'], playerCounts: [2, 3, 4, 5], maxConcurrentGames: 1,
   moveDelayMs: 500, growthResources: 2,
-  twoPlayerModel: 'human-baseline-v2', multiplayerModel: 'human-baseline-v2',
+  twoPlayerModel: 'human-baseline-v2', multiplayerModel: 'human-baseline-v2', fourPlayerModel: null,
   weightOverrides: { '2': {}, '4': {} },
 };
 
@@ -32,7 +32,10 @@ export function validateSettings(input) {
   if (!Array.isArray(s.playerCounts) || !s.playerCounts.length || s.playerCounts.some(n => ![2, 3, 4, 5].includes(n))) throw new Error('Choose player counts from two to five.');
   s.playerCounts = [...new Set(s.playerCounts)].sort();
   if (!(Object.hasOwn(catalog, s.twoPlayerModel) || isExperimentalModel(s.twoPlayerModel)) ||
-      !Object.hasOwn(catalog, s.multiplayerModel)) throw new Error('Choose an available model checkpoint.');
+      !Object.hasOwn(catalog, s.multiplayerModel) ||
+      !(s.fourPlayerModel === null || Object.hasOwn(catalog, s.fourPlayerModel) || isExperimentalModel(s.fourPlayerModel))) {
+    throw new Error('Choose an available model checkpoint.');
+  }
   if (!s.weightOverrides || typeof s.weightOverrides !== 'object' || Array.isArray(s.weightOverrides) ||
       Object.keys(s.weightOverrides).some(key => !['2', '4'].includes(key))) throw new Error('Weight overrides must use profiles 2 and 4.');
   for (const [count, weights] of Object.entries(s.weightOverrides)) {
