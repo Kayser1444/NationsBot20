@@ -18,11 +18,12 @@ prepares `NATIONS_CONFIG_DIR`; the question service stores its data in a `questi
 subdirectory. Local development uses its own configuration directory.
 
 Default model: **`gpt-6.1-sol`**, with no fallback or automatic API retry.
-The owner can choose `gpt-6.1-terra` or `gpt-6-luna` in the administration panel.
-The compatible-model list is intersected with OpenAI's `GET /v1/models` response,
-using this service's question API key. Discovery is cached for one minute and
-never invokes a paid response. Listing does not prove permission to generate;
-the separate connection-test button checks the currently selected model.
+The administration panel offers the models returned by OpenAI's `GET /v1/models`
+for this service's question API key. After enabling a new model in the OpenAI
+project, refresh the panel's model list. Discovery is cached for one minute and
+never invokes a paid response. The list can include models that cannot answer
+`/question`. Save the model, then use the connection test to check whether it can
+respond. A test question verifies the full investigation.
 
 The selection is saved atomically in `questions/model.json`, independently in
 each environment. Changes apply to new investigations; all rounds of an accepted
@@ -45,7 +46,7 @@ by the owner; delivery success is not an accuracy score. It warns when sources,
 prompts, reasoning/retrieval settings or requested languages differ or are unknown.
 Comparisons only read saved conversations; they never run or charge new questions.
 
-All three models use the same local tools, strict answer format, `low` reasoning,
+All models receive the same local tools, strict answer format, `low` reasoning,
 Standard service tier and existing request/token/context limits. Logs retain the
 requested model, provider-reported model, source and prompt fingerprints, actual
 service tier and granular usage. New telemetry has room for all six rounds.

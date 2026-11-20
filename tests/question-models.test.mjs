@@ -3,16 +3,34 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, readFileSync, writeFileSync, rmSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { createQuestionModels, questionUsage, questionModels } from '../question-models.mjs';
+import { createQuestionModels, questionUsage } from '../question-models.mjs';
 import { createQuestionService } from '../question-service.mjs';
 import { createQuestionLog } from '../question-log.mjs';
 import { createOpenAiConnectionTest } from '../openai-connection-test.mjs';
 
 const temp = t => { const directory = mkdtempSync(join(tmpdir(), 'nations-models-')); t.after(() => rmSync(directory, { recursive: true, force: true })); return directory; };
 const env = { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'synthetic-model-secret', NATIONS_OPENAI_ADMIN_KEY: 'never-use-admin-secret' };
-const listed = () => Response.json({ data: [...questionModels.map(({ id }) => ({ id })), { id: 'text-embedding-3-small' }, { id: 'unknown-model' }] });
 const owner = '229311536827465728';
-test('model discovery uses the question key, filters compatible IDs, caches concurrent reads, and persists audited choices', async t => {
+const newModel = 'gpt-6.2-sol';
+const listedModels = ['gpt-6-luna', 'gpt-6.1-sol', 'gpt-6.1-terra', newModel, 'text-embedding-3-small'];
+const listed = () => Response.json({ data: listedModels.map(id => ({ id })) });
+
+test('new models appear after the discovery cache expires and remain selected across restart', async t => {
+  const directory = temp(t);
+  let clock = 0, ids = ['gpt-6-luna'];
+  const options = { directory, env, now: () => clock,
+    fetcher: async () => Response.json({ data: ids.map(id => ({ id })) }) };
+  const models = createQuestionModels(options);
+  assert.deepEqual((await models.catalogue()).models.map(({ id }) => id), ids);
+
+  ids = ['gpt-6-luna', newModel, newModel];
+  assert.equal((await models.catalogue()).models.some(({ id }) => id === newModel), false);
+  clock += 60000;
+  assert.deepEqual((await models.catalogue()).models.map(({ id }) => id).sort(), ['gpt-6-luna', newModel]);
+  await models.select(newModel, owner);
+  assert.equal(createQuestionModels({ ...options, fetcher: () => assert.fail('Restart should read the saved model') }).current(), newModel);
+});
+test('model discovery uses the question key, caches concurrent reads, and persists audited choices from the catalogue', async t => {
   const directory = temp(t), audit = []; let clock = Date.now(), calls = 0, release;
   const gate = new Promise(resolve => { release = resolve; });
   const options = { directory, env, now: () => clock, report: message => audit.push(message), fetcher: async (url, options) => {
@@ -21,7 +39,8 @@ test('model discovery uses the question key, filters compatible IDs, caches conc
   } };
   let models = createQuestionModels(options); assert.equal(calls, 0); assert.equal(models.current(), 'gpt-6.1-sol');
   const first = models.catalogue(), second = models.catalogue(); assert.equal(calls, 1); release();
-  assert.deepEqual(await first, await second); assert.equal((await first).models.length, 3);
+  assert.deepEqual(await first, await second);
+  assert.deepEqual((await first).models.map(({ id }) => id), listedModels);
   await assert.rejects(models.select('unknown-model', owner)); assert.equal(calls, 1);
   await models.select('gpt-6.1-terra', owner); assert.equal(calls, 1); assert.equal(models.current(), 'gpt-6.1-terra');
   assert.ok(audit.some(message => message.includes(owner) && message.includes('gpt-6.1-terra')));
@@ -53,6 +72,7 @@ test('cost estimates include cache reads/writes, do not double-count reasoning a
   assert.equal(result.estimatedCostUsd,(1000+4000*.05+3000*1.25+4000*2.5+100*5)/1e6);
   assert.equal(result.reasoningTokens,50);
   assert.equal(questionUsage(provider(),'gpt-6.1-sol').estimatedCostUsd,result.estimatedCostUsd*2);
+  assert.equal(questionUsage(provider(),'future-model').estimatedCostUsd,undefined);
   for (const changed of [provider({ service_tier: 'priority' }), provider({ service_tier: undefined }), provider({ usage: { input_tokens: 12, output_tokens: 1 } }),
     provider({ usage: { input_tokens: 12, output_tokens: 1, input_tokens_details: { cached_tokens: 0, cache_write_tokens: 5 } } }),
     provider({ usage: { input_tokens: 12, output_tokens: 1, input_tokens_details: { cached_tokens: 13, cache_write_tokens: 0 } } })]) {
@@ -72,10 +92,10 @@ test('one question keeps its chosen model during admin changes; the next questio
   } };
   let service = createQuestionService(options); t.after(() => service.close());
   await service.selectModel('gpt-6.1-terra',owner);
-  await service.ask({ userId:owner,question:'Can Poland sell this advisor?',onAccepted:()=>service.selectModel('gpt-6-luna',owner),onTelemetry:event=>telemetry.push(event) });
+  await service.ask({ userId:owner,question:'Can Poland sell this advisor?',onAccepted:()=>service.selectModel(newModel,owner),onTelemetry:event=>telemetry.push(event) });
   assert.deepEqual(used,['gpt-6.1-terra','gpt-6.1-terra']); assert.ok(telemetry.some(e=>e.type==='configuration'&&e.model==='gpt-6.1-terra'&&e.promptHash));
-  service.close(); service=createQuestionService(options); assert.equal(service.currentModel(),'gpt-6-luna'); clock+=60001;
-  await service.ask({ userId:owner,question:'Can Poland sell this advisor?' }); assert.deepEqual(used.slice(-2),['gpt-6-luna','gpt-6-luna']);
+  service.close(); service=createQuestionService(options); assert.equal(service.currentModel(),newModel); clock+=60001;
+  await service.ask({ userId:owner,question:'Can Poland sell this advisor?' }); assert.deepEqual(used.slice(-2),[newModel,newModel]);
   assert.equal(service.quota(owner).used,2); assert.equal(service.quota(owner).requests,4);
 });
 
@@ -86,10 +106,10 @@ test('model administration and connection testing remain available while questio
   }};
   const service=createQuestionService(options);t.after(()=>service.close());
   assert.match(await service.ask({userId:owner,question:'Can I buy this advisor?'}),/not enabled/);assert.equal(calls,0);
-  await service.selectModel('gpt-6.1-terra',owner);assert.equal(service.currentModel(),'gpt-6.1-terra');assert.equal(calls,1);
+  await service.selectModel(newModel,owner);assert.equal(service.currentModel(),newModel);assert.equal(calls,1);
   assert.equal(existsSync(join(directory,'questions/usage.json')),false);
   const probe=await createOpenAiConnectionTest({env:options.env,getModel:()=>service.currentModel(),fetcher:async(_url,options)=>{
-    assert.equal(JSON.parse(options.body).model,'gpt-6.1-terra');return Response.json({status:'completed',output:[{type:'message',content:[{type:'output_text',text:'OK'}]}]});
+    assert.equal(JSON.parse(options.body).model,newModel);return Response.json({status:'completed',output:[{type:'message',content:[{type:'output_text',text:'OK'}]}]});
   }})();assert.equal(probe.ok,true);assert.equal(probe.questionEnabled,false);
   service.close();assert.throws(()=>service.selectModel('gpt-6-luna',owner),/stoppad/);
 });

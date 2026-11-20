@@ -23,13 +23,13 @@
 <p id="railway-note" class="muted">Gäller hela Railway-arbetsytan, inklusive staging och produktion.</p>
 <p id="railway-updated" class="muted"></p>
 </section>
-<section class="panel" aria-labelledby="openai-title">
+<section class="panel" aria-labelledby="openai-title" style="min-width:0">
 <h2 id="openai-title">OpenAI <span id="openai-state" class="muted">Hämtar uppgifter…</span></h2>
 <p id="openai-balance" style="font-size:20px;font-weight:600" role="status">–</p>
 <p id="openai-details" class="muted"></p>
 <p class="muted">Beräknad återstående kredit för hela OpenAI-organisationen. Rapporteringen kan släpa efter. Nya påfyllningar behöver registreras.</p>
 <p id="openai-updated" class="muted"></p>
-<form id="question-model-form"><h3>Modell för frågor</h3><label for="question-model">OpenAI-modell</label><select id="question-model" disabled><option>Hämtar modeller…</option></select><p style="margin-top:12px"><button id="question-model-save" type="submit" disabled>Spara modell</button> <button id="question-model-refresh" type="button">Uppdatera modellista</button></p><p class="muted">Valet gäller nya frågor och sparas över omstarter. Pågående frågor behåller sin modell. Listan visar kompatibla modeller från OpenAI och hämtas högst en gång per minut.</p><p id="question-model-feedback" role="status">Hämtar modellinställningen…</p></form>
+<form id="question-model-form"><h3>Modell för frågor</h3><label for="question-model">OpenAI-modell</label><select id="question-model" style="width:100%;max-width:24rem" disabled><option>Hämtar modeller…</option></select><p style="margin-top:12px"><button id="question-model-save" type="submit" disabled>Spara modell</button> <button id="question-model-refresh" type="button">Uppdatera modellista</button></p><p class="muted">Valet gäller nya frågor och sparas över omstarter. OpenAI:s modellista hämtas högst en gång per minut. Spara och testa den nya modellen. Vissa listade modeller kan inte svara på frågor.</p><p id="question-model-feedback" role="status">Hämtar modellinställningen…</p></form>
 <p style="margin-top:16px"><button id="openai-test" type="button">Testa OpenAI-anslutning</button></p>
 <p class="muted">Ett kort test med samma modell och API-nyckel som /question. En liten API-kostnad tillkommer. Högst ett nytt test per minut.</p>
 <p id="openai-test-result" role="status" style="white-space:pre-wrap;overflow-wrap:anywhere">Inget anslutningstest har körts här ännu.</p>
@@ -63,11 +63,11 @@ const time=value=>new Date(value).toLocaleTimeString('sv-SE');
 let modelBusy=false,modelChoices=[];
 function renderQuestionModel(settings){
  const select=el('question-model');select.replaceChildren();
- for(const model of settings.models||[]){const option=document.createElement('option');option.value=model.id;option.textContent=model.name+' ('+model.id+')';select.append(option)}
+ for(const model of settings.models||[]){const option=document.createElement('option');option.value=model.id;option.textContent=model.name===model.id?model.id:model.name+' ('+model.id+')';select.append(option)}
  if(settings.model&&!settings.models?.some(model=>model.id===settings.model)){const option=document.createElement('option');option.value=settings.model;option.textContent=settings.model+' · senast vald, inte i modellistan';option.disabled=true;select.append(option)}
  modelChoices=settings.available?(settings.models||[]).map(model=>model.id):[];
  select.value=settings.model||'';select.disabled=!modelChoices.length||modelBusy;el('question-model-save').disabled=!modelChoices.includes(select.value)||modelBusy;
- text('question-model-feedback',settings.selectionError||settings.error||('Vald modell: '+(settings.model||'ingen')+'. Listad av OpenAI '+new Date(settings.checkedAt).toLocaleString('sv-SE')+'. Testa anslutningen för att kontrollera att vald modell kan svara.'));
+ text('question-model-feedback',settings.selectionError||settings.error||('Vald modell: '+(settings.model||'ingen')+'. Modellistan hämtades '+new Date(settings.checkedAt).toLocaleString('sv-SE')+'.'));
 }
 async function loadQuestionModel(){
  if(modelBusy)return;modelBusy=true;el('question-model-refresh').disabled=true;el('question-model-save').disabled=true;
