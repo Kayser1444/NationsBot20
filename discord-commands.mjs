@@ -3,7 +3,7 @@ import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscr
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
-  { name: 'challenge', description: 'Challenge NationsBot to a 1v1 game on Tabony', type: 1, options: [
+  { name: 'challenge', description: 'Challenge NationsBot to a 1v1 game on Tabony. NationsBot chooses the game settings.', type: 1, options: [
     { name: 'nationsname', description: 'Your exact Tabony username', type: 3, max_length: 20 },
   ] },
   { name: 'question', description: 'Ask about Nations rules or the Tabony implementation', type: 1, options: [
