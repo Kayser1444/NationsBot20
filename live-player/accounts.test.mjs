@@ -108,7 +108,7 @@ test('takeover discovery includes old games and accepts only approved ongoing se
   const username = 'RetiredPlayer';
   const players = [username, 'UnlistedOpponent'];
   const render = id => `<div class="card my-2"><div>Title: <span>League</span></div><div>Type: <span>2-Player, King</span></div><div>Players: ${players.map(name => `<span>${name}</span>`).join(', ')}</div><a href="/nations/${id}/"></a></div>`;
-  const html = `<span class="navbar-text">Welcome, ${username}!</span><h1>Your Nations Matches</h1><h2>Your turn:</h2>${render('4000')}${render('4001')}<h2>Invitations:</h2>${render('4002')}<h2>Completed:</h2>${render('4003')}`;
+  const html = `<span class="navbar-text">Welcome, ${username}!</span><h1>Your Archived Nations Matches</h1><h2>Your turn:</h2>${render('4000')}${render('4001')}<h2>Invitations:</h2>${render('4002')}<h2>Completed:</h2>${render('4003')}`;
   const discover = () => discoverAccountMatches('fixture', username, async url => {
     assert.equal(new URL(url).pathname, '/nations/archive/mine/');
     return new Response(html);

@@ -17,6 +17,9 @@ test('admin proxy uses its fixed service URL and server credential and forwards 
   await proxy('account', { action: 'add', username: 'NationsBot_3', password: 'fixture', actor: 'forged' }, '229311536827465728');
   assert.equal(calls[2].url, 'http://player.railway.internal:8080/account');
   assert.deepEqual(JSON.parse(calls[2].options.body), { action: 'add', username: 'NationsBot_3', password: 'fixture', actor: '229311536827465728' });
+  await proxy('challenge', { username: 'BetaPlayer', discordUserId: '229311536827465728', actor: 'ignored', url: 'https://example.test/' });
+  assert.equal(calls[3].url, 'http://player.railway.internal:8080/challenge');
+  assert.deepEqual(JSON.parse(calls[3].options.body), { username: 'BetaPlayer', discordUserId: '229311536827465728' });
   assert.equal(createPlayerAdmin({ env: {} }), null);
   await assert.rejects(() => proxy('https://another.example/'), /Invalid/);
 });

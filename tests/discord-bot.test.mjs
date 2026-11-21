@@ -143,7 +143,7 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   t.after(() => bot.close());
   await bot.ready; await setImmediate();
   assert.deepEqual(instance.options.intents, [GatewayIntentBits.Guilds]);
-  assert.deepEqual(registered.map(item => item.body.name), ['question', 'reminders', 'smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
+  assert.deepEqual(registered.map(item => item.body.name), ['challenge', 'question', 'reminders', 'smtable', 'notifications', 'status', 'help', 'language', 'card', 'nation']);
   assert.deepEqual(registered.find(item => item.body.name === 'notifications').body.options.map(option => option.name), ['on', 'off']);
   assert.deepEqual(deleted.map(route => route.split('/').at(-1)), ['old-on', 'old-off', 'old-help']);
   assert.ok(states.includes('Igång'));
@@ -171,6 +171,20 @@ test('adapter supports all servers and restricts channel delivery to the SM remi
   assert.deepEqual(question.replies[0], {});
   assert.match(question.replies[1].content, /Poland and Porcelain Tower/);
   assert.deepEqual(question.replies[1].allowedMentions, { parse: [] });
+  const challenged = [];
+  f.service.challenge = async (name, userId) => {
+    challenged.push([name, userId]);
+    return { result: 'created', matchId: '456' };
+  };
+  const guessed = makeInteraction({ commandName: 'challenge', user: { id: second, username: 'suddoman' }, member: null });
+  const explicit = makeInteraction({ commandName: 'challenge', options: { getString: () => 'ExactTabony' } });
+  const registeredName = makeInteraction({ commandName: 'challenge', member: null });
+  const unknown = makeInteraction({ commandName: 'challenge', user: { id: second, username: 'unknown' }, member: null });
+  for (const request of [guessed, explicit, registeredName, unknown]) await instance.listeners(Events.InteractionCreate)[0](request);
+  assert.deepEqual(challenged, [['Suddoman', second], ['ExactTabony', first], ['Kayser', first]]);
+  assert.equal(guessed.replies[0].flags, MessageFlags.Ephemeral);
+  assert.match(guessed.replies[1].content, /https:\/\/games\.tabony\.net\/nations\/456\//);
+  assert.match(unknown.replies[1].content, /\/challenge nationsname:/);
   const help = makeInteraction({ commandName: 'help' });
   await instance.listeners(Events.InteractionCreate)[0](help);
   assert.equal(help.replies[0].flags, MessageFlags.Ephemeral);

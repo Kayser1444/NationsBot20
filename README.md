@@ -25,6 +25,7 @@ Bulletins can be drafted here and published through the limited [bulletin API an
 
 English commands with replies in Swedish, English, German, French, Spanish or Simplified Chinese:
 
+- `/challenge [nationsname]` invites you to a 1v1 game against the beta player bot on Tabony. See [challenge limits and Tabony invitations](docs/player-bot.md#open-beta-challenges).
 - `/notifications on [nationsname]` enables turn reminders; omitted names reuse
   your last subscription or match your Discord display name.
 - `/notifications off` ends your subscription.

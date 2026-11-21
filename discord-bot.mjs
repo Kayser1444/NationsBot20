@@ -1,4 +1,4 @@
-import { commands, autocompleteNames, handleSubscriptionCommand } from './discord-commands.mjs';
+import { commands, autocompleteNames, handleSubscriptionCommand, resolveChallengeName } from './discord-commands.mjs';
 import { autocompleteLanguages, resolveLanguage, text } from './language.mjs';
 import { createDisplayNameCache, statusServiceWithNames } from './status-turns.mjs';
 import { rateLimit } from './rate-limit.mjs';
@@ -125,6 +125,29 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
           }
           if (!allowed) { await interaction.editReply({ content: text(language(), inDm ? 'dmMembershipRequired' : 'wrongChannel'), allowedMentions: { parse: [] } }); return; }
           if (service.isBanned?.(interaction.user.id)) { await interaction.editReply({ content: text(language(), 'userBanned'), allowedMentions: { parse: [] } }); return; }
+          if (interaction.commandName === 'challenge') {
+            const userId = interaction.user.id;
+            service.captureLocale?.(userId, interaction.locale);
+            const reply = (key, values) => interaction.editReply({ content: text(language(), key, values), allowedMentions: { parse: [] } });
+            const username = resolveChallengeName({ userId, explicit: interaction.options.getString('nationsname'),
+              names: [interaction.member?.displayName || interaction.member?.nick || dmMember?.nick,
+                interaction.user.globalName, interaction.user.username],
+            }, service);
+            if (!username) { await reply('challengeUnknown'); return; }
+            let response;
+            try { response = await service.challenge?.(username, userId); }
+            catch { response = { result: 'pending' }; }
+            if (stopped) return;
+            const matchId = /^\d{1,10}$/.test(response?.matchId ?? '') ? response.matchId : null;
+            const link = matchId ? `https://games.tabony.net/nations/${matchId}/` : null;
+            const key = {
+              created: link ? 'challengeCreated' : 'challengePending',
+              active: link ? 'challengeActive' : 'challengePending',
+              limit: 'challengeLimit', unknown: 'challengeUnknown', pending: 'challengePending',
+            }[response?.result] ?? 'challengeUnavailable';
+            await reply(key, { link });
+            return;
+          }
           if (cardCommand) {
             service.captureLocale?.(interaction.user.id, interaction.locale);
             const message = await prepareImage(cardReply, {allowUpload:interaction.appPermissions?.has('AttachFiles') !== false});

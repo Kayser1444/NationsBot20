@@ -4,14 +4,14 @@ import { origin, StopPlayer } from './tabony.mjs';
 const decode = text => text.replace(/&#(x[\da-f]+|\d+);/gi, (_, n) => String.fromCodePoint(Math.min(0x10ffff, n[0].toLowerCase() === 'x' ? parseInt(n.slice(1), 16) : Number(n))))
   .replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 
-export function parseMyMatches(html, username) {
+export function parseMyMatches(html, username, { includeCompleted = false, archived = false } = {}) {
   const identity = html.match(/<span class="navbar-text[^"]*">Welcome, ([^<]+)!<\/span>/)?.[1];
-  if (!identity || decode(identity) !== username || !html.includes('<h1>Your Nations Matches</h1>')) throw new StopPlayer('The signed-in match listing could not be verified.');
+  if (!identity || decode(identity) !== username || !html.includes(`<h1>Your ${archived ? 'Archived ' : ''}Nations Matches</h1>`)) throw new StopPlayer('The signed-in match listing could not be verified.');
   const matches = [];
   let section = '';
   for (const part of html.split(/(?=<h2>|<div class="card my-2")/)) {
     if (part.startsWith('<h2>')) { section = part.match(/^<h2>([^<]*)/)?.[1]?.trim() ?? ''; continue; }
-    if (!part.startsWith('<div class="card my-2"') || section === 'Completed:') continue;
+    if (!part.startsWith('<div class="card my-2"') || section === 'Completed:' && !includeCompleted) continue;
     const id = part.match(/href="\/nations\/(\d+)\/"/)?.[1];
     const count = Number(part.match(/Type:\s*<span[^>]*>(\d+)-Player/)?.[1]);
     const names = [...(part.match(/Players:([\s\S]*?)<\/div>/)?.[1] ?? '').matchAll(/<span[^>]*>([^<]*)<\/span>/g)]
@@ -24,14 +24,14 @@ export function parseMyMatches(html, username) {
   return matches;
 }
 
-export async function discoverAccountMatches(session, username, fetcher = fetch, archived = false) {
+export async function discoverAccountMatches(session, username, fetcher = fetch, archived = false, includeCompleted = false) {
   const path = archived ? '/nations/archive/mine/' : '/nations/matches/mine/';
   const response = await fetcher(origin + path, {
     headers: { Cookie: session }, redirect: 'manual', signal: AbortSignal.timeout(15000),
   });
   if ([301, 302, 303, 401, 403].includes(response.status)) { await response.body?.cancel(); throw new StopPlayer('The player session needs a new login.'); }
   if (!response.ok) throw new Error(`Match listing returned HTTP ${response.status}.`);
-  return parseMyMatches(await response.text(), username);
+  return parseMyMatches(await response.text(), username, { archived, includeCompleted });
 }
 
 export function hasEligiblePlayer(match, settings, username) {
@@ -57,7 +57,7 @@ function respondToInvitation(match, config, session, Socket, action) {
     const socket = new Socket(`wss://games.tabony.net/ws/nations/${match.id}/`, {
       origin, headers: { Cookie: session }, handshakeTimeout: 12000, maxPayload: 4 * 1024 * 1024,
     });
-    let sent = false, settled = false;
+    let sent = false, settled = false, live, chatSent = false, chatConfirmed = false;
     const finish = (error, result) => {
       if (settled) return;
       settled = true;
@@ -71,10 +71,30 @@ function respondToInvitation(match, config, session, Socket, action) {
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => finish(new Error('Invitation connection failed.')));
     socket.on('close', () => { if (!settled) finish(new Error('Invitation connection closed before confirmation.')); });
+    const matchesChat = chat => chat?.player === config.username && chat.message === config.declineMessage;
+    function decline() {
+      if (!live || sent) return;
+      if (!live.players.includes(config.username) || live.state || live.accepted.includes(config.username) ||
+          !config.shouldDecline({ ...match, players: live.players })) {
+        finish(null, false);
+        return;
+      }
+      if (config.declineMessage && !chatConfirmed) {
+        if (!chatSent) { chatSent = true; socket.send(JSON.stringify({ chat: config.declineMessage })); }
+        return;
+      }
+      sent = true;
+      socket.send(JSON.stringify({ decline: config.username }));
+    }
     socket.on('message', bytes => {
       if (settled) return;
       try {
         const message = JSON.parse(bytes);
+        if (action === 'decline' && config.declineMessage &&
+            (matchesChat(message.chat) || (Array.isArray(message.chat_log) && message.chat_log.some(matchesChat)))) {
+          chatConfirmed = true;
+          decline();
+        }
         if (!Array.isArray(message.players) || message.replaying !== false) return;
         if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
         if (action === 'decline') {
@@ -82,15 +102,8 @@ function respondToInvitation(match, config, session, Socket, action) {
             finish(null, sent);
             return;
           }
-          if (sent) return;
-          const liveMatch = { ...match, players: message.players };
-          if (message.state || message.accepted.includes(config.username) ||
-              !config.shouldDecline(liveMatch)) {
-            finish(null, false);
-            return;
-          }
-          sent = true;
-          socket.send(JSON.stringify({ decline: config.username }));
+          live = message;
+          decline();
           return;
         }
         if (message.players.length !== match.players.length || new Set(message.players).size !== match.players.length ||
@@ -104,7 +117,11 @@ function respondToInvitation(match, config, session, Socket, action) {
         }
         const settings = config.settings();
         if (!settings.playEnabled || !settings.autoAccept || config.canPlay?.() === false) throw new Error('Invitation acceptance is paused.');
-        if (!sent) { sent = true; socket.send(JSON.stringify({ join: settings.growthResources })); }
+        if (!sent) {
+          if (config.beforeJoin?.(message) === false) { finish(null, false); return; }
+          sent = true;
+          socket.send(JSON.stringify({ join: settings.growthResources }));
+        }
       } catch (error) { finish(error); }
     });
     config.signal?.addEventListener('abort', abort, { once: true });

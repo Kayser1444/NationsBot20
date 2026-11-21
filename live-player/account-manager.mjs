@@ -5,7 +5,7 @@ import { isExperimentalModel } from './rl-policy.mjs';
 
 const conflict = message => Object.assign(new Error(message), { status: 409 });
 
-export function createAccountManager({ accounts, base, createRuntime, experiments }) {
+export function createAccountManager({ accounts, base, createRuntime, experiments, challengeBot }) {
   const entries = new Map(), retiring = new Set();
   const legacyId = accounts.legacyId();
   const background = promise => void promise.catch(() => {});
@@ -49,6 +49,10 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
   }
 
   return {
+    challenge(username, discordUserId) {
+      const entry = [...entries.values()].find(({ account }) => account.username === challengeBot && !account.matchIds);
+      return entry?.runtime.controller.challenge?.(username, discordUserId) ?? { result: 'unavailable' };
+    },
     status() {
       const statuses = [...entries.values()].map(({ account, runtime }) => ({ account, status: runtime.controller.status() }));
       const dates = key => statuses.map(({ status }) => status[key]).filter(stamp => stamp !== null);

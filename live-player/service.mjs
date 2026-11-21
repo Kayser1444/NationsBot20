@@ -12,6 +12,7 @@ import baseline from './baseline-info.json' with { type: 'json' };
 import { experimentalModels, isExperimentalModel } from './rl-policy.mjs';
 import { accountDatabase, accountStore } from './accounts.mjs';
 import { createAccountManager } from './account-manager.mjs';
+import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
@@ -49,8 +50,14 @@ export function createPlayerController({ config, store, connect, discover, accep
   let accountSocket = 'disconnected', modelRevision = -1, model;
   const settings = () => store.read().settings;
   const accountEnabled = () => config.accountEnabled?.() ?? true;
-  const authorized = game => config.authorize?.(game, settings()) ?? isAuthorized(game, settings(), config.username);
+  const challenges = config.challenges;
+  const authorized = game => {
+    const current = settings();
+    if (current.playerCounts.includes(2) && challenges?.authorize(config.username, game)) return true;
+    return config.authorize?.(game, current) ?? isAuthorized(game, current, config.username);
+  };
   const canPlay = game => running && accountEnabled() && settings().playEnabled && authorized(game);
+  const canRespond = () => running && config.play && accountEnabled() && settings().playEnabled;
   const shouldDecline = game => running && config.play && accountEnabled() && settings().playEnabled &&
     game.invitation && !config.hideUnauthorized?.(game) && game.players.includes(config.username) &&
     new Set(game.players).size === game.players.length && game.players.length <= game.playerCount &&
@@ -129,7 +136,10 @@ export function createPlayerController({ config, store, connect, discover, accep
     const task = (async () => {
       while (running && !signal.aborted) {
         const finished = await connect(controls);
-        if (finished && !signal.aborted) { game.status = 'completed'; log(`Match ${info.id}: completed.`); break; }
+        if (finished && !signal.aborted) {
+          challenges?.finished(config.username, info.id);
+          game.status = 'completed'; log(`Match ${info.id}: completed.`); break;
+        }
         if (!signal.aborted) { game.status = 'reconnecting'; await sleep(10000, undefined, { signal }); }
       }
     })().catch(error => {
@@ -140,18 +150,72 @@ export function createPlayerController({ config, store, connect, discover, accep
     connections.set(task, signal);
     log(`Match ${info.id}: connecting (${info.playerCount} players).`);
   }
+  async function respondToChallenge(info, show) {
+    const player = info.players.find(name => name !== config.username);
+    const valid = info.playerCount === 2 && info.players.length === 2 && Boolean(player);
+    const result = !valid ? 'invalid' : !settings().playerCounts.includes(2) ? 'unavailable' : challenges.check(player, info.id).result;
+    const messages = {
+      invalid: 'NationsBot beta challenges are for two players. Please invite the bot to a 1v1 game.',
+      active: 'You already have a NationsBot challenge. Finish that game before starting another.',
+      pending: 'You already have a NationsBot challenge being created. Check your Tabony invitations before trying again.',
+      limit: 'You have reached the limit of five NationsBot challenges today. Try again after midnight UTC.',
+      unavailable: 'NationsBot 1v1 challenges are currently unavailable. Please try again later.',
+    };
+    if (!canRespond()) { show('invited'); return; }
+    try {
+      if (result) {
+        const sameInvitation = live => canRespond() && live.players.length === info.players.length &&
+          new Set(live.players).size === info.players.length && live.players.every(name => info.players.includes(name));
+        if (await decline(info, { username: config.username, shouldDecline: sameInvitation,
+          declineMessage: messages[result], signal: lifecycle.signal })) {
+          games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
+          log(`Match ${info.id}: challenge invitation declined (${result}).`);
+        }
+        return;
+      }
+      if (!settings().autoAccept) { show('invited'); return; }
+      let reservation;
+      const available = () => canRespond() && settings().playerCounts.includes(2);
+      const joined = await accept(info, { username: config.username, settings, authorize: available,
+        canPlay: available, signal: lifecycle.signal, beforeJoin(lobby) {
+          if (!lobby.accepted.includes(player)) return false;
+          reservation = challenges.reserve(config.username, player, { matchId: info.id }).entry;
+          return Boolean(reservation);
+        } });
+      if (!joined) { show('invited'); return; }
+      reservation ??= challenges.reserve(config.username, player, { matchId: info.id }).entry;
+      if (!reservation) return;
+      challenges.confirm(reservation, info.id);
+      games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));
+      log(`Match ${info.id}: challenge invitation accepted.`);
+      if (joined.lobbyStarted) config.onLobbyStarted?.(info);
+    } catch {
+      if (!running) return;
+      show('challenge response unconfirmed');
+      log(`Match ${info.id}: challenge response unconfirmed. The next poll will check again.`);
+    }
+  }
+
   async function performPoll(reason) {
     lastPollError = null;
     log(`Checking games: ${reason}.`);
     try {
-      const found = await discover();
+      let found = await discover();
       if (!running) return;
+      if (challenges) {
+        challenges.reconcile(config.username, found);
+        found = found.filter(info => info.section !== 'Completed:');
+      }
       reconcile();
       for (const info of found.sort((a, b) => Number(b.id) - Number(a.id))) {
         const known = games.get(info.id);
         if (known?.status === 'completed' || known?.status === 'blocked' || known?.abort) continue;
         const s = settings();
         const show = status => games.set(info.id, loadPin({ ...info, status }));
+        if (challenges && info.invitation) {
+          await respondToChallenge(info, show);
+          continue;
+        }
         if (!authorized(info)) {
           if (config.hideUnauthorized?.(info)) continue;
           show('not authorized');
@@ -279,12 +343,22 @@ export async function startControlServer(controller, { token, port = 8080, host 
     try {
       if (req.method === 'GET' && req.url === '/status') { json(200, controller.status()); return; }
       if (req.method === 'POST' && req.url === '/poll') { await controller.poll(); json(200, controller.status()); return; }
-      if (req.method === 'POST' && ['/settings', '/match-model', '/account'].includes(req.url)) {
+      if (req.method === 'POST' && ['/settings', '/match-model', '/account', '/challenge'].includes(req.url)) {
         if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON required.' }); return; }
         let body = '';
         req.setEncoding('utf8');
         for await (const chunk of req) { body += chunk; if (Buffer.byteLength(body) > 32768) throw Object.assign(new Error('Request too large.'), { status: 413 }); }
         const input = JSON.parse(body);
+        if (req.url === '/challenge') {
+          if (typeof input?.discordUserId !== 'string' || !/^\d{17,20}$/.test(input.discordUserId)) {
+            throw new Error('An authenticated Discord user ID is required.');
+          }
+          if (typeof input?.username !== 'string' || !challengeNamePattern.test(input.username)) {
+            json(200, { result: 'unknown' }); return;
+          }
+          json(200, await controller.challenge?.(input.username, input.discordUserId) ?? { result: 'unavailable' });
+          return;
+        }
         if (!/^\d{17,20}$/.test(input?.actor ?? '')) throw new Error('An authenticated admin identity is required.');
         if (req.url === '/account' && !controller.changeAccount) throw new Error('The account vault is not configured.');
         const status = req.url === '/account' ? controller.changeAccount(input, input.actor) : req.url === '/match-model'
@@ -304,10 +378,10 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
   let session, stopped = false, socket, reconnect, keepAlive;
   const ignore = promise => void promise.catch(() => {});
   async function listMatches() {
-    const current = discoverAccountMatches(session, config.username);
-    if (!config.includeArchive) return current;
-    const archived = discoverAccountMatches(session, config.username, fetch, true);
-    const [recent, old] = await Promise.all([current, archived]);
+    const current = discoverAccountMatches(session, config.username, fetch, false, Boolean(config.challenges));
+    if (!config.includeArchive && !config.challenges) return current;
+    const archived = () => discoverAccountMatches(session, config.username, fetch, true, Boolean(config.challenges));
+    const [recent, old] = config.challenges ? [await current, await archived()] : await Promise.all([current, archived()]);
     return [...new Map([...old, ...recent].map(match => [match.id, match])).values()];
   }
   const controller = createPlayerController({ config, store, experiments,
@@ -327,6 +401,39 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
     decline: (match, controls) => respond(declineInvitation, match, controls, session),
     connect: async controls => subscribe(controls, session, await journal(controls)),
   });
+  if (config.challenges) controller.challenge = async (username, discordUserId) => {
+    const available = () => {
+      const settings = store.read().settings;
+      return !stopped && config.play && (config.accountEnabled?.() ?? true) &&
+        settings.playEnabled && settings.playerCounts.includes(2);
+    };
+    if (!available()) return { result: 'unavailable' };
+    if (username === config.username) return { result: 'unknown' };
+    const { entry, ...denied } = config.challenges.reserve(config.username, username, { discordUserId });
+    if (!entry) return denied;
+    let submitted = false;
+    try {
+      // Each create/review flow uses its own Tabony session. The review form
+      // stores its choices in that session until confirmation.
+      const formSession = await login({ ...config, matchId: undefined });
+      const result = await createTabonyChallenge(config.username, entry, formSession, () => {
+        if (!available()) return false;
+        config.challenges.submitting(entry);
+        submitted = true;
+        return true;
+      });
+      if (result.matchId) {
+        config.challenges.confirm(entry, result.matchId);
+        ignore(controller.lobbyStarted());
+      }
+      else config.challenges.discard(entry);
+      return result;
+    } catch {
+      if (!submitted) config.challenges.discard(entry);
+      else ignore(controller.lobbyStarted());
+      return { result: submitted ? 'pending' : 'unavailable' };
+    }
+  };
   function resetAccountSocket() {
     clearInterval(keepAlive);
     clearTimeout(reconnect);
@@ -359,6 +466,9 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
     throw new StopPlayer('The account vault needs NATIONS_PLAYER_CREDENTIAL_ENCRYPTION_KEY.');
   }
   const store = settingsStore(config.dataDir);
+  const challengeBot = process.env.NATIONS_PLAYER_CHALLENGE_ACCOUNT;
+  if (challengeBot && !challengeNamePattern.test(challengeBot)) throw new Error('Set the exact Tabony challenge account name.');
+  const challenges = challengeBot && challengeStore(config.dataDir);
   const experiments = experimentalModels(config.dataDir);
   experiments.scan();
   let runtime;
@@ -381,14 +491,18 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
       accounts.importLegacy(config);
       const base = createPlayerController({ config: { dataDir: config.dataDir }, store, experiments });
       const controller = createAccountManager({ accounts, base, experiments,
+        challengeBot,
         createRuntime: account => createAccountRuntime({
-          config: { dataDir: config.dataDir, ...account }, store, experiments, subscribe, journal, login, respond,
+          config: { dataDir: config.dataDir, ...account,
+            challenges: account.username === challengeBot && !account.includeArchive ? challenges : null },
+          store, experiments, subscribe, journal, login, respond,
         }),
       });
       runtime = { controller, close: () => controller.close() };
     } catch (error) { accounts.close(); throw error; }
   } else {
-    runtime = createAccountRuntime({ config, store, experiments, subscribe, journal, login });
+    runtime = createAccountRuntime({ config: { ...config, challenges: config.username === challengeBot ? challenges : null },
+      store, experiments, subscribe, journal, login });
   }
   const { controller } = runtime;
   let server;

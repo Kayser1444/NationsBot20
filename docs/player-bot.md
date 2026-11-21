@@ -101,6 +101,7 @@ the following in the same Railway environment:
 | Both | `NATIONS_PLAYER_CONTROL_TOKEN` | The same randomly generated 32-byte hex credential |
 | Player | `NATIONS_PLAYER_CONTROL_PORT` | `8080` (default) |
 | Player | `NATIONS_PLAYER_CREDENTIAL_ENCRYPTION_KEY` | A separate, random 32-byte hex key, sealed in Railway |
+| Player | `NATIONS_PLAYER_CHALLENGE_ACCOUNT` | Exact Tabony username of the regular bot account that handles open-beta challenges |
 
 Keep that credential in hosting variables and out of source and browser code.
 The player control service has no public domain. Its status and mutation routes
@@ -145,6 +146,33 @@ The managed player loads older checkpoints from `live-player/models.json` and
 the baseline from `live-player/human-baseline.json`. See
 [training and release evaluation](human-policy.md).
 The standalone worker still supports `NATIONS_PLAYER_WEIGHTS`.
+
+## Open-beta challenges
+
+Use `/challenge` in Discord and accept the resulting invitation in Tabony.
+The command reuses your saved Tabony name or tries your Discord nickname,
+display name and username against known Tabony players. Use
+`/challenge nationsname:YourTabonyName` to enter the exact name yourself.
+Discord-created games use the mixed-training distribution for difficulty,
+draft size, weighted card draw and the Korea and Lincoln rules.
+
+You can also create a 1v1 match in Tabony and invite the beta bot account.
+Those games use the settings chosen by their creator. If an invite is rejected,
+the reason is posted in the match chat before the bot removes its seat.
+Across both methods, each Tabony username can have one unfinished challenge
+and start five challenges per UTC calendar day. Each Discord account can also
+have one unfinished challenge started through `/challenge`, even if it supplies
+different Tabony names. A Discord invitation holds both slots while it awaits
+acceptance. The daily limit resets at midnight UTC.
+
+Set `NATIONS_PLAYER_CHALLENGE_ACCOUNT` to enable this on one regular account.
+Start the account and enable 2-player games and service-wide playing.
+Enable automatic invitation acceptance for the Tabony entry point and automatic
+discovery for unattended play. The account's game connection limit still
+controls how many games it plays at once. Challenge history and pending attempts
+are saved in `/data/player-challenges.json`. If creation is interrupted after
+confirmation was submitted, discovery looks for the unique match title before
+allowing a second challenge for that player.
 
 ## Install another experimental checkpoint
 

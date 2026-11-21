@@ -154,7 +154,19 @@ test('private control API requires its credential and checks settings revisions'
   const url = `http://127.0.0.1:${server.address().port}`;
   assert.equal((await fetch(url + '/status')).status, 401);
   assert.equal((await fetch(url + '/match-model', { method: 'POST' })).status, 401);
+  assert.equal((await fetch(url + '/challenge', { method: 'POST' })).status, 401);
   const headers = { authorization: `Bearer ${token}`, 'content-type': 'application/json' };
+  const discordUserId = '229311536827465728';
+  const challenge = input => fetch(url + '/challenge', { headers, method: 'POST', body: JSON.stringify(input) });
+  assert.equal((await challenge({ username: 'BetaPlayer' })).status, 400);
+  assert.deepEqual(await (await challenge({ username: 'BetaPlayer', discordUserId })).json(), { result: 'unavailable' });
+  assert.deepEqual(await (await challenge({ username: 'player/name', discordUserId })).json(), { result: 'unknown' });
+  controller.challenge = async (username, userId) => {
+    assert.equal(username, 'BetaPlayer');
+    assert.equal(userId, discordUserId);
+    return { result: 'created', matchId: '4000' };
+  };
+  assert.deepEqual(await (await challenge({ username: 'BetaPlayer', discordUserId })).json(), { result: 'created', matchId: '4000' });
   assert.equal((await fetch(url + '/status', { headers })).status, 200);
   const body = JSON.stringify({ settings: initialSettings, revision: 0, actor: '229311536827465728' });
   assert.equal((await fetch(url + '/settings', { headers, method: 'POST', body })).status, 200);
