@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import { EventEmitter } from 'node:events';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { challengeOptions, challengeStore } from './challenges.mjs';
 import { declineInvitation, parseMyMatches } from './discovery.mjs';
 import { createPlayerController } from './service.mjs';
-import { settingsStore } from './settings.mjs';
+import { initialSettings, settingsStore } from './settings.mjs';
 
 const bot = 'NationsBot20', player = 'BetaPlayer';
 const game = { id: '123', title: 'Test', players: [player, bot], playerCount: 2, invitation: true, section: 'Invitations:' };
@@ -27,12 +27,14 @@ test('Discord and Tabony share a persistent active-game guard and UTC daily quot
   store = challengeStore(directory, () => now);
   assert.equal(store.reserve(bot, player, { matchId: game.id }).result, 'pending');
   const options = challengeOptions(bot, entry, count => count - 1);
+  assert.equal(options.get('title'), 'BetaPlayer vs. NationsBot20 · 2026-11-21 23:59:00 UTC');
+  assert.equal(options.get('title'), entry.title);
   assert.equal(options.get('growth_resources'), '4');
   assert.equal(options.get('extra_draft_nations'), '2');
   assert.equal(options.has('weighted_card_draw'), false);
   assert.equal(options.has('korea_nerf'), true);
-  const created = { ...game, invitation: false, section: 'Open:', title: options.get('title') };
-  store.reconcile(bot, [created]);
+  const created = { ...game, players: [bot, player], invitation: false, section: 'Open:', title: options.get('title') };
+  store.reconcile(bot, [{ ...created, id: '122', players: [player, bot], invitation: true }, created]);
   assert.deepEqual(store.check(player), { result: 'active', matchId: game.id });
   assert.equal(store.authorize(bot, created), true);
   store.reconcile(bot, [{ ...created, section: 'Completed:' }]);
@@ -48,6 +50,25 @@ test('Discord and Tabony share a persistent active-game guard and UTC daily quot
   now += 60000;
   assert.ok(store.reserve(bot, player).entry);
   assert.ok(challengeStore(directory, () => now).reserve(bot, player).entry);
+});
+
+test('recovery still finds games created with the original UUID title', t => {
+  const directory = fixture(t);
+  const key = '073ef6c3-a5fe-48ef-be33-23d85db0ce9d';
+  writeFileSync(join(directory, 'player-challenges.json'), JSON.stringify([{
+    key, bot, username: player, status: 'creating', date: '2026-11-21', matchId: null,
+  }]));
+  const store = challengeStore(directory);
+  store.reconcile(bot, [{ ...game, players: [bot, player], title: `NationsBot challenge - ${key}`, invitation: false, section: 'Open:' }]);
+  assert.deepEqual(store.check(player), { result: 'active', matchId: game.id });
+});
+
+test('two matches for the same players get distinct titles even within the same second', t => {
+  const store = challengeStore(fixture(t), () => Date.parse('2026-11-21T14:57:00Z'));
+  const first = store.reserve(bot, player).entry;
+  store.confirm(first, game.id);
+  store.finished(bot, game.id);
+  assert.equal(store.reserve(bot, player).entry.title, 'BetaPlayer vs. NationsBot20 · 2026-11-21 14:57:01 UTC');
 });
 
 test('one Discord user cannot reserve another challenge by changing Tabony usernames', t => {
@@ -71,12 +92,14 @@ test('one Discord user cannot reserve another challenge by changing Tabony usern
 
 test('direct invitations authorize a new player and explain active-game rejections', async t => {
   const directory = fixture(t), challenges = challengeStore(directory);
+  const store = settingsStore(directory);
+  store.save({ ...initialSettings, playMode: 'open' }, 0);
   const next = { ...game, id: '124' };
   let matches = [game], connected;
   const declined = [];
   const controller = createPlayerController({
     config: { username: bot, play: true, challenges },
-    store: settingsStore(directory),
+    store,
     discover: async () => [...matches],
     accept: async (_, controls) => {
       assert.equal(controls.beforeJoin({ accepted: [] }), false);
@@ -97,6 +120,39 @@ test('direct invitations authorize a new player and explain active-game rejectio
   assert.match(declined[0], /already have a NationsBot challenge/);
   assert.equal(connected, true);
   assert.deepEqual(challenges.check(player), {});
+});
+
+test('play modes control discovery and admission to direct challenges', async t => {
+  const directory = fixture(t), challenges = challengeStore(directory);
+  const store = settingsStore(directory);
+  store.save({ ...initialSettings, playMode: 'closed' }, 0);
+  let discoveryCalls = 0, joined = 0;
+  const rejections = [];
+  const controller = createPlayerController({
+    config: { username: bot, play: true, challenges }, store,
+    discover: async () => { discoveryCalls++; return [game]; },
+    decline: async (_, controls) => { rejections.push(controls.declineMessage); return true; },
+    accept: async (_, controls) => {
+      assert.equal(controls.beforeJoin({ accepted: [player] }), true);
+      joined++;
+      return { lobbyStarted: true };
+    },
+    connect: async () => assert.fail('The listing only contains invitations.'),
+  });
+  t.after(() => controller.close());
+  await controller.poll();
+  await controller.tick();
+  await controller.notified();
+  assert.equal(discoveryCalls, 0);
+  controller.save({ ...initialSettings, playMode: 'invite-only' }, 1);
+  await controller.poll();
+  assert.equal(discoveryCalls, 1);
+  assert.match(rejections[0], /invite only/);
+  assert.equal(joined, 0);
+  controller.save({ ...initialSettings, playMode: 'open' }, 2);
+  await controller.poll();
+  assert.equal(discoveryCalls, 2);
+  assert.equal(joined, 1);
 });
 
 test('declining waits for the bot’s own chat echo, and retry uses persisted chat history', async () => {

@@ -35,7 +35,7 @@ export async function discoverAccountMatches(session, username, fetcher = fetch,
 }
 
 export function hasEligiblePlayer(match, settings, username) {
-  return match.players.some(name => name !== username && settings.authorizedPlayers.includes(name));
+  return match.players.some(name => name !== username && (settings.playMode === 'open' || settings.authorizedPlayers.includes(name)));
 }
 
 export function isAuthorized(match, settings, username) {

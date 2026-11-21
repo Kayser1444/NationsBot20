@@ -49,16 +49,18 @@ export function createPlayerController({ config, store, connect, discover, accep
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
   let accountSocket = 'disconnected', modelRevision = -1, model;
   const settings = () => store.read().settings;
+  const isClosed = () => settings().playMode === 'closed';
   const accountEnabled = () => config.accountEnabled?.() ?? true;
   const challenges = config.challenges;
   const authorized = game => {
     const current = settings();
-    if (current.playerCounts.includes(2) && challenges?.authorize(config.username, game)) return true;
+    if (current.playMode === 'closed') return false;
+    if (current.playMode === 'open' && current.playerCounts.includes(2) && challenges?.authorize(config.username, game)) return true;
     return config.authorize?.(game, current) ?? isAuthorized(game, current, config.username);
   };
   const canPlay = game => running && accountEnabled() && settings().playEnabled && authorized(game);
-  const canRespond = () => running && config.play && accountEnabled() && settings().playEnabled;
-  const shouldDecline = game => running && config.play && accountEnabled() && settings().playEnabled &&
+  const canRespond = () => running && !isClosed() && config.play && accountEnabled() && settings().playEnabled;
+  const shouldDecline = game => canRespond() &&
     game.invitation && !config.hideUnauthorized?.(game) && game.players.includes(config.username) &&
     new Set(game.players).size === game.players.length && game.players.length <= game.playerCount &&
     !hasEligiblePlayer(game, settings(), config.username);
@@ -81,13 +83,14 @@ export function createPlayerController({ config, store, connect, discover, accep
   };
   function reconcile() {
     const s = settings();
+    if (s.playMode === 'closed') config.onClosed?.();
     for (const game of games.values()) {
       if (game.abort && (!authorized(game) || !accountEnabled())) {
         game.abort.abort();
-        game.status = authorized(game) ? 'stopped' : 'not authorized';
+        game.status = isClosed() || authorized(game) ? 'stopped' : 'not authorized';
       }
     }
-    nextPollAt = s.pollingEnabled ? (lastPollAt ?? now()) + s.pollIntervalSeconds * 1000 : null;
+    nextPollAt = !isClosed() && s.pollingEnabled ? (lastPollAt ?? now()) + s.pollIntervalSeconds * 1000 : null;
   }
   const activeCount = () => [...games.values()].filter(game => game.abort && !game.abort.signal.aborted).length;
   const readPin = game => readMatchModel(config.dataDir, game.id, game.playerCount, config.storageId);
@@ -153,13 +156,16 @@ export function createPlayerController({ config, store, connect, discover, accep
   async function respondToChallenge(info, show) {
     const player = info.players.find(name => name !== config.username);
     const valid = info.playerCount === 2 && info.players.length === 2 && Boolean(player);
-    const result = !valid ? 'invalid' : !settings().playerCounts.includes(2) ? 'unavailable' : challenges.check(player, info.id).result;
+    const current = settings();
+    const result = !valid ? 'invalid' : !current.playerCounts.includes(2) ? 'unavailable'
+      : !hasEligiblePlayer(info, current, config.username) ? 'invite-only' : challenges.check(player, info.id).result;
     const messages = {
       invalid: 'NationsBot beta challenges are for two players. Please invite the bot to a 1v1 game.',
       active: 'You already have a NationsBot challenge. Finish that game before starting another.',
       pending: 'You already have a NationsBot challenge being created. Check your Tabony invitations before trying again.',
       limit: 'You have reached the limit of five NationsBot challenges today. Try again after midnight UTC.',
       unavailable: 'NationsBot 1v1 challenges are currently unavailable. Please try again later.',
+      'invite-only': 'NationsBot is currently invite only. This Tabony account is not on the authorized player list.',
     };
     if (!canRespond()) { show('invited'); return; }
     try {
@@ -175,7 +181,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       }
       if (!settings().autoAccept) { show('invited'); return; }
       let reservation;
-      const available = () => canRespond() && settings().playerCounts.includes(2);
+      const available = () => canRespond() && settings().playerCounts.includes(2) && hasEligiblePlayer(info, settings(), config.username);
       const joined = await accept(info, { username: config.username, settings, authorize: available,
         canPlay: available, signal: lifecycle.signal, beforeJoin(lobby) {
           if (!lobby.accepted.includes(player)) return false;
@@ -190,7 +196,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       log(`Match ${info.id}: challenge invitation accepted.`);
       if (joined.lobbyStarted) config.onLobbyStarted?.(info);
     } catch {
-      if (!running) return;
+      if (!running || isClosed()) return;
       show('challenge response unconfirmed');
       log(`Match ${info.id}: challenge response unconfirmed. The next poll will check again.`);
     }
@@ -201,7 +207,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     log(`Checking games: ${reason}.`);
     try {
       let found = await discover();
-      if (!running) return;
+      if (!running || isClosed()) return;
       if (challenges) {
         challenges.reconcile(config.username, found);
         found = found.filter(info => info.section !== 'Completed:');
@@ -233,7 +239,7 @@ export function createPlayerController({ config, store, connect, discover, accep
           }
           continue;
         }
-        if (!running) break;
+        if (!running || isClosed()) break;
         if (!accountEnabled()) { show('stopped'); continue; }
         if (activeCount() >= s.maxConcurrentGames) { show('waiting for capacity'); continue; }
         if (info.invitation) {
@@ -309,10 +315,11 @@ export function createPlayerController({ config, store, connect, discover, accep
       return this.status();
     },
     poll(reason = 'manual') {
+      if (!running || isClosed()) return Promise.resolve();
       if (!busy) { busy = performPoll(reason).finally(() => { busy = null; }); }
       return busy;
     },
-    async tick() { if (running && settings().pollingEnabled && !busy && (nextPollAt === null || now() >= nextPollAt)) await this.poll('scheduled'); },
+    async tick() { if (running && !isClosed() && settings().pollingEnabled && !busy && (nextPollAt === null || now() >= nextPollAt)) await this.poll('scheduled'); },
     async notified() { if (running && settings().pollingEnabled && (!lastPollAt || now() - lastPollAt >= 5000)) await this.poll('account notification'); },
     async lobbyStarted() {
       await Promise.allSettled([busy]);
@@ -376,22 +383,28 @@ export async function startControlServer(controller, { token, port = 8080, host 
 function createAccountRuntime({ config, store, experiments, subscribe, journal, login,
   respond = (action, match, controls, session) => action(match, controls, session) }) {
   let session, stopped = false, socket, reconnect, keepAlive;
+  const discoveryAllowed = () => !stopped && store.read().settings.playMode !== 'closed';
   const ignore = promise => void promise.catch(() => {});
   async function listMatches() {
     const current = discoverAccountMatches(session, config.username, fetch, false, Boolean(config.challenges));
     if (!config.includeArchive && !config.challenges) return current;
-    const archived = () => discoverAccountMatches(session, config.username, fetch, true, Boolean(config.challenges));
+    const archived = () => discoveryAllowed() ? discoverAccountMatches(session, config.username, fetch, true, Boolean(config.challenges)) : [];
     const [recent, old] = config.challenges ? [await current, await archived()] : await Promise.all([current, archived()]);
     return [...new Map([...old, ...recent].map(match => [match.id, match])).values()];
   }
-  const controller = createPlayerController({ config, store, experiments,
+  const controller = createPlayerController({ config: { ...config, onClosed: resetAccountSocket }, store, experiments,
     discover: async () => {
       if (session) {
-        try { return await listMatches(); }
+        try {
+          const matches = await listMatches();
+          if (!socket && !reconnect) connectAccount();
+          return matches;
+        }
         catch (error) { if (!(error instanceof StopPlayer)) throw error; }
       }
-      if (stopped) return [];
+      if (!discoveryAllowed()) return [];
       session = await login(config);
+      if (!discoveryAllowed()) return [];
       const matches = await listMatches();
       resetAccountSocket();
       connectAccount();
@@ -405,7 +418,8 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
     const available = () => {
       const settings = store.read().settings;
       return !stopped && config.play && (config.accountEnabled?.() ?? true) &&
-        settings.playEnabled && settings.playerCounts.includes(2);
+        settings.playMode !== 'closed' && settings.playEnabled && settings.playerCounts.includes(2) &&
+        (settings.playMode === 'open' || settings.authorizedPlayers.includes(username));
     };
     if (!available()) return { result: 'unavailable' };
     if (username === config.username) return { result: 'unknown' };
@@ -416,6 +430,7 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
       // Each create/review flow uses its own Tabony session. The review form
       // stores its choices in that session until confirmation.
       const formSession = await login({ ...config, matchId: undefined });
+      if (!available()) { config.challenges.discard(entry); return { result: 'unavailable' }; }
       const result = await createTabonyChallenge(config.username, entry, formSession, () => {
         if (!available()) return false;
         config.challenges.submitting(entry);
@@ -443,7 +458,7 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
     controller.setAccountSocket('disconnected');
   }
   function connectAccount() {
-    if (stopped) return;
+    if (!discoveryAllowed()) return;
     const current = new WebSocket('wss://games.tabony.net/ws/nations/', { origin, headers: { Cookie: session }, handshakeTimeout: 12000 });
     socket = current;
     current.on('open', () => { if (socket === current) { controller.setAccountSocket('connected'); current.send('null'); } });
@@ -452,7 +467,7 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
     current.on('close', () => {
       if (socket !== current) return;
       resetAccountSocket();
-      if (!stopped) reconnect = setTimeout(connectAccount, 10000);
+      if (discoveryAllowed()) reconnect = setTimeout(connectAccount, 10000);
     });
     keepAlive = setInterval(() => { if (current.readyState === WebSocket.OPEN) current.ping(); }, 30000);
   }

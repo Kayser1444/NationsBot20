@@ -8,6 +8,13 @@ is on the list. Other seats can be held by unlisted players or other bots.
 When playing is enabled, regular bots decline invitations with no eligible
 participant, even if automatic acceptance is off or the bot is at capacity.
 
+The service-wide **Play mode** is **Closed**, **Invite only**, or **Open**.
+Closed stops Tabony discovery, game connections and new Discord challenges.
+Invite only applies the authorized-player list to Tabony games and Discord challenges.
+Open accepts eligible Tabony players without an allowlist. Tournament takeover
+accounts still use their approved match IDs in both active modes. Existing settings
+without a mode default to Invite only.
+
 Controls include automatic discovery on/off, a poll interval from 15 seconds to
 one day, manual **Poll now**, automatic invitation acceptance, a separate pause
 for playing, allowed player counts, a concurrent-game limit, move delay, and
@@ -154,7 +161,8 @@ The command reuses your saved Tabony name or tries your Discord nickname,
 display name and username against known Tabony players. Use
 `/challenge nationsname:YourTabonyName` to enter the exact name yourself.
 Discord-created games use the mixed-training distribution for difficulty,
-draft size, weighted card draw and the Korea and Lincoln rules.
+draft size, weighted card draw and the Korea and Lincoln rules. Titles look like
+`Kayser vs. NationsBot20 · 2026-11-21 14:57:00 UTC`.
 
 You can also create a 1v1 match in Tabony and invite the beta bot account.
 Those games use the settings chosen by their creator. If an invite is rejected,

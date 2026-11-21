@@ -5,6 +5,7 @@ import { origin } from './tabony.mjs';
 
 export const challengeNamePattern = /^[A-Za-z0-9_]{1,20}$/;
 const day = time => new Date(time).toISOString().slice(0, 10);
+const matchTimestamp = time => new Date(time).toISOString().slice(0, 19).replace('T', ' ') + ' UTC';
 
 export function challengeStore(directory, now = Date.now) {
   const path = join(directory, 'player-challenges.json');
@@ -41,9 +42,16 @@ export function challengeStore(directory, now = Date.now) {
       }
       const checked = check(username, matchId);
       if (checked.result || checked.entry) return checked;
-      const date = day(now());
+      let timestamp = now();
+      const date = day(timestamp);
       const entry = { key: randomUUID(), bot, username, matchId, date, status: matchId ? 'inviting' : 'preparing',
         ...(discordUserId ? { discordUserId } : {}) };
+      if (!matchId) {
+        const title = time => `${username} vs. ${bot} · ${matchTimestamp(time)}`;
+        const usedTitles = new Set(entries.map(item => item.title));
+        while (usedTitles.has(title(timestamp))) timestamp += 1000;
+        entry.title = title(timestamp);
+      }
       save([...entries.filter(item => item.status !== 'closed' || item.date === date), entry]);
       return { entry };
     },
@@ -63,7 +71,9 @@ export function challengeStore(directory, now = Date.now) {
       const next = entries.map(entry => {
         if (entry.bot !== bot || entry.status === 'closed') return entry;
         const match = entry.matchId ? byId.get(entry.matchId)
-          : matches.find(game => game.title === challengeTitle(entry));
+          : matches.find(game => game.title === challengeTitle(entry) && !game.invitation &&
+            game.playerCount === 2 && game.players[0] === bot &&
+            (game.players.length === 1 || game.players[1] === entry.username));
         if (!match) return entry;
         if (match.section === 'Completed:' || (match.section === 'Open:' && !match.players.includes(entry.username))) {
           changed = true;
@@ -85,7 +95,8 @@ export function challengeStore(directory, now = Date.now) {
 }
 
 function challengeTitle(entry) {
-  return `NationsBot challenge - ${entry.key}`;
+  // Older pending requests may still need to be recovered by their original title.
+  return entry.title ?? `NationsBot challenge - ${entry.key}`;
 }
 
 export function challengeOptions(bot, entry, pick = randomInt) {

@@ -11,7 +11,7 @@ const catalog = { ...checkpoints,
   'human-baseline-v2': { label: 'Human baseline v2 — dynasties', model: deployed } };
 
 export const initialSettings = {
-  pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
+  playMode: 'invite-only', pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
   authorizedPlayers: ['Kayser'], playerCounts: [2, 3, 4, 5], maxConcurrentGames: 1,
   moveDelayMs: 500, growthResources: 2,
   twoPlayerModel: 'human-baseline-v2', multiplayerModel: 'human-baseline-v2', fourPlayerModel: null,
@@ -22,6 +22,7 @@ export function validateSettings(input) {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('Settings must be an object.');
   for (const key of Object.keys(input)) if (!Object.hasOwn(initialSettings, key)) throw new Error(`Unknown setting: ${key}`);
   const s = { ...structuredClone(initialSettings), ...input };
+  if (!['closed', 'invite-only', 'open'].includes(s.playMode)) throw new Error('Choose Closed, Invite only or Open.');
   for (const key of ['pollingEnabled', 'playEnabled', 'autoAccept']) if (typeof s[key] !== 'boolean') throw new Error(`Invalid ${key}.`);
   for (const [key, min, max] of [['pollIntervalSeconds', 15, 86400], ['maxConcurrentGames', 1, 10], ['moveDelayMs', 0, 30000], ['growthResources', 1, 4]]) {
     if (!Number.isInteger(s[key]) || s[key] < min || s[key] > max) throw new Error(`${key} must be between ${min} and ${max}.`);
