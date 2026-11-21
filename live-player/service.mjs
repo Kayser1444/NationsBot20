@@ -129,7 +129,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     };
     const controls = {
       dataDir: config.dataDir, storageId: config.storageId, play: config.play, username: config.username, accountId: config.accountId,
-      opponent: config.opponent, matchId: info.id, players: info.players, signal: game.abort.signal,
+      opponent: config.opponent, matchId: info.id, players: info.players, weightedCardDraw: info.weightedCardDraw, signal: game.abort.signal,
       getModel: getGameModel, delay: () => settings().moveDelayMs,
       canPlay: () => canPlay(game),
       onState(state, pending) { game.status = 'connected'; game.decision = state.move_number; game.turn = state.next_move_player; game.pending = pending; },
@@ -452,6 +452,7 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
   function resetAccountSocket() {
     clearInterval(keepAlive);
     clearTimeout(reconnect);
+    reconnect = null;
     const previous = socket;
     socket = null;
     previous?.terminate();

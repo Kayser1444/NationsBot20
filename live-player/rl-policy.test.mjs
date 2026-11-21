@@ -9,15 +9,25 @@ import { chooseMove } from './policy.mjs';
 import { initialSettings, modelForSettings, settingsStore } from './settings.mjs';
 import { createPlayerController } from './service.mjs';
 
-function checkpoint(games, count = 2) {
+function checkpoint(games, count = 2, mixed = false) {
   const bytes = readFileSync(new URL('./card-index.json', import.meta.url));
-  const header = Buffer.from(JSON.stringify({ format: count === 2 ? 'nations-policy-v1' : 'nations-policy-v2', games,
+  const format = mixed ? 'current-position-mixed-settings-v1' : count === 2 ? 'nations-policy-v1' : 'nations-policy-v2';
+  const header = Buffer.from(JSON.stringify({ format, games,
     checkpoint_sha256: 'a'.repeat(64), card_index_sha256: createHash('sha256').update(bytes).digest('hex') }));
   const prefix = Buffer.alloc(4);
   prefix.writeUInt32LE(header.length);
-  const weights = 215874 + (count === 4 ? 53 * 64 : 0);
+  const weights = 215874 + (mixed ? (3090 - 60) * 64 + (272 - 67) * 48 : count === 4 ? 53 * 64 : 0);
   return Buffer.concat([prefix, header, Buffer.alloc(weights * 4)]);
 }
+
+test('mixed-settings models keep canonical wonder choices legal on the physical Tabony board', () => {
+  const model = decodeExperimentalModel(checkpoint(100_000, 2, true));
+  const state = { next_move_player: 'a', next_move_choice: 'Place wonder where?',
+    players: { a: { nation: 'Rome', slots: { W3: 'GrWl' } }, b: {} }, player_order: ['a', 'b'],
+    next_move_options: ['W2', 'W3', 'W4', 'UNDO'] };
+  assert.equal(model.playerCount, 2);
+  assert.deepEqual(model.rank(state), { moves: [{ move: 'W3', score: 0 }, { move: 'W2', score: 0 }], winProbability: 0.5 });
+});
 
 test('checkpoint checksum, dimensions, feature compatibility and legal action masking', () => {
   const bytes = checkpoint(10_000);

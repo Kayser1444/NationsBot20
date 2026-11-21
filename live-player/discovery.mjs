@@ -18,7 +18,9 @@ export function parseMyMatches(html, username, { includeCompleted = false, archi
       .map(m => decode(m[1]).trim().replace(/ \(invited\)$/, ''));
     const title = decode(part.match(/Title:\s*<span[^>]*>([^<]*)<\/span>/)?.[1] ?? '');
     if (!id || count < 2 || count > 6 || !names.includes(username) || names.some(name => !/^[a-zA-Z0-9_]{1,20}$/.test(name))) throw new Error('Unexpected match listing format.');
-    matches.push({ id, title, playerCount: count, players: names, invitation: section === 'Invitations:', section });
+    const rules = part.match(/Type:\s*<span[^>]*>[^<]+<\/span>,\s*\(([^)]*)\)/)?.[1]?.split(', ');
+    matches.push({ id, title, playerCount: count, players: names, invitation: section === 'Invitations:', section,
+      weightedCardDraw: rules?.includes('Card Draw') ?? false });
   }
   if (!matches.length && !/<li>\s*None\.\s*<\/li>/.test(html)) throw new Error('The match listing has no recognizable entries.');
   return matches;

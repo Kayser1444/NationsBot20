@@ -103,8 +103,10 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         if (fatal || socket.readyState !== WebSocket.OPEN) return;
         let message;
         try { message = JSON.parse(data); } catch { return; }
-        const state = readPosition(message, config);
-        if (!state) return;
+        const position = readPosition(message, config);
+        if (!position) return;
+        const state = { ...position, growth_allowances: message.growth_resources,
+          weighted_card_draw: config.weightedCardDraw ?? position.weighted_card_draw };
         hasPosition = true;
         lastValid = Date.now();
         const number = state.move_number;

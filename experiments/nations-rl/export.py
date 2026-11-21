@@ -5,7 +5,11 @@ import json
 from pathlib import Path
 from struct import pack
 
-from model import load_model
+import torch
+
+from model import PolicyValue
+
+MIXED_FORMAT = 'current-position-mixed-settings-v1'
 
 LAYERS = ('state_embedding', 'action_embedding', 'context.0', 'action.0',
           'policy.0', 'policy.2', 'value.0', 'value.2')
@@ -18,13 +22,20 @@ def main():
                         help='Frozen card-index.json from the training run.')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    model, metadata = load_model(args.checkpoint)
-    formats = (({'state_size': 60, 'action_size': 67}, 'nations-policy-v1'),
-               ({'state_size': 113, 'action_size': 67, 'player_count': 4}, 'nations-policy-v2'))
-    export_format = next((name for config, name in formats if model.config == config), None)
-    if export_format is None or metadata.get('games', 0) < 1:
+    checkpoint = torch.load(args.checkpoint, map_location='cpu', weights_only=True)
+    version = checkpoint['encoding_version']
+    metadata = checkpoint['metadata']
+    formats = ((1, {'state_size': 60, 'action_size': 67}, 'nations-policy-v1'),
+               (1, {'state_size': 113, 'action_size': 67, 'player_count': 4}, 'nations-policy-v2'),
+               (MIXED_FORMAT, {'state_size': 3090, 'action_size': 272}, MIXED_FORMAT))
+    export_format = next((name for schema, config, name in formats
+                          if schema == version and checkpoint['config'] == config), None)
+    games = metadata.get('games_per_arm' if version == MIXED_FORMAT else 'games', 0)
+    if export_format is None or not isinstance(games, int) or games < 1:
         parser.error('Expected a compatible policy/value checkpoint with a game count.')
-    info = {'format': export_format, 'games': metadata['games'],
+    model = PolicyValue(**checkpoint['config'])
+    model.load_state_dict(checkpoint['parameters'])
+    info = {'format': export_format, 'games': games,
             'checkpoint_sha256': sha256(args.checkpoint.read_bytes()).hexdigest(),
             'card_index_sha256': sha256(args.card_index.read_bytes()).hexdigest()}
     header = json.dumps(info, separators=(',', ':')).encode('utf-8')

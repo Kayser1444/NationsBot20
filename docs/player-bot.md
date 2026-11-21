@@ -194,8 +194,8 @@ listing it. Refresh the Player Bot form to see the new choice. Compatible
 exports need no service deploy. Keep versions referenced by existing games.
 
 On staging, the player service has a private volume mounted at `/data`.
-The first checkpoint uses 10,000 training games and the selector label
-**Experimental RL · 10,000 games · c64187ec**.
+The default for new two-player games is **Experimental RL · 100,000 games · 556d1e2a**,
+the mixed-settings checkpoint. Existing seat pins and account overrides take precedence.
 
 Run `npm test` and `node --test --test-isolation=none live-player/*.test.mjs`
 before release. The latter includes persistence, profile selection, discovery,
