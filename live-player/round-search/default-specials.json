@@ -1,0 +1,143 @@
+{
+  "America": [
+    {
+      "id": "Am_S",
+      "name": "America Special",
+      "resources": {},
+      "description": "Discover Natrual Wonder: +2 [Food]",
+      "privateArchitects": 0
+    }
+  ],
+  "Arabs": [
+    {
+      "id": "Ar_S",
+      "name": "Arabs Special",
+      "resources": {},
+      "description": "Buy Battle: May also take 1 [Worker]",
+      "privateArchitects": 0
+    }
+  ],
+  "China": [
+    {
+      "id": "C_S",
+      "name": "China Special",
+      "resources": {},
+      "description": "Production: If passed first: +1 [Food]",
+      "privateArchitects": 0
+    }
+  ],
+  "Egypt": [
+    {
+      "id": "Eg_S",
+      "name": "Egypt Special",
+      "resources": {},
+      "description": "1 private [Architect] per round",
+      "privateArchitects": 1
+    }
+  ],
+  "Ethiopia": [
+    {
+      "id": "Et_S",
+      "name": "Ethiopia Special",
+      "resources": {},
+      "description": "Player Order: Add [Stability] to [Military]",
+      "privateArchitects": 0
+    }
+  ],
+  "Greece": [
+    {
+      "id": "G_S",
+      "name": "Greece Special",
+      "resources": {},
+      "description": "Golden age bonus: 1",
+      "privateArchitects": 0
+    }
+  ],
+  "India": [
+    {
+      "id": "I_S",
+      "name": "India Special",
+      "resources": {
+        "[Food]": 2
+      },
+      "description": "",
+      "privateArchitects": 0
+    }
+  ],
+  "Japan": [],
+  "Korea": [
+    {
+      "id": "K_S",
+      "name": "Korea Special",
+      "resources": {},
+      "description": "Buy Golden Age: May also hire 2 [Architects] for free",
+      "privateArchitects": 0
+    }
+  ],
+  "Mali": [
+    {
+      "id": "Ml_S",
+      "name": "Mali Special",
+      "resources": {},
+      "description": "Growth: [Gold] bonus: +1 [Gold]; Golden Age bonus: 1",
+      "privateArchitects": 0
+    }
+  ],
+  "Mongolia": [
+    {
+      "id": "Mg_S",
+      "name": "Mongolia Special",
+      "resources": {},
+      "description": "All: Defeats cost 2 same extra ([Food] / [Stone] / [Gold] / [Books])",
+      "privateArchitects": 0
+    }
+  ],
+  "Persia": [],
+  "Poland": [
+    {
+      "id": "Pl_S",
+      "name": "Poland Special",
+      "resources": {},
+      "description": "War: +3 [Books] if you are not defeated",
+      "privateArchitects": 0
+    }
+  ],
+  "Portugal": [
+    {
+      "id": "Pg_S",
+      "name": "Portugal Special",
+      "resources": {},
+      "description": "Buy Progress card: Row 3 cost 1 [Gold] less",
+      "privateArchitects": 0
+    }
+  ],
+  "Rome": [
+    {
+      "id": "R_S",
+      "name": "Rome Special",
+      "resources": {
+        "[Military]": 2
+      },
+      "description": "",
+      "privateArchitects": 0
+    }
+  ],
+  "Venice": [
+    {
+      "id": "Vn_S",
+      "name": "Venice Special",
+      "resources": {},
+      "description": "Pass last: +2 [Books]",
+      "privateArchitects": 0
+    }
+  ],
+  "Vikings": [
+    {
+      "id": "Vk_S",
+      "name": "Vikings Special",
+      "resources": {},
+      "description": "After production: Choose 1 ([Food] [Stone] [Gold] [Books]): Others lose 1 of that resource",
+      "privateArchitects": 0
+    }
+  ]
+}

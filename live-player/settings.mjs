@@ -5,6 +5,7 @@ import checkpoints from './models.json' with { type: 'json' };
 import deployed from './trained-weights.json' with { type: 'json' };
 import { validateModel, weightsFor } from './scorer.mjs';
 import { isExperimentalModel } from './rl-policy.mjs';
+import { direct100kId, publicRoundId } from './public-round.mjs';
 
 const catalog = { ...checkpoints,
   'human-baseline-v1': { label: 'Human baseline (previous settings ID)', model: deployed },
@@ -32,7 +33,7 @@ export function validateSettings(input) {
   s.authorizedPlayers = [...new Set(s.authorizedPlayers)];
   if (!Array.isArray(s.playerCounts) || !s.playerCounts.length || s.playerCounts.some(n => ![2, 3, 4, 5].includes(n))) throw new Error('Choose player counts from two to five.');
   s.playerCounts = [...new Set(s.playerCounts)].sort();
-  if (!(Object.hasOwn(catalog, s.twoPlayerModel) || isExperimentalModel(s.twoPlayerModel)) ||
+  if (!(Object.hasOwn(catalog, s.twoPlayerModel) || isExperimentalModel(s.twoPlayerModel) || s.twoPlayerModel === publicRoundId) ||
       !Object.hasOwn(catalog, s.multiplayerModel) ||
       !(s.fourPlayerModel === null || Object.hasOwn(catalog, s.fourPlayerModel) || isExperimentalModel(s.fourPlayerModel))) {
     throw new Error('Choose an available model checkpoint.');
@@ -54,8 +55,9 @@ export function modelForSettings(settings) {
     '2': { ...weightsFor(catalog[settings.twoPlayerModel]?.model ?? deployed, 2), ...settings.weightOverrides['2'] },
     '4': { ...weightsFor(catalog[settings.multiplayerModel]?.model ?? deployed, 4), ...settings.weightOverrides['4'] },
   };
-  model.playerPolicies = { '2': settings.twoPlayerModel, '4': settings.multiplayerModel };
-  return validateModel(model);
+  model.playerPolicies = { '2': settings.twoPlayerModel === publicRoundId ? direct100kId : settings.twoPlayerModel,
+                           '4': settings.multiplayerModel };
+  return { ...validateModel(model), publicRound: settings.twoPlayerModel === publicRoundId };
 }
 
 export function settingsStore(directory) {

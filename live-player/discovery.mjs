@@ -19,8 +19,14 @@ export function parseMyMatches(html, username, { includeCompleted = false, archi
     const title = decode(part.match(/Title:\s*<span[^>]*>([^<]*)<\/span>/)?.[1] ?? '');
     if (!id || count < 2 || count > 6 || !names.includes(username) || names.some(name => !/^[a-zA-Z0-9_]{1,20}$/.test(name))) throw new Error('Unexpected match listing format.');
     const rules = part.match(/Type:\s*<span[^>]*>[^<]+<\/span>,\s*\(([^)]*)\)/)?.[1]?.split(', ');
+    const weightedCardDraw = rules?.includes('Card Draw') ?? false;
     matches.push({ id, title, playerCount: count, players: names, invitation: section === 'Invitations:', section,
-      weightedCardDraw: rules?.includes('Card Draw') ?? false });
+      weightedCardDraw, roundRules: {
+        weighted_card_draw: weightedCardDraw,
+        resource_remainder_tiebreaker: rules?.includes('Tiebreaker') ?? false,
+        korea_nerf: rules?.includes('Korea Nerf') ?? false,
+        lincoln_nerf: rules?.includes('Lincoln Nerf') ?? false,
+      } });
   }
   if (!matches.length && !/<li>\s*None\.\s*<\/li>/.test(html)) throw new Error('The match listing has no recognizable entries.');
   return matches;

@@ -35,7 +35,9 @@ test('settings persist, reject stale writes and select the approved model profil
 test('account listing identifies invitations, ignores completed matches and verifies the account', () => {
   const card = `<div class="card my-2"><div>Title: <span>A &amp; B</span></div><div>Type: <span>2-Player, King</span></div><div>Players: <span>Kayser</span>, <span>NationsBot20 (invited)</span></div><a href="/nations/4000/"></a></div>`;
   const html = `<span class="navbar-text py-0 me-3">Welcome, NationsBot20!</span><h1>Your Nations Matches</h1><h2>Invitations:</h2>${card}<h2>Completed:</h2>${card}`;
-  assert.deepEqual(parseMyMatches(html, config.username), [{ ...game, title: 'A & B', section: 'Invitations:', weightedCardDraw: false }]);
+  assert.deepEqual(parseMyMatches(html, config.username), [{ ...game, title: 'A & B', section: 'Invitations:',
+    weightedCardDraw: false, roundRules: { weighted_card_draw: false, resource_remainder_tiebreaker: false,
+      korea_nerf: false, lincoln_nerf: false } }]);
   assert.throws(() => parseMyMatches(html, 'AnotherBot'));
   assert.equal(isAuthorized(game, initialSettings, config.username), true);
   assert.equal(isAuthorized({ ...game, players: ['SomeoneElse', config.username] }, initialSettings, config.username), false);

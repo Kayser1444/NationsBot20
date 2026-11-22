@@ -10,14 +10,19 @@ import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
 import { experimentalModels, isExperimentalModel } from './rl-policy.mjs';
+import { direct100kId, publicRoundId } from './public-round.mjs';
 import { accountDatabase, accountStore } from './accounts.mjs';
 import { createAccountManager } from './account-manager.mjs';
 import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
 
 const archiveAfterMs = 48 * 60 * 60 * 1000;
+const publicRoundModel = { id: publicRoundId, label: '100K public-snapshot search', playerCount: 2, twoPlayerOnly: true };
+const usesCheckpoint = id => isExperimentalModel(id) || id === publicRoundId;
+const checkpointId = id => id === publicRoundId ? direct100kId : id;
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
+    || playerCount === 2 && id === publicRoundId
     || (playerCount === 2 || playerCount === 4) && isExperimentalModel(id);
 }
 
@@ -87,7 +92,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (game.playerCount !== 2) return settings().multiplayerModel;
     const selected = settings().twoPlayerModel;
     const pinned = game.modelPin?.id;
-    if (isExperimentalModel(pinned) || isExperimentalModel(selected)) return pinned ?? selected;
+    if (usesCheckpoint(pinned) || usesCheckpoint(selected)) return pinned ?? selected;
     return selected;
   };
   function finishGame(game) {
@@ -127,17 +132,18 @@ export function createPlayerController({ config, store, connect, discover, accep
     try {
       if (game.error) throw new Error(game.error);
       if (!game.modelPin && (config.accountId || info.playerCount === 2 || info.playerCount === 4)) {
-        game.modelPin = { id: gameModelId(game), manual: Boolean(config.accountId) || info.playerCount === 4 };
+        const id = gameModelId(game);
+        game.modelPin = { id, manual: Boolean(config.accountId) || info.playerCount === 4 || id === publicRoundId };
         writePin(game, game.modelPin);
       }
       const id = gameModelId(game);
-      if (isExperimentalModel(id)) {
-        game.experimental = experiments.get(id);
+      if (usesCheckpoint(id)) {
+        game.experimental = experiments.get(checkpointId(id));
         if (game.experimental?.playerCount !== game.playerCount) throw new Error('Missing compatible experimental checkpoint.');
       }
     } catch {
       game.abort = null; game.status = 'blocked';
-      game.error = isExperimentalModel(game.modelPin?.id) ? 'The pinned experimental checkpoint is unavailable.' : 'The player could not read or save this match’s checkpoint.';
+      game.error = usesCheckpoint(game.modelPin?.id) ? 'The pinned experimental checkpoint is unavailable.' : 'The player could not read or save this match’s checkpoint.';
       log(`Match ${info.id}: ${game.error}`);
       return;
     }
@@ -150,7 +156,8 @@ export function createPlayerController({ config, store, connect, discover, accep
     };
     const controls = {
       dataDir: config.dataDir, storageId: config.storageId, play: config.play, username: config.username, accountId: config.accountId,
-      opponent: config.opponent, matchId: info.id, players: info.players, weightedCardDraw: info.weightedCardDraw, signal: game.abort.signal,
+      opponent: config.opponent, matchId: info.id, players: info.players, weightedCardDraw: info.weightedCardDraw,
+      roundRules: info.roundRules, signal: game.abort.signal,
       getModel: getGameModel, delay: () => settings().moveDelayMs,
       canPlay: () => canPlay(game),
       onState(state, pending) { game.status = 'connected'; game.decision = state.move_number; game.turn = state.next_move_player; game.pending = pending; },
@@ -293,9 +300,11 @@ export function createPlayerController({ config, store, connect, discover, accep
   return {
     status() {
       const archiveCutoff = now() - archiveAfterMs;
+      const checkpoints = experiments.scan();
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
         polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
-        models: [...modelChoices, ...experiments.scan().map(({ id, label, playerCount }) => ({
+        models: [...modelChoices, ...(checkpoints.some(model => model.id === direct100kId && model.playerCount === 2) ? [publicRoundModel] : []),
+          ...checkpoints.map(({ id, label, playerCount }) => ({
           id, label, playerCount, twoPlayerOnly: playerCount === 2,
         }))],
         effectiveWeights: getModel().profiles,
@@ -311,7 +320,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     save(input, revision, actor) {
       for (const [key, count] of [['twoPlayerModel', 2], ['fourPlayerModel', 4]]) {
         const selected = input?.[key];
-        if (isExperimentalModel(selected) && selected !== settings()[key] && experiments.get(selected)?.playerCount !== count) {
+        if (usesCheckpoint(selected) && selected !== settings()[key] && experiments.get(checkpointId(selected))?.playerCount !== count) {
           throw new Error(`That experimental checkpoint is unavailable for ${count === 2 ? 'two' : 'four'}-player games.`);
         }
       }
@@ -324,8 +333,8 @@ export function createPlayerController({ config, store, connect, discover, accep
       }
       if (gameModelId(game) !== previousModel) throw Object.assign(new Error('The match model changed. Refresh and try again.'), { status: 409 });
       if (!compatibleModel(modelId, game.playerCount)) throw new Error('Choose a checkpoint available for this player count.');
-      const experimental = isExperimentalModel(modelId) ? experiments.get(modelId) : undefined;
-      if (isExperimentalModel(modelId) && experimental?.playerCount !== game.playerCount) {
+      const experimental = usesCheckpoint(modelId) ? experiments.get(checkpointId(modelId)) : undefined;
+      if (usesCheckpoint(modelId) && experimental?.playerCount !== game.playerCount) {
         throw new Error('That experimental checkpoint is unavailable for this player count.');
       }
       const selection = { id: modelId, manual: true, updatedAt: new Date(now()).toISOString(), updatedBy: actor };

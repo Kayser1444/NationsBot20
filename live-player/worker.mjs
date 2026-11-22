@@ -10,6 +10,7 @@ import rules from './predictor-rules.json' with { type: 'json' };
 import { origin, login, readPosition, safeOption, StopPlayer } from './tabony.mjs';
 import { chooseMove } from './policy.mjs';
 import { validateModel } from './scorer.mjs';
+import { PublicRoundSession } from './public-round.mjs';
 
 function safeArchitectOptions(state, username) {
   const options = state.next_move_options;
@@ -91,6 +92,8 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     });
     let chain = Promise.resolve();
     let policyContext = {}, lastPolicy;
+    let newest;
+    const publicRound = new PublicRoundSession();
     const currentModel = () => config.getModel?.() ?? config.model;
     const policyId = (state, model) => model?.playerPolicies?.[Object.keys(state.players ?? {}).length === 2 ? '2' : '4'] ?? model?.name;
     function planMove(state, model) {
@@ -102,6 +105,18 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         : chooseMove(guarded, config.username, config.opponent, model, policyContext);
       if (!safeOption(guarded, move)) throw new StopPlayer('No safe legal option was selected.');
       return move;
+    }
+    async function selectMove(state, model) {
+      const direct = planMove(state, model);
+      if (!model?.publicRound || Object.keys(state.players).length !== 2 || !config.roundRules) return direct;
+      try {
+        const result = await publicRound.decide(config.matchId, state, config.roundRules);
+        const guarded = { ...state, next_move_options: safeArchitectOptions(state, config.username) };
+        if (result.compared && result.trusted && safeOption(guarded, result.move)) return result.move;
+      } catch (error) {
+        console.log(`Match ${config.matchId}: public round search fell back to direct play (${error.message}).`);
+      }
+      return direct;
     }
     let lastValid = Date.now();
     let hasPosition = false;
@@ -128,14 +143,25 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     config.signal?.addEventListener('abort', abort, { once: true });
     if (config.signal?.aborted) abort();
     socket.on('message', data => {
+      let message;
+      try { message = JSON.parse(data); } catch { return; }
+      let position;
+      try { position = readPosition(message, config); }
+      catch (error) {
+        fatal = error;
+        socket.terminate();
+        return;
+      }
+      if (!position) return;
+      newest = message;
+      const stillCurrent = () => newest.state.move_number === position.move_number &&
+        newest.state.next_move_player === position.next_move_player &&
+        !newest.state.invalid_move && newest.log === message.log;
       chain = chain.then(async () => {
         if (fatal || socket.readyState !== WebSocket.OPEN) return;
-        let message;
-        try { message = JSON.parse(data); } catch { return; }
-        const position = readPosition(message, config);
-        if (!position) return;
         const state = { ...position, growth_allowances: message.growth_resources,
           weighted_card_draw: config.weightedCardDraw ?? position.weighted_card_draw };
+        if (config.roundRules && typeof message.log === 'string') publicRound.observe({state, log: message.log});
         hasPosition = true;
         lastValid = Date.now();
         const number = state.move_number;
@@ -165,15 +191,16 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         if (state.invalid_move) return;
         const delay = config.delay?.() ?? 0;
         if (delay) await sleep(delay, undefined, { signal: config.signal });
-        if (!enabled() || socket.readyState !== WebSocket.OPEN) return;
+        if (!enabled() || !stillCurrent() || socket.readyState !== WebSocket.OPEN) return;
         const model = currentModel();
-        let move = planMove(state, model);
+        let move = await selectMove(state, model);
+        if (!stillCurrent() || socket.readyState !== WebSocket.OPEN) return;
         // Save first. A reconnect at the same position cannot send a duplicate.
         await moves.save(number);
-        if (!enabled()) { await moves.save(null); return; }
-        if (socket.readyState !== WebSocket.OPEN) return;
+        if (!enabled() || !stillCurrent() || socket.readyState !== WebSocket.OPEN) { await moves.save(null); return; }
         const latest = currentModel();
-        if (policyId(state, latest) !== policyId(state, model)) {
+        if (policyId(state, latest) !== policyId(state, model) ||
+            Boolean(latest?.publicRound) !== Boolean(model?.publicRound)) {
           try { move = planMove(state, latest); }
           catch (error) { await moves.save(null); throw error; }
         }

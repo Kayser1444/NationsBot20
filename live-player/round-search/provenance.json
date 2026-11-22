@@ -1,0 +1,7 @@
+{
+  "checkpoints": {
+    "structured.pt": "10a9901d4922dd456a04dba91960cb2be0cfbda7f158e843bad85e7980e7f036",
+    "round-value.pt": "93171fe2a1caf775ce8f6dfbc2c0c1ef1aca2ece198db87f248be73027d64396"
+  },
+  "weights_sha256": "d396423cd3fe135ad71f3eeb77efe85981e814e30556757eb5f0dd12d0d86a24"
+}
