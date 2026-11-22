@@ -7,6 +7,7 @@
 </style>
 <style>
 .accounts-panel{margin-bottom:20px}.accounts-panel .toolbar button{font-size:13px;padding:7px 10px}.accounts-panel fieldset{border:0;padding:0;margin:0}.accounts-panel form button{margin-top:14px}.account-message{display:block;margin-top:4px}.seat-name{display:block;margin-top:4px;font-weight:600}
+.archive-panel{margin:16px 0 0}.archive-panel[open] summary{margin-bottom:12px}
 </style>
 <main>
 <nav><a href="/">← NationsBot administration</a></nav>
@@ -52,6 +53,10 @@
 <div class="toolbar"><button type="submit" id="save">Save settings</button><span id="saved" class="muted"></span></div>
 </fieldset></form>
 <section class="panel" style="margin-top:24px"><h2>Games</h2><p id="match-feedback" role="status" aria-live="polite" hidden></p><div class="scroll"><table><thead><tr><th>Match / players</th><th>Status</th><th>Turn / last move</th><th>Seat model</th></tr></thead><tbody id="games"><tr><td colspan="4">No games loaded.</td></tr></tbody></table></div></section>
+<details class="panel archive-panel">
+  <summary id="archive-summary">Archive</summary>
+  <div class="scroll"><table aria-labelledby="archive-summary"><thead><tr><th>Match / players</th><th>Status</th><th>Turn / last move</th><th>Seat model</th></tr></thead><tbody id="archived-games"><tr><td colspan="4">No archived games loaded.</td></tr></tbody></table></div>
+</details>
 <section class="panel" style="margin-top:20px"><h2>Recent activity</h2><div id="events" class="events">No activity loaded.</div></section>
 <footer class="muted">Settings are saved on the player service and survive restarts. Removing a player stops their game connections. Lowering the game limit affects new connections.</footer>
 </main>
@@ -71,8 +76,41 @@ if(data.accountsAvailable){
   el('playing-state').textContent=data.settings.playMode==='closed'?'Closed':!data.settings.playEnabled?'Service paused':data.playAvailable?'Playing enabled':'All accounts stopped';
 }
 renderAccounts(data);
-el('games').replaceChildren();for(const game of data.games){const row=document.createElement('tr');for(let i=0;i<4;i++)row.append(document.createElement('td'));const link=document.createElement('a');link.href='https://games.tabony.net/nations/'+game.id+'/';link.target='_blank';link.rel='noopener';link.textContent='#'+game.id+' '+game.title;row.children[0].append(link,document.createElement('br'),document.createTextNode(game.players.join(', ')));if(game.accountName){const seat=document.createElement('span');seat.className='seat-name';seat.textContent=game.accountName;row.children[0].append(seat)}row.children[1].textContent=game.status+(game.error?' · '+game.error:'');row.children[2].textContent=(game.turn||'—')+(game.decision!=null?' · decision '+game.decision:'')+(game.lastMove?' · '+game.lastMove:'')+(game.pending!=null?' · waiting for confirmation':'');renderMatchModel(row.children[3],game,data);el('games').append(row)}if(!data.games.length){const row=el('games').insertRow();const cell=row.insertCell();cell.colSpan=4;cell.textContent='No current games discovered.'}
+const archived = data.games.filter(game => game.status === 'archived');
+renderGames(el('games'), data.games.filter(game => game.status !== 'archived'), data, 'No current games discovered.');
+renderGames(el('archived-games'), archived, data, 'No archived games.');
+el('archive-summary').textContent = `Archive (${archived.length})`;
 el('events').replaceChildren();for(const event of data.events){const line=document.createElement('div');line.className='event';const stamp=document.createElement('time');stamp.textContent=time(event.at);line.append(stamp,document.createTextNode(event.message));el('events').append(line)}if(data.lastPollError)feedback(data.lastPollError,true)}
+function renderGames(table, games, data, emptyMessage) {
+  table.replaceChildren();
+  for (const game of games) {
+    const row = table.insertRow();
+    const match = row.insertCell();
+    const link = document.createElement('a');
+    link.href = 'https://games.tabony.net/nations/' + game.id + '/';
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = '#' + game.id + ' ' + game.title;
+    match.append(link, document.createElement('br'), document.createTextNode(game.players.join(', ')));
+    if (game.accountName) {
+      const seat = document.createElement('span');
+      seat.className = 'seat-name';
+      seat.textContent = game.accountName;
+      match.append(seat);
+    }
+    const label = game.status === 'archived' ? 'Archived'
+      : game.status === 'finished' || game.status === 'completed' ? 'Finished' : game.status;
+    row.insertCell().textContent = label + (game.error ? ' · ' + game.error : '');
+    row.insertCell().textContent = (game.turn || '—') + (game.decision != null ? ' · decision ' + game.decision : '')
+      + (game.lastMove ? ' · ' + game.lastMove : '') + (game.pending != null ? ' · waiting for confirmation' : '');
+    renderMatchModel(row.insertCell(), game, data);
+  }
+  if (!games.length) {
+    const cell = table.insertRow().insertCell();
+    cell.colSpan = 4;
+    cell.textContent = emptyMessage;
+  }
+}
 function fillModels(menu,selected,models){menu.replaceChildren();for(const model of models)menu.add(new Option(model.label,model.id));if(!models.some(model=>model.id===selected))menu.add(new Option('Unavailable checkpoint · '+selected,selected));menu.value=selected}
 function supportsCount(model, count) {
   return model.playerCount ? model.playerCount === count : !model.twoPlayerOnly || count === 2;

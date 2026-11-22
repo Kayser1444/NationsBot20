@@ -93,6 +93,44 @@ test('manual polling works while disabled, coalesces requests and revocation clo
   assert.equal(controller.status().games.filter(g => g.active).length, 0);
 });
 
+test('finished games archive after 48 hours and keep their seat details across restarts', async t => {
+  const { directory, store } = storeFixture(t);
+  const match = { ...game, invitation: false };
+  const finishedAt = Date.UTC(2026, 10, 21);
+  let time = finishedAt;
+  let connections = 0;
+  const options = {
+    config: { ...config, dataDir: directory, accountId: 'test-seat' }, store,
+    discover: async () => [match], now: () => time,
+    connect: async controls => {
+      connections++;
+      controls.onState({ move_number: 123, next_move_player: config.username }, 123);
+      return true;
+    },
+  };
+  const controller = createPlayerController(options);
+  t.after(() => controller.close());
+  await controller.poll();
+  const [finished] = controller.status().games;
+  assert.equal(finished.status, 'finished');
+  assert.equal(finished.finishedAt, finishedAt);
+  assert.equal(finished.active, false);
+  assert.equal(finished.modelEditable, false);
+  assert.equal(finished.decision, 123);
+  assert.equal(finished.pending, null);
+  await controller.close();
+
+  time += 48 * 60 * 60 * 1000 - 1;
+  const restarted = createPlayerController(options);
+  t.after(() => restarted.close());
+  assert.deepEqual(restarted.status().games, [finished]);
+  time++;
+  assert.deepEqual(restarted.status().games, [{ ...finished, status: 'archived' }]);
+  assert.throws(() => restarted.changeMatchModel({ matchId: match.id }), { status: 409 });
+  await restarted.poll();
+  assert.equal(connections, 1);
+});
+
 test('invitation acceptance verifies participants, sends once and waits for confirmation', async () => {
   let socket;
   class FakeSocket extends EventEmitter {

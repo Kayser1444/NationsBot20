@@ -14,6 +14,8 @@ import { accountDatabase, accountStore } from './accounts.mjs';
 import { createAccountManager } from './account-manager.mjs';
 import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
 
+const archiveAfterMs = 48 * 60 * 60 * 1000;
+
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
     || (playerCount === 2 || playerCount === 4) && isExperimentalModel(id);
@@ -45,6 +47,13 @@ function writeMatchModel(directory, matchId, selection, storageId) {
 export function createPlayerController({ config, store, connect, discover, accept, decline, now = Date.now,
   experiments = experimentalModels(config.dataDir) }) {
   const games = new Map(), events = [];
+  const historyPath = config.dataDir && config.username &&
+    join(config.dataDir, `player-finished-${encodeURIComponent(config.username)}.json`);
+  if (historyPath) {
+    try {
+      for (const game of JSON.parse(readFileSync(historyPath, 'utf8'))) games.set(game.id, game);
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
   const lifecycle = new AbortController(), connections = new Map();
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
   let accountSocket = 'disconnected', modelRevision = -1, model;
@@ -81,6 +90,18 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (isExperimentalModel(pinned) || isExperimentalModel(selected)) return pinned ?? selected;
     return selected;
   };
+  function finishGame(game) {
+    const { abort, modelPin, experimental, ...details } = game;
+    games.set(game.id, { ...details, status: 'finished', pending: null,
+      finishedAt: now(), finishedModel: gameModelId(game) });
+    log(`Match ${game.id}: finished.`);
+    if (!historyPath) return;
+    try {
+      const history = [...games.values()].filter(game => game.finishedAt != null);
+      writeFileSync(`${historyPath}.tmp`, JSON.stringify(history), { mode: 0o600 });
+      renameSync(`${historyPath}.tmp`, historyPath);
+    } catch { log(`Match ${game.id}: could not save finished game history.`); }
+  }
   function reconcile() {
     const s = settings();
     if (s.playMode === 'closed') config.onClosed?.();
@@ -141,7 +162,8 @@ export function createPlayerController({ config, store, connect, discover, accep
         const finished = await connect(controls);
         if (finished && !signal.aborted) {
           challenges?.finished(config.username, info.id);
-          game.status = 'completed'; log(`Match ${info.id}: completed.`); break;
+          finishGame(game);
+          break;
         }
         if (!signal.aborted) { game.status = 'reconnecting'; await sleep(10000, undefined, { signal }); }
       }
@@ -215,7 +237,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       reconcile();
       for (const info of found.sort((a, b) => Number(b.id) - Number(a.id))) {
         const known = games.get(info.id);
-        if (known?.status === 'completed' || known?.status === 'blocked' || known?.abort) continue;
+        if (known?.finishedAt != null || known?.status === 'blocked' || known?.abort) continue;
         const s = settings();
         const show = status => games.set(info.id, loadPin({ ...info, status }));
         if (challenges && info.invitation) {
@@ -270,6 +292,7 @@ export function createPlayerController({ config, store, connect, discover, accep
   }
   return {
     status() {
+      const archiveCutoff = now() - archiveAfterMs;
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
         polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
         models: [...modelChoices, ...experiments.scan().map(({ id, label, playerCount }) => ({
@@ -277,10 +300,12 @@ export function createPlayerController({ config, store, connect, discover, accep
         }))],
         effectiveWeights: getModel().profiles,
         games: [...games.values()].map(game => {
-          const { abort, modelPin, experimental, ...publicGame } = game;
-          return { ...publicGame, active: Boolean(abort && !abort.signal.aborted), model: gameModelId(game),
+          const { abort, modelPin, experimental, finishedModel, ...publicGame } = game;
+          const finished = game.finishedAt != null;
+          const status = finished && game.finishedAt <= archiveCutoff ? 'archived' : game.status;
+          return { ...publicGame, status, active: Boolean(abort && !abort.signal.aborted), model: finishedModel ?? gameModelId(game),
             ...(config.accountId ? { accountId: config.accountId, accountName: config.username,
-              modelEditable: authorized(game) && game.status !== 'completed' } : {}) };
+              modelEditable: !finished && authorized(game) } : {}) };
         }), events };
     },
     save(input, revision, actor) {
@@ -294,7 +319,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     },
     changeMatchModel({ matchId, modelId, previousModel }, actor) {
       const game = typeof matchId === 'string' && /^\d{1,10}$/.test(matchId) && games.get(matchId);
-      if (!running || !game || !(config.accountId ? game.status !== 'completed' : game.abort && !game.abort.signal.aborted) || !authorized(game)) {
+      if (!running || !game || game.finishedAt != null || (!config.accountId && (!game.abort || game.abort.signal.aborted)) || !authorized(game)) {
         throw Object.assign(new Error('This match is no longer connected.'), { status: 409 });
       }
       if (gameModelId(game) !== previousModel) throw Object.assign(new Error('The match model changed. Refresh and try again.'), { status: 409 });

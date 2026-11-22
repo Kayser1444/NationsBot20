@@ -53,6 +53,10 @@ Seat selections survive reconnects and restarts. A move already sent still
 waits for confirmation. The advanced coefficient overrides apply to heuristic
 checkpoints.
 
+Finished games stay in **Games** for 48 hours after the player service records
+their completion. They then move to **Archive**, which starts collapsed.
+Recorded games stay available across service restarts.
+
 The page shows the worker version, account socket, last/next discovery time,
 game participants, current turn, pending move confirmation, selected model and
 recent activity. A stale form revision is rejected instead of overwriting a
