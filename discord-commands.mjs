@@ -3,6 +3,9 @@ import { validateSubscriptions, subscriptionEntries, addSubscriber, removeSubscr
 import { resolveLanguage, normalizeLanguage, text } from './language.mjs';
 
 export const commands = [
+  { name: 'challenge', description: 'Challenge NationsBot to a 1v1 game on Tabony', type: 1, options: [
+    { name: 'nationsname', description: 'Your exact Tabony username', type: 3, max_length: 20 },
+  ] },
   { name: 'question', description: 'Ask about Nations rules or the Tabony implementation', type: 1, options: [
     { name: 'question', description: 'Your rules or implementation question; no ongoing games or external lookups', type: 3, required: true, min_length: 5, max_length: 1200 },
   ] },
@@ -44,6 +47,19 @@ const folded = name => name.toLocaleLowerCase('sv-SE');
 // A server nickname may append a real name: "Kayser (Jonas Adolphson)".
 // Only automatic Discord-name matching removes that trailing annotation.
 const playerAlias = name => name.trim().replace(/\s+\([^()]*\)\s*$/u, '').trim();
+
+export function resolveChallengeName({ userId, names, explicit }, service) {
+  if (explicit != null) return explicit.trim();
+  const subscription = subscriptionEntries(service.getSubscriptions()).find(([, id]) => id === userId)?.[0];
+  const registered = subscription || service.getReminders?.(userId)?.name || service.getPreviousName?.(userId);
+  if (registered) return registered;
+  const known = [...new Set(service.getNames())];
+  for (const name of names.filter(Boolean)) {
+    const matches = known.filter(item => folded(item) === folded(playerAlias(name)));
+    if (matches.length === 1) return matches[0];
+  }
+  return null;
+}
 
 export function autocompleteNames(names, query) {
   const selected = folded(query.trim());

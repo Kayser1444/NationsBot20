@@ -14,6 +14,7 @@ import sys
 from time import perf_counter
 
 from nations_human_player import choose_human_move
+from nations_move_safety import safe_architect_options, with_move_options
 from nations_policy import ROOT, SharedScorer
 
 
@@ -52,6 +53,7 @@ def simulate(task):
     def choose(prompt, options, _undo):
         nonlocal decisions
         decisions += 1
+        options = safe_architect_options(match, prompt, options)
         if decisions > 1800 or perf_counter() - started > 120:
             raise RuntimeError('Decision or time limit exceeded')
         if match.invalid_move or not options:
@@ -66,7 +68,7 @@ def simulate(task):
         elif len(options) == 1:
             return options[0]
         else:
-            selected = _scorer.choose(match.get_state())
+            selected = _scorer.choose(with_move_options(match.get_state(), options))
         if selected not in legal:
             raise RuntimeError(f'{match.next_move_player}: unavailable choice {selected!r} for {prompt}')
         return legal[selected]

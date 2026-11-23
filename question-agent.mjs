@@ -4,7 +4,7 @@ import { maxSourceReadLines } from './question-sources.mjs';
 import { rulesDifferencesUrl } from './question-errata.mjs';
 import { faqAmendmentsUrl } from './question-amendments.mjs';
 import { createHash } from 'node:crypto';
-import { defaultQuestionModel, supportedQuestionModel, questionUsage } from './question-models.mjs';
+import { defaultQuestionModel, validQuestionModelId, questionUsage } from './question-models.mjs';
 import { safeDiagnostic } from './question-api-diagnostics.mjs';
 export const questionModel = defaultQuestionModel;
 export const maxQuestionRequests = 6;
@@ -31,7 +31,7 @@ const tools = [
 ];
 
 export async function investigateQuestion({ question, language, corpus, apiKey, model = questionModel, fetcher = fetch, reserveRequest, signal, onAnswer = () => {}, onTelemetry = () => {}, now = Date.now }) {
-  if (!supportedQuestionModel(model)) throw new Error('Unsupported question model.');
+  if (!validQuestionModelId(model)) throw new Error('Invalid question model ID.');
   const input = [{ role: 'user', content: question }];
   const evidence = new Set();
   const searchOutputs = [];

@@ -10,6 +10,7 @@ import { rankBaselineMoves } from './baseline.mjs';
 
 let models = {};
 let localHumanPolicy = null;
+let localExperimental = null;
 let defaultModel = defaults;
 if (process.env.NATIONS_PLAYER_WEIGHTS) {
   defaultModel = validateModel(JSON.parse(await readFile(process.env.NATIONS_PLAYER_WEIGHTS, 'utf8')));
@@ -37,6 +38,12 @@ for await (const line of readline.createInterface({ input: process.stdin })) {
       process.stdout.write('{"ok":true}\n');
       continue;
     }
+    if (message.loadExperimentalCheckpoint) {
+      const { decodeExperimentalModel } = await import('./rl-policy.mjs');
+      localExperimental = decodeExperimentalModel(await readFile(message.loadExperimentalCheckpoint));
+      process.stdout.write(JSON.stringify({ id: localExperimental.id, label: localExperimental.label }) + '\n');
+      continue;
+    }
     if (message.configure) {
       for (const candidate of Object.values(message.configure)) {
         if (candidate === 'v02') continue;
@@ -51,7 +58,10 @@ for await (const line of readline.createInterface({ input: process.stdin })) {
     const username = state.next_move_player;
     const model = models[username] ?? defaultModel;
     let result;
-    if (message.humanPolicy === true) {
+    if (message.experimentalAnalysis === true) {
+      if (!localExperimental) throw new Error('Experimental checkpoint is not installed');
+      result = localExperimental.rank(state) ?? { moves: rankBaselineMoves(state, username), winProbability: null };
+    } else if (message.humanPolicy === true) {
       if (!localHumanPolicy) throw new Error('Human policy is not installed');
       const prediction = { moves: rankBaselineMoves(state, username, localHumanPolicy), fallback: false };
       result = message.explain ? prediction : prediction.moves[0]?.move ?? null;

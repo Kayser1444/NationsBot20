@@ -73,6 +73,24 @@
       el('analysis-details').open=true;el('analysis-output').textContent='Evaluating…';
       const result=await api('/api/analyze');
       const lines=[`Decision ${current.move_number}: ${current.next_move_player} — ${current.next_move_choice}`,'Easy scorer:',...result.moves.slice(0,3).map(row=>`${formatMove(row.move,current)}: ${row.score.toFixed(2)}`)];
+      const predictive=result.predictive;
+      if(predictive){
+        lines.push(`\nDeterministic lookahead · ${predictive.model}`);
+        if(predictive.unavailable)lines.push(predictive.unavailable);
+        else{
+          const percentage=value=>value==null?'No estimate':`${(100*value).toFixed(1)}% estimated win probability`;
+          lines.push(`${predictive.moves.length} of ${predictive.legalChoices} choices explored for ${predictive.player} · ${predictive.completedDepth} levels · ${predictive.nodes} branches`);
+          if(predictive.rootWinProbability!=null)lines.push(`Current position: ${percentage(predictive.rootWinProbability)}`);
+          if(predictive.recommendedMove)lines.push(`Recommended: ${formatMove(predictive.recommendedMove,current)}`);
+          if(!predictive.moves.some(row=>row.comparable))lines.push('No shared stopping point for comparison. Keeping the direct policy choice.');
+          for(const row of predictive.moves){
+            lines.push(`${formatMove(row.move,current)}: ${percentage(row.winProbability)} · ${row.stop}${row.winProbability!=null&&!row.comparable?' · preview only':''}`);
+            lines.push(`  ${row.line.map(step=>`${step.player}: ${step.move}`).join(' → ')}`);
+          }
+          if(predictive.budgetReached)lines.push('Time or node limit reached.');
+          lines.push(`Opponent replies are compared among up to ${predictive.replyWidth} shortlisted moves.`);
+        }
+      }
       if(result.human){
         lines.push('\nHuman replay policy:');
         if(result.placement?.length){

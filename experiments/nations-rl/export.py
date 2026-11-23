@@ -19,9 +19,12 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     model, metadata = load_model(args.checkpoint)
-    if model.config != {'state_size': 60, 'action_size': 67} or metadata.get('games', 0) < 1:
-        parser.error('Expected a compatible v1 policy/value checkpoint with a game count.')
-    info = {'format': 'nations-policy-v1', 'games': metadata['games'],
+    formats = (({'state_size': 60, 'action_size': 67}, 'nations-policy-v1'),
+               ({'state_size': 113, 'action_size': 67, 'player_count': 4}, 'nations-policy-v2'))
+    export_format = next((name for config, name in formats if model.config == config), None)
+    if export_format is None or metadata.get('games', 0) < 1:
+        parser.error('Expected a compatible policy/value checkpoint with a game count.')
+    info = {'format': export_format, 'games': metadata['games'],
             'checkpoint_sha256': sha256(args.checkpoint.read_bytes()).hexdigest(),
             'card_index_sha256': sha256(args.card_index.read_bytes()).hexdigest()}
     header = json.dumps(info, separators=(',', ':')).encode('utf-8')

@@ -14,6 +14,7 @@ import sys
 import time
 
 from nations_policy import ROOT, SharedScorer
+from nations_move_safety import safe_architect_options, with_move_options
 
 _scorer = None
 BASE = ROOT / "live-player/default-weights.json"
@@ -42,13 +43,14 @@ def simulate(task):
     def choose(prompt, options, undo):
         nonlocal decisions
         decisions += 1
+        options = safe_architect_options(match, prompt, options)
         if not options:
             raise RuntimeError("engine offered no legal choices: " + prompt)
         if decisions > 1800:
             raise RuntimeError("decision limit exceeded")
         if len(options) == 1:
             return options[0]
-        selected = _scorer.choose(match.get_state())
+        selected = _scorer.choose(with_move_options(match.get_state(), options))
         for option in options:
             if str(option) == selected:
                 return option

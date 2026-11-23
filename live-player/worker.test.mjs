@@ -55,6 +55,53 @@ test('managed matches verify all participants in three- through five-player game
   }
 });
 
+test('the worker vetoes the final architect when every wonder slot is blocked', async () => {
+  let socket;
+  class FakeSocket extends EventEmitter {
+    readyState = 1;
+    sent = [];
+    constructor() { super(); socket = this; }
+    send(data) { this.sent.push(JSON.parse(data)); }
+    close() { this.readyState = 3; this.emit('close'); }
+    terminate() { this.close(); }
+  }
+  const moves = { pending: null, async save(value) { this.pending = value; } };
+  const model = {
+    playerPolicies: { '2': 'rl-' + 'a'.repeat(24) },
+    experimental: { rank: state => ({ moves: [{ move: state.next_move_options[0] }] }) },
+  };
+  const done = subscribe({ ...config, model }, 'sessionid=fake', moves, FakeSocket);
+  try {
+    const blocked = { W1: 'Sbr', W2: 'Sbr2', W3: 'SwOs', W4: 'GrBk', W5: 'CGH' };
+    const offer = async (number, { nation = 'Rome', wonder = 'StLb', completed = 1,
+      slots = blocked, prompt = 'Hire [Architect] for free?', options = ['Yes', 'No'] } = {}) => {
+      const message = snapshot(number, config.username, options);
+      message.state.next_move_choice = prompt;
+      message.state.players[config.username] = {
+        nation, slots: { ...slots, Hire: wonder }, cards: { [wonder]: { architects: completed } },
+      };
+      const sent = socket.sent.length;
+      socket.emit('message', JSON.stringify(message));
+      await setImmediate();
+      assert.equal(socket.sent.length, sent + 1);
+      return socket.sent.at(-1);
+    };
+    assert.deepEqual(await offer(10), { move: 'No' });
+    assert.deepEqual(await offer(11, { completed: 0, prompt: 'Hire 1 [Architect] for free?' }), { move: 'Yes' });
+    assert.deepEqual(await offer(12, { wonder: 'WcTw', slots: { ...blocked, W5: 'Orc' } }), { move: 'Yes' });
+    assert.deepEqual(await offer(20, { completed: 0, slots: { ...blocked, W5: 'WcTw' } }), { move: 'Yes' });
+    assert.deepEqual(await offer(21, { nation: 'China' }), { move: 'Yes' });
+    assert.deepEqual(await offer(22, { nation: 'China', slots: { ...blocked, W6: 'Vsv' },
+      prompt: 'Which action?', options: ['Special of "Qin Dynasty"', 'Hire', 'Hire from "Source"', 'Pass'] }), { move: 'Pass' });
+    assert.deepEqual(await offer(23, { prompt: 'Hire 1 [Architect] for free?' }), { move: 'No' });
+    assert.deepEqual(await offer(24, { nation: 'China', prompt: 'Which action?',
+      options: ['Special of "Qin Dynasty"', 'Pass'] }), { move: 'Special of "Qin Dynasty"' });
+  } finally {
+    socket.close();
+    await done;
+  }
+});
+
 test('observer, opponent turns, repeated states and an unconfirmed send cannot play', async () => {
   let socket;
   class FakeSocket extends EventEmitter {

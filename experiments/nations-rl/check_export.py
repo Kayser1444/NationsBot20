@@ -37,8 +37,9 @@ def main():
     parser.add_argument('test_replays', type=Path, help='Gzipped JSONL replay positions.')
     args = parser.parse_args()
     torch.set_num_threads(1)
-    encoder = Encoder(json.loads((ROOT / 'live-player/card-index.json').read_text(encoding='utf-8')))
     model, _ = load_model(args.checkpoint)
+    players = model.config.get('player_count', 2)
+    encoder = Encoder(json.loads((ROOT / 'live-player/card-index.json').read_text(encoding='utf-8')), players)
     model.eval()
     samples = {prompt: [] for prompt in SUPPORTED}
     counts = Counter()
@@ -47,7 +48,7 @@ def main():
         for line in source:
             state = json.loads(line)['state']
             prompt = state['next_move_choice']
-            if len(state['players']) != 2 or prompt not in samples:
+            if len(state['players']) != players or prompt not in samples:
                 continue
             counts[prompt] += 1
             group = samples[prompt]
@@ -59,7 +60,7 @@ def main():
                     group[index] = state
     states = [state for prompt in sorted(samples) for state in samples[prompt]]
     if not states:
-        raise ValueError('No two-player positions')
+        raise ValueError(f'No {players}-player positions')
     process = subprocess.run(['node', '--input-type=module', '-e', RUNNER, str(args.export.resolve())],
                              cwd=ROOT, input=json.dumps(states), encoding='utf-8', capture_output=True, check=True)
     result = json.loads(process.stdout)
@@ -73,7 +74,10 @@ def main():
             if scores.keys() != expected.keys() or actual['moves'][0]['move'] != moves[logits[0].argmax().item()]:
                 raise ValueError(f'Move mismatch at {state["next_move_choice"]}')
             max_error = max(max_error, max(abs(scores[move] - expected[move]) for move in moves))
-            max_value_error = max(max_value_error, abs(actual['winProbability'] - value.sigmoid().item()))
+            probability = value.sigmoid().item()
+            expected_value = probability if players == 2 else 1 + 4 * probability
+            key = 'winProbability' if players == 2 else 'expectedLeaguePoints'
+            max_value_error = max(max_value_error, abs(actual[key] - expected_value))
     if max(max_error, max_value_error) > 1e-4:
         raise ValueError('Numerical mismatch between PyTorch and the player.')
     print(json.dumps({'positions': len(states), 'by_prompt': {p: len(g) for p, g in samples.items()},

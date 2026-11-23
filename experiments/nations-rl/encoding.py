@@ -46,8 +46,17 @@ def legal_moves(state):
 
 
 class Encoder:
-    def __init__(self, cards):
+    placement_prompts = frozenset()
+
+    def __init__(self, cards, player_count=2):
+        self.player_count = player_count
         self.cards = cards
+
+    def supports(self, state):
+        return state['next_move_choice'] in SUPPORTED or state['next_move_choice'] in self.placement_prompts
+
+    def move_aliases(self, state):
+        return {}
 
     def card_numbers(self, card):
         return ([scaled(card.get(key), scale) for key, scale in (
@@ -66,12 +75,17 @@ class Encoder:
                 + [scaled(sum(self.cards.get(cid, {}).get('type') == kind
                               for cid in player.get('slots', {}).values()), 5) for kind in TYPES])
 
+    def uses_card_identity(self, cid):
+        return True
+
+    def move_token(self, move):
+        return move
+
     def state(self, state):
         players = state.get('players', {})
         who = state['next_move_player']
-        if len(players) != 2 or who not in players:
-            raise ValueError('The experimental model accepts two-player acting-player observations only')
-        rival = next(name for name in players if name != who)
+        if len(players) != self.player_count or who not in players:
+            raise ValueError(f'Expected a {self.player_count}-player acting-player observation')
         order = state.get('player_order', [])
         numbers = [scaled(state.get('round'), 8), scaled(state.get('architects'), 5),
                    scaled(state.get('turmoil'), 5), scaled(state.get('war_value'), 15),
@@ -79,24 +93,36 @@ class Encoder:
                    scaled(len(legal_moves(state)), 20)]
         tokens = [f"prompt/{state.get('next_move_choice')}", f"event/{state.get('event')}",
                   f"war/{state.get('war')}"]
-        for role, name in (('self', who), ('rival', rival)):
+        seats = [name for name in order if name in players]
+        seats.extend(name for name in players if name not in seats)
+        pivot = seats.index(who)
+        seats = seats[pivot:] + seats[:pivot]
+        extra = []
+        for index, name in enumerate(seats):
+            role = 'self' if index == 0 else 'rival'
             player = players[name]
-            numbers.extend(self.player_numbers(player))
+            (numbers if index < 2 else extra).extend(self.player_numbers(player))
             tokens.append(f"{role}/nation/{player.get('nation')}")
             for slot, cid in sorted(player.get('slots', {}).items()):
+                if not self.uses_card_identity(cid):
+                    continue
                 tokens.extend((f'{role}/slot/{slot}/{cid}', f'{role}/card/{cid}'))
                 deployed = player.get('cards', {}).get(cid, {}).get('deployed', 0)
                 tokens.append(f'{role}/deployed/{cid}/{deployed}')
             for cid in player.get('dynasties', []):
-                if cid:
+                if cid and self.uses_card_identity(cid):
                     tokens.append(f'{role}/dynasty/{cid}')
         for slot, cid in sorted(state.get('progress_board', {}).items()):
-            tokens.append(f'market/{slot}/{cid}')
+            if self.uses_card_identity(cid):
+                tokens.append(f'market/{slot}/{cid}')
         for nation in sorted(state.get('nations', {})):
             tokens.append(f'available/{nation}')
         event = self.cards.get(state.get('event'), {})
         numbers.append(scaled(event.get('famine'), 5))
-        return np.asarray(numbers, dtype=np.float32), ids(tokens, STATE_TOKENS)
+        if self.player_count == 4:
+            numbers.extend(extra)
+            numbers.append(pivot / 3)
+        return np.asarray(numbers, dtype=np.float32), ids(tokens, STATE_TOKENS if self.player_count == 2 else 512)
 
     def action(self, state, move):
         player = state['players'][state['next_move_player']]
@@ -130,9 +156,9 @@ class Encoder:
         card = self.cards.get(cid, {})
         deployed = player.get('cards', {}).get(cid, {}).get('deployed', 0)
         # The exact move token represents a public legal choice, never a player name.
-        tokens = [f'kind/{kind}', f'move/{move}', f'prompt-kind/{prompt}/{kind}',
+        tokens = [f'kind/{kind}', f'move/{self.move_token(move)}', f'prompt-kind/{prompt}/{kind}',
                   f"type/{card.get('type')}"]
-        if cid:
+        if cid and self.uses_card_identity(cid):
             tokens.extend((f'card/{cid}', f'{kind}/card/{cid}'))
         if draft is not None:
             tokens.append(f'nation/{move}')

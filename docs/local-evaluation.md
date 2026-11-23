@@ -92,6 +92,36 @@ players and league points in four players.
 See [the human replay policy](human-policy.md) for the separate move prediction
 and self-play experiments using Tabony's archive.
 
+## Deterministic lookahead with the RL checkpoint
+
+Install the player dependencies with `npm ci --prefix live-player`. Start the
+local board with an exported `.nrl` checkpoint from the RL experiment:
+
+```powershell
+& '../nations-server/.venv/Scripts/python.exe' -B scripts/serve-nations.py --experimental-checkpoint PATH_TO_CHECKPOINT.nrl
+```
+
+Choose **Explain position** in a local two-player game or open a full replay
+and select a decision. **Deterministic lookahead** compares up to four choices
+shortlisted by the policy. It evaluates up to three decisions per line and up
+to two shortlisted replies at each subsequent decision. For opponent replies
+it takes the lowest available estimate for the player being analyzed. The
+shown win probabilities are model estimates for the last scored positions.
+A branch that reaches actual final scoring can report the exact winner.
+To recommend a different move from the direct policy, both lines must reach
+comparable scored positions. This means the same number of strategic choices,
+round, decision prompt, acting player and turn progress. Other estimates are
+shown as previews. An unscored direct choice remains the recommendation.
+
+The real engine resolves actions, placements and revealed round effects. The
+replay seed reconstructs the observed prefix. After that point the search blocks
+access to the seed, hidden decks and random outcomes. It stops before an
+unrevealed event or progress card draw, including draws triggered mid-round.
+When a line cannot reach a scored position, it displays **No estimate**. A time
+or node limit retains the last completed comparison. The staging player does
+not receive a complete replay for a running match, so this analysis is available
+on the local board only.
+
 ## Checks
 
 ```powershell

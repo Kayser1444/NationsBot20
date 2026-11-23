@@ -9,13 +9,14 @@ import { chooseMove } from './policy.mjs';
 import { initialSettings, modelForSettings, settingsStore } from './settings.mjs';
 import { createPlayerController } from './service.mjs';
 
-function checkpoint(games) {
+function checkpoint(games, count = 2) {
   const bytes = readFileSync(new URL('./card-index.json', import.meta.url));
-  const header = Buffer.from(JSON.stringify({ format: 'nations-policy-v1', games,
+  const header = Buffer.from(JSON.stringify({ format: count === 2 ? 'nations-policy-v1' : 'nations-policy-v2', games,
     checkpoint_sha256: 'a'.repeat(64), card_index_sha256: createHash('sha256').update(bytes).digest('hex') }));
   const prefix = Buffer.alloc(4);
   prefix.writeUInt32LE(header.length);
-  return Buffer.concat([prefix, header, Buffer.alloc(215874 * 4)]);
+  const weights = 215874 + (count === 4 ? 53 * 64 : 0);
+  return Buffer.concat([prefix, header, Buffer.alloc(weights * 4)]);
 }
 
 test('checkpoint checksum, dimensions, feature compatibility and legal action masking', () => {
@@ -88,4 +89,35 @@ test('a compatible upload appears without restarting and model versions stay pin
   assert.equal(controls.at(-1).getModel().playerPolicies['2'], 'initial');
   another.changeMatchModel({ matchId: '9000', modelId: second, previousModel: 'initial' }, actor);
   assert.equal(controls.at(-1).getModel().experimental.id, second);
+});
+
+test('a four-player checkpoint can play a four-player seat and is rejected by the two-player selector', async t => {
+  const directory = mkdtempSync(join(tmpdir(), 'nations-rl-four-'));
+  t.after(() => rmSync(directory, { force: true, recursive: true }));
+  const bytes = checkpoint(512, 4);
+  const model = decodeExperimentalModel(bytes);
+  writeFileSync(join(directory, `${model.id}.nrl`), bytes);
+  const store = settingsStore(directory);
+  const players = ['NationsBot20', 'Kayser', 'Player3', 'Player4'];
+  store.save({ ...initialSettings, authorizedPlayers: players.slice(1) }, 0);
+  let connection;
+  const controller = createPlayerController({
+    config: { dataDir: directory, username: players[0], play: false },
+    store, discover: async () => [{ id: '4100', playerCount: 4, players }],
+    connect: async options => {
+      connection = options;
+      return new Promise(resolve => options.signal.addEventListener('abort', resolve, { once: true }));
+    },
+  });
+  t.after(() => controller.close());
+  assert.throws(() => controller.save({ ...store.read().settings, twoPlayerModel: model.id }, 1), /two-player/);
+  await controller.poll();
+  const state = { next_move_player: players[0], next_move_choice: 'Which action?',
+    players: Object.fromEntries(players.map(name => [name, {}])), player_order: players,
+    next_move_options: ['Pass', 'UNDO'] };
+  controller.changeMatchModel({ matchId: '4100', modelId: model.id, previousModel: 'human-baseline-v2' }, '229311536827465728');
+  assert.equal(connection.getModel().experimental.playerCount, 4);
+  assert.deepEqual(model.rank(state), { moves: [{ move: 'Pass', score: 0 }], expectedLeaguePoints: 3 });
+  assert.equal(chooseMove(state, players[0], undefined, connection.getModel()), 'Pass');
+  assert.equal(model.rank({ ...state, players: { [players[0]]: {}, [players[1]]: {} } }), null);
 });

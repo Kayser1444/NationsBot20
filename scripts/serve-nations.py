@@ -17,6 +17,8 @@ from urllib.parse import quote, urlsplit
 from nations_policy import SharedScorer
 from nations_placement import rank_placements
 from nations_human_player import choose_human_move, human_prediction
+from nations_lookahead import explore
+from nations_move_safety import safe_architect_options, with_move_options
 from native_nations import native_page, cached_asset, CACHE
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -54,13 +56,15 @@ def image_library():
 
 
 class LocalGame:
-    def __init__(self, save, seed, difficulty='easy', human_policy=None):
+    def __init__(self, save, seed, difficulty='easy', human_policy=None, experimental_checkpoint=None):
         self.save = save
         self.lock = Lock()
         self.revision = secrets.token_hex(12)
         self.by_id, self.by_name = image_library()
         self.images = {}
         self.scorer = SharedScorer()
+        self.experimental_model = (self.scorer.request({'loadExperimentalCheckpoint': str(experimental_checkpoint.resolve())})
+                                   if experimental_checkpoint else None)
         self.difficulties = ['easy', 'medium']
         if human_policy is not None:
             self.scorer.request({'loadHumanPolicy': json.loads(human_policy.read_text(encoding='utf-8'))})
@@ -108,6 +112,7 @@ class LocalGame:
                 started = perf_counter()
                 search = None
                 label_card = None
+                options = safe_architect_options(match, choice, options)
                 legal = [str(option) for option in options]
                 who = match.current_player.name
                 if choice == 'Which action?':
@@ -120,13 +125,13 @@ class LocalGame:
                 elif steps and steps[0] in legal:
                     selected = steps.pop(0)
                 elif self.difficulty == 'medium':
-                    search = self.scorer.request({'state':match.get_state(),'medium':True})
+                    search = self.scorer.request({'state':with_move_options(match.get_state(), options),'medium':True})
                     top = search['moves'][0]
                     selected = top['move']
                     if top.get('nextSteps'):
                         planned[who] = top['nextSteps'][:]
                 else:
-                    selected = self.scorer.choose(match.get_state())
+                    selected = self.scorer.choose(with_move_options(match.get_state(), options))
                 option = next((option for option in options if str(option) == selected), None)
                 if option is None:
                     raise RuntimeError('The scorer did not select a legal option.')
@@ -439,15 +444,20 @@ def handler_for(game):
                         position = game.state()
                         analysis = game.scorer.request({'state':position,'analyze':True})
                         analysis['medium'] = game.scorer.request({'state':position,'medium':True})
+                        match = game.view_match() if position['view']['replay_available'] and (game.experimental_model or 'human' in game.difficulties) else None
                         if 'human' in game.difficulties:
-                            match = game.view_match() if position['view']['replay_available'] else None
                             analysis['human'] = human_prediction(game.scorer, position, game.replay_position, match)
                             if match is not None:
                                 placement = rank_placements(match, game.replay_position)
                                 if placement:
                                     analysis['placement'] = placement
+                        if game.experimental_model:
+                            analysis['predictive'] = explore(match, lambda state: game.scorer.request({
+                                'state': state, 'experimentalAnalysis': True})) if match is not None else {
+                                    'unavailable': 'Exact lookahead needs a complete replay or a local game.'}
+                            analysis['predictive']['model'] = game.experimental_model['label']
                         self.json_reply(analysis)
-                    except RuntimeError as error:
+                    except (RuntimeError, ValueError) as error:
                         self.json_reply({'error':str(error)},400)
                     return
                 filename = {"/legacy": WEB / "index.html", "/board.js": WEB / "board.js", "/board.css": WEB / "board.css",
@@ -534,6 +544,7 @@ def main():
     parser.add_argument("--weights", type=Path, default=ROOT/'live-player/trained-weights.json', help="editable Easy model JSON to use locally")
     parser.add_argument('--difficulty',choices=['easy','medium','human'],default='easy',help='Policy for a new local save; an existing save retains its selected policy.')
     parser.add_argument('--human-policy',type=Path,help='Learned model JSON. Uses the local v1 model if present.')
+    parser.add_argument('--experimental-checkpoint', type=Path, help='Exported .nrl checkpoint for deterministic position analysis.')
     args = parser.parse_args()
     if args.weights:
         if not args.weights.is_file():
@@ -547,7 +558,10 @@ def main():
     human_policy = args.human_policy or (HUMAN_POLICY if HUMAN_POLICY.is_file() else None)
     if human_policy is not None and not human_policy.is_file():
         parser.error('--human-policy must name an existing JSON model')
-    game = LocalGame(args.save, args.seed, args.difficulty, human_policy=human_policy)
+    if args.experimental_checkpoint is not None and not args.experimental_checkpoint.is_file():
+        parser.error('--experimental-checkpoint must name an exported .nrl file')
+    game = LocalGame(args.save, args.seed, args.difficulty, human_policy=human_policy,
+                     experimental_checkpoint=args.experimental_checkpoint)
     with ThreadingHTTPServer(("127.0.0.1", args.port), handler_for(game)) as server:
         print(f"Nations offline is ready at http://127.0.0.1:{server.server_port}/", flush=True)
         try:

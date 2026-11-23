@@ -1,4 +1,4 @@
-"""Train and benchmark a resumable two-player batch using a frozen pilot environment."""
+"""Train and benchmark a resumable policy batch using a frozen pilot environment."""
 import argparse
 import atexit
 from collections import Counter
@@ -15,10 +15,11 @@ import sys
 import time
 
 import torch
+import numpy as np
 
 from encoding import Encoder
 from model import PolicyValue, load_model, save_model
-from train import (HERE, RULES, Baseline, board_seed, digest, emit, paired_improvement,
+from train import (HERE, RULES, LEAGUE_POINTS, SAFETY_SOURCE, Baseline, board_seed, digest, emit, paired_improvement,
                    play_game, ppo_update, seed_all, summarize, verify_snapshot, write_json)
 
 
@@ -85,6 +86,7 @@ def snapshot_batch(args, output, parent):
     (snapshot / 'experiment').mkdir()
     for name in ('batch.py', 'train.py', 'model.py', 'encoding.py', 'baseline-bridge.mjs', 'requirements.txt'):
         shutil.copy2(HERE / name, snapshot / 'experiment' / name)
+    shutil.copy2(SAFETY_SOURCE, snapshot / 'experiment' / SAFETY_SOURCE.name)
     (output / 'checkpoints').mkdir()
     (output / 'evaluations').mkdir()
     (output / 'replays').mkdir()
@@ -92,6 +94,11 @@ def snapshot_batch(args, output, parent):
     shutil.copy2(parent / 'pretrained.pt', output / 'pretrained.pt')
     config = {name: getattr(args, name) for name in ('games', 'games_per_update', 'monitor_every',
               'monitor_boards', 'final_boards', 'learning_rate', 'seed', 'game_seconds')}
+    config['players'] = learner.config.get('player_count', 2)
+    if args.patience is not None:
+        if config['players'] != 4:
+            raise ValueError('League-point patience requires a four-player checkpoint')
+        config['patience'] = args.patience
     repository = Path(manifest['repository_root'])
     protected = {p.name: digest(p) for p in sorted((repository / 'live-player').glob('*.json'))}
     batch_manifest = {'config': config, 'rules': RULES, 'parent_run': str(parent),
@@ -130,11 +137,11 @@ def load_batch(output):
 _worker = {}
 
 
-def initialize_worker(output):
+def initialize_worker(output, player_count):
     seed_all(0, 1)
     sys.path.insert(0, str(output / 'snapshot/engine'))
     from nations import Match
-    encoder = Encoder(json.loads((output / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')))
+    encoder = Encoder(json.loads((output / 'snapshot/baseline/card-index.json').read_text(encoding='utf-8')), player_count)
     baseline = Baseline(output)
     atexit.register(baseline.close)
     _worker.update(output=output, match=Match, encoder=encoder, baseline=baseline)
@@ -142,8 +149,8 @@ def initialize_worker(output):
 
 @lru_cache(maxsize=8)
 def worker_policy(name):
-    if name is None:
-        return None
+    if name in (None, 'heuristic'):
+        return name
     return load_model(_worker['output'] / name)[0].eval()
 
 
@@ -161,16 +168,18 @@ def play_chunk(task):
     for job in jobs:
         actor = job['actor']
         rival = job['rival']
-        opponent = learner if mode == 'train' and job['opponent'] == 'current' else worker_policy(job['opponent'])
         candidate = learner if mode == 'train' else worker_policy(job['candidate'])
+        opponents = job.get('opponents') or {rival: job['opponent']}
+        policies = {actor: candidate, **{seat: learner if name == 'current' else worker_policy(name)
+                                         for seat, name in opponents.items()}}
         row, trajectory = play_game(
-            _worker['match'], _worker['encoder'], _worker['baseline'], {actor: candidate, rival: opponent},
+            _worker['match'], _worker['encoder'], _worker['baseline'], policies,
             job.get('learners', ()), job['seed'], output / 'replays' / job['replay'] if mode == 'eval' else None,
             mode == 'train', job['sampling_seed'], seconds=seconds,
             failure_output=output / 'replays' / job['replay'] if mode == 'train' else None)
         if mode == 'train':
             row.update(episode=job['episode'], opponent_kind=job['kind'],
-                       opponent_checkpoint=job['opponent'], learner_seats=job['learners'])
+                       opponent_checkpoint=job.get('opponents', job['opponent']), learner_seats=job['learners'])
         else:
             row.update(board=job['board'], candidate=actor, opponent=rival)
         rows.append(row)
@@ -189,19 +198,31 @@ def run_games(executor, workers, mode, jobs, seconds):
     return rows, samples
 
 
+def four_player_opponents(seat, lineup):
+    return {f'Seat{(seat + distance) % 4}': policy for distance, policy in enumerate(lineup, 1)}
+
+
 def make_training_jobs(config, state, end, rng, seeds):
     jobs = []
     for episode in range(state['episode'], end):
-        seat = (episode + episode // 4) % 2
-        actor, rival = f'Seat{seat}', f'Seat{1 - seat}'
+        count = config.get('players', 2)
+        seat = (episode + episode // 4) % count
+        actor, rival = f'Seat{seat}', f'Seat{(seat + 1) % count}'
         kind = ('self-play', 'baseline', 'self-play', 'history')[episode % 4]
         opponent = 'current' if kind == 'self-play' else None
         if kind == 'history':
             opponent = rng.choice(state['pool'])
-        jobs.append({'actor': actor, 'rival': rival, 'episode': episode + 1, 'kind': kind,
-                     'opponent': opponent, 'learners': [actor, rival] if kind == 'self-play' else [actor],
-                     'seed': seeds('batch-training', episode), 'sampling_seed': config['seed'] + episode,
-                     'replay': f'train-{episode + 1:06}.replay'})
+        job = {'actor': actor, 'rival': rival, 'episode': episode + 1, 'kind': kind,
+               'opponent': opponent, 'learners': [actor, rival] if kind == 'self-play' else [actor],
+               'seed': seeds('batch-training', episode), 'sampling_seed': config['seed'] + episode,
+               'replay': f'train-{episode + 1:06}.replay'}
+        if count == 4:
+            lineup = ([opponent] * 3 if kind == 'self-play' else [opponent, None, 'heuristic'])
+            if kind != 'self-play':
+                rng.shuffle(lineup)
+            job['opponents'] = four_player_opponents(seat, lineup)
+            job['learners'] = [actor, *job['opponents']] if kind == 'self-play' else [actor]
+        jobs.append(job)
     return jobs
 
 
@@ -215,17 +236,51 @@ def make_seeds(manifest):
     return checked_seed
 
 
-def evaluate(executor, workers, output, config, seeds, label, namespace, boards, candidate, opponent=None):
+def four_points(rows):
+    return {(row['seed'], row['candidate']): LEAGUE_POINTS[row['ranks'][row['candidate']] - 1] if not row['error'] else 1
+            for row in rows}
+
+
+def four_summary(rows):
+    placements = Counter(row['ranks'][row['candidate']] for row in rows if not row['error'])
+    return {'games': len(rows), 'failures': sum(bool(row['error']) for row in rows),
+            'placements': [placements[rank] for rank in range(1, 5)],
+            'mean_league_points': float(np.mean(list(four_points(rows).values())))}
+
+
+def paired_points(reference, candidate):
+    left, right = four_points(reference), four_points(candidate)
+    if left.keys() != right.keys():
+        raise ValueError('Four-player comparisons require identical boards and seats')
+    boards = sorted({seed for seed, _ in left})
+    differences = np.asarray([np.mean([right[(seed, f'Seat{seat}')] - left[(seed, f'Seat{seat}')]
+                                      for seat in range(4)]) for seed in boards])
+    rng = np.random.default_rng(32901)
+    samples = rng.choice(differences, size=(5000, len(boards))).mean(axis=1)
+    return {'boards': len(boards), 'mean_gain': float(differences.mean()),
+            'interval_95': np.quantile(samples, [.025, .975]).tolist()}
+
+
+def evaluate(executor, workers, output, config, seeds, label, namespace, boards, candidate, opponent=None, mixed=False):
     destination = output / 'evaluations' / f'{label}.json'
     if destination.exists():
         return json.loads(destination.read_text(encoding='utf-8'))
-    jobs = [{'actor': f'Seat{seat}', 'rival': f'Seat{1-seat}', 'candidate': candidate, 'opponent': opponent,
-             'board': board, 'seed': seeds(namespace, board), 'sampling_seed': config['seed'],
-             'replay': f'{label}-{board:03}-{seat}.replay'}
-            for board in range(boards) for seat in range(2)]
+    count = config.get('players', 2)
+    jobs = []
+    for board in range(boards):
+        for seat in range(count):
+            job = {'actor': f'Seat{seat}', 'rival': f'Seat{(seat + 1) % count}', 'candidate': candidate,
+                   'opponent': opponent, 'board': board, 'seed': seeds(namespace, board),
+                   'sampling_seed': config['seed'], 'replay': f'{label}-{board:03}-{seat}.replay'}
+            if count == 4:
+                lineup = [opponent] * 3
+                if mixed:
+                    lineup[board % 3] = 'heuristic'
+                job['opponents'] = four_player_opponents(seat, lineup)
+            jobs.append(job)
     rows, _ = run_games(executor, workers, 'eval', jobs, config['game_seconds'])
     result = {'candidate': candidate, 'opponent': opponent or 'baseline', 'board_set': namespace,
-              'summary': summarize(rows), 'games': rows}
+              'summary': four_summary(rows) if count == 4 else summarize(rows), 'games': rows}
     write_json(destination, result)
     emit({'stage': 'evaluation', 'label': label, **result['summary']})
     return result
@@ -240,14 +295,26 @@ def benchmark(executor, workers, output, config, seeds, checkpoints):
                           config['monitor_boards'], checkpoint)
         summary = result['summary']
         results[label] = summary
-        if champion is not None:
+        if champion is not None and config.get('players', 2) == 2:
             match = evaluate(executor, workers, output, config, seeds, label + '-vs-champion',
                              'batch-monitor-duel', config['monitor_boards'], checkpoint, champion[1])
             results[label + '-vs-champion'] = match['summary']
-        rank = (summary['wins'], summary['mean_vp_margin'] if summary['mean_vp_margin'] is not None else -float('inf'))
+        rank = ((summary['mean_league_points'], 0 if config.get('patience') else -summary['failures']) if config.get('players') == 4 else
+                (summary['wins'], summary['mean_vp_margin'] if summary['mean_vp_margin'] is not None else -float('inf')))
         if champion is None or rank > champion[0]:
             champion = (rank, checkpoint)
     return champion[1], results
+
+
+def batches_without_improvement(checkpoints, monitoring):
+    best, stalled = -float('inf'), 0
+    for checkpoint in checkpoints:
+        points = monitoring['monitor-' + Path(checkpoint).stem]['mean_league_points']
+        if points > best:
+            best, stalled = points, 0
+        else:
+            stalled += 1
+    return stalled
 
 
 def train_batch(output, manifest, workers, max_updates):
@@ -270,13 +337,18 @@ def train_batch(output, manifest, workers, max_updates):
     failures = Counter(state['failures'])
     updates_this_session = 0
     emit({'stage': 'start', 'games_committed': state['episode'], 'target_games': config['games'], 'workers': workers})
-    with ProcessPoolExecutor(max_workers=workers, initializer=initialize_worker, initargs=(output,)) as executor:
+    four_player = config.get('players') == 4
+    patience = config.get('patience')
+    budget = config['games'] if patience is None else float('inf')
+    with ProcessPoolExecutor(max_workers=workers, initializer=initialize_worker,
+                             initargs=(output, config.get('players', 2))) as executor:
         champion, monitoring = benchmark(executor, workers, output, config, seeds, state['checkpoints'])
-        while state['episode'] < config['games']:
+        stalled = batches_without_improvement(state['checkpoints'], monitoring) if patience else 0
+        while state['episode'] < budget and (patience is None or stalled < patience):
             started = time.monotonic()
             episode = state['episode']
             next_monitor = (episode // config['monitor_every'] + 1) * config['monitor_every']
-            end = min(config['games'], episode + config['games_per_update'], next_monitor)
+            end = min(budget, episode + config['games_per_update'], next_monitor)
             jobs = make_training_jobs(config, state, end, rng, seeds)
             rows, samples = run_games(executor, workers, 'train', jobs, config['game_seconds'])
             if not samples:
@@ -287,9 +359,11 @@ def train_batch(output, manifest, workers, max_updates):
             update = state['update'] + 1
             event = {'stage': 'ppo-update', 'games': end, 'update': update, 'seconds': round(duration, 2),
                      'failures': sum(failures.values()), **metrics}
-            if end == next_monitor or end == config['games']:
+            if end == next_monitor or end == budget:
                 checkpoint = f'checkpoints/games-{end:06}.pt'
-                save_model(output / checkpoint, model, {'kind': 'ppo-batch', 'games': end, 'update': update})
+                previous_games = manifest['initial_metadata'].get('games', 0) if four_player else 0
+                save_model(output / checkpoint, model, {'kind': 'ppo-batch', 'games': previous_games + end,
+                                                        'batch_games': end, 'update': update})
                 state['checkpoints'].append(checkpoint)
                 state['pool'] = ['start.pt', 'pretrained.pt', *state['checkpoints'][1:][-4:]]
             state.update(episode=end, update=update, model=model.state_dict(), optimizer=optimizer.state_dict(),
@@ -300,17 +374,27 @@ def train_batch(output, manifest, workers, max_updates):
             state['updates.jsonl'] = append_rows(output / 'updates.jsonl', state['updates.jsonl'], [event])
             save_state(output / 'resume.pt', state)
             emit(event)
-            if end == next_monitor or end == config['games']:
+            if end == next_monitor or end == budget:
                 champion, monitoring = benchmark(executor, workers, output, config, seeds, state['checkpoints'])
+                if patience:
+                    stalled = batches_without_improvement(state['checkpoints'], monitoring)
+                    latest = 'monitor-' + Path(state['checkpoints'][-1]).stem
+                    emit({'stage': 'patience-check', 'games': end, 'selected': champion,
+                          'mean_league_points': monitoring[latest]['mean_league_points'],
+                          'batches_without_improvement': stalled, 'patience': patience})
             updates_this_session += 1
-            if max_updates is not None and updates_this_session >= max_updates and end < config['games']:
+            if (max_updates is not None and updates_this_session >= max_updates and end < budget
+                    and (patience is None or stalled < patience)):
                 emit({'stage': 'paused', 'games_committed': end, 'updates': update})
                 return
 
         # Freeze selection before running any final-board games.
         final_checkpoint = state['checkpoints'][-1]
-        write_json(output / 'selection.json', {'selected': champion, 'last': final_checkpoint,
-                   'criterion': 'monitoring wins vs baseline, then mean VP margin, then earliest checkpoint'})
+        criterion = 'monitoring wins vs baseline, then mean VP margin, then earliest checkpoint'
+        if four_player:
+            criterion = ('monitoring league points, then earliest checkpoint' if patience else
+                         'monitoring league points, then fewer failures, then earliest checkpoint')
+        write_json(output / 'selection.json', {'selected': champion, 'last': final_checkpoint, 'criterion': criterion})
         arms = {'start': 'start.pt', 'selected': champion, 'last': final_checkpoint}
         matches, by_checkpoint = {}, {}
         for arm, checkpoint in arms.items():
@@ -319,7 +403,7 @@ def train_batch(output, manifest, workers, max_updates):
                                                        'batch-final', config['final_boards'], checkpoint)
             matches[arm] = by_checkpoint[checkpoint]
         duel = None
-        if champion != 'start.pt':
+        if champion != 'start.pt' and not four_player:
             duel = evaluate(executor, workers, output, config, seeds, 'final-selected-vs-start',
                             'batch-final-duel', config['final_boards'], champion, 'start.pt')
         repository = Path(manifest['repository_root'])
@@ -331,9 +415,24 @@ def train_batch(output, manifest, workers, max_updates):
                   'last_checkpoint': final_checkpoint, 'last_sha256': digest(output / final_checkpoint),
                   'held_out_vs_baseline': {key: value['summary'] for key, value in matches.items()},
                   'held_out_selected_vs_start': duel['summary'] if duel else None,
-                  'paired_selected_minus_start_vs_baseline': paired_improvement(matches['start']['games'],
-                                                                              matches['selected']['games']),
+                  'paired_selected_minus_start_vs_baseline': (paired_points if four_player else paired_improvement)(
+                      matches['start']['games'], matches['selected']['games']),
                   'protected_models_unchanged': protected == manifest['protected_models_before']}
+        if patience:
+            report.update(stop_reason='no new monitoring high', patience=patience, batches_without_improvement=stalled)
+        if four_player:
+            reference = evaluate(executor, workers, output, config, seeds, 'final-reference', 'batch-final',
+                                 config['final_boards'], None)
+            mixed_args = (executor, workers, output, config, seeds)
+            mixed_reference = evaluate(*mixed_args, 'mixed-reference', 'batch-final-mixed',
+                                       config['final_boards'], None, mixed=True)
+            mixed_selected = evaluate(*mixed_args, 'mixed-selected', 'batch-final-mixed',
+                                      config['final_boards'], champion, mixed=True)
+            report.update(
+                reference_vs_baseline=reference['summary'],
+                paired_selected_minus_baseline=paired_points(reference['games'], matches['selected']['games']),
+                mixed_reference=mixed_reference['summary'], mixed_selected=mixed_selected['summary'],
+                paired_mixed_selected_minus_baseline=paired_points(mixed_reference['games'], mixed_selected['games']))
         write_json(output / 'results.json', report)
         emit({'stage': 'complete', **{k: v for k, v in report.items() if k != 'monitoring'}})
 
@@ -350,7 +449,9 @@ def main():
                              help='Pause after committing this many PPO updates.')
     start.add_argument('--run', type=Path, required=True, help='Parent replay pretraining run.')
     start.add_argument('--initial', type=Path, required=True, help='Policy/value checkpoint to continue from.')
-    start.add_argument('--games', type=int, default=10000)
+    stop = start.add_mutually_exclusive_group()
+    stop.add_argument('--games', type=int, help='Fixed number of training games (default 10000).')
+    stop.add_argument('--patience', type=int, help='Stop after this many four-player checkpoints without a new high in league points.')
     start.add_argument('--games-per-update', type=int, default=40)
     start.add_argument('--monitor-every', type=int, default=2000)
     start.add_argument('--monitor-boards', type=int, default=64)
@@ -361,9 +462,13 @@ def main():
     args = parser.parse_args()
     if args.workers < 1 or (args.max_updates_this_session is not None and args.max_updates_this_session < 1):
         parser.error('Worker and session budgets must be positive')
-    if args.command == 'start' and min(args.games, args.games_per_update, args.monitor_every, args.monitor_boards,
-                                       args.final_boards, args.learning_rate, args.game_seconds) <= 0:
-        parser.error('Game, update and evaluation budgets must be positive')
+    if args.command == 'start':
+        if args.games is None and args.patience is None:
+            args.games = 10000
+        budget = args.games if args.patience is None else args.patience
+        if min(budget, args.games_per_update, args.monitor_every, args.monitor_boards,
+               args.final_boards, args.learning_rate, args.game_seconds) <= 0:
+            parser.error('Game, update and evaluation budgets must be positive')
     output = args.output.resolve()
     if args.command == 'start':
         output.mkdir(parents=True, exist_ok=False)

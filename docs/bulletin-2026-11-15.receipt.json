@@ -1,0 +1,18 @@
+{
+  "id": "turn-alert-grace-20261115",
+  "environment": "production",
+  "destination": {
+    "guildId": "706912380067643473",
+    "channelId": "1558878151646388264",
+    "botId": "1558936899446374570"
+  },
+  "content": "**Nytt i NationsBot: färre pling när ni spelar live!** 🔕\n\nNär du gör ett drag pausar botten dina turnotiser i två minuter, även för dina andra partier. Varje nytt drag startar om tiden. När pausen är över får du bara en notis för de partier där det fortfarande är din tur.",
+  "length": 273,
+  "sha256": "98581f531c6fc922fe32d89d476b1c45179e5eca8ee2f8cdf53f478c3f3e10d4",
+  "nonce": "db3d2632e1ee2a90aa968a3f",
+  "status": "verified",
+  "createdAt": "2026-11-15T09:35:05.819Z",
+  "messageId": "1571458513580855428",
+  "verifiedAt": "2026-11-15T09:35:06.375Z",
+  "url": "https://discord.com/channels/706912380067643473/1558878151646388264/1571458513580855428"
+}

@@ -4,16 +4,15 @@ import { saveQuestionJson } from './question-sources.mjs';
 import { questionApiDiagnostics } from './question-api-diagnostics.mjs';
 
 export const defaultQuestionModel = 'gpt-6.1-sol';
-// Reviewed Responses/function-calling/structured-output compatibility. API discovery
-// determines which of these IDs are listed for this service's own question key.
-export const questionModels = Object.freeze([
+// Optional display names and verified Standard prices for estimates.
+const questionModelPricing = Object.freeze([
   { id: 'gpt-6.1-sol', name: 'GPT-6.1 Sol', input: 2, cached: 0.1, output: 10 },
   { id: 'gpt-6.1-terra', name: 'GPT-6.1 Terra', input: 1, cached: 0.05, output: 5 },
   { id: 'gpt-6-luna', name: 'GPT-6 Luna', input: 0.1, cached: 0.01, output: 0.5 },
 ].map(Object.freeze));
 export const questionPricingDate = '2026-10-30';
 export const questionPricingUrl = 'https://developers.openai.com/api/docs/pricing';
-export const supportedQuestionModel = id => questionModels.some(model => model.id === id);
+export const validQuestionModelId = id => typeof id === 'string' && id.length > 0 && !/[\s\p{Cc}]/u.test(id);
 
 export function createQuestionModels({ directory, env = process.env, fetcher = fetch, now = Date.now, report = () => {} } = {}) {
   const path = join(directory, 'model.json');
@@ -21,7 +20,7 @@ export function createQuestionModels({ directory, env = process.env, fetcher = f
   if (existsSync(path)) {
     try {
       const data = JSON.parse(readFileSync(path, 'utf8'));
-      if (data.schemaVersion !== 1 || !supportedQuestionModel(data.model)) throw new Error();
+      if (data.schemaVersion !== 1 || !validQuestionModelId(data.model)) throw new Error();
       selection = { model: data.model, updatedAt: data.updatedAt, updatedBy: data.updatedBy };
     } catch {
       selection = { model: null }; selectionError = 'Modellinställningen kunde inte läsas. Välj och spara en modell i ägarpanelen.';
@@ -46,9 +45,10 @@ export function createQuestionModels({ directory, env = process.env, fetcher = f
           if (size > 1024 * 1024) throw new Error(); chunks.push(Buffer.from(value)); }
       } finally { void reader.cancel().catch(() => {}); }
       const data = JSON.parse(Buffer.concat(chunks).toString('utf8'));
-      if (!Array.isArray(data.data) || data.data.some(item => typeof item?.id !== 'string')) throw new Error();
-      const ids = new Set(data.data.map(item => item.id));
-      return { available: true, checkedAt: new Date(now()).toISOString(), models: questionModels.filter(model => ids.has(model.id)).map(({ id, name }) => ({ id, name })) };
+      if (!Array.isArray(data.data) || data.data.some(item => !validQuestionModelId(item?.id))) throw new Error();
+      const ids = [...new Set(data.data.map(item => item.id))].sort();
+      const models = ids.map(id => ({ id, name: questionModelPricing.find(model => model.id === id)?.name ?? id }));
+      return { available: true, checkedAt: new Date(now()).toISOString(), models };
     } catch { return { available: false, models: [], error: 'OpenAI:s modellista kunde inte hämtas. Tidigare modellval behålls.' }; }
   }
   async function catalogue() {
@@ -64,7 +64,6 @@ export function createQuestionModels({ directory, env = process.env, fetcher = f
     catalogue,
     current() { if (selectionError) throw new Error(selectionError); return selection.model; },
     async select(model, actorId) {
-      if (!supportedQuestionModel(model)) throw new Error('Modellen stöds inte av frågefunktionen.');
       const listed = await catalogue();
       if (!listed.available || !listed.models.some(item => item.id === model)) throw new Error('Modellen är inte tillgänglig i OpenAI:s senaste modellista för denna API-nyckel.');
       const next = { schemaVersion: 1, model, updatedAt: new Date(now()).toISOString(), updatedBy: /^\d{17,20}$/.test(actorId) ? actorId : null };
@@ -84,7 +83,7 @@ export function questionUsage(result, model) {
     cachedInputTokens: details?.cached_tokens, cacheWriteTokens: details?.cache_write_tokens,
     cacheWrite30mTokens: details?.cache_write_tokens_details?.ttl_30m_tokens, cacheWrite12hTokens: details?.cache_write_tokens_details?.ttl_12h_tokens,
     reasoningTokens: usage?.output_tokens_details?.reasoning_tokens })) if (count(value)) fields[name] = value;
-  const rates = questionModels.find(item => item.id === model);
+  const rates = questionModelPricing.find(item => item.id === model);
   // Unknown cache details/tier must not turn into a fictitious zero or precise bill.
   if (!rates || (typeof result?.model === 'string' && result.model !== model && !result.model.startsWith(model + '-')) ||
       fields.serviceTier !== 'default' || !count(fields.inputTokens) || !count(fields.outputTokens) ||

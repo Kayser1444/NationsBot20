@@ -1,0 +1,18 @@
+{
+  "id": "open-beta-challenge-20261121",
+  "environment": "production",
+  "destination": {
+    "guildId": "706912380067643473",
+    "channelId": "1558878151646388264",
+    "botId": "1558936899446374570"
+  },
+  "content": "## Nu kan du spela mot NationsBot!\n\nDen öppna betan är igång! Nu kan alla spela **Nations 1 mot 1 mot NationsBot på Tabony**.\n\nSkriv `/challenge` här på Discord. Om botten inte hittar ditt Tabony-namn, skriv `/challenge nationsname:DittTabonyNamn`. **NationsBot väljer spelinställningarna** och skickar en inbjudan på Tabony. Du kan också skapa ett 1 mot 1-parti på Tabony och bjuda in `NationsBot20` direkt.\n\nSpelstyrkan är på sin höjd medelgod, och ett och annat drag kan bli rätt märkligt. Säg gärna till om ett parti fastnar eller om du ser något som verkar fel. Skicka gärna med länken till partiet.\n\nDu kan ha **ett pågående utmaningsparti i taget** och starta upp till **fem per dag**, oavsett hur du skickar utmaningen.",
+  "length": 727,
+  "sha256": "c15444bbb645be8e93408bc299a96377a16160a66b9aa02073fb49826b060be3",
+  "nonce": "a83ef8b1511f76391930cf88",
+  "status": "verified",
+  "createdAt": "2026-11-21T16:02:10.502Z",
+  "messageId": "1573730251870310475",
+  "verifiedAt": "2026-11-21T16:02:11.126Z",
+  "url": "https://discord.com/channels/706912380067643473/1558878151646388264/1573730251870310475"
+}

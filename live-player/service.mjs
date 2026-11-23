@@ -5,17 +5,20 @@ import { join } from 'node:path';
 import WebSocket from 'ws';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { settingsStore, modelForSettings, modelChoices } from './settings.mjs';
-import { discoverAccountMatches, isAuthorized, acceptInvitation } from './discovery.mjs';
+import { discoverAccountMatches, hasEligiblePlayer, isAuthorized, acceptInvitation, declineInvitation } from './discovery.mjs';
 import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
 import { experimentalModels, isExperimentalModel } from './rl-policy.mjs';
 import { accountDatabase, accountStore } from './accounts.mjs';
 import { createAccountManager } from './account-manager.mjs';
+import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
+
+const archiveAfterMs = 48 * 60 * 60 * 1000;
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
-    || playerCount === 2 && isExperimentalModel(id);
+    || (playerCount === 2 || playerCount === 4) && isExperimentalModel(id);
 }
 
 function matchModelPath(directory, matchId, storageId) {
@@ -41,16 +44,33 @@ function writeMatchModel(directory, matchId, selection, storageId) {
   renameSync(`${path}.tmp`, path);
 }
 
-export function createPlayerController({ config, store, connect, discover, accept, now = Date.now,
+export function createPlayerController({ config, store, connect, discover, accept, decline, now = Date.now,
   experiments = experimentalModels(config.dataDir) }) {
   const games = new Map(), events = [];
+  const historyPath = config.dataDir && config.username &&
+    join(config.dataDir, `player-finished-${encodeURIComponent(config.username)}.json`);
+  if (historyPath) {
+    try {
+      for (const game of JSON.parse(readFileSync(historyPath, 'utf8'))) games.set(game.id, game);
+    } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
   const lifecycle = new AbortController(), connections = new Map();
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
   let accountSocket = 'disconnected', modelRevision = -1, model;
   const settings = () => store.read().settings;
   const accountEnabled = () => config.accountEnabled?.() ?? true;
-  const authorized = game => config.authorize?.(game, settings()) ?? isAuthorized(game, settings(), config.username);
+  const challenges = config.challenges;
+  const authorized = game => {
+    const current = settings();
+    if (current.playerCounts.includes(2) && challenges?.authorize(config.username, game)) return true;
+    return config.authorize?.(game, current) ?? isAuthorized(game, current, config.username);
+  };
   const canPlay = game => running && accountEnabled() && settings().playEnabled && authorized(game);
+  const canRespond = () => running && config.play && accountEnabled() && settings().playEnabled;
+  const shouldDecline = game => running && config.play && accountEnabled() && settings().playEnabled &&
+    game.invitation && !config.hideUnauthorized?.(game) && game.players.includes(config.username) &&
+    new Set(game.players).size === game.players.length && game.players.length <= game.playerCount &&
+    !hasEligiblePlayer(game, settings(), config.username);
   const log = message => { events.unshift({ at: new Date(now()).toISOString(), message }); events.splice(50); console.log(message); };
   const getModel = () => {
     const saved = store.read();
@@ -67,6 +87,18 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (isExperimentalModel(pinned) || isExperimentalModel(selected)) return pinned ?? selected;
     return selected;
   };
+  function finishGame(game) {
+    const { abort, modelPin, experimental, ...details } = game;
+    games.set(game.id, { ...details, status: 'finished', pending: null,
+      finishedAt: now(), finishedModel: gameModelId(game) });
+    log(`Match ${game.id}: finished.`);
+    if (!historyPath) return;
+    try {
+      const history = [...games.values()].filter(game => game.finishedAt != null);
+      writeFileSync(`${historyPath}.tmp`, JSON.stringify(history), { mode: 0o600 });
+      renameSync(`${historyPath}.tmp`, historyPath);
+    } catch { log(`Match ${game.id}: could not save finished game history.`); }
+  }
   function reconcile() {
     const s = settings();
     for (const game of games.values()) {
@@ -97,7 +129,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       const id = gameModelId(game);
       if (isExperimentalModel(id)) {
         game.experimental = experiments.get(id);
-        if (!game.experimental) throw new Error('Missing experimental checkpoint.');
+        if (game.experimental?.playerCount !== game.playerCount) throw new Error('Missing compatible experimental checkpoint.');
       }
     } catch {
       game.abort = null; game.status = 'blocked';
@@ -124,7 +156,11 @@ export function createPlayerController({ config, store, connect, discover, accep
     const task = (async () => {
       while (running && !signal.aborted) {
         const finished = await connect(controls);
-        if (finished && !signal.aborted) { game.status = 'completed'; log(`Match ${info.id}: completed.`); break; }
+        if (finished && !signal.aborted) {
+          challenges?.finished(config.username, info.id);
+          finishGame(game);
+          break;
+        }
         if (!signal.aborted) { game.status = 'reconnecting'; await sleep(10000, undefined, { signal }); }
       }
     })().catch(error => {
@@ -135,19 +171,89 @@ export function createPlayerController({ config, store, connect, discover, accep
     connections.set(task, signal);
     log(`Match ${info.id}: connecting (${info.playerCount} players).`);
   }
+  async function respondToChallenge(info, show) {
+    const player = info.players.find(name => name !== config.username);
+    const valid = info.playerCount === 2 && info.players.length === 2 && Boolean(player);
+    const result = !valid ? 'invalid' : !settings().playerCounts.includes(2) ? 'unavailable' : challenges.check(player, info.id).result;
+    const messages = {
+      invalid: 'NationsBot beta challenges are for two players. Please invite the bot to a 1v1 game.',
+      active: 'You already have a NationsBot challenge. Finish that game before starting another.',
+      pending: 'You already have a NationsBot challenge being created. Check your Tabony invitations before trying again.',
+      limit: 'You have reached the limit of five NationsBot challenges today. Try again after midnight UTC.',
+      unavailable: 'NationsBot 1v1 challenges are currently unavailable. Please try again later.',
+    };
+    if (!canRespond()) { show('invited'); return; }
+    try {
+      if (result) {
+        const sameInvitation = live => canRespond() && live.players.length === info.players.length &&
+          new Set(live.players).size === info.players.length && live.players.every(name => info.players.includes(name));
+        if (await decline(info, { username: config.username, shouldDecline: sameInvitation,
+          declineMessage: messages[result], signal: lifecycle.signal })) {
+          games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
+          log(`Match ${info.id}: challenge invitation declined (${result}).`);
+        }
+        return;
+      }
+      if (!settings().autoAccept) { show('invited'); return; }
+      let reservation;
+      const available = () => canRespond() && settings().playerCounts.includes(2);
+      const joined = await accept(info, { username: config.username, settings, authorize: available,
+        canPlay: available, signal: lifecycle.signal, beforeJoin(lobby) {
+          if (!lobby.accepted.includes(player)) return false;
+          reservation = challenges.reserve(config.username, player, { matchId: info.id }).entry;
+          return Boolean(reservation);
+        } });
+      if (!joined) { show('invited'); return; }
+      reservation ??= challenges.reserve(config.username, player, { matchId: info.id }).entry;
+      if (!reservation) return;
+      challenges.confirm(reservation, info.id);
+      games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));
+      log(`Match ${info.id}: challenge invitation accepted.`);
+      if (joined.lobbyStarted) config.onLobbyStarted?.(info);
+    } catch {
+      if (!running) return;
+      show('challenge response unconfirmed');
+      log(`Match ${info.id}: challenge response unconfirmed. The next poll will check again.`);
+    }
+  }
+
   async function performPoll(reason) {
     lastPollError = null;
     log(`Checking games: ${reason}.`);
     try {
-      const found = await discover();
+      let found = await discover();
       if (!running) return;
+      if (challenges) {
+        challenges.reconcile(config.username, found);
+        found = found.filter(info => info.section !== 'Completed:');
+      }
       reconcile();
       for (const info of found.sort((a, b) => Number(b.id) - Number(a.id))) {
         const known = games.get(info.id);
-        if (known?.status === 'completed' || known?.status === 'blocked' || known?.abort) continue;
+        if (known?.finishedAt != null || known?.status === 'blocked' || known?.abort) continue;
         const s = settings();
         const show = status => games.set(info.id, loadPin({ ...info, status }));
-        if (!authorized(info)) { if (!config.hideUnauthorized?.(info)) show('not authorized'); continue; }
+        if (challenges && info.invitation) {
+          await respondToChallenge(info, show);
+          continue;
+        }
+        if (!authorized(info)) {
+          if (config.hideUnauthorized?.(info)) continue;
+          show('not authorized');
+          if (decline && shouldDecline(info)) {
+            try {
+              if (await decline(info, { username: config.username, shouldDecline, signal: lifecycle.signal })) {
+                games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
+                log(`Match ${info.id}: invitation declined (no eligible player).`);
+              }
+            } catch {
+              if (!running) return;
+              show('decline unconfirmed');
+              log(`Match ${info.id}: decline unconfirmed. The next poll will check again.`);
+            }
+          }
+          continue;
+        }
         if (!running) break;
         if (!accountEnabled()) { show('stopped'); continue; }
         if (activeCount() >= s.maxConcurrentGames) { show('waiting for capacity'); continue; }
@@ -158,6 +264,7 @@ export function createPlayerController({ config, store, connect, discover, accep
           log(`Match ${info.id}: invitation accepted.`);
           if (config.accountId) {
             games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));
+            if (joined?.lobbyStarted) config.onLobbyStarted?.(info);
             continue;
           }
         }
@@ -178,32 +285,40 @@ export function createPlayerController({ config, store, connect, discover, accep
   }
   return {
     status() {
+      const archiveCutoff = now() - archiveAfterMs;
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
         polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
-        models: [...modelChoices, ...experiments.scan().map(({ id, label }) => ({ id, label, twoPlayerOnly: true }))],
+        models: [...modelChoices, ...experiments.scan().map(({ id, label, playerCount }) => ({
+          id, label, playerCount, twoPlayerOnly: playerCount === 2,
+        }))],
         effectiveWeights: getModel().profiles,
         games: [...games.values()].map(game => {
-          const { abort, modelPin, experimental, ...publicGame } = game;
-          return { ...publicGame, active: Boolean(abort && !abort.signal.aborted), model: gameModelId(game),
+          const { abort, modelPin, experimental, finishedModel, ...publicGame } = game;
+          const finished = game.finishedAt != null;
+          const status = finished && game.finishedAt <= archiveCutoff ? 'archived' : game.status;
+          return { ...publicGame, status, active: Boolean(abort && !abort.signal.aborted), model: finishedModel ?? gameModelId(game),
             ...(config.accountId ? { accountId: config.accountId, accountName: config.username,
-              modelEditable: authorized(game) && game.status !== 'completed' } : {}) };
+              modelEditable: !finished && authorized(game) } : {}) };
         }), events };
     },
     save(input, revision, actor) {
-      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel && !experiments.get(input.twoPlayerModel)) {
-        throw new Error('That experimental checkpoint is unavailable.');
+      if (isExperimentalModel(input?.twoPlayerModel) && input.twoPlayerModel !== settings().twoPlayerModel &&
+          experiments.get(input.twoPlayerModel)?.playerCount !== 2) {
+        throw new Error('That experimental checkpoint is unavailable for two-player games.');
       }
       store.save(input, revision, actor); reconcile(); log('Player settings saved.'); return this.status();
     },
     changeMatchModel({ matchId, modelId, previousModel }, actor) {
       const game = typeof matchId === 'string' && /^\d{1,10}$/.test(matchId) && games.get(matchId);
-      if (!running || !game || !(config.accountId ? game.status !== 'completed' : game.abort && !game.abort.signal.aborted) || !authorized(game)) {
+      if (!running || !game || game.finishedAt != null || (!config.accountId && (!game.abort || game.abort.signal.aborted)) || !authorized(game)) {
         throw Object.assign(new Error('This match is no longer connected.'), { status: 409 });
       }
       if (gameModelId(game) !== previousModel) throw Object.assign(new Error('The match model changed. Refresh and try again.'), { status: 409 });
       if (!compatibleModel(modelId, game.playerCount)) throw new Error('Choose a checkpoint available for this player count.');
       const experimental = isExperimentalModel(modelId) ? experiments.get(modelId) : undefined;
-      if (isExperimentalModel(modelId) && !experimental) throw new Error('That experimental checkpoint is unavailable.');
+      if (isExperimentalModel(modelId) && experimental?.playerCount !== game.playerCount) {
+        throw new Error('That experimental checkpoint is unavailable for this player count.');
+      }
       const selection = { id: modelId, manual: true, updatedAt: new Date(now()).toISOString(), updatedBy: actor };
       try { writePin(game, selection); }
       catch { throw new Error('The player could not save the match model.'); }
@@ -221,6 +336,10 @@ export function createPlayerController({ config, store, connect, discover, accep
     },
     async tick() { if (running && settings().pollingEnabled && !busy && (nextPollAt === null || now() >= nextPollAt)) await this.poll('scheduled'); },
     async notified() { if (running && settings().pollingEnabled && (!lastPollAt || now() - lastPollAt >= 5000)) await this.poll('account notification'); },
+    async lobbyStarted() {
+      await Promise.allSettled([busy]);
+      if (running && accountEnabled() && settings().pollingEnabled) await this.poll('lobby started');
+    },
     async resume() {
       await Promise.allSettled([busy, ...[...connections].filter(([, signal]) => signal.aborted).map(([task]) => task)]);
       if (running && accountEnabled()) await this.poll('account started');
@@ -246,12 +365,22 @@ export async function startControlServer(controller, { token, port = 8080, host 
     try {
       if (req.method === 'GET' && req.url === '/status') { json(200, controller.status()); return; }
       if (req.method === 'POST' && req.url === '/poll') { await controller.poll(); json(200, controller.status()); return; }
-      if (req.method === 'POST' && ['/settings', '/match-model', '/account'].includes(req.url)) {
+      if (req.method === 'POST' && ['/settings', '/match-model', '/account', '/challenge'].includes(req.url)) {
         if (!req.headers['content-type']?.startsWith('application/json')) { json(415, { error: 'JSON required.' }); return; }
         let body = '';
         req.setEncoding('utf8');
         for await (const chunk of req) { body += chunk; if (Buffer.byteLength(body) > 32768) throw Object.assign(new Error('Request too large.'), { status: 413 }); }
         const input = JSON.parse(body);
+        if (req.url === '/challenge') {
+          if (typeof input?.discordUserId !== 'string' || !/^\d{17,20}$/.test(input.discordUserId)) {
+            throw new Error('An authenticated Discord user ID is required.');
+          }
+          if (typeof input?.username !== 'string' || !challengeNamePattern.test(input.username)) {
+            json(200, { result: 'unknown' }); return;
+          }
+          json(200, await controller.challenge?.(input.username, input.discordUserId) ?? { result: 'unavailable' });
+          return;
+        }
         if (!/^\d{17,20}$/.test(input?.actor ?? '')) throw new Error('An authenticated admin identity is required.');
         if (req.url === '/account' && !controller.changeAccount) throw new Error('The account vault is not configured.');
         const status = req.url === '/account' ? controller.changeAccount(input, input.actor) : req.url === '/match-model'
@@ -266,14 +395,15 @@ export async function startControlServer(controller, { token, port = 8080, host 
   return server;
 }
 
-function createAccountRuntime({ config, store, experiments, subscribe, journal, login, invite = acceptInvitation }) {
+function createAccountRuntime({ config, store, experiments, subscribe, journal, login,
+  respond = (action, match, controls, session) => action(match, controls, session) }) {
   let session, stopped = false, socket, reconnect, keepAlive;
   const ignore = promise => void promise.catch(() => {});
   async function listMatches() {
-    const current = discoverAccountMatches(session, config.username);
-    if (!config.includeArchive) return current;
-    const archived = discoverAccountMatches(session, config.username, fetch, true);
-    const [recent, old] = await Promise.all([current, archived]);
+    const current = discoverAccountMatches(session, config.username, fetch, false, Boolean(config.challenges));
+    if (!config.includeArchive && !config.challenges) return current;
+    const archived = () => discoverAccountMatches(session, config.username, fetch, true, Boolean(config.challenges));
+    const [recent, old] = config.challenges ? [await current, await archived()] : await Promise.all([current, archived()]);
     return [...new Map([...old, ...recent].map(match => [match.id, match])).values()];
   }
   const controller = createPlayerController({ config, store, experiments,
@@ -289,9 +419,43 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
       connectAccount();
       return matches;
     },
-    accept: (match, controls) => invite(match, controls, session),
+    accept: (match, controls) => respond(acceptInvitation, match, controls, session),
+    decline: (match, controls) => respond(declineInvitation, match, controls, session),
     connect: async controls => subscribe(controls, session, await journal(controls)),
   });
+  if (config.challenges) controller.challenge = async (username, discordUserId) => {
+    const available = () => {
+      const settings = store.read().settings;
+      return !stopped && config.play && (config.accountEnabled?.() ?? true) &&
+        settings.playEnabled && settings.playerCounts.includes(2);
+    };
+    if (!available()) return { result: 'unavailable' };
+    if (username === config.username) return { result: 'unknown' };
+    const { entry, ...denied } = config.challenges.reserve(config.username, username, { discordUserId });
+    if (!entry) return denied;
+    let submitted = false;
+    try {
+      // Each create/review flow uses its own Tabony session. The review form
+      // stores its choices in that session until confirmation.
+      const formSession = await login({ ...config, matchId: undefined });
+      const result = await createTabonyChallenge(config.username, entry, formSession, () => {
+        if (!available()) return false;
+        config.challenges.submitting(entry);
+        submitted = true;
+        return true;
+      });
+      if (result.matchId) {
+        config.challenges.confirm(entry, result.matchId);
+        ignore(controller.lobbyStarted());
+      }
+      else config.challenges.discard(entry);
+      return result;
+    } catch {
+      if (!submitted) config.challenges.discard(entry);
+      else ignore(controller.lobbyStarted());
+      return { result: submitted ? 'pending' : 'unavailable' };
+    }
+  };
   function resetAccountSocket() {
     clearInterval(keepAlive);
     clearTimeout(reconnect);
@@ -324,34 +488,43 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
     throw new StopPlayer('The account vault needs NATIONS_PLAYER_CREDENTIAL_ENCRYPTION_KEY.');
   }
   const store = settingsStore(config.dataDir);
+  const challengeBot = process.env.NATIONS_PLAYER_CHALLENGE_ACCOUNT;
+  if (challengeBot && !challengeNamePattern.test(challengeBot)) throw new Error('Set the exact Tabony challenge account name.');
+  const challenges = challengeBot && challengeStore(config.dataDir);
   const experiments = experimentalModels(config.dataDir);
   experiments.scan();
   let runtime;
   if (config.encryptionKey) {
     const accounts = accountStore(config.dataDir, config.encryptionKey);
-    const joining = new Map();
-    async function invite(match, controls, session) {
-      // Let each join finish before another account joins the same Tabony lobby.
-      const task = (joining.get(match.id) ?? Promise.resolve()).catch(() => {}).then(() => {
-        if (!controls.canPlay() || !controls.settings().autoAccept) return false;
-        return acceptInvitation(match, controls, session);
+    const lobbyActions = new Map();
+    async function respond(action, match, controls, session) {
+      // Let each response finish before another account changes the same lobby.
+      const task = (lobbyActions.get(match.id) ?? Promise.resolve()).catch(() => {}).then(() => {
+        const allowed = action === declineInvitation
+          ? controls.shouldDecline(match)
+          : controls.canPlay() && controls.settings().autoAccept;
+        return allowed ? action(match, controls, session) : false;
       });
-      joining.set(match.id, task);
+      lobbyActions.set(match.id, task);
       try { return await task; }
-      finally { if (joining.get(match.id) === task) joining.delete(match.id); }
+      finally { if (lobbyActions.get(match.id) === task) lobbyActions.delete(match.id); }
     }
     try {
       accounts.importLegacy(config);
       const base = createPlayerController({ config: { dataDir: config.dataDir }, store, experiments });
       const controller = createAccountManager({ accounts, base, experiments,
+        challengeBot,
         createRuntime: account => createAccountRuntime({
-          config: { dataDir: config.dataDir, ...account }, store, experiments, subscribe, journal, login, invite,
+          config: { dataDir: config.dataDir, ...account,
+            challenges: account.username === challengeBot && !account.includeArchive ? challenges : null },
+          store, experiments, subscribe, journal, login, respond,
         }),
       });
       runtime = { controller, close: () => controller.close() };
     } catch (error) { accounts.close(); throw error; }
   } else {
-    runtime = createAccountRuntime({ config, store, experiments, subscribe, journal, login });
+    runtime = createAccountRuntime({ config: { ...config, challenges: config.username === challengeBot ? challenges : null },
+      store, experiments, subscribe, journal, login });
   }
   const { controller } = runtime;
   let server;

@@ -12,9 +12,10 @@ const excluded = new Set(['UNDO', 'Resign', 'Confirm', 'Confirm and complete the
 const modelIdPattern = /^rl-[0-9a-f]{24}$/;
 const buckets = 4096;
 const embeddingSize = 24;
-const layerShapes = [[buckets, 24, false], [buckets, 24, false], [64, 84], [48, 91], [64, 112], [1, 64], [32, 64], [1, 32]];
-const weightBytes = 4 * layerShapes.reduce((size, [out, input, bias]) => size + out * (input + (bias === false ? 0 : 1)), 0);
-const maxBytes = weightBytes + 2048;
+const shapes = features => [[buckets, 24, false], [buckets, 24, false], [64, features + embeddingSize], [48, 91], [64, 112], [1, 64], [32, 64], [1, 32]];
+const weightBytes = layers => 4 * layers.reduce((size, [out, input, bias]) => size + out * (input + (bias === false ? 0 : 1)), 0);
+const minBytes = weightBytes(shapes(60)) + 5;
+const maxBytes = weightBytes(shapes(113)) + 2048;
 const ids = new Map();
 const card = id => Object.hasOwn(cards, id) ? cards[id] : {};
 const tokenText = value => value == null ? 'None' : String(value);
@@ -53,15 +54,20 @@ function cardNumbers(info) {
     ...types.map(type => Number(info.type === type)), scaled(sum(info.stages ?? []), 10), scaled(info.stages?.length, 4)];
 }
 
-function observation(state, moves) {
+function observation(state, moves, playerCount) {
   const actor = state.next_move_player;
-  const rival = Object.keys(state.players).find(name => name !== actor);
+  const order = (state.player_order ?? []).filter(name => Object.hasOwn(state.players, name));
+  order.push(...Object.keys(state.players).filter(name => !order.includes(name)));
+  const pivot = order.indexOf(actor);
+  const seats = [...order.slice(pivot), ...order.slice(0, pivot)];
   const numbers = [scaled(state.round, 8), scaled(state.architects, 5), scaled(state.turmoil, 5),
     scaled(state.war_value, 15), Number(Boolean(state.war)), Number(state.player_order?.[0] === actor), scaled(moves.length, 20)];
   const tokens = [`prompt/${state.next_move_choice}`, `event/${tokenText(state.event)}`, `war/${tokenText(state.war)}`];
-  for (const [role, name] of [['self', actor], ['rival', rival]]) {
+  const extra = [];
+  for (const [index, name] of seats.entries()) {
+    const role = index === 0 ? 'self' : 'rival';
     const player = state.players[name];
-    numbers.push(...playerNumbers(player));
+    (index < 2 ? numbers : extra).push(...playerNumbers(player));
     tokens.push(`${role}/nation/${tokenText(player.nation)}`);
     for (const [slot, cid] of sortedEntries(player.slots)) {
       tokens.push(`${role}/slot/${slot}/${cid}`, `${role}/card/${cid}`, `${role}/deployed/${cid}/${player.cards?.[cid]?.deployed ?? 0}`);
@@ -71,7 +77,8 @@ function observation(state, moves) {
   for (const [slot, cid] of sortedEntries(state.progress_board)) tokens.push(`market/${slot}/${cid}`);
   for (const nation of Object.keys(state.nations ?? {}).sort()) tokens.push(`available/${nation}`);
   numbers.push(scaled(card(state.event).famine, 5));
-  if (tokens.length > 128) throw new Error('Position exceeds the experimental model feature capacity.');
+  if (playerCount === 4) numbers.push(...extra, pivot / 3);
+  if (tokens.length > (playerCount === 2 ? 128 : 512)) throw new Error('Position exceeds the experimental model feature capacity.');
   return [numbers, tokens];
 }
 
@@ -129,17 +136,22 @@ function dense({ weights, bias, input, output }, values, activate = true) {
 }
 
 export function decodeExperimentalModel(bytes, expectedId) {
-  if (bytes.length > maxBytes || bytes.length < weightBytes + 5) throw new Error('Invalid model size.');
+  if (bytes.length > maxBytes || bytes.length < minBytes) throw new Error('Invalid model size.');
   const hash = sha256(bytes);
   const id = `rl-${hash.slice(0, 24)}`;
   if (expectedId != null && id !== expectedId) throw new Error('Model checksum does not match its filename.');
   const headerLength = bytes.readUInt32LE(0);
-  if (headerLength + 4 + weightBytes !== bytes.length) throw new Error('Invalid model dimensions.');
+  if (headerLength < 1 || headerLength > 2044) throw new Error('Invalid model dimensions.');
   const header = JSON.parse(bytes.subarray(4, 4 + headerLength).toString('utf8'));
-  if (header.format !== 'nations-policy-v1' || header.card_index_sha256 !== cardIndexHash ||
+  const formats = { 'nations-policy-v1': { count: 2, features: 60 }, 'nations-policy-v2': { count: 4, features: 113 } };
+  const format = Object.hasOwn(formats, header.format) ? formats[header.format] : null;
+  if (!format || header.card_index_sha256 !== cardIndexHash ||
       !Number.isSafeInteger(header.games) || header.games < 1 || !/^[a-f0-9]{64}$/.test(header.checkpoint_sha256)) {
     throw new Error('Model export is incompatible with this player.');
   }
+  const playerCount = format.count;
+  const layerShapes = shapes(format.features);
+  if (headerLength + 4 + weightBytes(layerShapes) !== bytes.length) throw new Error('Invalid model dimensions.');
   let offset = 4 + headerLength;
   const tensor = count => {
     const values = new Float32Array(count);
@@ -152,14 +164,14 @@ export function decodeExperimentalModel(bytes, expectedId) {
     return bias === false ? weights : { weights, bias: tensor(output), output, input };
   });
   return {
-    id, label: `Experimental RL · ${header.games.toLocaleString('en-US')} games · ${hash.slice(0, 8)}`,
-    hash, checkpointHash: header.checkpoint_sha256,
+    id, label: `Experimental RL · ${playerCount === 4 ? '4 players · ' : ''}${header.games.toLocaleString('en-US')} games · ${hash.slice(0, 8)}`,
+    hash, checkpointHash: header.checkpoint_sha256, playerCount,
     rank(state) {
-      if (!prompts.has(state.next_move_choice) || Object.keys(state.players ?? {}).length !== 2 ||
+      if (!prompts.has(state.next_move_choice) || Object.keys(state.players ?? {}).length !== playerCount ||
           !Object.hasOwn(state.players, state.next_move_player) || state.next_move_options?.some(option => option.startsWith('Confirm'))) return null;
       const choices = state.next_move_options?.filter(option => !excluded.has(option)) ?? [];
       if (!choices.length) return null;
-      const [numbers, tokens] = observation(state, choices);
+      const [numbers, tokens] = observation(state, choices, playerCount);
       const position = dense(context, Float32Array.from([...numbers, ...embed(stateEmbedding, tokens)]));
       const moves = choices.map(choice => {
         const [numeric, categorical] = action(state, choice);
@@ -169,7 +181,9 @@ export function decodeExperimentalModel(bytes, expectedId) {
       });
       const prediction = dense(valueLogit, dense(value, position), false)[0];
       if (!Number.isFinite(prediction) || moves.some(item => !Number.isFinite(item.score))) throw new Error('Invalid model prediction.');
-      return { moves: moves.sort((a, b) => b.score - a.score), winProbability: 1 / (1 + Math.exp(-prediction)) };
+      const probability = 1 / (1 + Math.exp(-prediction));
+      return { moves: moves.sort((a, b) => b.score - a.score),
+        ...(playerCount === 2 ? { winProbability: probability } : { expectedLeaguePoints: 1 + 4 * probability }) };
     },
   };
 }

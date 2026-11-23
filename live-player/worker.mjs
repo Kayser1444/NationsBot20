@@ -5,9 +5,35 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import WebSocket from 'ws';
 import metadata from './package.json' with { type: 'json' };
+import cards from './card-index.json' with { type: 'json' };
+import rules from './predictor-rules.json' with { type: 'json' };
 import { origin, login, readPosition, safeOption, StopPlayer } from './tabony.mjs';
 import { chooseMove } from './policy.mjs';
 import { validateModel } from './scorer.mjs';
+
+function safeArchitectOptions(state, username) {
+  const options = state.next_move_options;
+  const player = state.players[username];
+  const project = player?.slots?.Hire;
+  const stages = cards[project]?.stages;
+  const completed = player?.cards?.[project]?.architects ?? 0;
+  if (!stages?.length || completed + 1 !== stages.length) return options;
+
+  const spaces = rules.nations[player.nation]?.wonders ?? 5;
+  for (let i = 1; i <= spaces; i++) {
+    const type = cards[player.slots[`W${i}`]]?.type;
+    if (type !== 'natural-wonder' && type !== 'extension') return options;
+  }
+
+  // Tabony checks placement for normal hires, but some free hires bypass it.
+  if (/^Hire (?:1 )?\[Architect\] for free\?$/.test(state.next_move_choice)) {
+    return options.filter(move => move !== 'Yes');
+  }
+  if (state.next_move_choice === 'Which action?') {
+    return options.filter(move => move !== 'Special of "Qin Dynasty"' && !/^Hire(?:$| from )/.test(move));
+  }
+  return options;
+}
 
 function configuration(env, managed) {
   const config = {
@@ -70,8 +96,11 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     function planMove(state, model) {
       const id = policyId(state, model);
       if (id !== lastPolicy) { policyContext = {}; lastPolicy = id; }
-      const move = chooseMove(state, config.username, config.opponent, model, policyContext);
-      if (!safeOption(state, move)) throw new StopPlayer('No safe legal option was selected.');
+      const options = safeArchitectOptions(state, config.username);
+      const guarded = options === state.next_move_options ? state : { ...state, next_move_options: options };
+      const move = guarded !== state && options.length === 1 ? options[0]
+        : chooseMove(guarded, config.username, config.opponent, model, policyContext);
+      if (!safeOption(guarded, move)) throw new StopPlayer('No safe legal option was selected.');
       return move;
     }
     let lastValid = Date.now();

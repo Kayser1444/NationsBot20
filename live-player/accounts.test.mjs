@@ -108,7 +108,7 @@ test('takeover discovery includes old games and accepts only approved ongoing se
   const username = 'RetiredPlayer';
   const players = [username, 'UnlistedOpponent'];
   const render = id => `<div class="card my-2"><div>Title: <span>League</span></div><div>Type: <span>2-Player, King</span></div><div>Players: ${players.map(name => `<span>${name}</span>`).join(', ')}</div><a href="/nations/${id}/"></a></div>`;
-  const html = `<span class="navbar-text">Welcome, ${username}!</span><h1>Your Nations Matches</h1><h2>Your turn:</h2>${render('4000')}${render('4001')}<h2>Invitations:</h2>${render('4002')}<h2>Completed:</h2>${render('4003')}`;
+  const html = `<span class="navbar-text">Welcome, ${username}!</span><h1>Your Archived Nations Matches</h1><h2>Your turn:</h2>${render('4000')}${render('4001')}<h2>Invitations:</h2>${render('4002')}<h2>Completed:</h2>${render('4003')}`;
   const discover = () => discoverAccountMatches('fixture', username, async url => {
     assert.equal(new URL(url).pathname, '/nations/archive/mine/');
     return new Response(html);
@@ -124,6 +124,7 @@ test('takeover discovery includes old games and accepts only approved ongoing se
       assert.equal(config.includeArchive, true);
       const controller = createPlayerController({ config, store, experiments, discover,
         accept: () => assert.fail('Takeover seats must already be in progress.'),
+        decline: () => { connected.push('unexpected decline'); },
         connect: async options => { connected.push(options.matchId); return true; },
       });
       return { controller, close: () => controller.close() };
@@ -135,5 +136,42 @@ test('takeover discovery includes old games and accepts only approved ongoing se
     await manager.poll();
     assert.deepEqual(connected, ['4000']);
     assert.deepEqual(manager.status().games.map(game => game.id), ['4000']);
+  } finally { await manager.close(); }
+});
+
+test('the last confirmed invitation connects every managed seat without another scheduled poll', async t => {
+  const directory = directoryFixture(t);
+  const store = settingsStore(directory);
+  const bots = ['NationsBot20', 'NationsBot20_2', 'NationsBot_3'];
+  const match = { id: '3278', playerCount: 4, players: ['Kayser', ...bots] };
+  const accepted = new Set();
+  const connected = new Set();
+  const experiments = { scan: () => [] };
+  const manager = createAccountManager({
+    accounts: accountStore(directory, key), experiments,
+    base: createPlayerController({ config: {}, store, experiments }),
+    createRuntime(config) {
+      const controller = createPlayerController({
+        config: { ...config, dataDir: directory }, store, experiments,
+        discover: async () => [{
+          ...match, invitation: !accepted.has(config.username),
+          section: accepted.size < bots.length ? 'Open:' :
+            config.username === bots[0] ? 'Your turn:' : 'Not your turn:',
+        }],
+        accept: async () => {
+          accepted.add(config.username);
+          return { lobbyStarted: accepted.size === bots.length };
+        },
+        connect: async () => { connected.add(config.username); return true; },
+      });
+      return { controller, close: () => controller.close() };
+    },
+  });
+  try {
+    for (const username of bots) manager.changeAccount({ action: 'add', username, password: 'fixture' });
+    for (const { id } of manager.status().accounts) manager.changeAccount({ action: 'start', accountId: id });
+    await manager.poll();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.deepEqual([...connected].sort(), [...bots].sort());
   } finally { await manager.close(); }
 });

@@ -25,6 +25,7 @@ import { SmTableCache } from './sm-table.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
 import { adminUsers, adminSubscribers } from './admin-users.mjs';
 import { createBulletinService } from './bulletins.mjs';
+import { createPlayerAdmin } from './player-admin.mjs';
 const args = process.argv.slice(2);
 const profile = args.includes('--config') ? args[args.indexOf('--config') + 1] : 'kayser.json';
 if (!['kayser.json', 'friends.json'].includes(profile)) throw new Error('Unknown configuration profile.');
@@ -453,10 +454,14 @@ void refreshMatches();
 if (outbox) outboxTimer = setTimeout(flushOutbox, 0);
 void serviceStatus?.start();
 if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args.includes('--no-bot-commands')) {
+  let player;
+  try { player = createPlayerAdmin(); }
+  catch { log.add('Invalid player control configuration. The challenge command is unavailable.', 'error'); }
   bot = startDiscordBot({ token: process.env.NATIONS_DISCORD_BOT_TOKEN, questionLog,
     guildId: config.discord.guildId, channelId: config.discord.channelId,
     report: (message, level) => log.add(message, level), onState: state => { botState = state; },
     service: {
+      challenge: player && ((username, discordUserId) => player('challenge', { username, discordUserId })),
       getSmTable: (div, userId, language) => sm.reply(div, userId, readSubscriptions(configPath), language ?? readBotLanguage(configPath, userId)),
       isBanned: userId => isUserBanned(configPath, userId),
       getSubscriptions: () => readSubscriptions(configPath),

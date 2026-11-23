@@ -5,7 +5,7 @@ import { isExperimentalModel } from './rl-policy.mjs';
 
 const conflict = message => Object.assign(new Error(message), { status: 409 });
 
-export function createAccountManager({ accounts, base, createRuntime, experiments }) {
+export function createAccountManager({ accounts, base, createRuntime, experiments, challengeBot }) {
   const entries = new Map(), retiring = new Set();
   const legacyId = accounts.legacyId();
   const background = promise => void promise.catch(() => {});
@@ -16,8 +16,14 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
       username: account.username, password: account.password, play: true, accountId: account.id,
       storageId: account.id === legacyId ? undefined : account.id, includeArchive: Boolean(account.matchIds),
       accountEnabled: () => entry.account.enabled,
-      defaultModel: count => count === 2 || !isExperimentalModel(entry.account.defaultModel) ? entry.account.defaultModel : null,
+      defaultModel: count => !isExperimentalModel(entry.account.defaultModel) || count === (entry.account.defaultModelPlayers ?? 2)
+        ? entry.account.defaultModel : null,
       hideUnauthorized: () => Boolean(entry.account.matchIds),
+      onLobbyStarted(match) {
+        for (const { account, runtime } of entries.values()) {
+          if (match.players.includes(account.username)) background(runtime.controller.lobbyStarted());
+        }
+      },
       authorize(game, settings) {
         if (entry.account.matchIds) {
           return entry.account.matchIds.includes(game.id) && !game.invitation &&
@@ -25,8 +31,7 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
             game.players.length === game.playerCount &&
             isAuthorized(game, { ...settings, authorizedPlayers: game.players }, account.username);
         }
-        const managedNames = [...entries.values()].filter(other => !other.account.matchIds).map(other => other.account.username);
-        return isAuthorized(game, { ...settings, authorizedPlayers: [...settings.authorizedPlayers, ...managedNames] }, account.username);
+        return isAuthorized(game, settings, account.username);
       },
     });
     entries.set(account.id, entry);
@@ -37,12 +42,17 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
   const reconcile = () => controllers().forEach(controller => controller.reconcile());
 
   function validateDefault(model) {
-    if (model === null || modelChoices.some(choice => choice.id === model) ||
-        (isExperimentalModel(model) && experiments.get(model))) return;
+    if (model === null || modelChoices.some(choice => choice.id === model)) return null;
+    const experiment = isExperimentalModel(model) && experiments.get(model);
+    if (experiment) return experiment.playerCount;
     throw new Error('Choose an available default model.');
   }
 
   return {
+    challenge(username, discordUserId) {
+      const entry = [...entries.values()].find(({ account }) => account.username === challengeBot && !account.matchIds);
+      return entry?.runtime.controller.challenge?.(username, discordUserId) ?? { result: 'unavailable' };
+    },
     status() {
       const statuses = [...entries.values()].map(({ account, runtime }) => ({ account, status: runtime.controller.status() }));
       const dates = key => statuses.map(({ status }) => status[key]).filter(stamp => stamp !== null);
@@ -74,10 +84,11 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
             matchIds.some(id => typeof id !== 'string' || !matchIdPattern.test(id)))) {
           throw new Error('Enter one or more Tabony match IDs for this takeover account.');
         }
-        validateDefault(defaultModel);
+        const defaultModelPlayers = validateDefault(defaultModel);
         const id = accounts.idFor(username);
         if (entries.has(id) || retiring.has(id)) throw conflict('This account is already registered or is still disconnecting.');
-        attach(accounts.add({ username, password, defaultModel, matchIds: matchIds && [...new Set(matchIds)], enabled: false }));
+        attach(accounts.add({ username, password, defaultModel, defaultModelPlayers,
+          matchIds: matchIds && [...new Set(matchIds)], enabled: false }));
       } else {
         const entry = entries.get(input.accountId);
         if (!entry) throw conflict('This account is no longer registered.');
@@ -90,7 +101,7 @@ export function createAccountManager({ accounts, base, createRuntime, experiment
         } else if (['start', 'stop', 'default-model'].includes(input.action)) {
           const next = { ...entry.account };
           if (input.action === 'default-model') {
-            validateDefault(input.defaultModel);
+            next.defaultModelPlayers = validateDefault(input.defaultModel);
             next.defaultModel = input.defaultModel;
           } else next.enabled = input.action === 'start';
           accounts.save(next);

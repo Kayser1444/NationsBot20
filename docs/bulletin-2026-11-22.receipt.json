@@ -1,0 +1,18 @@
+{
+  "id": "stronger-two-player-20261122",
+  "environment": "production",
+  "destination": {
+    "guildId": "706912380067643473",
+    "channelId": "1558878151646388264",
+    "botId": "1558936899446374570"
+  },
+  "content": "**NationsBot 2.0 har blivit starkare! 💪**\n\nEn uppdaterad spelmodell är nu i drift i tvåspelarmatcher. Räkna med tuffare motstånd nästa gång du utmanar boten.",
+  "length": 158,
+  "sha256": "acd5007882e4fc50e2eff00b57d34b4baa0a23610ac4b0e7c982d49f9c237fd7",
+  "nonce": "6c43cc60487a14645012e7db",
+  "status": "verified",
+  "createdAt": "2026-11-22T10:27:45.708Z",
+  "messageId": "1574008482053750825",
+  "verifiedAt": "2026-11-22T10:27:46.228Z",
+  "url": "https://discord.com/channels/706912380067643473/1558878151646388264/1574008482053750825"
+}
