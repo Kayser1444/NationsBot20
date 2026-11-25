@@ -168,9 +168,11 @@ submissions retain the persistent journal and offered-option checks.
 
 When Tabony confirms that the last invitation accepted by a bot filled the
 lobby, automatic discovery refreshes the participating bot accounts. One
-WebSocket per signed-in account requests discovery after notifications. A timer covers
-new invitations that do not emit a notification. Notifications are coalesced
-and briefly throttled; manual and scheduled polls share one in-flight operation.
+WebSocket per signed-in account triggers discovery for invitation and turn updates.
+Updates received during a refresh or within five seconds of its completion queue
+one follow-up refresh. A periodic fallback catches missed updates and defaults
+to five minutes. Existing settings at the previous one-minute default move to
+five minutes on upgrade. Other intervals are preserved.
 Account WebSockets reconnect after disconnection, and expired listing sessions
 are logged in again. The page reports discovery and login errors per account.
 The next scheduled poll retries the affected accounts.

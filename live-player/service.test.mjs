@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { EventEmitter } from 'node:events';
@@ -30,6 +30,18 @@ test('settings persist, reject stale writes and select the approved model profil
   for (const bad of [{ pollIntervalSeconds: 1 }, { pollingEnabled: 'false' }, { twoPlayerModel: 'constructor' }, { authorizedPlayers: ['<script>'] }, { weightOverrides: { 2: { constructor: 1 } } }]) {
     assert.throws(() => validateSettings({ ...initialSettings, ...bad }));
   }
+});
+
+test('the previous default fallback interval migrates once and can be set back explicitly', t => {
+  const { directory } = storeFixture(t);
+  writeFileSync(join(directory, 'player-settings.json'), JSON.stringify({
+    revision: 4, baselineVersion: 2, settings: { ...initialSettings, pollIntervalSeconds: 60 },
+  }));
+  const store = settingsStore(directory);
+  assert.equal(store.read().revision, 5);
+  assert.equal(store.read().settings.pollIntervalSeconds, 300);
+  store.save({ ...store.read().settings, pollIntervalSeconds: 60 }, 5, 'owner');
+  assert.equal(settingsStore(directory).read().settings.pollIntervalSeconds, 60);
 });
 
 test('account listing identifies invitations, ignores completed matches and verifies the account', () => {
@@ -93,6 +105,54 @@ test('manual polling works while disabled, coalesces requests and revocation clo
   controller.save({ ...store.read().settings, authorizedPlayers: [] }, 2, '229311536827465728');
   assert.equal(connected.signal.aborted, true);
   assert.equal(controller.status().games.filter(g => g.active).length, 0);
+});
+
+test('account notifications refresh immediately and queue one refresh during a poll or the throttle', async t => {
+  const { store } = storeFixture(t);
+  let time = 0, discovered = 0, finishFirstPoll;
+  const controller = createPlayerController({ config, store, now: () => time,
+    discover() {
+      discovered++;
+      if (discovered === 1) return new Promise(resolve => { finishFirstPoll = () => resolve([]); });
+      return Promise.resolve([]);
+    },
+  });
+  t.after(() => controller.close());
+  const first = controller.notified();
+  assert.equal(discovered, 1);
+  await controller.notified();
+  await controller.tick();
+  assert.equal(discovered, 1);
+  finishFirstPoll();
+  await first;
+  assert.equal(controller.status().nextPollAt, 5000);
+
+  time = 4999;
+  await controller.notified();
+  await controller.notified();
+  assert.equal(discovered, 1);
+  assert.equal(controller.status().nextPollAt, 5000);
+  time = 5000;
+  await controller.tick();
+  await controller.tick();
+  assert.equal(discovered, 2);
+
+  time = 304999;
+  await controller.tick();
+  assert.equal(discovered, 2);
+  time = 305000;
+  await controller.tick();
+  assert.equal(discovered, 3);
+
+  await controller.notified();
+  controller.save({ ...store.read().settings, pollingEnabled: false }, 0, 'owner');
+  time += 5000;
+  await controller.tick();
+  await controller.notified();
+  assert.equal(discovered, 3);
+  controller.save({ ...store.read().settings, pollingEnabled: true }, 1, 'owner');
+  await controller.tick();
+  assert.equal(discovered, 3);
 });
 
 test('finished games archive after 48 hours and keep their seat details across restarts', async t => {

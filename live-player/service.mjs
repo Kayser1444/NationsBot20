@@ -16,6 +16,7 @@ import { createAccountManager } from './account-manager.mjs';
 import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
 
 const archiveAfterMs = 48 * 60 * 60 * 1000;
+const notificationThrottleMs = 5000;
 const publicRoundModel = { id: publicRoundId, label: '100K public-snapshot search', playerCount: 2, twoPlayerOnly: true };
 const usesCheckpoint = id => isExperimentalModel(id) || id === publicRoundId;
 const checkpointId = id => id === publicRoundId ? direct100kId : id;
@@ -61,6 +62,8 @@ export function createPlayerController({ config, store, connect, discover, accep
   }
   const lifecycle = new AbortController(), connections = new Map();
   let running = true, busy = null, lastPollAt = null, lastPollError = null, nextPollAt = null;
+  let notificationPending = false;
+  const notificationPollAt = () => lastPollAt === null ? now() : lastPollAt + notificationThrottleMs;
   let accountSocket = 'disconnected', modelRevision = -1, model;
   const settings = () => store.read().settings;
   const isClosed = () => settings().playMode === 'closed';
@@ -117,6 +120,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       }
     }
     nextPollAt = !isClosed() && s.pollingEnabled ? (lastPollAt ?? now()) + s.pollIntervalSeconds * 1000 : null;
+    if (nextPollAt === null) notificationPending = false;
   }
   const activeCount = () => [...games.values()].filter(game => game.abort && !game.abort.signal.aborted).length;
   const readPin = game => readMatchModel(config.dataDir, game.id, game.playerCount, config.storageId);
@@ -303,7 +307,9 @@ export function createPlayerController({ config, store, connect, discover, accep
       const archiveCutoff = now() - archiveAfterMs;
       const checkpoints = experiments.scan();
       return { ...store.read(), username: config.username, version: metadata.version, playAvailable: config.play,
-        polling: Boolean(busy), lastPollAt, lastPollError, nextPollAt, accountSocket, matchModelChanges: true,
+        polling: Boolean(busy), lastPollAt, lastPollError,
+        nextPollAt: notificationPending ? Math.min(nextPollAt ?? Infinity, notificationPollAt()) : nextPollAt,
+        accountSocket, matchModelChanges: true,
         models: [...modelChoices, ...(checkpoints.some(model => model.id === direct100kId && model.playerCount === 2) ? [publicRoundModel] : []),
           ...checkpoints.map(({ id, label, playerCount }) => ({
           id, label, playerCount, twoPlayerOnly: playerCount === 2,
@@ -351,11 +357,24 @@ export function createPlayerController({ config, store, connect, discover, accep
     },
     poll(reason = 'manual') {
       if (!running || isClosed()) return Promise.resolve();
-      if (!busy) { busy = performPoll(reason).finally(() => { busy = null; }); }
+      if (!busy) {
+        // A fresh listing covers all notifications received before it starts.
+        notificationPending = false;
+        busy = performPoll(reason).finally(() => { busy = null; });
+      }
       return busy;
     },
-    async tick() { if (running && !isClosed() && settings().pollingEnabled && !busy && (nextPollAt === null || now() >= nextPollAt)) await this.poll('scheduled'); },
-    async notified() { if (running && settings().pollingEnabled && (!lastPollAt || now() - lastPollAt >= 5000)) await this.poll('account notification'); },
+    async tick() {
+      if (!running || isClosed() || !settings().pollingEnabled || busy) return;
+      const time = now();
+      if (notificationPending && time >= notificationPollAt()) await this.poll('account notification');
+      else if (nextPollAt === null || time >= nextPollAt) await this.poll('scheduled');
+    },
+    async notified() {
+      if (!running || isClosed() || !settings().pollingEnabled) return;
+      notificationPending = true;
+      await this.tick();
+    },
     async lobbyStarted() {
       await Promise.allSettled([busy]);
       if (running && accountEnabled() && settings().pollingEnabled) await this.poll('lobby started');
@@ -368,6 +387,7 @@ export function createPlayerController({ config, store, connect, discover, accep
     reconcile,
     close() {
       running = false;
+      notificationPending = false;
       lifecycle.abort();
       for (const game of games.values()) game.abort?.abort();
       return Promise.allSettled([busy, ...connections.keys()]);

@@ -12,7 +12,7 @@ const catalog = { ...checkpoints,
   'human-baseline-v2': { label: 'Human baseline v2 — dynasties', model: deployed } };
 
 export const initialSettings = {
-  playMode: 'invite-only', pollingEnabled: true, pollIntervalSeconds: 60, playEnabled: true, autoAccept: true,
+  playMode: 'invite-only', pollingEnabled: true, pollIntervalSeconds: 300, playEnabled: true, autoAccept: true,
   authorizedPlayers: ['Kayser'], playerCounts: [2, 3, 4, 5], maxConcurrentGames: 1,
   moveDelayMs: 500, growthResources: 2,
   twoPlayerModel: 'human-baseline-v2', multiplayerModel: 'human-baseline-v2', fourPlayerModel: null,
@@ -67,14 +67,18 @@ export function settingsStore(directory) {
     saved = JSON.parse(readFileSync(path, 'utf8'));
     saved.settings = validateSettings(saved.settings);
     if (!Number.isSafeInteger(saved.revision) || saved.revision < 0) throw new Error('Invalid saved settings revision.');
-    if ((saved.baselineVersion ?? 0) < 2) {
-      // Promote existing installations once; preserve account and polling settings.
+    const migrateBaseline = (saved.baselineVersion ?? 0) < 2;
+    const migratePoll = !saved.fallbackPollVersion && saved.settings.pollIntervalSeconds === 60;
+    if (migrateBaseline || migratePoll) {
       const settings = { ...saved.settings };
-      for (const key of ['twoPlayerModel', 'multiplayerModel']) {
-        if (!saved.baselineVersion || settings[key] === 'human-baseline-v1') settings[key] = 'human-baseline-v2';
+      if (migrateBaseline) {
+        for (const key of ['twoPlayerModel', 'multiplayerModel']) {
+          if (!saved.baselineVersion || settings[key] === 'human-baseline-v1') settings[key] = 'human-baseline-v2';
+        }
       }
-      saved = { ...saved, baselineVersion: 2, revision: saved.revision + 1, settings,
-        updatedAt: new Date().toISOString(), updatedBy: 'human-baseline-v2 migration' };
+      if (migratePoll) settings.pollIntervalSeconds = initialSettings.pollIntervalSeconds;
+      saved = { ...saved, baselineVersion: 2, fallbackPollVersion: 1, revision: saved.revision + 1, settings,
+        updatedAt: new Date().toISOString(), updatedBy: migratePoll ? 'fallback poll migration' : 'human-baseline-v2 migration' };
       writeFileSync(path + '.tmp', JSON.stringify(saved, null, 2) + '\n', { mode: 0o600 });
       renameSync(path + '.tmp', path);
     }
@@ -83,7 +87,7 @@ export function settingsStore(directory) {
     read: () => structuredClone(saved),
     save(input, revision, actor) {
       if (revision !== saved.revision) throw Object.assign(new Error('Settings changed. Refresh before saving.'), { status: 409 });
-      const next = { baselineVersion: 2, settings: validateSettings(input), revision: saved.revision + 1,
+      const next = { baselineVersion: 2, fallbackPollVersion: 1, settings: validateSettings(input), revision: saved.revision + 1,
         updatedAt: new Date().toISOString(), updatedBy: actor ?? null };
       writeFileSync(path + '.tmp', JSON.stringify(next, null, 2) + '\n', { mode: 0o600 });
       renameSync(path + '.tmp', path);
