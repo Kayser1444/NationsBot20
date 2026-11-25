@@ -131,7 +131,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
           (remaining ? message(language, ` ${remaining} anrop återstår, men det behövs plats för upp till ${maxQuestionRequests} anrop för att starta en fråga.`,
             ` ${remaining} requests remain, but starting a question requires room for up to ${maxQuestionRequests} requests.`) : ''));
       }
-      if (limits.length) return matchContext ? 'The question limit has been reached. Please try again later.' : message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
+      if (limits.length) return matchContext ? 'I can’t chat more today.' : message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
         (user.count >= 5 || ledger.total >= 20 || apiBlocked ? message(language, '\nDygnskvoterna återställs kl. 00:00 UTC.', '\nDaily quotas reset at 00:00 UTC.') : '');
       let model;
       try { model = models.current(); }

@@ -49,6 +49,6 @@ test('the private Tabony route uses the shared investigation and never needs a D
   for (let count = 2; count <= 5; count++) {
     assert.deepEqual(await (await ask('Kayser', token, 'What move should I take?')).json(), { reply: line });
   }
-  assert.match((await (await ask('Kayser')).json()).reply, /question limit/);
+  assert.deepEqual(await (await ask('Kayser')).json(), { reply: 'I can’t chat more today.' });
   assert.equal(calls, 5);
 });

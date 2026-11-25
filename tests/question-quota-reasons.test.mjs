@@ -14,7 +14,9 @@ function fixture(t, { count = 0, elapsed = 60000, total = count, requests = 0, l
   const path = join(root, 'usage.json');
   writeFileSync(path, JSON.stringify({ day: ledgerDay, total, requests, users: { [userId]: { count, last: clock - elapsed } } }));
   let calls = 0;
-  const service = createQuestionService({ directory, now: () => clock, env: { NATIONS_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only' },
+  const service = createQuestionService({ directory, now: () => clock, env: {
+    NATIONS_QUESTION_ENABLED: '1', NATIONS_TABONY_QUESTION_ENABLED: '1', OPENAI_API_KEY: 'test-only',
+  },
     fetcher: async url => { if (url === 'https://api.openai.com/v1/responses') calls++; return new Response('', { status: 503 }); } });
   t.after(() => service.close());
   return { service, path, calls: () => calls };
@@ -51,5 +53,17 @@ test('exact minute and API reservation boundaries admit a question, and UTC roll
     const answer = await f.service.ask({ userId, question: 'Can I buy this advisor?', onAccepted: () => { accepted++; } });
     assert.equal(accepted, 1); assert.equal(f.calls(), 1); assert.doesNotMatch(answer, /limit reached/);
     assert.equal(f.service.globalQuota().requests, scenario.ledgerDay ? 1 : (scenario.requests ?? 0) + 1);
+  }
+});
+
+test('Tabony uses a fixed reply when the daily API budget cannot admit a question', async t => {
+  for (const requests of [115, 120]) {
+    const f = fixture(t, { requests });
+    const before = readFileSync(f.path, 'utf8');
+    const asker = 'Kayser';
+    const reply = await f.service.askTabony({ asker, question: 'Can I buy this advisor?', matchContext: { asker } });
+    assert.equal(reply, 'I can’t chat more today.');
+    assert.equal(f.calls(), 0);
+    assert.equal(readFileSync(f.path, 'utf8'), before);
   }
 });
