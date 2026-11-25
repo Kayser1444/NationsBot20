@@ -1,5 +1,6 @@
 """Reconstruct public decision positions from a Tabony replay archive."""
 
+from nations_action_prompt import policy_prompt
 import argparse
 from collections import Counter
 from contextlib import ExitStack
@@ -23,11 +24,12 @@ def read_decisions(match_type, replay):
         def get_move(self, player, choice, options):
             legal = [str(option) for option in options if str(option) not in EXCLUDED]
             recorded = self.move_list[0] if self.move_list else None
-            if (choice in PHASES and self.replaying_invalid_or_undo == 0
+            phase = PHASES.get(policy_prompt(choice))
+            if (phase and self.replaying_invalid_or_undo == 0
                     and recorded in legal and len(legal) > 1):
                 snapshot = self.get_state()
                 order = [seats[name] for name in snapshot['player_order']]
-                positions.append((PHASES[choice], seats[player.name], recorded, {
+                positions.append((phase, seats[player.name], recorded, {
                     'round': self.round_number, 'move_number': self.move_number,
                     'next_move_choice': choice, 'next_move_player': seats[player.name], 'next_move_options': legal,
                     'player_order': order,

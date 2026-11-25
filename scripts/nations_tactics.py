@@ -1,5 +1,6 @@
 """Check architect supply, Stability costs and planned worker transfers."""
 
+from nations_action_prompt import is_main_action
 from nations_placement import military_after_deploy
 from nations_advisors import advisor_adjustments
 
@@ -131,7 +132,7 @@ def gold_transfer_plans(match, player, replay_position, pass_score):
             released = replay_position(prefix + undeploy + '\n')
         except ValueError:
             continue
-        if released.next_move_player != player.name or released.next_move_choice != 'Which action?':
+        if released.next_move_player != player.name or not is_main_action(released.next_move_choice):
             continue
         mover = next(p for p in released.players if p.name == player.name)
         for target in mover.deploy_actions():
@@ -170,7 +171,7 @@ def gold_transfer_plans(match, player, replay_position, pass_score):
 
 def rank_actions(match, rows, replay_position, choose_benefit):
     """Keep learned preferences and adjust them for visible tactical constraints."""
-    if match.next_move_choice != 'Which action?' or not rows:
+    if not is_main_action(match.next_move_choice) or not rows:
         return rows
     player = next(p for p in match.players if p.name == match.next_move_player)
     adjustments = wonder_adjustments(match, player)

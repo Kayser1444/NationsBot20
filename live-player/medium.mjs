@@ -1,3 +1,4 @@
+import { policyPrompt } from './action-prompt.mjs';
 import cards from './card-index.json' with { type: 'json' };
 import { rankMoves } from './scorer.mjs';
 import { colonyRaces } from './position-reader.mjs';
@@ -348,7 +349,7 @@ export function predictMoves(state, username, model, { depth = 3, maxNodes = 300
       'Private building deployment is estimated at the leaf; bespoke card/nation hooks and new event resolution are not simulated.',
       'Rival replies are plausible threats, not a prediction of the human player.'], fallback: null };
   if (legal.length <= 1 || confirmations.includes(legal[0])) return { ...result, moves: easy, fallback: 'forced choice' };
-  if (!['Which action?', 'Draft which nation?', 'Take what for growth?'].includes(state.next_move_choice)) return { ...result, moves: easy, fallback: 'unmodelled subdecision uses Easy' };
+  if (!['Which action?', 'Draft which nation?', 'Take what for growth?'].includes(policyPrompt(state.next_move_choice))) return { ...result, moves: easy, fallback: 'unmodelled subdecision uses Easy' };
   const roots = legal.flatMap(move => predictAction(state, username, move).map(child => ({ ...child, move, nextSteps: child.steps, plan: [child.line], root: move })));
   if (!roots.length) return { ...result, moves: easy, fallback: 'no modelled transitions' };
   const base = leafValue(state, username), order = state.player_order ?? Object.keys(state.players);
@@ -392,7 +393,7 @@ export function predictMoves(state, username, model, { depth = 3, maxNodes = 300
     const completed = new Map();
     try {
       for (const root of roots) {
-        const continuation = search(root.state, ply, 0, state.next_move_choice === 'Which action?' ? rivals : earlyRivals);
+        const continuation = search(root.state, ply, 0, policyPrompt(state.next_move_choice) === 'Which action?' ? rivals : earlyRivals);
         const candidate = { ...root, value: continuation.value, plan: [root.line, ...continuation.plan], searchedDepth: ply };
         if (!completed.has(root.move) || candidate.value > completed.get(root.move).value) completed.set(root.move, candidate);
       }

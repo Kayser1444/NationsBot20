@@ -114,7 +114,7 @@ test('English library covers the card registry and separates printed image evide
   const tower = library.documents.find(doc => doc.id === 'cards/PcTw');
   assert.equal(tower.evidenceKind, 'implementation-description');
   assert.match(tower.text, /NOT verified printed card text/);
-  assert.ok(tower.text.includes(snapshot.commit));
+  assert.ok(tower.text.includes(raw.cards.find(entry => entry.id === 'PcTw').implementation.commit));
   assert.ok(library.documents.some(doc => doc.evidenceKind === 'metadata-only' && doc.text.includes('Do not infer an ability')));
 });
 
@@ -163,7 +163,7 @@ test('on-demand card lookup keeps the initial model context small and does not p
   assert.equal(c.catalogue().some(doc => doc.id === 'cards/PcTw'), false);
   assert.equal(c.search({ query: 'Stability' }).some(hit => hit.id.startsWith('cards/')), false);
   const card = c.read({ id: 'cards/PcTw', count: 100 });
-  assert.equal(card.implementationCommit, snapshot.commit);
+  assert.equal(card.implementationCommit, raw.cards.find(entry => entry.id === 'PcTw').implementation.commit);
   assert.notEqual(card.implementationCommit, c.commit);
   assert.match(card.excerpt, /Check the current code snapshot/);
   assert.ok(Buffer.byteLength(JSON.stringify(c.catalogue())) < 50000);

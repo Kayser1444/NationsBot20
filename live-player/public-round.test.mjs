@@ -31,6 +31,7 @@ test('public replay waits for the initial live position and restores contiguous 
 test('cold reconnect and continuous observation supply the same state and history to the scorer', async () => {
   const warm = new PublicRoundSession(), cold = new PublicRoundSession(), incomplete = new PublicRoundSession();
   const root = snapshot(12);
+  root.state.next_move_choice = 'Which action? (2 remaining)';
   warm.observe(snapshot(10));
   warm.observe(snapshot(11));
   for (const session of [warm, cold, incomplete]) session.observe(root);

@@ -6,6 +6,7 @@ from inspect import getsource
 from textwrap import dedent
 from time import perf_counter
 
+from nations_action_prompt import is_main_action, main_actions_remaining
 from nations import Match
 from nations.actions import ConfirmAction
 from nations.exceptions import GameOver, InvalidMove
@@ -13,7 +14,7 @@ from nations.phases import Phase
 from nations.resources import Resource, Resources
 from nations_lookahead import SearchBoundary, SearchBudget, lock_hidden_information
 from nations_microsearch import ADMIN, MAIN, COMPLETE, ranked_choices
-from nations_move_safety import safe_architect_options, with_move_options
+from nations_move_safety import with_move_options
 
 
 class PublicPositionUnavailable(SearchBoundary):
@@ -53,7 +54,7 @@ class PublicTurns:
             self.round = round_number
         elif number != self.number + 1 or not log.startswith(self.log):
             self.trusted = False
-        if self.actor and self.phase == 'Action Phase' and self.prompt == MAIN and number == self.number + 1:
+        if self.actor and self.phase == 'Action Phase' and is_main_action(self.prompt) and number == self.number + 1:
             lines = log[len(self.log):].splitlines()
             if not (lines and lines[0].startswith(self.actor + ' undeploys 1 [Worker] from ')):
                 self.consume(self.actor)
@@ -84,8 +85,11 @@ class PublicTurns:
             if not any(line.startswith(self.actor + ' undeploys 1 [Worker] from ') for line in lines):
                 self.paid.remove(self.actor)
         self.actor, self.prompt, self.phase = state['next_move_player'], state['next_move_choice'], state['phase']
-        if self.phase == 'Action Phase' and self.prompt == MAIN:
-            self.remaining[self.actor] = max(1, self.remaining.get(self.actor, 0))
+        if self.phase == 'Action Phase' and is_main_action(self.prompt):
+            if self.prompt == MAIN:
+                self.remaining[self.actor] = max(1, self.remaining.get(self.actor, 0))
+            else:
+                self.remaining[self.actor] = main_actions_remaining(self.prompt)
             if self.actor not in self.paid:
                 self.started[self.actor] = max(1, self.started.get(self.actor, 0))
         if self.phase == 'Action Phase' and self.prompt == COMPLETE:
@@ -143,7 +147,7 @@ def resources(values):
 
 
 def restore_round(state, turns, rules, choose):
-    if not turns.trusted or state['phase'] != 'Action Phase' or state['next_move_choice'] != MAIN:
+    if not turns.trusted or state['phase'] != 'Action Phase' or not is_main_action(state['next_move_choice']):
         raise PublicPositionUnavailable('unverified action context')
     roster = state['player_order']
     if len(roster) != 2 or not state['event']:
@@ -314,9 +318,8 @@ def public_rollout(state, turns, rules, prefix, predict, branch, deadline, *, ob
     def choose(prompt, options, _undo):
         if perf_counter() >= deadline:
             raise SearchBudget()
-        guarded = safe_architect_options(match, prompt, options)
-        legal = {str(option): option for option in guarded if str(option) not in ADMIN}
-        if not moves and (prompt != MAIN or match.next_move_player != owner
+        legal = {str(option): option for option in options if str(option) not in ADMIN}
+        if not moves and (not is_main_action(prompt) or match.next_move_player != owner
                           or set(legal) != set(state['next_move_options']) - ADMIN):
             raise PublicPositionUnavailable('root legal moves differ')
         if on_prompt is not None:
@@ -326,7 +329,7 @@ def public_rollout(state, turns, rules, prefix, predict, branch, deadline, *, ob
         elif len(legal) == 1:
             move = next(iter(legal))
         elif legal:
-            prediction = predict(with_move_options(observe(match), guarded))
+            prediction = predict(with_move_options(observe(match), options))
             order = ranked_choices(prompt, legal, prediction, all_moves=True)
             move = order[0]
             if match.next_move_player == owner:

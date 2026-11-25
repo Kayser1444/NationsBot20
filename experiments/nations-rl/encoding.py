@@ -19,7 +19,12 @@ TYPES = ('building', 'military', 'advisor', 'colony', 'wonder', 'natural-wonder'
          'battle', 'golden-age', 'war')
 SUPPORTED = frozenset(('Draft which nation?', 'Take what for growth?', 'Which action?',
                        'Which benefit?', 'Play which dynasty?'))
+_ACTION_HINT = re.compile(r'Which action\? \(([2-9]|[1-9]\d+) remaining\)')
 EXCLUDED = frozenset(('UNDO', 'Resign', 'Confirm', 'Confirm and complete the turn now'))
+
+
+def policy_prompt(prompt):
+    return 'Which action?' if isinstance(prompt, str) and _ACTION_HINT.fullmatch(prompt) else prompt
 
 
 @lru_cache(maxsize=50000)
@@ -77,7 +82,7 @@ class Encoder:
                    scaled(state.get('turmoil'), 5), scaled(state.get('war_value'), 15),
                    float(bool(state.get('war'))), float(order.index(who) == 0) if who in order else 0.,
                    scaled(len(legal_moves(state)), 20)]
-        tokens = [f"prompt/{state.get('next_move_choice')}", f"event/{state.get('event')}",
+        tokens = [f"prompt/{policy_prompt(state.get('next_move_choice'))}", f"event/{state.get('event')}",
                   f"war/{state.get('war')}"]
         seats = [name for name in order if name in players]
         seats.extend(name for name in players if name not in seats)
@@ -109,7 +114,7 @@ class Encoder:
 
     def action(self, state, move):
         player = state['players'][state['next_move_player']]
-        prompt = state['next_move_choice']
+        prompt = policy_prompt(state['next_move_choice'])
         cid, kind, price, deployed = None, 'other', 0, 0
         draft = state.get('nations', {}).get(move)
         if draft is not None:

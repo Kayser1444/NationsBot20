@@ -160,6 +160,10 @@ class Player:
     def replaceable_wonder_spaces(self):
         return len([space for space in self.wonders if space is None or not space.is_natural_wonder_or_extension()])
 
+    def can_hire_architect(self):
+        stages_remaining = self.incomplete_wonder_stages()
+        return stages_remaining > 1 or (stages_remaining == 1 and self.replaceable_wonder_spaces())
+
     def assign_nation(self, nation):
         self.nation = nation
         self.dynasties = nation.dynasties[:]
@@ -258,13 +262,15 @@ class Player:
         self.match.get_move(self, 'Confirm?', ('Confirm',))
 
     def can_buy_card(self, card, row, free=False):
-        if not free:
+        if free:
+            price = 0
+        else:
             price = row
             price += self.match.events.happen('extra card cost', self, card=card, check=True)
             price = self.match.events.happen('card discount', self, card=card, row=row, cost=price, check=True)
-            extra_payment = self.match.events.happen('extra payment', self, card=card, check=True)
-            if self.resources[Resource.GOLD] < price + extra_payment:
-                return False
+        extra_payment = self.match.events.happen('extra payment', self, card=card, check=True)
+        if self.resources[Resource.GOLD] < price + extra_payment:
+            return False
         if any(self.match.events.happen('may not buy card', self, card=card, check=True)):
             return False
         if card.is_colony():
@@ -533,16 +539,29 @@ class Player:
                 price = row
                 price += self.match.events.happen('extra card cost', self, card=card)
                 price = self.match.events.happen('card discount', self, card=card, row=row, cost=price)
-                extra_payment = self.match.events.happen('extra payment', self, card=card)
-                if self.resources[Resource.GOLD] < price + extra_payment:
-                    raise InvalidMove(f'Not enough [Gold] to buy "{card}".')
+            extra_payment = self.match.events.happen('extra payment', self, card=card)
+            if self.resources[Resource.GOLD] < price + extra_payment:
+                raise InvalidMove(f'Not enough [Gold] to buy "{card}".')
+            if not free:
                 self.match.log(f'{self} pays {price} [Gold] to buy "{card}".')
                 self.resources[Resource.GOLD] -= price
-                if extra_payment:
-                    self.match.events.happen('make extra payment', self, card=card)
+            if extra_payment:
+                self.match.events.happen('make extra payment', self, card=card)
+            price += extra_payment
         else:
             buy_with = self.match.events.happen('buy with', self, card=card)
-            price = self.match.events.happen('buy from player', self, card=card)[0]
+            cards_prices = self.match.events.happen('card price', self, card=card)
+            if len(cards_prices) == 1:
+                (activated_card, price) = cards_prices[0]
+            else:
+                buy_options = [effect_card for (effect_card, effect_price) in cards_prices]
+                choice = self.match.get_move(self, f'Activate which effect to buy "{card}"?', buy_options)
+                for (effect_card, effect_price) in cards_prices:
+                    if choice is effect_card:
+                        activated_card = effect_card
+                        price = effect_price
+                        break
+            self.match.events.happen('pay for card', self, card=card, activated=activated_card, price=price)
             if buy_with:
                 buy_with = buy_with[0]
             else:
@@ -767,7 +786,10 @@ class Player:
             possible_actions.append(PassAction())
             if len(self.match.players) == 2:
                 possible_actions.append(ResignAction())
-            action = self.match.get_move(self, 'Which action?', possible_actions)
+            multiple_remaining = ''
+            if self.remaining_main_actions > 1:
+                multiple_remaining = f' ({self.remaining_main_actions} remaining)'
+            action = self.match.get_move(self, f'Which action?{multiple_remaining}', possible_actions)
         self.take_action(action)
         if action.action_type is ActionType.PASS:
             self.remaining_main_actions = 0
@@ -955,7 +977,7 @@ class Player:
                     self.match.log(f'{self} loses 1 [Point] for negative {resource_type}.')
                     self.points -= 1
                     if lost_to_war:
-                        self.match.events.happen('lost to war', self, points=1)
+                        self.match.events.happen('lost to war', self, points=Resources({resource_type: 1}))
                     self.resource_deficit_points[resource_type] = -1
                 elif self.resource_deficit_points[resource_type]:
                     self.match.log(f'{self} already lost a [Point] for negative {resource_type}.')
@@ -978,7 +1000,7 @@ class Player:
                     self.match.log(f'{self} loses 1 [Point] for negative [Books].')
                     self.points -= 1
                     if lost_to_war:
-                        self.match.events.happen('lost to war', self, points=1)
+                        self.match.events.happen('lost to war', self, points=Resources({Resource.BOOKS: 1}))
                     self.resource_deficit_points[Resource.BOOKS] = -1
                 elif self.resource_deficit_points[Resource.BOOKS]:
                     if not mentioned_negative_books:
@@ -1066,7 +1088,7 @@ class Player:
                     if self.points > 0:
                         self.match.log(f'{self} loses 1 [Point] for being defeated in the "{self.match.war}".')
                         self.points -= 1
-                        self.match.events.happen('lost to war', self, points=1)
+                        self.match.events.happen('lost to war', self, points=Resources({Resource.MILITARY: 1}))
                     else:
                         self.match.log(f'{self} is spared the [Point] loss from being defeated in the "{self.match.war}".')
                 resource_loss_amount = penalty.total()

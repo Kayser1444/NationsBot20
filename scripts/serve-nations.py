@@ -14,6 +14,7 @@ from threading import Lock
 from time import perf_counter
 from urllib.parse import quote, urlsplit
 
+from nations_action_prompt import is_main_action
 from nations_policy import SharedScorer
 from nations_placement import rank_placements
 from nations_human_player import choose_human_move, human_prediction
@@ -110,7 +111,7 @@ class LocalGame:
                 label_card = None
                 legal = [str(option) for option in options]
                 who = match.current_player.name
-                if choice == 'Which action?':
+                if is_main_action(choice):
                     planned.pop(who,None)
                 steps = planned.get(who,[])
                 if self.difficulty == 'human':

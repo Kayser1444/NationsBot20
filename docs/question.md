@@ -126,7 +126,7 @@ English summary instead of displaying outdated text.
 The packaged seed in `data/question/tabony-snapshot.json` preserves the Python
 source, LICENSE, copyright notice, commit ID and per-file SHA-256 hashes from the
 unmodified local `Logitude/nations` clone at
-`9c344205b1802c9583d20c749b89a4cfa52516f7`. This JSON is reference data, never executed.
+`11f2554b58b647a6d517c810e473d769c349daff`. This JSON is reference data, never executed.
 
 A separate updater attempts a fetch at startup when due, then checks the schedule
 hourly. A persisted attempt timestamp limits it to once per 24 hours, including

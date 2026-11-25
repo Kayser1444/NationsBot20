@@ -1,3 +1,4 @@
+import { policyPrompt } from './action-prompt.mjs';
 import { blake2b } from '@noble/hashes/blake2.js';
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync, statSync } from 'node:fs';
@@ -65,7 +66,7 @@ function observation(state, moves, playerCount, { card, identity } = standardFea
   const seats = [...order.slice(pivot), ...order.slice(0, pivot)];
   const numbers = [scaled(state.round, 8), scaled(state.architects, 5), scaled(state.turmoil, 5),
     scaled(state.war_value, 15), Number(Boolean(state.war)), Number(state.player_order?.[0] === actor), scaled(moves.length, 20)];
-  const tokens = [`prompt/${state.next_move_choice}`, `event/${tokenText(state.event)}`, `war/${tokenText(state.war)}`];
+  const tokens = [`prompt/${policyPrompt(state.next_move_choice)}`, `event/${tokenText(state.event)}`, `war/${tokenText(state.war)}`];
   const extra = [];
   for (const [index, name] of seats.entries()) {
     const role = index === 0 ? 'self' : 'rival';
@@ -88,7 +89,7 @@ function observation(state, moves, playerCount, { card, identity } = standardFea
 
 function action(state, move, { card, identity, moveToken } = standardFeatures) {
   const player = state.players[state.next_move_player];
-  const prompt = state.next_move_choice;
+  const prompt = policyPrompt(state.next_move_choice);
   const draft = Object.hasOwn(state.nations ?? {}, move) ? state.nations[move] : null;
   let kind = 'other', cid, price = 0;
   if (draft) kind = 'draft';
@@ -172,7 +173,7 @@ export function decodeExperimentalModel(bytes, expectedId) {
     id, label: `Experimental RL · ${playerCount === 4 ? '4 players · ' : ''}${header.games.toLocaleString('en-US')} games · ${hash.slice(0, 8)}`,
     hash, checkpointHash: header.checkpoint_sha256, playerCount,
     rank(state) {
-      if (!(prompts.has(state.next_move_choice) || format.mixed && mixedPlacement(state.next_move_choice)) ||
+      if (!(prompts.has(policyPrompt(state.next_move_choice)) || format.mixed && mixedPlacement(state.next_move_choice)) ||
           Object.keys(state.players ?? {}).length !== playerCount ||
           !Object.hasOwn(state.players, state.next_move_player) || state.next_move_options?.some(option => option.startsWith('Confirm'))) return null;
       const choices = state.next_move_options?.filter(option => !excluded.has(option)) ?? [];

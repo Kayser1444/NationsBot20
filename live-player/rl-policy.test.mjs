@@ -40,6 +40,7 @@ test('checkpoint checksum, dimensions, feature compatibility and legal action ma
   const state = { next_move_player: 'a', next_move_choice: 'Which action?', players: { a: {}, b: {} },
     player_order: ['a', 'b'], next_move_options: ['Pass', 'UNDO', 'Resign'] };
   assert.deepEqual(model.rank(state), { moves: [{ move: 'Pass', score: 0 }], winProbability: 0.5 });
+  assert.deepEqual(model.rank({ ...state, next_move_choice: 'Which action? (2 remaining)' }), model.rank(state));
   const configured = { ...modelForSettings({ ...initialSettings, twoPlayerModel: model.id }), experimental: model };
   assert.equal(chooseMove(state, 'a', 'b', configured), 'Pass');
   assert.equal(chooseMove({ ...state, next_move_choice: 'Confirm?', next_move_options: ['Confirm'] }, 'a', 'b', configured), 'Confirm');

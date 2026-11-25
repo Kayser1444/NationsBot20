@@ -2,7 +2,6 @@
 from dataclasses import dataclass
 from time import perf_counter
 
-from nations_move_safety import safe_architect_options, with_move_options
 
 
 class SearchBoundary(Exception):
@@ -67,24 +66,21 @@ def branch(root, root_state, path, deadline):
     progress = 0
     choices_taken = 0
     entered = False
-    decision_options = None
 
     def choose(prompt, options, _undo):
-        nonlocal progress, choices_taken, entered, decision_options
+        nonlocal progress, choices_taken, entered
         if perf_counter() >= deadline:
             raise SearchBudget()
         if match.invalid_move:
             raise SearchBoundary('engine rejected a branch move')
-        decision_options = safe_architect_options(match, prompt, options)
         if not entered:
             if (match.move_number != root_state['move_number'] or prompt != root_state['next_move_choice']
                     or match.next_move_player != root_state['next_move_player']
-                    or tuple(root_state['next_move_options']) not in (
-                        tuple(map(str, options)), tuple(map(str, decision_options)))):
+                    or tuple(root_state['next_move_options']) != tuple(map(str, options))):
                 raise ValueError('The replay prefix did not reproduce the current decision.')
             lock_hidden_information(match)
             entered = True
-        by_name = {str(option): option for option in decision_options if str(option) not in ('UNDO', 'Resign')}
+        by_name = {str(option): option for option in options if str(option) not in ('UNDO', 'Resign')}
         if progress < len(path) and (progress == 0 or len(by_name) != 1):
             selected = path[progress]
             progress += 1
@@ -119,7 +115,7 @@ def branch(root, root_state, path, deadline):
                     tuple((p.name, p.passed, getattr(p, 'turn_number', None), getattr(p, 'action_number', None),
                            getattr(p, 'remaining_main_actions', None))
                           for p in sorted(match.players, key=lambda player: player.name)))
-        return Transition(position=with_move_options(match.get_state(), decision_options), frontier=frontier)
+        return Transition(position=match.get_state(), frontier=frontier)
     except SearchBoundary as boundary:
         return Transition(stop=str(boundary))
     if not entered or progress != len(path) or not match.game_over or match.phase.name != 'SCORING':
@@ -139,8 +135,6 @@ def explore(match, evaluate, *, depth=3, candidates=4, width=2, max_nodes=60, se
     owner = state['next_move_player']
     if len(state['players']) != 2 or state['game_over'] or not owner:
         return {'unavailable': 'Predictive analysis needs an active two-player decision.'}
-    state = with_move_options(state, safe_architect_options(match, state['next_move_choice'],
-                                                          state['next_move_options']))
     legal = legal_choices(state)
     if len(legal) < 2:
         return {'unavailable': 'There is no strategic choice at this decision.'}

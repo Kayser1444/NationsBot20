@@ -7,12 +7,12 @@ from itertools import count
 from sys import _getframe
 from time import perf_counter
 
+from nations_action_prompt import MAIN, is_main_action
 from nations_lookahead import SearchBoundary, SearchBudget, lock_hidden_information
-from nations_move_safety import safe_architect_options, with_move_options
+from nations_move_safety import with_move_options
 
 
 ADMIN = {'UNDO', 'Resign'}
-MAIN = 'Which action?'
 COMPLETE = 'Complete the turn?'
 RESOLVED_HANDOFFS = {'opponent turn', 'round resolution'}
 HANDOFFS = {
@@ -99,13 +99,13 @@ def fingerprint(match, owner, context):
 
 def ordinary_prompt(match, prompt):
     """Exclude prompts with a pending card or event continuation on the engine stack."""
-    if prompt not in (MAIN, COMPLETE):
+    if not (is_main_action(prompt) or prompt == COMPLETE):
         return False
     frame = _getframe(1)
     while frame is not None:
         if frame.f_code.co_name == 'get_move' and frame.f_locals.get('self') is match:
             caller = frame.f_back
-            if prompt == MAIN and caller.f_code.co_name == 'take_one_action':
+            if is_main_action(prompt) and caller.f_code.co_name == 'take_one_action':
                 caller = caller.f_back
             return caller.f_code.co_name == 'take_turn'
         frame = frame.f_back
@@ -182,24 +182,23 @@ def trace(replay, root_state, path, deadline, *, resolve_round=None, pre_move=Fa
         nonlocal entered, offset, starting_actions
         check()
         actor = match.current_player
-        guarded = safe_architect_options(match, prompt, options)
         if not entered:
             if (match.move_number != root_state['move_number'] or actor.name != owner
                     or prompt != root_state['next_move_choice']
-                    or tuple(root_state['next_move_options']) not in (tuple(map(str, options)), tuple(map(str, guarded)))):
+                    or tuple(root_state['next_move_options']) != tuple(map(str, options))):
                 raise ValueError('Current replay failed to reproduce the root prompt')
             lock_hidden_information(match)
             starting_actions = actor.action_number
             entered = True
-        legal = {str(option): option for option in guarded if str(option) not in ADMIN}
+        legal = {str(option): option for option in options if str(option) not in ADMIN}
         if not legal:
             raise SearchBoundary('no legal choice')
         if projecting:
-            if prompt in (MAIN, COMPLETE):
+            if (is_main_action(prompt) or prompt == COMPLETE):
                 raise SearchBoundary('extra turn during resolution')
             if len(legal) == 1:
                 return next(iter(legal.values()))
-            selected = resolve_round(with_move_options(observation(), guarded), tuple(legal))
+            selected = resolve_round(with_move_options(observation(), options), tuple(legal))
             if selected not in legal:
                 raise ValueError('Round forecast selected an illegal choice')
             return legal[selected]
@@ -217,7 +216,7 @@ def trace(replay, root_state, path, deadline, *, resolve_round=None, pre_move=Fa
                 raise ValueError('Search line no longer legal')
             offset += 1
         else:
-            position = with_move_options(observation(), guarded if pre_move else allowed)
+            position = with_move_options(observation(), options if pre_move else allowed)
             key, stock = fingerprint(match, owner, prompt) if ordinary_prompt(match, prompt) else (None, ())
             remaining = {p.name: p.remaining_main_actions for p in match.players} if capture_handoff else None
             raise InspectPosition(Position(position, allowed, actor.action_number - starting_actions,
@@ -280,7 +279,7 @@ def search(match, state, options, predict, direct, *, max_depth=3, max_nodes=40,
                             observe_leaf(path, position.boundary, value)
                         leaves.append((node, position.boundary, value, path))
                     continue
-                if position.state['next_move_choice'] == MAIN and position.main_actions >= max_depth:
+                if is_main_action(position.state['next_move_choice']) and position.main_actions >= max_depth:
                     counts['depth limit'] += 1
                     continue
                 if position.key:
@@ -290,7 +289,7 @@ def search(match, state, options, predict, direct, *, max_depth=3, max_nodes=40,
                         continue
                     stocks.append(position.stock)
                 choices = position.choices
-                if position.state['next_move_choice'] == MAIN or len(choices) > 6:
+                if is_main_action(position.state['next_move_choice']) or len(choices) > 6:
                     ranked = predict(position.state)['moves']
                     choices = tuple(row['move'] for row in ranked if row['move'] in choices)[:2]
                 pending[root].extend(path + (move,) for move in reversed(choices))
@@ -323,7 +322,7 @@ def ranked_choices(prompt, legal, prediction, *, all_moves=False, width=2):
     if aliases:
         legal = tuple(move for move in legal if move not in aliases)
     ranked = tuple(row['move'] for row in prediction['moves'] if row['move'] in legal)
-    if not all_moves and (prompt == MAIN or len(legal) > 6):
+    if not all_moves and (is_main_action(prompt) or len(legal) > 6):
         return ranked[:width]
     return ranked + tuple(move for move in legal if move not in ranked)
 
@@ -559,7 +558,7 @@ def search_best_first(match, state, options, predict, direct, *,
         prompt = position.state['next_move_choice']
         if value_score is None:
             score = prediction['winProbability']
-        elif prompt == MAIN:
+        elif is_main_action(prompt):
             owner = state['next_move_player']
             score = value_score(position.state, owner, owner, position.remaining_main_actions)
         else:

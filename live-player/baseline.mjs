@@ -1,3 +1,4 @@
+import { isMainAction } from './action-prompt.mjs';
 import cards from './card-index.json' with { type: 'json' };
 import rules from './predictor-rules.json' with { type: 'json' };
 import learned from './human-baseline.json' with { type: 'json' };
@@ -213,7 +214,7 @@ export function rankBaselineMoves(state, username = state.next_move_player, poli
     if (gold) return learnedMoves.map(row => dynastyId(state.players[username], row.move) === 'Ps_SE'
       ? { ...row, score: Math.min(row.score, gold.score - .01), reasons: ['No Gold turmoil remains before game end for Sassanid to improve.'] } : row).sort((a, b) => b.score - a.score);
   }
-  if (state.next_move_choice !== 'Which action?') return learnedMoves;
+  if (!isMainAction(state.next_move_choice)) return learnedMoves;
   const player = state.players[username], passScore = learnedMoves.find(row => row.move === 'Pass')?.score;
   const transfers = workerTransfers(state, player, passScore, username);
   const advisors = advisorMoves(state, player, username, learnedMoves, passScore);
@@ -243,7 +244,7 @@ export function rankBaselineMoves(state, username = state.next_move_player, poli
 }
 
 export function chooseBaselineMove(state, context = {}) {
-  if (context.transfer && state.next_move_choice === 'Which action?') {
+  if (context.transfer && isMainAction(state.next_move_choice)) {
     const planned = context.transfer;
     context.transfer = null;
     if (planned.decision === state.move_number && state.next_move_options.includes(planned.move)) return planned.move;

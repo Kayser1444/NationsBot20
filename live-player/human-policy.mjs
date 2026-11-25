@@ -1,3 +1,4 @@
+import { policyPrompt } from './action-prompt.mjs';
 import cards from './card-index.json' with { type: 'json' };
 import { rankMoves } from './scorer.mjs';
 import { currentSpecial, dynastyId, dynastyEffects } from './dynasty-effects.mjs';
@@ -28,7 +29,7 @@ function describe(state, player, move) {
 // Only the current legal list and public position enter these vectors. The
 // corpus's match ID, recorded choice and final rank never enter this function.
 export function humanCandidates(state, easyModel) {
-  if (!policyChoices.has(state.next_move_choice)) return [];
+  if (!policyChoices.has(policyPrompt(state.next_move_choice))) return [];
   const who = state.next_move_player;
   const player = state.players[who];
   const rivals = Object.entries(state.players).filter(([name]) => name !== who).map(([, p]) => p);

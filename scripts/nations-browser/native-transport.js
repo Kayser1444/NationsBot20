@@ -43,7 +43,7 @@
     el('save-local').href=game.view.replay_available?'/api/replay':'/api/snapshot';el('save-local').textContent=game.view.replay_available?'Save replay':'Save position';
     el('previous-position').disabled=game.move_number<=(game.view.min_position??0);
     el('next-position').disabled=game.move_number>=game.view.max_position;
-    const last=game.bot_decisions?.findLast(row=>row.difficulty===difficulty&&row.choice==='Which action?')??game.bot_decisions?.at(-1);
+    const last=game.bot_decisions?.findLast(row=>row.difficulty===difficulty&&/^Which action\?(?: \(\d+ remaining\))?$/.test(row.choice))??game.bot_decisions?.at(-1);
     el('local-timing').textContent=last?`Last ${modeNames[last.difficulty]} decision: ${last.duration_ms<100?`${last.duration_ms.toFixed(1)} ms`:`${(last.duration_ms/1000).toFixed(2)} s`} · ${last.label}${last.search?.completedDepth?` · ${last.search.completedDepth} levels searched`:''}`:'';
     el('local-error').textContent='';
     const message={players:game.player_order,accepted:game.player_order,growth_resources:Object.fromEntries(game.player_order.map(name=>[name,2])),

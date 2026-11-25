@@ -4,7 +4,7 @@ import re
 
 import numpy as np
 
-from encoding import Encoder, RESOURCES, TYPES, amount
+from encoding import Encoder, RESOURCES, TYPES, amount, policy_prompt
 
 
 SCHEMA = 'current-position-v1'
@@ -80,7 +80,7 @@ class PositionEncoder(Encoder):
         actor = state['next_move_player']
         opponent = next(name for name in state['players'] if name != actor)
         own, rival = (state['players'][name] for name in (actor, opponent))
-        prompt = state['next_move_choice']
+        prompt = policy_prompt(state['next_move_choice'])
         war = self.cards.get(state.get('war'), {})
         threshold = state.get('war_value') or 0
         board = [

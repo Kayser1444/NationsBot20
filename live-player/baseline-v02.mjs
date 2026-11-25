@@ -1,3 +1,4 @@
+import { isMainAction } from './action-prompt.mjs';
 import cards from './card-index.json' with { type: 'json' };
 
 const resources = ['Food', 'Gold', 'Stone', 'Books'];
@@ -76,7 +77,7 @@ export function chooseMove(state, username, opponent) {
       })
       .sort((a, b) => b.score - a.score)[0].option;
   }
-  if (state.next_move_choice !== 'Which action?') return options[0];
+  if (!isMainAction(state.next_move_choice)) return options[0];
 
   const military = amount(player.resources, 'Military');
   const stability = amount(player.resources, 'Stability');

@@ -1,3 +1,4 @@
+import { isMainAction } from './action-prompt.mjs';
 import WebSocket from 'ws';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -113,7 +114,7 @@ export class PublicRoundSession {
   async decide(matchId, state, rules, { recover = readPublicHistory, score = runPublicRound } = {}) {
     const start = state.round_starts?.[state.round];
     if (!this.previous || this.previous.state.move_number !== state.move_number ||
-        !Number.isSafeInteger(start) || state.phase !== 'Action Phase' || state.next_move_choice !== 'Which action?' ||
+        !Number.isSafeInteger(start) || state.phase !== 'Action Phase' || !isMainAction(state.next_move_choice) ||
         state.next_move_options.length < 2 || !rules || !state.growth_allowances || state.move_number - start > maxDecisions) {
       return {move: null, compared: false, reason: 'ineligible'};
     }

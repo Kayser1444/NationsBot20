@@ -8,7 +8,7 @@ from time import perf_counter
 
 from nations_lookahead import SearchBoundary, SearchBudget, lock_hidden_information
 from nations_microsearch import ADMIN, ranked_choices
-from nations_move_safety import safe_architect_options, with_move_options
+from nations_move_safety import with_move_options
 
 
 class RoundSettled(Exception):
@@ -106,11 +106,10 @@ def rollout_round(replay, root, prefix, predict, branch, deadline, *, observe):
         nonlocal entered
         check()
         actor = match.current_player.name
-        guarded = safe_architect_options(match, prompt, options)
-        legal = {str(option): option for option in guarded if str(option) not in ADMIN}
+        legal = {str(option): option for option in options if str(option) not in ADMIN}
         if not entered:
             if ((match.move_number, actor, prompt) != (root['move_number'], owner, root['next_move_choice'])
-                    or tuple(root['next_move_options']) not in (tuple(map(str, options)), tuple(map(str, guarded)))):
+                    or tuple(root['next_move_options']) != tuple(map(str, options))):
                 raise ValueError('Replay did not reproduce the round search root')
             # The catalogue and all revealed cards are public. Sort to remove
             # the actual deck ordering before sampling with a public seed.
@@ -130,7 +129,7 @@ def rollout_round(replay, root, prefix, predict, branch, deadline, *, observe):
         elif len(legal) == 1:
             move = next(iter(legal))
         else:
-            prediction = predict(with_move_options(observe(match), guarded))
+            prediction = predict(with_move_options(observe(match), options))
             choices = ranked_choices(prompt, legal, prediction, all_moves=True)
             if not choices:
                 raise SearchBoundary('no legal rollout choice')
