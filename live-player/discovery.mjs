@@ -56,8 +56,8 @@ export function acceptInvitation(match, config, session, Socket = WebSocket) {
   return respondToInvitation(match, config, session, Socket, 'acceptance');
 }
 
-export function declineInvitation(match, config, session, Socket = WebSocket) {
-  return respondToInvitation(match, config, session, Socket, 'decline');
+export function notifyPendingInvitation(match, config, session, Socket = WebSocket) {
+  return respondToInvitation(match, config, session, Socket, 'notice');
 }
 
 function respondToInvitation(match, config, session, Socket, action) {
@@ -65,7 +65,7 @@ function respondToInvitation(match, config, session, Socket, action) {
     const socket = new Socket(`wss://games.tabony.net/ws/nations/${match.id}/`, {
       origin, headers: { Cookie: session }, handshakeTimeout: 12000, maxPayload: 4 * 1024 * 1024,
     });
-    let sent = false, settled = false, live, chatSent = false, chatConfirmed = false;
+    let sent = false, settled = false, live, historyReceived = false, chatConfirmed = false;
     const finish = (error, result) => {
       if (settled) return;
       settled = true;
@@ -79,41 +79,39 @@ function respondToInvitation(match, config, session, Socket, action) {
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => finish(new Error('Invitation connection failed.')));
     socket.on('close', () => { if (!settled) finish(new Error('Invitation connection closed before confirmation.')); });
-    const matchesChat = chat => chat?.player === config.username && chat.message === config.declineMessage;
-    function decline() {
-      if (!live || sent) return;
+    const matchesChat = chat => chat?.player === config.username && chat.message === config.message;
+    function notify() {
+      if (!live || !historyReceived) return;
       if (!live.players.includes(config.username) || live.state || live.accepted.includes(config.username) ||
-          !config.shouldDecline({ ...match, players: live.players })) {
+          !config.shouldNotify({ ...match, players: live.players })) {
         finish(null, false);
         return;
       }
-      if (config.declineMessage && !chatConfirmed) {
-        if (!chatSent) { chatSent = true; socket.send(JSON.stringify({ chat: config.declineMessage })); }
-        return;
+      if (chatConfirmed) finish(null, true);
+      else if (!sent) {
+        sent = true;
+        socket.send(JSON.stringify({ chat: config.message }));
       }
-      sent = true;
-      socket.send(JSON.stringify({ decline: config.username }));
     }
     socket.on('message', bytes => {
       if (settled) return;
       try {
         const message = JSON.parse(bytes);
-        if (action === 'decline' && config.declineMessage &&
-            (matchesChat(message.chat) || (Array.isArray(message.chat_log) && message.chat_log.some(matchesChat)))) {
-          chatConfirmed = true;
-          decline();
+        if (action === 'notice') {
+          if (Array.isArray(message.chat_log)) {
+            historyReceived = true;
+            chatConfirmed ||= message.chat_log.some(matchesChat);
+          }
+          if (matchesChat(message.chat)) chatConfirmed = true;
+          if (Array.isArray(message.players) && message.replaying === false) {
+            if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
+            live = message;
+          }
+          notify();
+          return;
         }
         if (!Array.isArray(message.players) || message.replaying !== false) return;
         if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
-        if (action === 'decline') {
-          if (!message.players.includes(config.username)) {
-            finish(null, sent);
-            return;
-          }
-          live = message;
-          decline();
-          return;
-        }
         if (message.players.length !== match.players.length || new Set(message.players).size !== match.players.length ||
             !message.players.every(name => match.players.includes(name)) ||
             !(config.authorize?.(match) ?? isAuthorized(match, config.settings(), config.username))) throw new Error('Invitation participants changed. Poll again.');

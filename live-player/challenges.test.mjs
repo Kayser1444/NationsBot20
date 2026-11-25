@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { challengeOptions, challengeStore } from './challenges.mjs';
-import { declineInvitation, parseMyMatches } from './discovery.mjs';
+import { notifyPendingInvitation, parseMyMatches } from './discovery.mjs';
 import { createPlayerController } from './service.mjs';
 import { initialSettings, settingsStore } from './settings.mjs';
 
@@ -90,36 +90,46 @@ test('one Discord user cannot reserve another challenge by changing Tabony usern
   assert.ok(store.reserve(bot, 'AnotherPlayer', initiator).entry);
 });
 
-test('direct invitations authorize a new player and explain active-game rejections', async t => {
+test('direct invitations stay pending with a chat notice until the active challenge finishes', async t => {
   const directory = fixture(t), challenges = challengeStore(directory);
   const store = settingsStore(directory);
   store.save({ ...initialSettings, playMode: 'open' }, 0);
   const next = { ...game, id: '124' };
   let matches = [game], connected;
-  const declined = [];
+  const notices = [];
+  const accepted = [];
   const controller = createPlayerController({
     config: { username: bot, play: true, challenges },
     store,
     discover: async () => [...matches],
-    accept: async (_, controls) => {
+    accept: async (match, controls) => {
       assert.equal(controls.beforeJoin({ accepted: [] }), false);
       assert.equal(controls.beforeJoin({ accepted: [player] }), true);
+      accepted.push(match.id);
       return { lobbyStarted: true };
     },
-    decline: async (match, { declineMessage, shouldDecline }) => {
-      assert.ok(shouldDecline(match));
-      declined.push(declineMessage); return true;
+    notifyInvitation: async (match, { message, shouldNotify }) => {
+      assert.ok(shouldNotify(match));
+      notices.push(message); return true;
     },
     connect: async controls => { connected = controls.canPlay(); return true; },
   });
   t.after(() => controller.close());
   await controller.poll();
   assert.deepEqual(challenges.check(player), { result: 'active', matchId: game.id });
+  matches = [next];
+  await controller.poll();
+  await controller.poll();
+  assert.deepEqual(accepted, [game.id]);
+  assert.equal(notices.length, 1);
+  assert.match(notices[0], /already have a NationsBot challenge/);
+  assert.equal(controller.status().games.find(match => match.id === next.id).invitation, true);
   matches = [next, { ...game, invitation: false, section: 'Your turn:' }];
   await controller.poll();
-  assert.match(declined[0], /already have a NationsBot challenge/);
+  await controller.poll();
   assert.equal(connected, true);
-  assert.deepEqual(challenges.check(player), {});
+  assert.deepEqual(accepted, [game.id, next.id]);
+  assert.deepEqual(challenges.check(player), { result: 'active', matchId: next.id });
 });
 
 test('play modes control discovery and admission to direct challenges', async t => {
@@ -127,11 +137,11 @@ test('play modes control discovery and admission to direct challenges', async t 
   const store = settingsStore(directory);
   store.save({ ...initialSettings, playMode: 'closed' }, 0);
   let discoveryCalls = 0, joined = 0;
-  const rejections = [];
+  const notices = [];
   const controller = createPlayerController({
     config: { username: bot, play: true, challenges }, store,
     discover: async () => { discoveryCalls++; return [game]; },
-    decline: async (_, controls) => { rejections.push(controls.declineMessage); return true; },
+    notifyInvitation: async (_, controls) => { notices.push(controls.message); return true; },
     accept: async (_, controls) => {
       assert.equal(controls.beforeJoin({ accepted: [player] }), true);
       joined++;
@@ -147,7 +157,7 @@ test('play modes control discovery and admission to direct challenges', async t 
   controller.save({ ...initialSettings, playMode: 'invite-only' }, 1);
   await controller.poll();
   assert.equal(discoveryCalls, 1);
-  assert.match(rejections[0], /invite only/);
+  assert.match(notices[0], /invite only/);
   assert.equal(joined, 0);
   controller.save({ ...initialSettings, playMode: 'open' }, 2);
   await controller.poll();
@@ -155,7 +165,7 @@ test('play modes control discovery and admission to direct challenges', async t 
   assert.equal(joined, 1);
 });
 
-test('declining waits for the bot’s own chat echo, and retry uses persisted chat history', async () => {
+test('a pending invitation notice waits for the bot’s own chat echo and uses persisted chat history', async () => {
   let socket;
   class FakeSocket extends EventEmitter {
     sent = [];
@@ -164,26 +174,32 @@ test('declining waits for the bot’s own chat echo, and retry uses persisted ch
     close() {}
   }
   const text = 'Finish your current NationsBot challenge first.';
-  const controls = { username: bot, shouldDecline: () => true, declineMessage: text };
+  const controls = { username: bot, shouldNotify: () => true, message: text };
   const update = { players: game.players, accepted: [player], replaying: false };
   const emit = message => socket.emit('message', JSON.stringify(message));
   const echo = { player: bot, message: text };
-  const done = declineInvitation(game, controls, 'test-session', FakeSocket);
+  let confirmed = false;
+  const done = notifyPendingInvitation(game, controls, 'test-session', FakeSocket).then(result => {
+    confirmed = true;
+    return result;
+  });
   emit(update);
+  assert.deepEqual(socket.sent, []);
+  emit({ chat_log: [] });
   emit({ chat: { ...echo, player } });
   emit(update);
   assert.deepEqual(socket.sent, [{ chat: text }]);
+  await Promise.resolve();
+  assert.equal(confirmed, false);
   emit({ chat: echo });
-  assert.deepEqual(socket.sent, [{ chat: text }, { decline: bot }]);
-  emit({ ...update, players: [player] });
   assert.equal(await done, true);
+  assert.deepEqual(socket.sent, [{ chat: text }]);
 
-  const retried = declineInvitation(game, controls, 'test-session', FakeSocket);
+  const retried = notifyPendingInvitation(game, controls, 'test-session', FakeSocket);
   emit({ chat_log: [echo] });
   emit(update);
-  assert.deepEqual(socket.sent, [{ decline: bot }]);
-  emit({ ...update, players: [player] });
   assert.equal(await retried, true);
+  assert.deepEqual(socket.sent, []);
 });
 
 test('archived completion results can unlock a challenge after restart', () => {

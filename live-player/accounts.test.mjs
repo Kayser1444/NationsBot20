@@ -124,7 +124,7 @@ test('takeover discovery includes old games and accepts only approved ongoing se
       assert.equal(config.includeArchive, true);
       const controller = createPlayerController({ config, store, experiments, discover,
         accept: () => assert.fail('Takeover seats must already be in progress.'),
-        decline: () => { connected.push('unexpected decline'); },
+        notifyInvitation: () => { connected.push('unexpected invitation notice'); },
         connect: async options => { connected.push(options.matchId); return true; },
       });
       return { controller, close: () => controller.close() };

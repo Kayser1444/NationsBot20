@@ -5,8 +5,11 @@ link on its home page. It reuses Discord owner sign-in, HTTPS, the owner session
 and CSRF checks. Game access is a separate list of exact Tabony account names,
 initially `Kayser`. A regular bot can play when at least one other participant
 is on the list. Other seats can be held by unlisted players or other bots.
-When playing is enabled, regular bots decline invitations with no eligible
-participant, even if automatic acceptance is off or the bot is at capacity.
+When playing is enabled, regular bots keep invitations pending if no
+participant is eligible, the player count is disabled, or the bot is at
+capacity. The bot explains the reason in the match chat and rechecks the
+invitation on later polls. It accepts once eligible if automatic acceptance
+is enabled.
 
 The service-wide **Play mode** is **Closed**, **Invite only**, or **Open**.
 Closed stops Tabony discovery, game connections and new Discord challenges.
@@ -194,8 +197,10 @@ draft size, weighted card draw and the Korea and Lincoln rules. Titles look like
 `Kayser vs. NationsBot20 · 2026-11-21 14:57:00 UTC`.
 
 You can also create a 1v1 match in Tabony and invite the beta bot account.
-Those games use the settings chosen by their creator. If an invite is rejected,
-the reason is posted in the match chat before the bot removes its seat.
+Those games use the settings chosen by their creator. If a restriction such as
+an unfinished challenge or the daily limit prevents acceptance, the bot posts
+the reason in the match chat and keeps its seat reserved. It automatically
+accepts the pending invitation once the restriction clears.
 Across both methods, each Tabony username can have one unfinished challenge
 and start five challenges per UTC calendar day. Each Discord account can also
 have one unfinished challenge started through `/challenge`, even if it supplies

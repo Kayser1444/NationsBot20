@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import WebSocket from 'ws';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { settingsStore, modelForSettings, modelChoices } from './settings.mjs';
-import { discoverAccountMatches, hasEligiblePlayer, isAuthorized, acceptInvitation, declineInvitation } from './discovery.mjs';
+import { discoverAccountMatches, hasEligiblePlayer, isAuthorized, acceptInvitation, notifyPendingInvitation } from './discovery.mjs';
 import { origin, StopPlayer } from './tabony.mjs';
 import metadata from './package.json' with { type: 'json' };
 import baseline from './baseline-info.json' with { type: 'json' };
@@ -20,6 +20,15 @@ const notificationThrottleMs = 5000;
 const publicRoundModel = { id: publicRoundId, label: '100K public-snapshot search', playerCount: 2, twoPlayerOnly: true };
 const usesCheckpoint = id => isExperimentalModel(id) || id === publicRoundId;
 const checkpointId = id => id === publicRoundId ? direct100kId : id;
+const invitationNotices = {
+  'invite-only': 'NationsBot is currently invite only. I’ll join this game once a player here is authorized to play with me.',
+  capacity: 'NationsBot is at its game limit. I’ll join this game once I have room.',
+  unavailable: 'NationsBot is currently unavailable for this player count. I’ll join if it becomes available.',
+  invalid: 'NationsBot beta challenges are for two players. Please invite me to a 1v1 game.',
+  active: 'You already have a NationsBot challenge. I’ll join this game once your current challenge ends.',
+  pending: 'Another NationsBot challenge is being created for you. I’ll join this game once I’m available to play you again.',
+  limit: 'You’ve reached the limit of five NationsBot challenges today. I’ll join once the limit resets at midnight UTC and you can start a new challenge.',
+};
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
@@ -50,9 +59,9 @@ function writeMatchModel(directory, matchId, selection, storageId) {
   renameSync(`${path}.tmp`, path);
 }
 
-export function createPlayerController({ config, store, connect, discover, accept, decline, now = Date.now,
+export function createPlayerController({ config, store, connect, discover, accept, notifyInvitation, now = Date.now,
   experiments = experimentalModels(config.dataDir) }) {
-  const games = new Map(), events = [];
+  const games = new Map(), events = [], notifiedInvitations = new Map();
   const historyPath = config.dataDir && config.username &&
     join(config.dataDir, `player-finished-${encodeURIComponent(config.username)}.json`);
   if (historyPath) {
@@ -77,10 +86,6 @@ export function createPlayerController({ config, store, connect, discover, accep
   };
   const canPlay = game => running && accountEnabled() && settings().playEnabled && authorized(game);
   const canRespond = () => running && !isClosed() && config.play && accountEnabled() && settings().playEnabled;
-  const shouldDecline = game => canRespond() &&
-    game.invitation && !config.hideUnauthorized?.(game) && game.players.includes(config.username) &&
-    new Set(game.players).size === game.players.length && game.players.length <= game.playerCount &&
-    !hasEligiblePlayer(game, settings(), config.username);
   const log = message => { events.unshift({ at: new Date(now()).toISOString(), message }); events.splice(50); console.log(message); };
   const getModel = () => {
     const saved = store.read();
@@ -123,6 +128,36 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (nextPollAt === null) notificationPending = false;
   }
   const activeCount = () => [...games.values()].filter(game => game.abort && !game.abort.signal.aborted).length;
+  function regularInvitationBlocker(game) {
+    if (!game.invitation || config.hideUnauthorized?.(game) || !game.players.includes(config.username) ||
+        new Set(game.players).size !== game.players.length || game.players.length > game.playerCount) return;
+    const current = settings();
+    if (!hasEligiblePlayer(game, current, config.username)) return 'invite-only';
+    if (!current.playerCounts.includes(game.playerCount)) return 'unavailable';
+    if (authorized(game) && activeCount() >= current.maxConcurrentGames) return 'capacity';
+  }
+  function challengeInvitationBlocker(game) {
+    const player = game.players.find(name => name !== config.username);
+    if (game.playerCount !== 2 || game.players.length !== 2 || !player) return 'invalid';
+    if (!settings().playerCounts.includes(2)) return 'unavailable';
+    if (!hasEligiblePlayer(game, settings(), config.username)) return 'invite-only';
+    return challenges.check(player, game.id).result;
+  }
+  async function deferInvitation(info, show, blocker, reason) {
+    show('invitation deferred');
+    if (!notifyInvitation || !canRespond() || notifiedInvitations.get(info.id) === reason) return;
+    try {
+      if (await notifyInvitation(info, { username: config.username, message: invitationNotices[reason],
+        shouldNotify: live => canRespond() && blocker(live) === reason, signal: lifecycle.signal })) {
+        notifiedInvitations.set(info.id, reason);
+        log(`Match ${info.id}: invitation deferred (${reason}).`);
+      }
+    } catch {
+      if (!canRespond()) return;
+      show('invitation notice unconfirmed');
+      log(`Match ${info.id}: invitation notice unconfirmed. The next poll will check again.`);
+    }
+  }
   const readPin = game => readMatchModel(config.dataDir, game.id, game.playerCount, config.storageId);
   const writePin = (game, pin) => writeMatchModel(config.dataDir, game.id, pin, config.storageId);
   function loadPin(game) {
@@ -189,30 +224,13 @@ export function createPlayerController({ config, store, connect, discover, accep
   }
   async function respondToChallenge(info, show) {
     const player = info.players.find(name => name !== config.username);
-    const valid = info.playerCount === 2 && info.players.length === 2 && Boolean(player);
-    const current = settings();
-    const result = !valid ? 'invalid' : !current.playerCounts.includes(2) ? 'unavailable'
-      : !hasEligiblePlayer(info, current, config.username) ? 'invite-only' : challenges.check(player, info.id).result;
-    const messages = {
-      invalid: 'NationsBot beta challenges are for two players. Please invite the bot to a 1v1 game.',
-      active: 'You already have a NationsBot challenge. Finish that game before starting another.',
-      pending: 'You already have a NationsBot challenge being created. Check your Tabony invitations before trying again.',
-      limit: 'You have reached the limit of five NationsBot challenges today. Try again after midnight UTC.',
-      unavailable: 'NationsBot 1v1 challenges are currently unavailable. Please try again later.',
-      'invite-only': 'NationsBot is currently invite only. This Tabony account is not on the authorized player list.',
-    };
     if (!canRespond()) { show('invited'); return; }
+    const blocker = challengeInvitationBlocker(info);
+    if (blocker) {
+      await deferInvitation(info, show, challengeInvitationBlocker, blocker);
+      return;
+    }
     try {
-      if (result) {
-        const sameInvitation = live => canRespond() && live.players.length === info.players.length &&
-          new Set(live.players).size === info.players.length && live.players.every(name => info.players.includes(name));
-        if (await decline(info, { username: config.username, shouldDecline: sameInvitation,
-          declineMessage: messages[result], signal: lifecycle.signal })) {
-          games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
-          log(`Match ${info.id}: challenge invitation declined (${result}).`);
-        }
-        return;
-      }
       if (!settings().autoAccept) { show('invited'); return; }
       let reservation;
       const available = () => canRespond() && settings().playerCounts.includes(2) && hasEligiblePlayer(info, settings(), config.username);
@@ -247,6 +265,10 @@ export function createPlayerController({ config, store, connect, discover, accep
         found = found.filter(info => info.section !== 'Completed:');
       }
       reconcile();
+      const pendingIds = new Set(found.filter(info => info.invitation).map(info => info.id));
+      for (const id of notifiedInvitations.keys()) {
+        if (!pendingIds.has(id)) notifiedInvitations.delete(id);
+      }
       for (const info of found.sort((a, b) => Number(b.id) - Number(a.id))) {
         const known = games.get(info.id);
         if (known?.finishedAt != null || known?.status === 'blocked' || known?.abort) continue;
@@ -256,21 +278,14 @@ export function createPlayerController({ config, store, connect, discover, accep
           await respondToChallenge(info, show);
           continue;
         }
+        const blocker = regularInvitationBlocker(info);
+        if (blocker && canRespond()) {
+          await deferInvitation(info, show, regularInvitationBlocker, blocker);
+          continue;
+        }
         if (!authorized(info)) {
           if (config.hideUnauthorized?.(info)) continue;
           show('not authorized');
-          if (decline && shouldDecline(info)) {
-            try {
-              if (await decline(info, { username: config.username, shouldDecline, signal: lifecycle.signal })) {
-                games.set(info.id, { ...info, invitation: false, status: 'invitation declined' });
-                log(`Match ${info.id}: invitation declined (no eligible player).`);
-              }
-            } catch {
-              if (!running) return;
-              show('decline unconfirmed');
-              log(`Match ${info.id}: decline unconfirmed. The next poll will check again.`);
-            }
-          }
           continue;
         }
         if (!running || isClosed()) break;
@@ -466,7 +481,7 @@ function createAccountRuntime({ config, store, experiments, subscribe, journal, 
       return matches;
     },
     accept: (match, controls) => respond(acceptInvitation, match, controls, session),
-    decline: (match, controls) => respond(declineInvitation, match, controls, session),
+    notifyInvitation: (match, controls) => respond(notifyPendingInvitation, match, controls, session),
     connect: async controls => subscribe(controls, session, await journal(controls)),
   });
   if (config.challenges) controller.challenge = async (username, discordUserId) => {
@@ -549,8 +564,8 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
     async function respond(action, match, controls, session) {
       // Let each response finish before another account changes the same lobby.
       const task = (lobbyActions.get(match.id) ?? Promise.resolve()).catch(() => {}).then(() => {
-        const allowed = action === declineInvitation
-          ? controls.shouldDecline(match)
+        const allowed = action === notifyPendingInvitation
+          ? controls.shouldNotify(match)
           : controls.canPlay() && controls.settings().autoAccept;
         return allowed ? action(match, controls, session) : false;
       });

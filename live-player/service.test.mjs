@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { EventEmitter } from 'node:events';
 import { setImmediate } from 'node:timers/promises';
 import { settingsStore, initialSettings, validateSettings, modelForSettings } from './settings.mjs';
-import { parseMyMatches, isAuthorized, acceptInvitation, declineInvitation } from './discovery.mjs';
+import { parseMyMatches, isAuthorized, acceptInvitation, notifyPendingInvitation } from './discovery.mjs';
 import { createPlayerController, startControlServer } from './service.mjs';
 import deployed from './trained-weights.json' with { type: 'json' };
 
@@ -56,32 +56,67 @@ test('account listing identifies invitations, ignores completed matches and veri
   assert.equal(isAuthorized({ ...game, playerCount: 3, players: ['Kayser', 'SomeoneElse', config.username] }, initialSettings, config.username), true);
 });
 
-test('polling declines only ineligible pending invitations, independently of automatic acceptance', async t => {
+test('regular invitations stay pending until settings allow acceptance', async t => {
   const { store } = storeFixture(t);
   const ineligible = { ...game, id: '4001', players: ['SomeoneElse', config.username] };
   const unconfirmed = { ...ineligible, id: '4004' };
-  const invited = [ineligible, game, { ...ineligible, id: '4002', invitation: false },
-    { ...game, id: '4003', playerCount: 6 }, unconfirmed];
+  const unsupported = { ...game, id: '4003', playerCount: 6 };
+  let invited = [ineligible, game, { ...ineligible, id: '4002', invitation: false }, unsupported, unconfirmed];
   store.save({ ...initialSettings, autoAccept: false, playEnabled: false }, 0, '229311536827465728');
-  const declined = [];
+  const notices = [], accepted = [];
   const controller = createPlayerController({ config, store, discover: async () => invited,
-    accept: () => assert.fail('Automatic acceptance is off.'),
-    decline: async (match, controls) => {
-      assert.equal(controls.shouldDecline(match), true);
-      declined.push(match.id);
+    accept: async match => { accepted.push(match.id); },
+    notifyInvitation: async (match, controls) => {
+      assert.equal(controls.shouldNotify(match), true);
+      notices.push(match.id);
       if (match.id === unconfirmed.id) throw new Error('No response from Tabony.');
       return true;
     },
-    connect: () => assert.fail('No eligible ongoing game.'),
+    connect: async () => true,
   });
   t.after(() => controller.close());
   await controller.poll();
-  assert.deepEqual(declined, []);
+  assert.deepEqual(notices, []);
   controller.save({ ...store.read().settings, playEnabled: true }, 1, '229311536827465728');
   await controller.poll();
-  assert.deepEqual(declined, [unconfirmed.id, ineligible.id]);
-  assert.equal(controller.status().games.find(match => match.id === ineligible.id).status, 'invitation declined');
-  assert.equal(controller.status().games.find(match => match.id === unconfirmed.id).status, 'decline unconfirmed');
+  assert.deepEqual(notices, [unconfirmed.id, unsupported.id, ineligible.id]);
+  assert.deepEqual(accepted, []);
+  const pending = controller.status().games.find(match => match.id === ineligible.id);
+  assert.equal(pending.status, 'invitation deferred');
+  assert.equal(pending.invitation, true);
+  assert.equal(controller.status().games.find(match => match.id === unconfirmed.id).status, 'invitation notice unconfirmed');
+  invited = [ineligible, unsupported, unconfirmed];
+  await controller.poll();
+  assert.deepEqual(notices, [unconfirmed.id, unsupported.id, ineligible.id, unconfirmed.id]);
+  invited = [ineligible];
+  controller.save({ ...store.read().settings, autoAccept: true, authorizedPlayers: ['SomeoneElse'] }, 2, '229311536827465728');
+  await controller.poll();
+  assert.deepEqual(accepted, [ineligible.id]);
+});
+
+test('an invitation delayed by capacity is accepted when a game finishes', async t => {
+  const { store } = storeFixture(t);
+  const ongoing = { ...game, invitation: false };
+  const pending = { ...game, id: '4001' };
+  const notices = [], accepted = [];
+  let finish;
+  let matches = [ongoing];
+  const controller = createPlayerController({ config, store, discover: async () => [...matches],
+    accept: async match => { accepted.push(match.id); },
+    notifyInvitation: async (_, { message }) => { notices.push(message); return true; },
+    connect: async () => new Promise(resolve => { finish = resolve; }),
+  });
+  t.after(() => { finish?.(true); return controller.close(); });
+  await controller.poll();
+  matches = [ongoing, pending];
+  await controller.poll();
+  assert.deepEqual(accepted, []);
+  assert.match(notices[0], /at its game limit/);
+  finish(true);
+  await setImmediate();
+  matches = [pending];
+  await controller.poll();
+  assert.deepEqual(accepted, [pending.id]);
 });
 
 test('manual polling works while disabled, coalesces requests and revocation closes a game', async t => {
@@ -217,7 +252,7 @@ test('invitation acceptance verifies participants, sends once and waits for conf
   await assert.rejects(wrong, /participants changed/); assert.deepEqual(socket.sent, []);
 });
 
-test('decline rechecks live eligibility and confirms that the bot seat was removed', async () => {
+test('an invitation notice is skipped when the live lobby no longer needs it', async () => {
   let socket;
   class FakeSocket extends EventEmitter {
     sent = [];
@@ -226,19 +261,14 @@ test('decline rechecks live eligibility and confirms that the bot seat was remov
     close() {}
   }
   const ineligible = { ...game, players: ['SomeoneElse', config.username] };
-  const controls = { ...config, shouldDecline: match => !isAuthorized(match, initialSettings, config.username) };
+  const controls = { ...config, message: 'I’ll join once a player is authorized.',
+    shouldNotify: match => !isAuthorized(match, initialSettings, config.username) };
   const update = { replaying: false, players: ineligible.players, accepted: ['SomeoneElse'], state: null };
   const emit = message => socket.emit('message', JSON.stringify(message));
-  const done = declineInvitation(ineligible, controls, 'synthetic-session', FakeSocket);
-  emit(update);
-  emit(update);
-  assert.deepEqual(socket.sent, [{ decline: config.username }]);
-  emit({ ...update, players: ['SomeoneElse'] });
-  assert.equal(await done, true);
-
   for (const live of [{ ...update, players: game.players }, { ...update, accepted: ineligible.players },
-    { ...update, players: ['SomeoneElse'] }]) {
-    const skipped = declineInvitation(ineligible, controls, 'synthetic-session', FakeSocket);
+    { ...update, players: ['SomeoneElse'] }, { ...update, state: { move_number: 0 } }]) {
+    const skipped = notifyPendingInvitation(ineligible, controls, 'synthetic-session', FakeSocket);
+    emit({ chat_log: [] });
     emit(live);
     assert.equal(await skipped, false);
     assert.deepEqual(socket.sent, []);
