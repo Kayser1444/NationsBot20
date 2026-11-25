@@ -33,8 +33,9 @@ The bot sends a one-line reply in Tabony using the same model and rules sources
 as Discord's `/question`. For questions about the match, it can use the visible
 board at the time of the question and the recent public game log. It can explain
 what the position suggests and say when the available information is insufficient.
-Questions and that public context are sent to OpenAI. Tabony players have their
-own per-account limits, and both channels share the existing daily service budget.
+Questions and that public context are sent to OpenAI. Ask your next question
+after the bot replies. Each Tabony account can ask up to five questions per
+day, and both channels share the daily service budget.
 
 To enable this on Railway, set `NATIONS_TABONY_QUESTION_ENABLED=1` and
 `NATIONS_TABONY_QUESTION_PORT=8082` on the notifier with `/question` enabled.

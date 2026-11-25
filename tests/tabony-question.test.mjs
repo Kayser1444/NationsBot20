@@ -23,7 +23,9 @@ test('the private Tabony route uses the shared investigation and never needs a D
       if (url !== 'https://api.openai.com/v1/responses') return new Response('', { status: 503 });
       calls++;
       const body = JSON.parse(options.body);
-      assert.deepEqual(JSON.parse(body.input[0].content), { question, publicMatchSnapshot: matchContext });
+      assert.deepEqual(JSON.parse(body.input[0].content), {
+        question: calls === 1 ? question : 'What move should I take?', publicMatchSnapshot: matchContext,
+      });
       assert.match(body.instructions, /one plain-text sentence/);
       return Response.json({ status: 'completed', output: [{ type: 'message', content: [{ type: 'output_text',
         text: JSON.stringify({ question_language: 'en', answer_language: 'en', english_question: null,
@@ -35,15 +37,18 @@ test('the private Tabony route uses the shared investigation and never needs a D
   const server = await startTabonyQuestionServer({ ask: service.askTabony, token, port: 0, host: '127.0.0.1' });
   t.after(() => new Promise(resolve => server.close(resolve)));
   const url = `http://127.0.0.1:${server.address().port}/question`;
-  const ask = (asker, bearer = token) => fetch(url, { method: 'POST',
+  const ask = (asker, bearer = token, text = question) => fetch(url, { method: 'POST',
     headers: { authorization: `Bearer ${bearer}`, 'content-type': 'application/json' },
-    body: JSON.stringify({ asker, question, matchContext: { ...matchContext, asker } }),
+    body: JSON.stringify({ asker, question: text, matchContext: { ...matchContext, asker } }),
   });
   assert.equal((await ask('Kayser', 'wrong')).status, 401);
   assert.equal((await ask('Spectator')).status, 400);
   assert.equal(calls, 0);
   assert.deepEqual(await (await ask('Kayser')).json(), { reply: line });
   assert.equal(service.globalQuota().total, 1);
+  for (let count = 2; count <= 5; count++) {
+    assert.deepEqual(await (await ask('Kayser', token, 'What move should I take?')).json(), { reply: line });
+  }
   assert.match((await (await ask('Kayser')).json()).reply, /question limit/);
-  assert.equal(calls, 1);
+  assert.equal(calls, 5);
 });

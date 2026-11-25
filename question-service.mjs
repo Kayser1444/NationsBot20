@@ -118,7 +118,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       const day = new Date(checkedAt).toISOString().slice(0, 10);
       if (ledger.day !== day) ledger = { day, total: 0, requests: 0, users: {} };
       const user = ledger.users[userId] ?? { count: 0, last: 0 };
-      const cooldownSeconds = user.count ? Math.max(0, Math.ceil((60000 - (checkedAt - user.last)) / 1000)) : 0;
+      const cooldownSeconds = !matchContext && user.count ? Math.max(0, Math.ceil((60000 - (checkedAt - user.last)) / 1000)) : 0;
       const limits = [];
       if (cooldownSeconds > 0) limits.push(message(language,
         `Minutgränsen: vänta ${cooldownSeconds} s innan du ställer nästa fråga.`, `Minute limit: wait ${cooldownSeconds} s before asking another question.`));

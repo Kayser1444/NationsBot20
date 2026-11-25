@@ -126,16 +126,15 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     let fatal;
     const chatLife = new AbortController();
     const enabled = () => config.play && (!config.canPlay || config.canPlay());
-    let answering = false, lastQuestionAt = -Infinity;
+    let answering = false;
 
     function answerChat(chat) {
       if (!config.askQuestion || !session || !newest || newest.state.game_over ||
-          !enabled() || answering || Date.now() - lastQuestionAt < 60_000) return;
+          !enabled() || answering) return;
       const { players } = newest;
       const question = chatQuestion(chat, players, config.username);
       if (!question) return;
       answering = true;
-      lastQuestionAt = Date.now();
       const asker = chat.player;
       const snapshot = newest;
       void Promise.resolve().then(() => config.askQuestion({

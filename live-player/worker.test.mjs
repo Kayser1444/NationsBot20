@@ -238,6 +238,13 @@ test('only live participants can ask the bot and chat work leaves moves free to 
     assert.equal(socket.sent[1].chat.length, 255);
     assert.match(socket.sent[1].chat, /^AnotherPlayer leads\. a+…$/);
     assert.equal(requests.length, 1);
+
+    await feed({ chat: chat('Kayser', '@NationsBot20, what move should I take?') });
+    assert.equal(requests.length, 2);
+    assert.equal(requests[1].matchContext.decision, 2);
+    answer('Check whether you can strengthen your Military before the war resolves.');
+    await setImmediate();
+    assert.deepEqual(socket.sent[2], { chat: 'Check whether you can strengthen your Military before the war resolves.' });
   } finally {
     socket.close();
     await done;
