@@ -26,6 +26,7 @@ const invitationNotices = {
   unavailable: 'NationsBot is currently unavailable for this player count. I’ll join if it becomes available.',
   invalid: 'NationsBot beta challenges are for two players. Please invite me to a 1v1 game.',
   active: 'You already have a NationsBot challenge. I’ll join this game once your current challenge ends.',
+  'opponent-active': 'We already have a 1v1 game in progress. I’ll accept this invitation once we finish our current game.',
   pending: 'Another NationsBot challenge is being created for you. I’ll join this game once I’m available to play you again.',
   limit: 'You’ve reached the limit of five NationsBot challenges today. I’ll join once the limit resets at midnight UTC and you can start a new challenge.',
 };
@@ -128,20 +129,28 @@ export function createPlayerController({ config, store, connect, discover, accep
     if (nextPollAt === null) notificationPending = false;
   }
   const activeCount = () => [...games.values()].filter(game => game.abort && !game.abort.signal.aborted).length;
-  function regularInvitationBlocker(game) {
+  function oneOnOneOpponent(game) {
+    if (game.playerCount === 2 && game.players.length === 2 && game.players.includes(config.username)) {
+      return game.players.find(name => name !== config.username);
+    }
+  }
+  function regularInvitationBlocker(game, occupiedOpponents) {
     if (!game.invitation || config.hideUnauthorized?.(game) || !game.players.includes(config.username) ||
         new Set(game.players).size !== game.players.length || game.players.length > game.playerCount) return;
     const current = settings();
     if (!hasEligiblePlayer(game, current, config.username)) return 'invite-only';
     if (!current.playerCounts.includes(game.playerCount)) return 'unavailable';
+    if (occupiedOpponents.has(oneOnOneOpponent(game))) return 'opponent-active';
     if (authorized(game) && activeCount() >= current.maxConcurrentGames) return 'capacity';
   }
-  function challengeInvitationBlocker(game) {
-    const player = game.players.find(name => name !== config.username);
-    if (game.playerCount !== 2 || game.players.length !== 2 || !player) return 'invalid';
+  function challengeInvitationBlocker(game, occupiedOpponents) {
+    const player = oneOnOneOpponent(game);
+    if (!player) return 'invalid';
     if (!settings().playerCounts.includes(2)) return 'unavailable';
     if (!hasEligiblePlayer(game, settings(), config.username)) return 'invite-only';
-    return challenges.check(player, game.id).result;
+    const result = challenges.check(player, game.id).result;
+    if (result) return result;
+    if (occupiedOpponents.has(player)) return 'opponent-active';
   }
   async function deferInvitation(info, show, blocker, reason) {
     show('invitation deferred');
@@ -222,12 +231,13 @@ export function createPlayerController({ config, store, connect, discover, accep
     connections.set(task, signal);
     log(`Match ${info.id}: connecting (${info.playerCount} players).`);
   }
-  async function respondToChallenge(info, show) {
-    const player = info.players.find(name => name !== config.username);
+  async function respondToChallenge(info, show, occupiedOpponents) {
+    const player = oneOnOneOpponent(info);
     if (!canRespond()) { show('invited'); return; }
-    const blocker = challengeInvitationBlocker(info);
-    if (blocker) {
-      await deferInvitation(info, show, challengeInvitationBlocker, blocker);
+    const blocker = game => challengeInvitationBlocker(game, occupiedOpponents);
+    const reason = blocker(info);
+    if (reason) {
+      await deferInvitation(info, show, blocker, reason);
       return;
     }
     try {
@@ -244,6 +254,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       reservation ??= challenges.reserve(config.username, player, { matchId: info.id }).entry;
       if (!reservation) return;
       challenges.confirm(reservation, info.id);
+      occupiedOpponents.add(player);
       games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));
       log(`Match ${info.id}: challenge invitation accepted.`);
       if (joined.lobbyStarted) config.onLobbyStarted?.(info);
@@ -265,6 +276,15 @@ export function createPlayerController({ config, store, connect, discover, accep
         found = found.filter(info => info.section !== 'Completed:');
       }
       reconcile();
+      // The signed-in listing includes games that have no active worker yet.
+      const occupiedOpponents = new Set();
+      for (const match of found) {
+        if (match.invitation || !['Your turn:', 'Not your turn:', 'Open:'].includes(match.section) ||
+            games.get(match.id)?.finishedAt != null) continue;
+        const opponent = oneOnOneOpponent(match);
+        if (opponent) occupiedOpponents.add(opponent);
+      }
+      const regularBlocker = game => regularInvitationBlocker(game, occupiedOpponents);
       const pendingIds = new Set(found.filter(info => info.invitation).map(info => info.id));
       for (const id of notifiedInvitations.keys()) {
         if (!pendingIds.has(id)) notifiedInvitations.delete(id);
@@ -275,12 +295,12 @@ export function createPlayerController({ config, store, connect, discover, accep
         const s = settings();
         const show = status => games.set(info.id, loadPin({ ...info, status }));
         if (challenges && info.invitation) {
-          await respondToChallenge(info, show);
+          await respondToChallenge(info, show, occupiedOpponents);
           continue;
         }
-        const blocker = regularInvitationBlocker(info);
-        if (blocker && canRespond()) {
-          await deferInvitation(info, show, regularInvitationBlocker, blocker);
+        const reason = regularBlocker(info);
+        if (reason && canRespond()) {
+          await deferInvitation(info, show, regularBlocker, reason);
           continue;
         }
         if (!authorized(info)) {
@@ -295,6 +315,8 @@ export function createPlayerController({ config, store, connect, discover, accep
           if (!s.autoAccept || !s.playEnabled || !config.play) { show('invited'); continue; }
           const joined = await accept(info, { username: config.username, settings, authorize: authorized, canPlay: () => canPlay(info), signal: lifecycle.signal });
           if (joined === false) continue;
+          const opponent = oneOnOneOpponent(info);
+          if (opponent) occupiedOpponents.add(opponent);
           log(`Match ${info.id}: invitation accepted.`);
           if (config.accountId) {
             games.set(info.id, loadPin({ ...info, invitation: false, status: 'waiting for game to start' }));

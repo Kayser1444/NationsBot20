@@ -96,7 +96,8 @@ test('regular invitations stay pending until settings allow acceptance', async t
 
 test('an invitation delayed by capacity is accepted when a game finishes', async t => {
   const { store } = storeFixture(t);
-  const ongoing = { ...game, invitation: false };
+  store.save({ ...initialSettings, authorizedPlayers: ['Kayser', 'OtherPlayer'] }, 0, '229311536827465728');
+  const ongoing = { ...game, invitation: false, players: ['OtherPlayer', config.username] };
   const pending = { ...game, id: '4001' };
   const notices = [], accepted = [];
   let finish;
@@ -117,6 +118,38 @@ test('an invitation delayed by capacity is accepted when a game finishes', async
   matches = [pending];
   await controller.poll();
   assert.deepEqual(accepted, [pending.id]);
+});
+
+test('an ongoing 1v1 blocks a second invitation from that opponent even with spare capacity', async t => {
+  const { store } = storeFixture(t);
+  store.save({ ...initialSettings, maxConcurrentGames: 5, authorizedPlayers: ['Kayser', 'OtherPlayer'] }, 0, '229311536827465728');
+  const ongoing = { ...game, id: '3310', invitation: false, section: 'Not your turn:' };
+  const pending = { ...game, id: '3334' };
+  const other = { ...pending, id: '3335', players: ['OtherPlayer', config.username] };
+  let matches = [ongoing, pending, other];
+  const notices = [], accepted = [];
+  const controller = createPlayerController({ config: { ...config, accountId: 'test' }, store,
+    discover: async () => [...matches],
+    connect: async ({ signal }) => {
+      await new Promise(resolve => signal.addEventListener('abort', resolve, { once: true }));
+      return false;
+    },
+    accept: async match => { accepted.push(match.id); return { lobbyStarted: true }; },
+    notifyInvitation: async (match, { message, shouldNotify }) => {
+      assert.equal(shouldNotify(match), true);
+      notices.push({ id: match.id, message });
+      return true;
+    },
+  });
+  t.after(() => controller.close());
+  await controller.poll();
+  assert.deepEqual(accepted, [other.id]);
+  assert.equal(controller.status().games.find(match => match.id === pending.id).invitation, true);
+  assert.equal(notices[0]?.id, pending.id);
+  assert.match(notices[0].message, /once we finish our current game/);
+  matches = [pending];
+  await controller.poll();
+  assert.deepEqual(accepted, [other.id, pending.id]);
 });
 
 test('manual polling works while disabled, coalesces requests and revocation closes a game', async t => {

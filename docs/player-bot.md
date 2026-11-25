@@ -7,9 +7,10 @@ initially `Kayser`. A regular bot can play when at least one other participant
 is on the list. Other seats can be held by unlisted players or other bots.
 When playing is enabled, regular bots keep invitations pending if no
 participant is eligible, the player count is disabled, or the bot is at
-capacity. The bot explains the reason in the match chat and rechecks the
-invitation on later polls. It accepts once eligible if automatic acceptance
-is enabled.
+capacity. A second 1v1 invitation from the same opponent also waits until
+their current game ends, even if the bot can play more games. The bot explains
+the reason in match chat and rechecks on later polls. It accepts once eligible
+if automatic acceptance is enabled.
 
 The service-wide **Play mode** is **Closed**, **Invite only**, or **Open**.
 Closed stops Tabony discovery, game connections and new Discord challenges.
