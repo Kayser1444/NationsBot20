@@ -14,13 +14,17 @@ export function parseMyMatches(html, username, { includeCompleted = false, archi
     if (!part.startsWith('<div class="card my-2"') || section === 'Completed:' && !includeCompleted) continue;
     const id = part.match(/href="\/nations\/(\d+)\/"/)?.[1];
     const count = Number(part.match(/Type:\s*<span[^>]*>(\d+)-Player/)?.[1]);
-    const names = [...(part.match(/Players:([\s\S]*?)<\/div>/)?.[1] ?? '').matchAll(/<span[^>]*>([^<]*)<\/span>/g)]
-      .map(m => decode(m[1]).trim().replace(/ \(invited\)$/, ''));
+    const seats = [...(part.match(/Players:([\s\S]*?)<\/div>/)?.[1] ?? '').matchAll(/<span[^>]*>([^<]*)<\/span>/g)]
+      .map(m => decode(m[1]).trim());
+    const names = seats.map(name => name.replace(/ \(invited\)$/, ''));
     const title = decode(part.match(/Title:\s*<span[^>]*>([^<]*)<\/span>/)?.[1] ?? '');
     if (!id || count < 2 || count > 6 || !names.includes(username) || names.some(name => !/^[a-zA-Z0-9_]{1,20}$/.test(name))) throw new Error('Unexpected match listing format.');
     const rules = part.match(/Type:\s*<span[^>]*>[^<]+<\/span>,\s*\(([^)]*)\)/)?.[1]?.split(', ');
     const weightedCardDraw = rules?.includes('Card Draw') ?? false;
-    matches.push({ id, title, playerCount: count, players: names, invitation: section === 'Invitations:', section,
+    const invitation = section === 'Invitations:';
+    const accepted = seats.filter(name => name !== username && !name.endsWith(' (invited)'));
+    matches.push({ id, title, playerCount: count, players: names, invitation, section,
+      ...(invitation && names.length > 2 && accepted.length === 1 ? { inviter: accepted[0] } : {}),
       weightedCardDraw, roundRules: {
         weighted_card_draw: weightedCardDraw,
         resource_remainder_tiebreaker: rules?.includes('Tiebreaker') ?? false,
@@ -79,7 +83,7 @@ function respondToInvitation(match, config, session, Socket, action) {
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => finish(new Error('Invitation connection failed.')));
     socket.on('close', () => { if (!settled) finish(new Error('Invitation connection closed before confirmation.')); });
-    const matchesChat = chat => chat?.player === config.username && chat.message === config.message;
+    const previousMessages = config.previousMessages ?? [config.message];
     function notify() {
       if (!live || !historyReceived) return;
       if (!live.players.includes(config.username) || live.state || live.accepted.includes(config.username) ||
@@ -100,9 +104,10 @@ function respondToInvitation(match, config, session, Socket, action) {
         if (action === 'notice') {
           if (Array.isArray(message.chat_log)) {
             historyReceived = true;
-            chatConfirmed ||= message.chat_log.some(matchesChat);
+            chatConfirmed ||= message.chat_log.some(chat =>
+              chat?.player === config.username && previousMessages.includes(chat.message));
           }
-          if (matchesChat(message.chat)) chatConfirmed = true;
+          if (message.chat?.player === config.username && message.chat.message === config.message) chatConfirmed = true;
           if (Array.isArray(message.players) && message.replaying === false) {
             if (!Array.isArray(message.accepted)) throw new Error('Unexpected invitation acceptance state.');
             live = message;

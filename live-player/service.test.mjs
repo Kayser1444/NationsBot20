@@ -128,7 +128,9 @@ test('an ongoing 1v1 blocks a second invitation from that opponent even with spa
   const other = { ...pending, id: '3335', players: ['OtherPlayer', config.username] };
   let matches = [ongoing, pending, other];
   const notices = [], accepted = [];
-  const controller = createPlayerController({ config: { ...config, accountId: 'test' }, store,
+  const controller = createPlayerController({ config: { ...config, accountId: 'test',
+    getPlayerLanguage: async player => { assert.equal(player, 'Kayser'); return 'sv-SE'; },
+  }, store,
     discover: async () => [...matches],
     connect: async ({ signal }) => {
       await new Promise(resolve => signal.addEventListener('abort', resolve, { once: true }));
@@ -146,7 +148,7 @@ test('an ongoing 1v1 blocks a second invitation from that opponent even with spa
   assert.deepEqual(accepted, [other.id]);
   assert.equal(controller.status().games.find(match => match.id === pending.id).invitation, true);
   assert.equal(notices[0]?.id, pending.id);
-  assert.match(notices[0].message, /once we finish our current game/);
+  assert.match(notices[0].message, /när vårt pågående parti är klart/);
   matches = [pending];
   await controller.poll();
   assert.deepEqual(accepted, [other.id, pending.id]);

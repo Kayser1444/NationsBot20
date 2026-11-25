@@ -23,7 +23,7 @@ import { startDiscordBot } from './discord-bot.mjs';
 import { startTabonyQuestionServer } from './tabony-question-server.mjs';
 import { botDelivery } from './bot-delivery.mjs';
 import { SmTableCache } from './sm-table.mjs';
-import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
+import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber, readTabonyPlayerLanguage } from './subscriptions.mjs';
 import { adminUsers, adminSubscribers } from './admin-users.mjs';
 import { createBulletinService } from './bulletins.mjs';
 import { createPlayerAdmin } from './player-admin.mjs';
@@ -504,13 +504,15 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       },
     },
   });
-  if (process.env.NATIONS_TABONY_QUESTION_ENABLED === '1' && process.env.NATIONS_TABONY_QUESTION_PORT) {
+  if (process.env.NATIONS_TABONY_QUESTION_PORT) {
     try {
-      tabonyQuestionServer = await startTabonyQuestionServer({ ask: bot.askTabony,
+      tabonyQuestionServer = await startTabonyQuestionServer({
+        ask: process.env.NATIONS_TABONY_QUESTION_ENABLED === '1' ? bot.askTabony : undefined,
+        getPlayerLanguage: player => readTabonyPlayerLanguage(configPath, player),
         token: process.env.NATIONS_PLAYER_CONTROL_TOKEN, port: Number(process.env.NATIONS_TABONY_QUESTION_PORT) });
       if (stopped) tabonyQuestionServer.close();
-      else log.add('Privata frågetjänsten för Tabony är igång.');
-    } catch { log.add('Den privata frågetjänsten för Tabony kunde inte starta.', 'error'); }
+      else log.add('Privata chattjänsten för Tabony är igång.');
+    } catch { log.add('Den privata chattjänsten för Tabony kunde inte starta.', 'error'); }
   }
 }
 }

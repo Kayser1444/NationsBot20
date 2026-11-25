@@ -12,6 +12,11 @@ their current game ends, even if the bot can play more games. The bot explains
 the reason in match chat and rechecks on later polls. It accepts once eligible
 if automatic acceptance is enabled.
 
+Invitation notices use the inviting player's Discord bot language when the
+Tabony name is associated with one Discord account. This follows `/language`
+and its automatic Discord locale detection. The bot uses English if it
+cannot resolve a unique player or account.
+
 The service-wide **Play mode** is **Closed**, **Invite only**, or **Open**.
 Closed stops Tabony discovery, game connections and new Discord challenges.
 Invite only applies the authorized-player list to Tabony games and Discord challenges.

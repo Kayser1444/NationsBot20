@@ -8,7 +8,7 @@ import metadata from './package.json' with { type: 'json' };
 import { origin, login, readPosition, safeOption, StopPlayer } from './tabony.mjs';
 import { chooseMove } from './policy.mjs';
 import { validateModel } from './scorer.mjs';
-import { chatLine, chatQuestion, createTabonyQuestionClient, publicMatchContext } from './chat-questions.mjs';
+import { chatLine, chatQuestion, createTabonyQuestionClient, createTabonyLanguageClient, publicMatchContext } from './chat-questions.mjs';
 import { PublicRoundSession } from './public-round.mjs';
 
 function configuration(env, managed) {
@@ -218,8 +218,10 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
 async function run() {
   const managed = Boolean(process.env.NATIONS_PLAYER_CONTROL_TOKEN);
   const config = configuration(process.env, managed);
-  try { config.askQuestion = createTabonyQuestionClient(); }
-  catch { console.warn('Invalid private Tabony question configuration. Chat replies are disabled.'); }
+  try {
+    config.askQuestion = createTabonyQuestionClient();
+    config.getPlayerLanguage = createTabonyLanguageClient();
+  } catch { console.warn('Invalid private Tabony chat service configuration.'); }
   if (managed) {
     const { startPlayerService } = await import('./service.mjs');
     await startPlayerService({ config, subscribe, journal, login });

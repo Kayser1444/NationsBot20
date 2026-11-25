@@ -14,22 +14,13 @@ import { direct100kId, publicRoundId } from './public-round.mjs';
 import { accountDatabase, accountStore } from './accounts.mjs';
 import { createAccountManager } from './account-manager.mjs';
 import { challengeNamePattern, challengeStore, createTabonyChallenge } from './challenges.mjs';
+import { invitationNotice } from './invitation-notices.mjs';
 
 const archiveAfterMs = 48 * 60 * 60 * 1000;
 const notificationThrottleMs = 5000;
 const publicRoundModel = { id: publicRoundId, label: '100K public-snapshot search', playerCount: 2, twoPlayerOnly: true };
 const usesCheckpoint = id => isExperimentalModel(id) || id === publicRoundId;
 const checkpointId = id => id === publicRoundId ? direct100kId : id;
-const invitationNotices = {
-  'invite-only': 'NationsBot is currently invite only. I’ll join this game once a player here is authorized to play with me.',
-  capacity: 'NationsBot is at its game limit. I’ll join this game once I have room.',
-  unavailable: 'NationsBot is currently unavailable for this player count. I’ll join if it becomes available.',
-  invalid: 'NationsBot beta challenges are for two players. Please invite me to a 1v1 game.',
-  active: 'You already have a NationsBot challenge. I’ll join this game once your current challenge ends.',
-  'opponent-active': 'We already have a 1v1 game in progress. I’ll accept this invitation once we finish our current game.',
-  pending: 'Another NationsBot challenge is being created for you. I’ll join this game once I’m available to play you again.',
-  limit: 'You’ve reached the limit of five NationsBot challenges today. I’ll join once the limit resets at midnight UTC and you can start a new challenge.',
-};
 
 function compatibleModel(id, playerCount) {
   return id === 'human-baseline-v1' || modelChoices.some(model => model.id === id)
@@ -156,8 +147,12 @@ export function createPlayerController({ config, store, connect, discover, accep
     show('invitation deferred');
     if (!notifyInvitation || !canRespond() || notifiedInvitations.get(info.id) === reason) return;
     try {
-      if (await notifyInvitation(info, { username: config.username, message: invitationNotices[reason],
-        shouldNotify: live => canRespond() && blocker(live) === reason, signal: lifecycle.signal })) {
+      const others = info.players.filter(player => player !== config.username);
+      const inviter = others.length === 1 ? others[0] : info.inviter;
+      const language = inviter && await config.getPlayerLanguage?.(inviter, lifecycle.signal);
+      const shouldNotify = live => canRespond() && (!inviter || live.players.includes(inviter)) && blocker(live) === reason;
+      if (shouldNotify(info) && await notifyInvitation(info, { username: config.username,
+        ...invitationNotice(reason, language), shouldNotify, signal: lifecycle.signal })) {
         notifiedInvitations.set(info.id, reason);
         log(`Match ${info.id}: invitation deferred (${reason}).`);
       }
@@ -601,7 +596,7 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
       const controller = createAccountManager({ accounts, base, experiments,
         challengeBot,
         createRuntime: account => createAccountRuntime({
-          config: { dataDir: config.dataDir, askQuestion: config.askQuestion, ...account,
+          config: { dataDir: config.dataDir, askQuestion: config.askQuestion, getPlayerLanguage: config.getPlayerLanguage, ...account,
             challenges: account.username === challengeBot && !account.includeArchive ? challenges : null },
           store, experiments, subscribe, journal, login, respond,
         }),

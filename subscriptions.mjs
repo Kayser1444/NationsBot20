@@ -39,7 +39,10 @@ export function validateSubscriptions(value) {
 }
 
 export function readSubscriptions(path) {
-  const config = JSON.parse(readFileSync(path, 'utf8'));
+  return subscriptionsFrom(JSON.parse(readFileSync(path, 'utf8')));
+}
+
+function subscriptionsFrom(config) {
   const selected = validateSubscriptions(config.subscriptions ?? { [config.username]: config.discord.userId });
   const banned = validateBans(config.bannedUsers);
   return validateSubscriptions(Object.keys(banned).reduce((next, id) => removeSubscriber(next, id), selected));
@@ -108,7 +111,10 @@ export function readDmPreference(path, userId) {
 }
 
 export function readUserLocale(path, userId) {
-  const config = JSON.parse(readFileSync(path, 'utf8'));
+  return userLocale(JSON.parse(readFileSync(path, 'utf8')), userId);
+}
+
+function userLocale(config, userId) {
   const locale = config.userLocales?.[userId];
   return typeof locale === 'string' && /^[a-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$/.test(locale) && locale.length <= 35 ? locale : null;
 }
@@ -132,6 +138,23 @@ export function readLanguageOverride(path, userId) {
 
 export function readBotLanguage(path, userId) {
   return resolveLanguage(readUserLocale(path, userId), readLanguageOverride(path, userId));
+}
+
+export function readTabonyPlayerLanguage(path, username) {
+  const config = JSON.parse(readFileSync(path, 'utf8'));
+  const bans = validateBans(config.bannedUsers);
+  const ids = new Set(recipients(subscriptionsFrom(config), username));
+  for (const [id, preference] of Object.entries(config.reminderPreferences ?? {})) {
+    if (preference?.enabled && preference.name === username && !Object.hasOwn(bans, id)) ids.add(id);
+  }
+  if (ids.size === 0) {
+    for (const [id, name] of Object.entries(rememberedNames(config))) {
+      if (name === username && !Object.hasOwn(bans, id)) ids.add(id);
+    }
+  }
+  if (ids.size !== 1) return null;
+  const [id] = ids;
+  return resolveLanguage(userLocale(config, id), config.languagePreferences?.[id]);
 }
 
 export function saveLanguagePreference(path, userId, language) {

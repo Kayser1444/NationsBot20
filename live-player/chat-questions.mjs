@@ -32,13 +32,35 @@ export function publicMatchContext({ state, log }, players, bot, asker) {
   };
 }
 
-export function createTabonyQuestionClient(env = process.env, fetcher = fetch) {
+function tabonyServiceUrl(env) {
   if (!env.NATIONS_TABONY_QUESTION_URL) return undefined;
   const url = new URL(env.NATIONS_TABONY_QUESTION_URL);
   if (url.protocol !== 'http:' || !url.hostname.endsWith('.railway.internal') || url.username || url.password ||
       url.pathname !== '/' || url.search || url.hash || !/^[a-f0-9]{64}$/.test(env.NATIONS_PLAYER_CONTROL_TOKEN ?? '')) {
     throw new Error('Invalid private Tabony question configuration.');
   }
+  return url;
+}
+
+export function createTabonyLanguageClient(env = process.env, fetcher = fetch) {
+  const url = tabonyServiceUrl(env);
+  if (!url) return undefined;
+  return async (player, signal) => {
+    const endpoint = new URL('/player-language', url);
+    endpoint.searchParams.set('player', player);
+    try {
+      const response = await fetcher(endpoint, {
+        redirect: 'error', signal: AbortSignal.any([signal, AbortSignal.timeout(2500)]),
+        headers: { authorization: `Bearer ${env.NATIONS_PLAYER_CONTROL_TOKEN}` },
+      });
+      return response.ok ? (await response.json()).language : null;
+    } catch { return null; }
+  };
+}
+
+export function createTabonyQuestionClient(env = process.env, fetcher = fetch) {
+  const url = tabonyServiceUrl(env);
+  if (!url) return undefined;
   return async ({ asker, question, matchContext, signal }) => {
     const response = await fetcher(new URL('/question', url), {
       method: 'POST', redirect: 'error', signal: AbortSignal.any([signal, AbortSignal.timeout(125_000)]),

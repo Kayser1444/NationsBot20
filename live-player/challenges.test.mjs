@@ -195,7 +195,8 @@ test('a pending invitation notice waits for the bot’s own chat echo and uses p
   assert.equal(await done, true);
   assert.deepEqual(socket.sent, [{ chat: text }]);
 
-  const retried = notifyPendingInvitation(game, controls, 'test-session', FakeSocket);
+  const retried = notifyPendingInvitation(game, { ...controls, message: 'Swedish notice', previousMessages: [text, 'Swedish notice'] },
+    'test-session', FakeSocket);
   emit({ chat_log: [echo] });
   emit(update);
   assert.equal(await retried, true);

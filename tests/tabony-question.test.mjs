@@ -1,10 +1,41 @@
 import assert from 'node:assert/strict';
-import { mkdtempSync, rmSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 import { createQuestionService } from '../question-service.mjs';
 import { startTabonyQuestionServer } from '../tabony-question-server.mjs';
+import { readTabonyPlayerLanguage } from '../subscriptions.mjs';
+import { createTabonyLanguageClient } from '../live-player/chat-questions.mjs';
+
+test('the private language lookup uses the linked Discord preference without enabling questions', async t => {
+  const directory = mkdtempSync(join(tmpdir(), 'tabony-language-'));
+  t.after(() => rmSync(directory, { recursive: true, force: true }));
+  const path = join(directory, 'friends.json');
+  const kayser = '229311536827465728', other = '821001820309815368', shared = '163902453985577536';
+  writeFileSync(path, JSON.stringify({
+    subscriptions: { Kayser: kayser, Shared: [other, shared] },
+    reminderPreferences: { [other]: { enabled: true, name: 'AnotherPlayer' } },
+    userLocales: { [kayser]: 'en-US', [other]: 'fr' },
+    languagePreferences: { [kayser]: 'sv-SE' },
+  }));
+  const token = 'a'.repeat(64);
+  const server = await startTabonyQuestionServer({ getPlayerLanguage: name => readTabonyPlayerLanguage(path, name),
+    token, port: 0, host: '127.0.0.1' });
+  t.after(() => new Promise(resolve => server.close(resolve)));
+  const local = `http://127.0.0.1:${server.address().port}`;
+  const language = createTabonyLanguageClient({
+    NATIONS_TABONY_QUESTION_URL: 'http://notifier.railway.internal:8082',
+    NATIONS_PLAYER_CONTROL_TOKEN: token,
+  }, (url, options) => fetch(new URL(url.pathname + url.search, local), options));
+  const signal = new AbortController().signal;
+  assert.equal(await language('Kayser', signal), 'sv-SE');
+  assert.equal(await language('AnotherPlayer', signal), 'fr');
+  assert.equal(await language('Shared', signal), null);
+  assert.equal(await language('kayser', signal), null);
+  assert.equal((await fetch(local + '/player-language?player=Kayser')).status, 401);
+  assert.equal((await fetch(local + '/question', { method: 'POST', headers: { authorization: `Bearer ${token}` } })).status, 404);
+});
 
 test('the private Tabony route uses the shared investigation and never needs a Discord user ID', async t => {
   const directory = mkdtempSync(join(tmpdir(), 'tabony-question-'));
