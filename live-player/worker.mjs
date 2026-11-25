@@ -10,6 +10,7 @@ import rules from './predictor-rules.json' with { type: 'json' };
 import { origin, login, readPosition, safeOption, StopPlayer } from './tabony.mjs';
 import { chooseMove } from './policy.mjs';
 import { validateModel } from './scorer.mjs';
+import { chatLine, chatQuestion, createTabonyQuestionClient, publicMatchContext } from './chat-questions.mjs';
 import { PublicRoundSession } from './public-round.mjs';
 
 function safeArchitectOptions(state, username) {
@@ -123,6 +124,31 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     let lastLog;
     let finished = false;
     let fatal;
+    const chatLife = new AbortController();
+    const enabled = () => config.play && (!config.canPlay || config.canPlay());
+    let answering = false, lastQuestionAt = -Infinity;
+
+    function answerChat(chat) {
+      if (!config.askQuestion || !session || !newest || newest.state.game_over ||
+          !enabled() || answering || Date.now() - lastQuestionAt < 60_000) return;
+      const { players } = newest;
+      const question = chatQuestion(chat, players, config.username);
+      if (!question) return;
+      answering = true;
+      lastQuestionAt = Date.now();
+      const asker = chat.player;
+      const snapshot = newest;
+      void Promise.resolve().then(() => config.askQuestion({
+        asker, question, matchContext: publicMatchContext(snapshot, players, config.username, asker), signal: chatLife.signal,
+      })).then(reply => {
+        const line = chatLine(reply);
+        if (line && !chatLife.signal.aborted && !newest.state.game_over && enabled() && socket.readyState === WebSocket.OPEN) {
+          socket.send(JSON.stringify({ chat: line }));
+        }
+      }).catch(() => {
+        if (!chatLife.signal.aborted) console.warn(`Match ${config.matchId}: Tabony chat question could not be answered.`);
+      }).finally(() => { answering = false; });
+    }
 
     const timer = setInterval(() => {
       if (Date.now() - lastValid > 80_000) socket.terminate();
@@ -135,6 +161,7 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     socket.on('open', () => socket.send('null'));
     socket.on('error', () => socket.terminate());
     socket.on('close', () => {
+      chatLife.abort();
       clearInterval(timer);
       config.signal?.removeEventListener('abort', abort);
       chain.finally(() => fatal ? reject(fatal) : resolve(finished));
@@ -143,6 +170,7 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
     config.signal?.addEventListener('abort', abort, { once: true });
     if (config.signal?.aborted) abort();
     socket.on('message', data => {
+      if (fatal || socket.readyState !== WebSocket.OPEN) return;
       let message;
       try { message = JSON.parse(data); } catch { return; }
       let position;
@@ -152,8 +180,12 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
         socket.terminate();
         return;
       }
-      if (!position) return;
+      if (!position) {
+        if (message?.chat) answerChat(message.chat);
+        return;
+      }
       newest = message;
+      if (position.game_over) chatLife.abort();
       const stillCurrent = () => newest.state.move_number === position.move_number &&
         newest.state.next_move_player === position.next_move_player &&
         !newest.state.invalid_move && newest.log === message.log;
@@ -182,7 +214,6 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
           lastLog = status;
         }
         config.onState?.(state, moves.pending);
-        const enabled = () => config.play && (!config.canPlay || config.canPlay());
         if (!enabled() || state.next_move_player !== config.username) return;
         if (moves.pending !== null) {
           if (state.invalid_move) throw new StopPlayer('Tabony reported an invalid move. Inspect the match before resuming.');
@@ -218,6 +249,8 @@ export function subscribe(config, session, moves, Socket = WebSocket) {
 async function run() {
   const managed = Boolean(process.env.NATIONS_PLAYER_CONTROL_TOKEN);
   const config = configuration(process.env, managed);
+  try { config.askQuestion = createTabonyQuestionClient(); }
+  catch { console.warn('Invalid private Tabony question configuration. Chat replies are disabled.'); }
   if (managed) {
     const { startPlayerService } = await import('./service.mjs');
     await startPlayerService({ config, subscribe, journal, login });

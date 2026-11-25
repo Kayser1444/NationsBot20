@@ -22,6 +22,28 @@ growth for invitations with variable difficulty. Pausing discovery does not
 pause connected games. Pausing playing prevents new moves and invitation joins.
 An already submitted move remains submitted.
 
+## Questions in Tabony chat
+
+While the bot is playing, a participant can ask it a question in the match
+chat. In a two-player game, type a question ending in `?`. In a multiplayer
+game, start it with the bot's username, for example `@NationsBot20, Who has
+the most Military?` Spectators' messages and old chat history never trigger replies.
+
+The bot sends a one-line reply in Tabony using the same model and rules sources
+as Discord's `/question`. For questions about the match, it can use the visible
+board at the time of the question and the recent public game log. It can explain
+what the position suggests and say when the available information is insufficient.
+Questions and that public context are sent to OpenAI. Tabony players have their
+own per-account limits, and both channels share the existing daily service budget.
+
+To enable this on Railway, set `NATIONS_TABONY_QUESTION_ENABLED=1` and
+`NATIONS_TABONY_QUESTION_PORT=8082` on the notifier with `/question` enabled.
+Set `NATIONS_TABONY_QUESTION_URL` on the player service to the notifier's private
+origin, for example `http://nationsbot20-staging.railway.internal:8082`. The two
+services already share `NATIONS_PLAYER_CONTROL_TOKEN`; keep port 8082 private.
+
+## Models
+
 The two-player and shared multiplayer checkpoint selectors default to
 **Human baseline v2 — dynasties**, the replay-trained policy with shared
 tactical checks. The **Four-player checkpoint** selector can override the

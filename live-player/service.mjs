@@ -158,6 +158,7 @@ export function createPlayerController({ config, store, connect, discover, accep
       dataDir: config.dataDir, storageId: config.storageId, play: config.play, username: config.username, accountId: config.accountId,
       opponent: config.opponent, matchId: info.id, players: info.players, weightedCardDraw: info.weightedCardDraw,
       roundRules: info.roundRules, signal: game.abort.signal,
+      askQuestion: config.askQuestion,
       getModel: getGameModel, delay: () => settings().moveDelayMs,
       canPlay: () => canPlay(game),
       onState(state, pending) { game.status = 'connected'; game.decision = state.move_number; game.turn = state.next_move_player; game.pending = pending; },
@@ -543,7 +544,7 @@ export async function startPlayerService({ config, subscribe, journal, login }) 
       const controller = createAccountManager({ accounts, base, experiments,
         challengeBot,
         createRuntime: account => createAccountRuntime({
-          config: { dataDir: config.dataDir, ...account,
+          config: { dataDir: config.dataDir, askQuestion: config.askQuestion, ...account,
             challenges: account.username === challengeBot && !account.includeArchive ? challenges : null },
           store, experiments, subscribe, journal, login, respond,
         }),

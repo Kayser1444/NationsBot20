@@ -244,6 +244,7 @@ export function startDiscordBot({ token, guildId, channelId, service, report = (
     }
   })();
   return { close, ready,
+    askTabony: input => stopped ? null : questions.askTabony?.(input),
     questionModelSettings() {
       if (stopped || !questions.modelSettings) throw new Error('Modellinställningen är inte tillgänglig.');
       return questions.modelSettings();

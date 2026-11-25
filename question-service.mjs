@@ -97,8 +97,20 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       report(`Frågekvot nollställd för Discord-ID ${userId} av ${/^\d{17,20}$/.test(actorId) ? actorId : 'lokal administratör'}. Gemensamma fråge- och API-kvoter behålls.`);
       return this.quota(userId);
     },
-    async ask({ userId, question, language = 'en-US', onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
-      if (closed || !/^\d{17,20}$/.test(userId)) return disabled(language);
+    ask(input) {
+      if (!/^\d{17,20}$/.test(input.userId)) return Promise.resolve(disabled(input.language));
+      return ask(input);
+    },
+    askTabony({ asker, question, matchContext, signal }) {
+      if (env.NATIONS_TABONY_QUESTION_ENABLED !== '1' || matchContext?.asker !== asker ||
+          typeof asker !== 'string' || !/^[\p{L}\p{N}_@.+-]{1,150}$/u.test(asker)) return null;
+      return ask({ userId: `tabony:${asker.toLowerCase()}`, question, language: 'the language of the question', matchContext, signal });
+    },
+    close() { closed = true; controller.abort(); retrieval?.close(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },
+  };
+
+  async function ask({ userId, question, language = 'en-US', matchContext, signal, onAnswer = () => {}, onTelemetry = () => {}, onAccepted = async () => {} }) {
+      if (closed || signal?.aborted) return matchContext ? null : disabled(language);
       if (typeof question !== 'string' || question.trim().length < 5 || question.length > 1200) return message(language,
         'Skriv en fråga på 5–1200 tecken om Nations regler eller Tabony-implementationen.', 'Enter a 5–1200 character question about Nations rules or the Tabony implementation.');
       if (busy) return message(language, 'En fråga undersöks redan. Försök igen strax.', 'Another question is being investigated. Please try again shortly.');
@@ -119,7 +131,7 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
           (remaining ? message(language, ` ${remaining} anrop återstår, men det behövs plats för upp till ${maxQuestionRequests} anrop för att starta en fråga.`,
             ` ${remaining} requests remain, but starting a question requires room for up to ${maxQuestionRequests} requests.`) : ''));
       }
-      if (limits.length) return message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
+      if (limits.length) return matchContext ? 'The question limit has been reached. Please try again later.' : message(language, 'Frågegränsen är nådd:', 'Question limit reached:') + '\n' + limits.map(limit => '- ' + limit).join('\n') +
         (user.count >= 5 || ledger.total >= 20 || apiBlocked ? message(language, '\nDygnskvoterna återställs kl. 00:00 UTC.', '\nDaily quotas reset at 00:00 UTC.') : '');
       let model;
       try { model = models.current(); }
@@ -127,31 +139,33 @@ function buildQuestionService({ env = process.env, directory, fetcher = fetch, n
       busy = true;
       try {
         await onAccepted(); // Acknowledge after access/quota checks and before any paid request.
+        if (signal?.aborted) return null;
         ledger.total++; ledger.users[userId] = { count: user.count + 1, last: now() };
         saveQuestionJson(path, ledger);
         const originalCorpus = createCorpus();
         const corpus = retrieval ? retrieval.forCorpus(originalCorpus, onTelemetry) : originalCorpus;
         onTelemetry({ type: 'retrieval', phase: 'selected', name: corpus.retrieval ?? 'literal', corpusHash: originalCorpus.fingerprint });
         let details;
-        await investigateQuestion({ question: question.trim(), language, corpus, model, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
-          signal: controller.signal, reserveRequest() {
+        await investigateQuestion({ question: question.trim(), language, matchContext, corpus, model, apiKey: env.OPENAI_API_KEY, fetcher, now, onTelemetry, onAnswer: value => { details = value; },
+          signal: signal ? AbortSignal.any([controller.signal, signal]) : controller.signal, reserveRequest() {
             if (ledger.requests >= 120) throw new Error('Daily request limit.');
             ledger.requests++; saveQuestionJson(path, ledger);
           } });
+        if (matchContext) return details.parts.join(' ');
         const footer = [...(details.sourceUrls ?? []), questionSourceFooter(corpus, language)].join('\n');
         const parts = questionReplyParts(details.parts, footer);
         onAnswer({ ...details, parts, status: 'answered' });
         return parts.join('\n\n');
       } catch (error) {
+        if (signal?.aborted) return null;
         onAnswer({ status: 'failed', failure: ['invalid_answer', 'answer_too_long', 'context_limit'].includes(error.code) ? error.code : 'investigation_failed' });
         report(`En regelfråga kunde inte slutföras med ${model}. Ingen alternativ modell används.`, 'error');
+        if (matchContext) return 'I couldn’t answer that question right now.';
         if (error.code === 'context_limit') return message(language,
           'Undersökningen behövde mer källtext än vad som ryms i en fråga. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
           'The investigation needed more source text than fits in one question. This attempt counts toward your quota. Try a narrower question.');
         return message(language, 'Undersökningen kunde inte slutföras inom gränserna, eller den valda OpenAI-modellen är inte tillgänglig. Försöket räknas i kvoten. Försök med en mer avgränsad fråga.',
           'The investigation could not finish within its limits, or the selected OpenAI model is unavailable. This attempt counts toward your quota. Try a narrower question.');
       } finally { busy = false; }
-    },
-    close() { closed = true; controller.abort(); retrieval?.close(); sourceStore.close(); if (!rulesDifferencesStore) differencesStore.close(); },
-  };
+  }
 }

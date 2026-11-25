@@ -20,6 +20,7 @@ import { validateSubscriptions, readSubscriptions, saveSubscriptions, readPrevio
 import { text } from './language.mjs';
 import { PlayerCache } from './player-cache.mjs';
 import { startDiscordBot } from './discord-bot.mjs';
+import { startTabonyQuestionServer } from './tabony-question-server.mjs';
 import { botDelivery } from './bot-delivery.mjs';
 import { SmTableCache } from './sm-table.mjs';
 import { readBannedUsers, isUserBanned, setUserBan, recipients, subscriptionEntries, addSubscriber, removeSubscriber } from './subscriptions.mjs';
@@ -89,6 +90,7 @@ try {
 }
 let reminderTimer;
 let stopped = false, deadline, dashboard = null, subscriptionTimer, lastDelivery = null, bot = null;
+let tabonyQuestionServer;
 let botState = process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' ? 'Ansluter' : 'Inte konfigurerad';
 const serviceStatus = transport ? new ServiceStatus(async (payload, signal) => {
   await transport.verify(signal);
@@ -160,6 +162,7 @@ function stop() {
   if (stopped) return serviceStatus?.stopPromise;
   stopped = true; clearTimeout(deadline);
   clearInterval(reminderTimer); clearInterval(subscriptionTimer); dashboard?.close();
+  tabonyQuestionServer?.close();
   bot?.close();
   log.add('Bevakningen stängs av.');
   clearTimeout(outboxTimer); deliveryAbort.abort();
@@ -501,5 +504,13 @@ if (process.env.NATIONS_DISCORD_BOT_TOKEN && profile === 'friends.json' && !args
       },
     },
   });
+  if (process.env.NATIONS_TABONY_QUESTION_ENABLED === '1' && process.env.NATIONS_TABONY_QUESTION_PORT) {
+    try {
+      tabonyQuestionServer = await startTabonyQuestionServer({ ask: bot.askTabony,
+        token: process.env.NATIONS_PLAYER_CONTROL_TOKEN, port: Number(process.env.NATIONS_TABONY_QUESTION_PORT) });
+      if (stopped) tabonyQuestionServer.close();
+      else log.add('Privata frågetjänsten för Tabony är igång.');
+    } catch { log.add('Den privata frågetjänsten för Tabony kunde inte starta.', 'error'); }
+  }
 }
 }

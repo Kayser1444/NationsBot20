@@ -180,3 +180,66 @@ test('switching the model during the journal write changes the unsent move, then
   socket.close();
   await done;
 });
+
+test('only live participants can ask the bot and chat work leaves moves free to run', async () => {
+  let socket;
+  class FakeSocket extends EventEmitter {
+    readyState = 1;
+    sent = [];
+    constructor() { super(); socket = this; }
+    send(data) { this.sent.push(JSON.parse(data)); }
+    close() { this.readyState = 3; this.emit('close'); }
+    terminate() { this.close(); }
+  }
+  const players = [...allPlayers, 'AnotherPlayer'];
+  const moves = { pending: null, async save(next) { this.pending = next; } };
+  const requests = [];
+  let answer;
+  const askQuestion = request => {
+    requests.push(request);
+    return new Promise(resolve => { answer = resolve; });
+  };
+  const done = subscribe({ ...config, players, askQuestion }, 'sessionid=fake', moves, FakeSocket);
+  const feed = async payload => {
+    socket.emit('message', JSON.stringify(payload));
+    await setImmediate();
+  };
+  const chat = (player, message) => ({ player, message, timestamp: '2026-11-25T10:00:00Z' });
+  const position = (decision, nextPlayer, options) => {
+    const frame = snapshot(decision, nextPlayer, options);
+    frame.players = frame.accepted = players;
+    frame.state.players.AnotherPlayer = { resources: { '[Military]': 8 }, privateNotes: 'never send' };
+    frame.log = 'AnotherPlayer gained 2 Military.';
+    return frame;
+  };
+  const question = '@NationsBot20, Who has the most Military?';
+  try {
+    await feed({ chat: chat('Kayser', question) });
+    await feed(position(1, 'Kayser'));
+    await feed({ chat_log: [chat('Kayser', question)] });
+    await feed({ chat: chat('Spectator', question) });
+    await feed({ chat: chat(config.username, question) });
+    await feed({ chat: chat('Kayser', 'Who has the most Military?') });
+    assert.equal(requests.length, 0);
+
+    await feed({ chat: chat('Kayser', question) });
+    assert.equal(requests.length, 1);
+    const request = requests[0];
+    assert.equal(request.question, 'Who has the most Military?');
+    assert.equal(request.matchContext.players.AnotherPlayer.resources['[Military]'], 8);
+    assert.equal(request.matchContext.recentGameLog, 'AnotherPlayer gained 2 Military.');
+    assert.equal(JSON.stringify(request.matchContext).includes('never send'), false);
+    await feed({ chat: chat('Kayser', question) });
+    await feed(position(2, config.username, ['Greece']));
+    assert.deepEqual(socket.sent, [{ move: 'Greece' }]);
+
+    answer('AnotherPlayer leads.\n' + 'a'.repeat(260));
+    await setImmediate();
+    assert.equal(socket.sent[1].chat.length, 255);
+    assert.match(socket.sent[1].chat, /^AnotherPlayer leads\. a+…$/);
+    assert.equal(requests.length, 1);
+  } finally {
+    socket.close();
+    await done;
+  }
+});
